@@ -1,7 +1,7 @@
 import type { MetadataRoute } from 'next';
 import { toolList, locales } from '@/lib/translations';
 
-const BASE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://toolkit-online-gamma.vercel.app';
+const BASE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://toolkitonline.vip';
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const entries: MetadataRoute.Sitemap = [];
