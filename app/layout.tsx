@@ -66,6 +66,24 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "WebSite",
+              name: "ToolKit Online",
+              url: "https://toolkitonline.vip",
+              description: "Free online tools for everyday tasks",
+              potentialAction: {
+                "@type": "SearchAction",
+                target:
+                  "https://toolkitonline.vip/en?q={search_term_string}",
+                "query-input": "required name=search_term_string",
+              },
+            }),
+          }}
+        />
         <Script
           id="gtm"
           strategy="beforeInteractive"
