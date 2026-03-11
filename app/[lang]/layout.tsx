@@ -12,7 +12,7 @@ export async function generateMetadata({ params }: { params: Promise<{ lang: str
   const locale = (lang as Locale) || 'en';
   const t = common[locale];
   return {
-    title: { default: t.siteTitle, template: `%s | ${t.siteTitle}` },
+    title: { default: t.siteMetaTitle, template: `%s | ${t.siteTitle}` },
     description: t.siteDescription,
     alternates: {
       languages: Object.fromEntries(locales.map((l) => [l, `/${l}`])),

@@ -1,5 +1,5 @@
 import { common, tools, type Locale, getToolsByCategory } from '@/lib/translations';
-import ToolCard from '@/components/ToolCard';
+import HomeContent from '@/components/HomeContent';
 
 export default async function HomePage({ params }: { params: Promise<{ lang: string }> }) {
   const { lang } = await params;
@@ -7,35 +7,29 @@ export default async function HomePage({ params }: { params: Promise<{ lang: str
   const t = common[locale];
   const categories = getToolsByCategory();
 
-  return (
-    <div>
-      <section className="text-center mb-10">
-        <h1 className="text-4xl font-bold text-gray-900 mb-3">{t.siteTitle}</h1>
-        <p className="text-lg text-gray-600 max-w-2xl mx-auto">{t.siteDescription}</p>
-      </section>
+  // Build a flat map of slug -> { name, description } for the current locale
+  const toolsData: Record<string, { name: string; description: string }> = {};
+  for (const [slug, translations] of Object.entries(tools)) {
+    const toolT = translations[locale];
+    if (toolT) {
+      toolsData[slug] = { name: toolT.name, description: toolT.description };
+    }
+  }
 
-      {Object.entries(categories).map(([catKey, toolSlugs]) => (
-        <section key={catKey} className="mb-10">
-          <h2 className="text-2xl font-bold text-gray-800 mb-4">
-            {t.categories[catKey] || catKey}
-          </h2>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-            {toolSlugs.map((slug) => {
-              const toolT = tools[slug]?.[locale];
-              if (!toolT) return null;
-              return (
-                <ToolCard
-                  key={slug}
-                  slug={slug}
-                  name={toolT.name}
-                  description={toolT.description}
-                  lang={lang}
-                />
-              );
-            })}
-          </div>
-        </section>
-      ))}
-    </div>
+  return (
+    <HomeContent
+      categories={categories}
+      toolsData={toolsData}
+      locale={lang}
+      common={{
+        siteDescription: t.siteDescription,
+        heroTitle: t.heroTitle,
+        statsTools: t.statsTools,
+        statsLanguages: t.statsLanguages,
+        statsFree: t.statsFree,
+        searchPlaceholder: t.searchPlaceholder,
+        categories: t.categories,
+      }}
+    />
   );
 }

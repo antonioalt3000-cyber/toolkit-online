@@ -20,6 +20,11 @@ type ToolTranslation = {
 type CommonTranslation = {
   siteTitle: string;
   siteDescription: string;
+  siteMetaTitle: string;
+  heroTitle: string;
+  statsTools: string;
+  statsLanguages: string;
+  statsFree: string;
   toolsTitle: string;
   searchPlaceholder: string;
   categories: Record<string, string>;
@@ -31,12 +36,28 @@ type CommonTranslation = {
   clear: string;
   generate: string;
   convert: string;
+  footerAbout: string;
+  footerPrivacy: string;
+  footerTerms: string;
+  footerContact: string;
+  footerResources: string;
+  footerSitemap: string;
+  footerAllTools: string;
+  footerCompany: string;
+  footerPopularTools: string;
+  footerDescription: string;
+  relatedTools: string;
 };
 
 export const common: Record<Locale, CommonTranslation> = {
   en: {
     siteTitle: 'ToolKit Online',
     siteDescription: 'Free online tools for everyday tasks. Calculators, converters, text tools and more.',
+    siteMetaTitle: 'ToolKit Online — Free Calculators, Converters & Tools',
+    heroTitle: '40+ Free Online Tools',
+    statsTools: '40+ Tools',
+    statsLanguages: '6 Languages',
+    statsFree: '100% Free',
     toolsTitle: 'All Tools',
     searchPlaceholder: 'Search tools...',
     categories: {
@@ -56,10 +77,26 @@ export const common: Record<Locale, CommonTranslation> = {
     clear: 'Clear',
     generate: 'Generate',
     convert: 'Convert',
+    footerAbout: 'About',
+    footerPrivacy: 'Privacy Policy',
+    footerTerms: 'Terms of Service',
+    footerContact: 'Contact',
+    footerResources: 'Resources',
+    footerSitemap: 'Sitemap',
+    footerAllTools: 'All Tools',
+    footerCompany: 'Company',
+    footerPopularTools: 'Popular Tools',
+    footerDescription: 'Free online tools for everyday tasks. No registration required.',
+    relatedTools: 'Related Tools',
   },
   it: {
     siteTitle: 'ToolKit Online',
     siteDescription: 'Strumenti online gratuiti per le attività quotidiane. Calcolatori, convertitori, strumenti di testo e altro.',
+    siteMetaTitle: 'ToolKit Online — Calcolatori, Convertitori e Strumenti Gratuiti',
+    heroTitle: '40+ Strumenti Online Gratuiti',
+    statsTools: '40+ Strumenti',
+    statsLanguages: '6 Lingue',
+    statsFree: '100% Gratuito',
     toolsTitle: 'Tutti gli Strumenti',
     searchPlaceholder: 'Cerca strumenti...',
     categories: {
@@ -79,10 +116,26 @@ export const common: Record<Locale, CommonTranslation> = {
     clear: 'Pulisci',
     generate: 'Genera',
     convert: 'Converti',
+    footerAbout: 'Chi siamo',
+    footerPrivacy: 'Informativa sulla Privacy',
+    footerTerms: 'Termini di Servizio',
+    footerContact: 'Contatti',
+    footerResources: 'Risorse',
+    footerSitemap: 'Mappa del sito',
+    footerAllTools: 'Tutti gli Strumenti',
+    footerCompany: 'Azienda',
+    footerPopularTools: 'Strumenti Popolari',
+    footerDescription: 'Strumenti online gratuiti per le attività quotidiane. Nessuna registrazione richiesta.',
+    relatedTools: 'Strumenti Correlati',
   },
   es: {
     siteTitle: 'ToolKit Online',
     siteDescription: 'Herramientas en línea gratuitas para tareas cotidianas. Calculadoras, convertidores, herramientas de texto y más.',
+    siteMetaTitle: 'ToolKit Online — Calculadoras, Convertidores y Herramientas Gratis',
+    heroTitle: '40+ Herramientas Online Gratuitas',
+    statsTools: '40+ Herramientas',
+    statsLanguages: '6 Idiomas',
+    statsFree: '100% Gratis',
     toolsTitle: 'Todas las Herramientas',
     searchPlaceholder: 'Buscar herramientas...',
     categories: {
@@ -102,10 +155,26 @@ export const common: Record<Locale, CommonTranslation> = {
     clear: 'Limpiar',
     generate: 'Generar',
     convert: 'Convertir',
+    footerAbout: 'Acerca de',
+    footerPrivacy: 'Política de Privacidad',
+    footerTerms: 'Términos de Servicio',
+    footerContact: 'Contacto',
+    footerResources: 'Recursos',
+    footerSitemap: 'Mapa del sitio',
+    footerAllTools: 'Todas las Herramientas',
+    footerCompany: 'Empresa',
+    footerPopularTools: 'Herramientas Populares',
+    footerDescription: 'Herramientas en línea gratuitas para tareas cotidianas. Sin registro necesario.',
+    relatedTools: 'Herramientas Relacionadas',
   },
   fr: {
     siteTitle: 'ToolKit Online',
     siteDescription: 'Outils en ligne gratuits pour les tâches quotidiennes. Calculatrices, convertisseurs, outils de texte et plus.',
+    siteMetaTitle: 'ToolKit Online — Calculatrices, Convertisseurs et Outils Gratuits',
+    heroTitle: '40+ Outils en Ligne Gratuits',
+    statsTools: '40+ Outils',
+    statsLanguages: '6 Langues',
+    statsFree: '100% Gratuit',
     toolsTitle: 'Tous les Outils',
     searchPlaceholder: 'Rechercher des outils...',
     categories: {
@@ -125,10 +194,26 @@ export const common: Record<Locale, CommonTranslation> = {
     clear: 'Effacer',
     generate: 'Générer',
     convert: 'Convertir',
+    footerAbout: 'À propos',
+    footerPrivacy: 'Politique de Confidentialité',
+    footerTerms: 'Conditions d\'Utilisation',
+    footerContact: 'Contact',
+    footerResources: 'Ressources',
+    footerSitemap: 'Plan du site',
+    footerAllTools: 'Tous les Outils',
+    footerCompany: 'Entreprise',
+    footerPopularTools: 'Outils Populaires',
+    footerDescription: 'Outils en ligne gratuits pour les tâches quotidiennes. Aucune inscription requise.',
+    relatedTools: 'Outils Connexes',
   },
   de: {
     siteTitle: 'ToolKit Online',
     siteDescription: 'Kostenlose Online-Tools für alltägliche Aufgaben. Rechner, Umrechner, Textwerkzeuge und mehr.',
+    siteMetaTitle: 'ToolKit Online — Kostenlose Rechner, Umrechner & Tools',
+    heroTitle: '40+ Kostenlose Online-Tools',
+    statsTools: '40+ Tools',
+    statsLanguages: '6 Sprachen',
+    statsFree: '100% Kostenlos',
     toolsTitle: 'Alle Werkzeuge',
     searchPlaceholder: 'Werkzeuge suchen...',
     categories: {
@@ -148,10 +233,26 @@ export const common: Record<Locale, CommonTranslation> = {
     clear: 'Löschen',
     generate: 'Generieren',
     convert: 'Umrechnen',
+    footerAbout: 'Über uns',
+    footerPrivacy: 'Datenschutzrichtlinie',
+    footerTerms: 'Nutzungsbedingungen',
+    footerContact: 'Kontakt',
+    footerResources: 'Ressourcen',
+    footerSitemap: 'Seitenübersicht',
+    footerAllTools: 'Alle Werkzeuge',
+    footerCompany: 'Unternehmen',
+    footerPopularTools: 'Beliebte Werkzeuge',
+    footerDescription: 'Kostenlose Online-Tools für alltägliche Aufgaben. Keine Registrierung erforderlich.',
+    relatedTools: 'Verwandte Werkzeuge',
   },
   pt: {
     siteTitle: 'ToolKit Online',
     siteDescription: 'Ferramentas online gratuitas para tarefas do dia a dia. Calculadoras, conversores, ferramentas de texto e mais.',
+    siteMetaTitle: 'ToolKit Online — Calculadoras, Conversores e Ferramentas Gratis',
+    heroTitle: '40+ Ferramentas Online Gratuitas',
+    statsTools: '40+ Ferramentas',
+    statsLanguages: '6 Idiomas',
+    statsFree: '100% Gratuito',
     toolsTitle: 'Todas as Ferramentas',
     searchPlaceholder: 'Pesquisar ferramentas...',
     categories: {
@@ -171,6 +272,17 @@ export const common: Record<Locale, CommonTranslation> = {
     clear: 'Limpar',
     generate: 'Gerar',
     convert: 'Converter',
+    footerAbout: 'Sobre',
+    footerPrivacy: 'Política de Privacidade',
+    footerTerms: 'Termos de Serviço',
+    footerContact: 'Contato',
+    footerResources: 'Recursos',
+    footerSitemap: 'Mapa do site',
+    footerAllTools: 'Todas as Ferramentas',
+    footerCompany: 'Empresa',
+    footerPopularTools: 'Ferramentas Populares',
+    footerDescription: 'Ferramentas online gratuitas para tarefas do dia a dia. Sem registro necessário.',
+    relatedTools: 'Ferramentas Relacionadas',
   },
 };
 
