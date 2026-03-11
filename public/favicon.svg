@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
+  <rect width="64" height="64" rx="12" fill="#2563eb"/>
+  <g transform="translate(32,32)">
+    <g transform="rotate(-45)">
+      <!-- Wrench handle -->
+      <rect x="-4" y="-2" width="24" height="8" rx="2" fill="white"/>
+      <!-- Wrench head -->
+      <path d="M18,-7 Q28,-7 28,0 Q28,7 18,7 L18,3 Q22,3 22,0 Q22,-3 18,-3 Z" fill="white"/>
+      <!-- Second wrench (crossed) -->
+      <g transform="rotate(90)">
+        <rect x="-4" y="-2" width="24" height="8" rx="2" fill="white" opacity="0.85"/>
+        <path d="M18,-7 Q28,-7 28,0 Q28,7 18,7 L18,3 Q22,3 22,0 Q22,-3 18,-3 Z" fill="white" opacity="0.85"/>
+      </g>
+    </g>
+  </g>
+</svg>

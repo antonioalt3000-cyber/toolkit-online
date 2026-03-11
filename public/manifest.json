@@ -1,0 +1,16 @@
+{
+  "name": "ToolKit Online",
+  "short_name": "ToolKit",
+  "description": "Free online tools for everyday tasks. Calculators, converters, text tools and more.",
+  "start_url": "/en",
+  "display": "standalone",
+  "theme_color": "#2563eb",
+  "background_color": "#f9fafb",
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml"
+    }
+  ]
+}
