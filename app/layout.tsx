@@ -1,6 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
-import Analytics from "@/components/Analytics";
+import Script from "next/script";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -27,7 +27,7 @@ export const metadata: Metadata = {
   description:
     "Free online tools for everyday tasks. Calculators, converters, text tools and more. Available in 6 languages.",
   metadataBase: new URL(
-    process.env.NEXT_PUBLIC_SITE_URL || "https://toolkit-online-gamma.vercel.app"
+    process.env.NEXT_PUBLIC_SITE_URL || "https://toolkitonline.vip"
   ),
   icons: {
     icon: "/favicon.svg",
@@ -66,7 +66,9 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
-        <script
+        <Script
+          id="gtm"
+          strategy="beforeInteractive"
           dangerouslySetInnerHTML={{
             __html: `(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
 new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
@@ -75,7 +77,9 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 })(window,document,'script','dataLayer','GTM-WKG7WCXZ');`,
           }}
         />
-        <script
+        <Script
+          id="adsense"
+          strategy="beforeInteractive"
           async
           src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7033623734141087"
           crossOrigin="anonymous"
