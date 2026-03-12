@@ -1,5 +1,5 @@
 'use client';
-import { useState } from 'react';
+import { useState, useCallback } from 'react';
 import { useParams } from 'next/navigation';
 import { tools, type Locale } from '@/lib/translations';
 import ToolPageWrapper from '@/components/ToolPageWrapper';
@@ -12,6 +12,14 @@ const labels: Record<string, Record<Locale, string>> = {
   volume: { en: 'Volume', it: 'Volume', es: 'Volumen', fr: 'Volume', de: 'Volumen', pt: 'Volume' },
   weight: { en: 'Weight', it: 'Peso', es: 'Peso', fr: 'Poids', de: 'Gewicht', pt: 'Peso' },
   quickRef: { en: 'Quick Reference', it: 'Riferimento Rapido', es: 'Referencia Rápida', fr: 'Référence Rapide', de: 'Kurzübersicht', pt: 'Referência Rápida' },
+  copy: { en: 'Copy Result', it: 'Copia Risultato', es: 'Copiar Resultado', fr: 'Copier le Résultat', de: 'Ergebnis kopieren', pt: 'Copiar Resultado' },
+  copied: { en: 'Copied!', it: 'Copiato!', es: '¡Copiado!', fr: 'Copié !', de: 'Kopiert!', pt: 'Copiado!' },
+  reset: { en: 'Reset', it: 'Reimposta', es: 'Reiniciar', fr: 'Réinitialiser', de: 'Zurücksetzen', pt: 'Redefinir' },
+  swap: { en: 'Swap Units', it: 'Scambia Unità', es: 'Intercambiar Unidades', fr: 'Échanger les Unités', de: 'Einheiten tauschen', pt: 'Trocar Unidades' },
+  history: { en: 'Recent Conversions', it: 'Conversioni Recenti', es: 'Conversiones Recientes', fr: 'Conversions Récentes', de: 'Letzte Umrechnungen', pt: 'Conversões Recentes' },
+  clearHistory: { en: 'Clear', it: 'Cancella', es: 'Borrar', fr: 'Effacer', de: 'Löschen', pt: 'Limpar' },
+  invalidValue: { en: 'Please enter a valid positive number', it: 'Inserisci un numero positivo valido', es: 'Ingrese un número positivo válido', fr: 'Veuillez entrer un nombre positif valide', de: 'Bitte geben Sie eine gültige positive Zahl ein', pt: 'Insira um número positivo válido' },
+  commonEquivalents: { en: 'Common Cooking Equivalents', it: 'Equivalenze Comuni in Cucina', es: 'Equivalencias Comunes de Cocina', fr: 'Équivalences Courantes en Cuisine', de: 'Gängige Kochäquivalente', pt: 'Equivalências Comuns de Cozinha' },
 };
 
 // Volume units in ml
@@ -34,6 +42,14 @@ const weightUnits: Record<string, { label: Record<Locale, string>; g: number }> 
 
 type Category = 'volume' | 'weight';
 
+interface HistoryEntry {
+  amount: string;
+  fromUnit: string;
+  toUnit: string;
+  result: string;
+  category: Category;
+}
+
 export default function CookingConverter() {
   const { lang } = useParams() as { lang: Locale };
   const toolT = tools['cooking-converter'][lang];
@@ -43,27 +59,86 @@ export default function CookingConverter() {
   const [amount, setAmount] = useState('1');
   const [fromUnit, setFromUnit] = useState('cup');
   const [toUnit, setToUnit] = useState('ml');
+  const [copied, setCopied] = useState(false);
+  const [history, setHistory] = useState<HistoryEntry[]>([]);
 
-  const num = parseFloat(amount) || 0;
+  const num = parseFloat(amount);
+  const isValid = amount !== '' && !isNaN(num) && num > 0;
 
   let result = 0;
-  if (category === 'volume') {
-    const fromMl = volumeUnits[fromUnit]?.ml || 1;
-    const toMl = volumeUnits[toUnit]?.ml || 1;
-    result = (num * fromMl) / toMl;
-  } else {
-    const fromG = weightUnits[fromUnit]?.g || 1;
-    const toG = weightUnits[toUnit]?.g || 1;
-    result = (num * fromG) / toG;
+  if (isValid) {
+    if (category === 'volume') {
+      const fromMl = volumeUnits[fromUnit]?.ml || 1;
+      const toMl = volumeUnits[toUnit]?.ml || 1;
+      result = (num * fromMl) / toMl;
+    } else {
+      const fromG = weightUnits[fromUnit]?.g || 1;
+      const toG = weightUnits[toUnit]?.g || 1;
+      result = (num * fromG) / toG;
+    }
   }
 
+  const formatResult = (r: number) => r < 0.01 ? r.toExponential(2) : r.toFixed(r < 10 ? 3 : 2);
+
   const units = category === 'volume' ? volumeUnits : weightUnits;
+
+  const getUnitLabel = (unitKey: string, cat: Category) => {
+    const u = cat === 'volume' ? volumeUnits[unitKey] : weightUnits[unitKey];
+    return u?.label[lang] || unitKey;
+  };
 
   const switchCategory = (cat: Category) => {
     setCategory(cat);
     if (cat === 'volume') { setFromUnit('cup'); setToUnit('ml'); }
     else { setFromUnit('g'); setToUnit('oz'); }
   };
+
+  const handleSwap = () => {
+    setFromUnit(toUnit);
+    setToUnit(fromUnit);
+  };
+
+  const handleReset = () => {
+    setAmount('1');
+    if (category === 'volume') { setFromUnit('cup'); setToUnit('ml'); }
+    else { setFromUnit('g'); setToUnit('oz'); }
+  };
+
+  const handleCopy = useCallback(() => {
+    const text = `${amount} ${getUnitLabel(fromUnit, category)} = ${formatResult(result)} ${getUnitLabel(toUnit, category)}`;
+    navigator.clipboard.writeText(text).then(() => {
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+    });
+  }, [amount, fromUnit, toUnit, result, category, lang]);
+
+  const addToHistory = useCallback(() => {
+    if (!isValid) return;
+    const entry: HistoryEntry = {
+      amount,
+      fromUnit,
+      toUnit,
+      result: formatResult(result),
+      category,
+    };
+    setHistory(prev => {
+      const next = [entry, ...prev];
+      return next.slice(0, 5);
+    });
+  }, [amount, fromUnit, toUnit, result, category, isValid]);
+
+  const showError = amount !== '' && !isValid;
+
+  const quickRefData = [
+    { left: '1 cup', right: '236.6 ml', extra: '16 tbsp' },
+    { left: '1 tbsp', right: '14.8 ml', extra: '3 tsp' },
+    { left: '1 tsp', right: '4.9 ml', extra: '' },
+    { left: '1 fl oz', right: '29.6 ml', extra: '' },
+    { left: '1 L', right: '1000 ml', extra: '4.2 cups' },
+    { left: '1 oz', right: '28.35 g', extra: '' },
+    { left: '1 lb', right: '453.6 g', extra: '16 oz' },
+    { left: '1 kg', right: '1000 g', extra: '2.2 lb' },
+  ];
 
   const seoContent: Record<Locale, { title: string; paragraphs: string[]; faq: { q: string; a: string }[] }> = {
     en: {
@@ -174,21 +249,23 @@ export default function CookingConverter() {
         <p className="text-gray-600 mb-6">{toolT.description}</p>
 
         <div className="bg-white rounded-xl border border-gray-200 p-6 space-y-4">
+          {/* Category toggle */}
           <div className="flex gap-2">
             <button
               onClick={() => switchCategory('volume')}
-              className={`flex-1 py-2 rounded-lg font-medium ${category === 'volume' ? 'bg-blue-600 text-white' : 'bg-gray-100 text-gray-700'}`}
+              className={`flex-1 py-2 rounded-lg font-medium transition-colors ${category === 'volume' ? 'bg-blue-600 text-white' : 'bg-gray-100 text-gray-700 hover:bg-gray-200'}`}
             >
               {t('volume')}
             </button>
             <button
               onClick={() => switchCategory('weight')}
-              className={`flex-1 py-2 rounded-lg font-medium ${category === 'weight' ? 'bg-blue-600 text-white' : 'bg-gray-100 text-gray-700'}`}
+              className={`flex-1 py-2 rounded-lg font-medium transition-colors ${category === 'weight' ? 'bg-blue-600 text-white' : 'bg-gray-100 text-gray-700 hover:bg-gray-200'}`}
             >
               {t('weight')}
             </button>
           </div>
 
+          {/* Amount input */}
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-1">{t('amount')}</label>
             <input
@@ -196,11 +273,15 @@ export default function CookingConverter() {
               value={amount}
               onChange={(e) => setAmount(e.target.value)}
               step="0.1"
-              className="w-full border border-gray-300 rounded-lg px-4 py-2 text-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+              className={`w-full border rounded-lg px-4 py-2 text-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent ${showError ? 'border-red-400 bg-red-50' : 'border-gray-300'}`}
             />
+            {showError && (
+              <p className="mt-1 text-sm text-red-600">{t('invalidValue')}</p>
+            )}
           </div>
 
-          <div className="grid grid-cols-2 gap-4">
+          {/* From / To selectors with swap button */}
+          <div className="grid grid-cols-[1fr_auto_1fr] gap-2 items-end">
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-1">{t('from')}</label>
               <select
@@ -213,6 +294,17 @@ export default function CookingConverter() {
                 ))}
               </select>
             </div>
+            <button
+              onClick={handleSwap}
+              title={t('swap')}
+              className="mb-0.5 p-2 rounded-lg bg-gray-100 hover:bg-gray-200 text-gray-600 transition-colors"
+              aria-label={t('swap')}
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                <path d="M8 5a1 1 0 011 1v4.586l1.293-1.293a1 1 0 111.414 1.414l-3 3a1 1 0 01-1.414 0l-3-3a1 1 0 011.414-1.414L7 10.586V6a1 1 0 011-1z" />
+                <path d="M12 15a1 1 0 01-1-1V9.414l-1.293 1.293a1 1 0 01-1.414-1.414l3-3a1 1 0 011.414 0l3 3a1 1 0 01-1.414 1.414L13 9.414V14a1 1 0 01-1 1z" />
+              </svg>
+            </button>
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-1">{t('to')}</label>
               <select
@@ -227,25 +319,98 @@ export default function CookingConverter() {
             </div>
           </div>
 
-          {num > 0 && (
-            <div className="p-4 bg-blue-50 rounded-lg">
-              <div className="flex justify-between text-lg">
+          {/* Result card */}
+          {isValid && (
+            <div className="p-4 bg-green-50 border border-green-200 rounded-lg">
+              <div className="flex justify-between items-center text-lg">
                 <span className="font-bold text-gray-900">{t('result')}</span>
-                <span className="font-bold text-blue-600">
-                  {result < 0.01 ? result.toExponential(2) : result.toFixed(result < 10 ? 3 : 2)}
+                <span className="font-bold text-green-700">
+                  {formatResult(result)} {getUnitLabel(toUnit, category).split('(')[0].trim()}
                 </span>
+              </div>
+              <p className="text-sm text-gray-500 mt-1">
+                {amount} {getUnitLabel(fromUnit, category).split('(')[0].trim()} = {formatResult(result)} {getUnitLabel(toUnit, category).split('(')[0].trim()}
+              </p>
+            </div>
+          )}
+
+          {/* Action buttons: Copy, Save, Reset */}
+          <div className="flex gap-2">
+            <button
+              onClick={handleCopy}
+              disabled={!isValid}
+              className={`flex-1 py-2 rounded-lg font-medium text-sm transition-colors ${
+                copied
+                  ? 'bg-green-600 text-white'
+                  : isValid
+                    ? 'bg-blue-600 text-white hover:bg-blue-700'
+                    : 'bg-gray-200 text-gray-400 cursor-not-allowed'
+              }`}
+            >
+              {copied ? t('copied') : t('copy')}
+            </button>
+            <button
+              onClick={addToHistory}
+              disabled={!isValid}
+              className={`flex-1 py-2 rounded-lg font-medium text-sm transition-colors ${
+                isValid
+                  ? 'bg-gray-100 text-gray-700 hover:bg-gray-200 border border-gray-300'
+                  : 'bg-gray-200 text-gray-400 cursor-not-allowed'
+              }`}
+            >
+              + {t('history')}
+            </button>
+            <button
+              onClick={handleReset}
+              className="flex-1 py-2 rounded-lg font-medium text-sm bg-gray-100 text-gray-700 hover:bg-gray-200 border border-gray-300 transition-colors"
+            >
+              {t('reset')}
+            </button>
+          </div>
+
+          {/* History */}
+          {history.length > 0 && (
+            <div>
+              <div className="flex justify-between items-center mb-2">
+                <label className="block text-sm font-medium text-gray-700">{t('history')}</label>
+                <button
+                  onClick={() => setHistory([])}
+                  className="text-xs text-red-500 hover:text-red-700 transition-colors"
+                >
+                  {t('clearHistory')}
+                </button>
+              </div>
+              <div className="space-y-1">
+                {history.map((entry, i) => (
+                  <div key={i} className="flex justify-between items-center text-sm bg-gray-50 rounded-lg px-3 py-2">
+                    <span className="text-gray-600">
+                      {entry.amount} {getUnitLabel(entry.fromUnit, entry.category).split('(')[0].trim()}
+                    </span>
+                    <span className="text-gray-400 mx-2">&rarr;</span>
+                    <span className="font-medium text-gray-900">
+                      {entry.result} {getUnitLabel(entry.toUnit, entry.category).split('(')[0].trim()}
+                    </span>
+                  </div>
+                ))}
               </div>
             </div>
           )}
 
+          {/* Quick reference table */}
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-2">{t('quickRef')}</label>
-            <div className="text-sm text-gray-600 space-y-1 bg-gray-50 rounded-lg p-3">
-              <p>1 cup = 236.6 ml = 16 tbsp</p>
-              <p>1 tbsp = 14.8 ml = 3 tsp</p>
-              <p>1 fl oz = 29.6 ml</p>
-              <p>1 oz = 28.3 g</p>
-              <p>1 lb = 453.6 g</p>
+            <label className="block text-sm font-medium text-gray-700 mb-2">{t('commonEquivalents')}</label>
+            <div className="bg-gray-50 rounded-lg overflow-hidden border border-gray-200">
+              <table className="w-full text-sm">
+                <tbody>
+                  {quickRefData.map((row, i) => (
+                    <tr key={i} className={i % 2 === 0 ? 'bg-gray-50' : 'bg-white'}>
+                      <td className="px-3 py-1.5 font-medium text-gray-900">{row.left}</td>
+                      <td className="px-3 py-1.5 text-gray-600">= {row.right}</td>
+                      <td className="px-3 py-1.5 text-gray-400">{row.extra ? `(${row.extra})` : ''}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
             </div>
           </div>
         </div>

@@ -1,8 +1,15 @@
 'use client';
-import { useState, useMemo } from 'react';
+import { useState, useMemo, useCallback, useEffect, useRef } from 'react';
 import { useParams } from 'next/navigation';
 import { tools, type Locale } from '@/lib/translations';
 import ToolPageWrapper from '@/components/ToolPageWrapper';
+
+interface HistoryEntry {
+  preview: string;
+  total: number;
+  words: number;
+  timestamp: number;
+}
 
 const labels: Record<string, Record<string, string>> = {
   inputText: { en: 'Enter your text', it: 'Inserisci il testo', es: 'Ingresa tu texto', fr: 'Entrez votre texte', de: 'Text eingeben', pt: 'Digite seu texto' },
@@ -16,7 +23,25 @@ const labels: Record<string, Record<string, string>> = {
   sentences: { en: 'Sentences', it: 'Frasi', es: 'Oraciones', fr: 'Phrases', de: 'Sätze', pt: 'Frases' },
   mostFrequent: { en: 'Most Frequent Letter', it: 'Lettera Più Frequente', es: 'Letra Más Frecuente', fr: 'Lettre la Plus Fréquente', de: 'Häufigster Buchstabe', pt: 'Letra Mais Frequente' },
   charWithout: { en: 'Characters (no spaces)', it: 'Caratteri (senza spazi)', es: 'Caracteres (sin espacios)', fr: 'Caractères (sans espaces)', de: 'Zeichen (ohne Leerzeichen)', pt: 'Caracteres (sem espaços)' },
+  copyResults: { en: 'Copy Results', it: 'Copia Risultati', es: 'Copiar Resultados', fr: 'Copier les Résultats', de: 'Ergebnisse Kopieren', pt: 'Copiar Resultados' },
+  copied: { en: 'Copied!', it: 'Copiato!', es: 'Copiado!', fr: 'Copié !', de: 'Kopiert!', pt: 'Copiado!' },
+  reset: { en: 'Reset', it: 'Resetta', es: 'Restablecer', fr: 'Réinitialiser', de: 'Zurücksetzen', pt: 'Redefinir' },
+  emptyText: { en: 'Please enter some text first', it: 'Inserisci prima del testo', es: 'Por favor ingresa texto primero', fr: 'Veuillez entrer du texte d\'abord', de: 'Bitte geben Sie zuerst einen Text ein', pt: 'Por favor, digite algum texto primeiro' },
+  history: { en: 'Recent Analyses', it: 'Analisi Recenti', es: 'Análisis Recientes', fr: 'Analyses Récentes', de: 'Letzte Analysen', pt: 'Análises Recentes' },
+  charLimit: { en: 'Character Limit', it: 'Limite Caratteri', es: 'Límite de Caracteres', fr: 'Limite de Caractères', de: 'Zeichenlimit', pt: 'Limite de Caracteres' },
+  presets: { en: 'Quick Presets', it: 'Preset Rapidi', es: 'Preajustes Rápidos', fr: 'Préréglages Rapides', de: 'Schnellvorlagen', pt: 'Predefinições Rápidas' },
+  charsOf: { en: 'chars of', it: 'caratteri di', es: 'caracteres de', fr: 'caractères sur', de: 'Zeichen von', pt: 'caracteres de' },
+  noHistory: { en: 'No analyses yet', it: 'Nessuna analisi ancora', es: 'Sin análisis aún', fr: 'Aucune analyse encore', de: 'Noch keine Analysen', pt: 'Nenhuma análise ainda' },
+  chars: { en: 'chars', it: 'car.', es: 'car.', fr: 'car.', de: 'Zch.', pt: 'car.' },
+  wordsShort: { en: 'words', it: 'parole', es: 'palabras', fr: 'mots', de: 'Wörter', pt: 'palavras' },
 };
+
+const CHAR_PRESETS = [
+  { name: 'Twitter', limit: 280 },
+  { name: 'SMS', limit: 160 },
+  { name: 'Meta Description', limit: 160 },
+  { name: 'Title Tag', limit: 60 },
+];
 
 export default function CharacterCounter() {
   const { lang } = useParams() as { lang: Locale };
@@ -24,6 +49,12 @@ export default function CharacterCounter() {
   const t = (key: string) => labels[key]?.[lang] || labels[key]?.en || key;
 
   const [text, setText] = useState('');
+  const [copied, setCopied] = useState(false);
+  const [emptyError, setEmptyError] = useState(false);
+  const [charLimit, setCharLimit] = useState(280);
+  const [history, setHistory] = useState<HistoryEntry[]>([]);
+  const copiedTimeout = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const errorTimeout = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   const analysis = useMemo(() => {
     const vowels = (text.match(/[aeiouAEIOU]/g) || []).length;
@@ -61,6 +92,56 @@ export default function CharacterCounter() {
     { key: 'specialChars', value: analysis.specialChars },
     { key: 'mostFrequent', value: analysis.mostFrequent },
   ];
+
+  // Cleanup timeouts
+  useEffect(() => {
+    return () => {
+      if (copiedTimeout.current) clearTimeout(copiedTimeout.current);
+      if (errorTimeout.current) clearTimeout(errorTimeout.current);
+    };
+  }, []);
+
+  const handleCopyResults = useCallback(() => {
+    if (!text.trim()) {
+      setEmptyError(true);
+      if (errorTimeout.current) clearTimeout(errorTimeout.current);
+      errorTimeout.current = setTimeout(() => setEmptyError(false), 2000);
+      return;
+    }
+    const resultText = stats.map(({ key, value }) => `${t(key)}: ${value}`).join('\n');
+    navigator.clipboard.writeText(resultText).then(() => {
+      setCopied(true);
+      if (copiedTimeout.current) clearTimeout(copiedTimeout.current);
+      copiedTimeout.current = setTimeout(() => setCopied(false), 2000);
+
+      // Save to history
+      setHistory(prev => {
+        const entry: HistoryEntry = {
+          preview: text.slice(0, 30) + (text.length > 30 ? '...' : ''),
+          total: analysis.total,
+          words: analysis.words,
+          timestamp: Date.now(),
+        };
+        const updated = [entry, ...prev];
+        return updated.slice(0, 5);
+      });
+    });
+  }, [text, stats, analysis]);
+
+  const handleReset = useCallback(() => {
+    setText('');
+    setCopied(false);
+    setEmptyError(false);
+  }, []);
+
+  // Progress bar calculations
+  const progressPercent = Math.min((analysis.total / charLimit) * 100, 100);
+  const overLimit = analysis.total > charLimit;
+  const progressColor = overLimit
+    ? 'bg-red-500'
+    : progressPercent > 80
+      ? 'bg-yellow-500'
+      : 'bg-green-500';
 
   const seoContent: Record<Locale, { title: string; paragraphs: string[]; faq: { q: string; a: string }[] }> = {
     en: {
@@ -178,6 +259,41 @@ export default function CharacterCounter() {
               className="w-full border border-gray-300 rounded-lg px-4 py-2 text-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent resize-none" />
           </div>
 
+          {/* Character limit progress bar */}
+          <div>
+            <div className="flex items-center justify-between mb-2">
+              <span className="text-sm font-medium text-gray-700">{t('charLimit')}</span>
+              <span className={`text-sm font-semibold ${overLimit ? 'text-red-600' : 'text-gray-600'}`}>
+                {analysis.total} {t('charsOf')} {charLimit}
+              </span>
+            </div>
+            <div className="w-full bg-gray-200 rounded-full h-3 overflow-hidden">
+              <div
+                className={`h-3 rounded-full transition-all duration-300 ${progressColor}`}
+                style={{ width: `${progressPercent}%` }}
+              />
+            </div>
+            {/* Preset buttons */}
+            <div className="mt-2">
+              <span className="text-xs text-gray-500 mr-2">{t('presets')}:</span>
+              <div className="inline-flex flex-wrap gap-1.5 mt-1">
+                {CHAR_PRESETS.map((preset) => (
+                  <button
+                    key={preset.name}
+                    onClick={() => setCharLimit(preset.limit)}
+                    className={`text-xs px-2.5 py-1 rounded-full border transition-colors ${
+                      charLimit === preset.limit
+                        ? 'bg-blue-600 text-white border-blue-600'
+                        : 'bg-white text-gray-600 border-gray-300 hover:border-blue-400 hover:text-blue-600'
+                    }`}
+                  >
+                    {preset.name} ({preset.limit})
+                  </button>
+                ))}
+              </div>
+            </div>
+          </div>
+
           <div className="grid grid-cols-2 gap-3">
             {stats.map(({ key, value }) => (
               <div key={key} className="p-3 bg-blue-50 rounded-lg">
@@ -186,6 +302,46 @@ export default function CharacterCounter() {
               </div>
             ))}
           </div>
+
+          {/* Action buttons + validation message */}
+          <div className="flex items-center gap-3">
+            <button
+              onClick={handleCopyResults}
+              className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors ${
+                copied
+                  ? 'bg-green-600 text-white'
+                  : 'bg-blue-600 text-white hover:bg-blue-700'
+              }`}
+            >
+              {copied ? t('copied') : t('copyResults')}
+            </button>
+            <button
+              onClick={handleReset}
+              className="px-4 py-2 rounded-lg text-sm font-medium bg-gray-200 text-gray-700 hover:bg-gray-300 transition-colors"
+            >
+              {t('reset')}
+            </button>
+            {emptyError && (
+              <span className="text-sm text-red-500 animate-pulse">{t('emptyText')}</span>
+            )}
+          </div>
+        </div>
+
+        {/* History */}
+        <div className="mt-6 bg-white rounded-xl border border-gray-200 p-5">
+          <h3 className="text-sm font-semibold text-gray-700 mb-3">{t('history')}</h3>
+          {history.length === 0 ? (
+            <p className="text-sm text-gray-400">{t('noHistory')}</p>
+          ) : (
+            <ul className="space-y-2">
+              {history.map((entry, i) => (
+                <li key={entry.timestamp} className="flex items-center justify-between text-sm p-2 rounded-lg bg-gray-50">
+                  <span className="text-gray-700 truncate max-w-[60%] font-medium">&ldquo;{entry.preview}&rdquo;</span>
+                  <span className="text-gray-500 text-xs whitespace-nowrap ml-2">{entry.total} {t('chars')} &middot; {entry.words} {t('wordsShort')}</span>
+                </li>
+              ))}
+            </ul>
+          )}
         </div>
 
         {/* SEO Article */}

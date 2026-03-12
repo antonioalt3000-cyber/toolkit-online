@@ -1,8 +1,10 @@
 'use client';
-import { useState } from 'react';
+import { useState, useCallback } from 'react';
 import { useParams } from 'next/navigation';
 import { tools, type Locale } from '@/lib/translations';
 import ToolPageWrapper from '@/components/ToolPageWrapper';
+
+const DEFAULT_COLOR = '#3b82f6';
 
 function hexToRgb(hex: string) {
   const r = parseInt(hex.slice(1, 3), 16);
@@ -28,19 +30,83 @@ function rgbToHsl(r: number, g: number, b: number) {
   return { h: Math.round(h * 360), s: Math.round(s * 100), l: Math.round(l * 100) };
 }
 
+function hslToHex(h: number, s: number, l: number): string {
+  s /= 100;
+  l /= 100;
+  const a = s * Math.min(l, 1 - l);
+  const f = (n: number) => {
+    const k = (n + h / 30) % 12;
+    const color = l - a * Math.max(Math.min(k - 3, 9 - k, 1), -1);
+    return Math.round(255 * color).toString(16).padStart(2, '0');
+  };
+  return `#${f(0)}${f(8)}${f(4)}`;
+}
+
+function isValidHex(hex: string): boolean {
+  return /^#[0-9a-fA-F]{6}$/.test(hex);
+}
+
+function getLuminance(r: number, g: number, b: number): number {
+  const [rs, gs, bs] = [r, g, b].map(c => {
+    c /= 255;
+    return c <= 0.03928 ? c / 12.92 : Math.pow((c + 0.055) / 1.055, 2.4);
+  });
+  return 0.2126 * rs + 0.7152 * gs + 0.0722 * bs;
+}
+
+function getContrastRatio(l1: number, l2: number): number {
+  const lighter = Math.max(l1, l2);
+  const darker = Math.min(l1, l2);
+  return (lighter + 0.05) / (darker + 0.05);
+}
+
+function getWcagGrade(ratio: number): { aa: string; aaLarge: string; aaa: string; aaaLarge: string } {
+  return {
+    aa: ratio >= 4.5 ? 'Pass' : 'Fail',
+    aaLarge: ratio >= 3 ? 'Pass' : 'Fail',
+    aaa: ratio >= 7 ? 'Pass' : 'Fail',
+    aaaLarge: ratio >= 4.5 ? 'Pass' : 'Fail',
+  };
+}
+
+const labels: Record<string, Record<Locale, string>> = {
+  reset: { en: 'Reset', it: 'Ripristina', es: 'Restablecer', fr: 'Réinitialiser', de: 'Zurücksetzen', pt: 'Redefinir' },
+  hexInput: { en: 'Enter HEX', it: 'Inserisci HEX', es: 'Ingresa HEX', fr: 'Entrez HEX', de: 'HEX eingeben', pt: 'Digite HEX' },
+  invalidHex: { en: 'Invalid HEX', it: 'HEX non valido', es: 'HEX inválido', fr: 'HEX invalide', de: 'Ungültiges HEX', pt: 'HEX inválido' },
+  history: { en: 'Color History', it: 'Cronologia colori', es: 'Historial de colores', fr: 'Historique des couleurs', de: 'Farbverlauf', pt: 'Histórico de cores' },
+  clearHistory: { en: 'Clear', it: 'Cancella', es: 'Borrar', fr: 'Effacer', de: 'Löschen', pt: 'Limpar' },
+  palette: { en: 'Color Palette', it: 'Palette colori', es: 'Paleta de colores', fr: 'Palette de couleurs', de: 'Farbpalette', pt: 'Paleta de cores' },
+  complementary: { en: 'Complementary', it: 'Complementare', es: 'Complementario', fr: 'Complémentaire', de: 'Komplementär', pt: 'Complementar' },
+  analogous: { en: 'Analogous', it: 'Analogo', es: 'Análogo', fr: 'Analogue', de: 'Analog', pt: 'Análogo' },
+  triadic: { en: 'Triadic', it: 'Triadico', es: 'Triádico', fr: 'Triadique', de: 'Triadisch', pt: 'Triádico' },
+  contrast: { en: 'Contrast Checker', it: 'Verifica contrasto', es: 'Verificador de contraste', fr: 'Vérificateur de contraste', de: 'Kontrastprüfer', pt: 'Verificador de contraste' },
+  withBlack: { en: 'With Black Text', it: 'Con testo nero', es: 'Con texto negro', fr: 'Avec texte noir', de: 'Mit schwarzem Text', pt: 'Com texto preto' },
+  withWhite: { en: 'With White Text', it: 'Con testo bianco', es: 'Con texto blanco', fr: 'Avec texte blanc', de: 'Mit weißem Text', pt: 'Com texto branco' },
+  ratio: { en: 'Ratio', it: 'Rapporto', es: 'Ratio', fr: 'Ratio', de: 'Verhältnis', pt: 'Razão' },
+  normalText: { en: 'Normal Text', it: 'Testo normale', es: 'Texto normal', fr: 'Texte normal', de: 'Normaler Text', pt: 'Texto normal' },
+  largeText: { en: 'Large Text', it: 'Testo grande', es: 'Texto grande', fr: 'Grand texte', de: 'Großer Text', pt: 'Texto grande' },
+  copied: { en: 'Copied!', it: 'Copiato!', es: '¡Copiado!', fr: 'Copié !', de: 'Kopiert!', pt: 'Copiado!' },
+  copy: { en: 'Copy', it: 'Copia', es: 'Copiar', fr: 'Copier', de: 'Kopieren', pt: 'Copiar' },
+};
+
 export default function ColorPicker() {
   const { lang } = useParams() as { lang: Locale };
   const toolT = tools['color-picker'][lang];
-  const [color, setColor] = useState('#3b82f6');
+  const [color, setColor] = useState(DEFAULT_COLOR);
+  const [hexInput, setHexInput] = useState(DEFAULT_COLOR);
+  const [hexError, setHexError] = useState(false);
   const [copied, setCopied] = useState('');
+  const [history, setHistory] = useState<string[]>([]);
+
+  const t = useCallback((key: string) => labels[key]?.[lang] ?? labels[key]?.en ?? key, [lang]);
 
   const rgb = hexToRgb(color);
   const hsl = rgbToHsl(rgb.r, rgb.g, rgb.b);
 
   const formats = [
-    { label: 'HEX', value: color.toUpperCase() },
-    { label: 'RGB', value: `rgb(${rgb.r}, ${rgb.g}, ${rgb.b})` },
-    { label: 'HSL', value: `hsl(${hsl.h}, ${hsl.s}%, ${hsl.l}%)` },
+    { label: 'HEX', value: color.toUpperCase(), bg: 'bg-blue-50 border-blue-200' },
+    { label: 'RGB', value: `rgb(${rgb.r}, ${rgb.g}, ${rgb.b})`, bg: 'bg-green-50 border-green-200' },
+    { label: 'HSL', value: `hsl(${hsl.h}, ${hsl.s}%, ${hsl.l}%)`, bg: 'bg-purple-50 border-purple-200' },
   ];
 
   const copy = (val: string) => {
@@ -48,6 +114,60 @@ export default function ColorPicker() {
     setCopied(val);
     setTimeout(() => setCopied(''), 2000);
   };
+
+  const updateColor = (newColor: string) => {
+    setColor(newColor);
+    setHexInput(newColor);
+    setHexError(false);
+    setHistory(prev => {
+      const filtered = prev.filter(c => c !== newColor);
+      return [newColor, ...filtered].slice(0, 10);
+    });
+  };
+
+  const handleHexInput = (val: string) => {
+    let v = val;
+    if (!v.startsWith('#')) v = '#' + v;
+    setHexInput(v);
+    if (isValidHex(v)) {
+      setColor(v.toLowerCase());
+      setHexError(false);
+      setHistory(prev => {
+        const filtered = prev.filter(c => c !== v.toLowerCase());
+        return [v.toLowerCase(), ...filtered].slice(0, 10);
+      });
+    } else {
+      setHexError(v.length >= 4);
+    }
+  };
+
+  const handleReset = () => {
+    setColor(DEFAULT_COLOR);
+    setHexInput(DEFAULT_COLOR);
+    setHexError(false);
+  };
+
+  // Palette generation
+  const complementary = hslToHex((hsl.h + 180) % 360, hsl.s, hsl.l);
+  const analogous1 = hslToHex((hsl.h + 30) % 360, hsl.s, hsl.l);
+  const analogous2 = hslToHex((hsl.h + 330) % 360, hsl.s, hsl.l);
+  const triadic1 = hslToHex((hsl.h + 120) % 360, hsl.s, hsl.l);
+  const triadic2 = hslToHex((hsl.h + 240) % 360, hsl.s, hsl.l);
+
+  const paletteGroups = [
+    { name: t('complementary'), colors: [color, complementary] },
+    { name: t('analogous'), colors: [analogous2, color, analogous1] },
+    { name: t('triadic'), colors: [color, triadic1, triadic2] },
+  ];
+
+  // Contrast checker
+  const colorLum = getLuminance(rgb.r, rgb.g, rgb.b);
+  const blackLum = getLuminance(0, 0, 0);
+  const whiteLum = getLuminance(255, 255, 255);
+  const blackRatio = getContrastRatio(colorLum, blackLum);
+  const whiteRatio = getContrastRatio(colorLum, whiteLum);
+  const blackGrade = getWcagGrade(blackRatio);
+  const whiteGrade = getWcagGrade(whiteRatio);
 
   const seoContent: Record<Locale, { title: string; paragraphs: string[]; faq: { q: string; a: string }[] }> = {
     en: {
@@ -157,22 +277,136 @@ export default function ColorPicker() {
         <h1 className="text-3xl font-bold text-gray-900 mb-2">{toolT.name}</h1>
         <p className="text-gray-600 mb-6">{toolT.description}</p>
 
-        <div className="bg-white rounded-xl border border-gray-200 p-6 space-y-4">
+        <div className="bg-white rounded-xl border border-gray-200 p-6 space-y-6">
+          {/* Color picker + preview + reset */}
           <div className="flex gap-4 items-center">
-            <input type="color" value={color} onChange={(e) => setColor(e.target.value)} className="w-20 h-20 rounded-lg cursor-pointer border-0" />
-            <div className="w-full h-20 rounded-lg" style={{ backgroundColor: color }} />
+            <input type="color" value={color} onChange={(e) => updateColor(e.target.value)} className="w-20 h-20 rounded-lg cursor-pointer border-0" />
+            <div className="w-full h-20 rounded-lg border border-gray-200" style={{ backgroundColor: color }} />
+            <button
+              onClick={handleReset}
+              className="px-4 py-2 text-sm font-medium text-gray-700 bg-gray-100 rounded-lg hover:bg-gray-200 transition-colors whitespace-nowrap"
+            >
+              {t('reset')}
+            </button>
           </div>
 
-          <div className="space-y-2">
+          {/* Manual HEX input with validation */}
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-1">{t('hexInput')}</label>
+            <div className="flex gap-2 items-center">
+              <input
+                type="text"
+                value={hexInput}
+                onChange={(e) => handleHexInput(e.target.value)}
+                placeholder="#3B82F6"
+                maxLength={7}
+                className={`flex-1 px-4 py-2 rounded-lg border font-mono text-sm ${hexError ? 'border-red-400 bg-red-50 focus:ring-red-400' : 'border-gray-300 focus:ring-blue-400'} focus:outline-none focus:ring-2`}
+              />
+              {hexError && <span className="text-red-500 text-xs font-medium whitespace-nowrap">{t('invalidHex')}</span>}
+            </div>
+          </div>
+
+          {/* Result cards with colored backgrounds */}
+          <div className="grid gap-3">
             {formats.map((f) => (
-              <div key={f.label} className="flex items-center gap-3 bg-gray-50 rounded-lg px-4 py-3">
-                <span className="text-sm font-medium text-gray-500 w-10">{f.label}</span>
+              <div key={f.label} className={`flex items-center gap-3 rounded-lg px-4 py-3 border ${f.bg}`}>
+                <span className="text-sm font-semibold text-gray-600 w-10">{f.label}</span>
                 <code className="flex-1 font-mono text-gray-900">{f.value}</code>
-                <button onClick={() => copy(f.value)} className="text-xs px-3 py-1 bg-blue-600 text-white rounded hover:bg-blue-700">
-                  {copied === f.value ? '✓' : 'Copy'}
+                <button
+                  onClick={() => copy(f.value)}
+                  className="text-xs px-3 py-1 bg-blue-600 text-white rounded hover:bg-blue-700 transition-colors"
+                >
+                  {copied === f.value ? t('copied') : t('copy')}
                 </button>
               </div>
             ))}
+          </div>
+
+          {/* Color History */}
+          {history.length > 0 && (
+            <div>
+              <div className="flex items-center justify-between mb-2">
+                <h3 className="text-sm font-semibold text-gray-700">{t('history')}</h3>
+                <button
+                  onClick={() => setHistory([])}
+                  className="text-xs text-gray-500 hover:text-gray-700 transition-colors"
+                >
+                  {t('clearHistory')}
+                </button>
+              </div>
+              <div className="flex gap-2 flex-wrap">
+                {history.map((c) => (
+                  <button
+                    key={c}
+                    onClick={() => { setColor(c); setHexInput(c); setHexError(false); }}
+                    title={c.toUpperCase()}
+                    className="w-9 h-9 rounded-lg border border-gray-300 cursor-pointer hover:scale-110 transition-transform"
+                    style={{ backgroundColor: c }}
+                  />
+                ))}
+              </div>
+            </div>
+          )}
+        </div>
+
+        {/* Color Palette Generator */}
+        <div className="bg-white rounded-xl border border-gray-200 p-6 mt-6 space-y-4">
+          <h2 className="text-lg font-bold text-gray-900">{t('palette')}</h2>
+          {paletteGroups.map((group) => (
+            <div key={group.name}>
+              <p className="text-sm font-medium text-gray-600 mb-2">{group.name}</p>
+              <div className="flex gap-2">
+                {group.colors.map((c, i) => (
+                  <button
+                    key={i}
+                    onClick={() => { copy(c.toUpperCase()); }}
+                    title={c.toUpperCase()}
+                    className="flex-1 h-12 rounded-lg border border-gray-200 cursor-pointer hover:scale-105 transition-transform relative group"
+                    style={{ backgroundColor: c }}
+                  >
+                    <span className="absolute inset-0 flex items-center justify-center text-xs font-mono opacity-0 group-hover:opacity-100 transition-opacity"
+                      style={{ color: getLuminance(...Object.values(hexToRgb(c)) as [number, number, number]) > 0.5 ? '#000' : '#fff' }}>
+                      {c.toUpperCase()}
+                    </span>
+                  </button>
+                ))}
+              </div>
+            </div>
+          ))}
+        </div>
+
+        {/* Contrast Checker */}
+        <div className="bg-white rounded-xl border border-gray-200 p-6 mt-6 space-y-4">
+          <h2 className="text-lg font-bold text-gray-900">{t('contrast')}</h2>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            {/* Black text on color */}
+            <div className="rounded-lg overflow-hidden border border-gray-200">
+              <div className="px-4 py-6 text-center" style={{ backgroundColor: color }}>
+                <span className="text-lg font-bold" style={{ color: '#000000' }}>{t('withBlack')}</span>
+              </div>
+              <div className="px-4 py-3 bg-gray-50 space-y-1 text-sm">
+                <p className="font-medium">{t('ratio')}: <span className="font-mono">{blackRatio.toFixed(2)}:1</span></p>
+                <p>AA {t('normalText')}: <span className={blackGrade.aa === 'Pass' ? 'text-green-600 font-semibold' : 'text-red-600 font-semibold'}>{blackGrade.aa}</span></p>
+                <p>AA {t('largeText')}: <span className={blackGrade.aaLarge === 'Pass' ? 'text-green-600 font-semibold' : 'text-red-600 font-semibold'}>{blackGrade.aaLarge}</span></p>
+                <p>AAA {t('normalText')}: <span className={blackGrade.aaa === 'Pass' ? 'text-green-600 font-semibold' : 'text-red-600 font-semibold'}>{blackGrade.aaa}</span></p>
+                <p>AAA {t('largeText')}: <span className={blackGrade.aaaLarge === 'Pass' ? 'text-green-600 font-semibold' : 'text-red-600 font-semibold'}>{blackGrade.aaaLarge}</span></p>
+              </div>
+            </div>
+
+            {/* White text on color */}
+            <div className="rounded-lg overflow-hidden border border-gray-200">
+              <div className="px-4 py-6 text-center" style={{ backgroundColor: color }}>
+                <span className="text-lg font-bold" style={{ color: '#ffffff' }}>{t('withWhite')}</span>
+              </div>
+              <div className="px-4 py-3 bg-gray-50 space-y-1 text-sm">
+                <p className="font-medium">{t('ratio')}: <span className="font-mono">{whiteRatio.toFixed(2)}:1</span></p>
+                <p>AA {t('normalText')}: <span className={whiteGrade.aa === 'Pass' ? 'text-green-600 font-semibold' : 'text-red-600 font-semibold'}>{whiteGrade.aa}</span></p>
+                <p>AA {t('largeText')}: <span className={whiteGrade.aaLarge === 'Pass' ? 'text-green-600 font-semibold' : 'text-red-600 font-semibold'}>{whiteGrade.aaLarge}</span></p>
+                <p>AAA {t('normalText')}: <span className={whiteGrade.aaa === 'Pass' ? 'text-green-600 font-semibold' : 'text-red-600 font-semibold'}>{whiteGrade.aaa}</span></p>
+                <p>AAA {t('largeText')}: <span className={whiteGrade.aaaLarge === 'Pass' ? 'text-green-600 font-semibold' : 'text-red-600 font-semibold'}>{whiteGrade.aaaLarge}</span></p>
+              </div>
+            </div>
           </div>
         </div>
 

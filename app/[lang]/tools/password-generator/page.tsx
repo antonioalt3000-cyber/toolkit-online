@@ -4,6 +4,64 @@ import { useParams } from 'next/navigation';
 import { tools, type Locale } from '@/lib/translations';
 import ToolPageWrapper from '@/components/ToolPageWrapper';
 
+interface HistoryEntry {
+  password: string;
+  revealed: boolean;
+}
+
+function calcPoolSize(upper: boolean, lower: boolean, nums: boolean, syms: boolean): number {
+  let pool = 0;
+  if (upper) pool += 26;
+  if (lower) pool += 26;
+  if (nums) pool += 10;
+  if (syms) pool += 27;
+  return pool || 26;
+}
+
+function calcEntropy(length: number, poolSize: number): number {
+  return length * Math.log2(poolSize);
+}
+
+function getStrength(entropy: number): { level: 'weak' | 'fair' | 'good' | 'strong'; pct: number } {
+  if (entropy < 36) return { level: 'weak', pct: 20 };
+  if (entropy < 60) return { level: 'fair', pct: 45 };
+  if (entropy < 80) return { level: 'good', pct: 70 };
+  return { level: 'strong', pct: 100 };
+}
+
+function crackTimeText(entropy: number, lang: Locale): string {
+  // Assume 10 billion guesses/sec
+  const seconds = Math.pow(2, entropy) / 1e10;
+  const labels: Record<string, Record<Locale, string>> = {
+    instant: { en: 'Instantly', it: 'Istantaneamente', es: 'Instantáneamente', fr: 'Instantanément', de: 'Sofort', pt: 'Instantaneamente' },
+    seconds: { en: 'seconds', it: 'secondi', es: 'segundos', fr: 'secondes', de: 'Sekunden', pt: 'segundos' },
+    minutes: { en: 'minutes', it: 'minuti', es: 'minutos', fr: 'minutes', de: 'Minuten', pt: 'minutos' },
+    hours: { en: 'hours', it: 'ore', es: 'horas', fr: 'heures', de: 'Stunden', pt: 'horas' },
+    days: { en: 'days', it: 'giorni', es: 'días', fr: 'jours', de: 'Tage', pt: 'dias' },
+    years: { en: 'years', it: 'anni', es: 'años', fr: 'ans', de: 'Jahre', pt: 'anos' },
+    millions: { en: 'million years', it: 'milioni di anni', es: 'millones de años', fr: "millions d'années", de: 'Millionen Jahre', pt: 'milhões de anos' },
+    billions: { en: 'billion years', it: 'miliardi di anni', es: 'mil millones de años', fr: "milliards d'années", de: 'Milliarden Jahre', pt: 'bilhões de anos' },
+    trillions: { en: 'trillion+ years', it: 'bilioni+ di anni', es: 'billones+ de años', fr: "billions+ d'années", de: 'Billionen+ Jahre', pt: 'trilhões+ de anos' },
+  };
+  if (seconds < 1) return labels.instant[lang];
+  if (seconds < 60) return `~${Math.ceil(seconds)} ${labels.seconds[lang]}`;
+  if (seconds < 3600) return `~${Math.ceil(seconds / 60)} ${labels.minutes[lang]}`;
+  if (seconds < 86400) return `~${Math.ceil(seconds / 3600)} ${labels.hours[lang]}`;
+  if (seconds < 3.154e7) return `~${Math.ceil(seconds / 86400)} ${labels.days[lang]}`;
+  const years = seconds / 3.154e7;
+  if (years < 1e6) return `~${years < 100 ? Math.ceil(years) : Math.ceil(years).toLocaleString()} ${labels.years[lang]}`;
+  if (years < 1e9) return `~${Math.ceil(years / 1e6).toLocaleString()} ${labels.millions[lang]}`;
+  if (years < 1e12) return `~${Math.ceil(years / 1e9).toLocaleString()} ${labels.billions[lang]}`;
+  return labels.trillions[lang];
+}
+
+const STRENGTH_COLORS: Record<string, { bg: string; border: string; text: string; bar: string }> = {
+  weak: { bg: 'bg-red-50', border: 'border-red-300', text: 'text-red-700', bar: 'bg-red-500' },
+  fair: { bg: 'bg-orange-50', border: 'border-orange-300', text: 'text-orange-700', bar: 'bg-orange-500' },
+  good: { bg: 'bg-yellow-50', border: 'border-yellow-300', text: 'text-yellow-700', bar: 'bg-yellow-500' },
+  strong: { bg: 'bg-green-50', border: 'border-green-300', text: 'text-green-700', bar: 'bg-green-500' },
+};
+
 export default function PasswordGenerator() {
   const { lang } = useParams() as { lang: Locale };
   const toolT = tools['password-generator'][lang];
@@ -15,6 +73,9 @@ export default function PasswordGenerator() {
   const [symbols, setSymbols] = useState(true);
   const [password, setPassword] = useState('');
   const [copied, setCopied] = useState(false);
+  const [history, setHistory] = useState<HistoryEntry[]>([]);
+  const [bulkPasswords, setBulkPasswords] = useState<string[]>([]);
+  const [lengthError, setLengthError] = useState('');
 
   const labels = {
     length: { en: 'Length', it: 'Lunghezza', es: 'Longitud', fr: 'Longueur', de: 'Länge', pt: 'Comprimento' },
@@ -25,26 +86,105 @@ export default function PasswordGenerator() {
     gen: { en: 'Generate Password', it: 'Genera Password', es: 'Generar Contraseña', fr: 'Générer Mot de Passe', de: 'Passwort Generieren', pt: 'Gerar Senha' },
     copy: { en: 'Copy', it: 'Copia', es: 'Copiar', fr: 'Copier', de: 'Kopieren', pt: 'Copiar' },
     copied: { en: 'Copied!', it: 'Copiato!', es: '¡Copiado!', fr: 'Copié !', de: 'Kopiert!', pt: 'Copiado!' },
+    reset: { en: 'Reset Defaults', it: 'Ripristina Predefiniti', es: 'Restablecer', fr: 'Réinitialiser', de: 'Zurücksetzen', pt: 'Redefinir' },
+    strength: { en: 'Strength', it: 'Robustezza', es: 'Fortaleza', fr: 'Force', de: 'Stärke', pt: 'Força' },
+    weak: { en: 'Weak', it: 'Debole', es: 'Débil', fr: 'Faible', de: 'Schwach', pt: 'Fraca' },
+    fair: { en: 'Fair', it: 'Discreta', es: 'Regular', fr: 'Moyenne', de: 'Mäßig', pt: 'Razoável' },
+    good: { en: 'Good', it: 'Buona', es: 'Buena', fr: 'Bonne', de: 'Gut', pt: 'Boa' },
+    strong: { en: 'Strong', it: 'Forte', es: 'Fuerte', fr: 'Forte', de: 'Stark', pt: 'Forte' },
+    crackTime: { en: 'Est. crack time', it: 'Tempo stimato di cracking', es: 'Tiempo est. de descifrado', fr: 'Temps est. de craquage', de: 'Gesch. Knackzeit', pt: 'Tempo est. de quebra' },
+    entropy: { en: 'Entropy', it: 'Entropia', es: 'Entropía', fr: 'Entropie', de: 'Entropie', pt: 'Entropia' },
+    history: { en: 'Recent Passwords', it: 'Password Recenti', es: 'Contraseñas Recientes', fr: 'Mots de Passe Récents', de: 'Letzte Passwörter', pt: 'Senhas Recentes' },
+    reveal: { en: 'Reveal', it: 'Mostra', es: 'Revelar', fr: 'Révéler', de: 'Anzeigen', pt: 'Revelar' },
+    hide: { en: 'Hide', it: 'Nascondi', es: 'Ocultar', fr: 'Masquer', de: 'Verbergen', pt: 'Ocultar' },
+    bulkGen: { en: 'Generate 5 Passwords', it: 'Genera 5 Password', es: 'Generar 5 Contraseñas', fr: 'Générer 5 Mots de Passe', de: '5 Passwörter Generieren', pt: 'Gerar 5 Senhas' },
+    bulkTitle: { en: 'Bulk Passwords', it: 'Password Multiple', es: 'Contraseñas Múltiples', fr: 'Mots de Passe en Lot', de: 'Mehrere Passwörter', pt: 'Senhas em Lote' },
+    copyAll: { en: 'Copy All', it: 'Copia Tutte', es: 'Copiar Todas', fr: 'Copier Tout', de: 'Alle Kopieren', pt: 'Copiar Todas' },
+    lengthError: { en: 'Length must be between 4 and 128', it: 'La lunghezza deve essere tra 4 e 128', es: 'La longitud debe estar entre 4 y 128', fr: 'La longueur doit être entre 4 et 128', de: 'Länge muss zwischen 4 und 128 liegen', pt: 'O comprimento deve ser entre 4 e 128' },
+    bits: { en: 'bits', it: 'bit', es: 'bits', fr: 'bits', de: 'Bits', pt: 'bits' },
   } as Record<string, Record<Locale, string>>;
 
-  const generate = useCallback(() => {
+  const buildChars = useCallback(() => {
     let chars = '';
     if (uppercase) chars += 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
     if (lowercase) chars += 'abcdefghijklmnopqrstuvwxyz';
     if (numbers) chars += '0123456789';
     if (symbols) chars += '!@#$%^&*()_+-=[]{}|;:,.<>?';
     if (!chars) chars = 'abcdefghijklmnopqrstuvwxyz';
+    return chars;
+  }, [uppercase, lowercase, numbers, symbols]);
 
-    const array = new Uint32Array(length);
+  const generateOne = useCallback((len: number): string => {
+    const chars = buildChars();
+    const array = new Uint32Array(len);
     crypto.getRandomValues(array);
-    setPassword(Array.from(array, (v) => chars[v % chars.length]).join(''));
-  }, [length, uppercase, lowercase, numbers, symbols]);
+    return Array.from(array, (v) => chars[v % chars.length]).join('');
+  }, [buildChars]);
 
-  const copy = () => {
-    navigator.clipboard.writeText(password);
+  const generate = useCallback(() => {
+    if (length < 4 || length > 128) {
+      setLengthError(labels.lengthError[lang]);
+      return;
+    }
+    setLengthError('');
+    const pw = generateOne(length);
+    setPassword(pw);
+    setBulkPasswords([]);
+    setHistory((prev) => {
+      const next = [{ password: pw, revealed: false }, ...prev];
+      return next.slice(0, 5);
+    });
+  }, [length, generateOne, lang, labels.lengthError]);
+
+  const generateBulk = useCallback(() => {
+    if (length < 4 || length > 128) {
+      setLengthError(labels.lengthError[lang]);
+      return;
+    }
+    setLengthError('');
+    const pws = Array.from({ length: 5 }, () => generateOne(length));
+    setBulkPasswords(pws);
+    setPassword('');
+  }, [length, generateOne, lang, labels.lengthError]);
+
+  const resetDefaults = () => {
+    setLength(16);
+    setUppercase(true);
+    setLowercase(true);
+    setNumbers(true);
+    setSymbols(true);
+    setPassword('');
+    setCopied(false);
+    setBulkPasswords([]);
+    setLengthError('');
+  };
+
+  const copy = (text?: string) => {
+    navigator.clipboard.writeText(text || password);
     setCopied(true);
     setTimeout(() => setCopied(false), 2000);
   };
+
+  const toggleHistoryReveal = (index: number) => {
+    setHistory((prev) => prev.map((h, i) => i === index ? { ...h, revealed: !h.revealed } : h));
+  };
+
+  const handleLengthInput = (val: string) => {
+    const n = parseInt(val, 10);
+    if (isNaN(n)) return;
+    setLength(n);
+    if (n < 4 || n > 128) {
+      setLengthError(labels.lengthError[lang]);
+    } else {
+      setLengthError('');
+    }
+  };
+
+  // Computed strength values
+  const poolSize = calcPoolSize(uppercase, lowercase, numbers, symbols);
+  const entropy = calcEntropy(length, poolSize);
+  const strength = getStrength(entropy);
+  const colors = STRENGTH_COLORS[strength.level];
 
   const seoContent: Record<Locale, { title: string; paragraphs: string[]; faq: { q: string; a: string }[] }> = {
     en: {
@@ -155,20 +295,58 @@ export default function PasswordGenerator() {
         <p className="text-gray-600 mb-6">{toolT.description}</p>
 
         <div className="bg-white rounded-xl border border-gray-200 p-6 space-y-4">
+          {/* Password display */}
           {password && (
             <div className="flex items-center gap-2">
               <code className="flex-1 bg-gray-900 text-green-400 px-4 py-3 rounded-lg text-lg font-mono break-all">{password}</code>
-              <button onClick={copy} className="px-4 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 text-sm font-medium">
+              <button onClick={() => copy()} className="px-4 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors text-sm font-medium">
                 {copied ? labels.copied[lang] : labels.copy[lang]}
               </button>
             </div>
           )}
 
+          {/* Strength card + meter */}
+          {password && (
+            <div className={`rounded-lg border p-4 ${colors.bg} ${colors.border}`}>
+              <div className="flex items-center justify-between mb-2">
+                <span className={`font-semibold ${colors.text}`}>
+                  {labels.strength[lang]}: {labels[strength.level][lang]}
+                </span>
+                <span className="text-sm text-gray-500">
+                  {labels.entropy[lang]}: {Math.round(entropy)} {labels.bits[lang]}
+                </span>
+              </div>
+              {/* Strength bar */}
+              <div className="w-full bg-gray-200 rounded-full h-2.5 mb-3">
+                <div
+                  className={`h-2.5 rounded-full transition-all duration-500 ${colors.bar}`}
+                  style={{ width: `${strength.pct}%` }}
+                />
+              </div>
+              <p className="text-sm text-gray-600">
+                {labels.crackTime[lang]}: <span className="font-medium">{crackTimeText(entropy, lang)}</span>
+              </p>
+            </div>
+          )}
+
+          {/* Length control */}
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-1">{labels.length[lang]}: {length}</label>
-            <input type="range" min="4" max="128" value={length} onChange={(e) => setLength(+e.target.value)} className="w-full" />
+            <input type="range" min="4" max="128" value={Math.min(128, Math.max(4, length))} onChange={(e) => { setLength(+e.target.value); setLengthError(''); }} className="w-full" />
+            <div className="flex items-center gap-2 mt-1">
+              <input
+                type="number"
+                min="4"
+                max="128"
+                value={length}
+                onChange={(e) => handleLengthInput(e.target.value)}
+                className="w-20 px-2 py-1 border border-gray-300 rounded text-sm text-center"
+              />
+              {lengthError && <span className="text-red-500 text-sm">{lengthError}</span>}
+            </div>
           </div>
 
+          {/* Character type checkboxes */}
           {[
             { label: labels.upper[lang], checked: uppercase, set: setUppercase },
             { label: labels.lower[lang], checked: lowercase, set: setLowercase },
@@ -181,10 +359,72 @@ export default function PasswordGenerator() {
             </label>
           ))}
 
-          <button onClick={generate} className="w-full py-3 bg-blue-600 text-white rounded-lg font-semibold hover:bg-blue-700 text-lg">
-            {labels.gen[lang]}
+          {/* Action buttons */}
+          <div className="flex gap-2">
+            <button onClick={generate} className="flex-1 py-3 bg-blue-600 text-white rounded-lg font-semibold hover:bg-blue-700 transition-colors text-lg">
+              {labels.gen[lang]}
+            </button>
+            <button onClick={resetDefaults} className="px-4 py-3 bg-gray-200 text-gray-700 rounded-lg font-medium hover:bg-gray-300 transition-colors text-sm">
+              {labels.reset[lang]}
+            </button>
+          </div>
+
+          {/* Bulk generate */}
+          <button onClick={generateBulk} className="w-full py-2.5 bg-indigo-600 text-white rounded-lg font-medium hover:bg-indigo-700 transition-colors">
+            {labels.bulkGen[lang]}
           </button>
+
+          {/* Bulk passwords list */}
+          {bulkPasswords.length > 0 && (
+            <div className="bg-gray-50 rounded-lg border border-gray-200 p-4 space-y-2">
+              <div className="flex items-center justify-between mb-1">
+                <h3 className="text-sm font-semibold text-gray-700">{labels.bulkTitle[lang]}</h3>
+                <button
+                  onClick={() => copy(bulkPasswords.join('\n'))}
+                  className="text-xs px-3 py-1 bg-blue-600 text-white rounded hover:bg-blue-700 transition-colors"
+                >
+                  {labels.copyAll[lang]}
+                </button>
+              </div>
+              {bulkPasswords.map((pw, i) => (
+                <div key={i} className="flex items-center gap-2">
+                  <code className="flex-1 bg-gray-900 text-green-400 px-3 py-1.5 rounded font-mono text-sm break-all">{pw}</code>
+                  <button onClick={() => copy(pw)} className="text-xs px-2 py-1 bg-blue-600 text-white rounded hover:bg-blue-700 transition-colors">
+                    {labels.copy[lang]}
+                  </button>
+                </div>
+              ))}
+            </div>
+          )}
         </div>
+
+        {/* Password history */}
+        {history.length > 0 && (
+          <div className="mt-6 bg-white rounded-xl border border-gray-200 p-4">
+            <h3 className="text-sm font-semibold text-gray-700 mb-3">{labels.history[lang]}</h3>
+            <div className="space-y-2">
+              {history.map((h, i) => (
+                <div key={i} className="flex items-center gap-2">
+                  <code className="flex-1 bg-gray-100 px-3 py-1.5 rounded font-mono text-sm break-all text-gray-700">
+                    {h.revealed ? h.password : '\u2022'.repeat(Math.min(h.password.length, 24))}
+                  </code>
+                  <button
+                    onClick={() => toggleHistoryReveal(i)}
+                    className="text-xs px-2 py-1 bg-gray-200 text-gray-600 rounded hover:bg-gray-300 transition-colors"
+                  >
+                    {h.revealed ? labels.hide[lang] : labels.reveal[lang]}
+                  </button>
+                  <button
+                    onClick={() => copy(h.password)}
+                    className="text-xs px-2 py-1 bg-blue-600 text-white rounded hover:bg-blue-700 transition-colors"
+                  >
+                    {labels.copy[lang]}
+                  </button>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
 
         <article className="mt-12 prose prose-gray max-w-none">
           <h2 className="text-2xl font-bold text-gray-900 mb-4">{seo.title}</h2>
@@ -198,7 +438,7 @@ export default function PasswordGenerator() {
               <div key={i} className="border border-gray-200 rounded-lg">
                 <button onClick={() => setOpenFaq(openFaq === i ? null : i)} className="w-full text-left px-4 py-3 font-medium text-gray-900 flex justify-between items-center">
                   {item.q}
-                  <span className="text-gray-400">{openFaq === i ? '−' : '+'}</span>
+                  <span className="text-gray-400">{openFaq === i ? '\u2212' : '+'}</span>
                 </button>
                 {openFaq === i && <div className="px-4 pb-3 text-gray-600">{item.a}</div>}
               </div>

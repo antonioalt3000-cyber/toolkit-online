@@ -27,6 +27,30 @@ const catLabels: Record<string, Record<Locale, string>> = {
   speed: { en: 'Speed', it: 'Velocità', es: 'Velocidad', fr: 'Vitesse', de: 'Geschwindigkeit', pt: 'Velocidade' },
 };
 
+const labels: Record<string, Record<Locale, string>> = {
+  copy: { en: 'Copy Result', it: 'Copia Risultato', es: 'Copiar Resultado', fr: 'Copier le Résultat', de: 'Ergebnis Kopieren', pt: 'Copiar Resultado' },
+  copied: { en: 'Copied!', it: 'Copiato!', es: 'Copiado!', fr: 'Copié !', de: 'Kopiert!', pt: 'Copiado!' },
+  reset: { en: 'Reset', it: 'Ripristina', es: 'Restablecer', fr: 'Réinitialiser', de: 'Zurücksetzen', pt: 'Redefinir' },
+  swap: { en: 'Swap Units', it: 'Scambia Unità', es: 'Intercambiar Unidades', fr: 'Échanger les Unités', de: 'Einheiten Tauschen', pt: 'Trocar Unidades' },
+  history: { en: 'Recent Conversions', it: 'Conversioni Recenti', es: 'Conversiones Recientes', fr: 'Conversions Récentes', de: 'Letzte Umrechnungen', pt: 'Conversões Recentes' },
+  invalidValue: { en: 'Please enter a valid number', it: 'Inserisci un numero valido', es: 'Ingrese un número válido', fr: 'Veuillez entrer un nombre valide', de: 'Bitte geben Sie eine gültige Zahl ein', pt: 'Insira um número válido' },
+  negativeWeight: { en: 'Weight cannot be negative', it: 'Il peso non può essere negativo', es: 'El peso no puede ser negativo', fr: 'Le poids ne peut pas être négatif', de: 'Gewicht kann nicht negativ sein', pt: 'O peso não pode ser negativo' },
+  negativeLength: { en: 'Length cannot be negative', it: 'La lunghezza non può essere negativa', es: 'La longitud no puede ser negativa', fr: 'La longueur ne peut pas être négative', de: 'Länge kann nicht negativ sein', pt: 'O comprimento não pode ser negativo' },
+  negativeSpeed: { en: 'Speed cannot be negative', it: 'La velocità non può essere negativa', es: 'La velocidad no puede ser negativa', fr: 'La vitesse ne peut pas être négative', de: 'Geschwindigkeit kann nicht negativ sein', pt: 'A velocidade não pode ser negativa' },
+  from: { en: 'From', it: 'Da', es: 'De', fr: 'De', de: 'Von', pt: 'De' },
+  to: { en: 'To', it: 'A', es: 'A', fr: 'À', de: 'Nach', pt: 'Para' },
+  result: { en: 'Result', it: 'Risultato', es: 'Resultado', fr: 'Résultat', de: 'Ergebnis', pt: 'Resultado' },
+  clearHistory: { en: 'Clear History', it: 'Cancella Cronologia', es: 'Borrar Historial', fr: 'Effacer l\'Historique', de: 'Verlauf Löschen', pt: 'Limpar Histórico' },
+};
+
+interface HistoryEntry {
+  fromValue: string;
+  fromUnit: string;
+  toValue: string;
+  toUnit: string;
+  category: string;
+}
+
 function convertTemp(value: number, from: string, to: string): number {
   let celsius: number;
   if (from === '°C') celsius = value;
@@ -46,23 +70,85 @@ export default function UnitConverter() {
   const [fromUnit, setFromUnit] = useState(categories.length.units[0]);
   const [toUnit, setToUnit] = useState(categories.length.units[2]);
   const [value, setValue] = useState('');
+  const [copied, setCopied] = useState(false);
+  const [history, setHistory] = useState<HistoryEntry[]>([]);
 
   const currentCat = categories[cat];
-  const num = parseFloat(value) || 0;
+  const num = parseFloat(value);
+  const isValidNumber = value !== '' && !isNaN(num);
+  const isNegative = isValidNumber && num < 0;
+
+  // Validation
+  let errorMessage = '';
+  if (value !== '' && !isValidNumber) {
+    errorMessage = labels.invalidValue[lang];
+  } else if (isNegative && cat === 'weight') {
+    errorMessage = labels.negativeWeight[lang];
+  } else if (isNegative && cat === 'length') {
+    errorMessage = labels.negativeLength[lang];
+  } else if (isNegative && cat === 'speed') {
+    errorMessage = labels.negativeSpeed[lang];
+  }
+
+  const hasError = errorMessage !== '';
 
   let result = 0;
-  if (cat === 'temperature') {
-    result = convertTemp(num, fromUnit, toUnit);
-  } else {
-    const baseValue = num * (currentCat.toBase[fromUnit] || 1);
-    result = baseValue / (currentCat.toBase[toUnit] || 1);
+  if (isValidNumber && !hasError) {
+    if (cat === 'temperature') {
+      result = convertTemp(num, fromUnit, toUnit);
+    } else {
+      const baseValue = num * (currentCat.toBase[fromUnit] || 1);
+      result = baseValue / (currentCat.toBase[toUnit] || 1);
+    }
   }
+
+  const resultString = isValidNumber && !hasError
+    ? result.toLocaleString(lang, { maximumFractionDigits: 6 })
+    : '0';
 
   const changeCat = (newCat: string) => {
     setCat(newCat);
     setFromUnit(categories[newCat].units[0]);
     setToUnit(categories[newCat].units[1]);
     setValue('');
+  };
+
+  const handleSwap = () => {
+    const prevFrom = fromUnit;
+    const prevTo = toUnit;
+    setFromUnit(prevTo);
+    setToUnit(prevFrom);
+  };
+
+  const handleReset = () => {
+    setValue('');
+    setFromUnit(currentCat.units[0]);
+    setToUnit(currentCat.units[1]);
+  };
+
+  const handleCopy = async () => {
+    if (!isValidNumber || hasError) return;
+    const text = `${value} ${fromUnit} = ${resultString} ${toUnit}`;
+    await navigator.clipboard.writeText(text);
+    setCopied(true);
+    setTimeout(() => setCopied(false), 1500);
+  };
+
+  const addToHistory = () => {
+    if (!isValidNumber || hasError || !value) return;
+    const entry: HistoryEntry = {
+      fromValue: value,
+      fromUnit,
+      toValue: resultString,
+      toUnit,
+      category: cat,
+    };
+    setHistory((prev) => [entry, ...prev.slice(0, 4)]);
+  };
+
+  // Add to history on blur (when user finishes typing)
+  const handleInputBlur = () => {
+    addToHistory();
   };
 
   const seoContent: Record<Locale, { title: string; paragraphs: string[]; faq: { q: string; a: string }[] }> = {
@@ -174,31 +260,114 @@ export default function UnitConverter() {
         <p className="text-gray-600 mb-6">{toolT.description}</p>
 
         <div className="bg-white rounded-xl border border-gray-200 p-6 space-y-4">
+          {/* Category tabs */}
           <div className="flex flex-wrap gap-2">
             {Object.keys(categories).map((c) => (
-              <button key={c} onClick={() => changeCat(c)} className={`px-4 py-2 rounded-lg text-sm font-medium ${c === cat ? 'bg-blue-600 text-white' : 'bg-gray-100 text-gray-700 hover:bg-gray-200'}`}>
+              <button key={c} onClick={() => changeCat(c)} className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors ${c === cat ? 'bg-blue-600 text-white' : 'bg-gray-100 text-gray-700 hover:bg-gray-200'}`}>
                 {catLabels[c]?.[lang] || c}
               </button>
             ))}
           </div>
 
-          <div className="grid grid-cols-2 gap-3">
+          {/* Conversion area */}
+          <div className="grid grid-cols-[1fr_auto_1fr] gap-3 items-end">
             <div>
+              <label className="block text-xs font-medium text-gray-500 mb-1">{labels.from[lang]}</label>
               <select value={fromUnit} onChange={(e) => setFromUnit(e.target.value)} className="w-full border border-gray-300 rounded-lg px-3 py-2 mb-2">
                 {currentCat.units.map((u) => <option key={u} value={u}>{u}</option>)}
               </select>
-              <input type="number" value={value} onChange={(e) => setValue(e.target.value)} placeholder="0" className="w-full border border-gray-300 rounded-lg px-4 py-2 text-lg focus:ring-2 focus:ring-blue-500" />
+              <input
+                type="number"
+                value={value}
+                onChange={(e) => setValue(e.target.value)}
+                onBlur={handleInputBlur}
+                placeholder="0"
+                className={`w-full border rounded-lg px-4 py-2 text-lg focus:ring-2 focus:ring-blue-500 ${hasError ? 'border-red-400 bg-red-50' : 'border-gray-300'}`}
+              />
             </div>
+
+            {/* Swap button */}
+            <div className="flex items-center justify-center pb-1">
+              <button
+                onClick={handleSwap}
+                title={labels.swap[lang]}
+                className="p-2 rounded-full bg-gray-100 hover:bg-blue-100 text-gray-600 hover:text-blue-600 transition-colors"
+                aria-label={labels.swap[lang]}
+              >
+                <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4" />
+                </svg>
+              </button>
+            </div>
+
             <div>
+              <label className="block text-xs font-medium text-gray-500 mb-1">{labels.to[lang]}</label>
               <select value={toUnit} onChange={(e) => setToUnit(e.target.value)} className="w-full border border-gray-300 rounded-lg px-3 py-2 mb-2">
                 {currentCat.units.map((u) => <option key={u} value={u}>{u}</option>)}
               </select>
               <div className="w-full border border-gray-200 bg-blue-50 rounded-lg px-4 py-2 text-lg font-semibold text-blue-700">
-                {num ? result.toLocaleString(lang, { maximumFractionDigits: 6 }) : '0'}
+                {resultString}
               </div>
             </div>
           </div>
+
+          {/* Validation error */}
+          {hasError && (
+            <p className="text-sm text-red-600 font-medium">{errorMessage}</p>
+          )}
+
+          {/* Result card */}
+          {isValidNumber && !hasError && value !== '' && (
+            <div className="bg-green-50 border border-green-200 rounded-lg p-4">
+              <p className="text-sm text-green-700 font-medium">{labels.result[lang]}</p>
+              <p className="text-xl font-bold text-green-800 mt-1">
+                {value} {fromUnit} = {resultString} {toUnit}
+              </p>
+            </div>
+          )}
+
+          {/* Action buttons */}
+          <div className="flex flex-wrap gap-2">
+            <button
+              onClick={handleCopy}
+              disabled={!isValidNumber || hasError}
+              className="px-4 py-2 rounded-lg text-sm font-medium bg-blue-600 text-white hover:bg-blue-700 disabled:opacity-40 disabled:cursor-not-allowed transition-colors"
+            >
+              {copied ? labels.copied[lang] : labels.copy[lang]}
+            </button>
+            <button
+              onClick={handleReset}
+              className="px-4 py-2 rounded-lg text-sm font-medium bg-gray-100 text-gray-700 hover:bg-gray-200 transition-colors"
+            >
+              {labels.reset[lang]}
+            </button>
+          </div>
         </div>
+
+        {/* History */}
+        {history.length > 0 && (
+          <div className="mt-6 bg-white rounded-xl border border-gray-200 p-6">
+            <div className="flex items-center justify-between mb-3">
+              <h3 className="text-sm font-semibold text-gray-700">{labels.history[lang]}</h3>
+              <button
+                onClick={() => setHistory([])}
+                className="text-xs text-gray-400 hover:text-red-500 transition-colors"
+              >
+                {labels.clearHistory[lang]}
+              </button>
+            </div>
+            <ul className="space-y-2">
+              {history.map((entry, i) => (
+                <li key={i} className="flex items-center justify-between text-sm bg-gray-50 rounded-lg px-3 py-2">
+                  <span className="text-gray-700">
+                    {entry.fromValue} {entry.fromUnit} = {entry.toValue} {entry.toUnit}
+                  </span>
+                  <span className="text-xs text-gray-400 ml-2">{catLabels[entry.category]?.[lang]}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+        )}
 
         <article className="mt-12 prose prose-gray max-w-none">
           <h2 className="text-2xl font-bold text-gray-900 mb-4">{seo.title}</h2>
