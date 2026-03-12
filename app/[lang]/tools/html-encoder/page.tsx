@@ -1,5 +1,5 @@
 'use client';
-import { useState } from 'react';
+import { useState, useCallback } from 'react';
 import { useParams } from 'next/navigation';
 import { tools, type Locale } from '@/lib/translations';
 import ToolPageWrapper from '@/components/ToolPageWrapper';
@@ -13,7 +13,35 @@ const labels: Record<string, Record<Locale, string>> = {
   copied: { en: 'Copied!', it: 'Copiato!', es: '¡Copiado!', fr: 'Copié !', de: 'Kopiert!', pt: 'Copiado!' },
   encodePlaceholder: { en: 'Enter HTML to encode...', it: 'Inserisci HTML da codificare...', es: 'Ingresa HTML para codificar...', fr: 'Entrez du HTML à encoder...', de: 'HTML zum Kodieren eingeben...', pt: 'Digite HTML para codificar...' },
   decodePlaceholder: { en: 'Enter encoded HTML to decode...', it: 'Inserisci HTML codificato da decodificare...', es: 'Ingresa HTML codificado para decodificar...', fr: 'Entrez du HTML encodé à décoder...', de: 'Kodierten HTML zum Dekodieren eingeben...', pt: 'Digite HTML codificado para decodificar...' },
+  reset: { en: 'Reset', it: 'Ripristina', es: 'Restablecer', fr: 'Réinitialiser', de: 'Zurücksetzen', pt: 'Redefinir' },
+  copyResult: { en: 'Copy Result', it: 'Copia Risultato', es: 'Copiar Resultado', fr: 'Copier le Résultat', de: 'Ergebnis Kopieren', pt: 'Copiar Resultado' },
+  inputChars: { en: 'Input Characters', it: 'Caratteri Input', es: 'Caracteres de Entrada', fr: 'Caractères d\'Entrée', de: 'Eingabezeichen', pt: 'Caracteres de Entrada' },
+  outputChars: { en: 'Output Characters', it: 'Caratteri Output', es: 'Caracteres de Salida', fr: 'Caractères de Sortie', de: 'Ausgabezeichen', pt: 'Caracteres de Saída' },
+  emptyInputError: { en: 'Please enter some text first.', it: 'Inserisci prima del testo.', es: 'Por favor, ingresa texto primero.', fr: 'Veuillez d\'abord saisir du texte.', de: 'Bitte geben Sie zuerst Text ein.', pt: 'Por favor, insira algum texto primeiro.' },
+  history: { en: 'History', it: 'Cronologia', es: 'Historial', fr: 'Historique', de: 'Verlauf', pt: 'Histórico' },
+  clearHistory: { en: 'Clear', it: 'Cancella', es: 'Borrar', fr: 'Effacer', de: 'Löschen', pt: 'Limpar' },
+  noHistory: { en: 'No operations yet.', it: 'Nessuna operazione ancora.', es: 'Sin operaciones aún.', fr: 'Aucune opération pour l\'instant.', de: 'Noch keine Operationen.', pt: 'Nenhuma operação ainda.' },
+  quickReference: { en: 'Common HTML Entities', it: 'Entità HTML Comuni', es: 'Entidades HTML Comunes', fr: 'Entités HTML Courantes', de: 'Häufige HTML-Entitäten', pt: 'Entidades HTML Comuns' },
+  character: { en: 'Character', it: 'Carattere', es: 'Carácter', fr: 'Caractère', de: 'Zeichen', pt: 'Caractere' },
+  entity: { en: 'Entity', it: 'Entità', es: 'Entidad', fr: 'Entité', de: 'Entität', pt: 'Entidade' },
+  description: { en: 'Description', it: 'Descrizione', es: 'Descripción', fr: 'Description', de: 'Beschreibung', pt: 'Descrição' },
+  mode: { en: 'Mode', it: 'Modalità', es: 'Modo', fr: 'Mode', de: 'Modus', pt: 'Modo' },
+  ampersand: { en: 'Ampersand', it: 'E commerciale', es: 'Ampersand', fr: 'Esperluette', de: 'Kaufmanns-Und', pt: 'E comercial' },
+  lessThan: { en: 'Less than', it: 'Minore di', es: 'Menor que', fr: 'Inférieur à', de: 'Kleiner als', pt: 'Menor que' },
+  greaterThan: { en: 'Greater than', it: 'Maggiore di', es: 'Mayor que', fr: 'Supérieur à', de: 'Größer als', pt: 'Maior que' },
+  doubleQuote: { en: 'Double quote', it: 'Virgolette doppie', es: 'Comillas dobles', fr: 'Guillemet double', de: 'Anführungszeichen', pt: 'Aspas duplas' },
+  singleQuote: { en: 'Single quote', it: 'Apostrofo', es: 'Apóstrofe', fr: 'Apostrophe', de: 'Apostroph', pt: 'Apóstrofo' },
+  nonBreakingSpace: { en: 'Non-breaking space', it: 'Spazio non divisibile', es: 'Espacio irrompible', fr: 'Espace insécable', de: 'Geschütztes Leerzeichen', pt: 'Espaço não quebrável' },
+  copyright: { en: 'Copyright', it: 'Copyright', es: 'Copyright', fr: 'Copyright', de: 'Copyright', pt: 'Copyright' },
+  registered: { en: 'Registered', it: 'Registrato', es: 'Registrado', fr: 'Enregistré', de: 'Registriert', pt: 'Registrado' },
 };
+
+interface HistoryEntry {
+  mode: 'encode' | 'decode';
+  input: string;
+  output: string;
+  timestamp: number;
+}
 
 function encodeHTML(str: string): string {
   return str
@@ -45,14 +73,58 @@ export default function HtmlEncoder() {
   const [mode, setMode] = useState<'encode' | 'decode'>('encode');
   const [input, setInput] = useState('');
   const [copied, setCopied] = useState(false);
+  const [error, setError] = useState('');
+  const [history, setHistory] = useState<HistoryEntry[]>([]);
 
   const output = input ? (mode === 'encode' ? encodeHTML(input) : decodeHTML(input)) : '';
 
+  const addToHistory = useCallback((m: 'encode' | 'decode', inp: string, out: string) => {
+    setHistory(prev => {
+      const entry: HistoryEntry = { mode: m, input: inp, output: out, timestamp: Date.now() };
+      const next = [entry, ...prev];
+      return next.slice(0, 5);
+    });
+  }, []);
+
   const copyOutput = () => {
+    if (!input.trim()) {
+      setError(t('emptyInputError'));
+      setTimeout(() => setError(''), 3000);
+      return;
+    }
+    setError('');
     navigator.clipboard.writeText(output);
     setCopied(true);
+    addToHistory(mode, input, output);
     setTimeout(() => setCopied(false), 2000);
   };
+
+  const handleReset = () => {
+    setInput('');
+    setCopied(false);
+    setError('');
+  };
+
+  const handleModeSwitch = (newMode: 'encode' | 'decode') => {
+    if (input.trim() && output) {
+      addToHistory(mode, input, output);
+    }
+    setMode(newMode);
+    setInput('');
+    setError('');
+    setCopied(false);
+  };
+
+  const entityTable = [
+    { char: '&', entity: '&amp;', descKey: 'ampersand' },
+    { char: '<', entity: '&lt;', descKey: 'lessThan' },
+    { char: '>', entity: '&gt;', descKey: 'greaterThan' },
+    { char: '"', entity: '&quot;', descKey: 'doubleQuote' },
+    { char: "'", entity: '&#039;', descKey: 'singleQuote' },
+    { char: '\u00A0', entity: '&nbsp;', descKey: 'nonBreakingSpace' },
+    { char: '\u00A9', entity: '&copy;', descKey: 'copyright' },
+    { char: '\u00AE', entity: '&reg;', descKey: 'registered' },
+  ];
 
   const seoContent: Record<Locale, { title: string; paragraphs: string[]; faq: { q: string; a: string }[] }> = {
     en: {
@@ -163,40 +235,57 @@ export default function HtmlEncoder() {
         <p className="text-gray-600 mb-6">{toolT.description}</p>
 
         <div className="bg-white rounded-xl border border-gray-200 p-6 space-y-4">
+          {/* Mode Toggle */}
           <div className="flex gap-2">
             <button
-              onClick={() => { setMode('encode'); setInput(''); }}
-              className={`flex-1 py-2 rounded-lg font-medium ${mode === 'encode' ? 'bg-blue-600 text-white' : 'bg-gray-100 text-gray-700'}`}
+              onClick={() => handleModeSwitch('encode')}
+              className={`flex-1 py-2.5 rounded-lg font-medium transition-colors ${mode === 'encode' ? 'bg-blue-600 text-white shadow-sm' : 'bg-gray-100 text-gray-700 hover:bg-gray-200'}`}
             >
               {t('encode')}
             </button>
             <button
-              onClick={() => { setMode('decode'); setInput(''); }}
-              className={`flex-1 py-2 rounded-lg font-medium ${mode === 'decode' ? 'bg-blue-600 text-white' : 'bg-gray-100 text-gray-700'}`}
+              onClick={() => handleModeSwitch('decode')}
+              className={`flex-1 py-2.5 rounded-lg font-medium transition-colors ${mode === 'decode' ? 'bg-blue-600 text-white shadow-sm' : 'bg-gray-100 text-gray-700 hover:bg-gray-200'}`}
             >
               {t('decode')}
             </button>
           </div>
 
+          {/* Input */}
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-1">{t('input')}</label>
             <textarea
               value={input}
-              onChange={(e) => setInput(e.target.value)}
+              onChange={(e) => { setInput(e.target.value); setError(''); }}
               placeholder={mode === 'encode' ? t('encodePlaceholder') : t('decodePlaceholder')}
               rows={5}
               className="w-full border border-gray-300 rounded-lg px-4 py-2 font-mono text-sm focus:ring-2 focus:ring-blue-500 focus:border-transparent"
             />
           </div>
 
+          {/* Error Message */}
+          {error && (
+            <div className="text-red-600 text-sm bg-red-50 border border-red-200 rounded-lg px-4 py-2">
+              {error}
+            </div>
+          )}
+
+          {/* Result Cards */}
+          <div className="grid grid-cols-2 gap-3">
+            <div className="bg-blue-50 border border-blue-200 rounded-lg p-3 text-center">
+              <div className="text-xs font-medium text-blue-600 uppercase tracking-wide">{t('inputChars')}</div>
+              <div className="text-2xl font-bold text-blue-800 mt-1">{input.length}</div>
+            </div>
+            <div className="bg-green-50 border border-green-200 rounded-lg p-3 text-center">
+              <div className="text-xs font-medium text-green-600 uppercase tracking-wide">{t('outputChars')}</div>
+              <div className="text-2xl font-bold text-green-800 mt-1">{output.length}</div>
+            </div>
+          </div>
+
+          {/* Output */}
           {output && (
             <div>
-              <div className="flex justify-between items-center mb-1">
-                <label className="text-sm font-medium text-gray-700">{t('output')}</label>
-                <button onClick={copyOutput} className="text-sm text-blue-600 hover:text-blue-800 font-medium">
-                  {copied ? t('copied') : t('copy')}
-                </button>
-              </div>
+              <label className="block text-sm font-medium text-gray-700 mb-1">{t('output')}</label>
               <textarea
                 value={output}
                 readOnly
@@ -205,6 +294,93 @@ export default function HtmlEncoder() {
               />
             </div>
           )}
+
+          {/* Action Buttons */}
+          <div className="flex gap-3">
+            <button
+              onClick={copyOutput}
+              className={`flex-1 py-2.5 rounded-lg font-medium transition-colors ${
+                copied
+                  ? 'bg-green-600 text-white'
+                  : 'bg-blue-600 text-white hover:bg-blue-700'
+              }`}
+            >
+              {copied ? t('copied') : t('copyResult')}
+            </button>
+            <button
+              onClick={handleReset}
+              className="px-6 py-2.5 rounded-lg font-medium bg-gray-100 text-gray-700 hover:bg-gray-200 transition-colors"
+            >
+              {t('reset')}
+            </button>
+          </div>
+        </div>
+
+        {/* History Section */}
+        <div className="mt-6 bg-white rounded-xl border border-gray-200 p-6">
+          <div className="flex justify-between items-center mb-3">
+            <h3 className="text-sm font-semibold text-gray-900 uppercase tracking-wide">{t('history')}</h3>
+            {history.length > 0 && (
+              <button
+                onClick={() => setHistory([])}
+                className="text-xs text-red-500 hover:text-red-700 font-medium transition-colors"
+              >
+                {t('clearHistory')}
+              </button>
+            )}
+          </div>
+          {history.length === 0 ? (
+            <p className="text-sm text-gray-400 italic">{t('noHistory')}</p>
+          ) : (
+            <div className="space-y-2">
+              {history.map((entry, i) => (
+                <div
+                  key={entry.timestamp}
+                  className="flex items-start gap-3 p-3 bg-gray-50 rounded-lg text-sm cursor-pointer hover:bg-gray-100 transition-colors"
+                  onClick={() => {
+                    setMode(entry.mode);
+                    setInput(entry.input);
+                    setError('');
+                  }}
+                >
+                  <span className={`shrink-0 mt-0.5 px-2 py-0.5 rounded text-xs font-medium ${
+                    entry.mode === 'encode' ? 'bg-blue-100 text-blue-700' : 'bg-purple-100 text-purple-700'
+                  }`}>
+                    {t(entry.mode)}
+                  </span>
+                  <div className="min-w-0 flex-1">
+                    <div className="font-mono text-gray-600 truncate">{entry.input.slice(0, 60)}{entry.input.length > 60 ? '...' : ''}</div>
+                    <div className="font-mono text-gray-400 truncate text-xs mt-0.5">{entry.output.slice(0, 80)}{entry.output.length > 80 ? '...' : ''}</div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          )}
+        </div>
+
+        {/* Quick Reference Table */}
+        <div className="mt-6 bg-white rounded-xl border border-gray-200 p-6">
+          <h3 className="text-sm font-semibold text-gray-900 uppercase tracking-wide mb-3">{t('quickReference')}</h3>
+          <div className="overflow-x-auto">
+            <table className="w-full text-sm">
+              <thead>
+                <tr className="border-b border-gray-200">
+                  <th className="text-left py-2 px-3 font-medium text-gray-600">{t('character')}</th>
+                  <th className="text-left py-2 px-3 font-medium text-gray-600">{t('entity')}</th>
+                  <th className="text-left py-2 px-3 font-medium text-gray-600">{t('description')}</th>
+                </tr>
+              </thead>
+              <tbody>
+                {entityTable.map((row) => (
+                  <tr key={row.entity} className="border-b border-gray-100 last:border-0">
+                    <td className="py-2 px-3 font-mono text-gray-900">{row.char === '\u00A0' ? '(space)' : row.char}</td>
+                    <td className="py-2 px-3 font-mono text-blue-600">{row.entity}</td>
+                    <td className="py-2 px-3 text-gray-600">{t(row.descKey)}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
         </div>
 
         {/* SEO Article */}

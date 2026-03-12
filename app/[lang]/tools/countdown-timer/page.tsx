@@ -1,8 +1,14 @@
 'use client';
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect, useCallback, useRef } from 'react';
 import { useParams } from 'next/navigation';
 import { tools, type Locale } from '@/lib/translations';
 import ToolPageWrapper from '@/components/ToolPageWrapper';
+
+interface HistoryEntry {
+  eventName: string;
+  targetDate: string;
+  createdAt: string;
+}
 
 const labels: Record<string, Record<Locale, string>> = {
   targetDate: { en: 'Target Date & Time', it: 'Data e Ora Obiettivo', es: 'Fecha y Hora Objetivo', fr: 'Date et Heure Cible', de: 'Zieldatum und -zeit', pt: 'Data e Hora Alvo' },
@@ -17,7 +23,20 @@ const labels: Record<string, Record<Locale, string>> = {
   newYear: { en: 'New Year', it: 'Capodanno', es: 'Año Nuevo', fr: 'Nouvel An', de: 'Neujahr', pt: 'Ano Novo' },
   christmas: { en: 'Christmas', it: 'Natale', es: 'Navidad', fr: 'Noël', de: 'Weihnachten', pt: 'Natal' },
   tomorrow: { en: 'Tomorrow', it: 'Domani', es: 'Mañana', fr: 'Demain', de: 'Morgen', pt: 'Amanhã' },
+  copyResult: { en: 'Copy Result', it: 'Copia Risultato', es: 'Copiar Resultado', fr: 'Copier le Résultat', de: 'Ergebnis Kopieren', pt: 'Copiar Resultado' },
+  copied: { en: 'Copied!', it: 'Copiato!', es: '¡Copiado!', fr: 'Copié !', de: 'Kopiert!', pt: 'Copiado!' },
+  reset: { en: 'Reset', it: 'Reimposta', es: 'Restablecer', fr: 'Réinitialiser', de: 'Zurücksetzen', pt: 'Redefinir' },
+  validationError: { en: 'Please select a future date', it: 'Seleziona una data futura', es: 'Selecciona una fecha futura', fr: 'Veuillez sélectionner une date future', de: 'Bitte wählen Sie ein zukünftiges Datum', pt: 'Selecione uma data futura' },
+  history: { en: 'Recent Countdowns', it: 'Countdown Recenti', es: 'Cuentas Regresivas Recientes', fr: 'Comptes à Rebours Récents', de: 'Letzte Countdowns', pt: 'Contagens Regressivas Recentes' },
+  clearHistory: { en: 'Clear', it: 'Cancella', es: 'Borrar', fr: 'Effacer', de: 'Löschen', pt: 'Limpar' },
+  noHistory: { en: 'No recent countdowns', it: 'Nessun countdown recente', es: 'Sin cuentas regresivas recientes', fr: 'Aucun compte à rebours récent', de: 'Keine letzten Countdowns', pt: 'Sem contagens regressivas recentes' },
+  progress: { en: 'Time Elapsed', it: 'Tempo Trascorso', es: 'Tiempo Transcurrido', fr: 'Temps Écoulé', de: 'Verstrichene Zeit', pt: 'Tempo Decorrido' },
+  startCountdown: { en: 'Start Countdown', it: 'Avvia Countdown', es: 'Iniciar Cuenta Regresiva', fr: 'Démarrer le Compte à Rebours', de: 'Countdown Starten', pt: 'Iniciar Contagem' },
+  halloween: { en: 'Halloween', it: 'Halloween', es: 'Halloween', fr: 'Halloween', de: 'Halloween', pt: 'Halloween' },
+  valentines: { en: "Valentine's Day", it: 'San Valentino', es: 'San Valentín', fr: 'Saint-Valentin', de: 'Valentinstag', pt: 'Dia dos Namorados' },
 };
+
+const HISTORY_KEY = 'countdown-timer-history';
 
 export default function CountdownTimer() {
   const { lang } = useParams() as { lang: Locale };
@@ -33,6 +52,45 @@ export default function CountdownTimer() {
   const [targetDate, setTargetDate] = useState(getDefaultDate());
   const [eventName, setEventName] = useState('');
   const [timeLeft, setTimeLeft] = useState({ days: 0, hours: 0, minutes: 0, seconds: 0, expired: false });
+  const [validationError, setValidationError] = useState('');
+  const [copied, setCopied] = useState(false);
+  const [history, setHistory] = useState<HistoryEntry[]>([]);
+  const [startedAt, setStartedAt] = useState<number | null>(null);
+  const [progressPercent, setProgressPercent] = useState(0);
+  const hasStartedRef = useRef(false);
+
+  // Load history from localStorage
+  useEffect(() => {
+    try {
+      const stored = localStorage.getItem(HISTORY_KEY);
+      if (stored) setHistory(JSON.parse(stored));
+    } catch { /* ignore */ }
+  }, []);
+
+  const saveHistory = (entries: HistoryEntry[]) => {
+    setHistory(entries);
+    try { localStorage.setItem(HISTORY_KEY, JSON.stringify(entries)); } catch { /* ignore */ }
+  };
+
+  const addToHistory = useCallback((name: string, date: string) => {
+    if (!name.trim()) return;
+    setHistory(prev => {
+      const filtered = prev.filter(h => !(h.eventName === name && h.targetDate === date));
+      const updated = [{ eventName: name, targetDate: date, createdAt: new Date().toISOString() }, ...filtered].slice(0, 5);
+      try { localStorage.setItem(HISTORY_KEY, JSON.stringify(updated)); } catch { /* ignore */ }
+      return updated;
+    });
+  }, []);
+
+  const validateDate = useCallback((dateStr: string): boolean => {
+    const target = new Date(dateStr).getTime();
+    if (target <= Date.now()) {
+      setValidationError(t('validationError'));
+      return false;
+    }
+    setValidationError('');
+    return true;
+  }, [lang]); // eslint-disable-line react-hooks/exhaustive-deps
 
   const calculateTimeLeft = useCallback(() => {
     const target = new Date(targetDate).getTime();
@@ -52,6 +110,23 @@ export default function CountdownTimer() {
     };
   }, [targetDate]);
 
+  // Calculate progress
+  useEffect(() => {
+    if (!startedAt) {
+      setProgressPercent(0);
+      return;
+    }
+    const target = new Date(targetDate).getTime();
+    const totalDuration = target - startedAt;
+    if (totalDuration <= 0) {
+      setProgressPercent(100);
+      return;
+    }
+    const elapsed = Date.now() - startedAt;
+    const pct = Math.min(100, Math.max(0, (elapsed / totalDuration) * 100));
+    setProgressPercent(pct);
+  }, [timeLeft, startedAt, targetDate]);
+
   useEffect(() => {
     setTimeLeft(calculateTimeLeft());
     const interval = setInterval(() => {
@@ -60,30 +135,110 @@ export default function CountdownTimer() {
     return () => clearInterval(interval);
   }, [calculateTimeLeft]);
 
+  // Set startedAt on initial mount
+  useEffect(() => {
+    if (!hasStartedRef.current) {
+      hasStartedRef.current = true;
+      setStartedAt(Date.now());
+    }
+  }, []);
+
+  const handleDateChange = (value: string) => {
+    setTargetDate(value);
+    const target = new Date(value).getTime();
+    if (target > Date.now()) {
+      setValidationError('');
+      setStartedAt(Date.now());
+    } else {
+      setValidationError(t('validationError'));
+    }
+  };
+
   const setPreset = (type: string) => {
     const now = new Date();
     let target: Date;
+    let name = '';
     if (type === 'newYear') {
       target = new Date(now.getFullYear() + 1, 0, 1, 0, 0, 0);
-      setEventName(t('newYear'));
+      name = t('newYear');
     } else if (type === 'christmas') {
       const christmas = new Date(now.getFullYear(), 11, 25, 0, 0, 0);
       target = christmas > now ? christmas : new Date(now.getFullYear() + 1, 11, 25, 0, 0, 0);
-      setEventName(t('christmas'));
+      name = t('christmas');
+    } else if (type === 'halloween') {
+      const halloween = new Date(now.getFullYear(), 9, 31, 0, 0, 0);
+      target = halloween > now ? halloween : new Date(now.getFullYear() + 1, 9, 31, 0, 0, 0);
+      name = t('halloween');
+    } else if (type === 'valentines') {
+      const valentines = new Date(now.getFullYear(), 1, 14, 0, 0, 0);
+      target = valentines > now ? valentines : new Date(now.getFullYear() + 1, 1, 14, 0, 0, 0);
+      name = t('valentines');
     } else {
       target = new Date(now);
       target.setDate(target.getDate() + 1);
       target.setHours(0, 0, 0, 0);
-      setEventName(t('tomorrow'));
+      name = t('tomorrow');
     }
+    setEventName(name);
     setTargetDate(target.toISOString().slice(0, 16));
+    setValidationError('');
+    setStartedAt(Date.now());
+    addToHistory(name, target.toISOString().slice(0, 16));
   };
 
+  const handleStartCountdown = () => {
+    if (!validateDate(targetDate)) return;
+    setStartedAt(Date.now());
+    if (eventName.trim()) {
+      addToHistory(eventName, targetDate);
+    }
+  };
+
+  const handleReset = () => {
+    const defaultDate = getDefaultDate();
+    setTargetDate(defaultDate);
+    setEventName('');
+    setValidationError('');
+    setStartedAt(Date.now());
+    setProgressPercent(0);
+  };
+
+  const handleCopy = () => {
+    const { days, hours, minutes, seconds } = timeLeft;
+    const parts = [
+      `${days} ${t('days')}`,
+      `${hours} ${t('hours')}`,
+      `${minutes} ${t('minutes')}`,
+      `${seconds} ${t('seconds')}`,
+    ];
+    const text = eventName
+      ? `${eventName}: ${parts.join(', ')}`
+      : parts.join(', ');
+    navigator.clipboard.writeText(text).then(() => {
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+    });
+  };
+
+  const loadFromHistory = (entry: HistoryEntry) => {
+    setEventName(entry.eventName);
+    setTargetDate(entry.targetDate);
+    setValidationError('');
+    setStartedAt(Date.now());
+  };
+
+  const cardColors = [
+    { bg: 'bg-blue-50', text: 'text-blue-600', border: 'border-blue-200' },
+    { bg: 'bg-purple-50', text: 'text-purple-600', border: 'border-purple-200' },
+    { bg: 'bg-amber-50', text: 'text-amber-600', border: 'border-amber-200' },
+    { bg: 'bg-emerald-50', text: 'text-emerald-600', border: 'border-emerald-200' },
+  ];
+
   const boxes = [
-    { value: timeLeft.days, label: t('days') },
-    { value: timeLeft.hours, label: t('hours') },
-    { value: timeLeft.minutes, label: t('minutes') },
-    { value: timeLeft.seconds, label: t('seconds') },
+    { value: timeLeft.days, label: t('days'), color: cardColors[0] },
+    { value: timeLeft.hours, label: t('hours'), color: cardColors[1] },
+    { value: timeLeft.minutes, label: t('minutes'), color: cardColors[2] },
+    { value: timeLeft.seconds, label: t('seconds'), color: cardColors[3] },
   ];
 
   const seoContent: Record<Locale, { title: string; paragraphs: string[]; faq: { q: string; a: string }[] }> = {
@@ -195,6 +350,7 @@ export default function CountdownTimer() {
         <p className="text-gray-600 mb-6">{toolT.description}</p>
 
         <div className="bg-white rounded-xl border border-gray-200 p-6 space-y-4">
+          {/* Event Name */}
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-1">{t('eventName')}</label>
             <input
@@ -205,24 +361,29 @@ export default function CountdownTimer() {
             />
           </div>
 
+          {/* Target Date */}
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-1">{t('targetDate')}</label>
             <input
               type="datetime-local"
               value={targetDate}
-              onChange={(e) => setTargetDate(e.target.value)}
-              className="w-full border border-gray-300 rounded-lg px-4 py-2 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+              onChange={(e) => handleDateChange(e.target.value)}
+              className={`w-full border rounded-lg px-4 py-2 focus:ring-2 focus:ring-blue-500 focus:border-transparent ${validationError ? 'border-red-400 bg-red-50' : 'border-gray-300'}`}
             />
+            {validationError && (
+              <p className="mt-1 text-sm text-red-500">{validationError}</p>
+            )}
           </div>
 
+          {/* Presets */}
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-2">{t('presets')}</label>
-            <div className="flex gap-2">
-              {['newYear', 'christmas', 'tomorrow'].map((preset) => (
+            <div className="flex flex-wrap gap-2">
+              {['newYear', 'christmas', 'halloween', 'valentines', 'tomorrow'].map((preset) => (
                 <button
                   key={preset}
                   onClick={() => setPreset(preset)}
-                  className="px-3 py-1.5 bg-gray-100 rounded-lg text-sm text-gray-700 hover:bg-gray-200"
+                  className="px-3 py-1.5 bg-gray-100 rounded-lg text-sm text-gray-700 hover:bg-gray-200 transition-colors"
                 >
                   {t(preset)}
                 </button>
@@ -230,26 +391,118 @@ export default function CountdownTimer() {
             </div>
           </div>
 
+          {/* Action Buttons */}
+          <div className="flex gap-2">
+            <button
+              onClick={handleStartCountdown}
+              className="flex-1 px-4 py-2 bg-blue-600 text-white rounded-lg font-medium hover:bg-blue-700 transition-colors"
+            >
+              {t('startCountdown')}
+            </button>
+            <button
+              onClick={handleReset}
+              className="px-4 py-2 bg-gray-100 text-gray-700 rounded-lg font-medium hover:bg-gray-200 transition-colors"
+            >
+              {t('reset')}
+            </button>
+          </div>
+
+          {/* Counting Down Label */}
           {eventName && (
             <p className="text-center text-gray-600">
               {t('countingDown')} <strong>{eventName}</strong>
             </p>
           )}
 
+          {/* Result Cards */}
           {timeLeft.expired ? (
-            <div className="p-6 bg-green-50 rounded-lg text-center">
+            <div className="p-6 bg-green-50 rounded-lg text-center border border-green-200">
               <p className="text-xl font-bold text-green-600">{t('expired')}</p>
             </div>
           ) : (
             <div className="grid grid-cols-4 gap-3">
-              {boxes.map(({ value, label }) => (
-                <div key={label} className="bg-blue-50 rounded-lg p-4 text-center">
-                  <div className="text-4xl font-bold text-blue-600 font-mono">
+              {boxes.map(({ value, label, color }) => (
+                <div key={label} className={`${color.bg} border ${color.border} rounded-xl p-4 text-center shadow-sm`}>
+                  <div className={`text-4xl font-bold ${color.text} font-mono`}>
                     {String(value).padStart(2, '0')}
                   </div>
                   <div className="text-xs text-gray-600 mt-1 uppercase tracking-wide">{label}</div>
                 </div>
               ))}
+            </div>
+          )}
+
+          {/* Progress Bar */}
+          {startedAt && !timeLeft.expired && (
+            <div>
+              <div className="flex justify-between text-xs text-gray-500 mb-1">
+                <span>{t('progress')}</span>
+                <span>{progressPercent.toFixed(1)}%</span>
+              </div>
+              <div className="w-full bg-gray-200 rounded-full h-3 overflow-hidden">
+                <div
+                  className="h-full rounded-full bg-gradient-to-r from-blue-500 via-purple-500 to-emerald-500 transition-all duration-1000 ease-linear"
+                  style={{ width: `${progressPercent}%` }}
+                />
+              </div>
+            </div>
+          )}
+
+          {/* Copy Result Button */}
+          {!timeLeft.expired && (
+            <button
+              onClick={handleCopy}
+              className={`w-full px-4 py-2 rounded-lg font-medium transition-colors ${
+                copied
+                  ? 'bg-green-100 text-green-700 border border-green-300'
+                  : 'bg-gray-100 text-gray-700 hover:bg-gray-200 border border-gray-200'
+              }`}
+            >
+              {copied ? t('copied') : t('copyResult')}
+            </button>
+          )}
+        </div>
+
+        {/* History Section */}
+        <div className="mt-6 bg-white rounded-xl border border-gray-200 p-6">
+          <div className="flex justify-between items-center mb-3">
+            <h3 className="text-sm font-medium text-gray-700">{t('history')}</h3>
+            {history.length > 0 && (
+              <button
+                onClick={() => saveHistory([])}
+                className="text-xs text-red-500 hover:text-red-700 transition-colors"
+              >
+                {t('clearHistory')}
+              </button>
+            )}
+          </div>
+          {history.length === 0 ? (
+            <p className="text-sm text-gray-400">{t('noHistory')}</p>
+          ) : (
+            <div className="space-y-2">
+              {history.map((entry, i) => {
+                const targetD = new Date(entry.targetDate);
+                const isPast = targetD.getTime() <= Date.now();
+                return (
+                  <button
+                    key={i}
+                    onClick={() => loadFromHistory(entry)}
+                    className={`w-full text-left px-3 py-2 rounded-lg text-sm transition-colors ${
+                      isPast
+                        ? 'bg-gray-50 text-gray-400 hover:bg-gray-100'
+                        : 'bg-blue-50 text-gray-700 hover:bg-blue-100'
+                    }`}
+                  >
+                    <span className="font-medium">{entry.eventName}</span>
+                    <span className="text-gray-400 ml-2">
+                      {targetD.toLocaleDateString(lang, { year: 'numeric', month: 'short', day: 'numeric' })}
+                      {' '}
+                      {targetD.toLocaleTimeString(lang, { hour: '2-digit', minute: '2-digit' })}
+                    </span>
+                    {isPast && <span className="ml-2 text-xs text-gray-400">({t('expired').replace('!', '')})</span>}
+                  </button>
+                );
+              })}
             </div>
           )}
         </div>

@@ -1,5 +1,5 @@
 'use client';
-import { useState } from 'react';
+import { useState, useCallback } from 'react';
 import { useParams } from 'next/navigation';
 import { tools, type Locale } from '@/lib/translations';
 import ToolPageWrapper from '@/components/ToolPageWrapper';
@@ -14,9 +14,55 @@ const labels: Record<string, Record<string, string>> = {
   addDays: { en: 'Days to Add (negative to subtract)', it: 'Giorni da Aggiungere (negativo per sottrarre)', es: 'Días a Sumar (negativo para restar)', fr: 'Jours à Ajouter (négatif pour soustraire)', de: 'Tage hinzufügen (negativ zum Subtrahieren)', pt: 'Dias a Adicionar (negativo para subtrair)' },
   resultDate: { en: 'Result Date', it: 'Data Risultato', es: 'Fecha Resultado', fr: 'Date Résultat', de: 'Ergebnisdatum', pt: 'Data Resultado' },
   difference: { en: 'Difference', it: 'Differenza', es: 'Diferencia', fr: 'Différence', de: 'Differenz', pt: 'Diferença' },
-  weeks: { en: 'weeks', it: 'settimane', es: 'semanas', fr: 'semaines', de: 'Wochen', pt: 'semanas' },
-  months: { en: 'months (approx)', it: 'mesi (circa)', es: 'meses (aprox)', fr: 'mois (env.)', de: 'Monate (ca.)', pt: 'meses (aprox.)' },
+  weeks: { en: 'Weeks', it: 'Settimane', es: 'Semanas', fr: 'Semaines', de: 'Wochen', pt: 'Semanas' },
+  months: { en: 'Months', it: 'Mesi', es: 'Meses', fr: 'Mois', de: 'Monate', pt: 'Meses' },
+  years: { en: 'Years', it: 'Anni', es: 'Años', fr: 'Années', de: 'Jahre', pt: 'Anos' },
+  hours: { en: 'Hours', it: 'Ore', es: 'Horas', fr: 'Heures', de: 'Stunden', pt: 'Horas' },
+  minutes: { en: 'Minutes', it: 'Minuti', es: 'Minutos', fr: 'Minutes', de: 'Minuten', pt: 'Minutos' },
+  businessDays: { en: 'Business Days', it: 'Giorni Lavorativi', es: 'Días Hábiles', fr: 'Jours Ouvrés', de: 'Arbeitstage', pt: 'Dias Úteis' },
+  additionalInfo: { en: 'Additional Details', it: 'Dettagli Aggiuntivi', es: 'Detalles Adicionales', fr: 'Détails Supplémentaires', de: 'Zusätzliche Details', pt: 'Detalhes Adicionais' },
+  reset: { en: 'Reset', it: 'Ripristina', es: 'Restablecer', fr: 'Réinitialiser', de: 'Zurücksetzen', pt: 'Redefinir' },
+  copy: { en: 'Copy Result', it: 'Copia Risultato', es: 'Copiar Resultado', fr: 'Copier Résultat', de: 'Ergebnis Kopieren', pt: 'Copiar Resultado' },
+  copied: { en: 'Copied!', it: 'Copiato!', es: '¡Copiado!', fr: 'Copié !', de: 'Kopiert!', pt: 'Copiado!' },
+  errorEndBeforeStart: { en: 'End date is before start date', it: 'La data di fine è precedente alla data di inizio', es: 'La fecha final es anterior a la fecha de inicio', fr: 'La date de fin est antérieure à la date de début', de: 'Das Enddatum liegt vor dem Startdatum', pt: 'A data final é anterior à data de início' },
+  history: { en: 'Recent Calculations', it: 'Calcoli Recenti', es: 'Cálculos Recientes', fr: 'Calculs Récents', de: 'Letzte Berechnungen', pt: 'Cálculos Recentes' },
+  quickPresets: { en: 'Quick Presets', it: 'Preset Rapidi', es: 'Preselecciones Rápidas', fr: 'Préréglages Rapides', de: 'Schnellvorlagen', pt: 'Predefinições Rápidas' },
+  daysUntilEndOfYear: { en: 'Days until end of year', it: 'Giorni fino a fine anno', es: 'Días hasta fin de año', fr: "Jours jusqu'à fin d'année", de: 'Tage bis Jahresende', pt: 'Dias até o fim do ano' },
+  daysSinceStartOfYear: { en: 'Days since start of year', it: "Giorni dall'inizio dell'anno", es: 'Días desde inicio de año', fr: "Jours depuis le début de l'année", de: 'Tage seit Jahresbeginn', pt: 'Dias desde o início do ano' },
+  daysUntilNextBirthday: { en: 'Days until next birthday', it: 'Giorni al prossimo compleanno', es: 'Días hasta el próximo cumpleaños', fr: "Jours jusqu'au prochain anniversaire", de: 'Tage bis zum nächsten Geburtstag', pt: 'Dias até o próximo aniversário' },
+  birthdayPrompt: { en: 'Enter your birthday (MM-DD)', it: 'Inserisci il tuo compleanno (MM-GG)', es: 'Ingresa tu cumpleaños (MM-DD)', fr: 'Entrez votre anniversaire (MM-JJ)', de: 'Geben Sie Ihren Geburtstag ein (MM-TT)', pt: 'Insira seu aniversário (MM-DD)' },
+  approx: { en: 'approx', it: 'circa', es: 'aprox', fr: 'env.', de: 'ca.', pt: 'aprox.' },
+  exclWeekends: { en: 'excl. weekends', it: 'escl. weekend', es: 'excl. fines de semana', fr: 'hors week-ends', de: 'ohne Wochenenden', pt: 'excl. fins de semana' },
+  clearHistory: { en: 'Clear', it: 'Cancella', es: 'Borrar', fr: 'Effacer', de: 'Löschen', pt: 'Limpar' },
 };
+
+interface HistoryEntry {
+  id: number;
+  from: string;
+  to: string;
+  days: number;
+}
+
+function countBusinessDays(start: Date, end: Date): number {
+  let count = 0;
+  const d = new Date(start);
+  const direction = end >= start ? 1 : -1;
+  const target = new Date(end);
+  if (direction === 1) {
+    while (d < target) {
+      const dow = d.getDay();
+      if (dow !== 0 && dow !== 6) count++;
+      d.setDate(d.getDate() + 1);
+    }
+  } else {
+    while (d > target) {
+      d.setDate(d.getDate() - 1);
+      const dow = d.getDay();
+      if (dow !== 0 && dow !== 6) count++;
+    }
+  }
+  return count;
+}
 
 export default function DateCalculator() {
   const { lang } = useParams() as { lang: Locale };
@@ -29,14 +75,21 @@ export default function DateCalculator() {
   const [endDate, setEndDate] = useState(today);
   const [baseDate, setBaseDate] = useState(today);
   const [daysToAdd, setDaysToAdd] = useState('');
+  const [history, setHistory] = useState<HistoryEntry[]>([]);
+  const [historyCounter, setHistoryCounter] = useState(0);
 
   // Days between
   const d1 = new Date(startDate);
   const d2 = new Date(endDate);
   const diffMs = d2.getTime() - d1.getTime();
   const diffDays = Math.round(diffMs / (1000 * 60 * 60 * 24));
-  const diffWeeks = (diffDays / 7).toFixed(1);
-  const diffMonths = (diffDays / 30.44).toFixed(1);
+  const diffWeeks = (Math.abs(diffDays) / 7).toFixed(1);
+  const diffMonths = (Math.abs(diffDays) / 30.44).toFixed(1);
+  const diffYears = (Math.abs(diffDays) / 365.25).toFixed(2);
+  const diffHours = Math.abs(diffDays) * 24;
+  const diffMinutes = diffHours * 60;
+  const bDays = countBusinessDays(d1, d2);
+  const endBeforeStart = diffDays < 0;
 
   // Add days
   const addNum = parseInt(daysToAdd) || 0;
@@ -50,6 +103,78 @@ export default function DateCalculator() {
     } catch {
       return dateStr;
     }
+  };
+
+  const addToHistory = useCallback((from: string, to: string, days: number) => {
+    setHistoryCounter(prev => {
+      const newId = prev + 1;
+      setHistory(h => {
+        const exists = h.some(e => e.from === from && e.to === to);
+        if (exists) return h;
+        const entry: HistoryEntry = { id: newId, from, to, days };
+        return [entry, ...h].slice(0, 5);
+      });
+      return newId;
+    });
+  }, []);
+
+  const [copied, setCopied] = useState(false);
+
+  const handleReset = () => {
+    const t = new Date().toISOString().split('T')[0];
+    setStartDate(t); setEndDate(t); setBaseDate(t); setDaysToAdd('');
+  };
+
+  const copyResults = () => {
+    let text = '';
+    if (mode === 'between') {
+      text = `${t('difference')}: ${Math.abs(diffDays)} ${t('days')} (${diffWeeks} ${t('weeks')}, ${diffMonths} ${t('months')}, ${diffYears} ${t('years')}) | ${t('businessDays')}: ${bDays} | ${t('hours')}: ${diffHours.toLocaleString()} | ${t('minutes')}: ${diffMinutes.toLocaleString()}`;
+      addToHistory(startDate, endDate, Math.abs(diffDays));
+    } else {
+      text = `${t('resultDate')}: ${formatDate(resultStr)} (${resultStr})`;
+    }
+    navigator.clipboard.writeText(text);
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2000);
+  };
+
+  // Quick presets
+  const handleEndOfYear = () => {
+    const now = new Date();
+    const endOfYear = new Date(now.getFullYear(), 11, 31).toISOString().split('T')[0];
+    setMode('between');
+    setStartDate(new Date().toISOString().split('T')[0]);
+    setEndDate(endOfYear);
+  };
+
+  const handleStartOfYear = () => {
+    const now = new Date();
+    const startOfYear = new Date(now.getFullYear(), 0, 1).toISOString().split('T')[0];
+    setMode('between');
+    setStartDate(startOfYear);
+    setEndDate(new Date().toISOString().split('T')[0]);
+  };
+
+  const handleNextBirthday = () => {
+    const input = prompt(t('birthdayPrompt'));
+    if (!input) return;
+    const parts = input.split('-');
+    if (parts.length !== 2) return;
+    const month = parseInt(parts[0]) - 1;
+    const day = parseInt(parts[1]);
+    if (isNaN(month) || isNaN(day)) return;
+    const now = new Date();
+    let bday = new Date(now.getFullYear(), month, day);
+    if (bday <= now) bday = new Date(now.getFullYear() + 1, month, day);
+    setMode('between');
+    setStartDate(new Date().toISOString().split('T')[0]);
+    setEndDate(bday.toISOString().split('T')[0]);
+  };
+
+  const handleHistoryClick = (entry: HistoryEntry) => {
+    setMode('between');
+    setStartDate(entry.from);
+    setEndDate(entry.to);
   };
 
   const seoContent: Record<Locale, { title: string; paragraphs: string[]; faq: { q: string; a: string }[] }> = {
@@ -151,21 +276,6 @@ export default function DateCalculator() {
     },
   };
 
-  const [copied, setCopied] = useState(false);
-
-  const handleReset = () => { setStartDate(today); setEndDate(today); setBaseDate(today); setDaysToAdd(''); };
-  const copyResults = () => {
-    let text = '';
-    if (mode === 'between') {
-      text = `${t('difference')}: ${Math.abs(diffDays)} ${t('days')} (${diffWeeks} ${t('weeks')}, ${diffMonths} ${t('months')})`;
-    } else {
-      text = `${t('resultDate')}: ${formatDate(resultStr)} (${resultStr})`;
-    }
-    navigator.clipboard.writeText(text);
-    setCopied(true);
-    setTimeout(() => setCopied(false), 2000);
-  };
-
   const seo = seoContent[lang];
   const [openFaq, setOpenFaq] = useState<number | null>(null);
 
@@ -176,13 +286,14 @@ export default function DateCalculator() {
         <p className="text-gray-600 mb-6">{toolT.description}</p>
 
         <div className="bg-white rounded-xl border border-gray-200 p-6 space-y-4">
+          {/* Mode toggle */}
           <div className="flex gap-2">
             <button onClick={() => setMode('between')}
-              className={`flex-1 py-2 rounded-lg font-medium text-sm ${mode === 'between' ? 'bg-blue-600 text-white' : 'bg-gray-100 text-gray-700'}`}>
+              className={`flex-1 py-2 rounded-lg font-medium text-sm transition-colors ${mode === 'between' ? 'bg-blue-600 text-white' : 'bg-gray-100 text-gray-700 hover:bg-gray-200'}`}>
               {t('modeBetween')}
             </button>
             <button onClick={() => setMode('add')}
-              className={`flex-1 py-2 rounded-lg font-medium text-sm ${mode === 'add' ? 'bg-blue-600 text-white' : 'bg-gray-100 text-gray-700'}`}>
+              className={`flex-1 py-2 rounded-lg font-medium text-sm transition-colors ${mode === 'add' ? 'bg-blue-600 text-white' : 'bg-gray-100 text-gray-700 hover:bg-gray-200'}`}>
               {t('modeAdd')}
             </button>
           </div>
@@ -200,19 +311,61 @@ export default function DateCalculator() {
                   className="w-full border border-gray-300 rounded-lg px-4 py-2 focus:ring-2 focus:ring-blue-500 focus:border-transparent" />
               </div>
 
-              <div className="bg-blue-50 border border-blue-200 rounded-xl p-5 text-center">
-                <span className="text-2xl">📅</span>
-                <div className="text-xs text-blue-600 font-medium mt-1">{t('difference')}</div>
-                <div className="text-3xl font-bold text-blue-700">{Math.abs(diffDays)} {t('days')}</div>
-                <div className="text-sm text-gray-500 mt-1">{diffWeeks} {t('weeks')} &middot; {diffMonths} {t('months')}</div>
+              {/* Validation error */}
+              {endBeforeStart && (
+                <div className="bg-red-50 border border-red-200 rounded-lg p-3 flex items-center gap-2 text-red-700 text-sm">
+                  <svg className="w-4 h-4 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v2m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                  {t('errorEndBeforeStart')}
+                </div>
+              )}
+
+              {/* Result cards */}
+              <div className="grid grid-cols-2 gap-3">
+                <div className="bg-blue-50 border border-blue-200 rounded-xl p-4 text-center">
+                  <div className="text-xs text-blue-600 font-medium mb-1">{t('days')}</div>
+                  <div className="text-2xl font-bold text-blue-700">{Math.abs(diffDays).toLocaleString()}</div>
+                </div>
+                <div className="bg-green-50 border border-green-200 rounded-xl p-4 text-center">
+                  <div className="text-xs text-green-600 font-medium mb-1">{t('weeks')}</div>
+                  <div className="text-2xl font-bold text-green-700">{diffWeeks}</div>
+                </div>
+                <div className="bg-purple-50 border border-purple-200 rounded-xl p-4 text-center">
+                  <div className="text-xs text-purple-600 font-medium mb-1">{t('months')} ({t('approx')})</div>
+                  <div className="text-2xl font-bold text-purple-700">{diffMonths}</div>
+                </div>
+                <div className="bg-amber-50 border border-amber-200 rounded-xl p-4 text-center">
+                  <div className="text-xs text-amber-600 font-medium mb-1">{t('years')} ({t('approx')})</div>
+                  <div className="text-2xl font-bold text-amber-700">{diffYears}</div>
+                </div>
               </div>
-              <button onClick={copyResults} className="w-full py-2 rounded-lg border border-gray-300 text-sm font-medium text-gray-700 hover:bg-gray-50 transition-colors flex items-center justify-center gap-2">
-                {copied ? (
-                  <><svg className="w-4 h-4 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" /></svg>Copied!</>
-                ) : (
-                  <><svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" /></svg>Copy</>
-                )}
-              </button>
+
+              {/* Additional info */}
+              <div className="bg-gray-50 border border-gray-200 rounded-xl p-4">
+                <div className="text-xs font-semibold text-gray-500 uppercase mb-2">{t('additionalInfo')}</div>
+                <div className="grid grid-cols-2 gap-y-2 text-sm">
+                  <div className="text-gray-600">{t('businessDays')} <span className="text-xs text-gray-400">({t('exclWeekends')})</span></div>
+                  <div className="text-right font-semibold text-gray-800">{bDays.toLocaleString()}</div>
+                  <div className="text-gray-600">{t('hours')}</div>
+                  <div className="text-right font-semibold text-gray-800">{diffHours.toLocaleString()}</div>
+                  <div className="text-gray-600">{t('minutes')}</div>
+                  <div className="text-right font-semibold text-gray-800">{diffMinutes.toLocaleString()}</div>
+                </div>
+              </div>
+
+              {/* Action buttons */}
+              <div className="flex gap-2">
+                <button onClick={copyResults} className="flex-1 py-2 rounded-lg border border-gray-300 text-sm font-medium text-gray-700 hover:bg-gray-50 transition-colors flex items-center justify-center gap-2">
+                  {copied ? (
+                    <><svg className="w-4 h-4 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" /></svg>{t('copied')}</>
+                  ) : (
+                    <><svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" /></svg>{t('copy')}</>
+                  )}
+                </button>
+                <button onClick={handleReset} className="px-4 py-2 rounded-lg border border-gray-300 text-sm font-medium text-gray-700 hover:bg-gray-50 transition-colors flex items-center justify-center gap-2">
+                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" /></svg>
+                  {t('reset')}
+                </button>
+              </div>
             </>
           ) : (
             <>
@@ -230,23 +383,63 @@ export default function DateCalculator() {
               {addNum !== 0 && (
                 <>
                   <div className="bg-blue-50 border border-blue-200 rounded-xl p-5 text-center">
-                    <span className="text-2xl">🗓️</span>
                     <div className="text-xs text-blue-600 font-medium mt-1">{t('resultDate')}</div>
                     <div className="text-xl font-bold text-blue-700">{formatDate(resultStr)}</div>
                     <div className="text-sm text-gray-500 mt-1">{resultStr}</div>
                   </div>
-                  <button onClick={copyResults} className="w-full py-2 rounded-lg border border-gray-300 text-sm font-medium text-gray-700 hover:bg-gray-50 transition-colors flex items-center justify-center gap-2">
-                    {copied ? (
-                      <><svg className="w-4 h-4 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" /></svg>Copied!</>
-                    ) : (
-                      <><svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" /></svg>Copy</>
-                    )}
-                  </button>
+                  <div className="flex gap-2">
+                    <button onClick={copyResults} className="flex-1 py-2 rounded-lg border border-gray-300 text-sm font-medium text-gray-700 hover:bg-gray-50 transition-colors flex items-center justify-center gap-2">
+                      {copied ? (
+                        <><svg className="w-4 h-4 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" /></svg>{t('copied')}</>
+                      ) : (
+                        <><svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" /></svg>{t('copy')}</>
+                      )}
+                    </button>
+                    <button onClick={handleReset} className="px-4 py-2 rounded-lg border border-gray-300 text-sm font-medium text-gray-700 hover:bg-gray-50 transition-colors flex items-center justify-center gap-2">
+                      <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" /></svg>
+                      {t('reset')}
+                    </button>
+                  </div>
                 </>
               )}
             </>
           )}
         </div>
+
+        {/* Quick Presets */}
+        <div className="mt-4 bg-white rounded-xl border border-gray-200 p-4">
+          <div className="text-xs font-semibold text-gray-500 uppercase mb-3">{t('quickPresets')}</div>
+          <div className="flex flex-wrap gap-2">
+            <button onClick={handleEndOfYear} className="px-3 py-1.5 text-sm rounded-lg bg-blue-50 text-blue-700 border border-blue-200 hover:bg-blue-100 transition-colors">
+              {t('daysUntilEndOfYear')}
+            </button>
+            <button onClick={handleStartOfYear} className="px-3 py-1.5 text-sm rounded-lg bg-green-50 text-green-700 border border-green-200 hover:bg-green-100 transition-colors">
+              {t('daysSinceStartOfYear')}
+            </button>
+            <button onClick={handleNextBirthday} className="px-3 py-1.5 text-sm rounded-lg bg-purple-50 text-purple-700 border border-purple-200 hover:bg-purple-100 transition-colors">
+              {t('daysUntilNextBirthday')}
+            </button>
+          </div>
+        </div>
+
+        {/* History */}
+        {history.length > 0 && (
+          <div className="mt-4 bg-white rounded-xl border border-gray-200 p-4">
+            <div className="flex items-center justify-between mb-3">
+              <div className="text-xs font-semibold text-gray-500 uppercase">{t('history')}</div>
+              <button onClick={() => setHistory([])} className="text-xs text-gray-400 hover:text-gray-600 transition-colors">{t('clearHistory')}</button>
+            </div>
+            <div className="space-y-1.5">
+              {history.map((entry) => (
+                <button key={entry.id} onClick={() => handleHistoryClick(entry)}
+                  className="w-full text-left px-3 py-2 rounded-lg bg-gray-50 hover:bg-gray-100 transition-colors text-sm flex justify-between items-center">
+                  <span className="text-gray-600">{entry.from} &rarr; {entry.to}</span>
+                  <span className="font-semibold text-gray-800">{entry.days} {t('days')}</span>
+                </button>
+              ))}
+            </div>
+          </div>
+        )}
 
         <article className="mt-12 prose prose-gray max-w-none">
           <h2 className="text-2xl font-bold text-gray-900 mb-4">{seo.title}</h2>

@@ -1,8 +1,10 @@
 'use client';
-import { useState } from 'react';
+import { useState, useCallback } from 'react';
 import { useParams } from 'next/navigation';
 import { tools, type Locale } from '@/lib/translations';
 import ToolPageWrapper from '@/components/ToolPageWrapper';
+
+type HistoryEntry = { preview: string; caseType: string; fullResult: string };
 
 const labels: Record<string, Record<string, string>> = {
   inputText: { en: 'Enter your text', it: 'Inserisci il testo', es: 'Ingresa tu texto', fr: 'Entrez votre texte', de: 'Text eingeben', pt: 'Digite seu texto' },
@@ -12,8 +14,18 @@ const labels: Record<string, Record<string, string>> = {
   sentenceCase: { en: 'Sentence case', it: 'Frase normale', es: 'Tipo oración', fr: 'Casse phrase', de: 'Satzform', pt: 'Primeira frase' },
   camelCase: { en: 'camelCase', it: 'camelCase', es: 'camelCase', fr: 'camelCase', de: 'camelCase', pt: 'camelCase' },
   kebabCase: { en: 'kebab-case', it: 'kebab-case', es: 'kebab-case', fr: 'kebab-case', de: 'kebab-case', pt: 'kebab-case' },
+  alternatingCase: { en: 'aLtErNaTiNg', it: 'aLtErNaNtE', es: 'aLtErNaDo', fr: 'aLtErNé', de: 'aBwEcHsElNd', pt: 'aLtErNaDo' },
+  dotCase: { en: 'dot.case', it: 'dot.case', es: 'dot.case', fr: 'dot.case', de: 'dot.case', pt: 'dot.case' },
+  pathCase: { en: 'path/case', it: 'path/case', es: 'path/case', fr: 'path/case', de: 'path/case', pt: 'path/case' },
   copy: { en: 'Copy', it: 'Copia', es: 'Copiar', fr: 'Copier', de: 'Kopieren', pt: 'Copiar' },
   copied: { en: 'Copied!', it: 'Copiato!', es: '¡Copiado!', fr: 'Copié !', de: 'Kopiert!', pt: 'Copiado!' },
+  copyResult: { en: 'Copy Result', it: 'Copia risultato', es: 'Copiar resultado', fr: 'Copier le résultat', de: 'Ergebnis kopieren', pt: 'Copiar resultado' },
+  reset: { en: 'Reset', it: 'Resetta', es: 'Reiniciar', fr: 'Réinitialiser', de: 'Zurücksetzen', pt: 'Redefinir' },
+  characters: { en: 'Characters', it: 'Caratteri', es: 'Caracteres', fr: 'Caractères', de: 'Zeichen', pt: 'Caracteres' },
+  words: { en: 'Words', it: 'Parole', es: 'Palabras', fr: 'Mots', de: 'Wörter', pt: 'Palavras' },
+  history: { en: 'Recent Conversions', it: 'Conversioni recenti', es: 'Conversiones recientes', fr: 'Conversions récentes', de: 'Letzte Konvertierungen', pt: 'Conversões recentes' },
+  emptyText: { en: 'Please enter some text first.', it: 'Inserisci prima del testo.', es: 'Por favor, ingresa texto primero.', fr: 'Veuillez d\'abord saisir du texte.', de: 'Bitte geben Sie zuerst Text ein.', pt: 'Por favor, digite algum texto primeiro.' },
+  noHistory: { en: 'No conversions yet.', it: 'Nessuna conversione.', es: 'Sin conversiones.', fr: 'Aucune conversion.', de: 'Noch keine Konvertierungen.', pt: 'Nenhuma conversão.' },
 };
 
 function toTitleCase(s: string) {
@@ -28,6 +40,28 @@ function toCamelCase(s: string) {
 function toKebabCase(s: string) {
   return s.toLowerCase().replace(/[^a-zA-Z0-9]+/g, '-').replace(/^-|-$/g, '');
 }
+function toAlternatingCase(s: string) {
+  let upper = false;
+  return s.split('').map((c) => {
+    if (/[a-zA-Z]/.test(c)) {
+      upper = !upper;
+      return upper ? c.toUpperCase() : c.toLowerCase();
+    }
+    return c;
+  }).join('');
+}
+function toDotCase(s: string) {
+  return s.toLowerCase().replace(/[^a-zA-Z0-9]+/g, '.').replace(/^\.|\.$/g, '');
+}
+function toPathCase(s: string) {
+  return s.toLowerCase().replace(/[^a-zA-Z0-9]+/g, '/').replace(/^\/|\/$/g, '');
+}
+
+function countWords(s: string): number {
+  const trimmed = s.trim();
+  if (!trimmed) return 0;
+  return trimmed.split(/\s+/).length;
+}
 
 export default function TextCaseConverter() {
   const { lang } = useParams() as { lang: Locale };
@@ -36,6 +70,8 @@ export default function TextCaseConverter() {
 
   const [text, setText] = useState('');
   const [copiedKey, setCopiedKey] = useState('');
+  const [history, setHistory] = useState<HistoryEntry[]>([]);
+  const [validationMsg, setValidationMsg] = useState('');
 
   const conversions = [
     { key: 'uppercase', fn: (s: string) => s.toUpperCase() },
@@ -44,13 +80,43 @@ export default function TextCaseConverter() {
     { key: 'sentenceCase', fn: toSentenceCase },
     { key: 'camelCase', fn: toCamelCase },
     { key: 'kebabCase', fn: toKebabCase },
+    { key: 'alternatingCase', fn: toAlternatingCase },
+    { key: 'dotCase', fn: toDotCase },
+    { key: 'pathCase', fn: toPathCase },
   ];
 
+  const addToHistory = useCallback((caseType: string, fullResult: string) => {
+    setHistory((prev) => {
+      const entry: HistoryEntry = {
+        preview: fullResult.length > 30 ? fullResult.slice(0, 30) + '...' : fullResult,
+        caseType,
+        fullResult,
+      };
+      const next = [entry, ...prev];
+      return next.slice(0, 5);
+    });
+  }, []);
+
   const handleCopy = async (key: string, value: string) => {
+    if (!text.trim()) {
+      setValidationMsg(t('emptyText'));
+      setTimeout(() => setValidationMsg(''), 2500);
+      return;
+    }
     await navigator.clipboard.writeText(value);
     setCopiedKey(key);
+    addToHistory(t(key), value);
     setTimeout(() => setCopiedKey(''), 2000);
   };
+
+  const handleReset = () => {
+    setText('');
+    setCopiedKey('');
+    setValidationMsg('');
+  };
+
+  const charCount = text.length;
+  const wordCount = countWords(text);
 
   const seoContent: Record<Locale, { title: string; paragraphs: string[]; faq: { q: string; a: string }[] }> = {
     en: {
@@ -163,9 +229,36 @@ export default function TextCaseConverter() {
         <div className="bg-white rounded-xl border border-gray-200 p-6 space-y-4">
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-1">{t('inputText')}</label>
-            <textarea value={text} onChange={(e) => setText(e.target.value)} rows={4}
+            <textarea value={text} onChange={(e) => { setText(e.target.value); setValidationMsg(''); }} rows={4}
               placeholder="The Quick Brown Fox Jumps Over The Lazy Dog"
               className="w-full border border-gray-300 rounded-lg px-4 py-2 text-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent resize-none" />
+          </div>
+
+          {/* Validation message */}
+          {validationMsg && (
+            <div className="text-sm text-red-600 bg-red-50 border border-red-200 rounded-lg px-3 py-2">
+              {validationMsg}
+            </div>
+          )}
+
+          {/* Result cards: character count + word count */}
+          <div className="grid grid-cols-2 gap-3">
+            <div className="bg-blue-50 rounded-lg p-3 text-center">
+              <div className="text-2xl font-bold text-blue-700">{charCount}</div>
+              <div className="text-xs text-blue-600 font-medium">{t('characters')}</div>
+            </div>
+            <div className="bg-green-50 rounded-lg p-3 text-center">
+              <div className="text-2xl font-bold text-green-700">{wordCount}</div>
+              <div className="text-xs text-green-600 font-medium">{t('words')}</div>
+            </div>
+          </div>
+
+          {/* Reset button */}
+          <div className="flex justify-end">
+            <button onClick={handleReset}
+              className="text-sm px-4 py-1.5 rounded-lg bg-gray-100 text-gray-700 hover:bg-gray-200 transition-colors">
+              {t('reset')}
+            </button>
           </div>
 
           {text && (
@@ -177,7 +270,7 @@ export default function TextCaseConverter() {
                     <div className="flex justify-between items-center mb-1">
                       <span className="text-sm font-medium text-gray-600">{t(key)}</span>
                       <button onClick={() => handleCopy(key, result)}
-                        className={`text-xs px-2 py-1 rounded ${copiedKey === key ? 'bg-green-600 text-white' : 'bg-gray-200 text-gray-700 hover:bg-gray-300'}`}>
+                        className={`text-xs px-2 py-1 rounded transition-colors ${copiedKey === key ? 'bg-green-600 text-white' : 'bg-gray-200 text-gray-700 hover:bg-gray-300'}`}>
                         {copiedKey === key ? t('copied') : t('copy')}
                       </button>
                     </div>
@@ -186,6 +279,29 @@ export default function TextCaseConverter() {
                 );
               })}
             </div>
+          )}
+        </div>
+
+        {/* History section */}
+        <div className="mt-6 bg-white rounded-xl border border-gray-200 p-6">
+          <h2 className="text-lg font-semibold text-gray-900 mb-3">{t('history')}</h2>
+          {history.length === 0 ? (
+            <p className="text-sm text-gray-400">{t('noHistory')}</p>
+          ) : (
+            <ul className="space-y-2">
+              {history.map((entry, i) => (
+                <li key={i} className="flex items-center justify-between bg-gray-50 rounded-lg px-3 py-2">
+                  <div className="min-w-0 flex-1">
+                    <span className="text-xs font-medium text-blue-600 mr-2">{entry.caseType}</span>
+                    <span className="text-sm text-gray-700 truncate">{entry.preview}</span>
+                  </div>
+                  <button onClick={() => { navigator.clipboard.writeText(entry.fullResult); setCopiedKey('hist-' + i); setTimeout(() => setCopiedKey(''), 2000); }}
+                    className={`ml-2 text-xs px-2 py-1 rounded flex-shrink-0 transition-colors ${copiedKey === 'hist-' + i ? 'bg-green-600 text-white' : 'bg-gray-200 text-gray-700 hover:bg-gray-300'}`}>
+                    {copiedKey === 'hist-' + i ? t('copied') : t('copy')}
+                  </button>
+                </li>
+              ))}
+            </ul>
           )}
         </div>
 
