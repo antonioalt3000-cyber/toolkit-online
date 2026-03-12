@@ -1,20 +1,52 @@
 'use client';
-import { useState } from 'react';
+import { useState, useCallback } from 'react';
 import { useParams } from 'next/navigation';
 import { tools, type Locale } from '@/lib/translations';
 import ToolPageWrapper from '@/components/ToolPageWrapper';
+
+interface HistoryEntry {
+  preview: string;
+  words: number;
+  chars: number;
+  sentences: number;
+  paragraphs: number;
+  readingTime: number;
+}
 
 export default function WordCounter() {
   const { lang } = useParams() as { lang: Locale };
   const toolT = tools['word-counter'][lang];
   const [text, setText] = useState('');
+  const [copied, setCopied] = useState(false);
+  const [error, setError] = useState('');
+  const [history, setHistory] = useState<HistoryEntry[]>([]);
 
-  const words = text.trim() ? text.trim().split(/\s+/).length : 0;
+  const wordsArray = text.trim() ? text.trim().split(/\s+/) : [];
+  const words = wordsArray.length;
   const chars = text.length;
   const charsNoSpaces = text.replace(/\s/g, '').length;
   const sentences = text.trim() ? text.split(/[.!?]+/).filter((s) => s.trim()).length : 0;
   const paragraphs = text.trim() ? text.split(/\n\n+/).filter((s) => s.trim()).length : 0;
   const readingTime = Math.max(1, Math.ceil(words / 200));
+
+  // Additional stats
+  const avgWordLength = words > 0 ? (wordsArray.reduce((sum, w) => sum + w.replace(/[^a-zA-ZÀ-ÿ]/g, '').length, 0) / words).toFixed(1) : '0';
+  const longestWord = words > 0 ? wordsArray.reduce((a, b) => a.length >= b.length ? a : b, '').replace(/[^a-zA-ZÀ-ÿ'-]/g, '') : '-';
+
+  const getTopWords = useCallback((): { word: string; count: number }[] => {
+    if (words === 0) return [];
+    const freq: Record<string, number> = {};
+    wordsArray.forEach((w) => {
+      const clean = w.toLowerCase().replace(/[^a-zA-ZÀ-ÿ'-]/g, '');
+      if (clean.length > 0) freq[clean] = (freq[clean] || 0) + 1;
+    });
+    return Object.entries(freq)
+      .sort((a, b) => b[1] - a[1])
+      .slice(0, 5)
+      .map(([word, count]) => ({ word, count }));
+  }, [words, wordsArray]);
+
+  const topWords = getTopWords();
 
   const labels: Record<string, Record<Locale, string>> = {
     words: { en: 'Words', it: 'Parole', es: 'Palabras', fr: 'Mots', de: 'Wörter', pt: 'Palavras' },
@@ -24,7 +56,77 @@ export default function WordCounter() {
     paragraphs: { en: 'Paragraphs', it: 'Paragrafi', es: 'Párrafos', fr: 'Paragraphes', de: 'Absätze', pt: 'Parágrafos' },
     reading: { en: 'min read', it: 'min lettura', es: 'min lectura', fr: 'min lecture', de: 'Min. Lesezeit', pt: 'min leitura' },
     placeholder: { en: 'Type or paste your text here...', it: 'Scrivi o incolla il tuo testo qui...', es: 'Escribe o pega tu texto aquí...', fr: 'Tapez ou collez votre texte ici...', de: 'Geben Sie Ihren Text hier ein...', pt: 'Digite ou cole seu texto aqui...' },
+    copyResults: { en: 'Copy Results', it: 'Copia Risultati', es: 'Copiar Resultados', fr: 'Copier Résultats', de: 'Ergebnisse Kopieren', pt: 'Copiar Resultados' },
+    copiedMsg: { en: 'Copied!', it: 'Copiato!', es: '¡Copiado!', fr: 'Copié !', de: 'Kopiert!', pt: 'Copiado!' },
+    reset: { en: 'Reset', it: 'Cancella', es: 'Borrar', fr: 'Effacer', de: 'Zurücksetzen', pt: 'Limpar' },
+    emptyError: { en: 'Please enter some text first.', it: 'Inserisci prima del testo.', es: 'Por favor, ingresa texto primero.', fr: 'Veuillez d\'abord saisir du texte.', de: 'Bitte geben Sie zuerst einen Text ein.', pt: 'Por favor, insira algum texto primeiro.' },
+    avgWordLen: { en: 'Avg. Word Length', it: 'Lungh. Media Parola', es: 'Long. Media Palabra', fr: 'Long. Moy. Mot', de: 'Durchschn. Wortlänge', pt: 'Comp. Médio Palavra' },
+    longestWord: { en: 'Longest Word', it: 'Parola Più Lunga', es: 'Palabra Más Larga', fr: 'Mot le Plus Long', de: 'Längstes Wort', pt: 'Palavra Mais Longa' },
+    topWords: { en: 'Top 5 Words', it: 'Top 5 Parole', es: 'Top 5 Palabras', fr: 'Top 5 Mots', de: 'Top 5 Wörter', pt: 'Top 5 Palavras' },
+    readingProgress: { en: 'Reading Time', it: 'Tempo di Lettura', es: 'Tiempo de Lectura', fr: 'Temps de Lecture', de: 'Lesezeit', pt: 'Tempo de Leitura' },
+    history: { en: 'Recent Analyses', it: 'Analisi Recenti', es: 'Análisis Recientes', fr: 'Analyses Récentes', de: 'Letzte Analysen', pt: 'Análises Recentes' },
+    saveAnalysis: { en: 'Save Analysis', it: 'Salva Analisi', es: 'Guardar Análisis', fr: 'Sauvegarder', de: 'Analyse Speichern', pt: 'Salvar Análise' },
+    times: { en: 'times', it: 'volte', es: 'veces', fr: 'fois', de: 'mal', pt: 'vezes' },
+    noHistory: { en: 'No saved analyses yet.', it: 'Nessuna analisi salvata.', es: 'Sin análisis guardados.', fr: 'Aucune analyse sauvegardée.', de: 'Noch keine gespeicherten Analysen.', pt: 'Nenhuma análise salva ainda.' },
   };
+
+  const handleCopy = async () => {
+    if (!text.trim()) {
+      setError(labels.emptyError[lang]);
+      setTimeout(() => setError(''), 3000);
+      return;
+    }
+    setError('');
+    const stats = [
+      `${labels.words[lang]}: ${words}`,
+      `${labels.chars[lang]}: ${chars}`,
+      `${labels.charsNs[lang]}: ${charsNoSpaces}`,
+      `${labels.sentences[lang]}: ${sentences}`,
+      `${labels.paragraphs[lang]}: ${paragraphs}`,
+      `${labels.readingProgress[lang]}: ${readingTime} ${labels.reading[lang]}`,
+      `${labels.avgWordLen[lang]}: ${avgWordLength}`,
+      `${labels.longestWord[lang]}: ${longestWord}`,
+    ].join('\n');
+    await navigator.clipboard.writeText(stats);
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2000);
+  };
+
+  const handleReset = () => {
+    setText('');
+    setError('');
+    setCopied(false);
+  };
+
+  const handleSaveAnalysis = () => {
+    if (!text.trim()) {
+      setError(labels.emptyError[lang]);
+      setTimeout(() => setError(''), 3000);
+      return;
+    }
+    setError('');
+    const entry: HistoryEntry = {
+      preview: text.slice(0, 30) + (text.length > 30 ? '...' : ''),
+      words,
+      chars,
+      sentences,
+      paragraphs,
+      readingTime,
+    };
+    setHistory((prev) => [entry, ...prev].slice(0, 5));
+  };
+
+  const readingTimeMax = 10;
+  const readingProgress = Math.min((readingTime / readingTimeMax) * 100, 100);
+
+  const cardData = [
+    { label: labels.words[lang], value: words, bg: 'bg-blue-50', text: 'text-blue-700', border: 'border-blue-200' },
+    { label: labels.chars[lang], value: chars, bg: 'bg-green-50', text: 'text-green-700', border: 'border-green-200' },
+    { label: labels.charsNs[lang], value: charsNoSpaces, bg: 'bg-purple-50', text: 'text-purple-700', border: 'border-purple-200' },
+    { label: labels.sentences[lang], value: sentences, bg: 'bg-amber-50', text: 'text-amber-700', border: 'border-amber-200' },
+    { label: labels.paragraphs[lang], value: paragraphs, bg: 'bg-rose-50', text: 'text-rose-700', border: 'border-rose-200' },
+    { label: labels.reading[lang], value: readingTime, bg: 'bg-cyan-50', text: 'text-cyan-700', border: 'border-cyan-200' },
+  ];
 
   const seoContent: Record<Locale, { title: string; paragraphs: string[]; faq: { q: string; a: string }[] }> = {
     en: {
@@ -134,28 +236,117 @@ export default function WordCounter() {
         <h1 className="text-3xl font-bold text-gray-900 mb-2">{toolT.name}</h1>
         <p className="text-gray-600 mb-6">{toolT.description}</p>
 
+        {/* Result Cards */}
         <div className="grid grid-cols-3 sm:grid-cols-6 gap-3 mb-4">
-          {[
-            { label: labels.words[lang], value: words },
-            { label: labels.chars[lang], value: chars },
-            { label: labels.charsNs[lang], value: charsNoSpaces },
-            { label: labels.sentences[lang], value: sentences },
-            { label: labels.paragraphs[lang], value: paragraphs },
-            { label: labels.reading[lang], value: readingTime },
-          ].map((stat) => (
-            <div key={stat.label} className="bg-white border border-gray-200 rounded-lg p-3 text-center">
-              <div className="text-2xl font-bold text-blue-600">{stat.value}</div>
+          {cardData.map((stat) => (
+            <div key={stat.label} className={`${stat.bg} border ${stat.border} rounded-lg p-3 text-center`}>
+              <div className={`text-2xl font-bold ${stat.text}`}>{stat.value}</div>
               <div className="text-xs text-gray-500">{stat.label}</div>
             </div>
           ))}
         </div>
 
+        {/* Reading Time Progress Bar */}
+        <div className="mb-4 bg-white border border-gray-200 rounded-lg p-4">
+          <div className="flex justify-between items-center mb-2">
+            <span className="text-sm font-medium text-gray-700">{labels.readingProgress[lang]}</span>
+            <span className="text-sm font-semibold text-cyan-700">{readingTime} {labels.reading[lang]}</span>
+          </div>
+          <div className="w-full bg-gray-200 rounded-full h-3">
+            <div
+              className="bg-gradient-to-r from-cyan-400 to-blue-500 h-3 rounded-full transition-all duration-500"
+              style={{ width: `${readingProgress}%` }}
+            />
+          </div>
+        </div>
+
+        {/* Textarea */}
         <textarea
           value={text}
-          onChange={(e) => setText(e.target.value)}
+          onChange={(e) => { setText(e.target.value); setError(''); }}
           placeholder={labels.placeholder[lang]}
           className="w-full h-64 border border-gray-300 rounded-xl px-4 py-3 text-base focus:ring-2 focus:ring-blue-500 focus:border-transparent resize-y"
         />
+
+        {/* Error message */}
+        {error && (
+          <div className="mt-2 text-sm text-red-600 bg-red-50 border border-red-200 rounded-lg px-3 py-2">
+            {error}
+          </div>
+        )}
+
+        {/* Action Buttons */}
+        <div className="flex gap-3 mt-4">
+          <button
+            onClick={handleCopy}
+            className="flex-1 bg-blue-600 text-white px-4 py-2.5 rounded-lg font-medium hover:bg-blue-700 transition-colors"
+          >
+            {copied ? labels.copiedMsg[lang] : labels.copyResults[lang]}
+          </button>
+          <button
+            onClick={handleSaveAnalysis}
+            className="flex-1 bg-green-600 text-white px-4 py-2.5 rounded-lg font-medium hover:bg-green-700 transition-colors"
+          >
+            {labels.saveAnalysis[lang]}
+          </button>
+          <button
+            onClick={handleReset}
+            className="bg-gray-200 text-gray-700 px-4 py-2.5 rounded-lg font-medium hover:bg-gray-300 transition-colors"
+          >
+            {labels.reset[lang]}
+          </button>
+        </div>
+
+        {/* Additional Stats */}
+        <div className="mt-6 grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div className="bg-indigo-50 border border-indigo-200 rounded-lg p-4">
+            <div className="text-sm text-gray-500 mb-1">{labels.avgWordLen[lang]}</div>
+            <div className="text-xl font-bold text-indigo-700">{avgWordLength}</div>
+          </div>
+          <div className="bg-teal-50 border border-teal-200 rounded-lg p-4">
+            <div className="text-sm text-gray-500 mb-1">{labels.longestWord[lang]}</div>
+            <div className="text-xl font-bold text-teal-700 truncate">{longestWord || '-'}</div>
+          </div>
+        </div>
+
+        {/* Top 5 Words */}
+        <div className="mt-4 bg-orange-50 border border-orange-200 rounded-lg p-4">
+          <div className="text-sm font-medium text-gray-700 mb-3">{labels.topWords[lang]}</div>
+          {topWords.length > 0 ? (
+            <div className="flex flex-wrap gap-2">
+              {topWords.map((tw, i) => (
+                <span
+                  key={i}
+                  className="inline-flex items-center bg-white border border-orange-300 rounded-full px-3 py-1 text-sm"
+                >
+                  <span className="font-semibold text-orange-700">{tw.word}</span>
+                  <span className="ml-1.5 text-xs text-gray-500">({tw.count}x)</span>
+                </span>
+              ))}
+            </div>
+          ) : (
+            <div className="text-sm text-gray-400">-</div>
+          )}
+        </div>
+
+        {/* History */}
+        <div className="mt-6 bg-gray-50 border border-gray-200 rounded-lg p-4">
+          <div className="text-sm font-medium text-gray-700 mb-3">{labels.history[lang]}</div>
+          {history.length > 0 ? (
+            <div className="space-y-2">
+              {history.map((entry, i) => (
+                <div key={i} className="bg-white border border-gray-200 rounded-lg px-3 py-2 flex justify-between items-center text-sm">
+                  <span className="text-gray-600 truncate mr-3">&ldquo;{entry.preview}&rdquo;</span>
+                  <span className="text-gray-500 whitespace-nowrap">
+                    {entry.words} {labels.words[lang].toLowerCase()} &middot; {entry.readingTime} {labels.reading[lang]}
+                  </span>
+                </div>
+              ))}
+            </div>
+          ) : (
+            <div className="text-sm text-gray-400">{labels.noHistory[lang]}</div>
+          )}
+        </div>
 
         {/* SEO Article */}
         <article className="mt-12 prose prose-gray max-w-none">

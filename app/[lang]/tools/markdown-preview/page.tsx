@@ -1,5 +1,5 @@
 'use client';
-import { useState, useMemo } from 'react';
+import { useState, useMemo, useCallback, useEffect } from 'react';
 import { useParams } from 'next/navigation';
 import { tools, type Locale } from '@/lib/translations';
 import ToolPageWrapper from '@/components/ToolPageWrapper';
@@ -8,7 +8,30 @@ const labels: Record<string, Record<Locale, string>> = {
   editor: { en: 'Markdown Editor', it: 'Editor Markdown', es: 'Editor Markdown', fr: 'Éditeur Markdown', de: 'Markdown-Editor', pt: 'Editor Markdown' },
   preview: { en: 'Preview', it: 'Anteprima', es: 'Vista Previa', fr: 'Aperçu', de: 'Vorschau', pt: 'Pré-visualização' },
   placeholder: { en: '# Hello World\n\nWrite some **markdown** here...\n\n- Item 1\n- Item 2\n\n> A blockquote\n\n`inline code`\n\n```\ncode block\n```', it: '# Ciao Mondo\n\nScrivi del **markdown** qui...', es: '# Hola Mundo\n\nEscribe algo de **markdown** aquí...', fr: '# Bonjour le Monde\n\nÉcrivez du **markdown** ici...', de: '# Hallo Welt\n\nSchreiben Sie hier **Markdown**...', pt: '# Olá Mundo\n\nEscreva algum **markdown** aqui...' },
+  words: { en: 'Words', it: 'Parole', es: 'Palabras', fr: 'Mots', de: 'Wörter', pt: 'Palavras' },
+  characters: { en: 'Characters', it: 'Caratteri', es: 'Caracteres', fr: 'Caractères', de: 'Zeichen', pt: 'Caracteres' },
+  lines: { en: 'Lines', it: 'Righe', es: 'Líneas', fr: 'Lignes', de: 'Zeilen', pt: 'Linhas' },
+  copyHtml: { en: 'Copy HTML', it: 'Copia HTML', es: 'Copiar HTML', fr: 'Copier HTML', de: 'HTML kopieren', pt: 'Copiar HTML' },
+  copyMarkdown: { en: 'Copy Markdown', it: 'Copia Markdown', es: 'Copiar Markdown', fr: 'Copier Markdown', de: 'Markdown kopieren', pt: 'Copiar Markdown' },
+  copied: { en: 'Copied!', it: 'Copiato!', es: 'Copiado!', fr: 'Copié !', de: 'Kopiert!', pt: 'Copiado!' },
+  reset: { en: 'Reset', it: 'Cancella', es: 'Restablecer', fr: 'Réinitialiser', de: 'Zurücksetzen', pt: 'Limpar' },
+  fullscreen: { en: 'Fullscreen', it: 'Schermo intero', es: 'Pantalla completa', fr: 'Plein écran', de: 'Vollbild', pt: 'Tela cheia' },
+  exitFullscreen: { en: 'Exit Fullscreen', it: 'Esci', es: 'Salir', fr: 'Quitter', de: 'Beenden', pt: 'Sair' },
+  templates: { en: 'Quick Insert', it: 'Inserimento rapido', es: 'Inserción rápida', fr: 'Insertion rapide', de: 'Schnell einfügen', pt: 'Inserção rápida' },
+  history: { en: 'History', it: 'Cronologia', es: 'Historial', fr: 'Historique', de: 'Verlauf', pt: 'Histórico' },
+  saveToHistory: { en: 'Save to History', it: 'Salva nella cronologia', es: 'Guardar en historial', fr: 'Sauvegarder', de: 'Speichern', pt: 'Salvar no histórico' },
+  noHistory: { en: 'No saved snippets yet', it: 'Nessun frammento salvato', es: 'Sin fragmentos guardados', fr: 'Aucun extrait sauvegardé', de: 'Noch keine Snippets', pt: 'Nenhum trecho salvo' },
+  clearHistory: { en: 'Clear', it: 'Cancella', es: 'Borrar', fr: 'Effacer', de: 'Löschen', pt: 'Limpar' },
 };
+
+const TEMPLATES = [
+  { label: 'H1', md: '# Heading 1\n' },
+  { label: 'Bold', md: '**bold text**' },
+  { label: 'Link', md: '[text](https://example.com)' },
+  { label: 'Image', md: '![alt](https://example.com/image.png)' },
+  { label: 'Table', md: '| Column 1 | Column 2 |\n|----------|----------|\n| Cell 1   | Cell 2   |\n' },
+  { label: 'Code', md: '```\ncode block\n```\n' },
+];
 
 function parseMarkdown(md: string): string {
   let html = md;
@@ -72,14 +95,80 @@ function parseMarkdown(md: string): string {
   return html;
 }
 
+interface HistoryItem {
+  text: string;
+  preview: string;
+  timestamp: number;
+}
+
 export default function MarkdownPreview() {
   const { lang } = useParams() as { lang: Locale };
   const toolT = tools['markdown-preview'][lang];
   const t = (key: string) => labels[key]?.[lang] || labels[key]?.en || key;
 
   const [markdown, setMarkdown] = useState('');
+  const [copiedKey, setCopiedKey] = useState<string | null>(null);
+  const [isFullscreen, setIsFullscreen] = useState(false);
+  const [history, setHistory] = useState<HistoryItem[]>([]);
+
+  // Load history from localStorage on mount
+  useEffect(() => {
+    try {
+      const saved = localStorage.getItem('md-preview-history');
+      if (saved) setHistory(JSON.parse(saved));
+    } catch { /* ignore */ }
+  }, []);
 
   const rendered = useMemo(() => parseMarkdown(markdown || ''), [markdown]);
+
+  // Stats
+  const wordCount = useMemo(() => {
+    const trimmed = markdown.trim();
+    return trimmed ? trimmed.split(/\s+/).length : 0;
+  }, [markdown]);
+  const charCount = markdown.length;
+  const lineCount = useMemo(() => {
+    return markdown ? markdown.split('\n').length : 0;
+  }, [markdown]);
+
+  const copyToClipboard = useCallback(async (text: string, key: string) => {
+    try {
+      await navigator.clipboard.writeText(text);
+      setCopiedKey(key);
+      setTimeout(() => setCopiedKey(null), 1500);
+    } catch { /* ignore */ }
+  }, []);
+
+  const handleReset = useCallback(() => {
+    setMarkdown('');
+  }, []);
+
+  const insertTemplate = useCallback((md: string) => {
+    setMarkdown(prev => prev ? prev + '\n' + md : md);
+  }, []);
+
+  const saveToHistory = useCallback(() => {
+    if (!markdown.trim()) return;
+    const item: HistoryItem = {
+      text: markdown,
+      preview: markdown.trim().slice(0, 30) + (markdown.trim().length > 30 ? '...' : ''),
+      timestamp: Date.now(),
+    };
+    const newHistory = [item, ...history].slice(0, 5);
+    setHistory(newHistory);
+    try {
+      localStorage.setItem('md-preview-history', JSON.stringify(newHistory));
+    } catch { /* ignore */ }
+  }, [markdown, history]);
+
+  const clearHistory = useCallback(() => {
+    setHistory([]);
+    try { localStorage.removeItem('md-preview-history'); } catch { /* ignore */ }
+  }, []);
+
+  const loadFromHistory = useCallback((item: HistoryItem) => {
+    setMarkdown(item.text);
+  }, []);
 
   const seoContent: Record<Locale, { title: string; paragraphs: string[]; faq: { q: string; a: string }[] }> = {
     en: {
@@ -189,24 +278,135 @@ export default function MarkdownPreview() {
         <h1 className="text-3xl font-bold text-gray-900 mb-2">{toolT.name}</h1>
         <p className="text-gray-600 mb-6">{toolT.description}</p>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        {/* Stats Cards */}
+        <div className="grid grid-cols-3 gap-3 mb-4">
+          <div className="bg-blue-50 rounded-xl p-3 text-center">
+            <div className="text-2xl font-bold text-blue-700">{wordCount}</div>
+            <div className="text-xs text-blue-600 font-medium">{t('words')}</div>
+          </div>
+          <div className="bg-green-50 rounded-xl p-3 text-center">
+            <div className="text-2xl font-bold text-green-700">{charCount}</div>
+            <div className="text-xs text-green-600 font-medium">{t('characters')}</div>
+          </div>
+          <div className="bg-purple-50 rounded-xl p-3 text-center">
+            <div className="text-2xl font-bold text-purple-700">{lineCount}</div>
+            <div className="text-xs text-purple-600 font-medium">{t('lines')}</div>
+          </div>
+        </div>
+
+        {/* Action Buttons */}
+        <div className="flex flex-wrap gap-2 mb-4">
+          <button
+            onClick={() => copyToClipboard(rendered, 'html')}
+            className="px-3 py-1.5 text-sm bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
+          >
+            {copiedKey === 'html' ? t('copied') : t('copyHtml')}
+          </button>
+          <button
+            onClick={() => copyToClipboard(markdown, 'md')}
+            className="px-3 py-1.5 text-sm bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 transition-colors"
+          >
+            {copiedKey === 'md' ? t('copied') : t('copyMarkdown')}
+          </button>
+          <button
+            onClick={handleReset}
+            className="px-3 py-1.5 text-sm bg-gray-200 text-gray-700 rounded-lg hover:bg-gray-300 transition-colors"
+          >
+            {t('reset')}
+          </button>
+          <button
+            onClick={() => setIsFullscreen(!isFullscreen)}
+            className="px-3 py-1.5 text-sm bg-gray-200 text-gray-700 rounded-lg hover:bg-gray-300 transition-colors"
+          >
+            {isFullscreen ? t('exitFullscreen') : t('fullscreen')}
+          </button>
+        </div>
+
+        {/* Sample Templates */}
+        <div className="mb-4">
+          <span className="text-xs font-medium text-gray-500 mr-2">{t('templates')}:</span>
+          <div className="inline-flex flex-wrap gap-1.5">
+            {TEMPLATES.map((tpl) => (
+              <button
+                key={tpl.label}
+                onClick={() => insertTemplate(tpl.md)}
+                className="px-2.5 py-1 text-xs bg-gray-100 text-gray-700 rounded-md hover:bg-gray-200 transition-colors font-mono"
+              >
+                {tpl.label}
+              </button>
+            ))}
+          </div>
+        </div>
+
+        {/* Editor + Preview */}
+        <div className={`grid grid-cols-1 md:grid-cols-2 gap-4 ${isFullscreen ? 'fixed inset-0 z-50 bg-white p-4 overflow-auto' : ''}`}>
+          {isFullscreen && (
+            <button
+              onClick={() => setIsFullscreen(false)}
+              className="absolute top-2 right-4 z-50 px-3 py-1.5 text-sm bg-red-500 text-white rounded-lg hover:bg-red-600 transition-colors"
+            >
+              {t('exitFullscreen')}
+            </button>
+          )}
           <div className="bg-white rounded-xl border border-gray-200 p-4">
             <label className="block text-sm font-medium text-gray-700 mb-2">{t('editor')}</label>
             <textarea
               value={markdown}
               onChange={(e) => setMarkdown(e.target.value)}
               placeholder={t('placeholder')}
-              className="w-full h-96 border border-gray-300 rounded-lg px-4 py-2 font-mono text-sm focus:ring-2 focus:ring-blue-500 focus:border-transparent resize-none"
+              className={`w-full border border-gray-300 rounded-lg px-4 py-2 font-mono text-sm focus:ring-2 focus:ring-blue-500 focus:border-transparent resize-none ${isFullscreen ? 'h-[calc(100vh-120px)]' : 'h-96'}`}
             />
           </div>
 
           <div className="bg-white rounded-xl border border-gray-200 p-4">
             <label className="block text-sm font-medium text-gray-700 mb-2">{t('preview')}</label>
             <div
-              className="h-96 overflow-y-auto border border-gray-300 rounded-lg px-4 py-2 prose prose-sm max-w-none"
+              className={`overflow-y-auto border border-gray-300 rounded-lg px-4 py-2 prose prose-sm max-w-none ${isFullscreen ? 'h-[calc(100vh-120px)]' : 'h-96'}`}
               dangerouslySetInnerHTML={{ __html: rendered }}
             />
           </div>
+        </div>
+
+        {/* History */}
+        <div className="mt-6 bg-white rounded-xl border border-gray-200 p-4">
+          <div className="flex items-center justify-between mb-3">
+            <h3 className="text-sm font-medium text-gray-700">{t('history')}</h3>
+            <div className="flex gap-2">
+              <button
+                onClick={saveToHistory}
+                disabled={!markdown.trim()}
+                className="px-3 py-1 text-xs bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors disabled:opacity-40 disabled:cursor-not-allowed"
+              >
+                {t('saveToHistory')}
+              </button>
+              {history.length > 0 && (
+                <button
+                  onClick={clearHistory}
+                  className="px-3 py-1 text-xs bg-gray-200 text-gray-600 rounded-lg hover:bg-gray-300 transition-colors"
+                >
+                  {t('clearHistory')}
+                </button>
+              )}
+            </div>
+          </div>
+          {history.length === 0 ? (
+            <p className="text-xs text-gray-400 italic">{t('noHistory')}</p>
+          ) : (
+            <div className="space-y-1.5">
+              {history.map((item, i) => (
+                <button
+                  key={item.timestamp}
+                  onClick={() => loadFromHistory(item)}
+                  className="w-full text-left px-3 py-2 text-sm bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors flex justify-between items-center"
+                >
+                  <span className="font-mono text-gray-700 truncate">{item.preview}</span>
+                  <span className="text-xs text-gray-400 ml-2 flex-shrink-0">
+                    {new Date(item.timestamp).toLocaleTimeString()}
+                  </span>
+                </button>
+              ))}
+            </div>
+          )}
         </div>
 
         {/* SEO Article */}

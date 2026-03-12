@@ -10,7 +10,61 @@ const labels: Record<string, Record<string, string>> = {
   download: { en: 'Download PNG', it: 'Scarica PNG', es: 'Descargar PNG', fr: 'Télécharger PNG', de: 'PNG herunterladen', pt: 'Baixar PNG' },
   placeholder: { en: 'Enter text or URL to encode...', it: 'Inserisci testo o URL...', es: 'Ingresa texto o URL...', fr: 'Entrez texte ou URL...', de: 'Text oder URL eingeben...', pt: 'Digite texto ou URL...' },
   size: { en: 'Size', it: 'Dimensione', es: 'Tamaño', fr: 'Taille', de: 'Größe', pt: 'Tamanho' },
+  reset: { en: 'Reset', it: 'Ripristina', es: 'Restablecer', fr: 'Réinitialiser', de: 'Zurücksetzen', pt: 'Redefinir' },
+  copyLink: { en: 'Copy Link', it: 'Copia Link', es: 'Copiar Enlace', fr: 'Copier le Lien', de: 'Link kopieren', pt: 'Copiar Link' },
+  copied: { en: 'Copied!', it: 'Copiato!', es: '¡Copiado!', fr: 'Copié !', de: 'Kopiert!', pt: 'Copiado!' },
+  errorEmpty: { en: 'Please enter text or a URL', it: 'Inserisci testo o un URL', es: 'Ingresa texto o una URL', fr: 'Veuillez entrer du texte ou une URL', de: 'Bitte Text oder URL eingeben', pt: 'Por favor, digite texto ou uma URL' },
+  warnLong: { en: 'Text is very long and may not scan reliably', it: 'Il testo è molto lungo e potrebbe non essere scansionabile', es: 'El texto es muy largo y puede no escanearse correctamente', fr: 'Le texte est très long et peut ne pas être scanné correctement', de: 'Der Text ist sehr lang und kann möglicherweise nicht zuverlässig gescannt werden', pt: 'O texto é muito longo e pode não ser escaneado corretamente' },
+  detectedType: { en: 'Detected Type', it: 'Tipo Rilevato', es: 'Tipo Detectado', fr: 'Type Détecté', de: 'Erkannter Typ', pt: 'Tipo Detectado' },
+  charCount: { en: 'Characters', it: 'Caratteri', es: 'Caracteres', fr: 'Caractères', de: 'Zeichen', pt: 'Caracteres' },
+  presets: { en: 'Quick Presets', it: 'Preset Rapidi', es: 'Presets Rápidos', fr: 'Préréglages Rapides', de: 'Schnellvorlagen', pt: 'Presets Rápidos' },
+  history: { en: 'Recent', it: 'Recenti', es: 'Recientes', fr: 'Récents', de: 'Verlauf', pt: 'Recentes' },
+  clearHistory: { en: 'Clear', it: 'Cancella', es: 'Borrar', fr: 'Effacer', de: 'Löschen', pt: 'Limpar' },
+  fgColor: { en: 'Foreground', it: 'Primo piano', es: 'Primer plano', fr: 'Premier plan', de: 'Vordergrund', pt: 'Primeiro plano' },
+  bgColor: { en: 'Background', it: 'Sfondo', es: 'Fondo', fr: 'Arrière-plan', de: 'Hintergrund', pt: 'Fundo' },
+  sizeSmall: { en: 'Small', it: 'Piccolo', es: 'Pequeño', fr: 'Petit', de: 'Klein', pt: 'Pequeno' },
+  sizeMedium: { en: 'Medium', it: 'Medio', es: 'Mediano', fr: 'Moyen', de: 'Mittel', pt: 'Médio' },
+  sizeLarge: { en: 'Large', it: 'Grande', es: 'Grande', fr: 'Grand', de: 'Groß', pt: 'Grande' },
+  customization: { en: 'Customization', it: 'Personalizzazione', es: 'Personalización', fr: 'Personnalisation', de: 'Anpassung', pt: 'Personalização' },
+  qrResult: { en: 'QR Code Result', it: 'Risultato QR Code', es: 'Resultado del Código QR', fr: 'Résultat du QR Code', de: 'QR-Code-Ergebnis', pt: 'Resultado do QR Code' },
 };
+
+type InputType = 'URL' | 'Email' | 'Phone' | 'SMS' | 'WiFi' | 'vCard' | 'Text';
+
+function detectInputType(value: string): InputType {
+  const trimmed = value.trim();
+  if (/^https?:\/\//i.test(trimmed) || /^www\./i.test(trimmed)) return 'URL';
+  if (/^mailto:/i.test(trimmed) || /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(trimmed)) return 'Email';
+  if (/^tel:/i.test(trimmed) || /^\+?\d[\d\s\-()]{6,}$/.test(trimmed)) return 'Phone';
+  if (/^smsto:/i.test(trimmed) || /^sms:/i.test(trimmed)) return 'SMS';
+  if (/^WIFI:/i.test(trimmed)) return 'WiFi';
+  if (/^BEGIN:VCARD/i.test(trimmed)) return 'vCard';
+  return 'Text';
+}
+
+const typeColors: Record<InputType, string> = {
+  URL: 'bg-blue-100 text-blue-800 border-blue-200',
+  Email: 'bg-purple-100 text-purple-800 border-purple-200',
+  Phone: 'bg-green-100 text-green-800 border-green-200',
+  SMS: 'bg-yellow-100 text-yellow-800 border-yellow-200',
+  WiFi: 'bg-cyan-100 text-cyan-800 border-cyan-200',
+  vCard: 'bg-pink-100 text-pink-800 border-pink-200',
+  Text: 'bg-gray-100 text-gray-800 border-gray-200',
+};
+
+interface HistoryItem {
+  text: string;
+  timestamp: number;
+}
+
+const PRESETS: { label: string; template: string }[] = [
+  { label: 'URL', template: 'https://example.com' },
+  { label: 'WiFi', template: 'WIFI:T:WPA;S:NetworkName;P:Password;;' },
+  { label: 'Email', template: 'mailto:user@example.com?subject=Hello' },
+  { label: 'Phone', template: 'tel:+1234567890' },
+  { label: 'SMS', template: 'smsto:+1234567890:Your message here' },
+  { label: 'vCard', template: 'BEGIN:VCARD\nVERSION:3.0\nN:Doe;John\nTEL:+1234567890\nEMAIL:john@example.com\nEND:VCARD' },
+];
 
 function generateQRMatrix(text: string, size: number): boolean[][] {
   const matrix: boolean[][] = Array.from({ length: size }, () => Array(size).fill(false));
@@ -71,8 +125,33 @@ export default function QrCodeGenerator() {
 
   const [text, setText] = useState('');
   const [qrSize, setQrSize] = useState(25);
+  const [fgColor, setFgColor] = useState('#000000');
+  const [bgColor, setBgColor] = useState('#ffffff');
+  const [sizePreset, setSizePreset] = useState<'small' | 'medium' | 'large'>('medium');
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const [generated, setGenerated] = useState(false);
+  const [copiedFeedback, setCopiedFeedback] = useState(false);
+  const [showError, setShowError] = useState(false);
+  const [history, setHistory] = useState<HistoryItem[]>([]);
+
+  // Load history from localStorage
+  useEffect(() => {
+    try {
+      const saved = localStorage.getItem('qr-history');
+      if (saved) setHistory(JSON.parse(saved));
+    } catch { /* ignore */ }
+  }, []);
+
+  const saveToHistory = useCallback((value: string) => {
+    setHistory(prev => {
+      const filtered = prev.filter(h => h.text !== value);
+      const updated = [{ text: value, timestamp: Date.now() }, ...filtered].slice(0, 5);
+      try { localStorage.setItem('qr-history', JSON.stringify(updated)); } catch { /* ignore */ }
+      return updated;
+    });
+  }, []);
+
+  const modulePixelSize = sizePreset === 'small' ? 6 : sizePreset === 'large' ? 14 : 10;
 
   const drawQR = useCallback(() => {
     if (!text.trim() || !canvasRef.current) return;
@@ -80,31 +159,35 @@ export default function QrCodeGenerator() {
     const ctx = canvas.getContext('2d');
     if (!ctx) return;
 
-    const moduleSize = 10;
     const padding = 4;
     const totalModules = qrSize + padding * 2;
-    canvas.width = totalModules * moduleSize;
-    canvas.height = totalModules * moduleSize;
+    canvas.width = totalModules * modulePixelSize;
+    canvas.height = totalModules * modulePixelSize;
 
-    ctx.fillStyle = '#ffffff';
+    ctx.fillStyle = bgColor;
     ctx.fillRect(0, 0, canvas.width, canvas.height);
 
     const matrix = generateQRMatrix(text, qrSize);
 
-    ctx.fillStyle = '#000000';
+    ctx.fillStyle = fgColor;
     for (let r = 0; r < qrSize; r++) {
       for (let c = 0; c < qrSize; c++) {
         if (matrix[r][c]) {
-          ctx.fillRect((c + padding) * moduleSize, (r + padding) * moduleSize, moduleSize, moduleSize);
+          ctx.fillRect((c + padding) * modulePixelSize, (r + padding) * modulePixelSize, modulePixelSize, modulePixelSize);
         }
       }
     }
     setGenerated(true);
-  }, [text, qrSize]);
+  }, [text, qrSize, fgColor, bgColor, modulePixelSize]);
 
   useEffect(() => {
-    if (text.trim()) drawQR();
-  }, [text, qrSize, drawQR]);
+    if (text.trim()) {
+      drawQR();
+      setShowError(false);
+    } else {
+      setGenerated(false);
+    }
+  }, [text, qrSize, fgColor, bgColor, sizePreset, drawQR]);
 
   const handleDownload = () => {
     if (!canvasRef.current) return;
@@ -112,7 +195,49 @@ export default function QrCodeGenerator() {
     link.download = 'qr-code.png';
     link.href = canvasRef.current.toDataURL('image/png');
     link.click();
+    saveToHistory(text);
   };
+
+  const handleCopyLink = async () => {
+    if (!canvasRef.current) return;
+    try {
+      const dataUrl = canvasRef.current.toDataURL('image/png');
+      await navigator.clipboard.writeText(dataUrl);
+      setCopiedFeedback(true);
+      saveToHistory(text);
+      setTimeout(() => setCopiedFeedback(false), 2000);
+    } catch {
+      // Fallback: copy the text input itself
+      try {
+        await navigator.clipboard.writeText(text);
+        setCopiedFeedback(true);
+        setTimeout(() => setCopiedFeedback(false), 2000);
+      } catch { /* ignore */ }
+    }
+  };
+
+  const handleReset = () => {
+    setText('');
+    setQrSize(25);
+    setFgColor('#000000');
+    setBgColor('#ffffff');
+    setSizePreset('medium');
+    setGenerated(false);
+    setShowError(false);
+  };
+
+  const handleGenerate = () => {
+    if (!text.trim()) {
+      setShowError(true);
+      return;
+    }
+    setShowError(false);
+    drawQR();
+    saveToHistory(text);
+  };
+
+  const detectedType = text.trim() ? detectInputType(text) : null;
+  const isLongText = text.length > 500;
 
   const seoContent: Record<Locale, { title: string; paragraphs: string[]; faq: { q: string; a: string }[] }> = {
     en: {
@@ -222,31 +347,164 @@ export default function QrCodeGenerator() {
         <h1 className="text-3xl font-bold text-gray-900 mb-2">{toolT.name}</h1>
         <p className="text-gray-600 mb-6">{toolT.description}</p>
 
+        {/* Quick Presets */}
+        <div className="mb-4">
+          <label className="block text-sm font-medium text-gray-700 mb-2">{t('presets')}</label>
+          <div className="flex flex-wrap gap-2">
+            {PRESETS.map((preset) => (
+              <button
+                key={preset.label}
+                onClick={() => setText(preset.template)}
+                className="px-3 py-1.5 text-sm bg-gray-100 text-gray-700 rounded-lg border border-gray-200 hover:bg-gray-200 transition-colors"
+              >
+                {preset.label}
+              </button>
+            ))}
+          </div>
+        </div>
+
         <div className="bg-white rounded-xl border border-gray-200 p-6 space-y-4">
+          {/* Input */}
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-1">{t('inputText')}</label>
-            <textarea value={text} onChange={(e) => setText(e.target.value)} placeholder={t('placeholder')} rows={3}
-              className="w-full border border-gray-300 rounded-lg px-4 py-2 text-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent resize-none" />
+            <textarea value={text} onChange={(e) => { setText(e.target.value); setShowError(false); }} placeholder={t('placeholder')} rows={3}
+              className={`w-full border rounded-lg px-4 py-2 text-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent resize-none ${showError ? 'border-red-400' : 'border-gray-300'}`} />
+            {showError && (
+              <p className="text-red-500 text-sm mt-1">{t('errorEmpty')}</p>
+            )}
+            {isLongText && (
+              <p className="text-amber-600 text-sm mt-1">{t('warnLong')}</p>
+            )}
           </div>
 
-          <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">{t('size')}: {qrSize}x{qrSize}</label>
-            <input type="range" min="21" max="37" step="4" value={qrSize} onChange={(e) => setQrSize(parseInt(e.target.value))}
-              className="w-full" />
+          {/* Result Cards */}
+          {detectedType && text.trim() && (
+            <div className="flex gap-3">
+              <div className={`flex-1 rounded-lg border px-3 py-2 ${typeColors[detectedType]}`}>
+                <div className="text-xs font-medium opacity-70">{t('detectedType')}</div>
+                <div className="text-sm font-semibold">{detectedType}</div>
+              </div>
+              <div className="flex-1 rounded-lg border bg-indigo-50 text-indigo-800 border-indigo-200 px-3 py-2">
+                <div className="text-xs font-medium opacity-70">{t('charCount')}</div>
+                <div className="text-sm font-semibold">{text.length}</div>
+              </div>
+            </div>
+          )}
+
+          {/* Customization Section */}
+          <div className="border border-gray-200 rounded-lg p-4 space-y-3">
+            <label className="block text-sm font-medium text-gray-700">{t('customization')}</label>
+
+            {/* Size Preset Buttons */}
+            <div>
+              <label className="block text-xs text-gray-500 mb-1">{t('size')}</label>
+              <div className="flex gap-2">
+                {(['small', 'medium', 'large'] as const).map((s) => (
+                  <button
+                    key={s}
+                    onClick={() => setSizePreset(s)}
+                    className={`flex-1 px-3 py-1.5 text-sm rounded-lg border transition-colors ${
+                      sizePreset === s
+                        ? 'bg-blue-600 text-white border-blue-600'
+                        : 'bg-white text-gray-700 border-gray-300 hover:bg-gray-50'
+                    }`}
+                  >
+                    {t(s === 'small' ? 'sizeSmall' : s === 'medium' ? 'sizeMedium' : 'sizeLarge')}
+                  </button>
+                ))}
+              </div>
+            </div>
+
+            {/* Module density slider */}
+            <div>
+              <label className="block text-xs text-gray-500 mb-1">Density: {qrSize}x{qrSize}</label>
+              <input type="range" min="21" max="37" step="4" value={qrSize} onChange={(e) => setQrSize(parseInt(e.target.value))}
+                className="w-full" />
+            </div>
+
+            {/* Color Pickers */}
+            <div className="flex gap-4">
+              <div className="flex-1">
+                <label className="block text-xs text-gray-500 mb-1">{t('fgColor')}</label>
+                <div className="flex items-center gap-2">
+                  <input type="color" value={fgColor} onChange={(e) => setFgColor(e.target.value)}
+                    className="w-8 h-8 rounded cursor-pointer border border-gray-300" />
+                  <span className="text-sm text-gray-600 font-mono">{fgColor}</span>
+                </div>
+              </div>
+              <div className="flex-1">
+                <label className="block text-xs text-gray-500 mb-1">{t('bgColor')}</label>
+                <div className="flex items-center gap-2">
+                  <input type="color" value={bgColor} onChange={(e) => setBgColor(e.target.value)}
+                    className="w-8 h-8 rounded cursor-pointer border border-gray-300" />
+                  <span className="text-sm text-gray-600 font-mono">{bgColor}</span>
+                </div>
+              </div>
+            </div>
           </div>
 
+          {/* Action Buttons */}
+          <div className="flex gap-2">
+            <button onClick={handleGenerate}
+              className="flex-1 bg-blue-600 text-white py-2 rounded-lg font-medium hover:bg-blue-700 transition-colors">
+              {t('generate')}
+            </button>
+            <button onClick={handleReset}
+              className="px-4 py-2 bg-gray-100 text-gray-700 rounded-lg font-medium hover:bg-gray-200 border border-gray-300 transition-colors">
+              {t('reset')}
+            </button>
+          </div>
+
+          {/* QR Code Display */}
           {text.trim() && (
-            <div className="flex flex-col items-center gap-4">
+            <div className="flex flex-col items-center gap-4 pt-2">
+              <div className="text-sm font-medium text-gray-500">{t('qrResult')}</div>
               <canvas ref={canvasRef} className="border border-gray-200 rounded-lg max-w-full" />
               {generated && (
-                <button onClick={handleDownload}
-                  className="w-full bg-blue-600 text-white py-2 rounded-lg font-medium hover:bg-blue-700 transition-colors">
-                  {t('download')}
-                </button>
+                <div className="flex gap-2 w-full">
+                  <button onClick={handleDownload}
+                    className="flex-1 bg-blue-600 text-white py-2 rounded-lg font-medium hover:bg-blue-700 transition-colors">
+                    {t('download')}
+                  </button>
+                  <button onClick={handleCopyLink}
+                    className={`flex-1 py-2 rounded-lg font-medium border transition-colors ${
+                      copiedFeedback
+                        ? 'bg-green-100 text-green-700 border-green-300'
+                        : 'bg-white text-gray-700 border-gray-300 hover:bg-gray-50'
+                    }`}>
+                    {copiedFeedback ? t('copied') : t('copyLink')}
+                  </button>
+                </div>
               )}
             </div>
           )}
         </div>
+
+        {/* History */}
+        {history.length > 0 && (
+          <div className="mt-4 bg-white rounded-xl border border-gray-200 p-4">
+            <div className="flex items-center justify-between mb-2">
+              <label className="text-sm font-medium text-gray-700">{t('history')}</label>
+              <button
+                onClick={() => { setHistory([]); try { localStorage.removeItem('qr-history'); } catch { /* ignore */ } }}
+                className="text-xs text-gray-400 hover:text-gray-600 transition-colors"
+              >
+                {t('clearHistory')}
+              </button>
+            </div>
+            <div className="space-y-1">
+              {history.map((item, i) => (
+                <button
+                  key={i}
+                  onClick={() => setText(item.text)}
+                  className="w-full text-left px-3 py-2 text-sm text-gray-600 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors truncate"
+                >
+                  {item.text.length > 30 ? item.text.slice(0, 30) + '...' : item.text}
+                </button>
+              ))}
+            </div>
+          </div>
+        )}
 
         <article className="mt-12 prose prose-gray max-w-none">
           <h2 className="text-2xl font-bold text-gray-900 mb-4">{seo.title}</h2>

@@ -1,5 +1,5 @@
 'use client';
-import { useState } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { useParams } from 'next/navigation';
 import { tools, type Locale } from '@/lib/translations';
 import ToolPageWrapper from '@/components/ToolPageWrapper';
@@ -8,6 +8,19 @@ interface InvoiceItem {
   description: string;
   quantity: number;
   price: number;
+}
+
+interface SavedInvoice {
+  invoiceNum: string;
+  fromName: string;
+  toName: string;
+  total: number;
+  date: string;
+  fromAddress: string;
+  toAddress: string;
+  items: InvoiceItem[];
+  notes: string;
+  taxRate: number;
 }
 
 const labels: Record<string, Record<Locale, string>> = {
@@ -24,6 +37,21 @@ const labels: Record<string, Record<Locale, string>> = {
   print: { en: 'Print Invoice', it: 'Stampa Fattura', es: 'Imprimir Factura', fr: 'Imprimer Facture', de: 'Rechnung Drucken', pt: 'Imprimir Fatura' },
   subtotal: { en: 'Subtotal', it: 'Subtotale', es: 'Subtotal', fr: 'Sous-total', de: 'Zwischensumme', pt: 'Subtotal' },
   notes: { en: 'Notes', it: 'Note', es: 'Notas', fr: 'Notes', de: 'Notizen', pt: 'Notas' },
+  taxRate: { en: 'Tax %', it: 'IVA %', es: 'Impuesto %', fr: 'Taxe %', de: 'Steuer %', pt: 'Imposto %' },
+  taxAmount: { en: 'Tax', it: 'IVA', es: 'Impuesto', fr: 'Taxe', de: 'Steuer', pt: 'Imposto' },
+  grandTotal: { en: 'Grand Total', it: 'Totale Finale', es: 'Total General', fr: 'Total Général', de: 'Gesamtbetrag', pt: 'Total Geral' },
+  copy: { en: 'Copy Summary', it: 'Copia Riepilogo', es: 'Copiar Resumen', fr: 'Copier Résumé', de: 'Zusammenfassung Kopieren', pt: 'Copiar Resumo' },
+  copied: { en: 'Copied!', it: 'Copiato!', es: '¡Copiado!', fr: 'Copié!', de: 'Kopiert!', pt: 'Copiado!' },
+  reset: { en: 'Reset All', it: 'Ripristina Tutto', es: 'Restablecer Todo', fr: 'Tout Réinitialiser', de: 'Alles Zurücksetzen', pt: 'Redefinir Tudo' },
+  history: { en: 'Recent Invoices', it: 'Fatture Recenti', es: 'Facturas Recientes', fr: 'Factures Récentes', de: 'Letzte Rechnungen', pt: 'Faturas Recentes' },
+  load: { en: 'Load', it: 'Carica', es: 'Cargar', fr: 'Charger', de: 'Laden', pt: 'Carregar' },
+  save: { en: 'Save Invoice', it: 'Salva Fattura', es: 'Guardar Factura', fr: 'Enregistrer Facture', de: 'Rechnung Speichern', pt: 'Guardar Fatura' },
+  companyRequired: { en: 'Company name is required', it: 'Il nome dell\'azienda è obbligatorio', es: 'El nombre de la empresa es obligatorio', fr: 'Le nom de l\'entreprise est requis', de: 'Firmenname ist erforderlich', pt: 'O nome da empresa é obrigatório' },
+  itemRequired: { en: 'At least one item with description is required', it: 'Almeno un articolo con descrizione è richiesto', es: 'Se requiere al menos un artículo con descripción', fr: 'Au moins un article avec description est requis', de: 'Mindestens ein Artikel mit Beschreibung ist erforderlich', pt: 'É necessário pelo menos um artigo com descrição' },
+  lineTotal: { en: 'Line Total', it: 'Totale Riga', es: 'Total Línea', fr: 'Total Ligne', de: 'Zeilensumme', pt: 'Total Linha' },
+  address: { en: 'Address', it: 'Indirizzo', es: 'Dirección', fr: 'Adresse', de: 'Adresse', pt: 'Endereço' },
+  noHistory: { en: 'No saved invoices yet', it: 'Nessuna fattura salvata', es: 'No hay facturas guardadas', fr: 'Aucune facture enregistrée', de: 'Keine gespeicherten Rechnungen', pt: 'Nenhuma fatura guardada' },
+  clearHistory: { en: 'Clear History', it: 'Cancella Cronologia', es: 'Borrar Historial', fr: 'Effacer l\'historique', de: 'Verlauf Löschen', pt: 'Limpar Histórico' },
 };
 
 const seoContent: Record<Locale, { title: string; paragraphs: string[]; faq: { q: string; a: string }[] }> = {
@@ -119,6 +147,8 @@ const seoContent: Record<Locale, { title: string; paragraphs: string[]; faq: { q
   },
 };
 
+const HISTORY_KEY = 'invoice-generator-history';
+
 export default function InvoiceGenerator() {
   const { lang } = useParams() as { lang: Locale };
   const toolT = tools['invoice-generator'][lang];
@@ -131,9 +161,21 @@ export default function InvoiceGenerator() {
   const [invoiceNum, setInvoiceNum] = useState('001');
   const [date, setDate] = useState(new Date().toISOString().split('T')[0]);
   const [notes, setNotes] = useState('');
+  const [taxRate, setTaxRate] = useState(0);
   const [items, setItems] = useState<InvoiceItem[]>([
     { description: '', quantity: 1, price: 0 },
   ]);
+  const [copied, setCopied] = useState(false);
+  const [errors, setErrors] = useState<Record<string, string>>({});
+  const [history, setHistory] = useState<SavedInvoice[]>([]);
+
+  // Load history from localStorage on mount
+  useEffect(() => {
+    try {
+      const saved = localStorage.getItem(HISTORY_KEY);
+      if (saved) setHistory(JSON.parse(saved));
+    } catch { /* ignore */ }
+  }, []);
 
   const updateItem = (index: number, field: keyof InvoiceItem, value: string | number) => {
     const newItems = [...items];
@@ -146,7 +188,112 @@ export default function InvoiceGenerator() {
     if (items.length > 1) setItems(items.filter((_, i) => i !== index));
   };
 
+  // Auto-calculations
   const subtotal = items.reduce((sum, item) => sum + item.quantity * item.price, 0);
+  const taxAmount = subtotal * (taxRate / 100);
+  const grandTotal = subtotal + taxAmount;
+
+  // Validation
+  const validate = useCallback((): boolean => {
+    const newErrors: Record<string, string> = {};
+    if (!fromName.trim()) {
+      newErrors.fromName = t('companyRequired');
+    }
+    const hasValidItem = items.some((item) => item.description.trim().length > 0);
+    if (!hasValidItem) {
+      newErrors.items = t('itemRequired');
+    }
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
+  }, [fromName, items, t]);
+
+  // Reset all fields
+  const resetAll = () => {
+    setFromName('');
+    setFromAddress('');
+    setToName('');
+    setToAddress('');
+    setInvoiceNum('001');
+    setDate(new Date().toISOString().split('T')[0]);
+    setNotes('');
+    setTaxRate(0);
+    setItems([{ description: '', quantity: 1, price: 0 }]);
+    setErrors({});
+    setCopied(false);
+  };
+
+  // Copy summary to clipboard
+  const copySummary = async () => {
+    const lines = [
+      `${t('invoiceNumber')} ${invoiceNum}`,
+      `${t('date')}: ${date}`,
+      `${t('from')}: ${fromName}`,
+      `${t('to')}: ${toName}`,
+      '',
+      ...items.filter((item) => item.description.trim()).map(
+        (item) => `${item.description} - ${item.quantity} x ${item.price.toFixed(2)} = ${(item.quantity * item.price).toFixed(2)}`
+      ),
+      '',
+      `${t('subtotal')}: ${subtotal.toFixed(2)}`,
+      ...(taxRate > 0 ? [`${t('taxAmount')} (${taxRate}%): ${taxAmount.toFixed(2)}`] : []),
+      `${t('grandTotal')}: ${grandTotal.toFixed(2)}`,
+    ];
+    try {
+      await navigator.clipboard.writeText(lines.join('\n'));
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+    } catch { /* ignore */ }
+  };
+
+  // Save invoice to history
+  const saveToHistory = () => {
+    if (!validate()) return;
+    const invoice: SavedInvoice = {
+      invoiceNum,
+      fromName,
+      toName,
+      total: grandTotal,
+      date,
+      fromAddress,
+      toAddress,
+      items: [...items],
+      notes,
+      taxRate,
+    };
+    const updated = [invoice, ...history].slice(0, 5);
+    setHistory(updated);
+    try {
+      localStorage.setItem(HISTORY_KEY, JSON.stringify(updated));
+    } catch { /* ignore */ }
+  };
+
+  // Load invoice from history
+  const loadFromHistory = (invoice: SavedInvoice) => {
+    setFromName(invoice.fromName);
+    setFromAddress(invoice.fromAddress);
+    setToName(invoice.toName);
+    setToAddress(invoice.toAddress);
+    setInvoiceNum(invoice.invoiceNum);
+    setDate(invoice.date);
+    setNotes(invoice.notes);
+    setTaxRate(invoice.taxRate);
+    setItems(invoice.items);
+    setErrors({});
+  };
+
+  const clearHistory = () => {
+    setHistory([]);
+    try {
+      localStorage.removeItem(HISTORY_KEY);
+    } catch { /* ignore */ }
+  };
+
+  // Print with validation
+  const handlePrint = () => {
+    if (validate()) {
+      window.print();
+    }
+  };
 
   const seo = seoContent[lang];
   const [openFaq, setOpenFaq] = useState<number | null>(null);
@@ -157,21 +304,44 @@ export default function InvoiceGenerator() {
         <h1 className="text-3xl font-bold text-gray-900 mb-2">{toolT.name}</h1>
         <p className="text-gray-600 mb-6">{toolT.description}</p>
 
+        {/* Result Cards - Live Summary */}
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 mb-6 print:hidden">
+          <div className="bg-blue-50 border border-blue-200 rounded-xl p-4 text-center">
+            <div className="text-xs font-medium text-blue-600 uppercase tracking-wide">{t('subtotal')}</div>
+            <div className="text-2xl font-bold text-blue-800 mt-1">{subtotal.toFixed(2)}</div>
+          </div>
+          <div className="bg-green-50 border border-green-200 rounded-xl p-4 text-center">
+            <div className="text-xs font-medium text-green-600 uppercase tracking-wide">{t('taxAmount')} {taxRate > 0 && `(${taxRate}%)`}</div>
+            <div className="text-2xl font-bold text-green-800 mt-1">{taxAmount.toFixed(2)}</div>
+          </div>
+          <div className="bg-red-50 border border-red-200 rounded-xl p-4 text-center">
+            <div className="text-xs font-medium text-red-600 uppercase tracking-wide">{t('grandTotal')}</div>
+            <div className="text-2xl font-bold text-red-800 mt-1">{grandTotal.toFixed(2)}</div>
+          </div>
+        </div>
+
         <div id="invoice-area" className="bg-white rounded-xl border border-gray-200 p-8 space-y-6">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-1">{t('from')}</label>
-              <input type="text" value={fromName} onChange={(e) => setFromName(e.target.value)} placeholder={t('from') + ' name'} className="w-full border border-gray-300 rounded-lg px-3 py-2 mb-2 focus:ring-2 focus:ring-blue-500 focus:border-transparent" />
-              <textarea value={fromAddress} onChange={(e) => setFromAddress(e.target.value)} placeholder="Address" rows={2} className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-blue-500 focus:border-transparent" />
+              <input
+                type="text"
+                value={fromName}
+                onChange={(e) => { setFromName(e.target.value); if (errors.fromName) setErrors((prev) => { const n = { ...prev }; delete n.fromName; return n; }); }}
+                placeholder={t('from') + ' name'}
+                className={`w-full border rounded-lg px-3 py-2 mb-1 focus:ring-2 focus:ring-blue-500 focus:border-transparent ${errors.fromName ? 'border-red-500' : 'border-gray-300'}`}
+              />
+              {errors.fromName && <p className="text-red-500 text-xs mb-1">{errors.fromName}</p>}
+              <textarea value={fromAddress} onChange={(e) => setFromAddress(e.target.value)} placeholder={t('address')} rows={2} className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-blue-500 focus:border-transparent" />
             </div>
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-1">{t('to')}</label>
               <input type="text" value={toName} onChange={(e) => setToName(e.target.value)} placeholder={t('to') + ' name'} className="w-full border border-gray-300 rounded-lg px-3 py-2 mb-2 focus:ring-2 focus:ring-blue-500 focus:border-transparent" />
-              <textarea value={toAddress} onChange={(e) => setToAddress(e.target.value)} placeholder="Address" rows={2} className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-blue-500 focus:border-transparent" />
+              <textarea value={toAddress} onChange={(e) => setToAddress(e.target.value)} placeholder={t('address')} rows={2} className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-blue-500 focus:border-transparent" />
             </div>
           </div>
 
-          <div className="grid grid-cols-2 gap-4">
+          <div className="grid grid-cols-3 gap-4">
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-1">{t('invoiceNumber')}</label>
               <input type="text" value={invoiceNum} onChange={(e) => setInvoiceNum(e.target.value)} className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-blue-500 focus:border-transparent" />
@@ -180,9 +350,14 @@ export default function InvoiceGenerator() {
               <label className="block text-sm font-medium text-gray-700 mb-1">{t('date')}</label>
               <input type="date" value={date} onChange={(e) => setDate(e.target.value)} className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-blue-500 focus:border-transparent" />
             </div>
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-1">{t('taxRate')}</label>
+              <input type="number" min="0" max="100" step="0.1" value={taxRate} onChange={(e) => setTaxRate(parseFloat(e.target.value) || 0)} className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-blue-500 focus:border-transparent" />
+            </div>
           </div>
 
           <div>
+            {errors.items && <p className="text-red-500 text-xs mb-2">{errors.items}</p>}
             <table className="w-full text-sm">
               <thead>
                 <tr className="border-b border-gray-200">
@@ -190,14 +365,19 @@ export default function InvoiceGenerator() {
                   <th className="text-right py-2 font-medium text-gray-700 w-20">{t('quantity')}</th>
                   <th className="text-right py-2 font-medium text-gray-700 w-28">{t('price')}</th>
                   <th className="text-right py-2 font-medium text-gray-700 w-28">{t('total')}</th>
-                  <th className="w-10"></th>
+                  <th className="w-10 print:hidden"></th>
                 </tr>
               </thead>
               <tbody>
                 {items.map((item, i) => (
-                  <tr key={i} className="border-b border-gray-100">
+                  <tr key={i} className={`border-b border-gray-100 ${errors.items && !item.description.trim() ? '' : ''}`}>
                     <td className="py-2 pr-2">
-                      <input type="text" value={item.description} onChange={(e) => updateItem(i, 'description', e.target.value)} className="w-full border border-gray-300 rounded px-2 py-1 focus:ring-2 focus:ring-blue-500 focus:border-transparent" />
+                      <input
+                        type="text"
+                        value={item.description}
+                        onChange={(e) => { updateItem(i, 'description', e.target.value); if (errors.items) setErrors((prev) => { const n = { ...prev }; delete n.items; return n; }); }}
+                        className={`w-full border rounded px-2 py-1 focus:ring-2 focus:ring-blue-500 focus:border-transparent ${errors.items && i === 0 && !item.description.trim() ? 'border-red-500' : 'border-gray-300'}`}
+                      />
                     </td>
                     <td className="py-2 pr-2">
                       <input type="number" min="1" value={item.quantity} onChange={(e) => updateItem(i, 'quantity', parseInt(e.target.value) || 0)} className="w-full border border-gray-300 rounded px-2 py-1 text-right focus:ring-2 focus:ring-blue-500 focus:border-transparent" />
@@ -206,23 +386,33 @@ export default function InvoiceGenerator() {
                       <input type="number" min="0" step="0.01" value={item.price} onChange={(e) => updateItem(i, 'price', parseFloat(e.target.value) || 0)} className="w-full border border-gray-300 rounded px-2 py-1 text-right focus:ring-2 focus:ring-blue-500 focus:border-transparent" />
                     </td>
                     <td className="py-2 text-right font-medium">{(item.quantity * item.price).toFixed(2)}</td>
-                    <td className="py-2 text-center">
+                    <td className="py-2 text-center print:hidden">
                       {items.length > 1 && (
-                        <button onClick={() => removeItem(i)} className="text-red-500 hover:text-red-700 text-xs">X</button>
+                        <button onClick={() => removeItem(i)} className="text-red-500 hover:text-red-700 transition-colors text-xs">X</button>
                       )}
                     </td>
                   </tr>
                 ))}
               </tbody>
             </table>
-            <button onClick={addItem} className="mt-2 text-sm text-blue-600 hover:text-blue-800 font-medium">+ {t('addItem')}</button>
+            <button onClick={addItem} className="mt-2 text-sm text-blue-600 hover:text-blue-800 font-medium transition-colors print:hidden">+ {t('addItem')}</button>
           </div>
 
           <div className="flex justify-end">
             <div className="w-64 space-y-2">
-              <div className="flex justify-between text-lg font-bold border-t border-gray-300 pt-2">
-                <span>{t('total')}</span>
+              <div className="flex justify-between text-sm text-gray-600">
+                <span>{t('subtotal')}</span>
                 <span>{subtotal.toFixed(2)}</span>
+              </div>
+              {taxRate > 0 && (
+                <div className="flex justify-between text-sm text-gray-600">
+                  <span>{t('taxAmount')} ({taxRate}%)</span>
+                  <span>{taxAmount.toFixed(2)}</span>
+                </div>
+              )}
+              <div className="flex justify-between text-lg font-bold border-t border-gray-300 pt-2">
+                <span>{t('grandTotal')}</span>
+                <span>{grandTotal.toFixed(2)}</span>
               </div>
             </div>
           </div>
@@ -233,12 +423,61 @@ export default function InvoiceGenerator() {
           </div>
         </div>
 
-        <button
-          onClick={() => window.print()}
-          className="mt-4 w-full bg-blue-600 text-white py-3 rounded-lg font-medium hover:bg-blue-700 transition-colors print:hidden"
-        >
-          {t('print')}
-        </button>
+        {/* Action Buttons */}
+        <div className="mt-4 grid grid-cols-2 sm:grid-cols-4 gap-2 print:hidden">
+          <button
+            onClick={handlePrint}
+            className="bg-blue-600 text-white py-3 rounded-lg font-medium hover:bg-blue-700 transition-colors text-sm"
+          >
+            {t('print')}
+          </button>
+          <button
+            onClick={copySummary}
+            className={`py-3 rounded-lg font-medium transition-colors text-sm ${copied ? 'bg-green-600 text-white' : 'bg-gray-600 text-white hover:bg-gray-700'}`}
+          >
+            {copied ? t('copied') : t('copy')}
+          </button>
+          <button
+            onClick={saveToHistory}
+            className="bg-indigo-600 text-white py-3 rounded-lg font-medium hover:bg-indigo-700 transition-colors text-sm"
+          >
+            {t('save')}
+          </button>
+          <button
+            onClick={resetAll}
+            className="bg-red-600 text-white py-3 rounded-lg font-medium hover:bg-red-700 transition-colors text-sm"
+          >
+            {t('reset')}
+          </button>
+        </div>
+
+        {/* History Section */}
+        {history.length > 0 && (
+          <div className="mt-6 bg-gray-50 rounded-xl border border-gray-200 p-4 print:hidden">
+            <div className="flex justify-between items-center mb-3">
+              <h3 className="text-sm font-semibold text-gray-700">{t('history')}</h3>
+              <button onClick={clearHistory} className="text-xs text-red-500 hover:text-red-700 transition-colors">{t('clearHistory')}</button>
+            </div>
+            <div className="space-y-2">
+              {history.map((inv, i) => (
+                <div key={i} className="flex items-center justify-between bg-white rounded-lg border border-gray-200 px-3 py-2">
+                  <div className="text-sm">
+                    <span className="font-medium text-gray-900">#{inv.invoiceNum}</span>
+                    <span className="text-gray-500 mx-2">|</span>
+                    <span className="text-gray-600">{inv.fromName || '—'}</span>
+                    <span className="text-gray-400 mx-1">&rarr;</span>
+                    <span className="text-gray-600">{inv.toName || '—'}</span>
+                    <span className="text-gray-500 mx-2">|</span>
+                    <span className="font-medium text-gray-900">{inv.total.toFixed(2)}</span>
+                  </div>
+                  <button onClick={() => loadFromHistory(inv)} className="text-xs bg-blue-100 text-blue-700 hover:bg-blue-200 px-2 py-1 rounded transition-colors">
+                    {t('load')}
+                  </button>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
 
         <article className="mt-12 prose prose-gray max-w-none">
           <h2 className="text-2xl font-bold text-gray-900 mb-4">{seo.title}</h2>
