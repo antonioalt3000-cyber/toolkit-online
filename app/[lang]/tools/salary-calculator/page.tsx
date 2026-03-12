@@ -15,6 +15,14 @@ const labels: Record<string, Record<string, string>> = {
   rate: { en: 'Rate', it: 'Aliquota', es: 'Tasa', fr: 'Taux', de: 'Satz', pt: 'Taxa' },
   taxable: { en: 'Taxable', it: 'Imponibile', es: 'Base Imponible', fr: 'Imposable', de: 'Steuerpflichtig', pt: 'Tributável' },
   tax: { en: 'Tax', it: 'Tassa', es: 'Impuesto', fr: 'Impôt', de: 'Steuer', pt: 'Imposto' },
+  reset: { en: 'Reset', it: 'Resetta', es: 'Restablecer', fr: 'Réinitialiser', de: 'Zurücksetzen', pt: 'Redefinir' },
+  copy: { en: 'Copy Results', it: 'Copia Risultati', es: 'Copiar Resultados', fr: 'Copier Résultats', de: 'Ergebnisse Kopieren', pt: 'Copiar Resultados' },
+  copied: { en: 'Copied!', it: 'Copiato!', es: 'Copiado!', fr: 'Copié!', de: 'Kopiert!', pt: 'Copiado!' },
+  history: { en: 'History', it: 'Cronologia', es: 'Historial', fr: 'Historique', de: 'Verlauf', pt: 'Histórico' },
+  invalidSalary: { en: 'Salary must be > 0', it: 'Lo stipendio deve essere > 0', es: 'El salario debe ser > 0', fr: 'Le salaire doit être > 0', de: 'Gehalt muss > 0 sein', pt: 'O salário deve ser > 0' },
+  takeHome: { en: 'Take-Home Ratio', it: 'Rapporto Netto', es: 'Ratio Neto', fr: 'Ratio Net', de: 'Netto-Verhältnis', pt: 'Ratio Líquido' },
+  netWeekly: { en: 'Net Weekly', it: 'Netto Settimanale', es: 'Neto Semanal', fr: 'Net Hebdomadaire', de: 'Netto Wöchentlich', pt: 'Líquido Semanal' },
+  netBiweekly: { en: 'Net Bi-Weekly', it: 'Netto Bisettimanale', es: 'Neto Quincenal', fr: 'Net Bimensuel', de: 'Netto Zweiwöchentlich', pt: 'Líquido Quinzenal' },
 };
 
 const brackets = [
@@ -124,7 +132,11 @@ export default function SalaryCalculator() {
   const t = (key: string) => labels[key]?.[lang] || labels[key]?.en || key;
 
   const [gross, setGross] = useState('');
+  const [copiedState, setCopiedState] = useState(false);
+  const [history, setHistory] = useState<{ gross: string; net: string; rate: string }[]>([]);
+
   const grossNum = parseFloat(gross) || 0;
+  const salaryError = gross !== '' && grossNum <= 0;
 
   const taxDetails: { min: number; max: number; rate: number; taxable: number; tax: number }[] = [];
   let remaining = grossNum;
@@ -142,7 +154,21 @@ export default function SalaryCalculator() {
 
   const netAnnual = grossNum - totalTax;
   const netMonthly = netAnnual / 12;
+  const netBiweekly = netAnnual / 26;
+  const netWeekly = netAnnual / 52;
   const effectiveRate = grossNum > 0 ? (totalTax / grossNum) * 100 : 0;
+  const takeHomeRatio = grossNum > 0 ? (netAnnual / grossNum) * 100 : 0;
+
+  const copyResults = () => {
+    const text = `${t('grossSalary')}: $${grossNum.toFixed(2)}\n${t('totalTax')}: $${totalTax.toFixed(2)}\n${t('effectiveRate')}: ${effectiveRate.toFixed(1)}%\n${t('netAnnual')}: $${netAnnual.toFixed(2)}\n${t('netMonthly')}: $${netMonthly.toFixed(2)}`;
+    navigator.clipboard.writeText(text);
+    setCopiedState(true);
+    setTimeout(() => setCopiedState(false), 2000);
+  };
+
+  const saveToHistory = () => {
+    setHistory(prev => [{ gross: grossNum.toFixed(0), net: netAnnual.toFixed(0), rate: effectiveRate.toFixed(1) }, ...prev].slice(0, 5));
+  };
 
   const seo = seoContent[lang];
   const [openFaq, setOpenFaq] = useState<number | null>(null);
@@ -157,11 +183,58 @@ export default function SalaryCalculator() {
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-1">{t('grossSalary')}</label>
             <input type="number" value={gross} onChange={(e) => setGross(e.target.value)} placeholder="0"
-              className="w-full border border-gray-300 rounded-lg px-4 py-2 text-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent" />
+              className={`w-full border rounded-lg px-4 py-2 text-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent ${salaryError ? 'border-red-400 bg-red-50' : 'border-gray-300'}`} />
+            {salaryError && <p className="text-red-500 text-sm mt-1">{t('invalidSalary')}</p>}
           </div>
 
           {grossNum > 0 && (
             <>
+              {/* Result Cards */}
+              <div className="grid grid-cols-2 gap-3 mt-4">
+                <div className="rounded-xl p-4 text-center bg-gray-50 border border-gray-200">
+                  <p className="text-xs font-medium text-gray-500 mb-1">{t('grossSalary')}</p>
+                  <p className="text-lg font-bold text-gray-800">${grossNum.toLocaleString()}</p>
+                </div>
+                <div className="rounded-xl p-4 text-center bg-green-50 border border-green-200">
+                  <p className="text-xs font-medium text-green-600 mb-1">{t('netAnnual')}</p>
+                  <p className="text-lg font-bold text-green-700">${netAnnual.toFixed(2)}</p>
+                </div>
+              </div>
+
+              <div className="grid grid-cols-3 gap-3">
+                <div className="rounded-xl p-3 text-center bg-blue-50 border border-blue-200">
+                  <p className="text-xs font-medium text-blue-600 mb-1">{t('netMonthly')}</p>
+                  <p className="text-lg font-bold text-blue-700">${netMonthly.toFixed(2)}</p>
+                </div>
+                <div className="rounded-xl p-3 text-center bg-purple-50 border border-purple-200">
+                  <p className="text-xs font-medium text-purple-600 mb-1">{t('netBiweekly')}</p>
+                  <p className="text-lg font-bold text-purple-700">${netBiweekly.toFixed(2)}</p>
+                </div>
+                <div className="rounded-xl p-3 text-center bg-indigo-50 border border-indigo-200">
+                  <p className="text-xs font-medium text-indigo-600 mb-1">{t('netWeekly')}</p>
+                  <p className="text-lg font-bold text-indigo-700">${netWeekly.toFixed(2)}</p>
+                </div>
+              </div>
+
+              {/* Take-Home Ratio Progress Bar */}
+              <div>
+                <div className="flex justify-between text-xs text-gray-500 mb-1">
+                  <span>{t('takeHome')}: {takeHomeRatio.toFixed(1)}%</span>
+                  <span>{t('effectiveRate')}: {effectiveRate.toFixed(1)}%</span>
+                </div>
+                <div className="w-full h-3 bg-gray-200 rounded-full overflow-hidden">
+                  <div className="h-full flex">
+                    <div className="bg-green-500 h-full transition-all duration-300" style={{ width: `${takeHomeRatio}%` }} />
+                    <div className="bg-red-400 h-full transition-all duration-300" style={{ width: `${effectiveRate}%` }} />
+                  </div>
+                </div>
+                <div className="flex justify-between text-xs text-gray-400 mt-0.5">
+                  <span className="text-green-600">Net</span>
+                  <span className="text-red-500">{t('tax')}</span>
+                </div>
+              </div>
+
+              {/* Tax Brackets Table */}
               <div className="mt-4">
                 <h3 className="font-semibold text-gray-900 mb-2">{t('taxBrackets')}</h3>
                 <div className="overflow-x-auto">
@@ -178,9 +251,16 @@ export default function SalaryCalculator() {
                       {taxDetails.map((d, i) => (
                         <tr key={i} className="border-t border-gray-100">
                           <td className="px-2 py-1">${d.min.toLocaleString()} - {d.max === Infinity ? '...' : `$${d.max.toLocaleString()}`}</td>
-                          <td className="px-2 py-1 text-right">{d.rate}%</td>
+                          <td className="px-2 py-1 text-right">
+                            <span className={`inline-block px-1.5 py-0.5 rounded text-xs font-medium ${
+                              d.rate <= 10 ? 'bg-green-100 text-green-700' :
+                              d.rate <= 20 ? 'bg-yellow-100 text-yellow-700' :
+                              d.rate <= 30 ? 'bg-orange-100 text-orange-700' :
+                              'bg-red-100 text-red-700'
+                            }`}>{d.rate}%</span>
+                          </td>
                           <td className="px-2 py-1 text-right">${d.taxable.toFixed(2)}</td>
-                          <td className="px-2 py-1 text-right">${d.tax.toFixed(2)}</td>
+                          <td className="px-2 py-1 text-right text-red-600">${d.tax.toFixed(2)}</td>
                         </tr>
                       ))}
                     </tbody>
@@ -188,28 +268,49 @@ export default function SalaryCalculator() {
                 </div>
               </div>
 
-              <div className="p-4 bg-blue-50 rounded-lg space-y-2">
+              {/* Summary */}
+              <div className="p-4 bg-red-50 rounded-lg border border-red-200">
                 <div className="flex justify-between">
-                  <span className="text-gray-600">{t('totalTax')}</span>
-                  <span className="font-semibold text-red-600">${totalTax.toFixed(2)}</span>
+                  <span className="text-gray-700 font-medium">{t('totalTax')}</span>
+                  <span className="font-bold text-red-600 text-lg">${totalTax.toFixed(2)}</span>
                 </div>
-                <div className="flex justify-between">
-                  <span className="text-gray-600">{t('effectiveRate')}</span>
-                  <span className="font-semibold">{effectiveRate.toFixed(1)}%</span>
-                </div>
-                <hr className="border-blue-200" />
-                <div className="flex justify-between">
-                  <span className="text-gray-600">{t('netAnnual')}</span>
-                  <span className="font-bold text-blue-600 text-lg">${netAnnual.toFixed(2)}</span>
-                </div>
-                <div className="flex justify-between">
-                  <span className="text-gray-600">{t('netMonthly')}</span>
-                  <span className="font-bold text-green-600 text-lg">${netMonthly.toFixed(2)}</span>
-                </div>
+              </div>
+
+              {/* Action Buttons */}
+              <div className="flex gap-2 flex-wrap">
+                <button onClick={copyResults} className="px-4 py-2 text-sm rounded-lg bg-blue-100 text-blue-700 hover:bg-blue-200 transition-colors">
+                  {copiedState ? t('copied') : t('copy')}
+                </button>
+                <button onClick={saveToHistory} className="px-4 py-2 text-sm rounded-lg bg-gray-100 text-gray-700 hover:bg-gray-200 transition-colors">
+                  + {t('history')}
+                </button>
+                <button onClick={() => setGross('')} className="px-4 py-2 text-sm rounded-lg bg-gray-100 text-gray-700 hover:bg-gray-200 transition-colors">
+                  {t('reset')}
+                </button>
               </div>
             </>
           )}
         </div>
+
+        {/* History */}
+        {history.length > 0 && (
+          <div className="mt-6 bg-white rounded-xl border border-gray-200 p-4">
+            <h3 className="font-semibold text-gray-900 mb-3">{t('history')}</h3>
+            <div className="space-y-2">
+              {history.map((h, i) => (
+                <div key={i} className="flex justify-between items-center text-sm p-2 bg-gray-50 rounded-lg">
+                  <span className="text-gray-600">
+                    {t('grossSalary')}: ${parseInt(h.gross).toLocaleString()}
+                  </span>
+                  <div className="text-right">
+                    <span className="font-semibold text-green-700">${parseInt(h.net).toLocaleString()}</span>
+                    <span className="text-gray-400 text-xs ml-1">({h.rate}% tax)</span>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
 
         <article className="mt-12 prose prose-gray max-w-none">
           <h2 className="text-2xl font-bold text-gray-900 mb-4">{seo.title}</h2>

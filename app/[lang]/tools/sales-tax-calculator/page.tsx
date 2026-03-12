@@ -13,7 +13,26 @@ const labels: Record<string, Record<string, string>> = {
   addTax: { en: 'Add Tax to Price', it: 'Aggiungi Tassa al Prezzo', es: 'Agregar Impuesto al Precio', fr: 'Ajouter Taxe au Prix', de: 'Steuer zum Preis addieren', pt: 'Adicionar Imposto ao Preço' },
   removeTax: { en: 'Remove Tax from Total', it: 'Rimuovi Tassa dal Totale', es: 'Quitar Impuesto del Total', fr: 'Retirer Taxe du Total', de: 'Steuer vom Gesamtbetrag entfernen', pt: 'Remover Imposto do Total' },
   totalWithTax: { en: 'Total (with tax)', it: 'Totale (con tasse)', es: 'Total (con impuesto)', fr: 'Total (avec taxe)', de: 'Gesamt (mit Steuer)', pt: 'Total (com imposto)' },
+  reset: { en: 'Reset', it: 'Resetta', es: 'Restablecer', fr: 'Réinitialiser', de: 'Zurücksetzen', pt: 'Redefinir' },
+  copy: { en: 'Copy Results', it: 'Copia Risultati', es: 'Copiar Resultados', fr: 'Copier Résultats', de: 'Ergebnisse Kopieren', pt: 'Copiar Resultados' },
+  copied: { en: 'Copied!', it: 'Copiato!', es: 'Copiado!', fr: 'Copié!', de: 'Kopiert!', pt: 'Copiado!' },
+  history: { en: 'History', it: 'Cronologia', es: 'Historial', fr: 'Historique', de: 'Verlauf', pt: 'Histórico' },
+  invalidPrice: { en: 'Price must be > 0', it: 'Il prezzo deve essere > 0', es: 'El precio debe ser > 0', fr: 'Le prix doit être > 0', de: 'Preis muss > 0 sein', pt: 'O preço deve ser > 0' },
+  invalidRate: { en: 'Rate must be between 0-100%', it: 'L\'aliquota deve essere tra 0-100%', es: 'La tasa debe estar entre 0-100%', fr: 'Le taux doit être entre 0-100%', de: 'Satz muss zwischen 0-100% liegen', pt: 'A taxa deve estar entre 0-100%' },
+  taxPortion: { en: 'Tax Portion', it: 'Quota Tassa', es: 'Porción de Impuesto', fr: 'Part de Taxe', de: 'Steueranteil', pt: 'Parte do Imposto' },
+  commonRates: { en: 'Common Rates', it: 'Aliquote Comuni', es: 'Tasas Comunes', fr: 'Taux Courants', de: 'Gängige Sätze', pt: 'Taxas Comuns' },
 };
+
+const commonTaxRates = [
+  { label: 'US avg', rate: '7.12' },
+  { label: 'UK VAT', rate: '20' },
+  { label: 'DE MwSt', rate: '19' },
+  { label: 'FR TVA', rate: '20' },
+  { label: 'IT IVA', rate: '22' },
+  { label: 'ES IVA', rate: '21' },
+  { label: 'PT IVA', rate: '23' },
+  { label: 'JP', rate: '10' },
+];
 
 const seoContent: Record<Locale, { title: string; paragraphs: string[]; faq: { q: string; a: string }[] }> = {
   en: {
@@ -122,9 +141,15 @@ export default function SalesTaxCalculator() {
   const [mode, setMode] = useState<'add' | 'remove'>('add');
   const [price, setPrice] = useState('');
   const [taxRate, setTaxRate] = useState('');
+  const [copiedState, setCopiedState] = useState(false);
+  const [history, setHistory] = useState<{ mode: string; price: string; tax: string; total: string }[]>([]);
 
   const priceNum = parseFloat(price) || 0;
   const taxRateNum = parseFloat(taxRate) || 0;
+
+  // Validation
+  const priceError = price !== '' && priceNum <= 0;
+  const rateError = taxRate !== '' && (taxRateNum < 0 || taxRateNum > 100);
 
   let taxAmount = 0;
   let totalPrice = 0;
@@ -135,10 +160,28 @@ export default function SalesTaxCalculator() {
     totalPrice = priceNum + taxAmount;
     preTaxPrice = priceNum;
   } else {
-    preTaxPrice = priceNum / (1 + taxRateNum / 100);
+    preTaxPrice = taxRateNum > 0 ? priceNum / (1 + taxRateNum / 100) : priceNum;
     taxAmount = priceNum - preTaxPrice;
     totalPrice = priceNum;
   }
+
+  const canShow = priceNum > 0 && taxRateNum > 0 && !priceError && !rateError;
+  const taxPortion = totalPrice > 0 ? (taxAmount / totalPrice) * 100 : 0;
+
+  const copyResults = () => {
+    const text = `${t('preTaxPrice')}: $${preTaxPrice.toFixed(2)}\n${t('taxAmount')}: $${taxAmount.toFixed(2)} (${taxRateNum}%)\n${t('totalPrice')}: $${totalPrice.toFixed(2)}`;
+    navigator.clipboard.writeText(text);
+    setCopiedState(true);
+    setTimeout(() => setCopiedState(false), 2000);
+  };
+
+  const saveToHistory = () => {
+    setHistory(prev => [{ mode, price: preTaxPrice.toFixed(2), tax: taxAmount.toFixed(2), total: totalPrice.toFixed(2) }, ...prev].slice(0, 5));
+  };
+
+  const resetAll = () => {
+    setPrice(''); setTaxRate('');
+  };
 
   const seo = seoContent[lang];
   const [openFaq, setOpenFaq] = useState<number | null>(null);
@@ -152,11 +195,11 @@ export default function SalesTaxCalculator() {
         <div className="bg-white rounded-xl border border-gray-200 p-6 space-y-4">
           <div className="flex gap-2 mb-2">
             <button onClick={() => { setMode('add'); setPrice(''); }}
-              className={`flex-1 px-4 py-2 rounded-lg text-sm font-medium ${mode === 'add' ? 'bg-blue-600 text-white' : 'bg-gray-100 text-gray-700 hover:bg-gray-200'}`}>
+              className={`flex-1 px-4 py-2.5 rounded-lg text-sm font-medium transition-colors ${mode === 'add' ? 'bg-blue-600 text-white' : 'bg-gray-100 text-gray-700 hover:bg-gray-200'}`}>
               {t('addTax')}
             </button>
             <button onClick={() => { setMode('remove'); setPrice(''); }}
-              className={`flex-1 px-4 py-2 rounded-lg text-sm font-medium ${mode === 'remove' ? 'bg-blue-600 text-white' : 'bg-gray-100 text-gray-700 hover:bg-gray-200'}`}>
+              className={`flex-1 px-4 py-2.5 rounded-lg text-sm font-medium transition-colors ${mode === 'remove' ? 'bg-blue-600 text-white' : 'bg-gray-100 text-gray-700 hover:bg-gray-200'}`}>
               {t('removeTax')}
             </button>
           </div>
@@ -166,33 +209,102 @@ export default function SalesTaxCalculator() {
               {mode === 'add' ? t('price') : t('totalWithTax')}
             </label>
             <input type="number" value={price} onChange={(e) => setPrice(e.target.value)} placeholder="0.00"
-              className="w-full border border-gray-300 rounded-lg px-4 py-2 text-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent" />
+              className={`w-full border rounded-lg px-4 py-2 text-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent ${priceError ? 'border-red-400 bg-red-50' : 'border-gray-300'}`} />
+            {priceError && <p className="text-red-500 text-sm mt-1">{t('invalidPrice')}</p>}
           </div>
 
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-1">{t('taxRate')}</label>
             <input type="number" value={taxRate} onChange={(e) => setTaxRate(e.target.value)} placeholder="0"
-              className="w-full border border-gray-300 rounded-lg px-4 py-2 text-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent" />
+              className={`w-full border rounded-lg px-4 py-2 text-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent ${rateError ? 'border-red-400 bg-red-50' : 'border-gray-300'}`} />
+            {rateError && <p className="text-red-500 text-sm mt-1">{t('invalidRate')}</p>}
           </div>
 
-          {priceNum > 0 && taxRateNum > 0 && (
-            <div className="mt-4 p-4 bg-blue-50 rounded-lg space-y-2">
-              <div className="flex justify-between">
-                <span className="text-gray-600">{t('preTaxPrice')}</span>
-                <span className="font-semibold">${preTaxPrice.toFixed(2)}</span>
-              </div>
-              <div className="flex justify-between">
-                <span className="text-gray-600">{t('taxAmount')}</span>
-                <span className="font-semibold text-red-600">+${taxAmount.toFixed(2)}</span>
-              </div>
-              <hr className="border-blue-200" />
-              <div className="flex justify-between">
-                <span className="text-gray-600">{t('totalPrice')}</span>
-                <span className="font-bold text-blue-600 text-lg">${totalPrice.toFixed(2)}</span>
-              </div>
+          {/* Common Tax Rates */}
+          <div>
+            <p className="text-xs text-gray-500 mb-1">{t('commonRates')}:</p>
+            <div className="flex gap-1.5 flex-wrap">
+              {commonTaxRates.map((r) => (
+                <button key={r.label} onClick={() => setTaxRate(r.rate)}
+                  className={`px-2 py-1 text-xs rounded-md transition-colors ${taxRate === r.rate ? 'bg-blue-600 text-white' : 'bg-gray-100 text-gray-600 hover:bg-gray-200'}`}>
+                  {r.label} ({r.rate}%)
+                </button>
+              ))}
             </div>
+          </div>
+
+          {canShow && (
+            <>
+              {/* Result Cards */}
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 mt-4">
+                <div className="rounded-xl p-4 text-center bg-gray-50 border border-gray-200">
+                  <p className="text-xs font-medium text-gray-500 mb-1">{t('preTaxPrice')}</p>
+                  <p className="text-xl font-bold text-gray-800">${preTaxPrice.toFixed(2)}</p>
+                </div>
+                <div className="rounded-xl p-4 text-center bg-red-50 border border-red-200">
+                  <p className="text-xs font-medium text-red-600 mb-1">{t('taxAmount')}</p>
+                  <p className="text-xl font-bold text-red-700">+${taxAmount.toFixed(2)}</p>
+                </div>
+                <div className="rounded-xl p-4 text-center bg-blue-50 border border-blue-200">
+                  <p className="text-xs font-medium text-blue-600 mb-1">{t('totalPrice')}</p>
+                  <p className="text-xl font-bold text-blue-700">${totalPrice.toFixed(2)}</p>
+                </div>
+              </div>
+
+              {/* Tax Portion Progress Bar */}
+              <div>
+                <div className="flex justify-between text-xs text-gray-500 mb-1">
+                  <span>{t('preTaxPrice')}</span>
+                  <span>{t('taxPortion')}: {taxPortion.toFixed(1)}%</span>
+                </div>
+                <div className="w-full h-3 bg-gray-200 rounded-full overflow-hidden">
+                  <div className="h-full flex">
+                    <div className="bg-blue-500 h-full transition-all duration-300" style={{ width: `${100 - taxPortion}%` }} />
+                    <div className="bg-red-400 h-full transition-all duration-300" style={{ width: `${taxPortion}%` }} />
+                  </div>
+                </div>
+                <div className="flex justify-between text-xs text-gray-400 mt-0.5">
+                  <span className="text-blue-600">{t('preTaxPrice')}</span>
+                  <span className="text-red-500">{t('taxAmount')}</span>
+                </div>
+              </div>
+
+              {/* Action Buttons */}
+              <div className="flex gap-2 flex-wrap">
+                <button onClick={copyResults} className="px-4 py-2 text-sm rounded-lg bg-blue-100 text-blue-700 hover:bg-blue-200 transition-colors">
+                  {copiedState ? t('copied') : t('copy')}
+                </button>
+                <button onClick={saveToHistory} className="px-4 py-2 text-sm rounded-lg bg-gray-100 text-gray-700 hover:bg-gray-200 transition-colors">
+                  + {t('history')}
+                </button>
+                <button onClick={resetAll} className="px-4 py-2 text-sm rounded-lg bg-gray-100 text-gray-700 hover:bg-gray-200 transition-colors">
+                  {t('reset')}
+                </button>
+              </div>
+            </>
           )}
         </div>
+
+        {/* History */}
+        {history.length > 0 && (
+          <div className="mt-6 bg-white rounded-xl border border-gray-200 p-4">
+            <h3 className="font-semibold text-gray-900 mb-3">{t('history')}</h3>
+            <div className="space-y-2">
+              {history.map((h, i) => (
+                <div key={i} className="flex justify-between items-center text-sm p-2 bg-gray-50 rounded-lg">
+                  <span className="text-gray-600">
+                    <span className="inline-block px-2 py-0.5 bg-gray-200 text-gray-700 rounded text-xs mr-2">{h.mode === 'add' ? '+' : '-'}</span>
+                    ${h.price}
+                  </span>
+                  <div className="text-right">
+                    <span className="text-red-500 text-xs mr-2">+${h.tax}</span>
+                    <span className="font-semibold text-blue-700">${h.total}</span>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
 
         <article className="mt-12 prose prose-gray max-w-none">
           <h2 className="text-2xl font-bold text-gray-900 mb-4">{seo.title}</h2>

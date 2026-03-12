@@ -15,6 +15,14 @@ const labels: Record<string, Record<string, string>> = {
   costAndMargin: { en: 'Cost & Margin', it: 'Costo e Margine', es: 'Costo y Margen', fr: 'Coût et Marge', de: 'Kosten und Marge', pt: 'Custo e Margem' },
   revenueAndMargin: { en: 'Revenue & Margin', it: 'Ricavo e Margine', es: 'Ingreso y Margen', fr: 'Revenu et Marge', de: 'Umsatz und Marge', pt: 'Receita e Margem' },
   marginPercent: { en: 'Margin (%)', it: 'Margine (%)', es: 'Margen (%)', fr: 'Marge (%)', de: 'Marge (%)', pt: 'Margem (%)' },
+  reset: { en: 'Reset', it: 'Resetta', es: 'Restablecer', fr: 'Réinitialiser', de: 'Zurücksetzen', pt: 'Redefinir' },
+  copy: { en: 'Copy Results', it: 'Copia Risultati', es: 'Copiar Resultados', fr: 'Copier Résultats', de: 'Ergebnisse Kopieren', pt: 'Copiar Resultados' },
+  copied: { en: 'Copied!', it: 'Copiato!', es: 'Copiado!', fr: 'Copié!', de: 'Kopiert!', pt: 'Copiado!' },
+  history: { en: 'History', it: 'Cronologia', es: 'Historial', fr: 'Historique', de: 'Verlauf', pt: 'Histórico' },
+  invalidCost: { en: 'Cost must be > 0', it: 'Il costo deve essere > 0', es: 'El costo debe ser > 0', fr: 'Le coût doit être > 0', de: 'Kosten müssen > 0 sein', pt: 'O custo deve ser > 0' },
+  invalidMargin: { en: 'Margin must be between 0-100%', it: 'Il margine deve essere tra 0-100%', es: 'El margen debe estar entre 0-100%', fr: 'La marge doit être entre 0-100%', de: 'Marge muss zwischen 0-100% liegen', pt: 'A margem deve estar entre 0-100%' },
+  invalidRevenue: { en: 'Revenue must be > 0', it: 'Il ricavo deve essere > 0', es: 'El ingreso debe ser > 0', fr: 'Le revenu doit être > 0', de: 'Umsatz muss > 0 sein', pt: 'A receita deve ser > 0' },
+  profitRatio: { en: 'Profit/Revenue Ratio', it: 'Rapporto Profitto/Ricavo', es: 'Relación Ganancia/Ingreso', fr: 'Ratio Profit/Revenu', de: 'Gewinn/Umsatz-Verhältnis', pt: 'Relação Lucro/Receita' },
 };
 
 const seoContent: Record<Locale, { title: string; paragraphs: string[]; faq: { q: string; a: string }[] }> = {
@@ -125,10 +133,17 @@ export default function ProfitMarginCalculator() {
   const [cost, setCost] = useState('');
   const [revenue, setRevenue] = useState('');
   const [margin, setMargin] = useState('');
+  const [copiedState, setCopiedState] = useState(false);
+  const [history, setHistory] = useState<{ mode: string; profit: string; margin: string; markup: string }[]>([]);
 
   let costNum = parseFloat(cost) || 0;
   let revenueNum = parseFloat(revenue) || 0;
   const marginNum = parseFloat(margin) || 0;
+
+  // Validation
+  const costError = cost && costNum <= 0;
+  const revenueError = revenue && revenueNum <= 0;
+  const marginError = margin && (marginNum <= 0 || marginNum >= 100);
 
   let profit = 0;
   let profitMargin = 0;
@@ -154,6 +169,21 @@ export default function ProfitMarginCalculator() {
     canShow = true;
   }
 
+  const copyResults = () => {
+    const text = `${t('profit')}: $${profit.toFixed(2)}\n${t('profitMargin')}: ${profitMargin.toFixed(2)}%\n${t('markup')}: ${markupPct.toFixed(2)}%`;
+    navigator.clipboard.writeText(text);
+    setCopiedState(true);
+    setTimeout(() => setCopiedState(false), 2000);
+  };
+
+  const saveToHistory = () => {
+    setHistory(prev => [{ mode, profit: profit.toFixed(2), margin: profitMargin.toFixed(2), markup: markupPct.toFixed(2) }, ...prev].slice(0, 5));
+  };
+
+  const resetAll = () => {
+    setCost(''); setRevenue(''); setMargin('');
+  };
+
   const seo = seoContent[lang];
   const [openFaq, setOpenFaq] = useState<number | null>(null);
 
@@ -167,16 +197,16 @@ export default function ProfitMarginCalculator() {
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-1">{t('calcMode')}</label>
             <div className="flex gap-2 flex-wrap">
-              <button onClick={() => { setMode('costRevenue'); setCost(''); setRevenue(''); setMargin(''); }}
-                className={`px-3 py-1.5 rounded-lg text-sm font-medium ${mode === 'costRevenue' ? 'bg-blue-600 text-white' : 'bg-gray-100 text-gray-700 hover:bg-gray-200'}`}>
+              <button onClick={() => { setMode('costRevenue'); resetAll(); }}
+                className={`px-3 py-1.5 rounded-lg text-sm font-medium transition-colors ${mode === 'costRevenue' ? 'bg-blue-600 text-white' : 'bg-gray-100 text-gray-700 hover:bg-gray-200'}`}>
                 {t('costAndRevenue')}
               </button>
-              <button onClick={() => { setMode('costMargin'); setCost(''); setRevenue(''); setMargin(''); }}
-                className={`px-3 py-1.5 rounded-lg text-sm font-medium ${mode === 'costMargin' ? 'bg-blue-600 text-white' : 'bg-gray-100 text-gray-700 hover:bg-gray-200'}`}>
+              <button onClick={() => { setMode('costMargin'); resetAll(); }}
+                className={`px-3 py-1.5 rounded-lg text-sm font-medium transition-colors ${mode === 'costMargin' ? 'bg-blue-600 text-white' : 'bg-gray-100 text-gray-700 hover:bg-gray-200'}`}>
                 {t('costAndMargin')}
               </button>
-              <button onClick={() => { setMode('revenueMargin'); setCost(''); setRevenue(''); setMargin(''); }}
-                className={`px-3 py-1.5 rounded-lg text-sm font-medium ${mode === 'revenueMargin' ? 'bg-blue-600 text-white' : 'bg-gray-100 text-gray-700 hover:bg-gray-200'}`}>
+              <button onClick={() => { setMode('revenueMargin'); resetAll(); }}
+                className={`px-3 py-1.5 rounded-lg text-sm font-medium transition-colors ${mode === 'revenueMargin' ? 'bg-blue-600 text-white' : 'bg-gray-100 text-gray-700 hover:bg-gray-200'}`}>
                 {t('revenueAndMargin')}
               </button>
             </div>
@@ -186,7 +216,8 @@ export default function ProfitMarginCalculator() {
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-1">{t('cost')}</label>
               <input type="number" value={cost} onChange={(e) => setCost(e.target.value)} placeholder="0.00"
-                className="w-full border border-gray-300 rounded-lg px-4 py-2 text-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent" />
+                className={`w-full border rounded-lg px-4 py-2 text-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent ${costError ? 'border-red-400 bg-red-50' : 'border-gray-300'}`} />
+              {costError && <p className="text-red-500 text-sm mt-1">{t('invalidCost')}</p>}
             </div>
           )}
 
@@ -194,7 +225,8 @@ export default function ProfitMarginCalculator() {
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-1">{t('revenue')}</label>
               <input type="number" value={revenue} onChange={(e) => setRevenue(e.target.value)} placeholder="0.00"
-                className="w-full border border-gray-300 rounded-lg px-4 py-2 text-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent" />
+                className={`w-full border rounded-lg px-4 py-2 text-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent ${revenueError ? 'border-red-400 bg-red-50' : 'border-gray-300'}`} />
+              {revenueError && <p className="text-red-500 text-sm mt-1">{t('invalidRevenue')}</p>}
             </div>
           )}
 
@@ -202,44 +234,95 @@ export default function ProfitMarginCalculator() {
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-1">{t('marginPercent')}</label>
               <input type="number" value={margin} onChange={(e) => setMargin(e.target.value)} placeholder="0"
-                className="w-full border border-gray-300 rounded-lg px-4 py-2 text-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent" />
+                className={`w-full border rounded-lg px-4 py-2 text-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent ${marginError ? 'border-red-400 bg-red-50' : 'border-gray-300'}`} />
+              {marginError && <p className="text-red-500 text-sm mt-1">{t('invalidMargin')}</p>}
             </div>
           )}
 
           {canShow && (
-            <div className="mt-4 p-4 bg-blue-50 rounded-lg space-y-2">
+            <>
+              {/* Result Cards */}
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 mt-4">
+                <div className={`rounded-xl p-4 text-center ${profit >= 0 ? 'bg-green-50 border border-green-200' : 'bg-red-50 border border-red-200'}`}>
+                  <p className={`text-xs font-medium mb-1 ${profit >= 0 ? 'text-green-600' : 'text-red-600'}`}>{t('profit')}</p>
+                  <p className={`text-xl font-bold ${profit >= 0 ? 'text-green-700' : 'text-red-700'}`}>${profit.toFixed(2)}</p>
+                </div>
+                <div className="rounded-xl p-4 text-center bg-blue-50 border border-blue-200">
+                  <p className="text-xs font-medium text-blue-600 mb-1">{t('profitMargin')}</p>
+                  <p className="text-xl font-bold text-blue-700">{profitMargin.toFixed(2)}%</p>
+                </div>
+                <div className="rounded-xl p-4 text-center bg-purple-50 border border-purple-200">
+                  <p className="text-xs font-medium text-purple-600 mb-1">{t('markup')}</p>
+                  <p className="text-xl font-bold text-purple-700">{markupPct.toFixed(2)}%</p>
+                </div>
+              </div>
+
+              {/* Computed values for other modes */}
               {mode !== 'costRevenue' && (
-                <>
+                <div className="bg-gray-50 rounded-lg p-3 space-y-1">
                   {mode === 'revenueMargin' && (
-                    <div className="flex justify-between">
+                    <div className="flex justify-between text-sm">
                       <span className="text-gray-600">{t('cost')}</span>
                       <span className="font-semibold">${costNum.toFixed(2)}</span>
                     </div>
                   )}
                   {mode === 'costMargin' && (
-                    <div className="flex justify-between">
+                    <div className="flex justify-between text-sm">
                       <span className="text-gray-600">{t('revenue')}</span>
                       <span className="font-semibold">${revenueNum.toFixed(2)}</span>
                     </div>
                   )}
-                </>
+                </div>
               )}
-              <div className="flex justify-between">
-                <span className="text-gray-600">{t('profit')}</span>
-                <span className={`font-semibold ${profit >= 0 ? 'text-green-600' : 'text-red-600'}`}>${profit.toFixed(2)}</span>
+
+              {/* Progress bar showing profit ratio */}
+              <div>
+                <div className="flex justify-between text-xs text-gray-500 mb-1">
+                  <span>{t('cost')}</span>
+                  <span>{t('profitRatio')}: {profitMargin.toFixed(1)}%</span>
+                  <span>{t('profit')}</span>
+                </div>
+                <div className="w-full h-3 bg-gray-200 rounded-full overflow-hidden">
+                  <div className="h-full flex">
+                    <div className="bg-gray-400 h-full" style={{ width: `${revenueNum > 0 ? Math.max(0, ((revenueNum - profit) / revenueNum) * 100) : 100}%` }} />
+                    <div className={`h-full ${profit >= 0 ? 'bg-green-500' : 'bg-red-500'}`} style={{ width: `${revenueNum > 0 ? Math.max(0, Math.min(100, (profit / revenueNum) * 100)) : 0}%` }} />
+                  </div>
+                </div>
               </div>
-              <hr className="border-blue-200" />
-              <div className="flex justify-between">
-                <span className="text-gray-600">{t('profitMargin')}</span>
-                <span className="font-bold text-blue-600 text-lg">{profitMargin.toFixed(2)}%</span>
+
+              {/* Action Buttons */}
+              <div className="flex gap-2 flex-wrap">
+                <button onClick={copyResults} className="px-4 py-2 text-sm rounded-lg bg-blue-100 text-blue-700 hover:bg-blue-200 transition-colors">
+                  {copiedState ? t('copied') : t('copy')}
+                </button>
+                <button onClick={saveToHistory} className="px-4 py-2 text-sm rounded-lg bg-gray-100 text-gray-700 hover:bg-gray-200 transition-colors">
+                  + {t('history')}
+                </button>
+                <button onClick={resetAll} className="px-4 py-2 text-sm rounded-lg bg-gray-100 text-gray-700 hover:bg-gray-200 transition-colors">
+                  {t('reset')}
+                </button>
               </div>
-              <div className="flex justify-between">
-                <span className="text-gray-600">{t('markup')}</span>
-                <span className="font-semibold">{markupPct.toFixed(2)}%</span>
-              </div>
-            </div>
+            </>
           )}
         </div>
+
+        {/* History */}
+        {history.length > 0 && (
+          <div className="mt-6 bg-white rounded-xl border border-gray-200 p-4">
+            <h3 className="font-semibold text-gray-900 mb-3">{t('history')}</h3>
+            <div className="space-y-2">
+              {history.map((h, i) => (
+                <div key={i} className="flex justify-between items-center text-sm p-2 bg-gray-50 rounded-lg">
+                  <span className="text-gray-600">
+                    <span className="inline-block px-2 py-0.5 bg-gray-200 text-gray-700 rounded text-xs mr-2">{h.mode}</span>
+                    {t('profit')}: ${h.profit}
+                  </span>
+                  <span className="font-semibold text-blue-700">{t('profitMargin')}: {h.margin}%</span>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
 
         <article className="mt-12 prose prose-gray max-w-none">
           <h2 className="text-2xl font-bold text-gray-900 mb-4">{seo.title}</h2>
