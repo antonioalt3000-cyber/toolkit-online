@@ -13,7 +13,28 @@ const labels: Record<string, Record<Locale, string>> = {
   lapNumber: { en: 'Lap', it: 'Giro', es: 'Vuelta', fr: 'Tour', de: 'Runde', pt: 'Volta' },
   lapTime: { en: 'Lap Time', it: 'Tempo Giro', es: 'Tiempo Vuelta', fr: 'Temps Tour', de: 'Rundenzeit', pt: 'Tempo Volta' },
   totalTime: { en: 'Total Time', it: 'Tempo Totale', es: 'Tiempo Total', fr: 'Temps Total', de: 'Gesamtzeit', pt: 'Tempo Total' },
+  currentTime: { en: 'Current Time', it: 'Tempo Attuale', es: 'Tiempo Actual', fr: 'Temps Actuel', de: 'Aktuelle Zeit', pt: 'Tempo Atual' },
+  lapCount: { en: 'Laps', it: 'Giri', es: 'Vueltas', fr: 'Tours', de: 'Runden', pt: 'Voltas' },
+  bestLap: { en: 'Best Lap', it: 'Miglior Giro', es: 'Mejor Vuelta', fr: 'Meilleur Tour', de: 'Beste Runde', pt: 'Melhor Volta' },
+  worstLap: { en: 'Worst Lap', it: 'Peggior Giro', es: 'Peor Vuelta', fr: 'Pire Tour', de: 'Schlechteste Runde', pt: 'Pior Volta' },
+  copyResults: { en: 'Copy Results', it: 'Copia Risultati', es: 'Copiar Resultados', fr: 'Copier Résultats', de: 'Ergebnisse Kopieren', pt: 'Copiar Resultados' },
+  copied: { en: 'Copied!', it: 'Copiato!', es: '¡Copiado!', fr: 'Copié !', de: 'Kopiert!', pt: 'Copiado!' },
+  exportCsv: { en: 'Export CSV', it: 'Esporta CSV', es: 'Exportar CSV', fr: 'Exporter CSV', de: 'CSV Exportieren', pt: 'Exportar CSV' },
+  history: { en: 'Session History', it: 'Cronologia Sessioni', es: 'Historial de Sesiones', fr: 'Historique des Sessions', de: 'Sitzungsverlauf', pt: 'Histórico de Sessões' },
+  session: { en: 'Session', it: 'Sessione', es: 'Sesión', fr: 'Session', de: 'Sitzung', pt: 'Sessão' },
+  noLaps: { en: 'No laps yet', it: 'Nessun giro', es: 'Sin vueltas', fr: 'Aucun tour', de: 'Keine Runden', pt: 'Sem voltas' },
+  lapComparison: { en: 'Lap Comparison', it: 'Confronto Giri', es: 'Comparación de Vueltas', fr: 'Comparaison des Tours', de: 'Rundenvergleich', pt: 'Comparação de Voltas' },
+  clearHistory: { en: 'Clear History', it: 'Cancella Cronologia', es: 'Borrar Historial', fr: 'Effacer Historique', de: 'Verlauf Löschen', pt: 'Limpar Histórico' },
+  saveSession: { en: 'Save Session', it: 'Salva Sessione', es: 'Guardar Sesión', fr: 'Sauvegarder Session', de: 'Sitzung Speichern', pt: 'Salvar Sessão' },
 };
+
+interface SessionRecord {
+  id: number;
+  date: string;
+  totalTime: number;
+  lapCount: number;
+  laps: { lapTime: number; totalTime: number }[];
+}
 
 function formatTime(ms: number): string {
   const hours = Math.floor(ms / 3600000);
@@ -31,9 +52,34 @@ export default function Stopwatch() {
   const [elapsed, setElapsed] = useState(0);
   const [running, setRunning] = useState(false);
   const [laps, setLaps] = useState<{ lapTime: number; totalTime: number }[]>([]);
+  const [copiedText, setCopiedText] = useState(false);
+  const [copiedCsv, setCopiedCsv] = useState(false);
+  const [sessions, setSessions] = useState<SessionRecord[]>([]);
   const startTimeRef = useRef<number>(0);
   const elapsedRef = useRef<number>(0);
   const rafRef = useRef<number>(0);
+  const sessionIdRef = useRef<number>(0);
+
+  // Load history from localStorage on mount
+  useEffect(() => {
+    try {
+      const saved = localStorage.getItem('stopwatch-history');
+      if (saved) {
+        const parsed = JSON.parse(saved) as SessionRecord[];
+        setSessions(parsed);
+        sessionIdRef.current = parsed.length > 0 ? Math.max(...parsed.map(s => s.id)) + 1 : 0;
+      }
+    } catch { /* ignore */ }
+  }, []);
+
+  // Save history to localStorage when it changes
+  useEffect(() => {
+    if (sessions.length > 0) {
+      try {
+        localStorage.setItem('stopwatch-history', JSON.stringify(sessions));
+      } catch { /* ignore */ }
+    }
+  }, [sessions]);
 
   const tick = useCallback(() => {
     const now = performance.now();
@@ -55,14 +101,33 @@ export default function Stopwatch() {
     setRunning(false);
   }, []);
 
+  const saveSession = useCallback(() => {
+    if (elapsed === 0 && laps.length === 0) return;
+    const session: SessionRecord = {
+      id: sessionIdRef.current++,
+      date: new Date().toLocaleString(),
+      totalTime: elapsed,
+      lapCount: laps.length,
+      laps: [...laps],
+    };
+    setSessions(prev => {
+      const updated = [session, ...prev].slice(0, 5);
+      return updated;
+    });
+  }, [elapsed, laps]);
+
   const reset = useCallback(() => {
+    // Save current session before resetting (if there's data)
+    if (elapsed > 0 || laps.length > 0) {
+      saveSession();
+    }
     cancelAnimationFrame(rafRef.current);
     setRunning(false);
     setElapsed(0);
     elapsedRef.current = 0;
     startTimeRef.current = 0;
     setLaps([]);
-  }, []);
+  }, [elapsed, laps, saveSession]);
 
   const recordLap = useCallback(() => {
     const currentTotal = elapsedRef.current + (performance.now() - startTimeRef.current);
@@ -72,6 +137,44 @@ export default function Stopwatch() {
 
   useEffect(() => {
     return () => cancelAnimationFrame(rafRef.current);
+  }, []);
+
+  // Derived stats
+  const lapTimesOnly = laps.map(l => l.lapTime);
+  const bestLap = lapTimesOnly.length > 0 ? Math.min(...lapTimesOnly) : 0;
+  const worstLap = lapTimesOnly.length > 0 ? Math.max(...lapTimesOnly) : 0;
+  const maxLapTime = worstLap; // for bar chart scaling
+
+  // Copy results as text
+  const copyResults = useCallback(() => {
+    if (laps.length === 0) return;
+    const lines = laps.slice().reverse().map((lap, i) => (
+      `${t('lapNumber')} ${i + 1}: ${formatTime(lap.lapTime)} | ${t('totalTime')}: ${formatTime(lap.totalTime)}`
+    ));
+    const text = `${t('lapTimes')}\n${'─'.repeat(40)}\n${lines.join('\n')}\n${'─'.repeat(40)}\n${t('totalTime')}: ${formatTime(elapsed)}`;
+    navigator.clipboard.writeText(text).then(() => {
+      setCopiedText(true);
+      setTimeout(() => setCopiedText(false), 2000);
+    });
+  }, [laps, elapsed, lang]);
+
+  // Export as CSV
+  const exportCsv = useCallback(() => {
+    if (laps.length === 0) return;
+    const header = `#,${t('lapTime')},${t('totalTime')}`;
+    const rows = laps.slice().reverse().map((lap, i) => (
+      `${i + 1},${formatTime(lap.lapTime)},${formatTime(lap.totalTime)}`
+    ));
+    const csv = `${header}\n${rows.join('\n')}`;
+    navigator.clipboard.writeText(csv).then(() => {
+      setCopiedCsv(true);
+      setTimeout(() => setCopiedCsv(false), 2000);
+    });
+  }, [laps, lang]);
+
+  const clearHistory = useCallback(() => {
+    setSessions([]);
+    localStorage.removeItem('stopwatch-history');
   }, []);
 
   const seoContent: Record<Locale, { title: string; paragraphs: string[]; faq: { q: string; a: string }[] }> = {
@@ -190,6 +293,26 @@ export default function Stopwatch() {
             </div>
           </div>
 
+          {/* Result Cards */}
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+            <div className="bg-blue-50 border border-blue-200 rounded-lg p-3 text-center">
+              <div className="text-xs font-medium text-blue-600 uppercase tracking-wide">{t('currentTime')}</div>
+              <div className="text-sm font-mono font-bold text-blue-900 mt-1">{formatTime(elapsed)}</div>
+            </div>
+            <div className="bg-purple-50 border border-purple-200 rounded-lg p-3 text-center">
+              <div className="text-xs font-medium text-purple-600 uppercase tracking-wide">{t('lapCount')}</div>
+              <div className="text-2xl font-bold text-purple-900 mt-1">{laps.length}</div>
+            </div>
+            <div className="bg-green-50 border border-green-200 rounded-lg p-3 text-center">
+              <div className="text-xs font-medium text-green-600 uppercase tracking-wide">{t('bestLap')}</div>
+              <div className="text-sm font-mono font-bold text-green-900 mt-1">{laps.length > 0 ? formatTime(bestLap) : '—'}</div>
+            </div>
+            <div className="bg-red-50 border border-red-200 rounded-lg p-3 text-center">
+              <div className="text-xs font-medium text-red-600 uppercase tracking-wide">{t('worstLap')}</div>
+              <div className="text-sm font-mono font-bold text-red-900 mt-1">{laps.length > 0 ? formatTime(worstLap) : '—'}</div>
+            </div>
+          </div>
+
           {/* Controls */}
           <div className="flex gap-3">
             {!running ? (
@@ -212,7 +335,23 @@ export default function Stopwatch() {
           {/* Laps */}
           {laps.length > 0 && (
             <div>
-              <h3 className="font-semibold text-gray-900 mb-2">{t('lapTimes')}</h3>
+              <div className="flex items-center justify-between mb-2">
+                <h3 className="font-semibold text-gray-900">{t('lapTimes')}</h3>
+                <div className="flex gap-2">
+                  <button
+                    onClick={copyResults}
+                    className="text-sm px-3 py-1.5 bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200 transition-colors font-medium"
+                  >
+                    {copiedText ? t('copied') : t('copyResults')}
+                  </button>
+                  <button
+                    onClick={exportCsv}
+                    className="text-sm px-3 py-1.5 bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200 transition-colors font-medium"
+                  >
+                    {copiedCsv ? t('copied') : t('exportCsv')}
+                  </button>
+                </div>
+              </div>
               <div className="overflow-x-auto">
                 <table className="w-full text-sm">
                   <thead>
@@ -223,19 +362,89 @@ export default function Stopwatch() {
                     </tr>
                   </thead>
                   <tbody>
-                    {laps.map((lap, i) => (
-                      <tr key={i} className="border-b border-gray-100">
-                        <td className="py-2 px-2 font-medium">{t('lapNumber')} {laps.length - i}</td>
-                        <td className="text-right py-2 px-2 font-mono">{formatTime(lap.lapTime)}</td>
-                        <td className="text-right py-2 px-2 font-mono text-gray-500">{formatTime(lap.totalTime)}</td>
-                      </tr>
-                    ))}
+                    {laps.map((lap, i) => {
+                      const isBest = lap.lapTime === bestLap;
+                      const isWorst = lap.lapTime === worstLap && laps.length > 1;
+                      return (
+                        <tr key={i} className={`border-b border-gray-100 ${isBest ? 'bg-green-50' : isWorst ? 'bg-red-50' : ''}`}>
+                          <td className="py-2 px-2 font-medium">
+                            {t('lapNumber')} {laps.length - i}
+                            {isBest && <span className="ml-1 text-green-600 text-xs font-bold">&#9733;</span>}
+                            {isWorst && <span className="ml-1 text-red-500 text-xs font-bold">&#9660;</span>}
+                          </td>
+                          <td className="text-right py-2 px-2 font-mono">{formatTime(lap.lapTime)}</td>
+                          <td className="text-right py-2 px-2 font-mono text-gray-500">{formatTime(lap.totalTime)}</td>
+                        </tr>
+                      );
+                    })}
                   </tbody>
                 </table>
               </div>
             </div>
           )}
+
+          {/* Lap Comparison Bar Chart */}
+          {laps.length >= 2 && (
+            <div>
+              <h3 className="font-semibold text-gray-900 mb-3">{t('lapComparison')}</h3>
+              <div className="space-y-2">
+                {laps.slice().reverse().map((lap, i) => {
+                  const pct = maxLapTime > 0 ? (lap.lapTime / maxLapTime) * 100 : 0;
+                  const isBest = lap.lapTime === bestLap;
+                  const isWorst = lap.lapTime === worstLap;
+                  let barColor = 'bg-blue-500';
+                  if (isBest) barColor = 'bg-green-500';
+                  if (isWorst) barColor = 'bg-red-500';
+                  return (
+                    <div key={i} className="flex items-center gap-3">
+                      <span className="text-xs font-medium text-gray-500 w-8 text-right shrink-0">#{i + 1}</span>
+                      <div className="flex-1 bg-gray-100 rounded-full h-6 overflow-hidden relative">
+                        <div
+                          className={`${barColor} h-full rounded-full transition-all duration-300`}
+                          style={{ width: `${Math.max(pct, 2)}%` }}
+                        />
+                        <span className="absolute inset-0 flex items-center justify-end pr-2 text-xs font-mono text-gray-700">
+                          {formatTime(lap.lapTime)}
+                        </span>
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
+          )}
         </div>
+
+        {/* Session History */}
+        {sessions.length > 0 && (
+          <div className="mt-6 bg-white rounded-xl border border-gray-200 p-6">
+            <div className="flex items-center justify-between mb-4">
+              <h3 className="font-semibold text-gray-900">{t('history')}</h3>
+              <button
+                onClick={clearHistory}
+                className="text-sm px-3 py-1.5 bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200 transition-colors font-medium"
+              >
+                {t('clearHistory')}
+              </button>
+            </div>
+            <div className="space-y-3">
+              {sessions.map((session, idx) => (
+                <div key={session.id} className="bg-gray-50 rounded-lg p-3 flex items-center justify-between">
+                  <div>
+                    <div className="text-sm font-medium text-gray-900">
+                      {t('session')} {sessions.length - idx}
+                    </div>
+                    <div className="text-xs text-gray-500 mt-0.5">{session.date}</div>
+                  </div>
+                  <div className="text-right">
+                    <div className="text-sm font-mono font-bold text-gray-900">{formatTime(session.totalTime)}</div>
+                    <div className="text-xs text-gray-500">{session.lapCount} {t('lapCount').toLowerCase()}</div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
 
         <article className="mt-12 prose prose-gray max-w-none">
           <h2 className="text-2xl font-bold text-gray-900 mb-4">{seo.title}</h2>

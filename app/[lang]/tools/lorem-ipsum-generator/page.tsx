@@ -1,5 +1,5 @@
 'use client';
-import { useState } from 'react';
+import { useState, useCallback } from 'react';
 import { useParams } from 'next/navigation';
 import { tools, type Locale } from '@/lib/translations';
 import ToolPageWrapper from '@/components/ToolPageWrapper';
@@ -9,7 +9,31 @@ const labels: Record<string, Record<string, string>> = {
   generate: { en: 'Generate', it: 'Genera', es: 'Generar', fr: 'Générer', de: 'Generieren', pt: 'Gerar' },
   copy: { en: 'Copy to Clipboard', it: 'Copia negli Appunti', es: 'Copiar al Portapapeles', fr: 'Copier dans le Presse-papiers', de: 'In Zwischenablage kopieren', pt: 'Copiar para Área de Transferência' },
   copied: { en: 'Copied!', it: 'Copiato!', es: '¡Copiado!', fr: 'Copié !', de: 'Kopiert!', pt: 'Copiado!' },
+  reset: { en: 'Reset', it: 'Ripristina', es: 'Restablecer', fr: 'Réinitialiser', de: 'Zurücksetzen', pt: 'Redefinir' },
+  words: { en: 'Words', it: 'Parole', es: 'Palabras', fr: 'Mots', de: 'Wörter', pt: 'Palavras' },
+  characters: { en: 'Characters', it: 'Caratteri', es: 'Caracteres', fr: 'Caractères', de: 'Zeichen', pt: 'Caracteres' },
+  paragraphsCount: { en: 'Paragraphs', it: 'Paragrafi', es: 'Párrafos', fr: 'Paragraphes', de: 'Absätze', pt: 'Parágrafos' },
+  format: { en: 'Format', it: 'Formato', es: 'Formato', fr: 'Format', de: 'Format', pt: 'Formato' },
+  plainText: { en: 'Plain Text', it: 'Testo Semplice', es: 'Texto Plano', fr: 'Texte Brut', de: 'Klartext', pt: 'Texto Simples' },
+  html: { en: 'HTML', it: 'HTML', es: 'HTML', fr: 'HTML', de: 'HTML', pt: 'HTML' },
+  markdown: { en: 'Markdown', it: 'Markdown', es: 'Markdown', fr: 'Markdown', de: 'Markdown', pt: 'Markdown' },
+  startClassic: { en: 'Start with "Lorem ipsum..."', it: 'Inizia con "Lorem ipsum..."', es: 'Empezar con "Lorem ipsum..."', fr: 'Commencer par "Lorem ipsum..."', de: 'Mit "Lorem ipsum..." beginnen', pt: 'Começar com "Lorem ipsum..."' },
+  history: { en: 'History', it: 'Cronologia', es: 'Historial', fr: 'Historique', de: 'Verlauf', pt: 'Histórico' },
+  clearHistory: { en: 'Clear', it: 'Cancella', es: 'Borrar', fr: 'Effacer', de: 'Löschen', pt: 'Limpar' },
+  validation: { en: 'Paragraphs must be between 1 and 50', it: 'I paragrafi devono essere tra 1 e 50', es: 'Los párrafos deben estar entre 1 y 50', fr: 'Les paragraphes doivent être entre 1 et 50', de: 'Absätze müssen zwischen 1 und 50 liegen', pt: 'Os parágrafos devem estar entre 1 e 50' },
 };
+
+type FormatType = 'plain' | 'html' | 'markdown';
+
+interface HistoryEntry {
+  text: string;
+  preview: string;
+  paragraphs: number;
+  format: FormatType;
+  timestamp: number;
+}
+
+const CLASSIC_OPENING = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.';
 
 const loremSentences = [
   'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
@@ -51,14 +75,52 @@ export default function LoremIpsumGenerator() {
   const [count, setCount] = useState(3);
   const [text, setText] = useState('');
   const [copied, setCopied] = useState(false);
+  const [format, setFormat] = useState<FormatType>('plain');
+  const [startClassic, setStartClassic] = useState(true);
+  const [history, setHistory] = useState<HistoryEntry[]>([]);
+  const [validationError, setValidationError] = useState('');
+
+  const formatOutput = useCallback((paragraphs: string[], fmt: FormatType): string => {
+    switch (fmt) {
+      case 'html':
+        return paragraphs.map(p => `<p>${p}</p>`).join('\n\n');
+      case 'markdown':
+        return paragraphs.join('\n\n');
+      case 'plain':
+      default:
+        return paragraphs.join('\n\n');
+    }
+  }, []);
 
   const handleGenerate = () => {
+    if (count < 1 || count > 50) {
+      setValidationError(t('validation'));
+      return;
+    }
+    setValidationError('');
+
     const paragraphs: string[] = [];
     for (let i = 0; i < count; i++) {
       paragraphs.push(generateParagraph(i));
     }
-    setText(paragraphs.join('\n\n'));
+
+    if (startClassic && paragraphs.length > 0) {
+      const first = paragraphs[0];
+      if (!first.startsWith(CLASSIC_OPENING)) {
+        paragraphs[0] = CLASSIC_OPENING + ' ' + first;
+      }
+    }
+
+    const output = formatOutput(paragraphs, format);
+    setText(output);
     setCopied(false);
+
+    const preview = output.substring(0, 30) + (output.length > 30 ? '...' : '');
+    setHistory(prev => {
+      const newEntry: HistoryEntry = { text: output, preview, paragraphs: count, format, timestamp: Date.now() };
+      const updated = [newEntry, ...prev];
+      return updated.slice(0, 5);
+    });
   };
 
   const handleCopy = async () => {
@@ -66,6 +128,33 @@ export default function LoremIpsumGenerator() {
     setCopied(true);
     setTimeout(() => setCopied(false), 2000);
   };
+
+  const handleReset = () => {
+    setCount(3);
+    setText('');
+    setCopied(false);
+    setFormat('plain');
+    setStartClassic(true);
+    setValidationError('');
+  };
+
+  const handleCountChange = (value: number) => {
+    setCount(value);
+    if (value >= 1 && value <= 50) {
+      setValidationError('');
+    }
+  };
+
+  const loadFromHistory = (entry: HistoryEntry) => {
+    setText(entry.text);
+    setCount(entry.paragraphs);
+    setFormat(entry.format);
+    setCopied(false);
+  };
+
+  const wordCount = text ? text.split(/\s+/).filter(Boolean).length : 0;
+  const charCount = text.length;
+  const paraCount = text ? text.split(/\n\n+/).filter(Boolean).length : 0;
 
   const seoContent: Record<Locale, { title: string; paragraphs: string[]; faq: { q: string; a: string }[] }> = {
     en: {
@@ -176,17 +265,69 @@ export default function LoremIpsumGenerator() {
         <p className="text-gray-600 mb-6">{toolT.description}</p>
 
         <div className="bg-white rounded-xl border border-gray-200 p-6 space-y-4">
+          {/* Paragraph count slider */}
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-1">{t('paragraphs')}: {count}</label>
-            <input type="range" min="1" max="20" value={count} onChange={(e) => setCount(parseInt(e.target.value))}
+            <input type="range" min="1" max="50" value={count} onChange={(e) => handleCountChange(parseInt(e.target.value))}
               className="w-full" />
+            {validationError && (
+              <p className="text-red-500 text-xs mt-1">{validationError}</p>
+            )}
           </div>
 
-          <button onClick={handleGenerate}
-            className="w-full bg-blue-600 text-white py-2 rounded-lg font-medium hover:bg-blue-700 transition-colors">
-            {t('generate')}
-          </button>
+          {/* Format selector */}
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-1">{t('format')}</label>
+            <div className="flex gap-2">
+              {(['plain', 'html', 'markdown'] as FormatType[]).map((fmt) => (
+                <button key={fmt} onClick={() => setFormat(fmt)}
+                  className={`px-4 py-1.5 rounded-lg text-sm font-medium transition-colors ${format === fmt ? 'bg-blue-600 text-white' : 'bg-gray-100 text-gray-700 hover:bg-gray-200'}`}>
+                  {fmt === 'plain' ? t('plainText') : fmt === 'html' ? t('html') : t('markdown')}
+                </button>
+              ))}
+            </div>
+          </div>
 
+          {/* Classic opening toggle */}
+          <div className="flex items-center gap-3">
+            <button onClick={() => setStartClassic(!startClassic)}
+              className={`relative w-10 h-5 rounded-full transition-colors ${startClassic ? 'bg-blue-600' : 'bg-gray-300'}`}>
+              <span className={`absolute top-0.5 left-0.5 w-4 h-4 bg-white rounded-full transition-transform ${startClassic ? 'translate-x-5' : ''}`} />
+            </button>
+            <span className="text-sm text-gray-700">{t('startClassic')}</span>
+          </div>
+
+          {/* Action buttons */}
+          <div className="flex gap-2">
+            <button onClick={handleGenerate}
+              className="flex-1 bg-blue-600 text-white py-2 rounded-lg font-medium hover:bg-blue-700 transition-colors">
+              {t('generate')}
+            </button>
+            <button onClick={handleReset}
+              className="px-4 py-2 rounded-lg font-medium bg-gray-100 text-gray-700 hover:bg-gray-200 transition-colors">
+              {t('reset')}
+            </button>
+          </div>
+
+          {/* Stats cards */}
+          {text && (
+            <div className="grid grid-cols-3 gap-3">
+              <div className="bg-blue-50 rounded-lg p-3 text-center">
+                <div className="text-2xl font-bold text-blue-700">{wordCount}</div>
+                <div className="text-xs text-blue-600">{t('words')}</div>
+              </div>
+              <div className="bg-green-50 rounded-lg p-3 text-center">
+                <div className="text-2xl font-bold text-green-700">{charCount}</div>
+                <div className="text-xs text-green-600">{t('characters')}</div>
+              </div>
+              <div className="bg-purple-50 rounded-lg p-3 text-center">
+                <div className="text-2xl font-bold text-purple-700">{paraCount}</div>
+                <div className="text-xs text-purple-600">{t('paragraphsCount')}</div>
+              </div>
+            </div>
+          )}
+
+          {/* Output textarea */}
           {text && (
             <>
               <div className="relative">
@@ -200,6 +341,29 @@ export default function LoremIpsumGenerator() {
             </>
           )}
         </div>
+
+        {/* History section */}
+        {history.length > 0 && (
+          <div className="mt-6 bg-white rounded-xl border border-gray-200 p-4">
+            <div className="flex items-center justify-between mb-3">
+              <h3 className="text-sm font-semibold text-gray-700">{t('history')}</h3>
+              <button onClick={() => setHistory([])}
+                className="text-xs text-red-500 hover:text-red-700 transition-colors">
+                {t('clearHistory')}
+              </button>
+            </div>
+            <div className="space-y-2">
+              {history.map((entry, i) => (
+                <button key={entry.timestamp} onClick={() => loadFromHistory(entry)}
+                  className="w-full text-left px-3 py-2 rounded-lg bg-gray-50 hover:bg-gray-100 transition-colors text-sm">
+                  <span className="text-gray-500 mr-2">#{history.length - i}</span>
+                  <span className="text-gray-700">{entry.preview}</span>
+                  <span className="text-gray-400 ml-2 text-xs">({entry.paragraphs}p, {entry.format})</span>
+                </button>
+              ))}
+            </div>
+          </div>
+        )}
 
         {/* SEO Article */}
         <article className="mt-12 prose prose-gray max-w-none">

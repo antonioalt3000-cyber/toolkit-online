@@ -26,6 +26,13 @@ const currencyNames: Record<string, string> = {
   CNY: 'Chinese Yuan',
 };
 
+const popularPairs: [string, string][] = [
+  ['EUR', 'USD'],
+  ['GBP', 'EUR'],
+  ['USD', 'JPY'],
+  ['EUR', 'GBP'],
+];
+
 const labels: Record<string, Record<Locale, string>> = {
   amount: { en: 'Amount', it: 'Importo', es: 'Cantidad', fr: 'Montant', de: 'Betrag', pt: 'Valor' },
   from: { en: 'From', it: 'Da', es: 'De', fr: 'De', de: 'Von', pt: 'De' },
@@ -33,7 +40,21 @@ const labels: Record<string, Record<Locale, string>> = {
   result: { en: 'Result', it: 'Risultato', es: 'Resultado', fr: 'Résultat', de: 'Ergebnis', pt: 'Resultado' },
   swap: { en: 'Swap', it: 'Inverti', es: 'Invertir', fr: 'Inverser', de: 'Tauschen', pt: 'Inverter' },
   note: { en: 'Rates are approximate and for reference only.', it: 'I tassi sono approssimativi e solo indicativi.', es: 'Las tasas son aproximadas y solo de referencia.', fr: 'Les taux sont approximatifs et indicatifs uniquement.', de: 'Kurse sind ungefähre Richtwerte.', pt: 'As taxas são aproximadas e apenas para referência.' },
+  copy: { en: 'Copy Result', it: 'Copia Risultato', es: 'Copiar Resultado', fr: 'Copier Résultat', de: 'Ergebnis Kopieren', pt: 'Copiar Resultado' },
+  copied: { en: 'Copied!', it: 'Copiato!', es: '¡Copiado!', fr: 'Copié !', de: 'Kopiert!', pt: 'Copiado!' },
+  reset: { en: 'Reset', it: 'Resetta', es: 'Reiniciar', fr: 'Réinitialiser', de: 'Zurücksetzen', pt: 'Redefinir' },
+  invalidAmount: { en: 'Please enter a valid positive number.', it: 'Inserisci un numero positivo valido.', es: 'Introduce un número positivo válido.', fr: 'Veuillez entrer un nombre positif valide.', de: 'Bitte geben Sie eine gültige positive Zahl ein.', pt: 'Introduza um número positivo válido.' },
+  history: { en: 'Recent Conversions', it: 'Conversioni Recenti', es: 'Conversiones Recientes', fr: 'Conversions Récentes', de: 'Letzte Umrechnungen', pt: 'Conversões Recentes' },
+  popularPairs: { en: 'Popular Pairs', it: 'Coppie Popolari', es: 'Pares Populares', fr: 'Paires Populaires', de: 'Beliebte Paare', pt: 'Pares Populares' },
+  noHistory: { en: 'No conversions yet.', it: 'Nessuna conversione ancora.', es: 'Sin conversiones aún.', fr: 'Aucune conversion encore.', de: 'Noch keine Umrechnungen.', pt: 'Nenhuma conversão ainda.' },
 };
+
+interface HistoryEntry {
+  amount: number;
+  from: string;
+  to: string;
+  result: number;
+}
 
 const seoContent: Record<Locale, { title: string; paragraphs: string[]; faq: { q: string; a: string }[] }> = {
   en: {
@@ -136,15 +157,51 @@ export default function CurrencyConverter() {
   const [amount, setAmount] = useState('100');
   const [fromCurrency, setFromCurrency] = useState('USD');
   const [toCurrency, setToCurrency] = useState('EUR');
+  const [copied, setCopied] = useState(false);
+  const [history, setHistory] = useState<HistoryEntry[]>([]);
 
-  const num = parseFloat(amount) || 0;
-  const inUsd = num / rates[fromCurrency];
+  const num = parseFloat(amount);
+  const isValid = !isNaN(num) && num > 0;
+  const hasInput = amount.trim().length > 0;
+  const showError = hasInput && !isValid;
+
+  const inUsd = isValid ? num / rates[fromCurrency] : 0;
   const converted = inUsd * rates[toCurrency];
   const exchangeRate = rates[toCurrency] / rates[fromCurrency];
 
   const swap = () => {
     setFromCurrency(toCurrency);
     setToCurrency(fromCurrency);
+  };
+
+  const reset = () => {
+    setAmount('100');
+    setFromCurrency('USD');
+    setToCurrency('EUR');
+    setCopied(false);
+  };
+
+  const copyResult = () => {
+    if (!isValid) return;
+    const text = `${num.toFixed(2)} ${fromCurrency} = ${converted.toFixed(2)} ${toCurrency}`;
+    navigator.clipboard.writeText(text).then(() => {
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+    });
+  };
+
+  const addToHistory = () => {
+    if (!isValid) return;
+    const entry: HistoryEntry = { amount: num, from: fromCurrency, to: toCurrency, result: converted };
+    setHistory((prev) => {
+      const updated = [entry, ...prev];
+      return updated.slice(0, 5);
+    });
+  };
+
+  const selectPair = (from: string, to: string) => {
+    setFromCurrency(from);
+    setToCurrency(to);
   };
 
   const currencies = Object.keys(rates);
@@ -159,16 +216,43 @@ export default function CurrencyConverter() {
         <p className="text-gray-600 mb-6">{toolT.description}</p>
 
         <div className="bg-white rounded-xl border border-gray-200 p-6 space-y-4">
+          {/* Popular Pairs */}
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-2">{t('popularPairs')}</label>
+            <div className="flex flex-wrap gap-2">
+              {popularPairs.map(([from, to]) => (
+                <button
+                  key={`${from}-${to}`}
+                  onClick={() => selectPair(from, to)}
+                  className={`px-3 py-1.5 text-sm rounded-lg border transition-colors ${
+                    fromCurrency === from && toCurrency === to
+                      ? 'bg-blue-100 border-blue-300 text-blue-700'
+                      : 'bg-gray-50 border-gray-200 text-gray-700 hover:bg-gray-100'
+                  }`}
+                >
+                  {from}/{to}
+                </button>
+              ))}
+            </div>
+          </div>
+
+          {/* Amount Input */}
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-1">{t('amount')}</label>
             <input
               type="number"
               value={amount}
               onChange={(e) => setAmount(e.target.value)}
-              className="w-full border border-gray-300 rounded-lg px-4 py-2 text-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+              className={`w-full border rounded-lg px-4 py-2 text-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent ${
+                showError ? 'border-red-400 bg-red-50' : 'border-gray-300'
+              }`}
             />
+            {showError && (
+              <p className="mt-1 text-sm text-red-500">{t('invalidAmount')}</p>
+            )}
           </div>
 
+          {/* Currency Selectors with Swap */}
           <div className="grid grid-cols-[1fr_auto_1fr] gap-2 items-end">
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-1">{t('from')}</label>
@@ -184,7 +268,8 @@ export default function CurrencyConverter() {
             </div>
             <button
               onClick={swap}
-              className="mb-0.5 px-3 py-2 bg-gray-100 rounded-lg hover:bg-gray-200 font-medium text-gray-700"
+              className="mb-0.5 px-3 py-2 bg-gray-100 rounded-lg hover:bg-gray-200 font-medium text-gray-700 transition-colors"
+              title={t('swap')}
             >
               &#8646;
             </button>
@@ -202,7 +287,8 @@ export default function CurrencyConverter() {
             </div>
           </div>
 
-          {num > 0 && (
+          {/* Result */}
+          {isValid && (
             <div className="mt-4 p-4 bg-blue-50 rounded-lg space-y-2">
               <div className="flex justify-between text-sm text-gray-600">
                 <span>1 {fromCurrency} =</span>
@@ -216,8 +302,66 @@ export default function CurrencyConverter() {
             </div>
           )}
 
+          {/* Action Buttons */}
+          <div className="flex gap-2 pt-1">
+            <button
+              onClick={copyResult}
+              disabled={!isValid}
+              className={`flex-1 px-4 py-2 rounded-lg text-sm font-medium transition-colors ${
+                copied
+                  ? 'bg-green-100 text-green-700 border border-green-300'
+                  : isValid
+                    ? 'bg-blue-600 text-white hover:bg-blue-700'
+                    : 'bg-gray-100 text-gray-400 cursor-not-allowed'
+              }`}
+            >
+              {copied ? t('copied') : t('copy')}
+            </button>
+            <button
+              onClick={addToHistory}
+              disabled={!isValid}
+              className={`flex-1 px-4 py-2 rounded-lg text-sm font-medium transition-colors ${
+                isValid
+                  ? 'bg-gray-100 text-gray-700 hover:bg-gray-200 border border-gray-200'
+                  : 'bg-gray-100 text-gray-400 cursor-not-allowed'
+              }`}
+            >
+              + {t('history')}
+            </button>
+            <button
+              onClick={reset}
+              className="px-4 py-2 rounded-lg text-sm font-medium bg-gray-100 text-gray-700 hover:bg-gray-200 border border-gray-200 transition-colors"
+            >
+              {t('reset')}
+            </button>
+          </div>
+
           <p className="text-xs text-gray-400 text-center">{t('note')}</p>
         </div>
+
+        {/* Conversion History */}
+        {history.length > 0 && (
+          <div className="mt-6 bg-white rounded-xl border border-gray-200 p-4">
+            <h3 className="text-sm font-semibold text-gray-700 mb-3">{t('history')}</h3>
+            <ul className="space-y-2">
+              {history.map((entry, i) => (
+                <li
+                  key={i}
+                  className="flex justify-between items-center text-sm px-3 py-2 bg-gray-50 rounded-lg cursor-pointer hover:bg-gray-100 transition-colors"
+                  onClick={() => {
+                    setAmount(entry.amount.toString());
+                    setFromCurrency(entry.from);
+                    setToCurrency(entry.to);
+                  }}
+                >
+                  <span className="text-gray-700">{entry.amount.toFixed(2)} {entry.from}</span>
+                  <span className="text-gray-400 mx-2">&rarr;</span>
+                  <span className="font-medium text-blue-600">{entry.result.toFixed(2)} {entry.to}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+        )}
 
         <article className="mt-12 prose prose-gray max-w-none">
           <h2 className="text-2xl font-bold text-gray-900 mb-4">{seo.title}</h2>

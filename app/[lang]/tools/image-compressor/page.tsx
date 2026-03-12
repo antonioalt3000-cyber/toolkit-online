@@ -14,7 +14,28 @@ const labels: Record<string, Record<Locale, string>> = {
   reduction: { en: 'Reduction', it: 'Riduzione', es: 'Reducción', fr: 'Réduction', de: 'Reduktion', pt: 'Redução' },
   dragDrop: { en: 'Drag & drop or click to upload', it: 'Trascina o clicca per caricare', es: 'Arrastra o haz clic para subir', fr: 'Glissez ou cliquez pour télécharger', de: 'Ziehen oder klicken zum Hochladen', pt: 'Arraste ou clique para enviar' },
   format: { en: 'Output Format', it: 'Formato Output', es: 'Formato de Salida', fr: 'Format de Sortie', de: 'Ausgabeformat', pt: 'Formato de Saída' },
+  copyStats: { en: 'Copy Stats', it: 'Copia Statistiche', es: 'Copiar Estadísticas', fr: 'Copier Statistiques', de: 'Statistiken Kopieren', pt: 'Copiar Estatísticas' },
+  copied: { en: 'Copied!', it: 'Copiato!', es: '¡Copiado!', fr: 'Copié !', de: 'Kopiert!', pt: 'Copiado!' },
+  reset: { en: 'Reset', it: 'Reimposta', es: 'Reiniciar', fr: 'Réinitialiser', de: 'Zurücksetzen', pt: 'Redefinir' },
+  errorUnsupported: { en: 'Unsupported file type. Please upload JPEG, PNG, WebP, GIF, BMP, or SVG.', it: 'Tipo di file non supportato. Carica JPEG, PNG, WebP, GIF, BMP o SVG.', es: 'Tipo de archivo no soportado. Sube JPEG, PNG, WebP, GIF, BMP o SVG.', fr: 'Type de fichier non pris en charge. Téléchargez JPEG, PNG, WebP, GIF, BMP ou SVG.', de: 'Nicht unterstützter Dateityp. Bitte JPEG, PNG, WebP, GIF, BMP oder SVG hochladen.', pt: 'Tipo de arquivo não suportado. Envie JPEG, PNG, WebP, GIF, BMP ou SVG.' },
+  errorTooLarge: { en: 'File too large. Maximum size is 10 MB.', it: 'File troppo grande. La dimensione massima è 10 MB.', es: 'Archivo demasiado grande. El tamaño máximo es 10 MB.', fr: 'Fichier trop volumineux. La taille maximale est de 10 Mo.', de: 'Datei zu groß. Maximale Größe ist 10 MB.', pt: 'Arquivo muito grande. O tamanho máximo é 10 MB.' },
+  history: { en: 'Recent Compressions', it: 'Compressioni Recenti', es: 'Compresiones Recientes', fr: 'Compressions Récentes', de: 'Letzte Kompressionen', pt: 'Compressões Recentes' },
+  savings: { en: 'Savings', it: 'Risparmio', es: 'Ahorro', fr: 'Économie', de: 'Ersparnis', pt: 'Economia' },
+  beforeAfter: { en: 'Before / After', it: 'Prima / Dopo', es: 'Antes / Después', fr: 'Avant / Après', de: 'Vorher / Nachher', pt: 'Antes / Depois' },
+  noHistory: { en: 'No compressions yet', it: 'Nessuna compressione ancora', es: 'Sin compresiones aún', fr: 'Aucune compression encore', de: 'Noch keine Kompressionen', pt: 'Nenhuma compressão ainda' },
 };
+
+interface HistoryItem {
+  filename: string;
+  originalSize: number;
+  compressedSize: number;
+  reduction: number;
+  format: string;
+  timestamp: number;
+}
+
+const SUPPORTED_TYPES = ['image/jpeg', 'image/png', 'image/webp', 'image/gif', 'image/bmp', 'image/svg+xml'];
+const MAX_FILE_SIZE = 10 * 1024 * 1024; // 10 MB
 
 function formatBytes(bytes: number): string {
   if (bytes === 0) return '0 B';
@@ -35,6 +56,10 @@ export default function ImageCompressor() {
   const [compressedUrl, setCompressedUrl] = useState('');
   const [previewUrl, setPreviewUrl] = useState('');
   const [format, setFormat] = useState('image/jpeg');
+  const [error, setError] = useState('');
+  const [copiedStats, setCopiedStats] = useState(false);
+  const [fileName, setFileName] = useState('');
+  const [history, setHistory] = useState<HistoryItem[]>([]);
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const fileRef = useRef<HTMLInputElement>(null);
   const imgRef = useRef<HTMLImageElement | null>(null);
@@ -60,7 +85,22 @@ export default function ImageCompressor() {
     );
   }, []);
 
+  const validateFile = (file: File): boolean => {
+    setError('');
+    if (!SUPPORTED_TYPES.includes(file.type)) {
+      setError(t('errorUnsupported'));
+      return false;
+    }
+    if (file.size > MAX_FILE_SIZE) {
+      setError(t('errorTooLarge'));
+      return false;
+    }
+    return true;
+  };
+
   const handleFile = (file: File) => {
+    if (!validateFile(file)) return;
+    setFileName(file.name);
     setOriginalSize(file.size);
     const url = URL.createObjectURL(file);
     setPreviewUrl(url);
@@ -82,7 +122,54 @@ export default function ImageCompressor() {
     if (imgRef.current) compress(imgRef.current, quality, fmt);
   };
 
+  const handleReset = () => {
+    // Save to history before resetting if we have a result
+    if (originalSize > 0 && compressedSize > 0) {
+      const newEntry: HistoryItem = {
+        filename: fileName || 'image',
+        originalSize,
+        compressedSize,
+        reduction,
+        format,
+        timestamp: Date.now(),
+      };
+      setHistory(prev => [newEntry, ...prev].slice(0, 5));
+    }
+    setOriginalSize(0);
+    setCompressedSize(0);
+    setCompressedUrl('');
+    setPreviewUrl('');
+    setFileName('');
+    setError('');
+    setQuality(70);
+    setFormat('image/jpeg');
+    imgRef.current = null;
+    if (fileRef.current) fileRef.current.value = '';
+  };
+
   const reduction = originalSize > 0 ? Math.round((1 - compressedSize / originalSize) * 100) : 0;
+
+  const copyStats = () => {
+    const stats = `${fileName || 'image'}: ${formatBytes(originalSize)} -> ${formatBytes(compressedSize)} (${reduction}% ${t('reduction').toLowerCase()})`;
+    navigator.clipboard.writeText(stats).then(() => {
+      setCopiedStats(true);
+      setTimeout(() => setCopiedStats(false), 2000);
+    });
+  };
+
+  const addToHistory = () => {
+    if (originalSize > 0 && compressedSize > 0) {
+      const newEntry: HistoryItem = {
+        filename: fileName || 'image',
+        originalSize,
+        compressedSize,
+        reduction,
+        format,
+        timestamp: Date.now(),
+      };
+      setHistory(prev => [newEntry, ...prev].slice(0, 5));
+    }
+  };
 
   const seoContent: Record<Locale, { title: string; paragraphs: string[]; faq: { q: string; a: string }[] }> = {
     en: {
@@ -193,6 +280,14 @@ export default function ImageCompressor() {
         <p className="text-gray-600 mb-6">{toolT.description}</p>
 
         <div className="bg-white rounded-xl border border-gray-200 p-6 space-y-4">
+          {/* Error message */}
+          {error && (
+            <div className="bg-red-50 border border-red-200 text-red-700 rounded-lg px-4 py-3 text-sm">
+              {error}
+            </div>
+          )}
+
+          {/* Drop zone */}
           <div
             onClick={() => fileRef.current?.click()}
             onDragOver={(e) => e.preventDefault()}
@@ -200,11 +295,13 @@ export default function ImageCompressor() {
             className="border-2 border-dashed border-gray-300 rounded-lg p-8 text-center cursor-pointer hover:border-blue-400 transition-colors"
           >
             <p className="text-gray-500">{t('dragDrop')}</p>
+            <p className="text-xs text-gray-400 mt-1">JPEG, PNG, WebP, GIF, BMP, SVG &middot; max 10 MB</p>
             <input ref={fileRef} type="file" accept="image/*" className="hidden" onChange={(e) => { if (e.target.files?.[0]) handleFile(e.target.files[0]); }} />
           </div>
 
           {previewUrl && (
             <>
+              {/* Controls row */}
               <div className="grid grid-cols-2 gap-4">
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-1">{t('quality')}: {quality}%</label>
@@ -231,39 +328,91 @@ export default function ImageCompressor() {
                 </div>
               </div>
 
-              <div className="p-4 bg-blue-50 rounded-lg">
-                <div className="grid grid-cols-3 gap-4 text-center">
-                  <div>
-                    <p className="text-xs text-gray-500">{t('original')}</p>
-                    <p className="font-semibold">{formatBytes(originalSize)}</p>
+              {/* Before / After comparison cards */}
+              <div>
+                <p className="text-sm font-medium text-gray-700 mb-2">{t('beforeAfter')}</p>
+                <div className="grid grid-cols-2 gap-4">
+                  <div className="bg-red-50 border border-red-200 rounded-lg p-4 text-center">
+                    <p className="text-xs text-red-500 font-medium uppercase tracking-wide">{t('original')}</p>
+                    <p className="text-2xl font-bold text-red-700 mt-1">{formatBytes(originalSize)}</p>
                   </div>
-                  <div>
-                    <p className="text-xs text-gray-500">{t('compressed')}</p>
-                    <p className="font-semibold">{formatBytes(compressedSize)}</p>
-                  </div>
-                  <div>
-                    <p className="text-xs text-gray-500">{t('reduction')}</p>
-                    <p className="font-semibold text-blue-600">{reduction}%</p>
+                  <div className="bg-green-50 border border-green-200 rounded-lg p-4 text-center">
+                    <p className="text-xs text-green-500 font-medium uppercase tracking-wide">{t('compressed')}</p>
+                    <p className="text-2xl font-bold text-green-700 mt-1">{formatBytes(compressedSize)}</p>
                   </div>
                 </div>
               </div>
 
+              {/* Savings progress bar */}
+              <div className="bg-gray-50 rounded-lg p-4">
+                <div className="flex justify-between items-center mb-2">
+                  <span className="text-sm font-medium text-gray-700">{t('savings')}</span>
+                  <span className="text-sm font-bold text-blue-600">{reduction}% {t('reduction').toLowerCase()}</span>
+                </div>
+                <div className="w-full bg-gray-200 rounded-full h-3 overflow-hidden">
+                  <div
+                    className="h-3 rounded-full transition-all duration-500 ease-out"
+                    style={{
+                      width: `${Math.max(0, Math.min(100, reduction))}%`,
+                      backgroundColor: reduction > 50 ? '#16a34a' : reduction > 25 ? '#2563eb' : '#f59e0b',
+                    }}
+                  />
+                </div>
+              </div>
+
+              {/* Preview image */}
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img src={previewUrl} alt="Preview" className="w-full rounded-lg max-h-64 object-contain" />
 
-              {compressedUrl && (
-                <a
-                  href={compressedUrl}
-                  download={`compressed.${format === 'image/jpeg' ? 'jpg' : format === 'image/webp' ? 'webp' : 'png'}`}
-                  className="block w-full text-center bg-blue-600 text-white py-3 rounded-lg font-medium hover:bg-blue-700 transition-colors"
+              {/* Action buttons */}
+              <div className="flex gap-3">
+                {compressedUrl && (
+                  <a
+                    href={compressedUrl}
+                    download={`compressed.${format === 'image/jpeg' ? 'jpg' : format === 'image/webp' ? 'webp' : 'png'}`}
+                    onClick={addToHistory}
+                    className="flex-1 text-center bg-blue-600 text-white py-3 rounded-lg font-medium hover:bg-blue-700 transition-colors"
+                  >
+                    {t('download')}
+                  </a>
+                )}
+                <button
+                  onClick={copyStats}
+                  className="px-4 py-3 bg-gray-100 text-gray-700 rounded-lg font-medium hover:bg-gray-200 transition-colors text-sm"
                 >
-                  {t('download')}
-                </a>
-              )}
+                  {copiedStats ? t('copied') : t('copyStats')}
+                </button>
+                <button
+                  onClick={handleReset}
+                  className="px-4 py-3 bg-red-50 text-red-600 rounded-lg font-medium hover:bg-red-100 transition-colors text-sm"
+                >
+                  {t('reset')}
+                </button>
+              </div>
             </>
           )}
         </div>
         <canvas ref={canvasRef} className="hidden" />
+
+        {/* Compression history */}
+        {history.length > 0 && (
+          <div className="mt-6 bg-white rounded-xl border border-gray-200 p-6">
+            <h3 className="text-sm font-semibold text-gray-700 mb-3">{t('history')}</h3>
+            <div className="space-y-2">
+              {history.map((item, i) => (
+                <div key={item.timestamp} className="flex items-center justify-between text-sm bg-gray-50 rounded-lg px-4 py-2">
+                  <span className="text-gray-700 truncate max-w-[180px]" title={item.filename}>{item.filename}</span>
+                  <div className="flex items-center gap-3">
+                    <span className="text-gray-400">{formatBytes(item.originalSize)} &rarr; {formatBytes(item.compressedSize)}</span>
+                    <span className={`font-semibold ${item.reduction > 0 ? 'text-green-600' : 'text-red-500'}`}>
+                      {item.reduction > 0 ? '-' : '+'}{Math.abs(item.reduction)}%
+                    </span>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
 
         <article className="mt-12 prose prose-gray max-w-none">
           <h2 className="text-2xl font-bold text-gray-900 mb-4">{seo.title}</h2>

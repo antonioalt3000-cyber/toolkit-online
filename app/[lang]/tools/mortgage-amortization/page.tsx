@@ -1,8 +1,18 @@
 'use client';
-import { useState } from 'react';
+import { useState, useCallback } from 'react';
 import { useParams } from 'next/navigation';
 import { tools, type Locale } from '@/lib/translations';
 import ToolPageWrapper from '@/components/ToolPageWrapper';
+
+interface HistoryEntry {
+  principal: string;
+  rate: string;
+  years: string;
+  monthlyPayment: number;
+  totalInterest: number;
+  totalPaid: number;
+  timestamp: number;
+}
 
 export default function MortgageAmortization() {
   const { lang } = useParams() as { lang: Locale };
@@ -12,6 +22,9 @@ export default function MortgageAmortization() {
   const [rate, setRate] = useState('');
   const [years, setYears] = useState('');
   const [showSchedule, setShowSchedule] = useState(false);
+  const [copied, setCopied] = useState(false);
+  const [history, setHistory] = useState<HistoryEntry[]>([]);
+  const [errors, setErrors] = useState<{ principal?: string; rate?: string; years?: string }>({});
 
   const labels = {
     principal: { en: 'Loan Amount ($)', it: 'Importo Prestito (€)', es: 'Monto del Préstamo ($)', fr: 'Montant du Prêt (€)', de: 'Darlehensbetrag (€)', pt: 'Valor do Empréstimo (R$)' },
@@ -28,7 +41,35 @@ export default function MortgageAmortization() {
     interestPart: { en: 'Interest', it: 'Interessi', es: 'Interés', fr: 'Intérêts', de: 'Zinsen', pt: 'Juros' },
     balance: { en: 'Balance', it: 'Saldo', es: 'Saldo', fr: 'Solde', de: 'Restschuld', pt: 'Saldo' },
     year: { en: 'Year', it: 'Anno', es: 'Año', fr: 'Année', de: 'Jahr', pt: 'Ano' },
+    copyResults: { en: 'Copy Results', it: 'Copia Risultati', es: 'Copiar Resultados', fr: 'Copier les Résultats', de: 'Ergebnisse Kopieren', pt: 'Copiar Resultados' },
+    copied: { en: 'Copied!', it: 'Copiato!', es: '¡Copiado!', fr: 'Copié !', de: 'Kopiert!', pt: 'Copiado!' },
+    reset: { en: 'Reset', it: 'Ripristina', es: 'Restablecer', fr: 'Réinitialiser', de: 'Zurücksetzen', pt: 'Redefinir' },
+    history: { en: 'History', it: 'Cronologia', es: 'Historial', fr: 'Historique', de: 'Verlauf', pt: 'Histórico' },
+    clearHistory: { en: 'Clear History', it: 'Cancella Cronologia', es: 'Borrar Historial', fr: 'Effacer l\'Historique', de: 'Verlauf Löschen', pt: 'Limpar Histórico' },
+    principalVsInterest: { en: 'Principal vs Interest', it: 'Capitale vs Interessi', es: 'Capital vs Interés', fr: 'Capital vs Intérêts', de: 'Tilgung vs Zinsen', pt: 'Principal vs Juros' },
+    calculate: { en: 'Calculate', it: 'Calcola', es: 'Calcular', fr: 'Calculer', de: 'Berechnen', pt: 'Calcular' },
+    errorNegativeAmount: { en: 'Amount must be positive', it: 'L\'importo deve essere positivo', es: 'El monto debe ser positivo', fr: 'Le montant doit être positif', de: 'Betrag muss positiv sein', pt: 'O valor deve ser positivo' },
+    errorRateRange: { en: 'Rate must be between 0 and 100', it: 'Il tasso deve essere tra 0 e 100', es: 'La tasa debe estar entre 0 y 100', fr: 'Le taux doit être entre 0 et 100', de: 'Zinssatz muss zwischen 0 und 100 liegen', pt: 'A taxa deve estar entre 0 e 100' },
+    errorZeroTerm: { en: 'Term must be greater than 0', it: 'La durata deve essere maggiore di 0', es: 'El plazo debe ser mayor que 0', fr: 'La durée doit être supérieure à 0', de: 'Laufzeit muss größer als 0 sein', pt: 'O prazo deve ser maior que 0' },
+    errorNegativeTerm: { en: 'Term must be positive', it: 'La durata deve essere positiva', es: 'El plazo debe ser positivo', fr: 'La durée doit être positive', de: 'Laufzeit muss positiv sein', pt: 'O prazo deve ser positivo' },
+    loan: { en: 'Loan', it: 'Prestito', es: 'Préstamo', fr: 'Prêt', de: 'Darlehen', pt: 'Empréstimo' },
   } as Record<string, Record<Locale, string>>;
+
+  // Validation
+  const validate = useCallback(() => {
+    const newErrors: typeof errors = {};
+    const pVal = parseFloat(principal);
+    const rVal = parseFloat(rate);
+    const yVal = parseFloat(years);
+
+    if (principal && pVal < 0) newErrors.principal = labels.errorNegativeAmount[lang];
+    if (rate && (rVal < 0 || rVal > 100)) newErrors.rate = labels.errorRateRange[lang];
+    if (years && yVal < 0) newErrors.years = labels.errorNegativeTerm[lang];
+    if (years && yVal === 0) newErrors.years = labels.errorZeroTerm[lang];
+
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
+  }, [principal, rate, years, lang, labels]);
 
   const p = parseFloat(principal) || 0;
   const r = (parseFloat(rate) || 0) / 100 / 12;
@@ -51,7 +92,70 @@ export default function MortgageAmortization() {
   };
 
   const schedule = (p > 0 && n > 0) ? generateSchedule() : [];
-  const hasResult = p > 0 && n > 0;
+  const hasResult = p > 0 && n > 0 && Object.keys(errors).length === 0;
+  const principalRatio = hasResult ? (p / totalPaid) * 100 : 0;
+
+  // Save to history
+  const saveToHistory = useCallback(() => {
+    if (!hasResult) return;
+    const entry: HistoryEntry = {
+      principal, rate, years,
+      monthlyPayment, totalInterest, totalPaid,
+      timestamp: Date.now(),
+    };
+    setHistory(prev => [entry, ...prev].slice(0, 5));
+  }, [hasResult, principal, rate, years, monthlyPayment, totalInterest, totalPaid]);
+
+  // Copy results
+  const copyResults = useCallback(async () => {
+    if (!hasResult) return;
+    const text = `${labels.monthly[lang]}: ${monthlyPayment.toFixed(2)}\n${labels.totalInterest[lang]}: ${totalInterest.toFixed(2)}\n${labels.totalPaid[lang]}: ${totalPaid.toFixed(2)}`;
+    try {
+      await navigator.clipboard.writeText(text);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+    } catch { /* clipboard not available */ }
+  }, [hasResult, monthlyPayment, totalInterest, totalPaid, lang, labels]);
+
+  // Reset
+  const handleReset = () => {
+    setPrincipal('');
+    setRate('');
+    setYears('');
+    setShowSchedule(false);
+    setErrors({});
+  };
+
+  // Load from history
+  const loadFromHistory = (entry: HistoryEntry) => {
+    setPrincipal(entry.principal);
+    setRate(entry.rate);
+    setYears(entry.years);
+    setErrors({});
+  };
+
+  // Handle input with validation
+  const handlePrincipalChange = (val: string) => {
+    setPrincipal(val);
+    const v = parseFloat(val);
+    if (val && v < 0) setErrors(prev => ({ ...prev, principal: labels.errorNegativeAmount[lang] }));
+    else setErrors(prev => { const { principal: _, ...rest } = prev; return rest; });
+  };
+
+  const handleRateChange = (val: string) => {
+    setRate(val);
+    const v = parseFloat(val);
+    if (val && (v < 0 || v > 100)) setErrors(prev => ({ ...prev, rate: labels.errorRateRange[lang] }));
+    else setErrors(prev => { const { rate: _, ...rest } = prev; return rest; });
+  };
+
+  const handleYearsChange = (val: string) => {
+    setYears(val);
+    const v = parseFloat(val);
+    if (val && v < 0) setErrors(prev => ({ ...prev, years: labels.errorNegativeTerm[lang] }));
+    else if (val && v === 0) setErrors(prev => ({ ...prev, years: labels.errorZeroTerm[lang] }));
+    else setErrors(prev => { const { years: _, ...rest } = prev; return rest; });
+  };
 
   const seoContent: Record<Locale, { title: string; paragraphs: string[]; faq: { q: string; a: string }[] }> = {
     en: {
@@ -162,35 +266,81 @@ export default function MortgageAmortization() {
         <p className="text-gray-600 mb-6">{toolT.description}</p>
 
         <div className="bg-white rounded-xl border border-gray-200 p-6 space-y-4">
+          {/* Principal input */}
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-1">{labels.principal[lang]}</label>
-            <input type="number" value={principal} onChange={(e) => setPrincipal(e.target.value)} placeholder="250000" className="w-full border border-gray-300 rounded-lg px-4 py-2 text-lg focus:ring-2 focus:ring-blue-500" />
+            <input type="number" value={principal} onChange={(e) => handlePrincipalChange(e.target.value)} placeholder="250000" className={`w-full border rounded-lg px-4 py-2 text-lg focus:ring-2 focus:ring-blue-500 ${errors.principal ? 'border-red-400 bg-red-50' : 'border-gray-300'}`} />
+            {errors.principal && <p className="text-red-500 text-xs mt-1">{errors.principal}</p>}
           </div>
+          {/* Rate input */}
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-1">{labels.rate[lang]}</label>
-            <input type="number" value={rate} onChange={(e) => setRate(e.target.value)} placeholder="5.5" step="0.1" className="w-full border border-gray-300 rounded-lg px-4 py-2 text-lg focus:ring-2 focus:ring-blue-500" />
+            <input type="number" value={rate} onChange={(e) => handleRateChange(e.target.value)} placeholder="5.5" step="0.1" className={`w-full border rounded-lg px-4 py-2 text-lg focus:ring-2 focus:ring-blue-500 ${errors.rate ? 'border-red-400 bg-red-50' : 'border-gray-300'}`} />
+            {errors.rate && <p className="text-red-500 text-xs mt-1">{errors.rate}</p>}
           </div>
+          {/* Years input */}
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-1">{labels.years[lang]}</label>
-            <input type="number" value={years} onChange={(e) => setYears(e.target.value)} placeholder="30" className="w-full border border-gray-300 rounded-lg px-4 py-2 text-lg focus:ring-2 focus:ring-blue-500" />
+            <input type="number" value={years} onChange={(e) => handleYearsChange(e.target.value)} placeholder="30" className={`w-full border rounded-lg px-4 py-2 text-lg focus:ring-2 focus:ring-blue-500 ${errors.years ? 'border-red-400 bg-red-50' : 'border-gray-300'}`} />
+            {errors.years && <p className="text-red-500 text-xs mt-1">{errors.years}</p>}
+          </div>
+
+          {/* Action buttons row */}
+          <div className="flex gap-2">
+            <button
+              onClick={() => { if (validate()) saveToHistory(); }}
+              className="flex-1 py-2 px-4 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors text-sm font-medium"
+            >
+              {labels.calculate[lang]}
+            </button>
+            <button
+              onClick={handleReset}
+              className="py-2 px-4 bg-gray-200 text-gray-700 rounded-lg hover:bg-gray-300 transition-colors text-sm font-medium"
+            >
+              {labels.reset[lang]}
+            </button>
           </div>
 
           {hasResult && (
             <div className="space-y-3">
+              {/* Summary cards */}
               <div className="p-5 rounded-lg bg-blue-50 text-center">
                 <div className="text-sm text-gray-500">{labels.monthly[lang]}</div>
                 <div className="text-4xl font-bold text-blue-700">{monthlyPayment.toFixed(2)}</div>
               </div>
               <div className="grid grid-cols-2 gap-3">
-                <div className="p-3 rounded-lg bg-gray-50 text-center">
+                <div className="p-3 rounded-lg bg-red-50 text-center">
                   <div className="text-xs text-gray-500">{labels.totalInterest[lang]}</div>
                   <div className="text-lg font-semibold text-red-600">{totalInterest.toFixed(2)}</div>
                 </div>
-                <div className="p-3 rounded-lg bg-gray-50 text-center">
+                <div className="p-3 rounded-lg bg-green-50 text-center">
                   <div className="text-xs text-gray-500">{labels.totalPaid[lang]}</div>
                   <div className="text-lg font-semibold text-gray-900">{totalPaid.toFixed(2)}</div>
                 </div>
               </div>
+
+              {/* Progress bar: principal vs interest */}
+              <div>
+                <div className="flex justify-between text-xs text-gray-500 mb-1">
+                  <span>{labels.principalPart[lang]} ({principalRatio.toFixed(1)}%)</span>
+                  <span>{labels.interestPart[lang]} ({(100 - principalRatio).toFixed(1)}%)</span>
+                </div>
+                <div className="w-full h-4 bg-red-200 rounded-full overflow-hidden">
+                  <div
+                    className="h-full bg-green-500 rounded-l-full transition-all duration-500"
+                    style={{ width: `${principalRatio}%` }}
+                  />
+                </div>
+                <div className="text-center text-xs text-gray-400 mt-1">{labels.principalVsInterest[lang]}</div>
+              </div>
+
+              {/* Copy Results button */}
+              <button
+                onClick={copyResults}
+                className="w-full py-2 px-4 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors text-sm font-medium"
+              >
+                {copied ? labels.copied[lang] : labels.copyResults[lang]}
+              </button>
 
               <button
                 onClick={() => setShowSchedule(!showSchedule)}
@@ -228,6 +378,35 @@ export default function MortgageAmortization() {
             </div>
           )}
         </div>
+
+        {/* History section */}
+        {history.length > 0 && (
+          <div className="mt-6 bg-white rounded-xl border border-gray-200 p-4">
+            <div className="flex justify-between items-center mb-3">
+              <h3 className="text-sm font-semibold text-gray-700">{labels.history[lang]}</h3>
+              <button
+                onClick={() => setHistory([])}
+                className="text-xs text-red-500 hover:text-red-700 transition-colors"
+              >
+                {labels.clearHistory[lang]}
+              </button>
+            </div>
+            <div className="space-y-2">
+              {history.map((entry, i) => (
+                <button
+                  key={entry.timestamp}
+                  onClick={() => loadFromHistory(entry)}
+                  className="w-full text-left p-2 rounded-lg bg-gray-50 hover:bg-blue-50 transition-colors text-sm flex justify-between items-center"
+                >
+                  <span className="text-gray-700">
+                    {labels.loan[lang]}: {parseFloat(entry.principal).toLocaleString()} | {entry.rate}% | {entry.years} {labels.years[lang].split('(')[1]?.replace(')', '') || labels.year[lang]}
+                  </span>
+                  <span className="font-semibold text-blue-600">{entry.monthlyPayment.toFixed(2)}/mo</span>
+                </button>
+              ))}
+            </div>
+          </div>
+        )}
 
         {/* SEO Article */}
         <article className="mt-12 prose prose-gray max-w-none">
