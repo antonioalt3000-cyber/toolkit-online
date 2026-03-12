@@ -107,6 +107,8 @@ export default function PercentageCalculator() {
   const [val2b, setVal2b] = useState('');
   const [val3a, setVal3a] = useState('');
   const [val3b, setVal3b] = useState('');
+  const [copied, setCopied] = useState<string | null>(null);
+  const [history, setHistory] = useState<{ type: string; input: string; result: string }[]>([]);
 
   const labels = {
     whatIs: { en: 'What is', it: 'Quanto è il', es: 'Cuánto es el', fr: 'Combien est', de: 'Was ist', pt: 'Quanto é' },
@@ -114,11 +116,33 @@ export default function PercentageCalculator() {
     isWhatPct: { en: 'is what % of', it: 'è che % di', es: 'es qué % de', fr: 'est quel % de', de: 'ist wieviel % von', pt: 'é qual % de' },
     pctChange: { en: 'Percentage change from', it: 'Variazione percentuale da', es: 'Cambio porcentual de', fr: 'Changement en pourcentage de', de: 'Prozentuale Änderung von', pt: 'Mudança percentual de' },
     to: { en: 'to', it: 'a', es: 'a', fr: 'à', de: 'zu', pt: 'para' },
+    reset: { en: 'Reset All', it: 'Resetta Tutto', es: 'Restablecer Todo', fr: 'Réinitialiser Tout', de: 'Alles Zurücksetzen', pt: 'Redefinir Tudo' },
+    copy: { en: 'Copy', it: 'Copia', es: 'Copiar', fr: 'Copier', de: 'Kopieren', pt: 'Copiar' },
+    copied: { en: 'Copied!', it: 'Copiato!', es: 'Copiado!', fr: 'Copié!', de: 'Kopiert!', pt: 'Copiado!' },
+    history: { en: 'History', it: 'Cronologia', es: 'Historial', fr: 'Historique', de: 'Verlauf', pt: 'Histórico' },
+    increase: { en: 'Increase', it: 'Aumento', es: 'Aumento', fr: 'Augmentation', de: 'Zunahme', pt: 'Aumento' },
+    decrease: { en: 'Decrease', it: 'Diminuzione', es: 'Disminución', fr: 'Diminution', de: 'Abnahme', pt: 'Diminuição' },
+    result: { en: 'Result', it: 'Risultato', es: 'Resultado', fr: 'Résultat', de: 'Ergebnis', pt: 'Resultado' },
   } as Record<string, Record<Locale, string>>;
 
   const r1 = val1 && pct1 ? ((parseFloat(pct1) / 100) * parseFloat(val1)).toFixed(2) : '';
-  const r2 = val2a && val2b ? ((parseFloat(val2a) / parseFloat(val2b)) * 100).toFixed(2) + '%' : '';
-  const r3 = val3a && val3b ? (((parseFloat(val3b) - parseFloat(val3a)) / parseFloat(val3a)) * 100).toFixed(2) + '%' : '';
+  const r2 = val2a && val2b && parseFloat(val2b) !== 0 ? ((parseFloat(val2a) / parseFloat(val2b)) * 100).toFixed(2) : '';
+  const r3raw = val3a && val3b && parseFloat(val3a) !== 0 ? ((parseFloat(val3b) - parseFloat(val3a)) / parseFloat(val3a)) * 100 : null;
+  const r3 = r3raw !== null ? r3raw.toFixed(2) : '';
+
+  const copyResult = (key: string, text: string) => {
+    navigator.clipboard.writeText(text);
+    setCopied(key);
+    setTimeout(() => setCopied(null), 2000);
+  };
+
+  const saveToHistory = (type: string, input: string, result: string) => {
+    setHistory(prev => [{ type, input, result }, ...prev].slice(0, 5));
+  };
+
+  const resetAll = () => {
+    setVal1(''); setPct1(''); setVal2a(''); setVal2b(''); setVal3a(''); setVal3b('');
+  };
 
   const seo = seoContent[lang];
   const [openFaq, setOpenFaq] = useState<number | null>(null);
@@ -130,35 +154,127 @@ export default function PercentageCalculator() {
         <p className="text-gray-600 mb-6">{toolT.description}</p>
 
         <div className="space-y-6">
+          {/* Calculator 1: X% of Y */}
           <div className="bg-white rounded-xl border border-gray-200 p-5">
-            <div className="flex items-center gap-2 flex-wrap">
-              <span className="text-gray-700">{labels.whatIs[lang]}</span>
-              <input type="number" value={pct1} onChange={(e) => setPct1(e.target.value)} className="w-20 border border-gray-300 rounded px-2 py-1" placeholder="10" />
+            <div className="flex items-center gap-2 flex-wrap mb-3">
+              <span className="text-gray-700 font-medium">{labels.whatIs[lang]}</span>
+              <input type="number" value={pct1} onChange={(e) => setPct1(e.target.value)} className="w-20 border border-gray-300 rounded-lg px-2 py-1.5 focus:ring-2 focus:ring-blue-500 focus:border-transparent" placeholder="10" />
               <span className="text-gray-700">% {labels.of[lang]}</span>
-              <input type="number" value={val1} onChange={(e) => setVal1(e.target.value)} className="w-28 border border-gray-300 rounded px-2 py-1" placeholder="200" />
-              {r1 && <span className="text-lg font-bold text-blue-600">= {r1}</span>}
+              <input type="number" value={val1} onChange={(e) => setVal1(e.target.value)} className="w-28 border border-gray-300 rounded-lg px-2 py-1.5 focus:ring-2 focus:ring-blue-500 focus:border-transparent" placeholder="200" />
             </div>
+            {r1 && (
+              <div className="bg-blue-50 rounded-lg p-3 flex items-center justify-between">
+                <div className="flex items-center gap-2">
+                  <span className="text-2xl">🔢</span>
+                  <div>
+                    <p className="text-xs text-blue-600 font-medium">{labels.result[lang]}</p>
+                    <p className="text-xl font-bold text-blue-700">{r1}</p>
+                  </div>
+                </div>
+                <div className="flex gap-2">
+                  <button onClick={() => copyResult('r1', r1)} className="px-3 py-1 text-xs rounded-lg bg-blue-100 text-blue-700 hover:bg-blue-200 transition-colors">
+                    {copied === 'r1' ? labels.copied[lang] : labels.copy[lang]}
+                  </button>
+                  <button onClick={() => saveToHistory('% of', `${pct1}% of ${val1}`, r1)} className="px-3 py-1 text-xs rounded-lg bg-blue-100 text-blue-700 hover:bg-blue-200 transition-colors">
+                    +
+                  </button>
+                </div>
+              </div>
+            )}
           </div>
 
+          {/* Calculator 2: X is what % of Y */}
           <div className="bg-white rounded-xl border border-gray-200 p-5">
-            <div className="flex items-center gap-2 flex-wrap">
-              <input type="number" value={val2a} onChange={(e) => setVal2a(e.target.value)} className="w-24 border border-gray-300 rounded px-2 py-1" placeholder="50" />
-              <span className="text-gray-700">{labels.isWhatPct[lang]}</span>
-              <input type="number" value={val2b} onChange={(e) => setVal2b(e.target.value)} className="w-24 border border-gray-300 rounded px-2 py-1" placeholder="200" />
-              {r2 && <span className="text-lg font-bold text-blue-600">= {r2}</span>}
+            <div className="flex items-center gap-2 flex-wrap mb-3">
+              <input type="number" value={val2a} onChange={(e) => setVal2a(e.target.value)} className="w-24 border border-gray-300 rounded-lg px-2 py-1.5 focus:ring-2 focus:ring-green-500 focus:border-transparent" placeholder="50" />
+              <span className="text-gray-700 font-medium">{labels.isWhatPct[lang]}</span>
+              <input type="number" value={val2b} onChange={(e) => setVal2b(e.target.value)} className="w-24 border border-gray-300 rounded-lg px-2 py-1.5 focus:ring-2 focus:ring-green-500 focus:border-transparent" placeholder="200" />
             </div>
+            {val2b && parseFloat(val2b) === 0 && (
+              <p className="text-red-500 text-sm mb-2">Cannot divide by zero</p>
+            )}
+            {r2 && (
+              <div className="bg-green-50 rounded-lg p-3 flex items-center justify-between">
+                <div className="flex items-center gap-2">
+                  <span className="text-2xl">📊</span>
+                  <div>
+                    <p className="text-xs text-green-600 font-medium">{labels.result[lang]}</p>
+                    <p className="text-xl font-bold text-green-700">{r2}%</p>
+                  </div>
+                </div>
+                <div className="flex gap-2">
+                  <button onClick={() => copyResult('r2', r2 + '%')} className="px-3 py-1 text-xs rounded-lg bg-green-100 text-green-700 hover:bg-green-200 transition-colors">
+                    {copied === 'r2' ? labels.copied[lang] : labels.copy[lang]}
+                  </button>
+                  <button onClick={() => saveToHistory('is % of', `${val2a} of ${val2b}`, r2 + '%')} className="px-3 py-1 text-xs rounded-lg bg-green-100 text-green-700 hover:bg-green-200 transition-colors">
+                    +
+                  </button>
+                </div>
+              </div>
+            )}
           </div>
 
+          {/* Calculator 3: Percentage Change */}
           <div className="bg-white rounded-xl border border-gray-200 p-5">
-            <div className="flex items-center gap-2 flex-wrap">
-              <span className="text-gray-700">{labels.pctChange[lang]}</span>
-              <input type="number" value={val3a} onChange={(e) => setVal3a(e.target.value)} className="w-24 border border-gray-300 rounded px-2 py-1" placeholder="100" />
+            <div className="flex items-center gap-2 flex-wrap mb-3">
+              <span className="text-gray-700 font-medium">{labels.pctChange[lang]}</span>
+              <input type="number" value={val3a} onChange={(e) => setVal3a(e.target.value)} className="w-24 border border-gray-300 rounded-lg px-2 py-1.5 focus:ring-2 focus:ring-purple-500 focus:border-transparent" placeholder="100" />
               <span className="text-gray-700">{labels.to[lang]}</span>
-              <input type="number" value={val3b} onChange={(e) => setVal3b(e.target.value)} className="w-24 border border-gray-300 rounded px-2 py-1" placeholder="150" />
-              {r3 && <span className="text-lg font-bold text-blue-600">= {r3}</span>}
+              <input type="number" value={val3b} onChange={(e) => setVal3b(e.target.value)} className="w-24 border border-gray-300 rounded-lg px-2 py-1.5 focus:ring-2 focus:ring-purple-500 focus:border-transparent" placeholder="150" />
             </div>
+            {val3a && parseFloat(val3a) === 0 && (
+              <p className="text-red-500 text-sm mb-2">Cannot divide by zero</p>
+            )}
+            {r3 && r3raw !== null && (
+              <div className={`rounded-lg p-3 flex items-center justify-between ${r3raw >= 0 ? 'bg-green-50' : 'bg-red-50'}`}>
+                <div className="flex items-center gap-2">
+                  <span className="text-2xl">{r3raw >= 0 ? '📈' : '📉'}</span>
+                  <div>
+                    <p className={`text-xs font-medium ${r3raw >= 0 ? 'text-green-600' : 'text-red-600'}`}>
+                      {r3raw >= 0 ? labels.increase[lang] : labels.decrease[lang]}
+                    </p>
+                    <p className={`text-xl font-bold ${r3raw >= 0 ? 'text-green-700' : 'text-red-700'}`}>
+                      {r3raw >= 0 ? '+' : ''}{r3}%
+                    </p>
+                  </div>
+                </div>
+                <div className="flex gap-2">
+                  <button onClick={() => copyResult('r3', (r3raw >= 0 ? '+' : '') + r3 + '%')} className={`px-3 py-1 text-xs rounded-lg transition-colors ${r3raw >= 0 ? 'bg-green-100 text-green-700 hover:bg-green-200' : 'bg-red-100 text-red-700 hover:bg-red-200'}`}>
+                    {copied === 'r3' ? labels.copied[lang] : labels.copy[lang]}
+                  </button>
+                  <button onClick={() => saveToHistory('change', `${val3a} -> ${val3b}`, (r3raw >= 0 ? '+' : '') + r3 + '%')} className={`px-3 py-1 text-xs rounded-lg transition-colors ${r3raw >= 0 ? 'bg-green-100 text-green-700 hover:bg-green-200' : 'bg-red-100 text-red-700 hover:bg-red-200'}`}>
+                    +
+                  </button>
+                </div>
+              </div>
+            )}
           </div>
         </div>
+
+        {/* Reset Button */}
+        <div className="mt-4 flex justify-end">
+          <button onClick={resetAll} className="px-4 py-2 text-sm rounded-lg bg-gray-100 text-gray-700 hover:bg-gray-200 transition-colors">
+            {labels.reset[lang]}
+          </button>
+        </div>
+
+        {/* History */}
+        {history.length > 0 && (
+          <div className="mt-6 bg-white rounded-xl border border-gray-200 p-4">
+            <h3 className="font-semibold text-gray-900 mb-3">{labels.history[lang]}</h3>
+            <div className="space-y-2">
+              {history.map((h, i) => (
+                <div key={i} className="flex justify-between items-center text-sm p-2 bg-gray-50 rounded-lg">
+                  <span className="text-gray-600">
+                    <span className="inline-block px-2 py-0.5 bg-gray-200 text-gray-700 rounded text-xs mr-2">{h.type}</span>
+                    {h.input}
+                  </span>
+                  <span className="font-semibold text-gray-900">{h.result}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
 
         <article className="mt-12 prose prose-gray max-w-none">
           <h2 className="text-2xl font-bold text-gray-900 mb-4">{seo.title}</h2>

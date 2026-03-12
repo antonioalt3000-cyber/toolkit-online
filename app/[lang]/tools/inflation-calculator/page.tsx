@@ -34,6 +34,7 @@ export default function InflationCalculator() {
     copied: { en: 'Copied!', it: 'Copiato!', es: 'Copiado!', fr: 'Copié !', de: 'Kopiert!', pt: 'Copiado!' },
     copy: { en: 'Copy Result', it: 'Copia Risultato', es: 'Copiar Resultado', fr: 'Copier le Résultat', de: 'Ergebnis Kopieren', pt: 'Copiar Resultado' },
     invalidAmount: { en: 'Enter a positive amount', it: 'Inserisci un importo positivo', es: 'Ingresa un monto positivo', fr: 'Entrez un montant positif', de: 'Geben Sie einen positiven Betrag ein', pt: 'Insira um valor positivo' },
+    historyLabel: { en: 'Recent Calculations', it: 'Calcoli Recenti', es: 'Cálculos Recientes', fr: 'Calculs Récents', de: 'Letzte Berechnungen', pt: 'Cálculos Recentes' },
   } as Record<string, Record<Locale, string>>;
 
   const amt = parseFloat(amount) || 0;
@@ -278,6 +279,30 @@ export default function InflationCalculator() {
                   </div>
                 </div>
               )}
+
+              {/* Save to history */}
+              <button onClick={() => {
+                const res = mode === 'future' ? formatCurrency(futureValue) : formatCurrency(pastValue);
+                const label = mode === 'future' ? labels.futureMode[lang] : labels.pastMode[lang];
+                setHistoryList(prev => [{ mode: label, result: res }, ...prev].slice(0, 5));
+              }} className="w-full py-2 bg-blue-50 hover:bg-blue-100 rounded-lg text-sm text-blue-700 transition-colors">
+                + {labels.historyLabel[lang]}
+              </button>
+            </div>
+          )}
+
+          {/* History panel */}
+          {historyList.length > 0 && (
+            <div className="bg-gray-50 p-4 rounded-lg">
+              <div className="text-sm font-medium text-gray-700 mb-2">{labels.historyLabel[lang]}</div>
+              <div className="space-y-1">
+                {historyList.map((h, i) => (
+                  <div key={i} className="flex justify-between text-sm py-1 px-2 bg-white rounded">
+                    <span className="text-gray-500 text-xs truncate max-w-[50%]">{h.mode}</span>
+                    <span className="font-mono text-gray-900">{h.result}</span>
+                  </div>
+                ))}
+              </div>
             </div>
           )}
         </div>
