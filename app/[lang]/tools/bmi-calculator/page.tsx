@@ -4,31 +4,84 @@ import { useParams } from 'next/navigation';
 import { tools, type Locale } from '@/lib/translations';
 import ToolPageWrapper from '@/components/ToolPageWrapper';
 
+type HistoryEntry = { weight: number; height: number; bmi: number; category: string; unit: string };
+
 export default function BmiCalculator() {
   const { lang } = useParams() as { lang: Locale };
   const toolT = tools['bmi-calculator'][lang];
 
   const [weight, setWeight] = useState('');
   const [height, setHeight] = useState('');
-
-  const w = parseFloat(weight) || 0;
-  const h = parseFloat(height) || 0;
-  const bmi = h > 0 ? w / ((h / 100) ** 2) : 0;
+  const [unit, setUnit] = useState<'metric' | 'imperial'>('metric');
+  const [history, setHistory] = useState<HistoryEntry[]>([]);
+  const [copied, setCopied] = useState(false);
+  const [errors, setErrors] = useState<{ weight?: string; height?: string }>({});
 
   const labels = {
     weight: { en: 'Weight (kg)', it: 'Peso (kg)', es: 'Peso (kg)', fr: 'Poids (kg)', de: 'Gewicht (kg)', pt: 'Peso (kg)' },
+    weightLbs: { en: 'Weight (lbs)', it: 'Peso (lbs)', es: 'Peso (lbs)', fr: 'Poids (lbs)', de: 'Gewicht (lbs)', pt: 'Peso (lbs)' },
     height: { en: 'Height (cm)', it: 'Altezza (cm)', es: 'Altura (cm)', fr: 'Taille (cm)', de: 'Größe (cm)', pt: 'Altura (cm)' },
+    heightIn: { en: 'Height (inches)', it: 'Altezza (pollici)', es: 'Altura (pulgadas)', fr: 'Taille (pouces)', de: 'Größe (Zoll)', pt: 'Altura (polegadas)' },
     underweight: { en: 'Underweight', it: 'Sottopeso', es: 'Bajo peso', fr: 'Insuffisance pondérale', de: 'Untergewicht', pt: 'Abaixo do peso' },
     normal: { en: 'Normal weight', it: 'Normopeso', es: 'Peso normal', fr: 'Poids normal', de: 'Normalgewicht', pt: 'Peso normal' },
     overweight: { en: 'Overweight', it: 'Sovrappeso', es: 'Sobrepeso', fr: 'Surpoids', de: 'Übergewicht', pt: 'Sobrepeso' },
     obese: { en: 'Obese', it: 'Obesità', es: 'Obesidad', fr: 'Obésité', de: 'Adipositas', pt: 'Obesidade' },
+    metric: { en: 'Metric (kg/cm)', it: 'Metrico (kg/cm)', es: 'Métrico (kg/cm)', fr: 'Métrique (kg/cm)', de: 'Metrisch (kg/cm)', pt: 'Métrico (kg/cm)' },
+    imperial: { en: 'Imperial (lbs/in)', it: 'Imperiale (lbs/in)', es: 'Imperial (lbs/in)', fr: 'Impérial (lbs/in)', de: 'Imperial (lbs/in)', pt: 'Imperial (lbs/in)' },
+    reset: { en: 'Reset', it: 'Resetta', es: 'Restablecer', fr: 'Réinitialiser', de: 'Zurücksetzen', pt: 'Redefinir' },
+    copy: { en: 'Copy Results', it: 'Copia Risultati', es: 'Copiar Resultados', fr: 'Copier Résultats', de: 'Ergebnisse Kopieren', pt: 'Copiar Resultados' },
+    copied: { en: 'Copied!', it: 'Copiato!', es: 'Copiado!', fr: 'Copié!', de: 'Kopiert!', pt: 'Copiado!' },
+    history: { en: 'Recent Calculations', it: 'Calcoli Recenti', es: 'Cálculos Recientes', fr: 'Calculs Récents', de: 'Letzte Berechnungen', pt: 'Cálculos Recentes' },
+    healthyRange: { en: 'Healthy weight range', it: 'Range peso sano', es: 'Rango de peso saludable', fr: 'Plage de poids sain', de: 'Gesunder Gewichtsbereich', pt: 'Faixa de peso saudável' },
+    invalidWeight: { en: 'Enter a valid weight', it: 'Inserisci un peso valido', es: 'Ingresa un peso válido', fr: 'Entrez un poids valide', de: 'Gültiges Gewicht eingeben', pt: 'Insira um peso válido' },
+    invalidHeight: { en: 'Enter a valid height', it: 'Inserisci un\'altezza valida', es: 'Ingresa una altura válida', fr: 'Entrez une taille valide', de: 'Gültige Größe eingeben', pt: 'Insira uma altura válida' },
   } as Record<string, Record<Locale, string>>;
 
+  // Convert to metric for calculation
+  const wKg = unit === 'metric' ? (parseFloat(weight) || 0) : (parseFloat(weight) || 0) * 0.453592;
+  const hCm = unit === 'metric' ? (parseFloat(height) || 0) : (parseFloat(height) || 0) * 2.54;
+  const bmi = hCm > 0 ? wKg / ((hCm / 100) ** 2) : 0;
+
   const getCategory = () => {
-    if (bmi < 18.5) return { text: labels.underweight[lang], color: 'text-yellow-600', bg: 'bg-yellow-50' };
-    if (bmi < 25) return { text: labels.normal[lang], color: 'text-green-600', bg: 'bg-green-50' };
-    if (bmi < 30) return { text: labels.overweight[lang], color: 'text-orange-600', bg: 'bg-orange-50' };
-    return { text: labels.obese[lang], color: 'text-red-600', bg: 'bg-red-50' };
+    if (bmi < 18.5) return { text: labels.underweight[lang], color: 'text-yellow-600', bg: 'bg-yellow-50', border: 'border-yellow-200', icon: '⚠️', pct: (bmi / 40) * 100 };
+    if (bmi < 25) return { text: labels.normal[lang], color: 'text-green-600', bg: 'bg-green-50', border: 'border-green-200', icon: '✅', pct: (bmi / 40) * 100 };
+    if (bmi < 30) return { text: labels.overweight[lang], color: 'text-orange-600', bg: 'bg-orange-50', border: 'border-orange-200', icon: '⚠️', pct: (bmi / 40) * 100 };
+    return { text: labels.obese[lang], color: 'text-red-600', bg: 'bg-red-50', border: 'border-red-200', icon: '🔴', pct: Math.min((bmi / 40) * 100, 100) };
+  };
+
+  const healthyWeightMin = unit === 'metric' ? (18.5 * ((hCm / 100) ** 2)).toFixed(1) : ((18.5 * ((hCm / 100) ** 2)) / 0.453592).toFixed(1);
+  const healthyWeightMax = unit === 'metric' ? (24.9 * ((hCm / 100) ** 2)).toFixed(1) : ((24.9 * ((hCm / 100) ** 2)) / 0.453592).toFixed(1);
+
+  const validate = () => {
+    const newErrors: { weight?: string; height?: string } = {};
+    const w = parseFloat(weight);
+    const h = parseFloat(height);
+    if (weight && (isNaN(w) || w <= 0)) newErrors.weight = labels.invalidWeight[lang];
+    if (height && (isNaN(h) || h <= 0)) newErrors.height = labels.invalidHeight[lang];
+    setErrors(newErrors);
+  };
+
+  const handleCalculation = () => {
+    if (bmi > 0 && !errors.weight && !errors.height) {
+      const cat = getCategory();
+      const entry: HistoryEntry = { weight: parseFloat(weight), height: parseFloat(height), bmi, category: cat.text, unit };
+      setHistory(prev => [entry, ...prev.filter((_, i) => i < 4)]);
+    }
+  };
+
+  const handleReset = () => {
+    setWeight('');
+    setHeight('');
+    setErrors({});
+  };
+
+  const copyResults = () => {
+    const cat = getCategory();
+    const unitLabel = unit === 'metric' ? 'kg/cm' : 'lbs/in';
+    const text = `BMI: ${bmi.toFixed(1)} (${cat.text})\nWeight: ${weight} ${unitLabel.split('/')[0]}\nHeight: ${height} ${unitLabel.split('/')[1]}`;
+    navigator.clipboard.writeText(text);
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2000);
   };
 
   const seoContent: Record<Locale, { title: string; paragraphs: string[]; faq: { q: string; a: string }[] }> = {
@@ -134,43 +187,111 @@ export default function BmiCalculator() {
   const [openFaq, setOpenFaq] = useState<number | null>(null);
 
   return (
-    <ToolPageWrapper toolSlug="bmi-calculator">
+    <ToolPageWrapper toolSlug="bmi-calculator" faqItems={seo.faq}>
       <div className="max-w-2xl mx-auto">
         <h1 className="text-3xl font-bold text-gray-900 mb-2">{toolT.name}</h1>
         <p className="text-gray-600 mb-6">{toolT.description}</p>
 
         <div className="bg-white rounded-xl border border-gray-200 p-6 space-y-4">
-          <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">{labels.weight[lang]}</label>
-            <input type="number" value={weight} onChange={(e) => setWeight(e.target.value)} placeholder="70" className="w-full border border-gray-300 rounded-lg px-4 py-2 text-lg focus:ring-2 focus:ring-blue-500" />
-          </div>
-          <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">{labels.height[lang]}</label>
-            <input type="number" value={height} onChange={(e) => setHeight(e.target.value)} placeholder="175" className="w-full border border-gray-300 rounded-lg px-4 py-2 text-lg focus:ring-2 focus:ring-blue-500" />
+          {/* Unit toggle */}
+          <div className="flex gap-2">
+            <button onClick={() => { setUnit('metric'); setWeight(''); setHeight(''); setErrors({}); }} className={`flex-1 py-2 rounded-lg font-medium text-sm ${unit === 'metric' ? 'bg-blue-600 text-white' : 'bg-gray-100 text-gray-700'}`}>{labels.metric[lang]}</button>
+            <button onClick={() => { setUnit('imperial'); setWeight(''); setHeight(''); setErrors({}); }} className={`flex-1 py-2 rounded-lg font-medium text-sm ${unit === 'imperial' ? 'bg-blue-600 text-white' : 'bg-gray-100 text-gray-700'}`}>{labels.imperial[lang]}</button>
           </div>
 
-          {bmi > 0 && (
-            <div className={`p-5 rounded-lg ${getCategory().bg} text-center`}>
-              <div className="text-4xl font-bold text-gray-900">{bmi.toFixed(1)}</div>
-              <div className={`text-lg font-semibold mt-1 ${getCategory().color}`}>{getCategory().text}</div>
-            </div>
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-1">{unit === 'metric' ? labels.weight[lang] : labels.weightLbs[lang]}</label>
+            <input type="number" value={weight} onChange={(e) => { setWeight(e.target.value); validate(); }} onBlur={() => { validate(); handleCalculation(); }} placeholder={unit === 'metric' ? '70' : '154'} className={`w-full border rounded-lg px-4 py-2 text-lg focus:ring-2 focus:ring-blue-500 ${errors.weight ? 'border-red-400 bg-red-50' : 'border-gray-300'}`} />
+            {errors.weight && <p className="text-red-500 text-sm mt-1">{errors.weight}</p>}
+          </div>
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-1">{unit === 'metric' ? labels.height[lang] : labels.heightIn[lang]}</label>
+            <input type="number" value={height} onChange={(e) => { setHeight(e.target.value); validate(); }} onBlur={() => { validate(); handleCalculation(); }} placeholder={unit === 'metric' ? '175' : '69'} className={`w-full border rounded-lg px-4 py-2 text-lg focus:ring-2 focus:ring-blue-500 ${errors.height ? 'border-red-400 bg-red-50' : 'border-gray-300'}`} />
+            {errors.height && <p className="text-red-500 text-sm mt-1">{errors.height}</p>}
+          </div>
+
+          <div className="flex justify-end">
+            <button onClick={handleReset} className="text-sm text-gray-500 hover:text-red-500 transition-colors flex items-center gap-1">
+              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" /></svg>
+              {labels.reset[lang]}
+            </button>
+          </div>
+
+          {bmi > 0 && !errors.weight && !errors.height && (
+            <>
+              <div className={`p-5 rounded-xl ${getCategory().bg} border ${getCategory().border} text-center`}>
+                <div className="text-lg mb-1">{getCategory().icon}</div>
+                <div className="text-4xl font-bold text-gray-900">{bmi.toFixed(1)}</div>
+                <div className={`text-lg font-semibold mt-1 ${getCategory().color}`}>{getCategory().text}</div>
+              </div>
+
+              {/* BMI Scale */}
+              <div className="relative pt-2">
+                <div className="flex rounded-full h-3 overflow-hidden">
+                  <div className="bg-yellow-400 w-[23%]"></div>
+                  <div className="bg-green-400 w-[16%]"></div>
+                  <div className="bg-orange-400 w-[13%]"></div>
+                  <div className="bg-red-400 flex-1"></div>
+                </div>
+                <div className="absolute top-0 transition-all duration-500" style={{ left: `${Math.min(Math.max((bmi / 40) * 100, 2), 98)}%` }}>
+                  <div className="w-0 h-0 border-l-[6px] border-r-[6px] border-b-[8px] border-l-transparent border-r-transparent border-b-gray-800 -translate-x-1/2"></div>
+                </div>
+                <div className="flex justify-between text-xs text-gray-400 mt-1">
+                  <span>0</span>
+                  <span>18.5</span>
+                  <span>25</span>
+                  <span>30</span>
+                  <span>40</span>
+                </div>
+              </div>
+
+              {hCm > 0 && (
+                <div className="bg-blue-50 border border-blue-200 rounded-lg p-3 flex items-start gap-3">
+                  <span className="text-xl">📏</span>
+                  <div>
+                    <div className="text-xs text-blue-600 font-medium">{labels.healthyRange[lang]}</div>
+                    <div className="text-sm font-semibold text-gray-900">{healthyWeightMin} - {healthyWeightMax} {unit === 'metric' ? 'kg' : 'lbs'}</div>
+                  </div>
+                </div>
+              )}
+
+              <button onClick={copyResults} className="w-full py-2 rounded-lg border border-gray-300 text-sm font-medium text-gray-700 hover:bg-gray-50 transition-colors flex items-center justify-center gap-2">
+                {copied ? (
+                  <><svg className="w-4 h-4 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" /></svg>{labels.copied[lang]}</>
+                ) : (
+                  <><svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" /></svg>{labels.copy[lang]}</>
+                )}
+              </button>
+            </>
           )}
 
-          <div className="text-xs text-gray-400 space-y-1">
-            <div className="flex justify-between"><span>{'< 18.5'}</span><span>{labels.underweight[lang]}</span></div>
-            <div className="flex justify-between"><span>18.5 – 24.9</span><span>{labels.normal[lang]}</span></div>
-            <div className="flex justify-between"><span>25 – 29.9</span><span>{labels.overweight[lang]}</span></div>
-            <div className="flex justify-between"><span>{'≥ 30'}</span><span>{labels.obese[lang]}</span></div>
+          <div className="text-xs text-gray-400 space-y-1 border-t pt-3">
+            <div className="flex justify-between"><span>{'< 18.5'}</span><span className="text-yellow-600">{labels.underweight[lang]}</span></div>
+            <div className="flex justify-between"><span>18.5 – 24.9</span><span className="text-green-600">{labels.normal[lang]}</span></div>
+            <div className="flex justify-between"><span>25 – 29.9</span><span className="text-orange-600">{labels.overweight[lang]}</span></div>
+            <div className="flex justify-between"><span>{'≥ 30'}</span><span className="text-red-600">{labels.obese[lang]}</span></div>
           </div>
         </div>
 
-        {/* SEO Article */}
+        {history.length > 0 && (
+          <div className="mt-6 bg-white rounded-xl border border-gray-200 p-4">
+            <h3 className="text-sm font-medium text-gray-700 mb-3">{labels.history[lang]}</h3>
+            <div className="space-y-2">
+              {history.map((h, i) => (
+                <div key={i} className="px-3 py-2 rounded-lg bg-gray-50 flex justify-between items-center text-sm">
+                  <span className="text-gray-600">{h.weight}{h.unit === 'metric' ? 'kg' : 'lbs'} / {h.height}{h.unit === 'metric' ? 'cm' : 'in'}</span>
+                  <span className="font-medium text-gray-900">BMI: {h.bmi.toFixed(1)} ({h.category})</span>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
+
         <article className="mt-12 prose prose-gray max-w-none">
           <h2 className="text-2xl font-bold text-gray-900 mb-4">{seo.title}</h2>
           {seo.paragraphs.map((p, i) => <p key={i} className="text-gray-700 leading-relaxed mb-4">{p}</p>)}
         </article>
 
-        {/* FAQ Accordion */}
         <section className="mt-10 mb-8">
           <h2 className="text-2xl font-bold text-gray-900 mb-4">FAQ</h2>
           <div className="space-y-2">

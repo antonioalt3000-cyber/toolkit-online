@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import ToolCard from '@/components/ToolCard';
+import AdPlaceholder from '@/components/AdPlaceholder';
 
 type ToolData = {
   name: string;
@@ -16,6 +17,7 @@ type CommonData = {
   statsFree: string;
   searchPlaceholder: string;
   categories: Record<string, string>;
+  toolOfTheDay: string;
 };
 
 interface HomeContentProps {
@@ -29,6 +31,14 @@ export default function HomeContent({ categories, toolsData, locale, common: t }
   const [search, setSearch] = useState('');
 
   const query = search.toLowerCase().trim();
+
+  // Tool of the Day — deterministic based on day of year
+  const allToolSlugs = Object.values(categories).flat();
+  const now = new Date();
+  const startOfYear = new Date(now.getFullYear(), 0, 0);
+  const dayOfYear = Math.floor((now.getTime() - startOfYear.getTime()) / (1000 * 60 * 60 * 24));
+  const todayToolSlug = allToolSlugs[dayOfYear % allToolSlugs.length];
+  const todayTool = toolsData[todayToolSlug];
 
   const filteredCategories = Object.entries(categories)
     .map(([catKey, toolSlugs]) => {
@@ -107,29 +117,73 @@ export default function HomeContent({ categories, toolsData, locale, common: t }
         </div>
       </section>
 
-      {/* Tool Categories */}
-      {filteredCategories.map(([catKey, toolSlugs]) => (
-        <section key={catKey} className="mb-10">
-          <h2 className="text-2xl font-bold text-gray-800 mb-4">
-            {t.categories[catKey] || catKey}
+      {/* Tool of the Day */}
+      {todayTool && !query && (
+        <section className="mb-10">
+          <h2 className="text-2xl font-bold text-gray-800 mb-4 flex items-center gap-2">
+            <svg className="w-6 h-6 text-yellow-500" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M12 2l2.09 6.26L20.18 9.27l-5.09 3.9L16.18 19.27 12 16l-4.18 3.27 1.09-6.1-5.09-3.9 6.09-1.01z" />
+            </svg>
+            {t.toolOfTheDay}
           </h2>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-            {toolSlugs.map((slug) => {
-              const tool = toolsData[slug];
-              if (!tool) return null;
-              return (
-                <ToolCard
-                  key={slug}
-                  slug={slug}
-                  name={tool.name}
-                  description={tool.description}
-                  lang={locale}
-                  category={catKey}
-                />
-              );
-            })}
-          </div>
+          <a
+            href={`/${locale}/tools/${todayToolSlug}`}
+            className="block rounded-xl p-[2px] bg-gradient-to-r from-yellow-400 via-orange-400 to-pink-500 hover:shadow-lg transition-shadow"
+          >
+            <div className="bg-white rounded-[10px] p-5 flex items-center gap-4">
+              <div className="shrink-0 w-12 h-12 rounded-lg bg-gradient-to-br from-yellow-400 to-orange-500 flex items-center justify-center">
+                <svg className="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M12 2l2.09 6.26L20.18 9.27l-5.09 3.9L16.18 19.27 12 16l-4.18 3.27 1.09-6.1-5.09-3.9 6.09-1.01z" />
+                </svg>
+              </div>
+              <div>
+                <h3 className="text-lg font-bold text-gray-900">{todayTool.name}</h3>
+                <p className="text-sm text-gray-500">{todayTool.description}</p>
+              </div>
+            </div>
+          </a>
         </section>
+      )}
+
+      {/* Ad: between hero and categories */}
+      <AdPlaceholder
+        slot="SLOT_HOME_TOP"
+        format="horizontal"
+        className="mb-10"
+      />
+
+      {/* Tool Categories with interstitial ads every 2 categories */}
+      {filteredCategories.map(([catKey, toolSlugs], index) => (
+        <div key={catKey}>
+          {index > 0 && index % 2 === 0 && (
+            <AdPlaceholder
+              slot="SLOT_HOME_INTERSTITIAL"
+              format="horizontal"
+              className="my-6"
+            />
+          )}
+          <section className="mb-10">
+            <h2 className="text-2xl font-bold text-gray-800 mb-4">
+              {t.categories[catKey] || catKey}
+            </h2>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+              {toolSlugs.map((slug) => {
+                const tool = toolsData[slug];
+                if (!tool) return null;
+                return (
+                  <ToolCard
+                    key={slug}
+                    slug={slug}
+                    name={tool.name}
+                    description={tool.description}
+                    lang={locale}
+                    category={catKey}
+                  />
+                );
+              })}
+            </div>
+          </section>
+        </div>
       ))}
 
       {filteredCategories.length === 0 && search && (

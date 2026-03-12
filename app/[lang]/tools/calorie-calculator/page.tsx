@@ -4,6 +4,8 @@ import { useParams } from 'next/navigation';
 import { tools, type Locale } from '@/lib/translations';
 import ToolPageWrapper from '@/components/ToolPageWrapper';
 
+type HistoryEntry = { bmr: number; dailyCal: number; gender: string; activity: string };
+
 const labels: Record<string, Record<string, string>> = {
   age: { en: 'Age', it: 'Età', es: 'Edad', fr: 'Âge', de: 'Alter', pt: 'Idade' },
   gender: { en: 'Gender', it: 'Sesso', es: 'Género', fr: 'Sexe', de: 'Geschlecht', pt: 'Sexo' },
@@ -23,6 +25,10 @@ const labels: Record<string, Record<string, string>> = {
   maintain: { en: 'To maintain weight', it: 'Per mantenere il peso', es: 'Para mantener peso', fr: 'Pour maintenir le poids', de: 'Gewicht halten', pt: 'Para manter o peso' },
   gain: { en: 'To gain weight (~0.5 kg/week)', it: 'Per ingrassare (~0,5 kg/sett.)', es: 'Para ganar peso (~0,5 kg/sem.)', fr: 'Pour prendre (~0,5 kg/sem.)', de: 'Zum Zunehmen (~0,5 kg/Wo.)', pt: 'Para engordar (~0,5 kg/sem.)' },
   kcalDay: { en: 'kcal/day', it: 'kcal/giorno', es: 'kcal/día', fr: 'kcal/jour', de: 'kcal/Tag', pt: 'kcal/dia' },
+  reset: { en: 'Reset', it: 'Resetta', es: 'Restablecer', fr: 'Réinitialiser', de: 'Zurücksetzen', pt: 'Redefinir' },
+  copy: { en: 'Copy Results', it: 'Copia Risultati', es: 'Copiar Resultados', fr: 'Copier Résultats', de: 'Ergebnisse Kopieren', pt: 'Copiar Resultados' },
+  copied: { en: 'Copied!', it: 'Copiato!', es: 'Copiado!', fr: 'Copié!', de: 'Kopiert!', pt: 'Copiado!' },
+  historyLabel: { en: 'Recent Calculations', it: 'Calcoli Recenti', es: 'Cálculos Recientes', fr: 'Calculs Récents', de: 'Letzte Berechnungen', pt: 'Cálculos Recentes' },
 };
 
 const activityFactors = [
@@ -43,6 +49,8 @@ export default function CalorieCalculator() {
   const [weight, setWeight] = useState('');
   const [height, setHeight] = useState('');
   const [activity, setActivity] = useState('moderate');
+  const [history, setHistory] = useState<HistoryEntry[]>([]);
+  const [copied, setCopied] = useState(false);
 
   const ageNum = parseInt(age) || 0;
   const weightNum = parseFloat(weight) || 0;
@@ -56,6 +64,19 @@ export default function CalorieCalculator() {
       : 10 * weightNum + 6.25 * heightNum - 5 * ageNum - 161;
   }
   const dailyCal = Math.round(bmr * factor);
+
+  const handleReset = () => { setAge(''); setWeight(''); setHeight(''); setActivity('moderate'); setGender('male'); };
+  const copyResults = () => {
+    const text = `${t('bmr')}: ${Math.round(bmr)} ${t('kcalDay')}\n${t('lose')}: ${dailyCal - 500} ${t('kcalDay')}\n${t('maintain')}: ${dailyCal} ${t('kcalDay')}\n${t('gain')}: ${dailyCal + 500} ${t('kcalDay')}`;
+    navigator.clipboard.writeText(text);
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2000);
+  };
+  const addToHistory = () => {
+    if (bmr > 0) {
+      setHistory(prev => [{ bmr: Math.round(bmr), dailyCal, gender, activity }, ...prev].slice(0, 5));
+    }
+  };
 
   const seoContent: Record<Locale, { title: string; paragraphs: string[]; faq: { q: string; a: string }[] }> = {
     en: {
@@ -160,7 +181,7 @@ export default function CalorieCalculator() {
   const [openFaq, setOpenFaq] = useState<number | null>(null);
 
   return (
-    <ToolPageWrapper toolSlug="calorie-calculator">
+    <ToolPageWrapper toolSlug="calorie-calculator" faqItems={seo.faq}>
       <div className="max-w-2xl mx-auto">
         <h1 className="text-3xl font-bold text-gray-900 mb-2">{toolT.name}</h1>
         <p className="text-gray-600 mb-6">{toolT.description}</p>
@@ -185,7 +206,7 @@ export default function CalorieCalculator() {
           ].map(({ key, value, setter }) => (
             <div key={key}>
               <label className="block text-sm font-medium text-gray-700 mb-1">{t(key)}</label>
-              <input type="number" value={value} onChange={(e) => setter(e.target.value)} placeholder="0"
+              <input type="number" value={value} onChange={(e) => setter(e.target.value)} onBlur={addToHistory} placeholder="0"
                 className="w-full border border-gray-300 rounded-lg px-4 py-2 text-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent" />
             </div>
           ))}
@@ -200,36 +221,72 @@ export default function CalorieCalculator() {
             </select>
           </div>
 
+          <div className="flex justify-end">
+            <button onClick={handleReset} className="text-sm text-gray-500 hover:text-red-500 transition-colors flex items-center gap-1">
+              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" /></svg>
+              {t('reset')}
+            </button>
+          </div>
+
           {bmr > 0 && (
-            <div className="mt-4 p-4 bg-blue-50 rounded-lg space-y-2">
-              <div className="flex justify-between">
-                <span className="text-gray-600">{t('bmr')}</span>
-                <span className="font-semibold">{Math.round(bmr)} {t('kcalDay')}</span>
+            <>
+              <div className="bg-blue-50 border border-blue-200 rounded-xl p-4 text-center">
+                <span className="text-2xl">🔥</span>
+                <div className="text-xs text-blue-600 font-medium mt-1">{t('bmr')}</div>
+                <div className="text-2xl font-bold text-gray-900">{Math.round(bmr)} {t('kcalDay')}</div>
               </div>
-              <hr className="border-blue-200" />
-              <div className="flex justify-between">
-                <span className="text-gray-600">{t('lose')}</span>
-                <span className="font-semibold text-green-600">{dailyCal - 500} {t('kcalDay')}</span>
+
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                <div className="bg-green-50 border border-green-200 rounded-xl p-4 text-center">
+                  <span className="text-xl">📉</span>
+                  <div className="text-xs text-green-600 font-medium mt-1">{t('lose')}</div>
+                  <div className="text-xl font-bold text-green-700">{dailyCal - 500}</div>
+                  <div className="text-xs text-gray-500">{t('kcalDay')}</div>
+                </div>
+                <div className="bg-blue-50 border border-blue-200 rounded-xl p-4 text-center">
+                  <span className="text-xl">⚖️</span>
+                  <div className="text-xs text-blue-600 font-medium mt-1">{t('maintain')}</div>
+                  <div className="text-xl font-bold text-blue-700">{dailyCal}</div>
+                  <div className="text-xs text-gray-500">{t('kcalDay')}</div>
+                </div>
+                <div className="bg-orange-50 border border-orange-200 rounded-xl p-4 text-center">
+                  <span className="text-xl">📈</span>
+                  <div className="text-xs text-orange-600 font-medium mt-1">{t('gain')}</div>
+                  <div className="text-xl font-bold text-orange-700">{dailyCal + 500}</div>
+                  <div className="text-xs text-gray-500">{t('kcalDay')}</div>
+                </div>
               </div>
-              <div className="flex justify-between">
-                <span className="text-gray-600">{t('maintain')}</span>
-                <span className="font-bold text-blue-600 text-lg">{dailyCal} {t('kcalDay')}</span>
-              </div>
-              <div className="flex justify-between">
-                <span className="text-gray-600">{t('gain')}</span>
-                <span className="font-semibold text-orange-600">{dailyCal + 500} {t('kcalDay')}</span>
-              </div>
-            </div>
+
+              <button onClick={copyResults} className="w-full py-2 rounded-lg border border-gray-300 text-sm font-medium text-gray-700 hover:bg-gray-50 transition-colors flex items-center justify-center gap-2">
+                {copied ? (
+                  <><svg className="w-4 h-4 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" /></svg>{t('copied')}</>
+                ) : (
+                  <><svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" /></svg>{t('copy')}</>
+                )}
+              </button>
+            </>
           )}
         </div>
 
-        {/* SEO Article */}
+        {history.length > 0 && (
+          <div className="mt-6 bg-white rounded-xl border border-gray-200 p-4">
+            <h3 className="text-sm font-medium text-gray-700 mb-3">{t('historyLabel')}</h3>
+            <div className="space-y-2">
+              {history.map((h, i) => (
+                <div key={i} className="px-3 py-2 rounded-lg bg-gray-50 flex justify-between items-center text-sm">
+                  <span className="text-gray-600">BMR: {h.bmr} {t('kcalDay')}</span>
+                  <span className="font-medium text-gray-900">TDEE: {h.dailyCal} {t('kcalDay')}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
+
         <article className="mt-12 prose prose-gray max-w-none">
           <h2 className="text-2xl font-bold text-gray-900 mb-4">{seo.title}</h2>
           {seo.paragraphs.map((p, i) => <p key={i} className="text-gray-700 leading-relaxed mb-4">{p}</p>)}
         </article>
 
-        {/* FAQ Accordion */}
         <section className="mt-10 mb-8">
           <h2 className="text-2xl font-bold text-gray-900 mb-4">FAQ</h2>
           <div className="space-y-2">

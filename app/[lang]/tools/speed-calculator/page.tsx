@@ -9,11 +9,19 @@ const labels: Record<string, Record<string, string>> = {
   speed: { en: 'Speed', it: 'Velocità', es: 'Velocidad', fr: 'Vitesse', de: 'Geschwindigkeit', pt: 'Velocidade' },
   distance: { en: 'Distance', it: 'Distanza', es: 'Distancia', fr: 'Distance', de: 'Entfernung', pt: 'Distância' },
   time: { en: 'Time', it: 'Tempo', es: 'Tiempo', fr: 'Temps', de: 'Zeit', pt: 'Tempo' },
-  distanceUnit: { en: 'km', it: 'km', es: 'km', fr: 'km', de: 'km', pt: 'km' },
-  speedUnit: { en: 'km/h', it: 'km/h', es: 'km/h', fr: 'km/h', de: 'km/h', pt: 'km/h' },
   hours: { en: 'hours', it: 'ore', es: 'horas', fr: 'heures', de: 'Stunden', pt: 'horas' },
   minutes: { en: 'minutes', it: 'minuti', es: 'minutos', fr: 'minutes', de: 'Minuten', pt: 'minutos' },
   result: { en: 'Result', it: 'Risultato', es: 'Resultado', fr: 'Résultat', de: 'Ergebnis', pt: 'Resultado' },
+  reset: { en: 'Reset', it: 'Reset', es: 'Reiniciar', fr: 'Réinitialiser', de: 'Zurücksetzen', pt: 'Reiniciar' },
+  copied: { en: 'Copied!', it: 'Copiato!', es: 'Copiado!', fr: 'Copié !', de: 'Kopiert!', pt: 'Copiado!' },
+  copy: { en: 'Copy', it: 'Copia', es: 'Copiar', fr: 'Copier', de: 'Kopieren', pt: 'Copiar' },
+  history: { en: 'Recent Calculations', it: 'Calcoli Recenti', es: 'Cálculos Recientes', fr: 'Calculs Récents', de: 'Letzte Berechnungen', pt: 'Cálculos Recentes' },
+  unit: { en: 'Unit System', it: 'Sistema di Unità', es: 'Sistema de Unidades', fr: 'Système d\'Unités', de: 'Einheitensystem', pt: 'Sistema de Unidades' },
+  metric: { en: 'Metric (km)', it: 'Metrico (km)', es: 'Métrico (km)', fr: 'Métrique (km)', de: 'Metrisch (km)', pt: 'Métrico (km)' },
+  imperial: { en: 'Imperial (mi)', it: 'Imperiale (mi)', es: 'Imperial (mi)', fr: 'Impérial (mi)', de: 'Imperial (mi)', pt: 'Imperial (mi)' },
+  invalidDistance: { en: 'Enter a positive distance', it: 'Inserisci una distanza positiva', es: 'Ingresa una distancia positiva', fr: 'Entrez une distance positive', de: 'Geben Sie eine positive Entfernung ein', pt: 'Insira uma distância positiva' },
+  invalidSpeed: { en: 'Enter a positive speed', it: 'Inserisci una velocità positiva', es: 'Ingresa una velocidad positiva', fr: 'Entrez une vitesse positive', de: 'Geben Sie eine positive Geschwindigkeit ein', pt: 'Insira uma velocidade positiva' },
+  invalidTime: { en: 'Enter a valid time', it: 'Inserisci un tempo valido', es: 'Ingresa un tiempo válido', fr: 'Entrez un temps valide', de: 'Geben Sie eine gültige Zeit ein', pt: 'Insira um tempo válido' },
 };
 
 type Mode = 'speed' | 'distance' | 'time';
@@ -28,29 +36,73 @@ export default function SpeedCalculator() {
   const [speed, setSpeed] = useState('');
   const [hours, setHours] = useState('');
   const [minutes, setMinutes] = useState('');
+  const [unitSystem, setUnitSystem] = useState<'metric' | 'imperial'>('metric');
+  const [history, setHistory] = useState<{ label: string; value: string }[]>([]);
+  const [copied, setCopied] = useState(false);
+  const [touched, setTouched] = useState<Record<string, boolean>>({});
+
+  const distUnit = unitSystem === 'metric' ? 'km' : 'mi';
+  const speedUnit = unitSystem === 'metric' ? 'km/h' : 'mph';
 
   const distNum = parseFloat(distance) || 0;
   const spdNum = parseFloat(speed) || 0;
   const timeHrs = (parseFloat(hours) || 0) + (parseFloat(minutes) || 0) / 60;
 
+  const distError = touched.distance && distance !== '' && distNum <= 0;
+  const speedError = touched.speed && speed !== '' && spdNum <= 0;
+  const timeError = touched.time && (hours !== '' || minutes !== '') && timeHrs <= 0;
+
   let result = '';
+  let resultIcon = '';
   if (mode === 'speed' && distNum > 0 && timeHrs > 0) {
     const s = distNum / timeHrs;
-    result = `${s.toFixed(2)} ${t('speedUnit')}`;
+    result = `${s.toFixed(2)} ${speedUnit}`;
+    resultIcon = '\u{1F3CE}\u{FE0F}';
   } else if (mode === 'distance' && spdNum > 0 && timeHrs > 0) {
     const d = spdNum * timeHrs;
-    result = `${d.toFixed(2)} ${t('distanceUnit')}`;
+    result = `${d.toFixed(2)} ${distUnit}`;
+    resultIcon = '\u{1F4CF}';
   } else if (mode === 'time' && distNum > 0 && spdNum > 0) {
     const tHrs = distNum / spdNum;
     const h = Math.floor(tHrs);
     const m = Math.round((tHrs - h) * 60);
     result = `${h} ${t('hours')} ${m} ${t('minutes')}`;
+    resultIcon = '\u{23F1}\u{FE0F}';
   }
 
-  const modes: { key: Mode; label: string }[] = [
-    { key: 'speed', label: t('speed') },
-    { key: 'distance', label: t('distance') },
-    { key: 'time', label: t('time') },
+  const handleReset = () => {
+    setDistance('');
+    setSpeed('');
+    setHours('');
+    setMinutes('');
+    setTouched({});
+  };
+
+  const saveToHistory = () => {
+    if (result) {
+      setHistory(prev => [{ label: `${t(mode)}`, value: result }, ...prev].slice(0, 5));
+    }
+  };
+
+  const copyResult = () => {
+    if (result) {
+      navigator.clipboard.writeText(result);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 1500);
+    }
+  };
+
+  // Auto-save to history when result changes
+  const prevResult = useState<string>('');
+  if (result && result !== prevResult[0]) {
+    prevResult[1](result);
+    if (result) saveToHistory();
+  }
+
+  const modes: { key: Mode; label: string; icon: string }[] = [
+    { key: 'speed', label: t('speed'), icon: '\u{1F3CE}\u{FE0F}' },
+    { key: 'distance', label: t('distance'), icon: '\u{1F4CF}' },
+    { key: 'time', label: t('time'), icon: '\u{23F1}\u{FE0F}' },
   ];
 
   const seoContent: Record<Locale, { title: string; paragraphs: string[]; faq: { q: string; a: string }[] }> = {
@@ -156,19 +208,30 @@ export default function SpeedCalculator() {
   const [openFaq, setOpenFaq] = useState<number | null>(null);
 
   return (
-    <ToolPageWrapper toolSlug="speed-calculator">
+    <ToolPageWrapper toolSlug="speed-calculator" faqItems={seo.faq}>
       <div className="max-w-2xl mx-auto">
         <h1 className="text-3xl font-bold text-gray-900 mb-2">{toolT.name}</h1>
         <p className="text-gray-600 mb-6">{toolT.description}</p>
 
         <div className="bg-white rounded-xl border border-gray-200 p-6 space-y-4">
+          {/* Unit system toggle */}
+          <div className="flex gap-2">
+            <button onClick={() => setUnitSystem('metric')} className={`flex-1 py-2 rounded-lg text-sm font-medium transition-colors ${unitSystem === 'metric' ? 'bg-gray-800 text-white' : 'bg-gray-100 text-gray-600 hover:bg-gray-200'}`}>
+              {t('metric')}
+            </button>
+            <button onClick={() => setUnitSystem('imperial')} className={`flex-1 py-2 rounded-lg text-sm font-medium transition-colors ${unitSystem === 'imperial' ? 'bg-gray-800 text-white' : 'bg-gray-100 text-gray-600 hover:bg-gray-200'}`}>
+              {t('imperial')}
+            </button>
+          </div>
+
+          {/* Mode selector */}
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-1">{t('mode')}</label>
             <div className="flex gap-2">
               {modes.map((m) => (
                 <button key={m.key} onClick={() => setMode(m.key)}
-                  className={`flex-1 py-2 rounded-lg font-medium ${mode === m.key ? 'bg-blue-600 text-white' : 'bg-gray-100 text-gray-700'}`}>
-                  {m.label}
+                  className={`flex-1 py-2 rounded-lg font-medium transition-all ${mode === m.key ? 'bg-blue-600 text-white shadow-md' : 'bg-gray-100 text-gray-700 hover:bg-gray-200'}`}>
+                  <span className="mr-1">{m.icon}</span> {m.label}
                 </button>
               ))}
             </div>
@@ -176,17 +239,19 @@ export default function SpeedCalculator() {
 
           {mode !== 'distance' && (
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">{t('distance')} ({t('distanceUnit')})</label>
-              <input type="number" value={distance} onChange={(e) => setDistance(e.target.value)} placeholder="0"
-                className="w-full border border-gray-300 rounded-lg px-4 py-2 text-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent" />
+              <label className="block text-sm font-medium text-gray-700 mb-1">{t('distance')} ({distUnit})</label>
+              <input type="number" value={distance} onChange={(e) => setDistance(e.target.value)} onBlur={() => setTouched(p => ({ ...p, distance: true }))} placeholder="0"
+                className={`w-full border rounded-lg px-4 py-2 text-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent ${distError ? 'border-red-400 bg-red-50' : 'border-gray-300'}`} />
+              {distError && <p className="text-red-500 text-xs mt-1">{t('invalidDistance')}</p>}
             </div>
           )}
 
           {mode !== 'speed' && (
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">{t('speed')} ({t('speedUnit')})</label>
-              <input type="number" value={speed} onChange={(e) => setSpeed(e.target.value)} placeholder="0"
-                className="w-full border border-gray-300 rounded-lg px-4 py-2 text-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent" />
+              <label className="block text-sm font-medium text-gray-700 mb-1">{t('speed')} ({speedUnit})</label>
+              <input type="number" value={speed} onChange={(e) => setSpeed(e.target.value)} onBlur={() => setTouched(p => ({ ...p, speed: true }))} placeholder="0"
+                className={`w-full border rounded-lg px-4 py-2 text-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent ${speedError ? 'border-red-400 bg-red-50' : 'border-gray-300'}`} />
+              {speedError && <p className="text-red-500 text-xs mt-1">{t('invalidSpeed')}</p>}
             </div>
           )}
 
@@ -195,26 +260,59 @@ export default function SpeedCalculator() {
               <label className="block text-sm font-medium text-gray-700 mb-1">{t('time')}</label>
               <div className="grid grid-cols-2 gap-2">
                 <div>
-                  <input type="number" value={hours} onChange={(e) => setHours(e.target.value)} placeholder="0"
-                    className="w-full border border-gray-300 rounded-lg px-4 py-2 text-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent" />
+                  <input type="number" value={hours} onChange={(e) => setHours(e.target.value)} onBlur={() => setTouched(p => ({ ...p, time: true }))} placeholder="0"
+                    className={`w-full border rounded-lg px-4 py-2 text-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent ${timeError ? 'border-red-400 bg-red-50' : 'border-gray-300'}`} />
                   <span className="text-xs text-gray-500">{t('hours')}</span>
                 </div>
                 <div>
-                  <input type="number" value={minutes} onChange={(e) => setMinutes(e.target.value)} placeholder="0"
-                    className="w-full border border-gray-300 rounded-lg px-4 py-2 text-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent" />
+                  <input type="number" value={minutes} onChange={(e) => setMinutes(e.target.value)} onBlur={() => setTouched(p => ({ ...p, time: true }))} placeholder="0"
+                    className={`w-full border rounded-lg px-4 py-2 text-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent ${timeError ? 'border-red-400 bg-red-50' : 'border-gray-300'}`} />
                   <span className="text-xs text-gray-500">{t('minutes')}</span>
                 </div>
               </div>
+              {timeError && <p className="text-red-500 text-xs mt-1">{t('invalidTime')}</p>}
             </div>
           )}
 
+          {/* Reset button */}
+          <button onClick={handleReset} className="w-full py-2 text-sm text-gray-500 hover:text-red-500 transition-colors">
+            {t('reset')}
+          </button>
+
           {result && (
-            <div className="mt-4 p-4 bg-blue-50 rounded-lg">
-              <div className="text-sm text-gray-600">{t('result')}</div>
-              <div className="text-2xl font-bold text-blue-600">{result}</div>
+            <div className="mt-4 p-5 bg-gradient-to-r from-blue-50 to-indigo-50 rounded-xl border border-blue-100">
+              <div className="flex items-center justify-between">
+                <div>
+                  <div className="text-sm text-gray-500">{t('result')}</div>
+                  <div className="text-3xl font-bold text-blue-700 flex items-center gap-2">
+                    <span>{resultIcon}</span> {result}
+                  </div>
+                </div>
+                <button onClick={copyResult} className="px-3 py-1.5 bg-white border border-gray-200 rounded-lg text-sm text-gray-600 hover:bg-gray-50 transition-colors">
+                  {copied ? t('copied') : t('copy')}
+                </button>
+              </div>
             </div>
           )}
         </div>
+
+        {/* History */}
+        {history.length > 0 && (
+          <div className="mt-4 bg-white rounded-xl border border-gray-200 p-4">
+            <div className="flex justify-between items-center mb-2">
+              <h3 className="text-sm font-medium text-gray-700">{t('history')}</h3>
+              <button onClick={() => setHistory([])} className="text-xs text-red-500 hover:text-red-700">Clear</button>
+            </div>
+            <div className="space-y-1">
+              {history.map((h, i) => (
+                <div key={i} className="flex justify-between text-sm px-2 py-1.5 bg-gray-50 rounded">
+                  <span className="text-gray-500">{h.label}</span>
+                  <span className="font-semibold text-gray-900">{h.value}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
 
         <article className="mt-12 prose prose-gray max-w-none">
           <h2 className="text-2xl font-bold text-gray-900 mb-4">{seo.title}</h2>

@@ -132,12 +132,21 @@ export default function ElectricityCalculator() {
   const yearlyCost = kwhDaily * 365 * r;
 
   const currency = lang === 'pt' ? 'R$' : ['it', 'fr', 'de'].includes(lang) ? '€' : '$';
+  const [copied, setCopied] = useState(false);
+
+  const handleReset = () => { setWatts(''); setHoursPerDay(''); setDays('30'); setRate('0.12'); };
+  const copyResults = () => {
+    const text = `${t('energyUsed')}: ${kwhTotal.toFixed(2)} kWh\n${t('dailyCost')}: ${currency}${dailyCost.toFixed(2)}\n${t('totalCost')}: ${currency}${totalCost.toFixed(2)}\n${t('monthlyCost')}: ${currency}${monthlyCost.toFixed(2)}\n${t('yearlyCost')}: ${currency}${yearlyCost.toFixed(2)}`;
+    navigator.clipboard.writeText(text);
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2000);
+  };
 
   const seo = seoContent[lang];
   const [openFaq, setOpenFaq] = useState<number | null>(null);
 
   return (
-    <ToolPageWrapper toolSlug="electricity-calculator">
+    <ToolPageWrapper toolSlug="electricity-calculator" faqItems={seo.faq}>
       <div className="max-w-2xl mx-auto">
         <h1 className="text-3xl font-bold text-gray-900 mb-2">{toolT.name}</h1>
         <p className="text-gray-600 mb-6">{toolT.description}</p>
@@ -156,30 +165,55 @@ export default function ElectricityCalculator() {
             </div>
           ))}
 
+          <div className="flex justify-end">
+            <button onClick={handleReset} className="text-sm text-gray-500 hover:text-red-500 transition-colors flex items-center gap-1">
+              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" /></svg>
+              Reset
+            </button>
+          </div>
+
           {w > 0 && h > 0 && (
-            <div className="mt-4 p-4 bg-blue-50 rounded-lg space-y-2">
-              <div className="flex justify-between">
-                <span className="text-gray-600">{t('energyUsed')}</span>
-                <span className="font-semibold">{kwhTotal.toFixed(2)} kWh</span>
+            <>
+              <div className="bg-yellow-50 border border-yellow-200 rounded-xl p-4 text-center">
+                <span className="text-2xl">⚡</span>
+                <div className="text-xs text-yellow-600 font-medium mt-1">{t('energyUsed')}</div>
+                <div className="text-2xl font-bold text-gray-900">{kwhTotal.toFixed(2)} kWh</div>
               </div>
-              <div className="flex justify-between">
-                <span className="text-gray-600">{t('dailyCost')}</span>
-                <span className="font-semibold">{currency}{dailyCost.toFixed(2)}</span>
+
+              <div className="grid grid-cols-2 gap-3">
+                <div className="bg-blue-50 border border-blue-200 rounded-xl p-3 text-center">
+                  <span className="text-lg">📅</span>
+                  <div className="text-xs text-blue-600 font-medium">{t('dailyCost')}</div>
+                  <div className="text-lg font-bold text-blue-700">{currency}{dailyCost.toFixed(2)}</div>
+                </div>
+                <div className="bg-indigo-50 border border-indigo-200 rounded-xl p-3 text-center">
+                  <span className="text-lg">📊</span>
+                  <div className="text-xs text-indigo-600 font-medium">{t('totalCost')} ({d}d)</div>
+                  <div className="text-lg font-bold text-indigo-700">{currency}{totalCost.toFixed(2)}</div>
+                </div>
               </div>
-              <hr className="border-blue-200" />
-              <div className="flex justify-between">
-                <span className="text-gray-600">{t('totalCost')} ({d} {labels.days[lang] || 'days'})</span>
-                <span className="font-bold text-blue-600 text-lg">{currency}{totalCost.toFixed(2)}</span>
+
+              <div className="grid grid-cols-2 gap-3">
+                <div className="bg-purple-50 border border-purple-200 rounded-xl p-3 text-center">
+                  <span className="text-lg">🗓️</span>
+                  <div className="text-xs text-purple-600 font-medium">{t('monthlyCost')}</div>
+                  <div className="text-lg font-bold text-purple-700">{currency}{monthlyCost.toFixed(2)}</div>
+                </div>
+                <div className="bg-red-50 border border-red-200 rounded-xl p-3 text-center">
+                  <span className="text-lg">📆</span>
+                  <div className="text-xs text-red-600 font-medium">{t('yearlyCost')}</div>
+                  <div className="text-lg font-bold text-red-700">{currency}{yearlyCost.toFixed(2)}</div>
+                </div>
               </div>
-              <div className="flex justify-between">
-                <span className="text-gray-600">{t('monthlyCost')}</span>
-                <span className="font-semibold">{currency}{monthlyCost.toFixed(2)}</span>
-              </div>
-              <div className="flex justify-between">
-                <span className="text-gray-600">{t('yearlyCost')}</span>
-                <span className="font-semibold">{currency}{yearlyCost.toFixed(2)}</span>
-              </div>
-            </div>
+
+              <button onClick={copyResults} className="w-full py-2 rounded-lg border border-gray-300 text-sm font-medium text-gray-700 hover:bg-gray-50 transition-colors flex items-center justify-center gap-2">
+                {copied ? (
+                  <><svg className="w-4 h-4 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" /></svg>Copied!</>
+                ) : (
+                  <><svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" /></svg>Copy Results</>
+                )}
+              </button>
+            </>
           )}
         </div>
 

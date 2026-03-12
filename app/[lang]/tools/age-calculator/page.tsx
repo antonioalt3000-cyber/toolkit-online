@@ -4,10 +4,15 @@ import { useParams } from 'next/navigation';
 import { tools, type Locale } from '@/lib/translations';
 import ToolPageWrapper from '@/components/ToolPageWrapper';
 
+type AgeResult = { years: number; months: number; days: number; totalDays: number; nextBdayDays: number; birthDate: string };
+
 export default function AgeCalculator() {
   const { lang } = useParams() as { lang: Locale };
   const toolT = tools['age-calculator'][lang];
   const [birthDate, setBirthDate] = useState('');
+  const [history, setHistory] = useState<AgeResult[]>([]);
+  const [copied, setCopied] = useState(false);
+  const [error, setError] = useState('');
 
   const labels = {
     birthDate: { en: 'Birth date', it: 'Data di nascita', es: 'Fecha de nacimiento', fr: 'Date de naissance', de: 'Geburtsdatum', pt: 'Data de nascimento' },
@@ -16,36 +21,93 @@ export default function AgeCalculator() {
     days: { en: 'Days', it: 'Giorni', es: 'Días', fr: 'Jours', de: 'Tage', pt: 'Dias' },
     totalDays: { en: 'Total days lived', it: 'Giorni totali vissuti', es: 'Días totales vividos', fr: 'Jours totaux vécus', de: 'Gesamt gelebte Tage', pt: 'Dias totais vividos' },
     nextBday: { en: 'Next birthday in', it: 'Prossimo compleanno tra', es: 'Próximo cumpleaños en', fr: 'Prochain anniversaire dans', de: 'Nächster Geburtstag in', pt: 'Próximo aniversário em' },
+    reset: { en: 'Reset', it: 'Resetta', es: 'Restablecer', fr: 'Réinitialiser', de: 'Zurücksetzen', pt: 'Redefinir' },
+    copy: { en: 'Copy Results', it: 'Copia Risultati', es: 'Copiar Resultados', fr: 'Copier Résultats', de: 'Ergebnisse Kopieren', pt: 'Copiar Resultados' },
+    copied: { en: 'Copied!', it: 'Copiato!', es: 'Copiado!', fr: 'Copié!', de: 'Kopiert!', pt: 'Copiado!' },
+    history: { en: 'Recent Calculations', it: 'Calcoli Recenti', es: 'Cálculos Recientes', fr: 'Calculs Récents', de: 'Letzte Berechnungen', pt: 'Cálculos Recentes' },
+    futureDate: { en: 'Birth date cannot be in the future', it: 'La data di nascita non può essere nel futuro', es: 'La fecha no puede ser futura', fr: 'La date ne peut pas être future', de: 'Datum darf nicht in der Zukunft liegen', pt: 'A data não pode ser futura' },
+    invalidDate: { en: 'Please enter a valid date', it: 'Inserisci una data valida', es: 'Ingresa una fecha válida', fr: 'Entrez une date valide', de: 'Bitte gültiges Datum eingeben', pt: 'Insira uma data válida' },
   } as Record<string, Record<Locale, string>>;
 
   let age = { years: 0, months: 0, days: 0, totalDays: 0, nextBdayDays: 0 };
+  let valid = false;
 
   if (birthDate) {
     const birth = new Date(birthDate);
     const now = new Date();
 
-    let years = now.getFullYear() - birth.getFullYear();
-    let months = now.getMonth() - birth.getMonth();
-    let days = now.getDate() - birth.getDate();
+    if (isNaN(birth.getTime())) {
+      if (!error) setError(labels.invalidDate[lang]);
+    } else if (birth > now) {
+      if (!error) setError(labels.futureDate[lang]);
+    } else {
+      if (error) setError('');
+      valid = true;
+      let years = now.getFullYear() - birth.getFullYear();
+      let months = now.getMonth() - birth.getMonth();
+      let days = now.getDate() - birth.getDate();
 
-    if (days < 0) {
-      months--;
-      const prevMonth = new Date(now.getFullYear(), now.getMonth(), 0);
-      days += prevMonth.getDate();
+      if (days < 0) {
+        months--;
+        const prevMonth = new Date(now.getFullYear(), now.getMonth(), 0);
+        days += prevMonth.getDate();
+      }
+      if (months < 0) {
+        years--;
+        months += 12;
+      }
+
+      const totalDays = Math.floor((now.getTime() - birth.getTime()) / (1000 * 60 * 60 * 24));
+
+      let nextBday = new Date(now.getFullYear(), birth.getMonth(), birth.getDate());
+      if (nextBday <= now) nextBday = new Date(now.getFullYear() + 1, birth.getMonth(), birth.getDate());
+      const nextBdayDays = Math.ceil((nextBday.getTime() - now.getTime()) / (1000 * 60 * 60 * 24));
+
+      age = { years, months, days, totalDays, nextBdayDays };
     }
-    if (months < 0) {
-      years--;
-      months += 12;
-    }
-
-    const totalDays = Math.floor((now.getTime() - birth.getTime()) / (1000 * 60 * 60 * 24));
-
-    let nextBday = new Date(now.getFullYear(), birth.getMonth(), birth.getDate());
-    if (nextBday <= now) nextBday = new Date(now.getFullYear() + 1, birth.getMonth(), birth.getDate());
-    const nextBdayDays = Math.ceil((nextBday.getTime() - now.getTime()) / (1000 * 60 * 60 * 24));
-
-    age = { years, months, days, totalDays, nextBdayDays };
   }
+
+  const handleDateChange = (value: string) => {
+    setError('');
+    setBirthDate(value);
+    if (value) {
+      const birth = new Date(value);
+      const now = new Date();
+      if (!isNaN(birth.getTime()) && birth <= now) {
+        let years = now.getFullYear() - birth.getFullYear();
+        let months = now.getMonth() - birth.getMonth();
+        let days = now.getDate() - birth.getDate();
+        if (days < 0) { months--; days += new Date(now.getFullYear(), now.getMonth(), 0).getDate(); }
+        if (months < 0) { years--; months += 12; }
+        const totalDays = Math.floor((now.getTime() - birth.getTime()) / (1000 * 60 * 60 * 24));
+        let nextBday = new Date(now.getFullYear(), birth.getMonth(), birth.getDate());
+        if (nextBday <= now) nextBday = new Date(now.getFullYear() + 1, birth.getMonth(), birth.getDate());
+        const nextBdayDays = Math.ceil((nextBday.getTime() - now.getTime()) / (1000 * 60 * 60 * 24));
+        const entry: AgeResult = { years, months, days, totalDays, nextBdayDays, birthDate: value };
+        setHistory(prev => {
+          const filtered = prev.filter(h => h.birthDate !== value);
+          return [entry, ...filtered].slice(0, 5);
+        });
+      }
+    }
+  };
+
+  const handleReset = () => {
+    setBirthDate('');
+    setError('');
+  };
+
+  const copyResults = () => {
+    const text = `${labels.years[lang]}: ${age.years}, ${labels.months[lang]}: ${age.months}, ${labels.days[lang]}: ${age.days}\n${labels.totalDays[lang]}: ${age.totalDays.toLocaleString()}\n${labels.nextBday[lang]}: ${age.nextBdayDays} ${labels.days[lang].toLowerCase()}`;
+    navigator.clipboard.writeText(text);
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2000);
+  };
+
+  const getLifeProgress = () => {
+    const maxAge = 80;
+    return Math.min((age.years / maxAge) * 100, 100);
+  };
 
   const seoContent: Record<Locale, { title: string; paragraphs: string[]; faq: { q: string; a: string }[] }> = {
     en: {
@@ -150,7 +212,7 @@ export default function AgeCalculator() {
   const [openFaq, setOpenFaq] = useState<number | null>(null);
 
   return (
-    <ToolPageWrapper toolSlug="age-calculator">
+    <ToolPageWrapper toolSlug="age-calculator" faqItems={seo.faq}>
       <div className="max-w-2xl mx-auto">
         <h1 className="text-3xl font-bold text-gray-900 mb-2">{toolT.name}</h1>
         <p className="text-gray-600 mb-6">{toolT.description}</p>
@@ -158,30 +220,89 @@ export default function AgeCalculator() {
         <div className="bg-white rounded-xl border border-gray-200 p-6 space-y-4">
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-1">{labels.birthDate[lang]}</label>
-            <input type="date" value={birthDate} onChange={(e) => setBirthDate(e.target.value)} className="w-full border border-gray-300 rounded-lg px-4 py-2 text-lg focus:ring-2 focus:ring-blue-500" />
+            <input type="date" value={birthDate} onChange={(e) => handleDateChange(e.target.value)} className={`w-full border rounded-lg px-4 py-2 text-lg focus:ring-2 focus:ring-blue-500 ${error ? 'border-red-400 bg-red-50' : 'border-gray-300'}`} />
+            {error && <p className="text-red-500 text-sm mt-1">{error}</p>}
           </div>
 
           {birthDate && (
+            <div className="flex justify-end">
+              <button onClick={handleReset} className="text-sm text-gray-500 hover:text-red-500 transition-colors flex items-center gap-1">
+                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" /></svg>
+                {labels.reset[lang]}
+              </button>
+            </div>
+          )}
+
+          {valid && (
             <>
               <div className="grid grid-cols-3 gap-3">
                 {[
-                  { label: labels.years[lang], value: age.years },
-                  { label: labels.months[lang], value: age.months },
-                  { label: labels.days[lang], value: age.days },
+                  { label: labels.years[lang], value: age.years, icon: '🎂', color: 'from-blue-500 to-blue-600' },
+                  { label: labels.months[lang], value: age.months, icon: '📅', color: 'from-indigo-500 to-indigo-600' },
+                  { label: labels.days[lang], value: age.days, icon: '☀️', color: 'from-purple-500 to-purple-600' },
                 ].map((item) => (
-                  <div key={item.label} className="bg-blue-50 rounded-lg p-4 text-center">
-                    <div className="text-3xl font-bold text-blue-600">{item.value}</div>
-                    <div className="text-sm text-gray-600">{item.label}</div>
+                  <div key={item.label} className={`bg-gradient-to-br ${item.color} rounded-xl p-4 text-center shadow-sm`}>
+                    <div className="text-2xl mb-1">{item.icon}</div>
+                    <div className="text-3xl font-bold text-white">{item.value}</div>
+                    <div className="text-sm text-white/80">{item.label}</div>
                   </div>
                 ))}
               </div>
-              <div className="text-sm text-gray-600 space-y-1">
-                <p>{labels.totalDays[lang]}: <span className="font-semibold text-gray-900">{age.totalDays.toLocaleString()}</span></p>
-                <p>{labels.nextBday[lang]}: <span className="font-semibold text-gray-900">{age.nextBdayDays} {labels.days[lang].toLowerCase()}</span></p>
+
+              {/* Life progress bar */}
+              <div className="bg-gray-50 rounded-lg p-4">
+                <div className="flex justify-between text-xs text-gray-500 mb-1">
+                  <span>0</span>
+                  <span>80 {labels.years[lang].toLowerCase()}</span>
+                </div>
+                <div className="w-full bg-gray-200 rounded-full h-3">
+                  <div className="bg-gradient-to-r from-green-400 via-yellow-400 to-red-400 h-3 rounded-full transition-all duration-500" style={{ width: `${getLifeProgress()}%` }}></div>
+                </div>
+                <div className="text-center text-sm text-gray-600 mt-1">{getLifeProgress().toFixed(1)}%</div>
               </div>
+
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                <div className="bg-amber-50 border border-amber-200 rounded-lg p-4 flex items-start gap-3">
+                  <span className="text-2xl">🗓️</span>
+                  <div>
+                    <div className="text-xs text-amber-600 font-medium">{labels.totalDays[lang]}</div>
+                    <div className="text-xl font-bold text-gray-900">{age.totalDays.toLocaleString()}</div>
+                  </div>
+                </div>
+                <div className="bg-pink-50 border border-pink-200 rounded-lg p-4 flex items-start gap-3">
+                  <span className="text-2xl">🎉</span>
+                  <div>
+                    <div className="text-xs text-pink-600 font-medium">{labels.nextBday[lang]}</div>
+                    <div className="text-xl font-bold text-gray-900">{age.nextBdayDays} {labels.days[lang].toLowerCase()}</div>
+                  </div>
+                </div>
+              </div>
+
+              <button onClick={copyResults} className="w-full py-2 rounded-lg border border-gray-300 text-sm font-medium text-gray-700 hover:bg-gray-50 transition-colors flex items-center justify-center gap-2">
+                {copied ? (
+                  <><svg className="w-4 h-4 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" /></svg>{labels.copied[lang]}</>
+                ) : (
+                  <><svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3" /></svg>{labels.copy[lang]}</>
+                )}
+              </button>
             </>
           )}
         </div>
+
+        {/* History */}
+        {history.length > 0 && (
+          <div className="mt-6 bg-white rounded-xl border border-gray-200 p-4">
+            <h3 className="text-sm font-medium text-gray-700 mb-3">{labels.history[lang]}</h3>
+            <div className="space-y-2">
+              {history.map((h, i) => (
+                <button key={i} onClick={() => handleDateChange(h.birthDate)} className="w-full text-left px-3 py-2 rounded-lg bg-gray-50 hover:bg-blue-50 transition-colors flex justify-between items-center text-sm">
+                  <span className="text-gray-600">{h.birthDate}</span>
+                  <span className="font-medium text-gray-900">{h.years}y {h.months}m {h.days}d</span>
+                </button>
+              ))}
+            </div>
+          </div>
+        )}
 
         <article className="mt-12 prose prose-gray max-w-none">
           <h2 className="text-2xl font-bold text-gray-900 mb-4">{seo.title}</h2>

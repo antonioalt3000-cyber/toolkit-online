@@ -10,6 +10,13 @@ interface GradeEntry {
   weight: number;
 }
 
+interface HistoryEntry {
+  weightedAvg: number;
+  simpleAvg: number;
+  gpa: number;
+  timestamp: string;
+}
+
 const labels: Record<string, Record<Locale, string>> = {
   subject: { en: 'Subject', it: 'Materia', es: 'Materia', fr: 'Matière', de: 'Fach', pt: 'Disciplina' },
   score: { en: 'Score', it: 'Voto', es: 'Nota', fr: 'Note', de: 'Note', pt: 'Nota' },
@@ -21,6 +28,13 @@ const labels: Record<string, Record<Locale, string>> = {
   gpa: { en: 'GPA (4.0 scale)', it: 'GPA (scala 4.0)', es: 'GPA (escala 4.0)', fr: 'GPA (échelle 4.0)', de: 'GPA (4.0 Skala)', pt: 'GPA (escala 4.0)' },
   totalWeight: { en: 'Total Weight', it: 'Peso Totale', es: 'Peso Total', fr: 'Coefficient Total', de: 'Gesamtgewicht', pt: 'Peso Total' },
   maxScore: { en: 'Max Score', it: 'Voto Massimo', es: 'Nota Máxima', fr: 'Note Maximum', de: 'Maximalnote', pt: 'Nota Máxima' },
+  reset: { en: 'Reset', it: 'Reimposta', es: 'Reiniciar', fr: 'Réinitialiser', de: 'Zurücksetzen', pt: 'Redefinir' },
+  copy: { en: 'Copy Results', it: 'Copia Risultati', es: 'Copiar Resultados', fr: 'Copier les Résultats', de: 'Ergebnisse Kopieren', pt: 'Copiar Resultados' },
+  copied: { en: 'Copied!', it: 'Copiato!', es: 'Copiado!', fr: 'Copié!', de: 'Kopiert!', pt: 'Copiado!' },
+  history: { en: 'Recent Calculations', it: 'Calcoli Recenti', es: 'Cálculos Recientes', fr: 'Calculs Récents', de: 'Letzte Berechnungen', pt: 'Cálculos Recentes' },
+  invalidScore: { en: 'Score exceeds max', it: 'Voto supera il max', es: 'Nota supera el máx', fr: 'Note dépasse le max', de: 'Note über Maximum', pt: 'Nota excede o máx' },
+  invalidWeight: { en: 'Must be > 0', it: 'Deve essere > 0', es: 'Debe ser > 0', fr: 'Doit être > 0', de: 'Muss > 0 sein', pt: 'Deve ser > 0' },
+  percentage: { en: 'Percentage', it: 'Percentuale', es: 'Porcentaje', fr: 'Pourcentage', de: 'Prozent', pt: 'Percentual' },
 };
 
 export default function GradeCalculator() {
@@ -33,6 +47,8 @@ export default function GradeCalculator() {
     { name: '', score: 0, weight: 1 },
     { name: '', score: 0, weight: 1 },
   ]);
+  const [copied, setCopied] = useState(false);
+  const [history, setHistory] = useState<HistoryEntry[]>([]);
 
   const updateGrade = (index: number, field: keyof GradeEntry, value: string | number) => {
     const newGrades = [...grades];
@@ -45,6 +61,12 @@ export default function GradeCalculator() {
     if (grades.length > 1) setGrades(grades.filter((_, idx) => idx !== i));
   };
 
+  const resetAll = () => {
+    setGrades([{ name: '', score: 0, weight: 1 }]);
+    setMaxScore(100);
+    setCopied(false);
+  };
+
   const totalWeight = grades.reduce((sum, g) => sum + g.weight, 0);
   const weightedAvg = totalWeight > 0
     ? grades.reduce((sum, g) => sum + g.score * g.weight, 0) / totalWeight
@@ -53,6 +75,33 @@ export default function GradeCalculator() {
     ? grades.reduce((sum, g) => sum + g.score, 0) / grades.length
     : 0;
   const gpa = maxScore > 0 ? (weightedAvg / maxScore) * 4 : 0;
+  const percentage = maxScore > 0 ? (weightedAvg / maxScore) * 100 : 0;
+
+  const getGradeColor = (pct: number) => {
+    if (pct >= 90) return 'text-green-600';
+    if (pct >= 75) return 'text-blue-600';
+    if (pct >= 60) return 'text-yellow-600';
+    return 'text-red-600';
+  };
+
+  const getGradeBg = (pct: number) => {
+    if (pct >= 90) return 'bg-green-50 border-green-200';
+    if (pct >= 75) return 'bg-blue-50 border-blue-200';
+    if (pct >= 60) return 'bg-yellow-50 border-yellow-200';
+    return 'bg-red-50 border-red-200';
+  };
+
+  const copyResults = () => {
+    const text = `${t('weightedAvg')}: ${weightedAvg.toFixed(2)} | ${t('simpleAvg')}: ${simpleAvg.toFixed(2)} | ${t('gpa')}: ${gpa.toFixed(2)} | ${t('percentage')}: ${percentage.toFixed(1)}%`;
+    navigator.clipboard.writeText(text);
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2000);
+  };
+
+  const saveToHistory = () => {
+    const entry: HistoryEntry = { weightedAvg, simpleAvg, gpa, timestamp: new Date().toLocaleTimeString() };
+    setHistory(prev => [entry, ...prev].slice(0, 5));
+  };
 
   const seoContent: Record<Locale, { title: string; paragraphs: string[]; faq: { q: string; a: string }[] }> = {
     en: {
@@ -157,20 +206,30 @@ export default function GradeCalculator() {
   const [openFaq, setOpenFaq] = useState<number | null>(null);
 
   return (
-    <ToolPageWrapper toolSlug="grade-calculator">
+    <ToolPageWrapper toolSlug="grade-calculator" faqItems={seo.faq}>
       <div className="max-w-2xl mx-auto">
         <h1 className="text-3xl font-bold text-gray-900 mb-2">{toolT.name}</h1>
         <p className="text-gray-600 mb-6">{toolT.description}</p>
 
         <div className="bg-white rounded-xl border border-gray-200 p-6 space-y-4">
-          <div className="w-40">
-            <label className="block text-sm font-medium text-gray-700 mb-1">{t('maxScore')}</label>
-            <input
-              type="number"
-              value={maxScore}
-              onChange={(e) => setMaxScore(parseInt(e.target.value) || 100)}
-              className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-            />
+          <div className="flex items-end gap-4">
+            <div className="w-40">
+              <label className="block text-sm font-medium text-gray-700 mb-1">{t('maxScore')}</label>
+              <input
+                type="number"
+                value={maxScore}
+                onChange={(e) => setMaxScore(parseInt(e.target.value) || 100)}
+                className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+              />
+            </div>
+            <div className="flex gap-2 ml-auto">
+              <button onClick={copyResults} className="px-3 py-2 bg-gray-100 hover:bg-gray-200 rounded-lg text-sm font-medium text-gray-700 transition-colors">
+                {copied ? t('copied') : t('copy')}
+              </button>
+              <button onClick={resetAll} className="px-3 py-2 bg-red-50 hover:bg-red-100 rounded-lg text-sm font-medium text-red-600 transition-colors">
+                {t('reset')}
+              </button>
+            </div>
           </div>
 
           <div className="space-y-2">
@@ -181,64 +240,99 @@ export default function GradeCalculator() {
               <span></span>
             </div>
             {grades.map((g, i) => (
-              <div key={i} className="grid grid-cols-[1fr_80px_80px_40px] gap-2">
-                <input
-                  type="text"
-                  value={g.name}
-                  onChange={(e) => updateGrade(i, 'name', e.target.value)}
-                  placeholder={`${t('subject')} ${i + 1}`}
-                  className="border border-gray-300 rounded-lg px-3 py-2 text-sm focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                />
-                <input
-                  type="number"
-                  value={g.score}
-                  onChange={(e) => updateGrade(i, 'score', parseFloat(e.target.value) || 0)}
-                  min="0"
-                  max={maxScore}
-                  className="border border-gray-300 rounded-lg px-2 py-2 text-sm text-center focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                />
-                <input
-                  type="number"
-                  value={g.weight}
-                  onChange={(e) => updateGrade(i, 'weight', parseFloat(e.target.value) || 0)}
-                  min="0"
-                  step="0.5"
-                  className="border border-gray-300 rounded-lg px-2 py-2 text-sm text-center focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                />
-                <button
-                  onClick={() => removeGrade(i)}
-                  className="text-red-500 hover:text-red-700 text-sm"
-                  disabled={grades.length <= 1}
-                >
-                  X
-                </button>
+              <div key={i}>
+                <div className="grid grid-cols-[1fr_80px_80px_40px] gap-2">
+                  <input
+                    type="text"
+                    value={g.name}
+                    onChange={(e) => updateGrade(i, 'name', e.target.value)}
+                    placeholder={`${t('subject')} ${i + 1}`}
+                    className="border border-gray-300 rounded-lg px-3 py-2 text-sm focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                  />
+                  <input
+                    type="number"
+                    value={g.score}
+                    onChange={(e) => updateGrade(i, 'score', parseFloat(e.target.value) || 0)}
+                    min="0"
+                    max={maxScore}
+                    className={`border rounded-lg px-2 py-2 text-sm text-center focus:ring-2 focus:ring-blue-500 focus:border-transparent ${g.score > maxScore ? 'border-red-400 bg-red-50' : 'border-gray-300'}`}
+                  />
+                  <input
+                    type="number"
+                    value={g.weight}
+                    onChange={(e) => updateGrade(i, 'weight', parseFloat(e.target.value) || 0)}
+                    min="0"
+                    step="0.5"
+                    className={`border rounded-lg px-2 py-2 text-sm text-center focus:ring-2 focus:ring-blue-500 focus:border-transparent ${g.weight <= 0 ? 'border-red-400 bg-red-50' : 'border-gray-300'}`}
+                  />
+                  <button
+                    onClick={() => removeGrade(i)}
+                    className="text-red-500 hover:text-red-700 hover:bg-red-50 rounded-lg text-sm transition-colors"
+                    disabled={grades.length <= 1}
+                  >
+                    X
+                  </button>
+                </div>
+                {g.score > maxScore && <p className="text-red-500 text-xs mt-0.5 ml-0">{t('invalidScore')}</p>}
+                {g.weight <= 0 && <p className="text-red-500 text-xs mt-0.5 text-right mr-12">{t('invalidWeight')}</p>}
               </div>
             ))}
           </div>
 
-          <button onClick={addGrade} className="text-sm text-blue-600 hover:text-blue-800 font-medium">
+          <button onClick={addGrade} className="w-full border-2 border-dashed border-gray-300 rounded-lg py-2 text-sm text-gray-500 hover:border-blue-400 hover:text-blue-500 transition-colors font-medium">
             + {t('addGrade')}
           </button>
 
-          <div className="p-4 bg-blue-50 rounded-lg space-y-2">
-            <div className="flex justify-between">
-              <span className="text-gray-600">{t('totalWeight')}</span>
-              <span className="font-semibold">{totalWeight}</span>
+          {/* Result Cards */}
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
+            <div className={`rounded-xl p-3 text-center border ${getGradeBg(percentage)}`}>
+              <div className="text-xs text-gray-500">{t('weightedAvg')}</div>
+              <div className={`text-xl font-bold ${getGradeColor(percentage)}`}>{weightedAvg.toFixed(2)}</div>
             </div>
-            <div className="flex justify-between">
-              <span className="text-gray-600">{t('simpleAvg')}</span>
-              <span className="font-semibold">{simpleAvg.toFixed(2)}</span>
+            <div className="bg-gray-50 rounded-xl p-3 text-center border border-gray-200">
+              <div className="text-xs text-gray-500">{t('simpleAvg')}</div>
+              <div className="text-xl font-bold text-gray-900">{simpleAvg.toFixed(2)}</div>
             </div>
-            <hr className="border-blue-200" />
-            <div className="flex justify-between text-lg">
-              <span className="font-bold text-gray-900">{t('weightedAvg')}</span>
-              <span className="font-bold text-blue-600">{weightedAvg.toFixed(2)}</span>
+            <div className={`rounded-xl p-3 text-center border ${getGradeBg(percentage)}`}>
+              <div className="text-xs text-gray-500">{t('gpa')}</div>
+              <div className={`text-xl font-bold ${getGradeColor(percentage)}`}>{gpa.toFixed(2)}</div>
             </div>
-            <div className="flex justify-between">
-              <span className="text-gray-600">{t('gpa')}</span>
-              <span className="font-semibold text-blue-600">{gpa.toFixed(2)}</span>
+            <div className={`rounded-xl p-3 text-center border ${getGradeBg(percentage)}`}>
+              <div className="text-xs text-gray-500">{t('percentage')}</div>
+              <div className={`text-xl font-bold ${getGradeColor(percentage)}`}>{percentage.toFixed(1)}%</div>
             </div>
           </div>
+
+          {/* Progress bar */}
+          <div className="w-full bg-gray-200 rounded-full h-3 overflow-hidden">
+            <div
+              className={`h-full rounded-full transition-all duration-500 ${percentage >= 90 ? 'bg-green-500' : percentage >= 75 ? 'bg-blue-500' : percentage >= 60 ? 'bg-yellow-500' : 'bg-red-500'}`}
+              style={{ width: `${Math.min(percentage, 100)}%` }}
+            />
+          </div>
+
+          <div className="flex justify-between text-xs text-gray-500">
+            <span>{t('totalWeight')}: {totalWeight}</span>
+            <button onClick={saveToHistory} className="text-blue-600 hover:text-blue-800 font-medium">
+              + {t('history')}
+            </button>
+          </div>
+
+          {/* History */}
+          {history.length > 0 && (
+            <div className="p-3 bg-gray-50 rounded-lg">
+              <h3 className="text-sm font-semibold text-gray-700 mb-2">{t('history')}</h3>
+              <div className="space-y-1">
+                {history.map((entry, i) => (
+                  <div key={i} className="flex justify-between text-sm text-gray-600 bg-white rounded px-3 py-1.5 border border-gray-100">
+                    <span className="font-semibold">{t('weightedAvg')}: {entry.weightedAvg.toFixed(2)}</span>
+                    <span>{t('gpa')}: {entry.gpa.toFixed(2)}</span>
+                    <span className="text-gray-400">{entry.timestamp}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
         </div>
 
         <article className="mt-12 prose prose-gray max-w-none">

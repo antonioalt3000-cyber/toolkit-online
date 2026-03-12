@@ -13,6 +13,22 @@ const vatRates: Record<string, number[]> = {
   en: [20, 15, 10, 5],
 };
 
+const vatLabels: Record<string, Record<string, string>> = {
+  addVat: { en: 'Add VAT', it: 'Aggiungi IVA', es: 'Añadir IVA', fr: 'Ajouter TVA', de: 'MwSt hinzufügen', pt: 'Adicionar IVA' },
+  removeVat: { en: 'Remove VAT', it: 'Scorporo IVA', es: 'Quitar IVA', fr: 'Retirer TVA', de: 'MwSt entfernen', pt: 'Remover IVA' },
+  amount: { en: 'Amount', it: 'Importo (€)', es: 'Cantidad (€)', fr: 'Montant (€)', de: 'Betrag (€)', pt: 'Valor (€)' },
+  vatRate: { en: 'VAT Rate', it: 'Aliquota IVA', es: 'Tipo de IVA', fr: 'Taux TVA', de: 'MwSt-Satz', pt: 'Taxa IVA' },
+  netAmount: { en: 'Net amount', it: 'Importo netto', es: 'Importe neto', fr: 'Montant HT', de: 'Nettobetrag', pt: 'Valor líquido' },
+  grossAmount: { en: 'Amount with VAT', it: 'Importo con IVA', es: 'Importe con IVA', fr: 'Montant TTC', de: 'Bruttobetrag', pt: 'Valor com IVA' },
+  vat: { en: 'VAT', it: 'IVA', es: 'IVA', fr: 'TVA', de: 'MwSt', pt: 'IVA' },
+  totalWithVat: { en: 'Total with VAT', it: 'Totale con IVA', es: 'Total con IVA', fr: 'Total TTC', de: 'Gesamt mit MwSt', pt: 'Total com IVA' },
+  reset: { en: 'Reset', it: 'Reset', es: 'Reiniciar', fr: 'Réinitialiser', de: 'Zurücksetzen', pt: 'Reiniciar' },
+  copied: { en: 'Copied!', it: 'Copiato!', es: 'Copiado!', fr: 'Copié !', de: 'Kopiert!', pt: 'Copiado!' },
+  copy: { en: 'Copy', it: 'Copia', es: 'Copiar', fr: 'Copier', de: 'Kopieren', pt: 'Copiar' },
+  history: { en: 'Recent Calculations', it: 'Calcoli Recenti', es: 'Cálculos Recientes', fr: 'Calculs Récents', de: 'Letzte Berechnungen', pt: 'Cálculos Recentes' },
+  invalidAmount: { en: 'Enter a valid amount', it: 'Inserisci un importo valido', es: 'Ingresa un monto válido', fr: 'Entrez un montant valide', de: 'Geben Sie einen gültigen Betrag ein', pt: 'Insira um valor válido' },
+};
+
 const seoContent: Record<Locale, { title: string; paragraphs: string[]; faq: { q: string; a: string }[] }> = {
   en: {
     title: 'What Is a VAT Calculator and How Does It Work?',
@@ -101,7 +117,7 @@ const seoContent: Record<Locale, { title: string; paragraphs: string[]; faq: { q
       { q: 'Qual e a diferenca entre adicionar e remover o IVA?', a: 'Adicionar IVA significa calcular o imposto sobre um preco liquido para obter o total bruto. Remover IVA significa extrair a parcela fiscal de um preco bruto para encontrar o valor liquido original.' },
       { q: 'Quais sao as taxas de IVA em Portugal?', a: 'Em Portugal aplicam-se tres taxas: 23% normal, 13% intermedia para restauracao e alguns produtos alimentares, e 6% reduzida para bens essenciais como pao, leite e livros.' },
       { q: 'Posso usar esta calculadora para faturas profissionais?', a: 'Sim. Introduza o valor liquido do seu produto ou servico, selecione a taxa de IVA apropriada e a calculadora mostrara o IVA exato e o total bruto a incluir na sua fatura.' },
-      { q: 'O IVA e o mesmo que Sales Tax?', a: 'Nao. O IVA e cobrado em cada etapa da producao e distribuicao, enquanto a Sales Tax e cobrada apenas uma vez no ponto de venda final ao consumidor.' },
+      { q: 'O IVA e o mesmo que Sales Tax?', a: 'Nao. O IVA e cobrado em cada etapa da producao e distribuicao, enquanto a Sales Tax e cobrada apenas uma vez no ponto de venta final ao consumidor.' },
     ],
   },
 };
@@ -111,20 +127,53 @@ export default function VatCalculator() {
   const t = common[lang];
   const toolT = tools['vat-calculator'][lang];
   const rates = vatRates[lang] || vatRates.en;
+  const vt = (key: string) => vatLabels[key]?.[lang] || vatLabels[key]?.en || key;
 
   const [amount, setAmount] = useState('');
   const [rate, setRate] = useState(rates[0]);
   const [mode, setMode] = useState<'add' | 'remove'>('add');
+  const [copied, setCopied] = useState(false);
+  const [history, setHistory] = useState<{ mode: string; amount: string; rate: number; result: string }[]>([]);
+  const [touched, setTouched] = useState(false);
 
   const num = parseFloat(amount) || 0;
+  const amountError = touched && amount !== '' && num <= 0;
   const vatAmount = mode === 'add' ? num * (rate / 100) : num - num / (1 + rate / 100);
   const total = mode === 'add' ? num + num * (rate / 100) : num / (1 + rate / 100);
+
+  const handleReset = () => {
+    setAmount('');
+    setRate(rates[0]);
+    setMode('add');
+    setTouched(false);
+  };
+
+  const copyResult = () => {
+    if (num > 0) {
+      const text = `${vt('vat')}: €${vatAmount.toFixed(2)} | ${mode === 'add' ? vt('totalWithVat') : vt('netAmount')}: €${total.toFixed(2)}`;
+      navigator.clipboard.writeText(text);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 1500);
+    }
+  };
+
+  // Track history
+  const prevAmount = useState('');
+  if (num > 0 && amount !== prevAmount[0]) {
+    prevAmount[1](amount);
+    setHistory(prev => [{
+      mode: mode === 'add' ? '+' : '-',
+      amount: `€${num.toFixed(2)}`,
+      rate,
+      result: `€${total.toFixed(2)}`
+    }, ...prev].slice(0, 5));
+  }
 
   const seo = seoContent[lang];
   const [openFaq, setOpenFaq] = useState<number | null>(null);
 
   return (
-    <ToolPageWrapper toolSlug="vat-calculator">
+    <ToolPageWrapper toolSlug="vat-calculator" faqItems={seo.faq}>
       <div className="max-w-2xl mx-auto">
         <h1 className="text-3xl font-bold text-gray-900 mb-2">{toolT.name}</h1>
         <p className="text-gray-600 mb-6">{toolT.description}</p>
@@ -133,41 +182,42 @@ export default function VatCalculator() {
           <div className="flex gap-2">
             <button
               onClick={() => setMode('add')}
-              className={`flex-1 py-2 rounded-lg font-medium ${mode === 'add' ? 'bg-blue-600 text-white' : 'bg-gray-100 text-gray-700'}`}
+              className={`flex-1 py-2.5 rounded-lg font-medium transition-all ${mode === 'add' ? 'bg-green-600 text-white shadow-md' : 'bg-gray-100 text-gray-700 hover:bg-gray-200'}`}
             >
-              + {lang === 'it' ? 'Aggiungi IVA' : lang === 'es' ? 'Añadir IVA' : lang === 'fr' ? 'Ajouter TVA' : lang === 'de' ? 'MwSt hinzufügen' : lang === 'pt' ? 'Adicionar IVA' : 'Add VAT'}
+              + {vt('addVat')}
             </button>
             <button
               onClick={() => setMode('remove')}
-              className={`flex-1 py-2 rounded-lg font-medium ${mode === 'remove' ? 'bg-blue-600 text-white' : 'bg-gray-100 text-gray-700'}`}
+              className={`flex-1 py-2.5 rounded-lg font-medium transition-all ${mode === 'remove' ? 'bg-orange-600 text-white shadow-md' : 'bg-gray-100 text-gray-700 hover:bg-gray-200'}`}
             >
-              − {lang === 'it' ? 'Scorporo IVA' : lang === 'es' ? 'Quitar IVA' : lang === 'fr' ? 'Retirer TVA' : lang === 'de' ? 'MwSt entfernen' : lang === 'pt' ? 'Remover IVA' : 'Remove VAT'}
+              - {vt('removeVat')}
             </button>
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">
-              {lang === 'it' ? 'Importo (€)' : lang === 'es' ? 'Cantidad (€)' : lang === 'fr' ? 'Montant (€)' : lang === 'de' ? 'Betrag (€)' : lang === 'pt' ? 'Valor (€)' : 'Amount'}
-            </label>
-            <input
-              type="number"
-              value={amount}
-              onChange={(e) => setAmount(e.target.value)}
-              placeholder="0.00"
-              className="w-full border border-gray-300 rounded-lg px-4 py-2 text-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-            />
+            <label className="block text-sm font-medium text-gray-700 mb-1">{vt('amount')}</label>
+            <div className="relative">
+              <span className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 text-lg">€</span>
+              <input
+                type="number"
+                value={amount}
+                onChange={(e) => setAmount(e.target.value)}
+                onBlur={() => setTouched(true)}
+                placeholder="0.00"
+                className={`w-full border rounded-lg pl-8 pr-4 py-2 text-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent ${amountError ? 'border-red-400 bg-red-50' : 'border-gray-300'}`}
+              />
+            </div>
+            {amountError && <p className="text-red-500 text-xs mt-1">{vt('invalidAmount')}</p>}
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">
-              {lang === 'it' ? 'Aliquota IVA' : lang === 'es' ? 'Tipo de IVA' : lang === 'fr' ? 'Taux TVA' : lang === 'de' ? 'MwSt-Satz' : lang === 'pt' ? 'Taxa IVA' : 'VAT Rate'}
-            </label>
-            <div className="flex gap-2">
+            <label className="block text-sm font-medium text-gray-700 mb-1">{vt('vatRate')}</label>
+            <div className="flex gap-2 flex-wrap">
               {rates.map((r) => (
                 <button
                   key={r}
                   onClick={() => setRate(r)}
-                  className={`px-4 py-2 rounded-lg font-medium ${r === rate ? 'bg-blue-600 text-white' : 'bg-gray-100 text-gray-700 hover:bg-gray-200'}`}
+                  className={`px-4 py-2 rounded-lg font-medium transition-all ${r === rate ? 'bg-blue-600 text-white shadow-md' : 'bg-gray-100 text-gray-700 hover:bg-gray-200'}`}
                 >
                   {r}%
                 </button>
@@ -175,24 +225,73 @@ export default function VatCalculator() {
             </div>
           </div>
 
+          {/* Reset button */}
+          <button onClick={handleReset} className="w-full py-2 text-sm text-gray-500 hover:text-red-500 transition-colors">
+            {vt('reset')}
+          </button>
+
           {num > 0 && (
-            <div className="mt-4 p-4 bg-blue-50 rounded-lg space-y-2">
-              <div className="flex justify-between">
-                <span className="text-gray-600">{mode === 'add' ? (lang === 'it' ? 'Importo netto' : 'Net amount') : (lang === 'it' ? 'Importo con IVA' : 'Amount with VAT')}</span>
-                <span className="font-semibold">€{num.toFixed(2)}</span>
+            <div className="mt-4 space-y-3">
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                <div className="p-4 bg-gray-50 rounded-xl text-center">
+                  <div className="text-xs text-gray-500">{mode === 'add' ? vt('netAmount') : vt('grossAmount')}</div>
+                  <div className="text-xl font-bold text-gray-700">€{num.toFixed(2)}</div>
+                </div>
+                <div className={`p-4 rounded-xl text-center ${mode === 'add' ? 'bg-green-50 border border-green-100' : 'bg-orange-50 border border-orange-100'}`}>
+                  <div className="text-xs text-gray-500">{vt('vat')} ({rate}%)</div>
+                  <div className={`text-xl font-bold ${mode === 'add' ? 'text-green-700' : 'text-orange-700'}`}>€{vatAmount.toFixed(2)}</div>
+                </div>
+                <div className="p-4 bg-blue-50 rounded-xl border border-blue-100 text-center">
+                  <div className="text-xs text-gray-500">{mode === 'add' ? vt('totalWithVat') : vt('netAmount')}</div>
+                  <div className="text-xl font-bold text-blue-700">€{total.toFixed(2)}</div>
+                </div>
               </div>
-              <div className="flex justify-between">
-                <span className="text-gray-600">{lang === 'it' ? 'IVA' : 'VAT'} ({rate}%)</span>
-                <span className="font-semibold">€{vatAmount.toFixed(2)}</span>
+
+              {/* Visual breakdown bar */}
+              <div className="bg-gray-50 rounded-lg p-3">
+                <div className="w-full bg-gray-200 rounded-full h-3 overflow-hidden">
+                  {mode === 'add' ? (
+                    <div className="h-full flex">
+                      <div className="bg-blue-500 h-full" style={{ width: `${(num / (num + vatAmount)) * 100}%` }} />
+                      <div className="bg-green-500 h-full" style={{ width: `${(vatAmount / (num + vatAmount)) * 100}%` }} />
+                    </div>
+                  ) : (
+                    <div className="h-full flex">
+                      <div className="bg-blue-500 h-full" style={{ width: `${(total / num) * 100}%` }} />
+                      <div className="bg-orange-500 h-full" style={{ width: `${(vatAmount / num) * 100}%` }} />
+                    </div>
+                  )}
+                </div>
+                <div className="flex justify-between text-xs text-gray-400 mt-1">
+                  <span>{vt('netAmount')}</span>
+                  <span>{vt('vat')}</span>
+                </div>
               </div>
-              <hr className="border-blue-200" />
-              <div className="flex justify-between text-lg">
-                <span className="font-bold text-gray-900">{mode === 'add' ? (lang === 'it' ? 'Totale con IVA' : 'Total with VAT') : (lang === 'it' ? 'Importo netto' : 'Net amount')}</span>
-                <span className="font-bold text-blue-600">€{total.toFixed(2)}</span>
-              </div>
+
+              <button onClick={copyResult} className="w-full py-2 bg-gray-100 hover:bg-gray-200 rounded-lg text-sm text-gray-700 transition-colors">
+                {copied ? vt('copied') : vt('copy')}
+              </button>
             </div>
           )}
         </div>
+
+        {/* History */}
+        {history.length > 0 && (
+          <div className="mt-4 bg-white rounded-xl border border-gray-200 p-4">
+            <div className="flex justify-between items-center mb-2">
+              <h3 className="text-sm font-medium text-gray-700">{vt('history')}</h3>
+              <button onClick={() => setHistory([])} className="text-xs text-red-500 hover:text-red-700">Clear</button>
+            </div>
+            <div className="space-y-1">
+              {history.map((h, i) => (
+                <div key={i} className="flex justify-between text-sm px-2 py-1.5 bg-gray-50 rounded">
+                  <span className="text-gray-500">{h.mode} {h.amount} @ {h.rate}%</span>
+                  <span className="font-semibold text-gray-900">{h.result}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
 
         <article className="mt-12 prose prose-gray max-w-none">
           <h2 className="text-2xl font-bold text-gray-900 mb-4">{seo.title}</h2>

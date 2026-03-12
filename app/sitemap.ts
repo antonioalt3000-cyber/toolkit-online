@@ -6,24 +6,49 @@ const BASE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://toolkitonline.vip'
 export default function sitemap(): MetadataRoute.Sitemap {
   const entries: MetadataRoute.Sitemap = [];
 
-  // Home pages for each locale
+  // Home pages for each locale (with hreflang alternates)
   for (const locale of locales) {
     entries.push({
       url: `${BASE_URL}/${locale}`,
-      lastModified: new Date(),
+      lastModified: new Date('2026-03-12'),
       changeFrequency: 'weekly',
       priority: 1.0,
+      alternates: {
+        languages: Object.fromEntries(
+          locales.map((l) => [l, `${BASE_URL}/${l}`])
+        ),
+      },
     });
   }
 
-  // Tool pages for each locale
+  // Tools listing page for each locale
+  for (const locale of locales) {
+    entries.push({
+      url: `${BASE_URL}/${locale}/tools`,
+      lastModified: new Date('2026-03-12'),
+      changeFrequency: 'weekly',
+      priority: 0.9,
+      alternates: {
+        languages: Object.fromEntries(
+          locales.map((l) => [l, `${BASE_URL}/${l}/tools`])
+        ),
+      },
+    });
+  }
+
+  // Tool pages for each locale (with hreflang alternates)
   for (const tool of toolList) {
     for (const locale of locales) {
       entries.push({
         url: `${BASE_URL}/${locale}/tools/${tool}`,
-        lastModified: new Date(),
+        lastModified: new Date('2026-03-12'),
         changeFrequency: 'monthly',
         priority: 0.8,
+        alternates: {
+          languages: Object.fromEntries(
+            locales.map((l) => [l, `${BASE_URL}/${l}/tools/${tool}`])
+          ),
+        },
       });
     }
   }

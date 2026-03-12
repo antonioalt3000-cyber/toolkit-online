@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 import { tools, locales, type Locale } from '@/lib/translations';
 
-export const BASE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://toolkit-online-gamma.vercel.app';
+export const BASE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://toolkitonline.vip';
 
 export function generateToolMetadata(toolSlug: string, lang: string): Metadata {
   const locale = (lang as Locale) || 'en';
@@ -31,7 +31,7 @@ export function generateToolMetadata(toolSlug: string, lang: string): Metadata {
       type: 'website',
     },
     twitter: {
-      card: 'summary_large_image',
+      card: 'summary',
       title: toolData.metaTitle,
       description: toolData.metaDescription,
     },

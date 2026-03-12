@@ -4,6 +4,8 @@ import { useParams } from 'next/navigation';
 import { tools, type Locale } from '@/lib/translations';
 import ToolPageWrapper from '@/components/ToolPageWrapper';
 
+type HistoryEntry = { width: number; ratios: { name: string; height: number }[] };
+
 const labels: Record<string, Record<Locale, string>> = {
   width: { en: 'Width (px)', it: 'Larghezza (px)', es: 'Ancho (px)', fr: 'Largeur (px)', de: 'Breite (px)', pt: 'Largura (px)' },
   height: { en: 'Height (px)', it: 'Altezza (px)', es: 'Alto (px)', fr: 'Hauteur (px)', de: 'Höhe (px)', pt: 'Altura (px)' },
@@ -13,15 +15,21 @@ const labels: Record<string, Record<Locale, string>> = {
   ratioH: { en: 'Ratio H', it: 'Rapporto A', es: 'Proporción Al', fr: 'Ratio H', de: 'Verhältnis H', pt: 'Proporção A' },
   results: { en: 'Calculated Dimensions', it: 'Dimensioni Calcolate', es: 'Dimensiones Calculadas', fr: 'Dimensions Calculées', de: 'Berechnete Maße', pt: 'Dimensões Calculadas' },
   ratio: { en: 'Ratio', it: 'Rapporto', es: 'Proporción', fr: 'Ratio', de: 'Verhältnis', pt: 'Proporção' },
+  reset: { en: 'Reset', it: 'Resetta', es: 'Restablecer', fr: 'Réinitialiser', de: 'Zurücksetzen', pt: 'Redefinir' },
+  copy: { en: 'Copy', it: 'Copia', es: 'Copiar', fr: 'Copier', de: 'Kopieren', pt: 'Copiar' },
+  copied: { en: 'Copied!', it: 'Copiato!', es: 'Copiado!', fr: 'Copié!', de: 'Kopiert!', pt: 'Copiado!' },
+  copyAll: { en: 'Copy All Results', it: 'Copia Tutti', es: 'Copiar Todo', fr: 'Tout Copier', de: 'Alle Kopieren', pt: 'Copiar Tudo' },
+  history: { en: 'Recent Calculations', it: 'Calcoli Recenti', es: 'Cálculos Recientes', fr: 'Calculs Récents', de: 'Letzte Berechnungen', pt: 'Cálculos Recentes' },
+  invalidWidth: { en: 'Width must be a positive number', it: 'La larghezza deve essere positiva', es: 'El ancho debe ser positivo', fr: 'La largeur doit être positive', de: 'Breite muss positiv sein', pt: 'A largura deve ser positiva' },
 };
 
 const commonRatios = [
-  { name: '16:9', w: 16, h: 9 },
-  { name: '4:3', w: 4, h: 3 },
-  { name: '1:1', w: 1, h: 1 },
-  { name: '21:9', w: 21, h: 9 },
-  { name: '3:2', w: 3, h: 2 },
-  { name: '9:16', w: 9, h: 16 },
+  { name: '16:9', w: 16, h: 9, icon: '🖥️' },
+  { name: '4:3', w: 4, h: 3, icon: '📺' },
+  { name: '1:1', w: 1, h: 1, icon: '⬛' },
+  { name: '21:9', w: 21, h: 9, icon: '🎬' },
+  { name: '3:2', w: 3, h: 2, icon: '📷' },
+  { name: '9:16', w: 9, h: 16, icon: '📱' },
 ];
 
 export default function AspectRatioCalculator() {
@@ -32,12 +40,53 @@ export default function AspectRatioCalculator() {
   const [width, setWidth] = useState('1920');
   const [customW, setCustomW] = useState('16');
   const [customH, setCustomH] = useState('9');
+  const [copiedIdx, setCopiedIdx] = useState<number | null>(null);
+  const [copiedAll, setCopiedAll] = useState(false);
+  const [history, setHistory] = useState<HistoryEntry[]>([]);
+  const [error, setError] = useState('');
 
   const w = parseInt(width) || 0;
   const cw = parseInt(customW) || 1;
   const ch = parseInt(customH) || 1;
 
-  const allRatios = [...commonRatios, { name: `${cw}:${ch}`, w: cw, h: ch }];
+  const allRatios = [...commonRatios, { name: `${cw}:${ch}`, w: cw, h: ch, icon: '🔧' }];
+
+  const handleWidthChange = (val: string) => {
+    setWidth(val);
+    const num = parseInt(val);
+    if (val && (isNaN(num) || num <= 0)) {
+      setError(t('invalidWidth'));
+    } else {
+      setError('');
+      if (num > 0) {
+        const ratios = allRatios.map(r => ({ name: r.name, height: Math.round(num * r.h / r.w) }));
+        setHistory(prev => {
+          const filtered = prev.filter(h => h.width !== num);
+          return [{ width: num, ratios }, ...filtered].slice(0, 5);
+        });
+      }
+    }
+  };
+
+  const copyDimension = (idx: number, w: number, h: number) => {
+    navigator.clipboard.writeText(`${w} x ${h}`);
+    setCopiedIdx(idx);
+    setTimeout(() => setCopiedIdx(null), 1500);
+  };
+
+  const copyAll = () => {
+    const text = allRatios.map(r => `${r.name}: ${w} x ${Math.round(w * r.h / r.w)}`).join('\n');
+    navigator.clipboard.writeText(text);
+    setCopiedAll(true);
+    setTimeout(() => setCopiedAll(false), 2000);
+  };
+
+  const handleReset = () => {
+    setWidth('1920');
+    setCustomW('16');
+    setCustomH('9');
+    setError('');
+  };
 
   const seoContent: Record<Locale, { title: string; paragraphs: string[]; faq: { q: string; a: string }[] }> = {
     en: {
@@ -142,7 +191,7 @@ export default function AspectRatioCalculator() {
   const [openFaq, setOpenFaq] = useState<number | null>(null);
 
   return (
-    <ToolPageWrapper toolSlug="aspect-ratio-calculator">
+    <ToolPageWrapper toolSlug="aspect-ratio-calculator" faqItems={seo.faq}>
       <div className="max-w-2xl mx-auto">
         <h1 className="text-3xl font-bold text-gray-900 mb-2">{toolT.name}</h1>
         <p className="text-gray-600 mb-6">{toolT.description}</p>
@@ -153,9 +202,10 @@ export default function AspectRatioCalculator() {
             <input
               type="number"
               value={width}
-              onChange={(e) => setWidth(e.target.value)}
-              className="w-full border border-gray-300 rounded-lg px-4 py-2 text-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+              onChange={(e) => handleWidthChange(e.target.value)}
+              className={`w-full border rounded-lg px-4 py-2 text-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent ${error ? 'border-red-400 bg-red-50' : 'border-gray-300'}`}
             />
+            {error && <p className="text-red-500 text-sm mt-1">{error}</p>}
           </div>
 
           <div>
@@ -179,27 +229,68 @@ export default function AspectRatioCalculator() {
             </div>
           </div>
 
-          {w > 0 && (
+          <div className="flex justify-end">
+            <button onClick={handleReset} className="text-sm text-gray-500 hover:text-red-500 transition-colors flex items-center gap-1">
+              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" /></svg>
+              {t('reset')}
+            </button>
+          </div>
+
+          {w > 0 && !error && (
             <div className="mt-4">
               <label className="block text-sm font-medium text-gray-700 mb-2">{t('results')}</label>
               <div className="space-y-2">
-                {allRatios.map((ratio) => {
+                {allRatios.map((ratio, idx) => {
                   const height = Math.round(w * ratio.h / ratio.w);
+                  const isCustom = idx === allRatios.length - 1;
                   return (
-                    <div key={ratio.name} className="flex justify-between items-center p-3 bg-blue-50 rounded-lg">
-                      <div>
+                    <div key={ratio.name} className={`flex justify-between items-center p-3 rounded-lg border transition-colors ${isCustom ? 'bg-purple-50 border-purple-200' : 'bg-blue-50 border-blue-100'}`}>
+                      <div className="flex items-center gap-2">
+                        <span className="text-lg">{ratio.icon}</span>
                         <span className="font-semibold text-gray-900">{ratio.name}</span>
                       </div>
-                      <div className="text-right">
+                      <div className="flex items-center gap-2">
                         <span className="font-mono text-blue-600 font-semibold">{w} x {height}</span>
+                        <button
+                          onClick={() => copyDimension(idx, w, height)}
+                          className="text-gray-400 hover:text-blue-600 transition-colors p-1"
+                          title={t('copy')}
+                        >
+                          {copiedIdx === idx ? (
+                            <svg className="w-4 h-4 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" /></svg>
+                          ) : (
+                            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" /></svg>
+                          )}
+                        </button>
                       </div>
                     </div>
                   );
                 })}
               </div>
+              <button onClick={copyAll} className="mt-3 w-full py-2 rounded-lg border border-gray-300 text-sm font-medium text-gray-700 hover:bg-gray-50 transition-colors flex items-center justify-center gap-2">
+                {copiedAll ? (
+                  <><svg className="w-4 h-4 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" /></svg>{t('copied')}</>
+                ) : (
+                  <><svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" /></svg>{t('copyAll')}</>
+                )}
+              </button>
             </div>
           )}
         </div>
+
+        {history.length > 0 && (
+          <div className="mt-6 bg-white rounded-xl border border-gray-200 p-4">
+            <h3 className="text-sm font-medium text-gray-700 mb-3">{t('history')}</h3>
+            <div className="space-y-2">
+              {history.map((h, i) => (
+                <button key={i} onClick={() => handleWidthChange(String(h.width))} className="w-full text-left px-3 py-2 rounded-lg bg-gray-50 hover:bg-blue-50 transition-colors flex justify-between items-center text-sm">
+                  <span className="text-gray-600">{t('width')}: {h.width}px</span>
+                  <span className="font-medium text-gray-900">16:9 = {h.width} x {Math.round(h.width * 9 / 16)}</span>
+                </button>
+              ))}
+            </div>
+          </div>
+        )}
 
         <article className="mt-12 prose prose-gray max-w-none">
           <h2 className="text-2xl font-bold text-gray-900 mb-4">{seo.title}</h2>

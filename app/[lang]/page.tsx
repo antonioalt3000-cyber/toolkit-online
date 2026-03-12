@@ -29,6 +29,7 @@ export default async function HomePage({ params }: { params: Promise<{ lang: str
         statsFree: t.statsFree,
         searchPlaceholder: t.searchPlaceholder,
         categories: t.categories,
+        toolOfTheDay: t.toolOfTheDay,
       }}
     />
   );

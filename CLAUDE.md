@@ -53,10 +53,20 @@ image-compressor
 - La sitemap si genera automaticamente da `toolList`
 - Commit messages in inglese, comunicazione con l'utente in italiano
 - Il dominio base nella sitemap è hardcoded come fallback: 'https://toolkitonline.vip'
+- Ogni tool DEVE avere: ToolPageWrapper, SEO article (300-400 parole x6 lingue), FAQ accordion (4-5 domande)
+- Layout tool: max-w-2xl
+
+## Skill disponibili (slash commands)
+- `/new-tool [slug] [category]` — Crea un nuovo tool completo
+- `/deploy [messaggio]` — Build + commit + push + verifica
+- `/seo-check [slug]` — Analisi SEO di un tool
+- `/add-tools-batch [slug1,slug2,...] [category]` — Crea tool in batch
+- `/publish-article [topic]` — Pubblica articolo su Dev.to (richiede API key)
 
 ## Prossimi passi
 - Attendere approvazione AdSense
-- Aggiungere nuovi tool (target: 100+)
-- Articoli SEO per long-tail keywords
+- Aggiungere nuovi tool (target: 100+) — vedi .claude/projects/strategy.md
+- Creare account Dev.to + Sellix per automazione
+- Articoli SEO su Dev.to per backlink
+- Prodotti digitali su Sellix
 - Google Analytics (GA4 Measurement ID)
-- Gumroad per prodotti digitali

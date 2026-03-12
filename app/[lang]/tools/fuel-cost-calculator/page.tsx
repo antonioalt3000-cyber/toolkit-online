@@ -19,6 +19,16 @@ const labels: Record<string, Record<Locale, string>> = {
   liters: { en: 'liters', it: 'litri', es: 'litros', fr: 'litres', de: 'Liter', pt: 'litros' },
   gallons: { en: 'gallons', it: 'galloni', es: 'galones', fr: 'gallons', de: 'Gallonen', pt: 'galões' },
   roundTrip: { en: 'Round Trip', it: 'Andata e Ritorno', es: 'Ida y Vuelta', fr: 'Aller-Retour', de: 'Hin- und Rückfahrt', pt: 'Ida e Volta' },
+  costPerKm: { en: 'Cost per km', it: 'Costo al km', es: 'Costo por km', fr: 'Coût par km', de: 'Kosten pro km', pt: 'Custo por km' },
+  costPerMile: { en: 'Cost per mile', it: 'Costo per miglio', es: 'Costo por milla', fr: 'Coût par mile', de: 'Kosten pro Meile', pt: 'Custo por milha' },
+  reset: { en: 'Reset', it: 'Ripristina', es: 'Restablecer', fr: 'Réinitialiser', de: 'Zurücksetzen', pt: 'Redefinir' },
+  copy: { en: 'Copy Result', it: 'Copia Risultato', es: 'Copiar Resultado', fr: 'Copier le Résultat', de: 'Ergebnis kopieren', pt: 'Copiar Resultado' },
+  copied: { en: 'Copied!', it: 'Copiato!', es: '¡Copiado!', fr: 'Copié !', de: 'Kopiert!', pt: 'Copiado!' },
+  historyLabel: { en: 'Recent Calculations', it: 'Calcoli Recenti', es: 'Cálculos Recientes', fr: 'Calculs Récents', de: 'Letzte Berechnungen', pt: 'Cálculos Recentes' },
+  invalidDistance: { en: 'Enter a valid distance', it: 'Inserisci una distanza valida', es: 'Ingrese una distancia válida', fr: 'Entrez une distance valide', de: 'Gültige Entfernung eingeben', pt: 'Insira uma distância válida' },
+  invalidConsumption: { en: 'Enter a valid consumption', it: 'Inserisci un consumo valido', es: 'Ingrese un consumo válido', fr: 'Entrez une consommation valide', de: 'Gültigen Verbrauch eingeben', pt: 'Insira um consumo válido' },
+  invalidPrice: { en: 'Enter a valid price', it: 'Inserisci un prezzo valido', es: 'Ingrese un precio válido', fr: 'Entrez un prix valide', de: 'Gültigen Preis eingeben', pt: 'Insira um preço válido' },
+  calculate: { en: 'Calculate', it: 'Calcola', es: 'Calcular', fr: 'Calculer', de: 'Berechnen', pt: 'Calcular' },
 };
 
 const seoContent: Record<Locale, { title: string; paragraphs: string[]; faq: { q: string; a: string }[] }> = {
@@ -121,29 +131,17 @@ export default function FuelCostCalculator() {
 
   const [mode, setMode] = useState<'metric' | 'imperial'>('metric');
   const [distance, setDistance] = useState('100');
-  const [consumption, setConsumption] = useState(mode === 'metric' ? '7' : '35');
-  const [fuelPrice, setFuelPrice] = useState(mode === 'metric' ? '1.80' : '3.50');
+  const [consumption, setConsumption] = useState('7');
+  const [fuelPrice, setFuelPrice] = useState('1.80');
   const [roundTrip, setRoundTrip] = useState(false);
-
-  const dist = (parseFloat(distance) || 0) * (roundTrip ? 2 : 1);
-  const cons = parseFloat(consumption) || 0;
-  const price = parseFloat(fuelPrice) || 0;
-
-  let fuelUsed = 0;
-  let tripCost = 0;
-
-  if (mode === 'metric') {
-    // L/100km
-    fuelUsed = (dist * cons) / 100;
-    tripCost = fuelUsed * price;
-  } else {
-    // MPG (US gallons)
-    fuelUsed = cons > 0 ? dist / cons : 0;
-    tripCost = fuelUsed * price;
-  }
+  const [calculated, setCalculated] = useState(false);
+  const [copied, setCopied] = useState(false);
+  const [errors, setErrors] = useState<Record<string, string>>({});
+  const [history, setHistory] = useState<{ dist: number; fuel: number; cost: number; unit: string }[]>([]);
 
   const switchMode = (newMode: 'metric' | 'imperial') => {
     setMode(newMode);
+    setCalculated(false);
     if (newMode === 'metric') {
       setConsumption('7');
       setFuelPrice('1.80');
@@ -153,11 +151,74 @@ export default function FuelCostCalculator() {
     }
   };
 
+  const handleReset = () => {
+    setDistance('100');
+    setConsumption(mode === 'metric' ? '7' : '35');
+    setFuelPrice(mode === 'metric' ? '1.80' : '3.50');
+    setRoundTrip(false);
+    setCalculated(false);
+    setCopied(false);
+    setErrors({});
+  };
+
+  const handleCalculate = () => {
+    const newErrors: Record<string, string> = {};
+    const d = parseFloat(distance);
+    const c = parseFloat(consumption);
+    const p = parseFloat(fuelPrice);
+
+    if (isNaN(d) || d <= 0) newErrors.distance = t('invalidDistance');
+    if (isNaN(c) || c <= 0) newErrors.consumption = t('invalidConsumption');
+    if (isNaN(p) || p <= 0) newErrors.price = t('invalidPrice');
+
+    setErrors(newErrors);
+    if (Object.keys(newErrors).length > 0) { setCalculated(false); return; }
+
+    setCalculated(true);
+
+    const totalDist = d * (roundTrip ? 2 : 1);
+    let fuel = 0;
+    if (mode === 'metric') {
+      fuel = (totalDist * c) / 100;
+    } else {
+      fuel = totalDist / c;
+    }
+    const cost = fuel * p;
+    const unit = mode === 'metric' ? 'km' : 'mi';
+    setHistory(prev => [{ dist: totalDist, fuel, cost, unit }, ...prev].slice(0, 5));
+  };
+
+  const dist = (parseFloat(distance) || 0) * (roundTrip ? 2 : 1);
+  const cons = parseFloat(consumption) || 0;
+  const price = parseFloat(fuelPrice) || 0;
+
+  let fuelUsed = 0;
+  let tripCost = 0;
+  let costPerUnit = 0;
+
+  if (mode === 'metric') {
+    fuelUsed = (dist * cons) / 100;
+    tripCost = fuelUsed * price;
+    costPerUnit = dist > 0 ? tripCost / dist : 0;
+  } else {
+    fuelUsed = cons > 0 ? dist / cons : 0;
+    tripCost = fuelUsed * price;
+    costPerUnit = dist > 0 ? tripCost / dist : 0;
+  }
+
+  const copyResults = () => {
+    if (!calculated) return;
+    const text = `${t('distance')}: ${dist.toFixed(1)} ${mode === 'metric' ? t('km') : t('miles')}\n${t('fuelUsed')}: ${fuelUsed.toFixed(2)} ${mode === 'metric' ? t('liters') : t('gallons')}\n${t('tripCost')}: ${tripCost.toFixed(2)}\n${mode === 'metric' ? t('costPerKm') : t('costPerMile')}: ${costPerUnit.toFixed(3)}`;
+    navigator.clipboard.writeText(text);
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2000);
+  };
+
   const seo = seoContent[lang];
   const [openFaq, setOpenFaq] = useState<number | null>(null);
 
   return (
-    <ToolPageWrapper toolSlug="fuel-cost-calculator">
+    <ToolPageWrapper toolSlug="fuel-cost-calculator" faqItems={seo.faq}>
       <div className="max-w-2xl mx-auto">
         <h1 className="text-3xl font-bold text-gray-900 mb-2">{toolT.name}</h1>
         <p className="text-gray-600 mb-6">{toolT.description}</p>
@@ -185,9 +246,10 @@ export default function FuelCostCalculator() {
             <input
               type="number"
               value={distance}
-              onChange={(e) => setDistance(e.target.value)}
-              className="w-full border border-gray-300 rounded-lg px-4 py-2 text-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+              onChange={(e) => { setDistance(e.target.value); setErrors(prev => ({ ...prev, distance: '' })); }}
+              className={`w-full border rounded-lg px-4 py-2 text-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent ${errors.distance ? 'border-red-400 bg-red-50' : 'border-gray-300'}`}
             />
+            {errors.distance && <p className="text-red-500 text-xs mt-1">{errors.distance}</p>}
           </div>
 
           <div>
@@ -197,10 +259,11 @@ export default function FuelCostCalculator() {
             <input
               type="number"
               value={consumption}
-              onChange={(e) => setConsumption(e.target.value)}
+              onChange={(e) => { setConsumption(e.target.value); setErrors(prev => ({ ...prev, consumption: '' })); }}
               step="0.1"
-              className="w-full border border-gray-300 rounded-lg px-4 py-2 text-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+              className={`w-full border rounded-lg px-4 py-2 text-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent ${errors.consumption ? 'border-red-400 bg-red-50' : 'border-gray-300'}`}
             />
+            {errors.consumption && <p className="text-red-500 text-xs mt-1">{errors.consumption}</p>}
           </div>
 
           <div>
@@ -210,10 +273,11 @@ export default function FuelCostCalculator() {
             <input
               type="number"
               value={fuelPrice}
-              onChange={(e) => setFuelPrice(e.target.value)}
+              onChange={(e) => { setFuelPrice(e.target.value); setErrors(prev => ({ ...prev, price: '' })); }}
               step="0.01"
-              className="w-full border border-gray-300 rounded-lg px-4 py-2 text-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+              className={`w-full border rounded-lg px-4 py-2 text-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent ${errors.price ? 'border-red-400 bg-red-50' : 'border-gray-300'}`}
             />
+            {errors.price && <p className="text-red-500 text-xs mt-1">{errors.price}</p>}
           </div>
 
           <label className="flex items-center gap-2">
@@ -221,20 +285,88 @@ export default function FuelCostCalculator() {
             <span className="text-sm text-gray-700">{t('roundTrip')}</span>
           </label>
 
-          {dist > 0 && cons > 0 && price > 0 && (
-            <div className="p-4 bg-blue-50 rounded-lg space-y-2">
-              <div className="flex justify-between">
-                <span className="text-gray-600">{t('distance')}</span>
-                <span className="font-semibold">{dist.toFixed(1)} {mode === 'metric' ? t('km') : t('miles')}</span>
+          <div className="flex gap-2">
+            <button onClick={handleCalculate} className="flex-1 bg-blue-600 text-white rounded-lg px-4 py-2.5 font-medium hover:bg-blue-700 transition-colors">{t('calculate')}</button>
+            <button onClick={handleReset} className="px-4 py-2.5 rounded-lg border border-gray-300 text-gray-700 hover:bg-gray-50 transition-colors flex items-center gap-1.5" title={t('reset')}>
+              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" /></svg>
+              {t('reset')}
+            </button>
+          </div>
+
+          {calculated && dist > 0 && cons > 0 && price > 0 && (
+            <div className="space-y-3">
+              {/* Trip Cost - main card */}
+              <div className="bg-gradient-to-br from-green-50 to-emerald-50 border border-green-200 rounded-xl p-5 text-center">
+                <div className="text-sm text-green-600 font-medium mb-1 flex items-center justify-center gap-1">
+                  <span>💰</span> {t('tripCost')}
+                </div>
+                <div className="text-4xl font-bold text-green-700">{tripCost.toFixed(2)}</div>
+                {roundTrip && <div className="text-xs text-green-500 mt-1">{t('roundTrip')}</div>}
               </div>
-              <div className="flex justify-between">
-                <span className="text-gray-600">{t('fuelUsed')}</span>
-                <span className="font-semibold">{fuelUsed.toFixed(2)} {mode === 'metric' ? t('liters') : t('gallons')}</span>
+
+              {/* Fuel & Distance cards */}
+              <div className="grid grid-cols-2 gap-3">
+                <div className="bg-gradient-to-br from-yellow-50 to-amber-50 border border-yellow-200 rounded-xl p-4 text-center">
+                  <div className="text-sm text-yellow-600 font-medium mb-1 flex items-center justify-center gap-1">
+                    <span>⛽</span> {t('fuelUsed')}
+                  </div>
+                  <div className="text-xl font-bold text-yellow-700">{fuelUsed.toFixed(2)}</div>
+                  <div className="text-xs text-yellow-500">{mode === 'metric' ? t('liters') : t('gallons')}</div>
+                </div>
+                <div className="bg-gradient-to-br from-blue-50 to-indigo-50 border border-blue-200 rounded-xl p-4 text-center">
+                  <div className="text-sm text-blue-600 font-medium mb-1 flex items-center justify-center gap-1">
+                    <span>🛣️</span> {t('distance')}
+                  </div>
+                  <div className="text-xl font-bold text-blue-700">{dist.toFixed(1)}</div>
+                  <div className="text-xs text-blue-500">{mode === 'metric' ? t('km') : t('miles')}</div>
+                </div>
               </div>
-              <hr className="border-blue-200" />
-              <div className="flex justify-between text-lg">
-                <span className="font-bold text-gray-900">{t('tripCost')}</span>
-                <span className="font-bold text-blue-600">{tripCost.toFixed(2)}</span>
+
+              {/* Cost per unit */}
+              <div className="bg-gradient-to-br from-purple-50 to-violet-50 border border-purple-200 rounded-xl p-4 text-center">
+                <div className="text-sm text-purple-600 font-medium mb-1 flex items-center justify-center gap-1">
+                  <span>📊</span> {mode === 'metric' ? t('costPerKm') : t('costPerMile')}
+                </div>
+                <div className="text-xl font-bold text-purple-700">{costPerUnit.toFixed(3)}</div>
+              </div>
+
+              {/* Fuel usage progress bar */}
+              <div className="bg-gray-50 border border-gray-200 rounded-xl p-4">
+                <div className="flex justify-between text-xs text-gray-500 mb-1">
+                  <span>0</span>
+                  <span>{fuelUsed.toFixed(1)} {mode === 'metric' ? 'L' : 'gal'}</span>
+                  <span>{(fuelUsed * 2).toFixed(0)}</span>
+                </div>
+                <div className="w-full bg-gray-200 rounded-full h-3">
+                  <div className="bg-gradient-to-r from-green-400 via-yellow-400 to-red-400 h-3 rounded-full transition-all duration-500" style={{ width: '50%' }}></div>
+                </div>
+              </div>
+
+              {/* Copy Button */}
+              <button onClick={copyResults} className="w-full py-2 rounded-lg border border-gray-300 text-sm font-medium text-gray-700 hover:bg-gray-50 transition-colors flex items-center justify-center gap-2">
+                {copied ? (
+                  <><svg className="w-4 h-4 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" /></svg>{t('copied')}</>
+                ) : (
+                  <><svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3" /></svg>{t('copy')}</>
+                )}
+              </button>
+            </div>
+          )}
+
+          {/* History */}
+          {history.length > 0 && (
+            <div className="border-t border-gray-200 pt-4">
+              <h3 className="text-sm font-medium text-gray-700 mb-2 flex items-center gap-1.5">
+                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                {t('historyLabel')}
+              </h3>
+              <div className="space-y-1.5">
+                {history.map((h, i) => (
+                  <div key={i} className="flex justify-between items-center text-sm bg-gray-50 rounded-lg px-3 py-2 hover:bg-gray-100 transition-colors">
+                    <span className="text-gray-600">{h.dist.toFixed(0)} {h.unit} / {h.fuel.toFixed(1)} {mode === 'metric' ? 'L' : 'gal'}</span>
+                    <span className="font-semibold text-gray-900">{h.cost.toFixed(2)}</span>
+                  </div>
+                ))}
               </div>
             </div>
           )}

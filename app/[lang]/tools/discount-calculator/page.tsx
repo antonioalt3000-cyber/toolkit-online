@@ -111,6 +111,8 @@ export default function DiscountCalculator() {
 
   const [price, setPrice] = useState('');
   const [discount, setDiscount] = useState('');
+  const [copied, setCopied] = useState(false);
+  const [history, setHistory] = useState<{ price: number; discount: number; saved: number; final: number }[]>([]);
 
   const priceNum = parseFloat(price) || 0;
   const discountNum = parseFloat(discount) || 0;
@@ -119,11 +121,24 @@ export default function DiscountCalculator() {
 
   const presets = [10, 15, 20, 25, 30, 50];
 
+  const handleReset = () => { setPrice(''); setDiscount(''); };
+  const copyResults = () => {
+    const text = `${t('originalPrice')}: $${priceNum.toFixed(2)}\n${t('discountPercent')}: ${discountNum}%\n${t('youSave')}: $${saved.toFixed(2)}\n${t('finalPrice')}: $${finalPrice.toFixed(2)}`;
+    navigator.clipboard.writeText(text);
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2000);
+  };
+  const addToHistory = () => {
+    if (priceNum > 0 && discountNum > 0) {
+      setHistory(prev => [{ price: priceNum, discount: discountNum, saved, final: finalPrice }, ...prev].slice(0, 5));
+    }
+  };
+
   const seo = seoContent[lang];
   const [openFaq, setOpenFaq] = useState<number | null>(null);
 
   return (
-    <ToolPageWrapper toolSlug="discount-calculator">
+    <ToolPageWrapper toolSlug="discount-calculator" faqItems={seo.faq}>
       <div className="max-w-2xl mx-auto">
         <h1 className="text-3xl font-bold text-gray-900 mb-2">{toolT.name}</h1>
         <p className="text-gray-600 mb-6">{toolT.description}</p>
@@ -149,18 +164,44 @@ export default function DiscountCalculator() {
               className="w-full border border-gray-300 rounded-lg px-4 py-2 text-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent" />
           </div>
 
+          <div className="flex justify-end">
+            <button onClick={handleReset} className="text-sm text-gray-500 hover:text-red-500 transition-colors flex items-center gap-1">
+              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" /></svg>
+              Reset
+            </button>
+          </div>
+
           {priceNum > 0 && discountNum > 0 && (
-            <div className="mt-4 p-4 bg-blue-50 rounded-lg space-y-2">
-              <div className="flex justify-between">
-                <span className="text-gray-600">{t('youSave')}</span>
-                <span className="font-semibold text-green-600">${saved.toFixed(2)}</span>
+            <>
+              <div className="grid grid-cols-2 gap-3">
+                <div className="bg-green-50 border border-green-200 rounded-xl p-4 text-center">
+                  <span className="text-2xl">💵</span>
+                  <div className="text-xs text-green-600 font-medium mt-1">{t('youSave')}</div>
+                  <div className="text-2xl font-bold text-green-700">${saved.toFixed(2)}</div>
+                </div>
+                <div className="bg-blue-50 border border-blue-200 rounded-xl p-4 text-center">
+                  <span className="text-2xl">🏷️</span>
+                  <div className="text-xs text-blue-600 font-medium mt-1">{t('finalPrice')}</div>
+                  <div className="text-2xl font-bold text-blue-700">${finalPrice.toFixed(2)}</div>
+                </div>
               </div>
-              <hr className="border-blue-200" />
-              <div className="flex justify-between text-lg">
-                <span className="font-bold text-gray-900">{t('finalPrice')}</span>
-                <span className="font-bold text-blue-600">${finalPrice.toFixed(2)}</span>
+
+              {/* Savings progress bar */}
+              <div className="bg-gray-50 rounded-lg p-3">
+                <div className="w-full bg-gray-200 rounded-full h-3">
+                  <div className="bg-gradient-to-r from-green-400 to-green-600 h-3 rounded-full transition-all" style={{ width: `${discountNum}%` }}></div>
+                </div>
+                <div className="text-center text-xs text-gray-500 mt-1">{discountNum}% off</div>
               </div>
-            </div>
+
+              <button onClick={() => { copyResults(); addToHistory(); }} className="w-full py-2 rounded-lg border border-gray-300 text-sm font-medium text-gray-700 hover:bg-gray-50 transition-colors flex items-center justify-center gap-2">
+                {copied ? (
+                  <><svg className="w-4 h-4 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" /></svg>Copied!</>
+                ) : (
+                  <><svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" /></svg>Copy Results</>
+                )}
+              </button>
+            </>
           )}
         </div>
 

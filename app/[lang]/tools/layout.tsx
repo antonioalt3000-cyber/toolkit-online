@@ -17,7 +17,7 @@ export async function generateMetadata({
       siteName: 'ToolKit Online',
     },
     twitter: {
-      card: 'summary_large_image',
+      card: 'summary',
     },
     alternates: {
       languages: Object.fromEntries(

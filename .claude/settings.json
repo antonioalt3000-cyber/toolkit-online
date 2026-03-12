@@ -1,0 +1,42 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npx next build *)",
+      "Bash(npx next build)",
+      "Bash(git *)",
+      "Bash(npm run *)",
+      "Bash(npx vercel *)",
+      "Bash(curl -X POST https://dev.to/*)",
+      "Bash(nslookup *)",
+      "Bash(sleep *)",
+      "Bash(mkdir *)",
+      "Bash(ls *)",
+      "Bash(wc *)",
+      "Read",
+      "Write",
+      "Edit",
+      "Glob",
+      "Grep"
+    ],
+    "deny": [
+      "Bash(rm -rf /)",
+      "Bash(git push --force *)"
+    ]
+  },
+  "env": {
+    "NEXT_PUBLIC_SITE_URL": "https://toolkitonline.vip"
+  },
+  "hooks": {
+    "PostToolUse": [
+      {
+        "matcher": "Bash",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "echo ''"
+          }
+        ]
+      }
+    ]
+  }
+}

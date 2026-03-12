@@ -151,11 +151,26 @@ export default function DateCalculator() {
     },
   };
 
+  const [copied, setCopied] = useState(false);
+
+  const handleReset = () => { setStartDate(today); setEndDate(today); setBaseDate(today); setDaysToAdd(''); };
+  const copyResults = () => {
+    let text = '';
+    if (mode === 'between') {
+      text = `${t('difference')}: ${Math.abs(diffDays)} ${t('days')} (${diffWeeks} ${t('weeks')}, ${diffMonths} ${t('months')})`;
+    } else {
+      text = `${t('resultDate')}: ${formatDate(resultStr)} (${resultStr})`;
+    }
+    navigator.clipboard.writeText(text);
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2000);
+  };
+
   const seo = seoContent[lang];
   const [openFaq, setOpenFaq] = useState<number | null>(null);
 
   return (
-    <ToolPageWrapper toolSlug="date-calculator">
+    <ToolPageWrapper toolSlug="date-calculator" faqItems={seo.faq}>
       <div className="max-w-2xl mx-auto">
         <h1 className="text-3xl font-bold text-gray-900 mb-2">{toolT.name}</h1>
         <p className="text-gray-600 mb-6">{toolT.description}</p>
@@ -185,11 +200,19 @@ export default function DateCalculator() {
                   className="w-full border border-gray-300 rounded-lg px-4 py-2 focus:ring-2 focus:ring-blue-500 focus:border-transparent" />
               </div>
 
-              <div className="p-4 bg-blue-50 rounded-lg space-y-2">
-                <div className="text-sm text-gray-600">{t('difference')}</div>
-                <div className="text-2xl font-bold text-blue-600">{Math.abs(diffDays)} {t('days')}</div>
-                <div className="text-sm text-gray-500">{diffWeeks} {t('weeks')} &middot; {diffMonths} {t('months')}</div>
+              <div className="bg-blue-50 border border-blue-200 rounded-xl p-5 text-center">
+                <span className="text-2xl">📅</span>
+                <div className="text-xs text-blue-600 font-medium mt-1">{t('difference')}</div>
+                <div className="text-3xl font-bold text-blue-700">{Math.abs(diffDays)} {t('days')}</div>
+                <div className="text-sm text-gray-500 mt-1">{diffWeeks} {t('weeks')} &middot; {diffMonths} {t('months')}</div>
               </div>
+              <button onClick={copyResults} className="w-full py-2 rounded-lg border border-gray-300 text-sm font-medium text-gray-700 hover:bg-gray-50 transition-colors flex items-center justify-center gap-2">
+                {copied ? (
+                  <><svg className="w-4 h-4 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" /></svg>Copied!</>
+                ) : (
+                  <><svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" /></svg>Copy</>
+                )}
+              </button>
             </>
           ) : (
             <>
@@ -205,11 +228,21 @@ export default function DateCalculator() {
               </div>
 
               {addNum !== 0 && (
-                <div className="p-4 bg-blue-50 rounded-lg">
-                  <div className="text-sm text-gray-600">{t('resultDate')}</div>
-                  <div className="text-xl font-bold text-blue-600">{formatDate(resultStr)}</div>
-                  <div className="text-sm text-gray-500">{resultStr}</div>
-                </div>
+                <>
+                  <div className="bg-blue-50 border border-blue-200 rounded-xl p-5 text-center">
+                    <span className="text-2xl">🗓️</span>
+                    <div className="text-xs text-blue-600 font-medium mt-1">{t('resultDate')}</div>
+                    <div className="text-xl font-bold text-blue-700">{formatDate(resultStr)}</div>
+                    <div className="text-sm text-gray-500 mt-1">{resultStr}</div>
+                  </div>
+                  <button onClick={copyResults} className="w-full py-2 rounded-lg border border-gray-300 text-sm font-medium text-gray-700 hover:bg-gray-50 transition-colors flex items-center justify-center gap-2">
+                    {copied ? (
+                      <><svg className="w-4 h-4 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" /></svg>Copied!</>
+                    ) : (
+                      <><svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" /></svg>Copy</>
+                    )}
+                  </button>
+                </>
               )}
             </>
           )}

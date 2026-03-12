@@ -12,9 +12,15 @@ const labels: Record<string, Record<string, string>> = {
   totalAmount: { en: 'Total Amount', it: 'Importo Totale', es: 'Monto Total', fr: 'Montant Total', de: 'Gesamtbetrag', pt: 'Valor Total' },
   tipPerPerson: { en: 'Tip per Person', it: 'Mancia per Persona', es: 'Propina por Persona', fr: 'Pourboire par Personne', de: 'Trinkgeld pro Person', pt: 'Gorjeta por Pessoa' },
   totalPerPerson: { en: 'Total per Person', it: 'Totale per Persona', es: 'Total por Persona', fr: 'Total par Personne', de: 'Gesamt pro Person', pt: 'Total por Pessoa' },
+  reset: { en: 'Reset', it: 'Reset', es: 'Reiniciar', fr: 'Réinitialiser', de: 'Zurücksetzen', pt: 'Reiniciar' },
+  copied: { en: 'Copied!', it: 'Copiato!', es: 'Copiado!', fr: 'Copié !', de: 'Kopiert!', pt: 'Copiado!' },
+  copy: { en: 'Copy', it: 'Copia', es: 'Copiar', fr: 'Copier', de: 'Kopieren', pt: 'Copiar' },
+  history: { en: 'Recent Calculations', it: 'Calcoli Recenti', es: 'Cálculos Recientes', fr: 'Calculs Récents', de: 'Letzte Berechnungen', pt: 'Cálculos Recentes' },
+  invalidBill: { en: 'Enter a valid bill amount', it: 'Inserisci un importo valido', es: 'Ingresa un monto válido', fr: 'Entrez un montant valide', de: 'Geben Sie einen gültigen Betrag ein', pt: 'Insira um valor válido' },
+  invalidPeople: { en: 'Enter at least 1 person', it: 'Inserisci almeno 1 persona', es: 'Ingresa al menos 1 persona', fr: 'Entrez au moins 1 personne', de: 'Geben Sie mindestens 1 Person ein', pt: 'Insira pelo menos 1 pessoa' },
 };
 
-const seoContent: Record<Locale, { title: string; paragraphs: string[]; faq: { q: string; a: string }[] }> = {
+const seoContent: Record<string, { title: string; paragraphs: string[]; faq: { q: string; a: string }[] }> = {
   en: {
     title: 'How to Calculate Tips at Restaurants and Bars',
     paragraphs: [
@@ -108,17 +114,23 @@ const seoContent: Record<Locale, { title: string; paragraphs: string[]; faq: { q
 };
 
 export default function TipCalculator() {
-  const { lang } = useParams() as { lang: Locale };
-  const toolT = tools['tip-calculator'][lang];
+  const { lang } = useParams() as { lang: string };
+  const toolT = tools['tip-calculator'][lang as keyof typeof tools['tip-calculator']];
   const t = (key: string) => labels[key]?.[lang] || labels[key]?.en || key;
 
   const [bill, setBill] = useState('');
   const [tipPct, setTipPct] = useState('15');
   const [people, setPeople] = useState('1');
+  const [copied, setCopied] = useState(false);
+  const [history, setHistory] = useState<{ bill: string; tip: string; total: string }[]>([]);
+  const [touched, setTouched] = useState<Record<string, boolean>>({});
 
   const billNum = parseFloat(bill) || 0;
   const tipNum = parseFloat(tipPct) || 0;
   const peopleNum = Math.max(parseInt(people) || 1, 1);
+
+  const billError = touched.bill && bill !== '' && billNum <= 0;
+  const peopleError = touched.people && people !== '' && (parseInt(people) || 0) < 1;
 
   const tipAmount = billNum * (tipNum / 100);
   const total = billNum + tipAmount;
@@ -127,11 +139,34 @@ export default function TipCalculator() {
 
   const presets = [10, 15, 18, 20, 25];
 
-  const seo = seoContent[lang];
+  const handleReset = () => {
+    setBill('');
+    setTipPct('15');
+    setPeople('1');
+    setTouched({});
+  };
+
+  const copyResult = () => {
+    if (billNum > 0) {
+      const text = `${t('tipAmount')}: $${tipAmount.toFixed(2)} | ${t('totalAmount')}: $${total.toFixed(2)}${peopleNum > 1 ? ` | ${t('totalPerPerson')}: $${totalPerPerson.toFixed(2)}` : ''}`;
+      navigator.clipboard.writeText(text);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 1500);
+    }
+  };
+
+  // Save to history when bill changes and has result
+  const prevBill = useState('');
+  if (billNum > 0 && bill !== prevBill[0]) {
+    prevBill[1](bill);
+    setHistory(prev => [{ bill: `$${billNum.toFixed(2)}`, tip: `${tipNum}%`, total: `$${total.toFixed(2)}` }, ...prev].slice(0, 5));
+  }
+
+  const seo = seoContent[lang] || seoContent.en;
   const [openFaq, setOpenFaq] = useState<number | null>(null);
 
   return (
-    <ToolPageWrapper toolSlug="tip-calculator">
+    <ToolPageWrapper toolSlug="tip-calculator" faqItems={seo.faq}>
       <div className="max-w-2xl mx-auto">
         <h1 className="text-3xl font-bold text-gray-900 mb-2">{toolT.name}</h1>
         <p className="text-gray-600 mb-6">{toolT.description}</p>
@@ -139,16 +174,20 @@ export default function TipCalculator() {
         <div className="bg-white rounded-xl border border-gray-200 p-6 space-y-4">
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-1">{t('billAmount')}</label>
-            <input type="number" value={bill} onChange={(e) => setBill(e.target.value)} placeholder="0.00"
-              className="w-full border border-gray-300 rounded-lg px-4 py-2 text-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent" />
+            <div className="relative">
+              <span className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 text-lg">$</span>
+              <input type="number" value={bill} onChange={(e) => setBill(e.target.value)} onBlur={() => setTouched(p => ({ ...p, bill: true }))} placeholder="0.00"
+                className={`w-full border rounded-lg pl-8 pr-4 py-2 text-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent ${billError ? 'border-red-400 bg-red-50' : 'border-gray-300'}`} />
+            </div>
+            {billError && <p className="text-red-500 text-xs mt-1">{t('invalidBill')}</p>}
           </div>
 
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-1">{t('tipPercent')}</label>
-            <div className="flex gap-2 mb-2">
+            <div className="flex gap-2 mb-2 flex-wrap">
               {presets.map((p) => (
                 <button key={p} onClick={() => setTipPct(String(p))}
-                  className={`px-3 py-1 rounded-lg text-sm font-medium ${String(p) === tipPct ? 'bg-blue-600 text-white' : 'bg-gray-100 text-gray-700 hover:bg-gray-200'}`}>
+                  className={`px-3 py-1.5 rounded-lg text-sm font-medium transition-all ${String(p) === tipPct ? 'bg-blue-600 text-white shadow-md' : 'bg-gray-100 text-gray-700 hover:bg-gray-200'}`}>
                   {p}%
                 </button>
               ))}
@@ -159,36 +198,81 @@ export default function TipCalculator() {
 
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-1">{t('numPeople')}</label>
-            <input type="number" value={people} onChange={(e) => setPeople(e.target.value)} min="1" placeholder="1"
-              className="w-full border border-gray-300 rounded-lg px-4 py-2 text-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent" />
+            <div className="flex items-center gap-3">
+              <button onClick={() => setPeople(String(Math.max(1, peopleNum - 1)))} className="w-10 h-10 rounded-lg bg-gray-100 text-gray-700 font-bold text-xl hover:bg-gray-200 transition-colors">-</button>
+              <input type="number" value={people} onChange={(e) => setPeople(e.target.value)} onBlur={() => setTouched(p => ({ ...p, people: true }))} min="1" placeholder="1"
+                className={`flex-1 border rounded-lg px-4 py-2 text-lg text-center focus:ring-2 focus:ring-blue-500 focus:border-transparent ${peopleError ? 'border-red-400 bg-red-50' : 'border-gray-300'}`} />
+              <button onClick={() => setPeople(String(peopleNum + 1))} className="w-10 h-10 rounded-lg bg-gray-100 text-gray-700 font-bold text-xl hover:bg-gray-200 transition-colors">+</button>
+            </div>
+            {peopleError && <p className="text-red-500 text-xs mt-1">{t('invalidPeople')}</p>}
           </div>
 
+          {/* Reset button */}
+          <button onClick={handleReset} className="w-full py-2 text-sm text-gray-500 hover:text-red-500 transition-colors">
+            {t('reset')}
+          </button>
+
           {billNum > 0 && (
-            <div className="mt-4 p-4 bg-blue-50 rounded-lg space-y-2">
-              <div className="flex justify-between">
-                <span className="text-gray-600">{t('tipAmount')}</span>
-                <span className="font-semibold">${tipAmount.toFixed(2)}</span>
-              </div>
-              <div className="flex justify-between">
-                <span className="text-gray-600">{t('totalAmount')}</span>
-                <span className="font-semibold">${total.toFixed(2)}</span>
+            <div className="mt-4 space-y-3">
+              <div className="grid grid-cols-2 gap-3">
+                <div className="p-4 bg-green-50 rounded-xl border border-green-100 text-center">
+                  <div className="text-xs text-gray-500">{t('tipAmount')}</div>
+                  <div className="text-2xl font-bold text-green-700">${tipAmount.toFixed(2)}</div>
+                </div>
+                <div className="p-4 bg-blue-50 rounded-xl border border-blue-100 text-center">
+                  <div className="text-xs text-gray-500">{t('totalAmount')}</div>
+                  <div className="text-2xl font-bold text-blue-700">${total.toFixed(2)}</div>
+                </div>
               </div>
               {peopleNum > 1 && (
-                <>
-                  <hr className="border-blue-200" />
-                  <div className="flex justify-between">
-                    <span className="text-gray-600">{t('tipPerPerson')}</span>
-                    <span className="font-semibold">${tipPerPerson.toFixed(2)}</span>
+                <div className="grid grid-cols-2 gap-3">
+                  <div className="p-3 bg-purple-50 rounded-xl border border-purple-100 text-center">
+                    <div className="text-xs text-gray-500">{t('tipPerPerson')}</div>
+                    <div className="text-xl font-bold text-purple-700">${tipPerPerson.toFixed(2)}</div>
                   </div>
-                  <div className="flex justify-between">
-                    <span className="text-gray-600">{t('totalPerPerson')}</span>
-                    <span className="font-bold text-blue-600 text-lg">${totalPerPerson.toFixed(2)}</span>
+                  <div className="p-3 bg-indigo-50 rounded-xl border border-indigo-100 text-center">
+                    <div className="text-xs text-gray-500">{t('totalPerPerson')}</div>
+                    <div className="text-xl font-bold text-indigo-700">${totalPerPerson.toFixed(2)}</div>
                   </div>
-                </>
+                </div>
               )}
+              {/* Tip percentage visual bar */}
+              <div className="bg-gray-50 rounded-lg p-3">
+                <div className="flex justify-between text-xs text-gray-500 mb-1">
+                  <span>{t('billAmount')}</span>
+                  <span>{tipNum}% {t('tipAmount').toLowerCase()}</span>
+                </div>
+                <div className="w-full bg-gray-200 rounded-full h-2.5 overflow-hidden">
+                  <div className="h-full flex">
+                    <div className="bg-blue-500 h-full" style={{ width: `${(billNum / total) * 100}%` }} />
+                    <div className="bg-green-500 h-full" style={{ width: `${(tipAmount / total) * 100}%` }} />
+                  </div>
+                </div>
+              </div>
+              <button onClick={copyResult} className="w-full py-2 bg-gray-100 hover:bg-gray-200 rounded-lg text-sm text-gray-700 transition-colors">
+                {copied ? t('copied') : t('copy')}
+              </button>
             </div>
           )}
         </div>
+
+        {/* History */}
+        {history.length > 0 && (
+          <div className="mt-4 bg-white rounded-xl border border-gray-200 p-4">
+            <div className="flex justify-between items-center mb-2">
+              <h3 className="text-sm font-medium text-gray-700">{t('history')}</h3>
+              <button onClick={() => setHistory([])} className="text-xs text-red-500 hover:text-red-700">Clear</button>
+            </div>
+            <div className="space-y-1">
+              {history.map((h, i) => (
+                <div key={i} className="flex justify-between text-sm px-2 py-1.5 bg-gray-50 rounded">
+                  <span className="text-gray-500">{h.bill} @ {h.tip}</span>
+                  <span className="font-semibold text-gray-900">{h.total}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
 
         <article className="mt-12 prose prose-gray max-w-none">
           <h2 className="text-2xl font-bold text-gray-900 mb-4">{seo.title}</h2>
