@@ -7,7 +7,6 @@ import FeedbackWidget from './FeedbackWidget';
 import AdPlaceholder from './AdPlaceholder';
 import AffiliateBox from './AffiliateBox';
 import EmbedTool from './EmbedTool';
-import EmailCapture from './EmailCapture';
 import ShareTool from './ShareTool';
 import { tools, type Locale } from '@/lib/translations';
 
@@ -126,12 +125,6 @@ export default function ToolPageWrapper({ toolSlug, children, faqItems }: ToolPa
       price: '0',
       priceCurrency: 'USD',
     },
-    aggregateRating: {
-      '@type': 'AggregateRating',
-      ratingValue: '4.8',
-      ratingCount: '1250',
-      bestRating: '5',
-    },
     author: {
       '@type': 'Organization',
       name: 'ToolKit Online',
@@ -228,8 +221,7 @@ export default function ToolPageWrapper({ toolSlug, children, faqItems }: ToolPa
 
       <FeedbackWidget toolSlug={toolSlug} />
 
-      {/* Email capture for newsletter */}
-      <EmailCapture />
+      {/* Email capture disabled until backend integration */}
 
       <RelatedTools currentSlug={toolSlug} />
 

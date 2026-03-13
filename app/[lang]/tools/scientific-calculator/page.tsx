@@ -165,8 +165,15 @@ export default function ScientificCalculator() {
         setError(labels.invalidExpr[lang]);
         return;
       }
-      // eslint-disable-next-line no-eval
-      const result = Function('"use strict"; return (' + sanitized + ')')();
+      // Only allow safe math characters: digits, operators, parentheses, dots, spaces, Math functions
+      if (!/^[\d\s+\-*/().%e]+$/i.test(sanitized.replace(/Math\.\w+/g, '').replace(/\*\*/g, ''))) {
+        setError(labels.invalidExpr[lang]);
+        setDisplay('Error');
+        return;
+      }
+      // Safe eval: only allow Math functions and basic arithmetic
+      const safeSanitized = sanitized.replace(/\b(sin|cos|tan|log|sqrt|abs|ceil|floor|round|pow|PI|E|asin|acos|atan|exp|log2|log10)\b/g, 'Math.$1');
+      const result = Function('"use strict"; return (' + safeSanitized + ')')();
       if (result === undefined || result === null) {
         setError(labels.invalidExpr[lang]);
         setDisplay('Error');

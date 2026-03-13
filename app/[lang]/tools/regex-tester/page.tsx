@@ -85,14 +85,15 @@ export default function RegexTester() {
         }
       }
 
+      const escapeHtml = (s: string) => s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
       let highlighted = '';
       let lastIndex = 0;
       for (const m of matches) {
-        highlighted += testString.slice(lastIndex, m.index);
-        highlighted += `<mark class="bg-yellow-200 rounded px-0.5">${testString.slice(m.index, m.index + m.match.length)}</mark>`;
+        highlighted += escapeHtml(testString.slice(lastIndex, m.index));
+        highlighted += `<mark class="bg-yellow-200 rounded px-0.5">${escapeHtml(testString.slice(m.index, m.index + m.match.length))}</mark>`;
         lastIndex = m.index + m.match.length;
       }
-      highlighted += testString.slice(lastIndex);
+      highlighted += escapeHtml(testString.slice(lastIndex));
 
       return { matches, error: '', errorDetail: '', highlighted };
     } catch (e: unknown) {
