@@ -28,6 +28,7 @@ export function setConsent(state: ConsentState) {
 }
 
 const GTM_ID = 'GTM-WKG7WCXZ';
+const GA_ID = 'G-30KL6W6WJY';
 const ADSENSE_CLIENT = 'ca-pub-7033623734141087';
 
 function injectGTM() {
@@ -59,6 +60,23 @@ function injectGTM() {
     noscript.appendChild(iframe);
     document.body.insertBefore(noscript, document.body.firstChild);
   }
+}
+
+function injectGA4() {
+  if (document.getElementById('ga4-script')) return;
+  const script = document.createElement('script');
+  script.id = 'ga4-script';
+  script.async = true;
+  script.src = `https://www.googletagmanager.com/gtag/js?id=${GA_ID}`;
+  document.head.appendChild(script);
+  // Initialize gtag
+  const w = window as unknown as Record<string, unknown>;
+  w.dataLayer = w.dataLayer || [];
+  function gtag(...args: unknown[]) {
+    (w.dataLayer as unknown[]).push(args);
+  }
+  gtag('js', new Date());
+  gtag('config', GA_ID);
 }
 
 function injectAdSense() {
@@ -117,6 +135,7 @@ export default function ConsentManager() {
     updateConsentMode(consent);
     if (consent.analytics) {
       injectGTM();
+      injectGA4();
     }
     if (consent.advertising) {
       injectAdSense();
