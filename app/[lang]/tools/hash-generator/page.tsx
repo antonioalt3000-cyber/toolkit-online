@@ -1,8 +1,21 @@
 'use client';
-import { useState, useCallback } from 'react';
+import { useState, useCallback, useRef } from 'react';
 import { useParams } from 'next/navigation';
 import { tools, common, type Locale } from '@/lib/translations';
 import ToolPageWrapper from '@/components/ToolPageWrapper';
+
+interface HistoryEntry {
+  input: string;
+  preview: string;
+  timestamp: number;
+}
+
+const ALGO_COLORS: Record<string, { bg: string; border: string; badge: string }> = {
+  'MD5':     { bg: 'bg-blue-50',   border: 'border-blue-200',   badge: 'bg-blue-600' },
+  'SHA-1':   { bg: 'bg-emerald-50', border: 'border-emerald-200', badge: 'bg-emerald-600' },
+  'SHA-256': { bg: 'bg-purple-50',  border: 'border-purple-200',  badge: 'bg-purple-600' },
+  'SHA-512': { bg: 'bg-amber-50',   border: 'border-amber-200',   badge: 'bg-amber-600' },
+};
 
 export default function HashGenerator() {
   const { lang } = useParams() as { lang: Locale };
@@ -12,13 +25,15 @@ export default function HashGenerator() {
   const [input, setInput] = useState('');
   const [hashes, setHashes] = useState<Record<string, string>>({});
   const [copiedKey, setCopiedKey] = useState('');
+  const [validationMsg, setValidationMsg] = useState('');
+  const [history, setHistory] = useState<HistoryEntry[]>([]);
+  const [compareHash, setCompareHash] = useState('');
+  const [compareResult, setCompareResult] = useState<null | { match: boolean; algo: string | null }>(null);
+  const [isDragging, setIsDragging] = useState(false);
+  const [fileName, setFileName] = useState('');
+  const fileInputRef = useRef<HTMLInputElement>(null);
 
-  const algorithms = [
-    { name: 'MD5', algo: null },
-    { name: 'SHA-1', algo: 'SHA-1' },
-    { name: 'SHA-256', algo: 'SHA-256' },
-    { name: 'SHA-512', algo: 'SHA-512' },
-  ];
+  const algorithms = ['MD5', 'SHA-1', 'SHA-256', 'SHA-512'];
 
   const md5 = (str: string): string => {
     const utf8 = new TextEncoder().encode(str);
@@ -78,11 +93,43 @@ export default function HashGenerator() {
       } catch { result[algo] = 'Not supported'; }
     }
     setHashes(result);
+    return result;
   }, []);
 
-  const handleInputChange = (text: string) => {
+  const addToHistory = (text: string, hashResult: Record<string, string>) => {
+    const preview = hashResult['SHA-256']?.slice(0, 16) || '';
+    setHistory(prev => {
+      const next = [{ input: text.slice(0, 100), preview, timestamp: Date.now() }, ...prev.filter(h => h.input !== text.slice(0, 100))];
+      return next.slice(0, 5);
+    });
+  };
+
+  const handleInputChange = async (text: string) => {
     setInput(text);
-    generateHashes(text);
+    setValidationMsg('');
+    setCompareResult(null);
+    const result = await generateHashes(text);
+    if (result && text.trim()) {
+      addToHistory(text, result);
+    }
+  };
+
+  const handleReset = () => {
+    setInput('');
+    setHashes({});
+    setValidationMsg('');
+    setCompareHash('');
+    setCompareResult(null);
+    setFileName('');
+  };
+
+  const handleGenerate = () => {
+    if (!input.trim()) {
+      setValidationMsg(labels.emptyInput[lang]);
+      return;
+    }
+    setValidationMsg('');
+    generateHashes(input);
   };
 
   const handleCopy = (key: string, value: string) => {
@@ -91,9 +138,69 @@ export default function HashGenerator() {
     setTimeout(() => setCopiedKey(''), 2000);
   };
 
+  const handleCompare = () => {
+    if (!compareHash.trim() || Object.keys(hashes).length === 0) return;
+    const normalized = compareHash.trim().toLowerCase();
+    for (const algo of algorithms) {
+      if (hashes[algo]?.toLowerCase() === normalized) {
+        setCompareResult({ match: true, algo });
+        return;
+      }
+    }
+    setCompareResult({ match: false, algo: null });
+  };
+
+  const handleFileRead = async (file: File) => {
+    setFileName(file.name);
+    const text = await file.text();
+    setInput(text);
+    setValidationMsg('');
+    setCompareResult(null);
+    const result = await generateHashes(text);
+    if (result) {
+      addToHistory(`[${file.name}] ${text.slice(0, 80)}`, result);
+    }
+  };
+
+  const handleDrop = (e: React.DragEvent) => {
+    e.preventDefault();
+    setIsDragging(false);
+    const file = e.dataTransfer.files?.[0];
+    if (file) handleFileRead(file);
+  };
+
+  const handleDragOver = (e: React.DragEvent) => {
+    e.preventDefault();
+    setIsDragging(true);
+  };
+
+  const handleDragLeave = () => setIsDragging(false);
+
+  const handleFileInput = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (file) handleFileRead(file);
+  };
+
+  const handleHistoryClick = (entry: HistoryEntry) => {
+    handleInputChange(entry.input);
+  };
+
   const labels = {
     input: { en: 'Enter text to hash', it: 'Inserisci il testo da hashare', es: 'Ingresa texto para hashear', fr: 'Entrez le texte à hacher', de: 'Text zum Hashen eingeben', pt: 'Digite o texto para hash' },
     chars: { en: 'characters', it: 'caratteri', es: 'caracteres', fr: 'caractères', de: 'Zeichen', pt: 'caracteres' },
+    reset: { en: 'Reset', it: 'Ripristina', es: 'Restablecer', fr: 'Réinitialiser', de: 'Zurücksetzen', pt: 'Redefinir' },
+    generate: { en: 'Generate Hashes', it: 'Genera Hash', es: 'Generar Hashes', fr: 'Générer les Hashes', de: 'Hashes generieren', pt: 'Gerar Hashes' },
+    emptyInput: { en: 'Please enter text or drop a file to generate hashes.', it: 'Inserisci un testo o trascina un file per generare gli hash.', es: 'Ingresa texto o arrastra un archivo para generar hashes.', fr: 'Veuillez saisir un texte ou déposer un fichier pour générer les hashes.', de: 'Bitte geben Sie Text ein oder legen Sie eine Datei ab, um Hashes zu generieren.', pt: 'Digite um texto ou arraste um arquivo para gerar hashes.' },
+    compareLabel: { en: 'Compare / Verify Hash', it: 'Confronta / Verifica Hash', es: 'Comparar / Verificar Hash', fr: 'Comparer / Vérifier le Hash', de: 'Hash vergleichen / überprüfen', pt: 'Comparar / Verificar Hash' },
+    comparePlaceholder: { en: 'Paste a hash to compare...', it: 'Incolla un hash da confrontare...', es: 'Pega un hash para comparar...', fr: 'Collez un hash à comparer...', de: 'Hash zum Vergleichen einfügen...', pt: 'Cole um hash para comparar...' },
+    compareBtn: { en: 'Verify', it: 'Verifica', es: 'Verificar', fr: 'Vérifier', de: 'Überprüfen', pt: 'Verificar' },
+    matchFound: { en: 'Match found', it: 'Corrispondenza trovata', es: 'Coincidencia encontrada', fr: 'Correspondance trouvée', de: 'Übereinstimmung gefunden', pt: 'Correspondência encontrada' },
+    noMatch: { en: 'No match found', it: 'Nessuna corrispondenza', es: 'Sin coincidencia', fr: 'Aucune correspondance', de: 'Keine Übereinstimmung', pt: 'Sem correspondência' },
+    history: { en: 'Recent Inputs', it: 'Input recenti', es: 'Entradas recientes', fr: 'Entrées récentes', de: 'Letzte Eingaben', pt: 'Entradas recentes' },
+    clearHistory: { en: 'Clear', it: 'Cancella', es: 'Borrar', fr: 'Effacer', de: 'Löschen', pt: 'Limpar' },
+    fileHash: { en: 'Hash File Content', it: 'Hash contenuto file', es: 'Hash de contenido de archivo', fr: 'Hacher le contenu du fichier', de: 'Dateiinhalt hashen', pt: 'Hash de conteúdo de arquivo' },
+    dropFile: { en: 'Drop file here or click to browse', it: 'Trascina un file qui o clicca per sfogliare', es: 'Arrastra un archivo aquí o haz clic para explorar', fr: 'Déposez un fichier ici ou cliquez pour parcourir', de: 'Datei hierher ziehen oder klicken zum Durchsuchen', pt: 'Arraste um arquivo aqui ou clique para procurar' },
+    fileLoaded: { en: 'File loaded', it: 'File caricato', es: 'Archivo cargado', fr: 'Fichier chargé', de: 'Datei geladen', pt: 'Arquivo carregado' },
   } as Record<string, Record<Locale, string>>;
 
   const seoContent: Record<Locale, { title: string; paragraphs: string[]; faq: { q: string; a: string }[] }> = {
@@ -200,29 +307,148 @@ export default function HashGenerator() {
         <h1 className="text-3xl font-bold text-gray-900 mb-2">{toolT.name}</h1>
         <p className="text-gray-600 mb-6">{toolT.description}</p>
 
-        <div className="bg-white rounded-xl border border-gray-200 p-6 space-y-4">
+        <div className="bg-white rounded-xl border border-gray-200 p-6 space-y-5">
+          {/* Text Input */}
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-1">{labels.input[lang]}</label>
-            <textarea value={input} onChange={(e) => handleInputChange(e.target.value)} rows={4} placeholder="Hello World" className="w-full border border-gray-300 rounded-lg px-4 py-2 font-mono text-sm focus:ring-2 focus:ring-blue-500" />
-            {input && <div className="text-xs text-gray-400 mt-1">{input.length} {labels.chars[lang]}</div>}
+            <textarea
+              value={input}
+              onChange={(e) => handleInputChange(e.target.value)}
+              rows={4}
+              placeholder="Hello World"
+              className="w-full border border-gray-300 rounded-lg px-4 py-2 font-mono text-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none"
+            />
+            <div className="flex justify-between items-center mt-1">
+              {input ? <span className="text-xs text-gray-400">{input.length} {labels.chars[lang]}</span> : <span />}
+              {fileName && <span className="text-xs text-green-600">{labels.fileLoaded[lang]}: {fileName}</span>}
+            </div>
+            {validationMsg && (
+              <div className="mt-2 text-sm text-red-600 bg-red-50 border border-red-200 rounded-lg px-3 py-2">
+                {validationMsg}
+              </div>
+            )}
           </div>
 
+          {/* File Drop Zone */}
+          <div
+            onDrop={handleDrop}
+            onDragOver={handleDragOver}
+            onDragLeave={handleDragLeave}
+            onClick={() => fileInputRef.current?.click()}
+            className={`border-2 border-dashed rounded-lg px-4 py-4 text-center cursor-pointer transition-colors ${
+              isDragging ? 'border-blue-500 bg-blue-50' : 'border-gray-300 hover:border-gray-400 bg-gray-50'
+            }`}
+          >
+            <input ref={fileInputRef} type="file" className="hidden" onChange={handleFileInput} />
+            <div className="text-sm text-gray-500">
+              <svg className="mx-auto h-8 w-8 text-gray-400 mb-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12" />
+              </svg>
+              {labels.dropFile[lang]}
+            </div>
+          </div>
+
+          {/* Action Buttons */}
+          <div className="flex gap-3">
+            <button
+              onClick={handleGenerate}
+              className="flex-1 bg-blue-600 hover:bg-blue-700 text-white font-medium py-2.5 px-4 rounded-lg transition-colors"
+            >
+              {labels.generate[lang]}
+            </button>
+            <button
+              onClick={handleReset}
+              className="bg-gray-100 hover:bg-gray-200 text-gray-700 font-medium py-2.5 px-4 rounded-lg border border-gray-200 transition-colors"
+            >
+              {labels.reset[lang]}
+            </button>
+          </div>
+
+          {/* Result Cards */}
           {Object.keys(hashes).length > 0 && (
             <div className="space-y-3">
-              {['MD5', 'SHA-1', 'SHA-256', 'SHA-512'].map(algo => hashes[algo] ? (
-                <div key={algo} className="bg-gray-50 rounded-lg p-3">
-                  <div className="flex justify-between items-center mb-1">
-                    <span className="text-xs font-semibold text-gray-500">{algo}</span>
-                    <button onClick={() => handleCopy(algo, hashes[algo])} className="text-xs bg-white hover:bg-gray-100 text-gray-700 px-3 py-1 rounded-md border border-gray-200">
-                      {copiedKey === algo ? t.copied : t.copy}
+              {algorithms.map(algo => hashes[algo] ? (
+                <div key={algo} className={`rounded-lg p-4 border ${ALGO_COLORS[algo].bg} ${ALGO_COLORS[algo].border}`}>
+                  <div className="flex justify-between items-center mb-2">
+                    <span className={`text-xs font-bold text-white px-2 py-0.5 rounded ${ALGO_COLORS[algo].badge}`}>{algo}</span>
+                    <button
+                      onClick={() => handleCopy(algo, hashes[algo])}
+                      className="text-xs bg-white hover:bg-gray-50 text-gray-700 px-3 py-1 rounded-md border border-gray-200 transition-colors flex items-center gap-1"
+                    >
+                      {copiedKey === algo ? (
+                        <><svg className="w-3 h-3 text-green-600" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" /></svg> {t.copied}</>
+                      ) : (
+                        <><svg className="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" /></svg> {t.copy}</>
+                      )}
                     </button>
                   </div>
-                  <div className="font-mono text-xs break-all text-gray-800 select-all">{hashes[algo]}</div>
+                  <div className="font-mono text-xs break-all text-gray-800 select-all bg-white/60 rounded px-2 py-1.5">{hashes[algo]}</div>
                 </div>
               ) : null)}
             </div>
           )}
+
+          {/* Hash Comparison */}
+          {Object.keys(hashes).length > 0 && (
+            <div className="border border-gray-200 rounded-lg p-4 bg-gray-50">
+              <label className="block text-sm font-medium text-gray-700 mb-2">{labels.compareLabel[lang]}</label>
+              <div className="flex gap-2">
+                <input
+                  type="text"
+                  value={compareHash}
+                  onChange={(e) => { setCompareHash(e.target.value); setCompareResult(null); }}
+                  placeholder={labels.comparePlaceholder[lang]}
+                  className="flex-1 border border-gray-300 rounded-lg px-3 py-2 font-mono text-xs focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none"
+                />
+                <button
+                  onClick={handleCompare}
+                  className="bg-gray-800 hover:bg-gray-900 text-white text-sm font-medium px-4 py-2 rounded-lg transition-colors"
+                >
+                  {labels.compareBtn[lang]}
+                </button>
+              </div>
+              {compareResult && (
+                <div className={`mt-2 text-sm font-medium px-3 py-2 rounded-lg ${
+                  compareResult.match
+                    ? 'bg-green-50 text-green-700 border border-green-200'
+                    : 'bg-red-50 text-red-700 border border-red-200'
+                }`}>
+                  {compareResult.match
+                    ? `${labels.matchFound[lang]} (${compareResult.algo})`
+                    : labels.noMatch[lang]
+                  }
+                </div>
+              )}
+            </div>
+          )}
         </div>
+
+        {/* History */}
+        {history.length > 0 && (
+          <div className="mt-6 bg-white rounded-xl border border-gray-200 p-4">
+            <div className="flex justify-between items-center mb-3">
+              <h3 className="text-sm font-semibold text-gray-700">{labels.history[lang]}</h3>
+              <button
+                onClick={() => setHistory([])}
+                className="text-xs text-gray-400 hover:text-gray-600 transition-colors"
+              >
+                {labels.clearHistory[lang]}
+              </button>
+            </div>
+            <div className="space-y-1.5">
+              {history.map((entry, i) => (
+                <button
+                  key={entry.timestamp}
+                  onClick={() => handleHistoryClick(entry)}
+                  className="w-full text-left px-3 py-2 rounded-lg hover:bg-gray-50 transition-colors border border-transparent hover:border-gray-200 group"
+                >
+                  <div className="text-sm text-gray-800 truncate">{entry.input}</div>
+                  <div className="text-xs text-gray-400 font-mono mt-0.5">SHA-256: {entry.preview}...</div>
+                </button>
+              ))}
+            </div>
+          </div>
+        )}
 
         {/* SEO Article */}
         <article className="mt-12 prose prose-gray max-w-none">

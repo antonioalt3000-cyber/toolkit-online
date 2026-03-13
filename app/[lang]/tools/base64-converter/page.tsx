@@ -1,8 +1,17 @@
 'use client';
-import { useState } from 'react';
+import { useState, useCallback } from 'react';
 import { useParams } from 'next/navigation';
 import { tools, type Locale } from '@/lib/translations';
 import ToolPageWrapper from '@/components/ToolPageWrapper';
+
+interface HistoryEntry {
+  mode: 'encode' | 'decode';
+  input: string;
+  output: string;
+  inputSize: number;
+  outputSize: number;
+  timestamp: number;
+}
 
 export default function Base64Converter() {
   const { lang } = useParams() as { lang: Locale };
@@ -12,30 +21,97 @@ export default function Base64Converter() {
   const [output, setOutput] = useState('');
   const [mode, setMode] = useState<'encode' | 'decode'>('encode');
   const [copied, setCopied] = useState(false);
+  const [error, setError] = useState('');
+  const [history, setHistory] = useState<HistoryEntry[]>([]);
+  const [inputSize, setInputSize] = useState(0);
+  const [outputSize, setOutputSize] = useState(0);
 
   const labels = {
     encode: { en: 'Encode', it: 'Codifica', es: 'Codificar', fr: 'Encoder', de: 'Kodieren', pt: 'Codificar' },
     decode: { en: 'Decode', it: 'Decodifica', es: 'Decodificar', fr: 'Décoder', de: 'Dekodieren', pt: 'Decodificar' },
     inputPh: { en: 'Enter text to encode/decode...', it: 'Inserisci il testo da codificare/decodificare...', es: 'Ingresa texto para codificar/decodificar...', fr: 'Entrez le texte à encoder/décoder...', de: 'Text zum Kodieren/Dekodieren eingeben...', pt: 'Digite o texto para codificar/decodificar...' },
+    copyResult: { en: 'Copy Result', it: 'Copia Risultato', es: 'Copiar Resultado', fr: 'Copier le Résultat', de: 'Ergebnis Kopieren', pt: 'Copiar Resultado' },
+    copiedLabel: { en: 'Copied!', it: 'Copiato!', es: 'Copiado!', fr: 'Copié !', de: 'Kopiert!', pt: 'Copiado!' },
+    reset: { en: 'Reset', it: 'Ripristina', es: 'Restablecer', fr: 'Réinitialiser', de: 'Zurücksetzen', pt: 'Redefinir' },
+    inputSizeLabel: { en: 'Input Size', it: 'Dim. Input', es: 'Tamaño Entrada', fr: 'Taille Entrée', de: 'Eingabegröße', pt: 'Tamanho Entrada' },
+    outputSizeLabel: { en: 'Output Size', it: 'Dim. Output', es: 'Tamaño Salida', fr: 'Taille Sortie', de: 'Ausgabegröße', pt: 'Tamanho Saída' },
+    sizeRatio: { en: 'Size Ratio', it: 'Rapporto Dimensione', es: 'Proporción', fr: 'Ratio de Taille', de: 'Größenverhältnis', pt: 'Proporção' },
+    history: { en: 'History', it: 'Cronologia', es: 'Historial', fr: 'Historique', de: 'Verlauf', pt: 'Histórico' },
+    clearHistory: { en: 'Clear', it: 'Cancella', es: 'Borrar', fr: 'Effacer', de: 'Löschen', pt: 'Limpar' },
+    noHistory: { en: 'No operations yet', it: 'Nessuna operazione', es: 'Sin operaciones', fr: 'Aucune opération', de: 'Keine Operationen', pt: 'Sem operações' },
+    invalidBase64: { en: 'Invalid Base64 string. Please check the input and try again.', it: 'Stringa Base64 non valida. Controlla l\'input e riprova.', es: 'Cadena Base64 no válida. Verifica la entrada e inténtalo de nuevo.', fr: 'Chaîne Base64 invalide. Vérifiez l\'entrée et réessayez.', de: 'Ungültiger Base64-String. Bitte überprüfen Sie die Eingabe.', pt: 'String Base64 inválida. Verifique a entrada e tente novamente.' },
+    bytes: { en: 'bytes', it: 'byte', es: 'bytes', fr: 'octets', de: 'Bytes', pt: 'bytes' },
   } as Record<string, Record<Locale, string>>;
 
-  const convert = () => {
+  const getByteSize = (str: string): number => new Blob([str]).size;
+
+  const convert = useCallback(() => {
+    setError('');
+    if (!input.trim()) return;
+
     try {
+      let result: string;
       if (mode === 'encode') {
-        setOutput(btoa(unescape(encodeURIComponent(input))));
+        result = btoa(unescape(encodeURIComponent(input)));
       } else {
-        setOutput(decodeURIComponent(escape(atob(input))));
+        // Validate base64 before decoding
+        const base64Regex = /^[A-Za-z0-9+/]*={0,2}$/;
+        const trimmed = input.trim();
+        if (!base64Regex.test(trimmed) || trimmed.length % 4 !== 0) {
+          setError(labels.invalidBase64[lang]);
+          setOutput('');
+          setInputSize(0);
+          setOutputSize(0);
+          return;
+        }
+        result = decodeURIComponent(escape(atob(trimmed)));
       }
+
+      const inSize = getByteSize(input);
+      const outSize = getByteSize(result);
+      setOutput(result);
+      setInputSize(inSize);
+      setOutputSize(outSize);
+
+      const entry: HistoryEntry = {
+        mode,
+        input: input.length > 60 ? input.slice(0, 60) + '...' : input,
+        output: result.length > 60 ? result.slice(0, 60) + '...' : result,
+        inputSize: inSize,
+        outputSize: outSize,
+        timestamp: Date.now(),
+      };
+      setHistory(prev => [entry, ...prev].slice(0, 5));
     } catch {
-      setOutput('Error: invalid input');
+      if (mode === 'decode') {
+        setError(labels.invalidBase64[lang]);
+        setOutput('');
+        setInputSize(0);
+        setOutputSize(0);
+      } else {
+        setOutput('Error: invalid input');
+      }
     }
-  };
+  }, [input, mode, lang, labels.invalidBase64]);
 
   const copy = () => {
     navigator.clipboard.writeText(output);
     setCopied(true);
     setTimeout(() => setCopied(false), 2000);
   };
+
+  const reset = () => {
+    setInput('');
+    setOutput('');
+    setError('');
+    setInputSize(0);
+    setOutputSize(0);
+    setCopied(false);
+  };
+
+  const sizeRatio = inputSize > 0 && outputSize > 0
+    ? (outputSize / inputSize).toFixed(2)
+    : null;
 
   const seoContent: Record<Locale, { title: string; paragraphs: string[]; faq: { q: string; a: string }[] }> = {
     en: {
@@ -147,31 +223,99 @@ export default function Base64Converter() {
 
         <div className="bg-white rounded-xl border border-gray-200 p-6 space-y-4">
           <div className="flex gap-2">
-            <button onClick={() => setMode('encode')} className={`flex-1 py-2 rounded-lg font-medium ${mode === 'encode' ? 'bg-blue-600 text-white' : 'bg-gray-100 text-gray-700'}`}>
+            <button onClick={() => setMode('encode')} className={`flex-1 py-2 rounded-lg font-medium transition-colors ${mode === 'encode' ? 'bg-blue-600 text-white' : 'bg-gray-100 text-gray-700 hover:bg-gray-200'}`}>
               {labels.encode[lang]}
             </button>
-            <button onClick={() => setMode('decode')} className={`flex-1 py-2 rounded-lg font-medium ${mode === 'decode' ? 'bg-blue-600 text-white' : 'bg-gray-100 text-gray-700'}`}>
+            <button onClick={() => setMode('decode')} className={`flex-1 py-2 rounded-lg font-medium transition-colors ${mode === 'decode' ? 'bg-blue-600 text-white' : 'bg-gray-100 text-gray-700 hover:bg-gray-200'}`}>
               {labels.decode[lang]}
             </button>
           </div>
 
           <textarea
             value={input}
-            onChange={(e) => setInput(e.target.value)}
+            onChange={(e) => { setInput(e.target.value); setError(''); }}
             placeholder={labels.inputPh[lang]}
             className="w-full h-32 border border-gray-300 rounded-lg px-4 py-3 font-mono text-sm focus:ring-2 focus:ring-blue-500"
           />
 
-          <button onClick={convert} className="w-full py-3 bg-blue-600 text-white rounded-lg font-semibold hover:bg-blue-700">
-            {mode === 'encode' ? labels.encode[lang] : labels.decode[lang]}
-          </button>
+          {error && (
+            <div className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-lg text-sm">
+              {error}
+            </div>
+          )}
 
-          {output && (
-            <div className="relative">
-              <button onClick={copy} className="absolute top-2 right-2 px-3 py-1 bg-gray-700 text-white text-xs rounded">
-                {copied ? '✓' : 'Copy'}
+          <div className="flex gap-2">
+            <button onClick={convert} className="flex-1 py-3 bg-blue-600 text-white rounded-lg font-semibold hover:bg-blue-700 transition-colors">
+              {mode === 'encode' ? labels.encode[lang] : labels.decode[lang]}
+            </button>
+            <button onClick={reset} className="px-5 py-3 bg-gray-200 text-gray-700 rounded-lg font-semibold hover:bg-gray-300 transition-colors">
+              {labels.reset[lang]}
+            </button>
+          </div>
+
+          {output && !error && (
+            <>
+              {/* Size info cards */}
+              <div className="grid grid-cols-3 gap-3">
+                <div className="bg-blue-50 rounded-lg p-3 text-center">
+                  <div className="text-xs text-blue-600 font-medium">{labels.inputSizeLabel[lang]}</div>
+                  <div className="text-lg font-bold text-blue-800">{inputSize} <span className="text-xs font-normal">{labels.bytes[lang]}</span></div>
+                </div>
+                <div className="bg-green-50 rounded-lg p-3 text-center">
+                  <div className="text-xs text-green-600 font-medium">{labels.outputSizeLabel[lang]}</div>
+                  <div className="text-lg font-bold text-green-800">{outputSize} <span className="text-xs font-normal">{labels.bytes[lang]}</span></div>
+                </div>
+                <div className="bg-purple-50 rounded-lg p-3 text-center">
+                  <div className="text-xs text-purple-600 font-medium">{labels.sizeRatio[lang]}</div>
+                  <div className="text-lg font-bold text-purple-800">{sizeRatio}x</div>
+                </div>
+              </div>
+
+              {/* Output with copy button */}
+              <div className="relative">
+                <button
+                  onClick={copy}
+                  className="absolute top-2 right-2 px-3 py-1.5 bg-gray-700 text-white text-xs rounded hover:bg-gray-600 transition-colors"
+                >
+                  {copied ? labels.copiedLabel[lang] : labels.copyResult[lang]}
+                </button>
+                <pre className="bg-gray-900 text-green-400 p-4 pt-10 rounded-lg overflow-x-auto text-sm font-mono whitespace-pre-wrap break-all">{output}</pre>
+              </div>
+            </>
+          )}
+        </div>
+
+        {/* History section */}
+        <div className="mt-6 bg-white rounded-xl border border-gray-200 p-6">
+          <div className="flex items-center justify-between mb-3">
+            <h3 className="font-semibold text-gray-900">{labels.history[lang]}</h3>
+            {history.length > 0 && (
+              <button onClick={() => setHistory([])} className="text-xs text-red-500 hover:text-red-700 transition-colors">
+                {labels.clearHistory[lang]}
               </button>
-              <pre className="bg-gray-900 text-green-400 p-4 rounded-lg overflow-x-auto text-sm font-mono whitespace-pre-wrap break-all">{output}</pre>
+            )}
+          </div>
+          {history.length === 0 ? (
+            <p className="text-sm text-gray-400 italic">{labels.noHistory[lang]}</p>
+          ) : (
+            <div className="space-y-2">
+              {history.map((entry, i) => (
+                <div
+                  key={entry.timestamp}
+                  className="flex items-center gap-3 text-sm border border-gray-100 rounded-lg p-3 hover:bg-gray-50 transition-colors cursor-pointer"
+                  onClick={() => {
+                    setMode(entry.mode);
+                    setInput(entry.input.endsWith('...') ? input : entry.input);
+                    setOutput(entry.output.endsWith('...') ? output : entry.output);
+                  }}
+                >
+                  <span className={`shrink-0 px-2 py-0.5 rounded text-xs font-medium ${entry.mode === 'encode' ? 'bg-blue-100 text-blue-700' : 'bg-amber-100 text-amber-700'}`}>
+                    {labels[entry.mode][lang]}
+                  </span>
+                  <span className="text-gray-600 truncate flex-1 font-mono text-xs">{entry.input}</span>
+                  <span className="shrink-0 text-gray-400 text-xs">{entry.inputSize} → {entry.outputSize} {labels.bytes[lang]}</span>
+                </div>
+              ))}
             </div>
           )}
         </div>

@@ -15,7 +15,25 @@ const labels: Record<string, Record<string, string>> = {
   copied: { en: 'Copied!', it: 'Copiato!', es: '¡Copiado!', fr: 'Copié !', de: 'Kopiert!', pt: 'Copiado!' },
   error: { en: 'Range too small for unique numbers', it: 'Intervallo troppo piccolo per numeri unici', es: 'Rango muy pequeño para números únicos', fr: 'Plage trop petite pour des nombres uniques', de: 'Bereich zu klein für eindeutige Zahlen', pt: 'Intervalo muito pequeno para números únicos' },
   sorted: { en: 'Sort Results', it: 'Ordina Risultati', es: 'Ordenar Resultados', fr: 'Trier les Résultats', de: 'Ergebnisse Sortieren', pt: 'Ordenar Resultados' },
+  errorMinMax: { en: 'Minimum must be less than maximum', it: 'Il minimo deve essere inferiore al massimo', es: 'El mínimo debe ser menor que el máximo', fr: 'Le minimum doit être inférieur au maximum', de: 'Minimum muss kleiner als Maximum sein', pt: 'O mínimo deve ser menor que o máximo' },
+  reset: { en: 'Reset', it: 'Reimposta', es: 'Restablecer', fr: 'Réinitialiser', de: 'Zurücksetzen', pt: 'Redefinir' },
+  copyResult: { en: 'Copy', it: 'Copia', es: 'Copiar', fr: 'Copier', de: 'Kopieren', pt: 'Copiar' },
+  history: { en: 'History', it: 'Cronologia', es: 'Historial', fr: 'Historique', de: 'Verlauf', pt: 'Histórico' },
+  clearHistory: { en: 'Clear', it: 'Cancella', es: 'Borrar', fr: 'Effacer', de: 'Löschen', pt: 'Limpar' },
+  bulkGenerate: { en: 'Bulk Generate', it: 'Generazione Multipla', es: 'Generación Múltiple', fr: 'Génération en Masse', de: 'Massengenerierung', pt: 'Geração em Massa' },
+  statistics: { en: 'Statistics', it: 'Statistiche', es: 'Estadísticas', fr: 'Statistiques', de: 'Statistiken', pt: 'Estatísticas' },
+  statMin: { en: 'Min', it: 'Min', es: 'Mín', fr: 'Min', de: 'Min', pt: 'Mín' },
+  statMax: { en: 'Max', it: 'Max', es: 'Máx', fr: 'Max', de: 'Max', pt: 'Máx' },
+  statAvg: { en: 'Average', it: 'Media', es: 'Promedio', fr: 'Moyenne', de: 'Durchschnitt', pt: 'Média' },
+  generatedNumber: { en: 'Generated Number', it: 'Numero Generato', es: 'Número Generado', fr: 'Nombre Généré', de: 'Generierte Zahl', pt: 'Número Gerado' },
+  generatedNumbers: { en: 'Generated Numbers', it: 'Numeri Generati', es: 'Números Generados', fr: 'Nombres Générés', de: 'Generierte Zahlen', pt: 'Números Gerados' },
+  numbers: { en: 'numbers', it: 'numeri', es: 'números', fr: 'nombres', de: 'Zahlen', pt: 'números' },
 };
+
+interface HistoryEntry {
+  numbers: number[];
+  timestamp: Date;
+}
 
 export default function RandomNumberGenerator() {
   const { lang } = useParams() as { lang: Locale };
@@ -30,38 +48,67 @@ export default function RandomNumberGenerator() {
   const [results, setResults] = useState<number[]>([]);
   const [error, setError] = useState('');
   const [copied, setCopied] = useState(false);
+  const [copiedResult, setCopiedResult] = useState(false);
+  const [history, setHistory] = useState<HistoryEntry[]>([]);
 
-  const handleGenerate = () => {
+  const generateNumbers = (qty: number): number[] | null => {
     const minNum = parseInt(min) || 0;
     const maxNum = parseInt(max) || 0;
-    const qty = Math.min(parseInt(quantity) || 1, 1000);
+    const clampedQty = Math.min(qty, 1000);
     const range = maxNum - minNum + 1;
 
-    if (noDups && qty > range) {
+    if (minNum >= maxNum) {
+      setError(t('errorMinMax'));
+      setResults([]);
+      return null;
+    }
+
+    if (noDups && clampedQty > range) {
       setError(t('error'));
       setResults([]);
-      return;
+      return null;
     }
     setError('');
 
+    let nums: number[];
     if (noDups) {
       const pool: number[] = [];
       for (let i = minNum; i <= maxNum; i++) pool.push(i);
-      // Fisher-Yates shuffle
       for (let i = pool.length - 1; i > 0; i--) {
         const j = Math.floor(Math.random() * (i + 1));
         [pool[i], pool[j]] = [pool[j], pool[i]];
       }
-      const nums = pool.slice(0, qty);
-      setResults(sorted ? nums.sort((a, b) => a - b) : nums);
+      nums = pool.slice(0, clampedQty);
     } else {
-      const nums: number[] = [];
-      for (let i = 0; i < qty; i++) {
+      nums = [];
+      for (let i = 0; i < clampedQty; i++) {
         nums.push(Math.floor(Math.random() * range) + minNum);
       }
-      setResults(sorted ? nums.sort((a, b) => a - b) : nums);
     }
-    setCopied(false);
+
+    if (sorted) nums.sort((a, b) => a - b);
+    return nums;
+  };
+
+  const handleGenerate = () => {
+    const qty = Math.min(parseInt(quantity) || 1, 1000);
+    const nums = generateNumbers(qty);
+    if (nums) {
+      setResults(nums);
+      setCopied(false);
+      setCopiedResult(false);
+      setHistory(prev => [{ numbers: nums, timestamp: new Date() }, ...prev].slice(0, 10));
+    }
+  };
+
+  const handleBulkGenerate = (count: number) => {
+    const nums = generateNumbers(count);
+    if (nums) {
+      setResults(nums);
+      setCopied(false);
+      setCopiedResult(false);
+      setHistory(prev => [{ numbers: nums, timestamp: new Date() }, ...prev].slice(0, 10));
+    }
   };
 
   const handleCopy = async () => {
@@ -69,6 +116,31 @@ export default function RandomNumberGenerator() {
     setCopied(true);
     setTimeout(() => setCopied(false), 2000);
   };
+
+  const handleCopyResult = async () => {
+    await navigator.clipboard.writeText(results.join(', '));
+    setCopiedResult(true);
+    setTimeout(() => setCopiedResult(false), 2000);
+  };
+
+  const handleReset = () => {
+    setMin('1');
+    setMax('100');
+    setQuantity('1');
+    setNoDups(false);
+    setSorted(false);
+    setResults([]);
+    setError('');
+    setCopied(false);
+    setCopiedResult(false);
+  };
+
+  const allHistoryNumbers = history.flatMap(h => h.numbers);
+  const stats = allHistoryNumbers.length > 0 ? {
+    min: Math.min(...allHistoryNumbers),
+    max: Math.max(...allHistoryNumbers),
+    avg: (allHistoryNumbers.reduce((a, b) => a + b, 0) / allHistoryNumbers.length).toFixed(2),
+  } : null;
 
   const seoContent: Record<Locale, { title: string; paragraphs: string[]; faq: { q: string; a: string }[] }> = {
     en: {
@@ -211,34 +283,114 @@ export default function RandomNumberGenerator() {
             </label>
           </div>
 
-          <button onClick={handleGenerate}
-            className="w-full bg-blue-600 text-white py-2 rounded-lg font-medium hover:bg-blue-700 transition-colors">
-            {t('generate')}
-          </button>
+          <div className="flex gap-2">
+            <button onClick={handleGenerate}
+              className="flex-1 bg-blue-600 text-white py-2 rounded-lg font-medium hover:bg-blue-700 transition-colors">
+              {t('generate')}
+            </button>
+            <button onClick={handleReset}
+              className="px-4 py-2 bg-gray-200 text-gray-700 rounded-lg font-medium hover:bg-gray-300 transition-colors">
+              {t('reset')}
+            </button>
+          </div>
 
-          {error && <div className="text-red-600 text-sm">{error}</div>}
+          {/* Bulk Generate */}
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-2">{t('bulkGenerate')}</label>
+            <div className="flex gap-2">
+              {[5, 10, 20].map((count) => (
+                <button key={count} onClick={() => handleBulkGenerate(count)}
+                  className="flex-1 px-3 py-2 bg-indigo-50 text-indigo-700 border border-indigo-200 rounded-lg font-medium hover:bg-indigo-100 transition-colors text-sm">
+                  {count} {t('numbers')}
+                </button>
+              ))}
+            </div>
+          </div>
 
+          {error && <div className="text-red-600 text-sm bg-red-50 border border-red-200 rounded-lg px-4 py-2">{error}</div>}
+
+          {/* Result Card */}
           {results.length > 0 && (
             <div className="mt-4">
-              <div className="flex justify-between items-center mb-2">
-                <span className="text-sm font-medium text-gray-600">{t('results')}</span>
-                <button onClick={handleCopy}
-                  className={`text-xs px-2 py-1 rounded ${copied ? 'bg-green-600 text-white' : 'bg-gray-200 text-gray-700 hover:bg-gray-300'}`}>
-                  {copied ? t('copied') : t('copy')}
-                </button>
-              </div>
-              <div className="p-4 bg-blue-50 rounded-lg">
-                <div className="flex flex-wrap gap-2">
-                  {results.map((num, i) => (
-                    <span key={i} className="bg-white px-3 py-1 rounded-lg border border-blue-200 text-blue-600 font-mono font-semibold">
-                      {num}
-                    </span>
-                  ))}
+              <div className="bg-green-50 border border-green-200 rounded-xl p-6">
+                <div className="flex justify-between items-center mb-3">
+                  <span className="text-sm font-medium text-green-800">
+                    {results.length === 1 ? t('generatedNumber') : t('generatedNumbers')}
+                  </span>
+                  <div className="flex gap-2">
+                    <button onClick={handleCopyResult}
+                      className={`text-xs px-3 py-1 rounded-lg font-medium transition-colors ${copiedResult ? 'bg-green-600 text-white' : 'bg-green-200 text-green-800 hover:bg-green-300'}`}>
+                      {copiedResult ? t('copied') : t('copyResult')}
+                    </button>
+                    <button onClick={handleCopy}
+                      className={`text-xs px-3 py-1 rounded-lg font-medium transition-colors ${copied ? 'bg-green-600 text-white' : 'bg-green-200 text-green-800 hover:bg-green-300'}`}>
+                      {copied ? t('copied') : t('copy')}
+                    </button>
+                  </div>
                 </div>
+                {results.length === 1 ? (
+                  <div className="text-center">
+                    <span className="text-5xl font-bold text-green-700 font-mono">{results[0]}</span>
+                  </div>
+                ) : (
+                  <div className="flex flex-wrap gap-2">
+                    {results.map((num, i) => (
+                      <span key={i} className="bg-white px-3 py-1 rounded-lg border border-green-200 text-green-700 font-mono font-semibold">
+                        {num}
+                      </span>
+                    ))}
+                  </div>
+                )}
               </div>
             </div>
           )}
         </div>
+
+        {/* Statistics */}
+        {stats && (
+          <div className="mt-4 bg-white rounded-xl border border-gray-200 p-4">
+            <h3 className="text-sm font-medium text-gray-700 mb-3">{t('statistics')}</h3>
+            <div className="grid grid-cols-3 gap-4">
+              <div className="text-center p-3 bg-blue-50 rounded-lg">
+                <div className="text-xs text-blue-600 font-medium">{t('statMin')}</div>
+                <div className="text-lg font-bold text-blue-800 font-mono">{stats.min}</div>
+              </div>
+              <div className="text-center p-3 bg-purple-50 rounded-lg">
+                <div className="text-xs text-purple-600 font-medium">{t('statAvg')}</div>
+                <div className="text-lg font-bold text-purple-800 font-mono">{stats.avg}</div>
+              </div>
+              <div className="text-center p-3 bg-red-50 rounded-lg">
+                <div className="text-xs text-red-600 font-medium">{t('statMax')}</div>
+                <div className="text-lg font-bold text-red-800 font-mono">{stats.max}</div>
+              </div>
+            </div>
+          </div>
+        )}
+
+        {/* History */}
+        {history.length > 0 && (
+          <div className="mt-4 bg-white rounded-xl border border-gray-200 p-4">
+            <div className="flex justify-between items-center mb-3">
+              <h3 className="text-sm font-medium text-gray-700">{t('history')}</h3>
+              <button onClick={() => setHistory([])}
+                className="text-xs px-2 py-1 bg-gray-200 text-gray-600 rounded hover:bg-gray-300 transition-colors">
+                {t('clearHistory')}
+              </button>
+            </div>
+            <div className="space-y-2 max-h-60 overflow-y-auto">
+              {history.map((entry, i) => (
+                <div key={i} className="flex items-center justify-between py-2 px-3 bg-gray-50 rounded-lg text-sm">
+                  <span className="font-mono text-gray-800 truncate flex-1 mr-2">
+                    {entry.numbers.join(', ')}
+                  </span>
+                  <span className="text-xs text-gray-400 whitespace-nowrap">
+                    {entry.timestamp.toLocaleTimeString()}
+                  </span>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
 
         <article className="mt-12 prose prose-gray max-w-none">
           <h2 className="text-2xl font-bold text-gray-900 mb-4">{seo.title}</h2>

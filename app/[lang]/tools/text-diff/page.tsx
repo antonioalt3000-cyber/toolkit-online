@@ -1,10 +1,12 @@
 'use client';
-import { useState, useMemo } from 'react';
+import { useState, useMemo, useCallback } from 'react';
 import { useParams } from 'next/navigation';
 import { tools, type Locale } from '@/lib/translations';
 import ToolPageWrapper from '@/components/ToolPageWrapper';
 
 type DiffLine = { type: 'equal' | 'added' | 'removed'; text: string };
+
+type HistoryEntry = { textA: string; textB: string; timestamp: number };
 
 function computeDiff(a: string, b: string): DiffLine[] {
   const linesA = a.split('\n');
@@ -39,12 +41,22 @@ function computeDiff(a: string, b: string): DiffLine[] {
   return result;
 }
 
+function formatDiffOutput(diff: DiffLine[]): string {
+  return diff.map(line => {
+    const prefix = line.type === 'added' ? '+ ' : line.type === 'removed' ? '- ' : '  ';
+    return prefix + line.text;
+  }).join('\n');
+}
+
 export default function TextDiff() {
   const { lang } = useParams() as { lang: Locale };
   const toolT = tools['text-diff'][lang];
 
   const [textA, setTextA] = useState('');
   const [textB, setTextB] = useState('');
+  const [copied, setCopied] = useState(false);
+  const [history, setHistory] = useState<HistoryEntry[]>([]);
+  const [showHistory, setShowHistory] = useState(false);
 
   const labels = {
     originalText: { en: 'Original Text', it: 'Testo Originale', es: 'Texto Original', fr: 'Texte Original', de: 'Originaltext', pt: 'Texto Original' },
@@ -56,12 +68,56 @@ export default function TextDiff() {
     linesRemoved: { en: 'lines removed', it: 'righe rimosse', es: 'líneas eliminadas', fr: 'lignes supprimées', de: 'Zeilen entfernt', pt: 'linhas removidas' },
     linesUnchanged: { en: 'lines unchanged', it: 'righe invariate', es: 'líneas sin cambios', fr: 'lignes inchangées', de: 'Zeilen unverändert', pt: 'linhas inalteradas' },
     placeholder: { en: 'Paste your text here...', it: 'Incolla il testo qui...', es: 'Pega tu texto aquí...', fr: 'Collez votre texte ici...', de: 'Fügen Sie Ihren Text hier ein...', pt: 'Cole seu texto aqui...' },
+    copyResult: { en: 'Copy Result', it: 'Copia Risultato', es: 'Copiar Resultado', fr: 'Copier le Résultat', de: 'Ergebnis Kopieren', pt: 'Copiar Resultado' },
+    copiedMsg: { en: 'Copied!', it: 'Copiato!', es: '¡Copiado!', fr: 'Copié !', de: 'Kopiert!', pt: 'Copiado!' },
+    reset: { en: 'Reset', it: 'Azzera', es: 'Reiniciar', fr: 'Réinitialiser', de: 'Zurücksetzen', pt: 'Redefinir' },
+    swap: { en: 'Swap Texts', it: 'Scambia Testi', es: 'Intercambiar Textos', fr: 'Inverser les Textes', de: 'Texte Tauschen', pt: 'Trocar Textos' },
+    loadSample: { en: 'Load Sample', it: 'Carica Esempio', es: 'Cargar Ejemplo', fr: 'Charger un Exemple', de: 'Beispiel Laden', pt: 'Carregar Exemplo' },
+    textsIdentical: { en: 'Both texts are identical — no differences found.', it: 'Entrambi i testi sono identici — nessuna differenza trovata.', es: 'Ambos textos son idénticos — no se encontraron diferencias.', fr: 'Les deux textes sont identiques — aucune différence trouvée.', de: 'Beide Texte sind identisch — keine Unterschiede gefunden.', pt: 'Ambos os textos são idênticos — nenhuma diferença encontrada.' },
+    textsEmpty: { en: 'Please enter text in both fields to compare.', it: 'Inserisci testo in entrambi i campi per confrontare.', es: 'Por favor, ingresa texto en ambos campos para comparar.', fr: 'Veuillez entrer du texte dans les deux champs pour comparer.', de: 'Bitte geben Sie Text in beide Felder ein, um zu vergleichen.', pt: 'Por favor, insira texto em ambos os campos para comparar.' },
+    history: { en: 'History', it: 'Cronologia', es: 'Historial', fr: 'Historique', de: 'Verlauf', pt: 'Histórico' },
+    noHistory: { en: 'No comparisons yet.', it: 'Nessun confronto effettuato.', es: 'Sin comparaciones aún.', fr: 'Aucune comparaison effectuée.', de: 'Noch keine Vergleiche.', pt: 'Nenhuma comparação ainda.' },
+    loadEntry: { en: 'Load', it: 'Carica', es: 'Cargar', fr: 'Charger', de: 'Laden', pt: 'Carregar' },
+    compare: { en: 'Compare', it: 'Confronta', es: 'Comparar', fr: 'Comparer', de: 'Vergleichen', pt: 'Comparar' },
+    additions: { en: 'Additions', it: 'Aggiunte', es: 'Adiciones', fr: 'Ajouts', de: 'Hinzufügungen', pt: 'Adições' },
+    deletions: { en: 'Deletions', it: 'Rimozioni', es: 'Eliminaciones', fr: 'Suppressions', de: 'Löschungen', pt: 'Remoções' },
+    unchanged: { en: 'Unchanged', it: 'Invariate', es: 'Sin Cambios', fr: 'Inchangées', de: 'Unverändert', pt: 'Inalteradas' },
   } as Record<string, Record<Locale, string>>;
 
+  const sampleTexts: Record<Locale, { a: string; b: string }> = {
+    en: {
+      a: 'The quick brown fox\njumps over the lazy dog.\nThis line stays the same.\nRemove this line.\nAnother unchanged line.',
+      b: 'The quick brown cat\njumps over the lazy dog.\nThis line stays the same.\nA brand new line was added.\nAnother unchanged line.',
+    },
+    it: {
+      a: 'La veloce volpe marrone\nsalta sopra il cane pigro.\nQuesta riga resta uguale.\nRimuovi questa riga.\nAltra riga invariata.',
+      b: 'Il veloce gatto marrone\nsalta sopra il cane pigro.\nQuesta riga resta uguale.\nUna nuova riga aggiunta.\nAltra riga invariata.',
+    },
+    es: {
+      a: 'El rápido zorro marrón\nsalta sobre el perro perezoso.\nEsta línea no cambia.\nEliminar esta línea.\nOtra línea sin cambios.',
+      b: 'El rápido gato marrón\nsalta sobre el perro perezoso.\nEsta línea no cambia.\nUna nueva línea añadida.\nOtra línea sin cambios.',
+    },
+    fr: {
+      a: 'Le rapide renard brun\nsaute par-dessus le chien paresseux.\nCette ligne reste identique.\nSupprimer cette ligne.\nAutre ligne inchangée.',
+      b: 'Le rapide chat brun\nsaute par-dessus le chien paresseux.\nCette ligne reste identique.\nUne nouvelle ligne ajoutée.\nAutre ligne inchangée.',
+    },
+    de: {
+      a: 'Der schnelle braune Fuchs\nspringt über den faulen Hund.\nDiese Zeile bleibt gleich.\nDiese Zeile entfernen.\nEine weitere unveränderte Zeile.',
+      b: 'Die schnelle braune Katze\nspringt über den faulen Hund.\nDiese Zeile bleibt gleich.\nEine neue Zeile hinzugefügt.\nEine weitere unveränderte Zeile.',
+    },
+    pt: {
+      a: 'A rápida raposa marrom\npula sobre o cachorro preguiçoso.\nEsta linha permanece igual.\nRemover esta linha.\nOutra linha inalterada.',
+      b: 'O rápido gato marrom\npula sobre o cachorro preguiçoso.\nEsta linha permanece igual.\nUma nova linha adicionada.\nOutra linha inalterada.',
+    },
+  };
+
+  const [compared, setCompared] = useState(false);
+
   const diff = useMemo(() => {
+    if (!compared) return [];
     if (!textA && !textB) return [];
     return computeDiff(textA, textB);
-  }, [textA, textB]);
+  }, [textA, textB, compared]);
 
   const stats = useMemo(() => {
     const added = diff.filter(d => d.type === 'added').length;
@@ -70,7 +126,67 @@ export default function TextDiff() {
     return { added, removed, equal };
   }, [diff]);
 
+  const bothEmpty = textA.length === 0 && textB.length === 0;
+  const textsIdentical = compared && !bothEmpty && textA === textB;
   const hasBothTexts = textA.length > 0 || textB.length > 0;
+
+  const handleCompare = useCallback(() => {
+    setCompared(true);
+    if (textA.length > 0 && textB.length > 0) {
+      setHistory(prev => {
+        const newEntry: HistoryEntry = { textA, textB, timestamp: Date.now() };
+        const updated = [newEntry, ...prev].slice(0, 5);
+        return updated;
+      });
+    }
+  }, [textA, textB]);
+
+  const handleReset = useCallback(() => {
+    setTextA('');
+    setTextB('');
+    setCompared(false);
+    setCopied(false);
+  }, []);
+
+  const handleSwap = useCallback(() => {
+    const tempA = textA;
+    setTextA(textB);
+    setTextB(tempA);
+    if (compared) setCompared(false);
+  }, [textA, textB, compared]);
+
+  const handleLoadSample = useCallback(() => {
+    const sample = sampleTexts[lang] || sampleTexts.en;
+    setTextA(sample.a);
+    setTextB(sample.b);
+    setCompared(false);
+  }, [lang]);
+
+  const handleCopy = useCallback(async () => {
+    const output = formatDiffOutput(diff);
+    try {
+      await navigator.clipboard.writeText(output);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+    } catch {
+      // fallback
+      const textarea = document.createElement('textarea');
+      textarea.value = output;
+      document.body.appendChild(textarea);
+      textarea.select();
+      document.execCommand('copy');
+      document.body.removeChild(textarea);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+    }
+  }, [diff]);
+
+  const handleLoadHistory = useCallback((entry: HistoryEntry) => {
+    setTextA(entry.textA);
+    setTextB(entry.textB);
+    setCompared(false);
+    setShowHistory(false);
+  }, []);
 
   const seoContent: Record<Locale, { title: string; paragraphs: string[]; faq: { q: string; a: string }[] }> = {
     en: {
@@ -176,12 +292,69 @@ export default function TextDiff() {
         <p className="text-gray-600 mb-6">{toolT.description}</p>
 
         <div className="bg-white rounded-xl border border-gray-200 p-6 space-y-4">
+          {/* Action buttons row */}
+          <div className="flex flex-wrap gap-2">
+            <button
+              onClick={handleLoadSample}
+              className="px-3 py-1.5 text-sm font-medium text-blue-700 bg-blue-50 border border-blue-200 rounded-lg hover:bg-blue-100 transition-colors"
+            >
+              {labels.loadSample[lang]}
+            </button>
+            <button
+              onClick={handleSwap}
+              disabled={bothEmpty}
+              className="px-3 py-1.5 text-sm font-medium text-purple-700 bg-purple-50 border border-purple-200 rounded-lg hover:bg-purple-100 transition-colors disabled:opacity-40 disabled:cursor-not-allowed"
+            >
+              &#8646; {labels.swap[lang]}
+            </button>
+            <button
+              onClick={handleReset}
+              disabled={bothEmpty}
+              className="px-3 py-1.5 text-sm font-medium text-red-700 bg-red-50 border border-red-200 rounded-lg hover:bg-red-100 transition-colors disabled:opacity-40 disabled:cursor-not-allowed"
+            >
+              {labels.reset[lang]}
+            </button>
+            <button
+              onClick={() => setShowHistory(!showHistory)}
+              className="px-3 py-1.5 text-sm font-medium text-gray-700 bg-gray-50 border border-gray-200 rounded-lg hover:bg-gray-100 transition-colors ml-auto"
+            >
+              {labels.history[lang]} ({history.length})
+            </button>
+          </div>
+
+          {/* History panel */}
+          {showHistory && (
+            <div className="border border-gray-200 rounded-lg p-3 bg-gray-50 space-y-2">
+              <h3 className="text-sm font-semibold text-gray-700">{labels.history[lang]}</h3>
+              {history.length === 0 ? (
+                <p className="text-sm text-gray-400">{labels.noHistory[lang]}</p>
+              ) : (
+                history.map((entry, i) => (
+                  <div key={entry.timestamp} className="flex items-center justify-between bg-white rounded-md px-3 py-2 border border-gray-100">
+                    <div className="text-xs text-gray-500 truncate flex-1 mr-2">
+                      <span className="font-medium text-gray-700">#{i + 1}</span>{' '}
+                      {new Date(entry.timestamp).toLocaleTimeString()} &mdash;{' '}
+                      {entry.textA.substring(0, 40).replace(/\n/g, ' ')}{entry.textA.length > 40 ? '...' : ''}
+                    </div>
+                    <button
+                      onClick={() => handleLoadHistory(entry)}
+                      className="px-2 py-1 text-xs font-medium text-blue-700 bg-blue-50 rounded hover:bg-blue-100 transition-colors"
+                    >
+                      {labels.loadEntry[lang]}
+                    </button>
+                  </div>
+                ))
+              )}
+            </div>
+          )}
+
+          {/* Text areas */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-1">{labels.originalText[lang]}</label>
               <textarea
                 value={textA}
-                onChange={(e) => setTextA(e.target.value)}
+                onChange={(e) => { setTextA(e.target.value); setCompared(false); }}
                 placeholder={labels.placeholder[lang]}
                 rows={10}
                 className="w-full border border-gray-300 rounded-lg px-4 py-2 text-sm font-mono focus:ring-2 focus:ring-blue-500 resize-y"
@@ -191,7 +364,7 @@ export default function TextDiff() {
               <label className="block text-sm font-medium text-gray-700 mb-1">{labels.modifiedText[lang]}</label>
               <textarea
                 value={textB}
-                onChange={(e) => setTextB(e.target.value)}
+                onChange={(e) => { setTextB(e.target.value); setCompared(false); }}
                 placeholder={labels.placeholder[lang]}
                 rows={10}
                 className="w-full border border-gray-300 rounded-lg px-4 py-2 text-sm font-mono focus:ring-2 focus:ring-blue-500 resize-y"
@@ -199,14 +372,57 @@ export default function TextDiff() {
             </div>
           </div>
 
-          {hasBothTexts && diff.length > 0 && (
+          {/* Compare button */}
+          <button
+            onClick={handleCompare}
+            disabled={bothEmpty}
+            className="w-full py-2.5 text-sm font-semibold text-white bg-blue-600 rounded-lg hover:bg-blue-700 transition-colors disabled:opacity-40 disabled:cursor-not-allowed"
+          >
+            {labels.compare[lang]}
+          </button>
+
+          {/* Validation messages */}
+          {compared && bothEmpty && (
+            <div className="text-center text-amber-600 bg-amber-50 border border-amber-200 rounded-lg py-3 px-4 text-sm">
+              {labels.textsEmpty[lang]}
+            </div>
+          )}
+
+          {textsIdentical && (
+            <div className="text-center text-blue-600 bg-blue-50 border border-blue-200 rounded-lg py-3 px-4 text-sm">
+              {labels.textsIdentical[lang]}
+            </div>
+          )}
+
+          {/* Result cards */}
+          {compared && hasBothTexts && !textsIdentical && diff.length > 0 && (
             <>
-              <div className="flex gap-4 text-sm">
-                <span className="text-green-600 font-medium">+{stats.added} {labels.linesAdded[lang]}</span>
-                <span className="text-red-600 font-medium">-{stats.removed} {labels.linesRemoved[lang]}</span>
-                <span className="text-gray-500">{stats.equal} {labels.linesUnchanged[lang]}</span>
+              <div className="grid grid-cols-3 gap-3">
+                <div className="bg-green-50 border border-green-200 rounded-lg p-3 text-center">
+                  <div className="text-2xl font-bold text-green-700">+{stats.added}</div>
+                  <div className="text-xs text-green-600 mt-1">{labels.additions[lang]}</div>
+                </div>
+                <div className="bg-red-50 border border-red-200 rounded-lg p-3 text-center">
+                  <div className="text-2xl font-bold text-red-700">-{stats.removed}</div>
+                  <div className="text-xs text-red-600 mt-1">{labels.deletions[lang]}</div>
+                </div>
+                <div className="bg-gray-50 border border-gray-200 rounded-lg p-3 text-center">
+                  <div className="text-2xl font-bold text-gray-700">{stats.equal}</div>
+                  <div className="text-xs text-gray-500 mt-1">{labels.unchanged[lang]}</div>
+                </div>
               </div>
 
+              {/* Copy result button */}
+              <div className="flex justify-end">
+                <button
+                  onClick={handleCopy}
+                  className="px-4 py-1.5 text-sm font-medium text-green-700 bg-green-50 border border-green-200 rounded-lg hover:bg-green-100 transition-colors"
+                >
+                  {copied ? labels.copiedMsg[lang] : labels.copyResult[lang]}
+                </button>
+              </div>
+
+              {/* Diff output */}
               <div className="border border-gray-200 rounded-lg overflow-hidden">
                 <div className="bg-gray-50 px-4 py-2 text-sm font-medium text-gray-700 border-b border-gray-200">{labels.differences[lang]}</div>
                 <div className="max-h-96 overflow-y-auto font-mono text-sm">
@@ -234,7 +450,7 @@ export default function TextDiff() {
             </>
           )}
 
-          {!hasBothTexts && (
+          {!compared && !hasBothTexts && (
             <div className="text-center text-gray-400 py-8">{labels.enterText[lang]}</div>
           )}
         </div>
