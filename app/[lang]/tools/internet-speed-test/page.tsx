@@ -56,7 +56,6 @@ interface ConnectionInfo {
 
 interface TestResult {
   date: string;
-  ip: string;
   latency: number;
   downlink: number;
   effectiveType: string;
@@ -202,7 +201,6 @@ export default function InternetSpeedTest() {
 
     const result: TestResult = {
       date: new Date().toLocaleString(),
-      ip,
       latency,
       downlink: dl,
       effectiveType: et,

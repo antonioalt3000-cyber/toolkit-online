@@ -15,24 +15,16 @@ interface IpInfo {
   postal?: string;
 }
 
-interface HistoryEntry {
-  ip: string;
-  city?: string;
-  country?: string;
-  org?: string;
-  timestamp: number;
-}
-
 export default function IpLookup() {
   const { lang } = useParams() as { lang: Locale };
   const toolT = tools['ip-lookup'][lang];
 
   const [ipInfo, setIpInfo] = useState<IpInfo | null>(null);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
   const [copied, setCopied] = useState(false);
   const [copiedAll, setCopiedAll] = useState(false);
-  const [history, setHistory] = useState<HistoryEntry[]>([]);
+  const [hasStarted, setHasStarted] = useState(false);
 
   const labels = {
     yourIp: { en: 'Your IP Address', it: 'Il Tuo Indirizzo IP', es: 'Tu Dirección IP', fr: 'Votre Adresse IP', de: 'Ihre IP-Adresse', pt: 'Seu Endereço IP' },
@@ -51,40 +43,15 @@ export default function IpLookup() {
     na: { en: 'N/A', it: 'N/D', es: 'N/D', fr: 'N/D', de: 'K.A.', pt: 'N/D' },
     copyAll: { en: 'Copy All Info', it: 'Copia Tutte le Info', es: 'Copiar Toda la Info', fr: 'Copier Toutes les Infos', de: 'Alle Infos Kopieren', pt: 'Copiar Todas as Infos' },
     reset: { en: 'Reset', it: 'Resetta', es: 'Restablecer', fr: 'Réinitialiser', de: 'Zurücksetzen', pt: 'Redefinir' },
-    history: { en: 'Recent Lookups', it: 'Ricerche Recenti', es: 'Búsquedas Recientes', fr: 'Recherches Récentes', de: 'Letzte Abfragen', pt: 'Buscas Recentes' },
-    clearHistory: { en: 'Clear History', it: 'Cancella Cronologia', es: 'Borrar Historial', fr: 'Effacer l\'Historique', de: 'Verlauf Löschen', pt: 'Limpar Histórico' },
-    noHistory: { en: 'No lookups yet', it: 'Nessuna ricerca', es: 'Sin búsquedas', fr: 'Aucune recherche', de: 'Keine Abfragen', pt: 'Nenhuma busca' },
     networkInfo: { en: 'Network Information', it: 'Informazioni di Rete', es: 'Información de Red', fr: 'Informations Réseau', de: 'Netzwerkinformationen', pt: 'Informações de Rede' },
     locationInfo: { en: 'Location Details', it: 'Dettagli Posizione', es: 'Detalles de Ubicación', fr: 'Détails de Localisation', de: 'Standortdetails', pt: 'Detalhes de Localização' },
     refresh: { en: 'Refresh', it: 'Aggiorna', es: 'Actualizar', fr: 'Actualiser', de: 'Aktualisieren', pt: 'Atualizar' },
+    lookupBtn: { en: 'Lookup My IP', it: 'Cerca il Mio IP', es: 'Buscar Mi IP', fr: 'Rechercher Mon IP', de: 'Meine IP Suchen', pt: 'Buscar Meu IP' },
+    privacyNote: { en: 'This tool will send a request to external services (ipinfo.io) to retrieve your public IP address. No data is stored on our servers.', it: 'Questo strumento invierà una richiesta a servizi esterni (ipinfo.io) per recuperare il tuo indirizzo IP pubblico. Nessun dato viene memorizzato sui nostri server.', es: 'Esta herramienta enviará una solicitud a servicios externos (ipinfo.io) para obtener tu dirección IP pública. No se almacenan datos en nuestros servidores.', fr: 'Cet outil enverra une requête à des services externes (ipinfo.io) pour récupérer votre adresse IP publique. Aucune donnée n\'est stockée sur nos serveurs.', de: 'Dieses Tool sendet eine Anfrage an externe Dienste (ipinfo.io), um Ihre öffentliche IP-Adresse abzurufen. Keine Daten werden auf unseren Servern gespeichert.', pt: 'Esta ferramenta enviará uma solicitação a serviços externos (ipinfo.io) para recuperar seu endereço IP público. Nenhum dado é armazenado em nossos servidores.' },
   } as Record<string, Record<Locale, string>>;
 
-  // Load history from localStorage
-  useEffect(() => {
-    try {
-      const saved = localStorage.getItem('ip-lookup-history');
-      if (saved) setHistory(JSON.parse(saved));
-    } catch {}
-  }, []);
-
-  const saveToHistory = (info: IpInfo) => {
-    const entry: HistoryEntry = {
-      ip: info.ip,
-      city: info.city,
-      country: info.country,
-      org: info.org,
-      timestamp: Date.now(),
-    };
-    setHistory(prev => {
-      // Don't add duplicate IPs consecutively
-      if (prev.length > 0 && prev[0].ip === entry.ip) return prev;
-      const updated = [entry, ...prev].slice(0, 5);
-      try { localStorage.setItem('ip-lookup-history', JSON.stringify(updated)); } catch {}
-      return updated;
-    });
-  };
-
   const fetchIpInfo = async () => {
+    setHasStarted(true);
     setLoading(true);
     setError('');
     try {
@@ -92,14 +59,12 @@ export default function IpLookup() {
       if (!res.ok) throw new Error('Failed');
       const data = await res.json();
       setIpInfo(data);
-      saveToHistory(data);
     } catch {
       try {
         const res = await fetch('https://api.ipify.org?format=json');
         if (!res.ok) throw new Error('Failed');
         const data = await res.json();
         setIpInfo({ ip: data.ip });
-        saveToHistory({ ip: data.ip });
       } catch {
         setError(labels.errorMsg[lang]);
       }
@@ -107,11 +72,6 @@ export default function IpLookup() {
       setLoading(false);
     }
   };
-
-  useEffect(() => {
-    fetchIpInfo();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
 
   const copyIp = () => {
     if (ipInfo?.ip) {
@@ -142,11 +102,6 @@ export default function IpLookup() {
     setIpInfo(null);
     setError('');
     setLoading(false);
-  };
-
-  const clearHistory = () => {
-    setHistory([]);
-    try { localStorage.removeItem('ip-lookup-history'); } catch {}
   };
 
   const networkRows = ipInfo ? [
@@ -267,6 +222,18 @@ export default function IpLookup() {
         <p className="text-gray-600 mb-6">{toolT.description}</p>
 
         <div className="bg-white rounded-xl border border-gray-200 p-6 space-y-4">
+          {!hasStarted && !loading && (
+            <div className="text-center py-8 space-y-4">
+              <p className="text-sm text-gray-500 max-w-md mx-auto">{labels.privacyNote[lang]}</p>
+              <button
+                onClick={fetchIpInfo}
+                className="px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors font-medium"
+              >
+                {labels.lookupBtn[lang]}
+              </button>
+            </div>
+          )}
+
           {loading && (
             <div className="text-center py-8">
               <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600 mx-auto mb-3" />
@@ -375,38 +342,6 @@ export default function IpLookup() {
             </>
           )}
         </div>
-
-        {/* History Section */}
-        {history.length > 0 && (
-          <div className="mt-6 bg-white rounded-xl border border-gray-200 p-6">
-            <div className="flex justify-between items-center mb-3">
-              <h3 className="text-sm font-semibold text-gray-700">{labels.history[lang]}</h3>
-              <button
-                onClick={clearHistory}
-                className="text-xs text-red-500 hover:text-red-700 transition-colors"
-              >
-                {labels.clearHistory[lang]}
-              </button>
-            </div>
-            <div className="space-y-2">
-              {history.map((entry, i) => (
-                <div key={i} className="flex justify-between items-center py-2 px-3 bg-gray-50 rounded-lg">
-                  <div>
-                    <span className="text-sm font-mono font-medium text-gray-900">{entry.ip}</span>
-                    {(entry.city || entry.country) && (
-                      <span className="text-xs text-gray-500 ml-2">
-                        {[entry.city, entry.country].filter(Boolean).join(', ')}
-                      </span>
-                    )}
-                  </div>
-                  <span className="text-xs text-gray-400">
-                    {new Date(entry.timestamp).toLocaleTimeString()}
-                  </span>
-                </div>
-              ))}
-            </div>
-          </div>
-        )}
 
         {/* SEO Article */}
         <article className="mt-12 prose prose-gray max-w-none">

@@ -10,7 +10,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   for (const locale of locales) {
     entries.push({
       url: `${BASE_URL}/${locale}`,
-      lastModified: new Date('2026-03-13'),
+      lastModified: new Date(),
       changeFrequency: 'weekly',
       priority: 1.0,
       alternates: {
@@ -25,7 +25,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   for (const locale of locales) {
     entries.push({
       url: `${BASE_URL}/${locale}/tools`,
-      lastModified: new Date('2026-03-13'),
+      lastModified: new Date(),
       changeFrequency: 'weekly',
       priority: 0.9,
       alternates: {
@@ -41,7 +41,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     for (const locale of locales) {
       entries.push({
         url: `${BASE_URL}/${locale}/tools/${tool}`,
-        lastModified: new Date('2026-03-13'),
+        lastModified: new Date(),
         changeFrequency: 'weekly',
         priority: 0.8,
         alternates: {

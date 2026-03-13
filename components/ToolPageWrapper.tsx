@@ -5,7 +5,6 @@ import RelatedTools from './RelatedTools';
 import PopularTools from './PopularTools';
 import FeedbackWidget from './FeedbackWidget';
 import AdPlaceholder from './AdPlaceholder';
-import AffiliateBox from './AffiliateBox';
 import EmbedTool from './EmbedTool';
 import ShareTool from './ShareTool';
 import SupportButton from './SupportButton';
@@ -113,27 +112,6 @@ export default function ToolPageWrapper({ toolSlug, children, faqItems }: ToolPa
     })),
   } : null;
 
-  const webAppSchema = toolT ? {
-    '@context': 'https://schema.org',
-    '@type': 'WebApplication',
-    name: toolT.name,
-    description: toolT.description,
-    url: `https://toolkitonline.vip/${lang}/tools/${toolSlug}`,
-    applicationCategory: 'UtilityApplication',
-    operatingSystem: 'Any',
-    offers: {
-      '@type': 'Offer',
-      price: '0',
-      priceCurrency: 'USD',
-    },
-    author: {
-      '@type': 'Organization',
-      name: 'ToolKit Online',
-    },
-    datePublished: '2024-01-01',
-    softwareVersion: '2.0',
-  } : null;
-
   const ht = howToTranslations[lang] || howToTranslations['en'];
   const howToSchema = toolT ? {
     '@context': 'https://schema.org',
@@ -170,12 +148,6 @@ export default function ToolPageWrapper({ toolSlug, children, faqItems }: ToolPa
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
-        />
-      )}
-      {webAppSchema && (
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(webAppSchema) }}
         />
       )}
       {howToSchema && (
@@ -216,9 +188,6 @@ export default function ToolPageWrapper({ toolSlug, children, faqItems }: ToolPa
         format="rectangle"
         className="my-8"
       />
-
-      {/* Affiliate recommendation */}
-      <AffiliateBox toolSlug={toolSlug} />
 
       <FeedbackWidget toolSlug={toolSlug} />
 

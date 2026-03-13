@@ -25,27 +25,27 @@ Portfolio di micro-tool gratuiti per generare traffico SEO e monetizzare con Goo
 - `app/api/google-verification/route.ts` — verifica Google Search Console
 - `public/` — assets statici, ads.txt, manifest.json
 
-## Tool attuali (40 tool = 240 pagine)
-### Finance (11)
-vat-calculator, percentage-calculator, loan-calculator, salary-calculator, tip-calculator, discount-calculator, electricity-calculator, invoice-generator, mortgage-calculator, currency-converter, fuel-cost-calculator
+## Tool attuali (99 tool = 594 pagine)
+### Finance (20)
+vat-calculator, percentage-calculator, loan-calculator, salary-calculator, tip-calculator, discount-calculator, electricity-calculator, invoice-generator, invoice-calculator, mortgage-calculator, currency-converter, fuel-cost-calculator, compound-interest-calculator, investment-calculator, paycheck-calculator, profit-margin-calculator, sales-tax-calculator, roi-calculator, mortgage-amortization, inflation-calculator
 
-### Text (7)
-word-counter, lorem-ipsum-generator, text-case-converter, character-counter, text-to-slug, markdown-preview, html-encoder
+### Text (20)
+word-counter, lorem-ipsum-generator, text-case-converter, character-counter, text-to-slug, markdown-preview, html-encoder, text-diff, typing-speed-test, character-map, text-to-speech, grammar-checker, resume-builder, ai-text-detector, text-repeater, emoji-picker, word-frequency-counter, line-counter, note-taking, flashcard-maker
 
-### Health (2)
-bmi-calculator, calorie-calculator
+### Health (10)
+bmi-calculator, calorie-calculator, body-fat-calculator, ideal-weight-calculator, water-intake-calculator, sleep-calculator, pregnancy-calculator, pace-calculator, breathing-exercise, noise-generator
 
-### Conversion (5)
-unit-converter, base64-converter, time-zone-converter, cooking-converter, csv-to-json
+### Conversion (11)
+unit-converter, base64-converter, time-zone-converter, cooking-converter, csv-to-json, url-encoder, jpg-to-pdf, pdf-to-jpg, word-to-pdf, number-to-words, temperature-converter
 
-### Developer (7)
-json-formatter, color-picker, password-generator, qr-code-generator, screen-resolution, regex-tester, hex-converter
+### Developer (18)
+json-formatter, color-picker, password-generator, qr-code-generator, barcode-generator, screen-resolution, screen-recorder, regex-tester, hex-converter, hash-generator, binary-converter, binary-translator, color-converter, ip-lookup, cron-expression-generator, timestamp-converter, color-palette-generator, internet-speed-test
 
-### Math (7)
-age-calculator, speed-calculator, date-calculator, random-number-generator, aspect-ratio-calculator, grade-calculator, countdown-timer
+### Math (14)
+age-calculator, speed-calculator, date-calculator, random-number-generator, aspect-ratio-calculator, grade-calculator, countdown-timer, fraction-calculator, gpa-calculator, scientific-calculator, stopwatch, percentage-change-calculator, pomodoro-timer, habit-tracker
 
-### Images (1)
-image-compressor
+### Images (6)
+image-compressor, image-resizer, photo-editor, pixel-ruler, meme-generator, pixel-art-maker
 
 ## Convenzioni
 - Ogni tool è un file `page.tsx` con 'use client'
@@ -65,7 +65,7 @@ image-compressor
 
 ## Prossimi passi
 - Attendere approvazione AdSense
-- Aggiungere nuovi tool (target: 100+) — vedi .claude/projects/strategy.md
+- Target raggiunto: 99 tool (obiettivo iniziale 100+) — continuare ad espandere
 - Creare account Dev.to + Sellix per automazione
 - Articoli SEO su Dev.to per backlink
 - Prodotti digitali su Sellix

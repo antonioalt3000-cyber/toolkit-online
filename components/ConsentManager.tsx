@@ -71,8 +71,50 @@ function injectAdSense() {
   document.head.appendChild(script);
 }
 
+function initConsentMode(consent: ConsentState | null) {
+  const w = window as unknown as Record<string, unknown>;
+  w.dataLayer = w.dataLayer || [];
+  function gtag(...args: unknown[]) {
+    (w.dataLayer as unknown[]).push(args);
+  }
+  // Set default consent state (denied until user accepts)
+  gtag('consent', 'default', {
+    ad_storage: 'denied',
+    ad_user_data: 'denied',
+    ad_personalization: 'denied',
+    analytics_storage: 'denied',
+    functionality_storage: 'granted',
+    security_storage: 'granted',
+    wait_for_update: 500,
+  });
+  // If consent already given, update immediately
+  if (consent) {
+    gtag('consent', 'update', {
+      ad_storage: consent.advertising ? 'granted' : 'denied',
+      ad_user_data: consent.advertising ? 'granted' : 'denied',
+      ad_personalization: consent.advertising ? 'granted' : 'denied',
+      analytics_storage: consent.analytics ? 'granted' : 'denied',
+    });
+  }
+}
+
+function updateConsentMode(consent: ConsentState) {
+  const w = window as unknown as Record<string, unknown>;
+  w.dataLayer = w.dataLayer || [];
+  function gtag(...args: unknown[]) {
+    (w.dataLayer as unknown[]).push(args);
+  }
+  gtag('consent', 'update', {
+    ad_storage: consent.advertising ? 'granted' : 'denied',
+    ad_user_data: consent.advertising ? 'granted' : 'denied',
+    ad_personalization: consent.advertising ? 'granted' : 'denied',
+    analytics_storage: consent.analytics ? 'granted' : 'denied',
+  });
+}
+
 export default function ConsentManager() {
   const applyConsent = useCallback((consent: ConsentState) => {
+    updateConsentMode(consent);
     if (consent.analytics) {
       injectGTM();
     }
@@ -82,8 +124,11 @@ export default function ConsentManager() {
   }, []);
 
   useEffect(() => {
-    // Check existing consent on mount
+    // Initialize Google Consent Mode v2 with defaults
     const consent = getConsent();
+    initConsentMode(consent);
+
+    // Apply existing consent on mount
     if (consent) {
       applyConsent(consent);
     }

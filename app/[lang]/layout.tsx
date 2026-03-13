@@ -5,6 +5,7 @@ import BackToTop from '@/components/BackToTop';
 import CookieConsent from '@/components/CookieConsent';
 import ConsentManager from '@/components/ConsentManager';
 import { locales, common, type Locale } from '@/lib/translations';
+import HtmlLang from '@/components/HtmlLang';
 import { BASE_URL } from '@/lib/seo';
 
 export function generateStaticParams() {
@@ -48,6 +49,7 @@ export default async function LangLayout({
   const { lang } = await params;
   return (
     <div lang={lang}>
+      <HtmlLang />
       <Header />
       <main className="max-w-6xl mx-auto px-4 py-8">{children}</main>
       <Footer />
