@@ -8,6 +8,7 @@ import AdPlaceholder from './AdPlaceholder';
 import AffiliateBox from './AffiliateBox';
 import EmbedTool from './EmbedTool';
 import ShareTool from './ShareTool';
+import SupportButton from './SupportButton';
 import { tools, type Locale } from '@/lib/translations';
 
 const toolCounterTranslations: Record<string, string> = {
@@ -221,7 +222,8 @@ export default function ToolPageWrapper({ toolSlug, children, faqItems }: ToolPa
 
       <FeedbackWidget toolSlug={toolSlug} />
 
-      {/* Email capture disabled until backend integration */}
+      {/* Support / Donations */}
+      <SupportButton />
 
       <RelatedTools currentSlug={toolSlug} />
 
