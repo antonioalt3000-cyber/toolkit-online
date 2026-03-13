@@ -12,12 +12,12 @@ import SupportButton from './SupportButton';
 import { tools, type Locale } from '@/lib/translations';
 
 const toolCounterTranslations: Record<string, string> = {
-  en: '79+ Free Tools Available',
-  it: '79+ Strumenti Gratuiti Disponibili',
-  es: '79+ Herramientas Gratuitas Disponibles',
-  fr: '79+ Outils Gratuits Disponibles',
-  de: '79+ Kostenlose Tools Verfügbar',
-  pt: '79+ Ferramentas Gratuitas Disponíveis',
+  en: '99+ Free Tools Available',
+  it: '99+ Strumenti Gratuiti Disponibili',
+  es: '99+ Herramientas Gratuitas Disponibles',
+  fr: '99+ Outils Gratuits Disponibles',
+  de: '99+ Kostenlose Tools Verfügbar',
+  pt: '99+ Ferramentas Gratuitas Disponíveis',
 };
 
 const howToTranslations: Record<string, {
