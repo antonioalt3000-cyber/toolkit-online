@@ -9,7 +9,9 @@
     "lint": "eslint"
   },
   "dependencies": {
+    "canvas": "^3.2.1",
     "next": "16.1.6",
+    "playwright": "^1.58.2",
     "react": "19.2.3",
     "react-dom": "19.2.3"
   },
