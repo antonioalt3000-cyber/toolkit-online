@@ -1,5 +1,5 @@
 'use client';
-import { useState } from 'react';
+import { useState, useCallback } from 'react';
 import { useParams } from 'next/navigation';
 import { tools, type Locale } from '@/lib/translations';
 import ToolPageWrapper from '@/components/ToolPageWrapper';
@@ -15,30 +15,89 @@ const labels: Record<string, Record<Locale, string>> = {
   copied: { en: 'Copied!', it: 'Copiato!', es: '¡Copiado!', fr: 'Copié !', de: 'Kopiert!', pt: 'Copiado!' },
   error: { en: 'Invalid input', it: 'Input non valido', es: 'Entrada inválida', fr: 'Entrée invalide', de: 'Ungültige Eingabe', pt: 'Entrada inválida' },
   csvPlaceholder: { en: 'name,age,city\nJohn,30,NYC\nJane,25,LA', it: 'nome,età,città\nMario,30,Roma\nLucia,25,Milano', es: 'nombre,edad,ciudad\nJuan,30,Madrid\nAna,25,Barcelona', fr: 'nom,âge,ville\nJean,30,Paris\nMarie,25,Lyon', de: 'Name,Alter,Stadt\nHans,30,Berlin\nAnna,25,München', pt: 'nome,idade,cidade\nJoão,30,Lisboa\nAna,25,Porto' },
+  rows: { en: 'Rows', it: 'Righe', es: 'Filas', fr: 'Lignes', de: 'Zeilen', pt: 'Linhas' },
+  columns: { en: 'Columns', it: 'Colonne', es: 'Columnas', fr: 'Colonnes', de: 'Spalten', pt: 'Colunas' },
+  reset: { en: 'Reset', it: 'Reimposta', es: 'Restablecer', fr: 'Réinitialiser', de: 'Zurücksetzen', pt: 'Redefinir' },
+  copyResult: { en: 'Copy Result', it: 'Copia risultato', es: 'Copiar resultado', fr: 'Copier le résultat', de: 'Ergebnis kopieren', pt: 'Copiar resultado' },
+  downloadJson: { en: 'Download JSON', it: 'Scarica JSON', es: 'Descargar JSON', fr: 'Télécharger JSON', de: 'JSON herunterladen', pt: 'Baixar JSON' },
+  downloadCsv: { en: 'Download CSV', it: 'Scarica CSV', es: 'Descargar CSV', fr: 'Télécharger CSV', de: 'CSV herunterladen', pt: 'Baixar CSV' },
+  delimiter: { en: 'Delimiter', it: 'Delimitatore', es: 'Delimitador', fr: 'Délimiteur', de: 'Trennzeichen', pt: 'Delimitador' },
+  comma: { en: 'Comma (,)', it: 'Virgola (,)', es: 'Coma (,)', fr: 'Virgule (,)', de: 'Komma (,)', pt: 'Vírgula (,)' },
+  semicolon: { en: 'Semicolon (;)', it: 'Punto e virgola (;)', es: 'Punto y coma (;)', fr: 'Point-virgule (;)', de: 'Semikolon (;)', pt: 'Ponto e vírgula (;)' },
+  tab: { en: 'Tab', it: 'Tabulazione', es: 'Tabulación', fr: 'Tabulation', de: 'Tabulator', pt: 'Tabulação' },
+  pipe: { en: 'Pipe (|)', it: 'Pipe (|)', es: 'Pipe (|)', fr: 'Pipe (|)', de: 'Pipe (|)', pt: 'Pipe (|)' },
+  headerRow: { en: 'First row is header', it: 'La prima riga è intestazione', es: 'La primera fila es encabezado', fr: 'La première ligne est l\'en-tête', de: 'Erste Zeile ist Kopfzeile', pt: 'A primeira linha é cabeçalho' },
+  options: { en: 'Options', it: 'Opzioni', es: 'Opciones', fr: 'Options', de: 'Optionen', pt: 'Opções' },
+  history: { en: 'History', it: 'Cronologia', es: 'Historial', fr: 'Historique', de: 'Verlauf', pt: 'Histórico' },
+  noHistory: { en: 'No conversions yet', it: 'Nessuna conversione', es: 'Sin conversiones aún', fr: 'Aucune conversion', de: 'Noch keine Konvertierungen', pt: 'Nenhuma conversão ainda' },
+  clearHistory: { en: 'Clear history', it: 'Cancella cronologia', es: 'Borrar historial', fr: 'Effacer l\'historique', de: 'Verlauf löschen', pt: 'Limpar histórico' },
+  errorMalformed: { en: 'Malformed CSV: inconsistent column count', it: 'CSV malformato: numero di colonne inconsistente', es: 'CSV malformado: número de columnas inconsistente', fr: 'CSV malformé : nombre de colonnes incohérent', de: 'Fehlerhaftes CSV: inkonsistente Spaltenanzahl', pt: 'CSV malformado: número de colunas inconsistente' },
+  errorEmpty: { en: 'Input is empty', it: 'L\'input è vuoto', es: 'La entrada está vacía', fr: 'L\'entrée est vide', de: 'Eingabe ist leer', pt: 'A entrada está vazia' },
+  errorNoData: { en: 'CSV must have at least a header and one data row', it: 'Il CSV deve avere almeno un\'intestazione e una riga di dati', es: 'El CSV debe tener al menos un encabezado y una fila de datos', fr: 'Le CSV doit avoir au moins un en-tête et une ligne de données', de: 'CSV muss mindestens eine Kopfzeile und eine Datenzeile haben', pt: 'O CSV deve ter pelo menos um cabeçalho e uma linha de dados' },
 };
 
-function csvToJson(csv: string): string {
-  const lines = csv.trim().split('\n');
-  if (lines.length < 2) return '[]';
-  const headers = lines[0].split(',').map((h) => h.trim());
-  const result = lines.slice(1).map((line) => {
-    const values = line.split(',').map((v) => v.trim());
-    const obj: Record<string, string> = {};
-    headers.forEach((h, i) => { obj[h] = values[i] || ''; });
-    return obj;
-  });
-  return JSON.stringify(result, null, 2);
+type DelimiterKey = 'comma' | 'semicolon' | 'tab' | 'pipe';
+const delimiterMap: Record<DelimiterKey, string> = { comma: ',', semicolon: ';', tab: '\t', pipe: '|' };
+
+interface HistoryEntry {
+  mode: 'csvToJson' | 'jsonToCsv';
+  input: string;
+  output: string;
+  timestamp: number;
 }
 
-function jsonToCsv(json: string): string {
+function csvToJson(csv: string, delimiter: string, hasHeader: boolean): { json: string; rows: number; cols: number; error?: string } {
+  const lines = csv.trim().split('\n').filter(l => l.trim() !== '');
+  if (lines.length === 0) return { json: '[]', rows: 0, cols: 0, error: 'errorEmpty' };
+
+  if (hasHeader) {
+    if (lines.length < 2) return { json: '[]', rows: 0, cols: 0, error: 'errorNoData' };
+    const headers = lines[0].split(delimiter).map((h) => h.trim());
+    const cols = headers.length;
+    const dataLines = lines.slice(1);
+    // Validate consistent column count
+    for (let i = 0; i < dataLines.length; i++) {
+      const vals = dataLines[i].split(delimiter);
+      if (vals.length !== cols) {
+        return { json: '', rows: 0, cols: 0, error: 'errorMalformed' };
+      }
+    }
+    const result = dataLines.map((line) => {
+      const values = line.split(delimiter).map((v) => v.trim());
+      const obj: Record<string, string> = {};
+      headers.forEach((h, i) => { obj[h] = values[i] || ''; });
+      return obj;
+    });
+    return { json: JSON.stringify(result, null, 2), rows: dataLines.length, cols };
+  } else {
+    // No header: use col_0, col_1, etc.
+    const cols = lines[0].split(delimiter).length;
+    for (let i = 0; i < lines.length; i++) {
+      const vals = lines[i].split(delimiter);
+      if (vals.length !== cols) {
+        return { json: '', rows: 0, cols: 0, error: 'errorMalformed' };
+      }
+    }
+    const headers = Array.from({ length: cols }, (_, i) => `col_${i}`);
+    const result = lines.map((line) => {
+      const values = line.split(delimiter).map((v) => v.trim());
+      const obj: Record<string, string> = {};
+      headers.forEach((h, i) => { obj[h] = values[i] || ''; });
+      return obj;
+    });
+    return { json: JSON.stringify(result, null, 2), rows: lines.length, cols };
+  }
+}
+
+function jsonToCsv(json: string, delimiter: string): { csv: string; rows: number; cols: number } {
   const arr = JSON.parse(json);
-  if (!Array.isArray(arr) || arr.length === 0) return '';
+  if (!Array.isArray(arr) || arr.length === 0) return { csv: '', rows: 0, cols: 0 };
   const headers = Object.keys(arr[0]);
-  const lines = [headers.join(',')];
+  const csvLines = [headers.join(delimiter)];
   arr.forEach((obj: Record<string, unknown>) => {
-    lines.push(headers.map((h) => String(obj[h] ?? '')).join(','));
+    csvLines.push(headers.map((h) => String(obj[h] ?? '')).join(delimiter));
   });
-  return lines.join('\n');
+  return { csv: csvLines.join('\n'), rows: arr.length, cols: headers.length };
 }
 
 export default function CsvToJson() {
@@ -49,12 +108,34 @@ export default function CsvToJson() {
   const [mode, setMode] = useState<'csvToJson' | 'jsonToCsv'>('csvToJson');
   const [input, setInput] = useState('');
   const [copied, setCopied] = useState(false);
+  const [delimiterKey, setDelimiterKey] = useState<DelimiterKey>('comma');
+  const [hasHeader, setHasHeader] = useState(true);
+  const [history, setHistory] = useState<HistoryEntry[]>([]);
+
+  const delimiter = delimiterMap[delimiterKey];
 
   let output = '';
   let error = '';
+  let rowCount = 0;
+  let colCount = 0;
+
   try {
     if (input.trim()) {
-      output = mode === 'csvToJson' ? csvToJson(input) : jsonToCsv(input);
+      if (mode === 'csvToJson') {
+        const result = csvToJson(input, delimiter, hasHeader);
+        if (result.error) {
+          error = t(result.error);
+        } else {
+          output = result.json;
+          rowCount = result.rows;
+          colCount = result.cols;
+        }
+      } else {
+        const result = jsonToCsv(input, delimiter);
+        output = result.csv;
+        rowCount = result.rows;
+        colCount = result.cols;
+      }
     }
   } catch {
     error = t('error');
@@ -64,6 +145,44 @@ export default function CsvToJson() {
     navigator.clipboard.writeText(output);
     setCopied(true);
     setTimeout(() => setCopied(false), 2000);
+  };
+
+  const handleReset = () => {
+    setInput('');
+    setCopied(false);
+  };
+
+  const downloadResult = () => {
+    const isJson = mode === 'csvToJson';
+    const blob = new Blob([output], { type: isJson ? 'application/json' : 'text/csv' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = isJson ? 'result.json' : 'result.csv';
+    a.click();
+    URL.revokeObjectURL(url);
+  };
+
+  const saveToHistory = useCallback(() => {
+    if (!output || error) return;
+    setHistory((prev) => {
+      const entry: HistoryEntry = { mode, input, output, timestamp: Date.now() };
+      const updated = [entry, ...prev.filter(h => h.input !== input || h.mode !== mode)].slice(0, 5);
+      return updated;
+    });
+  }, [output, error, mode, input]);
+
+  // Save to history when output changes and is valid
+  const prevOutputRef = useState<string>('');
+  if (output && !error && output !== prevOutputRef[0]) {
+    prevOutputRef[0] = output;
+    // Use microtask to avoid setState during render
+    queueMicrotask(() => saveToHistory());
+  }
+
+  const loadFromHistory = (entry: HistoryEntry) => {
+    setMode(entry.mode);
+    setInput(entry.input);
   };
 
   const seoContent: Record<Locale, { title: string; paragraphs: string[]; faq: { q: string; a: string }[] }> = {
@@ -175,21 +294,54 @@ export default function CsvToJson() {
         <p className="text-gray-600 mb-6">{toolT.description}</p>
 
         <div className="bg-white rounded-xl border border-gray-200 p-6 space-y-4">
+          {/* Mode toggle */}
           <div className="flex gap-2">
             <button
               onClick={() => { setMode('csvToJson'); setInput(''); }}
-              className={`flex-1 py-2 rounded-lg font-medium ${mode === 'csvToJson' ? 'bg-blue-600 text-white' : 'bg-gray-100 text-gray-700'}`}
+              className={`flex-1 py-2 rounded-lg font-medium transition-colors ${mode === 'csvToJson' ? 'bg-blue-600 text-white' : 'bg-gray-100 text-gray-700 hover:bg-gray-200'}`}
             >
               {t('csvToJson')}
             </button>
             <button
               onClick={() => { setMode('jsonToCsv'); setInput(''); }}
-              className={`flex-1 py-2 rounded-lg font-medium ${mode === 'jsonToCsv' ? 'bg-blue-600 text-white' : 'bg-gray-100 text-gray-700'}`}
+              className={`flex-1 py-2 rounded-lg font-medium transition-colors ${mode === 'jsonToCsv' ? 'bg-blue-600 text-white' : 'bg-gray-100 text-gray-700 hover:bg-gray-200'}`}
             >
               {t('jsonToCsv')}
             </button>
           </div>
 
+          {/* Options: delimiter + header toggle */}
+          <div className="bg-gray-50 rounded-lg p-4 space-y-3">
+            <p className="text-sm font-semibold text-gray-700">{t('options')}</p>
+            <div className="flex flex-wrap gap-4 items-center">
+              <div className="flex items-center gap-2">
+                <label className="text-sm text-gray-600">{t('delimiter')}:</label>
+                <select
+                  value={delimiterKey}
+                  onChange={(e) => setDelimiterKey(e.target.value as DelimiterKey)}
+                  className="border border-gray-300 rounded-md px-2 py-1 text-sm focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                >
+                  <option value="comma">{t('comma')}</option>
+                  <option value="semicolon">{t('semicolon')}</option>
+                  <option value="tab">{t('tab')}</option>
+                  <option value="pipe">{t('pipe')}</option>
+                </select>
+              </div>
+              {mode === 'csvToJson' && (
+                <label className="flex items-center gap-2 text-sm text-gray-600 cursor-pointer">
+                  <input
+                    type="checkbox"
+                    checked={hasHeader}
+                    onChange={(e) => setHasHeader(e.target.checked)}
+                    className="rounded border-gray-300 text-blue-600 focus:ring-blue-500"
+                  />
+                  {t('headerRow')}
+                </label>
+              )}
+            </div>
+          </div>
+
+          {/* Input */}
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-1">
               {mode === 'csvToJson' ? t('csvInput') : t('jsonInput')}
@@ -203,17 +355,34 @@ export default function CsvToJson() {
             />
           </div>
 
-          {error && <p className="text-red-500 text-sm">{error}</p>}
+          {/* Validation error */}
+          {error && (
+            <div className="bg-red-50 border border-red-200 rounded-lg px-4 py-3 text-red-700 text-sm">
+              {error}
+            </div>
+          )}
 
-          {output && (
+          {/* Result cards */}
+          {output && !error && (
+            <div className="grid grid-cols-2 gap-3">
+              <div className="bg-blue-50 rounded-lg p-3 text-center">
+                <p className="text-2xl font-bold text-blue-700">{rowCount}</p>
+                <p className="text-sm text-blue-600">{t('rows')}</p>
+              </div>
+              <div className="bg-green-50 rounded-lg p-3 text-center">
+                <p className="text-2xl font-bold text-green-700">{colCount}</p>
+                <p className="text-sm text-green-600">{t('columns')}</p>
+              </div>
+            </div>
+          )}
+
+          {/* Output */}
+          {output && !error && (
             <div>
               <div className="flex justify-between items-center mb-1">
                 <label className="text-sm font-medium text-gray-700">
                   {mode === 'csvToJson' ? t('jsonOutput') : t('csvOutput')}
                 </label>
-                <button onClick={copyOutput} className="text-sm text-blue-600 hover:text-blue-800 font-medium">
-                  {copied ? t('copied') : t('copy')}
-                </button>
               </div>
               <textarea
                 value={output}
@@ -223,7 +392,71 @@ export default function CsvToJson() {
               />
             </div>
           )}
+
+          {/* Action buttons */}
+          <div className="flex flex-wrap gap-2">
+            {output && !error && (
+              <>
+                <button
+                  onClick={copyOutput}
+                  className="px-4 py-2 bg-blue-600 text-white rounded-lg text-sm font-medium hover:bg-blue-700 transition-colors"
+                >
+                  {copied ? t('copied') : t('copyResult')}
+                </button>
+                <button
+                  onClick={downloadResult}
+                  className="px-4 py-2 bg-green-600 text-white rounded-lg text-sm font-medium hover:bg-green-700 transition-colors"
+                >
+                  {mode === 'csvToJson' ? t('downloadJson') : t('downloadCsv')}
+                </button>
+              </>
+            )}
+            {input && (
+              <button
+                onClick={handleReset}
+                className="px-4 py-2 bg-gray-200 text-gray-700 rounded-lg text-sm font-medium hover:bg-gray-300 transition-colors"
+              >
+                {t('reset')}
+              </button>
+            )}
+          </div>
         </div>
+
+        {/* History */}
+        {history.length > 0 && (
+          <div className="mt-6 bg-white rounded-xl border border-gray-200 p-6">
+            <div className="flex justify-between items-center mb-3">
+              <h3 className="text-sm font-semibold text-gray-700">{t('history')}</h3>
+              <button
+                onClick={() => setHistory([])}
+                className="text-xs text-red-500 hover:text-red-700 transition-colors"
+              >
+                {t('clearHistory')}
+              </button>
+            </div>
+            <div className="space-y-2">
+              {history.map((entry, i) => (
+                <button
+                  key={entry.timestamp}
+                  onClick={() => loadFromHistory(entry)}
+                  className="w-full text-left bg-gray-50 hover:bg-gray-100 rounded-lg px-3 py-2 transition-colors"
+                >
+                  <div className="flex justify-between items-center">
+                    <span className="text-xs font-medium text-blue-600">
+                      {entry.mode === 'csvToJson' ? 'CSV → JSON' : 'JSON → CSV'}
+                    </span>
+                    <span className="text-xs text-gray-400">
+                      {new Date(entry.timestamp).toLocaleTimeString()}
+                    </span>
+                  </div>
+                  <p className="text-xs text-gray-500 mt-1 truncate font-mono">
+                    {entry.input.slice(0, 80)}{entry.input.length > 80 ? '...' : ''}
+                  </p>
+                </button>
+              ))}
+            </div>
+          </div>
+        )}
 
         <article className="mt-12 prose prose-gray max-w-none">
           <h2 className="text-2xl font-bold text-gray-900 mb-4">{seo.title}</h2>

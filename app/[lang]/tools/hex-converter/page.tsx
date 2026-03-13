@@ -1,5 +1,5 @@
 'use client';
-import { useState } from 'react';
+import { useState, useCallback } from 'react';
 import { useParams } from 'next/navigation';
 import { tools, type Locale } from '@/lib/translations';
 import ToolPageWrapper from '@/components/ToolPageWrapper';
@@ -13,9 +13,29 @@ const labels: Record<string, Record<Locale, string>> = {
   copy: { en: 'Copy', it: 'Copia', es: 'Copiar', fr: 'Copier', de: 'Kopieren', pt: 'Copiar' },
   copied: { en: 'Copied!', it: 'Copiato!', es: '¡Copiado!', fr: 'Copié !', de: 'Kopiert!', pt: 'Copiado!' },
   invalid: { en: 'Invalid input', it: 'Input non valido', es: 'Entrada inválida', fr: 'Entrée invalide', de: 'Ungültige Eingabe', pt: 'Entrada inválida' },
+  copyAll: { en: 'Copy All Results', it: 'Copia tutti i risultati', es: 'Copiar todos los resultados', fr: 'Copier tous les résultats', de: 'Alle Ergebnisse kopieren', pt: 'Copiar todos os resultados' },
+  copiedAll: { en: 'All Copied!', it: 'Tutto copiato!', es: '¡Todo copiado!', fr: 'Tout copié !', de: 'Alles kopiert!', pt: 'Tudo copiado!' },
+  reset: { en: 'Reset', it: 'Ripristina', es: 'Reiniciar', fr: 'Réinitialiser', de: 'Zurücksetzen', pt: 'Redefinir' },
+  history: { en: 'Recent Conversions', it: 'Conversioni recenti', es: 'Conversiones recientes', fr: 'Conversions récentes', de: 'Letzte Konvertierungen', pt: 'Conversões recentes' },
+  clearHistory: { en: 'Clear History', it: 'Cancella cronologia', es: 'Borrar historial', fr: 'Effacer l\'historique', de: 'Verlauf löschen', pt: 'Limpar histórico' },
+  swapDirection: { en: 'Swap Direction', it: 'Inverti direzione', es: 'Invertir dirección', fr: 'Inverser direction', de: 'Richtung wechseln', pt: 'Inverter direção' },
+  bitVisualization: { en: 'Bit Visualization', it: 'Visualizzazione bit', es: 'Visualización de bits', fr: 'Visualisation des bits', de: 'Bit-Visualisierung', pt: 'Visualização de bits' },
+  bitOn: { en: 'ON', it: 'ON', es: 'ON', fr: 'ON', de: 'AN', pt: 'ON' },
+  bitOff: { en: 'OFF', it: 'OFF', es: 'OFF', fr: 'OFF', de: 'AUS', pt: 'OFF' },
+  invalidHex: { en: 'Only 0-9 and A-F allowed', it: 'Solo 0-9 e A-F ammessi', es: 'Solo 0-9 y A-F permitidos', fr: 'Seuls 0-9 et A-F autorisés', de: 'Nur 0-9 und A-F erlaubt', pt: 'Apenas 0-9 e A-F permitidos' },
+  invalidDecimal: { en: 'Only digits 0-9 allowed', it: 'Solo cifre 0-9 ammesse', es: 'Solo dígitos 0-9 permitidos', fr: 'Seuls les chiffres 0-9 autorisés', de: 'Nur Ziffern 0-9 erlaubt', pt: 'Apenas dígitos 0-9 permitidos' },
+  invalidBinary: { en: 'Only 0 and 1 allowed', it: 'Solo 0 e 1 ammessi', es: 'Solo 0 y 1 permitidos', fr: 'Seuls 0 et 1 autorisés', de: 'Nur 0 und 1 erlaubt', pt: 'Apenas 0 e 1 permitidos' },
+  invalidOctal: { en: 'Only digits 0-7 allowed', it: 'Solo cifre 0-7 ammesse', es: 'Solo dígitos 0-7 permitidos', fr: 'Seuls les chiffres 0-7 autorisés', de: 'Nur Ziffern 0-7 erlaubt', pt: 'Apenas dígitos 0-7 permitidos' },
+  results: { en: 'Results', it: 'Risultati', es: 'Resultados', fr: 'Résultats', de: 'Ergebnisse', pt: 'Resultados' },
 };
 
 type Base = 'decimal' | 'hexadecimal' | 'binary' | 'octal';
+
+interface HistoryEntry {
+  inputBase: Base;
+  inputValue: string;
+  decimalValue: number;
+}
 
 function parseInput(value: string, base: Base): number | null {
   if (!value.trim()) return null;
@@ -42,6 +62,46 @@ function formatOutput(num: number, base: Base): string {
   }
 }
 
+function getValidationError(value: string, base: Base): string | null {
+  if (!value.trim()) return null;
+  const cleaned = value.trim();
+  switch (base) {
+    case 'decimal':
+      if (!/^-?\d+$/.test(cleaned)) return 'invalidDecimal';
+      break;
+    case 'hexadecimal': {
+      const hex = cleaned.replace(/^0x/i, '');
+      if (!/^[0-9a-fA-F]+$/.test(hex)) return 'invalidHex';
+      break;
+    }
+    case 'binary': {
+      const bin = cleaned.replace(/^0b/i, '');
+      if (!/^[01]+$/.test(bin)) return 'invalidBinary';
+      break;
+    }
+    case 'octal': {
+      const oct = cleaned.replace(/^0o/i, '');
+      if (!/^[0-7]+$/.test(oct)) return 'invalidOctal';
+      break;
+    }
+  }
+  return null;
+}
+
+const cardColors: Record<Base, string> = {
+  hexadecimal: 'bg-blue-50 border-blue-200',
+  decimal: 'bg-green-50 border-green-200',
+  binary: 'bg-purple-50 border-purple-200',
+  octal: 'bg-amber-50 border-amber-200',
+};
+
+const cardIconColors: Record<Base, string> = {
+  hexadecimal: 'text-blue-600',
+  decimal: 'text-green-600',
+  binary: 'text-purple-600',
+  octal: 'text-amber-600',
+};
+
 export default function HexConverter() {
   const { lang } = useParams() as { lang: Locale };
   const toolT = tools['hex-converter'][lang];
@@ -50,9 +110,12 @@ export default function HexConverter() {
   const [inputBase, setInputBase] = useState<Base>('decimal');
   const [input, setInput] = useState('255');
   const [copiedField, setCopiedField] = useState('');
+  const [copiedAll, setCopiedAll] = useState(false);
+  const [history, setHistory] = useState<HistoryEntry[]>([]);
 
   const num = parseInput(input, inputBase);
   const isValid = num !== null;
+  const validationError = getValidationError(input, inputBase);
 
   const bases: Base[] = ['decimal', 'hexadecimal', 'binary', 'octal'];
   const prefixes: Record<Base, string> = {
@@ -62,12 +125,66 @@ export default function HexConverter() {
     octal: '0o',
   };
 
+  const addToHistory = useCallback((base: Base, value: string, decimal: number) => {
+    setHistory(prev => {
+      const newEntry: HistoryEntry = { inputBase: base, inputValue: value, decimalValue: decimal };
+      const filtered = prev.filter(
+        e => !(e.inputBase === base && e.inputValue === value)
+      );
+      return [newEntry, ...filtered].slice(0, 5);
+    });
+  }, []);
+
   const copyValue = (base: Base) => {
     if (num === null) return;
     const val = prefixes[base] + formatOutput(num, base);
     navigator.clipboard.writeText(val);
     setCopiedField(base);
     setTimeout(() => setCopiedField(''), 2000);
+  };
+
+  const copyAllResults = () => {
+    if (num === null) return;
+    const lines = bases.map(base => `${t(base)}: ${prefixes[base]}${formatOutput(num, base)}`).join('\n');
+    navigator.clipboard.writeText(lines);
+    setCopiedAll(true);
+    setTimeout(() => setCopiedAll(false), 2000);
+  };
+
+  const handleReset = () => {
+    setInput('');
+    setInputBase('decimal');
+    setCopiedField('');
+    setCopiedAll(false);
+  };
+
+  const handleSwapDirection = () => {
+    const currentIndex = bases.indexOf(inputBase);
+    const nextIndex = (currentIndex + 1) % bases.length;
+    const nextBase = bases[nextIndex];
+    if (num !== null) {
+      setInput(formatOutput(num, nextBase));
+    }
+    setInputBase(nextBase);
+  };
+
+  const handleConvert = () => {
+    if (num !== null && input.trim()) {
+      addToHistory(inputBase, input.trim(), num);
+    }
+  };
+
+  const loadFromHistory = (entry: HistoryEntry) => {
+    setInputBase(entry.inputBase);
+    setInput(entry.inputValue);
+  };
+
+  // Binary bit visualization: pad to nearest multiple of 8
+  const getBits = (n: number): number[] => {
+    if (n < 0) return [];
+    const binary = n.toString(2);
+    const padded = binary.padStart(Math.max(8, Math.ceil(binary.length / 8) * 8), '0');
+    return padded.split('').map(Number);
   };
 
   const seoContent: Record<Locale, { title: string; paragraphs: string[]; faq: { q: string; a: string }[] }> = {
@@ -172,6 +289,8 @@ export default function HexConverter() {
   const seo = seoContent[lang];
   const [openFaq, setOpenFaq] = useState<number | null>(null);
 
+  const bits = isValid && num >= 0 ? getBits(num) : [];
+
   return (
     <ToolPageWrapper toolSlug="hex-converter" faqItems={seo.faq}>
       <div className="max-w-2xl mx-auto">
@@ -179,6 +298,7 @@ export default function HexConverter() {
         <p className="text-gray-600 mb-6">{toolT.description}</p>
 
         <div className="bg-white rounded-xl border border-gray-200 p-6 space-y-4">
+          {/* Input base selector */}
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-1">{t('inputAs')}</label>
             <div className="flex gap-2 flex-wrap">
@@ -189,7 +309,7 @@ export default function HexConverter() {
                     if (num !== null) setInput(formatOutput(num, base));
                     setInputBase(base);
                   }}
-                  className={`px-3 py-1.5 rounded-lg text-sm font-medium ${
+                  className={`px-3 py-1.5 rounded-lg text-sm font-medium transition-colors ${
                     inputBase === base ? 'bg-blue-600 text-white' : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
                   }`}
                 >
@@ -199,41 +319,168 @@ export default function HexConverter() {
             </div>
           </div>
 
+          {/* Input field */}
           <div>
             <input
               type="text"
               value={input}
               onChange={(e) => setInput(e.target.value)}
+              onKeyDown={(e) => { if (e.key === 'Enter') handleConvert(); }}
               placeholder={inputBase === 'decimal' ? '255' : inputBase === 'hexadecimal' ? 'FF' : inputBase === 'binary' ? '11111111' : '377'}
               className={`w-full border rounded-lg px-4 py-2 text-lg font-mono focus:ring-2 focus:ring-blue-500 focus:border-transparent ${
                 input && !isValid ? 'border-red-300 bg-red-50' : 'border-gray-300'
               }`}
             />
-            {input && !isValid && <p className="text-red-500 text-sm mt-1">{t('invalid')}</p>}
+            {input && validationError && (
+              <p className="text-red-500 text-sm mt-1">{t(validationError)}</p>
+            )}
+            {input && !validationError && !isValid && (
+              <p className="text-red-500 text-sm mt-1">{t('invalid')}</p>
+            )}
           </div>
 
+          {/* Action buttons: Swap, Reset */}
+          <div className="flex gap-2">
+            <button
+              onClick={handleSwapDirection}
+              className="flex items-center gap-1.5 px-4 py-2 bg-indigo-50 text-indigo-700 rounded-lg text-sm font-medium hover:bg-indigo-100 transition-colors"
+              title={t('swapDirection')}
+            >
+              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 16V4m0 0L3 8m4-4l4 4m6 0v12m0 0l4-4m-4 4l-4-4" />
+              </svg>
+              {t('swapDirection')}
+            </button>
+            <button
+              onClick={handleReset}
+              className="flex items-center gap-1.5 px-4 py-2 bg-gray-100 text-gray-700 rounded-lg text-sm font-medium hover:bg-gray-200 transition-colors"
+            >
+              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+              </svg>
+              {t('reset')}
+            </button>
+          </div>
+
+          {/* Result cards */}
           {isValid && (
-            <div className="space-y-2">
-              {bases.map((base) => (
-                <div key={base} className="flex items-center justify-between p-3 bg-blue-50 rounded-lg">
-                  <div>
-                    <span className="text-xs text-gray-500 uppercase tracking-wide">{t(base)}</span>
-                    <p className="font-mono font-semibold text-gray-900">
+            <div className="space-y-3">
+              <div className="flex items-center justify-between">
+                <h3 className="text-sm font-semibold text-gray-700 uppercase tracking-wide">{t('results')}</h3>
+                <button
+                  onClick={() => { copyAllResults(); handleConvert(); }}
+                  className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-sm font-medium transition-colors ${
+                    copiedAll
+                      ? 'bg-green-100 text-green-700'
+                      : 'bg-blue-100 text-blue-700 hover:bg-blue-200'
+                  }`}
+                >
+                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    {copiedAll ? (
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                    ) : (
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3" />
+                    )}
+                  </svg>
+                  {copiedAll ? t('copiedAll') : t('copyAll')}
+                </button>
+              </div>
+
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                {bases.map((base) => (
+                  <div key={base} className={`p-4 rounded-xl border ${cardColors[base]}`}>
+                    <div className="flex items-center justify-between mb-1">
+                      <span className={`text-xs font-bold uppercase tracking-wide ${cardIconColors[base]}`}>{t(base)}</span>
+                      <button
+                        onClick={() => copyValue(base)}
+                        className={`text-xs font-medium px-2 py-0.5 rounded transition-colors ${
+                          copiedField === base
+                            ? 'bg-green-100 text-green-700'
+                            : 'bg-white/60 text-gray-600 hover:bg-white hover:text-gray-900'
+                        }`}
+                      >
+                        {copiedField === base ? t('copied') : t('copy')}
+                      </button>
+                    </div>
+                    <p className="font-mono font-semibold text-gray-900 text-lg break-all">
                       <span className="text-gray-400">{prefixes[base]}</span>
                       {formatOutput(num, base)}
                     </p>
                   </div>
-                  <button
-                    onClick={() => copyValue(base)}
-                    className="text-sm text-blue-600 hover:text-blue-800 font-medium"
-                  >
-                    {copiedField === base ? t('copied') : t('copy')}
-                  </button>
+                ))}
+              </div>
+            </div>
+          )}
+
+          {/* Bit Visualization */}
+          {isValid && num >= 0 && bits.length > 0 && bits.length <= 32 && (
+            <div className="mt-2">
+              <h3 className="text-sm font-semibold text-gray-700 uppercase tracking-wide mb-2">{t('bitVisualization')}</h3>
+              <div className="bg-gray-50 rounded-xl border border-gray-200 p-4">
+                <div className="flex flex-wrap gap-1 justify-center">
+                  {bits.map((bit, i) => (
+                    <div key={i} className="flex flex-col items-center">
+                      {i % 8 === 0 && i > 0 && <div className="w-1" />}
+                      <div
+                        className={`w-8 h-8 rounded flex items-center justify-center text-sm font-mono font-bold transition-colors ${
+                          bit === 1
+                            ? 'bg-purple-600 text-white shadow-sm'
+                            : 'bg-gray-200 text-gray-400'
+                        }`}
+                      >
+                        {bit}
+                      </div>
+                      <span className="text-[10px] text-gray-400 mt-0.5">{bits.length - 1 - i}</span>
+                    </div>
+                  ))}
                 </div>
-              ))}
+                <div className="flex justify-center mt-2 gap-4 text-xs text-gray-500">
+                  <span className="flex items-center gap-1">
+                    <span className="inline-block w-3 h-3 rounded bg-purple-600"></span> {t('bitOn')}
+                  </span>
+                  <span className="flex items-center gap-1">
+                    <span className="inline-block w-3 h-3 rounded bg-gray-200"></span> {t('bitOff')}
+                  </span>
+                </div>
+              </div>
             </div>
           )}
         </div>
+
+        {/* History section */}
+        {history.length > 0 && (
+          <div className="mt-6 bg-white rounded-xl border border-gray-200 p-4">
+            <div className="flex items-center justify-between mb-3">
+              <h3 className="text-sm font-semibold text-gray-700 uppercase tracking-wide">{t('history')}</h3>
+              <button
+                onClick={() => setHistory([])}
+                className="text-xs text-gray-500 hover:text-red-600 transition-colors"
+              >
+                {t('clearHistory')}
+              </button>
+            </div>
+            <div className="space-y-2">
+              {history.map((entry, i) => (
+                <button
+                  key={i}
+                  onClick={() => loadFromHistory(entry)}
+                  className="w-full text-left px-3 py-2 bg-gray-50 hover:bg-gray-100 rounded-lg transition-colors flex items-center justify-between group"
+                >
+                  <div className="flex items-center gap-3">
+                    <span className="text-xs font-medium text-gray-400 uppercase w-12">{t(entry.inputBase).slice(0, 3)}</span>
+                    <span className="font-mono text-sm text-gray-900">{entry.inputValue}</span>
+                  </div>
+                  <div className="flex items-center gap-2 text-xs text-gray-400">
+                    <span>= {entry.decimalValue}</span>
+                    <svg className="w-3 h-3 opacity-0 group-hover:opacity-100 transition-opacity" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                    </svg>
+                  </div>
+                </button>
+              ))}
+            </div>
+          </div>
+        )}
 
         <article className="mt-12 prose prose-gray max-w-none">
           <h2 className="text-2xl font-bold text-gray-900 mb-4">{seo.title}</h2>

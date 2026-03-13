@@ -1,5 +1,5 @@
 'use client';
-import { useState } from 'react';
+import { useState, useCallback } from 'react';
 import { useParams } from 'next/navigation';
 import { tools, type Locale } from '@/lib/translations';
 import ToolPageWrapper from '@/components/ToolPageWrapper';
@@ -14,7 +14,44 @@ const labels: Record<string, Record<string, string>> = {
   totalCost: { en: 'Total Cost', it: 'Costo Totale', es: 'Costo Total', fr: 'Coût Total', de: 'Gesamtkosten', pt: 'Custo Total' },
   monthlyCost: { en: 'Monthly Estimate (30 days)', it: 'Stima Mensile (30 giorni)', es: 'Estimación Mensual (30 días)', fr: 'Estimation Mensuelle (30 jours)', de: 'Monatliche Schätzung (30 Tage)', pt: 'Estimativa Mensal (30 dias)' },
   yearlyCost: { en: 'Yearly Estimate', it: 'Stima Annuale', es: 'Estimación Anual', fr: 'Estimation Annuelle', de: 'Jährliche Schätzung', pt: 'Estimativa Anual' },
+  presets: { en: 'Quick Presets', it: 'Preset Rapidi', es: 'Preajustes Rápidos', fr: 'Préréglages Rapides', de: 'Schnellauswahl', pt: 'Predefinições Rápidas' },
+  fridge: { en: 'Fridge', it: 'Frigo', es: 'Nevera', fr: 'Frigo', de: 'Kühlschrank', pt: 'Geladeira' },
+  ac: { en: 'AC', it: 'Condizionatore', es: 'Aire Acond.', fr: 'Climatiseur', de: 'Klimaanlage', pt: 'Ar Cond.' },
+  tv: { en: 'TV', it: 'TV', es: 'TV', fr: 'TV', de: 'Fernseher', pt: 'TV' },
+  washingMachine: { en: 'Washing Machine', it: 'Lavatrice', es: 'Lavadora', fr: 'Lave-linge', de: 'Waschmaschine', pt: 'Máq. Lavar' },
+  pc: { en: 'PC', it: 'PC', es: 'PC', fr: 'PC', de: 'PC', pt: 'PC' },
+  history: { en: 'Calculation History', it: 'Storico Calcoli', es: 'Historial de Cálculos', fr: 'Historique des Calculs', de: 'Berechnungsverlauf', pt: 'Histórico de Cálculos' },
+  clearHistory: { en: 'Clear', it: 'Cancella', es: 'Borrar', fr: 'Effacer', de: 'Löschen', pt: 'Limpar' },
+  calculate: { en: 'Save to History', it: 'Salva nello Storico', es: 'Guardar en Historial', fr: 'Sauvegarder', de: 'Speichern', pt: 'Salvar no Histórico' },
+  costComparison: { en: 'Cost Comparison', it: 'Confronto Costi', es: 'Comparación de Costos', fr: 'Comparaison des Coûts', de: 'Kostenvergleich', pt: 'Comparação de Custos' },
+  daily: { en: 'Daily', it: 'Giornaliero', es: 'Diario', fr: 'Journalier', de: 'Täglich', pt: 'Diário' },
+  monthly: { en: 'Monthly', it: 'Mensile', es: 'Mensual', fr: 'Mensuel', de: 'Monatlich', pt: 'Mensal' },
+  yearly: { en: 'Yearly', it: 'Annuale', es: 'Anual', fr: 'Annuel', de: 'Jährlich', pt: 'Anual' },
+  errorNegative: { en: 'Value cannot be negative', it: 'Il valore non può essere negativo', es: 'El valor no puede ser negativo', fr: 'La valeur ne peut pas être négative', de: 'Wert darf nicht negativ sein', pt: 'O valor não pode ser negativo' },
+  copyResults: { en: 'Copy Results', it: 'Copia Risultati', es: 'Copiar Resultados', fr: 'Copier les Résultats', de: 'Ergebnisse Kopieren', pt: 'Copiar Resultados' },
+  copied: { en: 'Copied!', it: 'Copiato!', es: '¡Copiado!', fr: 'Copié !', de: 'Kopiert!', pt: 'Copiado!' },
+  reset: { en: 'Reset', it: 'Reimposta', es: 'Restablecer', fr: 'Réinitialiser', de: 'Zurücksetzen', pt: 'Redefinir' },
 };
+
+interface HistoryEntry {
+  watts: number;
+  hours: number;
+  days: number;
+  rate: number;
+  dailyCost: number;
+  monthlyCost: number;
+  yearlyCost: number;
+  currency: string;
+  timestamp: number;
+}
+
+const presets = [
+  { key: 'fridge', watts: 150, icon: '🧊' },
+  { key: 'ac', watts: 1500, icon: '❄️' },
+  { key: 'tv', watts: 100, icon: '📺' },
+  { key: 'washingMachine', watts: 500, icon: '🫧' },
+  { key: 'pc', watts: 300, icon: '💻' },
+];
 
 const seoContent: Record<Locale, { title: string; paragraphs: string[]; faq: { q: string; a: string }[] }> = {
   en: {
@@ -118,6 +155,18 @@ export default function ElectricityCalculator() {
   const [hoursPerDay, setHoursPerDay] = useState('');
   const [days, setDays] = useState('30');
   const [rate, setRate] = useState('0.12');
+  const [copied, setCopied] = useState(false);
+  const [history, setHistory] = useState<HistoryEntry[]>([]);
+  const [openFaq, setOpenFaq] = useState<number | null>(null);
+
+  // Validation: track which fields have negative values
+  const errors: Record<string, boolean> = {
+    watts: parseFloat(watts) < 0,
+    hoursPerDay: parseFloat(hoursPerDay) < 0,
+    days: parseFloat(days) < 0,
+    rate: parseFloat(rate) < 0,
+  };
+  const hasErrors = Object.values(errors).some(Boolean);
 
   const w = parseFloat(watts) || 0;
   const h = parseFloat(hoursPerDay) || 0;
@@ -131,10 +180,15 @@ export default function ElectricityCalculator() {
   const monthlyCost = kwhDaily * 30 * r;
   const yearlyCost = kwhDaily * 365 * r;
 
-  const currency = lang === 'pt' ? 'R$' : ['it', 'fr', 'de'].includes(lang) ? '€' : '$';
-  const [copied, setCopied] = useState(false);
+  const currency = lang === 'pt' ? 'R$' : ['it', 'fr', 'de'].includes(lang) ? '\u20ac' : '$';
 
-  const handleReset = () => { setWatts(''); setHoursPerDay(''); setDays('30'); setRate('0.12'); };
+  const handleReset = () => {
+    setWatts('');
+    setHoursPerDay('');
+    setDays('30');
+    setRate('0.12');
+  };
+
   const copyResults = () => {
     const text = `${t('energyUsed')}: ${kwhTotal.toFixed(2)} kWh\n${t('dailyCost')}: ${currency}${dailyCost.toFixed(2)}\n${t('totalCost')}: ${currency}${totalCost.toFixed(2)}\n${t('monthlyCost')}: ${currency}${monthlyCost.toFixed(2)}\n${t('yearlyCost')}: ${currency}${yearlyCost.toFixed(2)}`;
     navigator.clipboard.writeText(text);
@@ -142,8 +196,39 @@ export default function ElectricityCalculator() {
     setTimeout(() => setCopied(false), 2000);
   };
 
+  const saveToHistory = useCallback(() => {
+    if (w <= 0 || h <= 0 || hasErrors) return;
+    const entry: HistoryEntry = {
+      watts: w,
+      hours: h,
+      days: d,
+      rate: r,
+      dailyCost,
+      monthlyCost,
+      yearlyCost,
+      currency,
+      timestamp: Date.now(),
+    };
+    setHistory((prev) => [entry, ...prev].slice(0, 5));
+  }, [w, h, d, r, dailyCost, monthlyCost, yearlyCost, currency, hasErrors]);
+
+  const applyPreset = (presetWatts: number) => {
+    setWatts(String(presetWatts));
+  };
+
+  const showResults = w > 0 && h > 0 && !hasErrors;
+
+  // Cost comparison bar max value
+  const maxCost = yearlyCost > 0 ? yearlyCost : 1;
+
   const seo = seoContent[lang];
-  const [openFaq, setOpenFaq] = useState<number | null>(null);
+
+  const inputFields = [
+    { key: 'watts', value: watts, setter: setWatts, placeholder: '100' },
+    { key: 'hoursPerDay', value: hoursPerDay, setter: setHoursPerDay, placeholder: '8' },
+    { key: 'days', value: days, setter: setDays, placeholder: '30' },
+    { key: 'rate', value: rate, setter: setRate, placeholder: '0.12' },
+  ];
 
   return (
     <ToolPageWrapper toolSlug="electricity-calculator" faqItems={seo.faq}>
@@ -152,70 +237,184 @@ export default function ElectricityCalculator() {
         <p className="text-gray-600 mb-6">{toolT.description}</p>
 
         <div className="bg-white rounded-xl border border-gray-200 p-6 space-y-4">
-          {[
-            { key: 'watts', value: watts, setter: setWatts, placeholder: '100' },
-            { key: 'hoursPerDay', value: hoursPerDay, setter: setHoursPerDay, placeholder: '8' },
-            { key: 'days', value: days, setter: setDays, placeholder: '30' },
-            { key: 'rate', value: rate, setter: setRate, placeholder: '0.12' },
-          ].map(({ key, value, setter, placeholder }) => (
+          {/* Preset Appliances */}
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-2">{t('presets')}</label>
+            <div className="flex flex-wrap gap-2">
+              {presets.map((preset) => (
+                <button
+                  key={preset.key}
+                  onClick={() => applyPreset(preset.watts)}
+                  className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-gray-100 hover:bg-blue-100 hover:text-blue-700 border border-gray-200 rounded-lg text-sm font-medium text-gray-700 transition-colors"
+                >
+                  <span>{preset.icon}</span>
+                  <span>{t(preset.key)}</span>
+                  <span className="text-xs text-gray-400">({preset.watts}W)</span>
+                </button>
+              ))}
+            </div>
+          </div>
+
+          {/* Input Fields */}
+          {inputFields.map(({ key, value, setter, placeholder }) => (
             <div key={key}>
               <label className="block text-sm font-medium text-gray-700 mb-1">{t(key)}</label>
-              <input type="number" value={value} onChange={(e) => setter(e.target.value)} placeholder={placeholder}
-                className="w-full border border-gray-300 rounded-lg px-4 py-2 text-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent" />
+              <input
+                type="number"
+                value={value}
+                onChange={(e) => setter(e.target.value)}
+                placeholder={placeholder}
+                className={`w-full border rounded-lg px-4 py-2 text-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent ${
+                  errors[key] ? 'border-red-400 bg-red-50' : 'border-gray-300'
+                }`}
+              />
+              {errors[key] && (
+                <p className="mt-1 text-sm text-red-500">{t('errorNegative')}</p>
+              )}
             </div>
           ))}
 
-          <div className="flex justify-end">
-            <button onClick={handleReset} className="text-sm text-gray-500 hover:text-red-500 transition-colors flex items-center gap-1">
-              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" /></svg>
-              Reset
+          {/* Action Buttons */}
+          <div className="flex justify-between items-center">
+            <button
+              onClick={handleReset}
+              className="text-sm text-gray-500 hover:text-red-500 transition-colors flex items-center gap-1"
+            >
+              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+              </svg>
+              {t('reset')}
             </button>
+            {showResults && (
+              <button
+                onClick={saveToHistory}
+                className="text-sm text-blue-600 hover:text-blue-800 transition-colors flex items-center gap-1 font-medium"
+              >
+                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
+                </svg>
+                {t('calculate')}
+              </button>
+            )}
           </div>
 
-          {w > 0 && h > 0 && (
+          {/* Results */}
+          {showResults && (
             <>
+              {/* Energy Used */}
               <div className="bg-yellow-50 border border-yellow-200 rounded-xl p-4 text-center">
                 <span className="text-2xl">⚡</span>
                 <div className="text-xs text-yellow-600 font-medium mt-1">{t('energyUsed')}</div>
                 <div className="text-2xl font-bold text-gray-900">{kwhTotal.toFixed(2)} kWh</div>
               </div>
 
-              <div className="grid grid-cols-2 gap-3">
+              {/* Result Cards: Daily / Monthly / Yearly */}
+              <div className="grid grid-cols-3 gap-3">
                 <div className="bg-blue-50 border border-blue-200 rounded-xl p-3 text-center">
-                  <span className="text-lg">📅</span>
                   <div className="text-xs text-blue-600 font-medium">{t('dailyCost')}</div>
-                  <div className="text-lg font-bold text-blue-700">{currency}{dailyCost.toFixed(2)}</div>
+                  <div className="text-lg font-bold text-blue-700 mt-1">{currency}{dailyCost.toFixed(2)}</div>
                 </div>
-                <div className="bg-indigo-50 border border-indigo-200 rounded-xl p-3 text-center">
-                  <span className="text-lg">📊</span>
-                  <div className="text-xs text-indigo-600 font-medium">{t('totalCost')} ({d}d)</div>
-                  <div className="text-lg font-bold text-indigo-700">{currency}{totalCost.toFixed(2)}</div>
+                <div className="bg-green-50 border border-green-200 rounded-xl p-3 text-center">
+                  <div className="text-xs text-green-600 font-medium">{t('monthlyCost')}</div>
+                  <div className="text-lg font-bold text-green-700 mt-1">{currency}{monthlyCost.toFixed(2)}</div>
                 </div>
-              </div>
-
-              <div className="grid grid-cols-2 gap-3">
                 <div className="bg-purple-50 border border-purple-200 rounded-xl p-3 text-center">
-                  <span className="text-lg">🗓️</span>
-                  <div className="text-xs text-purple-600 font-medium">{t('monthlyCost')}</div>
-                  <div className="text-lg font-bold text-purple-700">{currency}{monthlyCost.toFixed(2)}</div>
-                </div>
-                <div className="bg-red-50 border border-red-200 rounded-xl p-3 text-center">
-                  <span className="text-lg">📆</span>
-                  <div className="text-xs text-red-600 font-medium">{t('yearlyCost')}</div>
-                  <div className="text-lg font-bold text-red-700">{currency}{yearlyCost.toFixed(2)}</div>
+                  <div className="text-xs text-purple-600 font-medium">{t('yearlyCost')}</div>
+                  <div className="text-lg font-bold text-purple-700 mt-1">{currency}{yearlyCost.toFixed(2)}</div>
                 </div>
               </div>
 
-              <button onClick={copyResults} className="w-full py-2 rounded-lg border border-gray-300 text-sm font-medium text-gray-700 hover:bg-gray-50 transition-colors flex items-center justify-center gap-2">
+              {/* Total Cost for Period */}
+              <div className="bg-indigo-50 border border-indigo-200 rounded-xl p-3 text-center">
+                <div className="text-xs text-indigo-600 font-medium">{t('totalCost')} ({d} {t('days').toLowerCase().replace(/[^a-zA-Zàèéìòùäöüß]+/g, ' ').trim().split(' ').pop()})</div>
+                <div className="text-lg font-bold text-indigo-700">{currency}{totalCost.toFixed(2)}</div>
+              </div>
+
+              {/* Cost Comparison Bar */}
+              <div className="bg-gray-50 border border-gray-200 rounded-xl p-4">
+                <h3 className="text-sm font-semibold text-gray-700 mb-3">{t('costComparison')}</h3>
+                <div className="space-y-3">
+                  {[
+                    { label: t('daily'), value: dailyCost, color: 'bg-blue-500' },
+                    { label: t('monthly'), value: monthlyCost, color: 'bg-green-500' },
+                    { label: t('yearly'), value: yearlyCost, color: 'bg-purple-500' },
+                  ].map((bar) => (
+                    <div key={bar.label}>
+                      <div className="flex justify-between text-xs text-gray-600 mb-1">
+                        <span className="font-medium">{bar.label}</span>
+                        <span>{currency}{bar.value.toFixed(2)}</span>
+                      </div>
+                      <div className="w-full bg-gray-200 rounded-full h-3">
+                        <div
+                          className={`${bar.color} h-3 rounded-full transition-all duration-500`}
+                          style={{ width: `${Math.max((bar.value / maxCost) * 100, 1)}%` }}
+                        />
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* Copy Results Button */}
+              <button
+                onClick={copyResults}
+                className="w-full py-2 rounded-lg border border-gray-300 text-sm font-medium text-gray-700 hover:bg-gray-50 transition-colors flex items-center justify-center gap-2"
+              >
                 {copied ? (
-                  <><svg className="w-4 h-4 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" /></svg>Copied!</>
+                  <>
+                    <svg className="w-4 h-4 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                    </svg>
+                    {t('copied')}
+                  </>
                 ) : (
-                  <><svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" /></svg>Copy Results</>
+                  <>
+                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
+                    </svg>
+                    {t('copyResults')}
+                  </>
                 )}
               </button>
             </>
           )}
         </div>
+
+        {/* Calculation History */}
+        {history.length > 0 && (
+          <div className="mt-6 bg-white rounded-xl border border-gray-200 p-6">
+            <div className="flex justify-between items-center mb-3">
+              <h3 className="text-sm font-semibold text-gray-700">{t('history')}</h3>
+              <button
+                onClick={() => setHistory([])}
+                className="text-xs text-gray-400 hover:text-red-500 transition-colors"
+              >
+                {t('clearHistory')}
+              </button>
+            </div>
+            <div className="space-y-2">
+              {history.map((entry, i) => (
+                <div
+                  key={entry.timestamp}
+                  className="flex items-center justify-between bg-gray-50 rounded-lg px-3 py-2 text-sm"
+                >
+                  <div className="text-gray-700">
+                    <span className="font-medium">{entry.watts}W</span>
+                    <span className="text-gray-400 mx-1">x</span>
+                    <span>{entry.hours}h/d</span>
+                    <span className="text-gray-400 mx-1">@</span>
+                    <span>{entry.currency}{entry.rate}/kWh</span>
+                  </div>
+                  <div className="flex gap-3 text-xs">
+                    <span className="text-blue-600">{entry.currency}{entry.dailyCost.toFixed(2)}/d</span>
+                    <span className="text-green-600">{entry.currency}{entry.monthlyCost.toFixed(2)}/mo</span>
+                    <span className="text-purple-600">{entry.currency}{entry.yearlyCost.toFixed(2)}/yr</span>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
 
         <article className="mt-12 prose prose-gray max-w-none">
           <h2 className="text-2xl font-bold text-gray-900 mb-4">{seo.title}</h2>
@@ -229,7 +428,7 @@ export default function ElectricityCalculator() {
               <div key={i} className="border border-gray-200 rounded-lg">
                 <button onClick={() => setOpenFaq(openFaq === i ? null : i)} className="w-full text-left px-4 py-3 font-medium text-gray-900 flex justify-between items-center">
                   {item.q}
-                  <span className="text-gray-400">{openFaq === i ? '−' : '+'}</span>
+                  <span className="text-gray-400">{openFaq === i ? '\u2212' : '+'}</span>
                 </button>
                 {openFaq === i && <div className="px-4 pb-3 text-gray-600">{item.a}</div>}
               </div>

@@ -1,5 +1,5 @@
 'use client';
-import { useState, useMemo } from 'react';
+import { useState, useMemo, useCallback } from 'react';
 import { useParams } from 'next/navigation';
 import { tools, type Locale } from '@/lib/translations';
 import ToolPageWrapper from '@/components/ToolPageWrapper';
@@ -14,7 +14,34 @@ const labels: Record<string, Record<Locale, string>> = {
   invalidRegex: { en: 'Invalid regex', it: 'Regex non valida', es: 'Regex inválida', fr: 'Regex invalide', de: 'Ungültiger Regex', pt: 'Regex inválido' },
   matchCount: { en: 'match(es)', it: 'corrispondenza/e', es: 'coincidencia(s)', fr: 'correspondance(s)', de: 'Treffer', pt: 'correspondência(s)' },
   fullMatch: { en: 'Full Match', it: 'Match Completo', es: 'Coincidencia Completa', fr: 'Correspondance Complète', de: 'Vollständiger Treffer', pt: 'Correspondência Completa' },
+  copyResult: { en: 'Copy Matches', it: 'Copia Risultati', es: 'Copiar Resultados', fr: 'Copier Résultats', de: 'Treffer Kopieren', pt: 'Copiar Resultados' },
+  copied: { en: 'Copied!', it: 'Copiato!', es: 'Copiado!', fr: 'Copié !', de: 'Kopiert!', pt: 'Copiado!' },
+  reset: { en: 'Reset', it: 'Reset', es: 'Reiniciar', fr: 'Réinitialiser', de: 'Zurücksetzen', pt: 'Redefinir' },
+  history: { en: 'History', it: 'Cronologia', es: 'Historial', fr: 'Historique', de: 'Verlauf', pt: 'Histórico' },
+  commonPatterns: { en: 'Common Patterns', it: 'Pattern Comuni', es: 'Patrones Comunes', fr: 'Motifs Courants', de: 'Häufige Muster', pt: 'Padrões Comuns' },
+  matchCountCard: { en: 'Matches', it: 'Corrispondenze', es: 'Coincidencias', fr: 'Correspondances', de: 'Treffer', pt: 'Correspondências' },
+  groupCountCard: { en: 'Groups', it: 'Gruppi', es: 'Grupos', fr: 'Groupes', de: 'Gruppen', pt: 'Grupos' },
+  syntaxError: { en: 'Syntax Error', it: 'Errore di Sintassi', es: 'Error de Sintaxis', fr: 'Erreur de Syntaxe', de: 'Syntaxfehler', pt: 'Erro de Sintaxe' },
+  flagGlobal: { en: 'Global', it: 'Globale', es: 'Global', fr: 'Global', de: 'Global', pt: 'Global' },
+  flagCaseInsensitive: { en: 'Case Insensitive', it: 'Ignora Maiuscole', es: 'Sin Mayúsculas', fr: 'Insensible Casse', de: 'Groß-/Klein', pt: 'Sem Maiúsculas' },
+  flagMultiline: { en: 'Multiline', it: 'Multilinea', es: 'Multilínea', fr: 'Multiligne', de: 'Mehrzeilig', pt: 'Multilinha' },
+  flagDotAll: { en: 'DotAll', it: 'DotAll', es: 'DotAll', fr: 'DotAll', de: 'DotAll', pt: 'DotAll' },
+  noHistory: { en: 'No history yet', it: 'Nessuna cronologia', es: 'Sin historial', fr: 'Pas d\'historique', de: 'Kein Verlauf', pt: 'Sem histórico' },
 };
+
+interface HistoryItem {
+  pattern: string;
+  flags: string;
+  testPreview: string;
+}
+
+const commonPatterns = [
+  { label: 'Email', pattern: '[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}' },
+  { label: 'URL', pattern: 'https?:\\/\\/[\\w\\-]+(\\.[\\w\\-]+)+[\\w\\-.,@?^=%&:/~+#]*' },
+  { label: 'Phone', pattern: '\\+?\\d{1,4}[\\s.-]?\\(?\\d{1,4}\\)?[\\s.-]?\\d{1,9}' },
+  { label: 'IP', pattern: '\\b(?:\\d{1,3}\\.){3}\\d{1,3}\\b' },
+  { label: 'Date', pattern: '\\d{4}[-/]\\d{2}[-/]\\d{2}' },
+];
 
 export default function RegexTester() {
   const { lang } = useParams() as { lang: Locale };
@@ -24,9 +51,15 @@ export default function RegexTester() {
   const [pattern, setPattern] = useState('');
   const [flags, setFlags] = useState('g');
   const [testString, setTestString] = useState('');
+  const [copiedFeedback, setCopiedFeedback] = useState(false);
+  const [history, setHistory] = useState<HistoryItem[]>([]);
+
+  const toggleFlag = (flag: string) => {
+    setFlags(prev => prev.includes(flag) ? prev.replace(flag, '') : prev + flag);
+  };
 
   const result = useMemo(() => {
-    if (!pattern || !testString) return { matches: [], error: '', highlighted: testString };
+    if (!pattern || !testString) return { matches: [], error: '', errorDetail: '', highlighted: testString };
     try {
       const regex = new RegExp(pattern, flags);
       const matches: { match: string; index: number; groups: string[] }[] = [];
@@ -61,11 +94,55 @@ export default function RegexTester() {
       }
       highlighted += testString.slice(lastIndex);
 
-      return { matches, error: '', highlighted };
-    } catch {
-      return { matches: [], error: t('invalidRegex'), highlighted: testString };
+      return { matches, error: '', errorDetail: '', highlighted };
+    } catch (e: unknown) {
+      const msg = e instanceof Error ? e.message : '';
+      return { matches: [], error: t('invalidRegex'), errorDetail: msg, highlighted: testString };
     }
-  }, [pattern, flags, testString, t]);
+  }, [pattern, flags, testString]);
+
+  const totalGroups = useMemo(() => {
+    return result.matches.reduce((acc, m) => acc + m.groups.length, 0);
+  }, [result.matches]);
+
+  const addToHistory = useCallback(() => {
+    if (!pattern) return;
+    setHistory(prev => {
+      const newItem: HistoryItem = {
+        pattern,
+        flags,
+        testPreview: testString.slice(0, 40) + (testString.length > 40 ? '...' : ''),
+      };
+      const filtered = prev.filter(h => h.pattern !== pattern || h.flags !== flags);
+      return [newItem, ...filtered].slice(0, 5);
+    });
+  }, [pattern, flags, testString]);
+
+  const handlePatternBlur = () => {
+    if (pattern) addToHistory();
+  };
+
+  const copyMatches = async () => {
+    const text = result.matches.map(m => m.match).join('\n');
+    await navigator.clipboard.writeText(text);
+    setCopiedFeedback(true);
+    setTimeout(() => setCopiedFeedback(false), 1500);
+  };
+
+  const handleReset = () => {
+    setPattern('');
+    setFlags('g');
+    setTestString('');
+  };
+
+  const loadFromHistory = (item: HistoryItem) => {
+    setPattern(item.pattern);
+    setFlags(item.flags);
+  };
+
+  const insertCommonPattern = (p: string) => {
+    setPattern(p);
+  };
 
   const seoContent: Record<Locale, { title: string; paragraphs: string[]; faq: { q: string; a: string }[] }> = {
     en: {
@@ -169,6 +246,13 @@ export default function RegexTester() {
   const seo = seoContent[lang];
   const [openFaq, setOpenFaq] = useState<number | null>(null);
 
+  const flagToggles: { flag: string; labelKey: string }[] = [
+    { flag: 'g', labelKey: 'flagGlobal' },
+    { flag: 'i', labelKey: 'flagCaseInsensitive' },
+    { flag: 'm', labelKey: 'flagMultiline' },
+    { flag: 's', labelKey: 'flagDotAll' },
+  ];
+
   return (
     <ToolPageWrapper toolSlug="regex-tester" faqItems={seo.faq}>
       <div className="max-w-2xl mx-auto">
@@ -176,33 +260,74 @@ export default function RegexTester() {
         <p className="text-gray-600 mb-6">{toolT.description}</p>
 
         <div className="bg-white rounded-xl border border-gray-200 p-6 space-y-4">
-          <div className="flex gap-2">
-            <div className="flex-1">
-              <label className="block text-sm font-medium text-gray-700 mb-1">{t('pattern')}</label>
-              <div className="flex items-center border border-gray-300 rounded-lg overflow-hidden focus-within:ring-2 focus-within:ring-blue-500">
-                <span className="px-2 text-gray-400 font-mono">/</span>
-                <input
-                  type="text"
-                  value={pattern}
-                  onChange={(e) => setPattern(e.target.value)}
-                  className="flex-1 px-1 py-2 font-mono focus:outline-none"
-                  placeholder="[a-z]+"
-                />
-                <span className="px-2 text-gray-400 font-mono">/</span>
-              </div>
-            </div>
-            <div className="w-24">
-              <label className="block text-sm font-medium text-gray-700 mb-1">{t('flags')}</label>
+          {/* Pattern input */}
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-1">{t('pattern')}</label>
+            <div className={`flex items-center border rounded-lg overflow-hidden focus-within:ring-2 focus-within:ring-blue-500 ${result.error ? 'border-red-400' : 'border-gray-300'}`}>
+              <span className="px-2 text-gray-400 font-mono">/</span>
               <input
                 type="text"
-                value={flags}
-                onChange={(e) => setFlags(e.target.value)}
-                className="w-full border border-gray-300 rounded-lg px-3 py-2 font-mono focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                placeholder="gi"
+                value={pattern}
+                onChange={(e) => setPattern(e.target.value)}
+                onBlur={handlePatternBlur}
+                className="flex-1 px-1 py-2 font-mono focus:outline-none"
+                placeholder="[a-z]+"
               />
+              <span className="px-2 text-gray-400 font-mono">/</span>
             </div>
           </div>
 
+          {/* Validation error */}
+          {result.error && (
+            <div className="flex items-start gap-2 p-3 bg-red-50 border border-red-200 rounded-lg">
+              <svg className="w-5 h-5 text-red-500 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+              </svg>
+              <div>
+                <p className="text-red-700 text-sm font-medium">{t('syntaxError')}: {result.error}</p>
+                {result.errorDetail && <p className="text-red-500 text-xs mt-0.5 font-mono">{result.errorDetail}</p>}
+              </div>
+            </div>
+          )}
+
+          {/* Flag toggles */}
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-2">{t('flags')}</label>
+            <div className="flex flex-wrap gap-2">
+              {flagToggles.map(({ flag, labelKey }) => (
+                <button
+                  key={flag}
+                  onClick={() => toggleFlag(flag)}
+                  className={`px-3 py-1.5 rounded-lg text-sm font-medium transition-colors ${
+                    flags.includes(flag)
+                      ? 'bg-blue-600 text-white'
+                      : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
+                  }`}
+                >
+                  <span className="font-mono mr-1">{flag}</span>
+                  <span className="text-xs">{t(labelKey)}</span>
+                </button>
+              ))}
+            </div>
+          </div>
+
+          {/* Common patterns */}
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-2">{t('commonPatterns')}</label>
+            <div className="flex flex-wrap gap-2">
+              {commonPatterns.map((cp) => (
+                <button
+                  key={cp.label}
+                  onClick={() => insertCommonPattern(cp.pattern)}
+                  className="px-3 py-1.5 bg-gray-50 border border-gray-200 rounded-lg text-sm text-gray-700 hover:bg-gray-100 transition-colors"
+                >
+                  {cp.label}
+                </button>
+              ))}
+            </div>
+          </div>
+
+          {/* Test string */}
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-1">{t('testString')}</label>
             <textarea
@@ -213,10 +338,38 @@ export default function RegexTester() {
             />
           </div>
 
-          {result.error && <p className="text-red-500 text-sm">{result.error}</p>}
+          {/* Action buttons */}
+          <div className="flex gap-2">
+            {result.matches.length > 0 && (
+              <button
+                onClick={copyMatches}
+                className="px-4 py-2 bg-blue-600 text-white rounded-lg text-sm font-medium hover:bg-blue-700 transition-colors"
+              >
+                {copiedFeedback ? t('copied') : t('copyResult')}
+              </button>
+            )}
+            <button
+              onClick={handleReset}
+              className="px-4 py-2 bg-gray-100 text-gray-700 rounded-lg text-sm font-medium hover:bg-gray-200 transition-colors"
+            >
+              {t('reset')}
+            </button>
+          </div>
 
+          {/* Result cards */}
           {testString && pattern && !result.error && (
             <>
+              <div className="grid grid-cols-2 gap-3">
+                <div className="p-4 bg-blue-50 rounded-lg text-center">
+                  <div className="text-2xl font-bold text-blue-700">{result.matches.length}</div>
+                  <div className="text-sm text-blue-600">{t('matchCountCard')}</div>
+                </div>
+                <div className="p-4 bg-green-50 rounded-lg text-center">
+                  <div className="text-2xl font-bold text-green-700">{totalGroups}</div>
+                  <div className="text-sm text-green-600">{t('groupCountCard')}</div>
+                </div>
+              </div>
+
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-1">
                   {t('matches')} ({result.matches.length} {t('matchCount')})
@@ -257,6 +410,27 @@ export default function RegexTester() {
             </>
           )}
         </div>
+
+        {/* History section */}
+        {history.length > 0 && (
+          <div className="mt-6 bg-white rounded-xl border border-gray-200 p-6">
+            <h3 className="text-sm font-medium text-gray-700 mb-3">{t('history')}</h3>
+            <div className="space-y-2">
+              {history.map((item, i) => (
+                <button
+                  key={i}
+                  onClick={() => loadFromHistory(item)}
+                  className="w-full text-left p-3 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors"
+                >
+                  <div className="font-mono text-sm text-blue-700 truncate">/{item.pattern}/{item.flags}</div>
+                  {item.testPreview && (
+                    <div className="text-xs text-gray-500 mt-0.5 truncate">{item.testPreview}</div>
+                  )}
+                </button>
+              ))}
+            </div>
+          </div>
+        )}
 
         <article className="mt-12 prose prose-gray max-w-none">
           <h2 className="text-2xl font-bold text-gray-900 mb-4">{seo.title}</h2>

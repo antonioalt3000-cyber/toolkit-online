@@ -1,5 +1,5 @@
 'use client';
-import { useState, useMemo } from 'react';
+import { useState, useMemo, useCallback } from 'react';
 import { useParams } from 'next/navigation';
 import { tools, type Locale } from '@/lib/translations';
 import ToolPageWrapper from '@/components/ToolPageWrapper';
@@ -10,6 +10,16 @@ const labels: Record<string, Record<string, string>> = {
   time: { en: 'Time', it: 'Ora', es: 'Hora', fr: 'Heure', de: 'Uhrzeit', pt: 'Hora' },
   date: { en: 'Date', it: 'Data', es: 'Fecha', fr: 'Date', de: 'Datum', pt: 'Data' },
   convertedTime: { en: 'Converted Time', it: 'Ora Convertita', es: 'Hora Convertida', fr: 'Heure Convertie', de: 'Konvertierte Zeit', pt: 'Hora Convertida' },
+  sourceTime: { en: 'Source Time', it: 'Ora di Origine', es: 'Hora de Origen', fr: 'Heure Source', de: 'Ausgangszeit', pt: 'Hora de Origem' },
+  copyResult: { en: 'Copy Result', it: 'Copia Risultato', es: 'Copiar Resultado', fr: 'Copier le Résultat', de: 'Ergebnis Kopieren', pt: 'Copiar Resultado' },
+  copied: { en: 'Copied!', it: 'Copiato!', es: '¡Copiado!', fr: 'Copié !', de: 'Kopiert!', pt: 'Copiado!' },
+  reset: { en: 'Reset', it: 'Reimposta', es: 'Restablecer', fr: 'Réinitialiser', de: 'Zurücksetzen', pt: 'Redefinir' },
+  swap: { en: 'Swap Zones', it: 'Scambia Fusi', es: 'Intercambiar Zonas', fr: 'Échanger les Fuseaux', de: 'Zeitzonen Tauschen', pt: 'Trocar Fusos' },
+  history: { en: 'Recent Conversions', it: 'Conversioni Recenti', es: 'Conversiones Recientes', fr: 'Conversions Récentes', de: 'Letzte Umrechnungen', pt: 'Conversões Recentes' },
+  popularZones: { en: 'Popular Time Zones', it: 'Fusi Orari Popolari', es: 'Zonas Horarias Populares', fr: 'Fuseaux Horaires Populaires', de: 'Beliebte Zeitzonen', pt: 'Fusos Horários Populares' },
+  invalidTime: { en: 'Invalid time format', it: 'Formato ora non valido', es: 'Formato de hora no válido', fr: 'Format d\'heure invalide', de: 'Ungültiges Zeitformat', pt: 'Formato de hora inválido' },
+  invalidDate: { en: 'Invalid date format', it: 'Formato data non valido', es: 'Formato de fecha no válido', fr: 'Format de date invalide', de: 'Ungültiges Datumsformat', pt: 'Formato de data inválido' },
+  clearHistory: { en: 'Clear', it: 'Cancella', es: 'Borrar', fr: 'Effacer', de: 'Löschen', pt: 'Limpar' },
 };
 
 const zones = [
@@ -33,19 +43,100 @@ const zones = [
   'Pacific/Auckland',
 ];
 
+interface HistoryEntry {
+  from: string;
+  to: string;
+  date: string;
+  time: string;
+  result: string;
+}
+
+const popularZones: { label: string; zone: string }[] = [
+  { label: 'UTC', zone: 'UTC' },
+  { label: 'EST', zone: 'America/New_York' },
+  { label: 'PST', zone: 'America/Los_Angeles' },
+  { label: 'CET', zone: 'Europe/Paris' },
+  { label: 'JST', zone: 'Asia/Tokyo' },
+  { label: 'IST', zone: 'Asia/Kolkata' },
+];
+
 export default function TimeZoneConverter() {
   const { lang } = useParams() as { lang: Locale };
   const toolT = tools['time-zone-converter'][lang];
   const t = (key: string) => labels[key]?.[lang] || labels[key]?.en || key;
 
   const now = new Date();
-  const [fromZone, setFromZone] = useState('Europe/London');
-  const [toZone, setToZone] = useState('America/New_York');
-  const [date, setDate] = useState(now.toISOString().split('T')[0]);
-  const [time, setTime] = useState(now.toTimeString().slice(0, 5));
+  const defaultFromZone = 'Europe/London';
+  const defaultToZone = 'America/New_York';
+  const defaultDate = now.toISOString().split('T')[0];
+  const defaultTime = now.toTimeString().slice(0, 5);
+
+  const [fromZone, setFromZone] = useState(defaultFromZone);
+  const [toZone, setToZone] = useState(defaultToZone);
+  const [date, setDate] = useState(defaultDate);
+  const [time, setTime] = useState(defaultTime);
+  const [copiedFeedback, setCopiedFeedback] = useState(false);
+  const [history, setHistory] = useState<HistoryEntry[]>([]);
+  const [timeError, setTimeError] = useState('');
+  const [dateError, setDateError] = useState('');
+
+  const validateTime = (val: string): boolean => {
+    const match = /^([01]\d|2[0-3]):([0-5]\d)$/.test(val);
+    setTimeError(match || val === '' ? '' : t('invalidTime'));
+    return match;
+  };
+
+  const validateDate = (val: string): boolean => {
+    const match = /^\d{4}-\d{2}-\d{2}$/.test(val);
+    if (!match) {
+      setDateError(val === '' ? '' : t('invalidDate'));
+      return false;
+    }
+    const d = new Date(val);
+    const valid = !isNaN(d.getTime());
+    setDateError(valid ? '' : t('invalidDate'));
+    return valid;
+  };
+
+  const sourceFormatted = useMemo(() => {
+    try {
+      if (!validateTime(time) || !validateDate(date)) return '—';
+      const dateTimeStr = `${date}T${time}:00`;
+      const fromFormatter = new Intl.DateTimeFormat(lang, {
+        timeZone: fromZone,
+        weekday: 'long',
+        year: 'numeric', month: 'long', day: 'numeric',
+        hour: '2-digit', minute: '2-digit', second: '2-digit',
+        hour12: false,
+      });
+      const tempDate = new Date(dateTimeStr);
+      const utcStr = tempDate.toLocaleString('en-US', { timeZone: fromZone });
+      const localStr = tempDate.toLocaleString('en-US', { timeZone: 'UTC' });
+      const fromDate = new Date(utcStr);
+      const utcDate = new Date(localStr);
+      const offset = utcDate.getTime() - fromDate.getTime();
+      // For source display, we want it in the fromZone — use the original tempDate adjusted to fromZone
+      // Actually the input IS in fromZone, so just format tempDate adjusted to fromZone
+      const adjustedForSource = new Date(tempDate.getTime() + offset);
+      // But we want to show in fromZone, not toZone. The offset calculation converts to UTC.
+      // Let's just format the input time in fromZone directly.
+      const sourceFormatter = new Intl.DateTimeFormat(lang, {
+        timeZone: fromZone,
+        weekday: 'long',
+        year: 'numeric', month: 'long', day: 'numeric',
+        hour: '2-digit', minute: '2-digit',
+        hour12: false,
+      });
+      return sourceFormatter.format(adjustedForSource);
+    } catch {
+      return '—';
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [date, time, fromZone, lang]);
 
   const converted = useMemo(() => {
     try {
+      if (!validateTime(time) || !validateDate(date)) return '—';
       const dateTimeStr = `${date}T${time}:00`;
       const toFormatter = new Intl.DateTimeFormat(lang, {
         timeZone: toZone,
@@ -67,7 +158,62 @@ export default function TimeZoneConverter() {
     } catch {
       return '—';
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [date, time, fromZone, toZone, lang]);
+
+  const addToHistory = useCallback(() => {
+    if (converted === '—') return;
+    setHistory((prev) => {
+      const entry: HistoryEntry = {
+        from: fromZone,
+        to: toZone,
+        date,
+        time,
+        result: converted,
+      };
+      const next = [entry, ...prev.filter(
+        (h) => !(h.from === entry.from && h.to === entry.to && h.date === entry.date && h.time === entry.time)
+      )].slice(0, 5);
+      return next;
+    });
+  }, [converted, fromZone, toZone, date, time]);
+
+  const handleCopy = async () => {
+    const text = `${time} ${fromZone.replace(/_/g, ' ')} → ${converted} (${toZone.replace(/_/g, ' ')})`;
+    try {
+      await navigator.clipboard.writeText(text);
+      setCopiedFeedback(true);
+      addToHistory();
+      setTimeout(() => setCopiedFeedback(false), 2000);
+    } catch {
+      // fallback
+    }
+  };
+
+  const handleReset = () => {
+    const n = new Date();
+    setFromZone(defaultFromZone);
+    setToZone(defaultToZone);
+    setDate(n.toISOString().split('T')[0]);
+    setTime(n.toTimeString().slice(0, 5));
+    setTimeError('');
+    setDateError('');
+  };
+
+  const handleSwap = () => {
+    setFromZone(toZone);
+    setToZone(fromZone);
+  };
+
+  const handleTimeChange = (val: string) => {
+    setTime(val);
+    validateTime(val);
+  };
+
+  const handleDateChange = (val: string) => {
+    setDate(val);
+    validateDate(val);
+  };
 
   const seoContent: Record<Locale, { title: string; paragraphs: string[]; faq: { q: string; a: string }[] }> = {
     en: {
@@ -178,6 +324,27 @@ export default function TimeZoneConverter() {
         <p className="text-gray-600 mb-6">{toolT.description}</p>
 
         <div className="bg-white rounded-xl border border-gray-200 p-6 space-y-4">
+          {/* Popular Time Zones */}
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-2">{t('popularZones')}</label>
+            <div className="flex flex-wrap gap-2">
+              {popularZones.map((pz) => (
+                <button
+                  key={pz.label}
+                  onClick={() => setFromZone(pz.zone)}
+                  className={`px-3 py-1.5 text-sm rounded-lg border transition-colors ${
+                    fromZone === pz.zone
+                      ? 'bg-blue-600 text-white border-blue-600'
+                      : 'bg-gray-50 text-gray-700 border-gray-200 hover:bg-blue-50 hover:border-blue-300'
+                  }`}
+                >
+                  {pz.label}
+                </button>
+              ))}
+            </div>
+          </div>
+
+          {/* From Zone */}
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-1">{t('fromZone')}</label>
             <select value={fromZone} onChange={(e) => setFromZone(e.target.value)}
@@ -186,19 +353,37 @@ export default function TimeZoneConverter() {
             </select>
           </div>
 
+          {/* Date & Time */}
           <div className="grid grid-cols-2 gap-4">
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-1">{t('date')}</label>
-              <input type="date" value={date} onChange={(e) => setDate(e.target.value)}
-                className="w-full border border-gray-300 rounded-lg px-4 py-2 focus:ring-2 focus:ring-blue-500 focus:border-transparent" />
+              <input type="date" value={date} onChange={(e) => handleDateChange(e.target.value)}
+                className={`w-full border rounded-lg px-4 py-2 focus:ring-2 focus:ring-blue-500 focus:border-transparent ${dateError ? 'border-red-400' : 'border-gray-300'}`} />
+              {dateError && <p className="text-red-500 text-xs mt-1">{dateError}</p>}
             </div>
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-1">{t('time')}</label>
-              <input type="time" value={time} onChange={(e) => setTime(e.target.value)}
-                className="w-full border border-gray-300 rounded-lg px-4 py-2 focus:ring-2 focus:ring-blue-500 focus:border-transparent" />
+              <input type="time" value={time} onChange={(e) => handleTimeChange(e.target.value)}
+                className={`w-full border rounded-lg px-4 py-2 focus:ring-2 focus:ring-blue-500 focus:border-transparent ${timeError ? 'border-red-400' : 'border-gray-300'}`} />
+              {timeError && <p className="text-red-500 text-xs mt-1">{timeError}</p>}
             </div>
           </div>
 
+          {/* Swap Button */}
+          <div className="flex justify-center">
+            <button
+              onClick={handleSwap}
+              className="flex items-center gap-2 px-4 py-2 text-sm font-medium text-blue-600 bg-blue-50 rounded-lg hover:bg-blue-100 transition-colors"
+              title={t('swap')}
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                <path strokeLinecap="round" strokeLinejoin="round" d="M7 16V4m0 0L3 8m4-4l4 4m6 0v12m0 0l4-4m-4 4l-4-4" />
+              </svg>
+              {t('swap')}
+            </button>
+          </div>
+
+          {/* To Zone */}
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-1">{t('toZone')}</label>
             <select value={toZone} onChange={(e) => setToZone(e.target.value)}
@@ -207,11 +392,87 @@ export default function TimeZoneConverter() {
             </select>
           </div>
 
-          <div className="mt-4 p-4 bg-blue-50 rounded-lg">
-            <div className="text-sm text-gray-600 mb-1">{t('convertedTime')}</div>
-            <div className="text-xl font-bold text-blue-600">{converted}</div>
+          {/* Result Cards */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-4">
+            <div className="p-4 bg-blue-50 rounded-lg border border-blue-100">
+              <div className="text-sm font-medium text-blue-700 mb-1">{t('sourceTime')}</div>
+              <div className="text-xs text-blue-500 mb-2">{fromZone.replace(/_/g, ' ')}</div>
+              <div className="text-lg font-bold text-blue-800">{sourceFormatted}</div>
+            </div>
+            <div className="p-4 bg-green-50 rounded-lg border border-green-100">
+              <div className="text-sm font-medium text-green-700 mb-1">{t('convertedTime')}</div>
+              <div className="text-xs text-green-500 mb-2">{toZone.replace(/_/g, ' ')}</div>
+              <div className="text-lg font-bold text-green-800">{converted}</div>
+            </div>
+          </div>
+
+          {/* Action Buttons */}
+          <div className="flex gap-3 mt-4">
+            <button
+              onClick={handleCopy}
+              disabled={converted === '—'}
+              className="flex-1 flex items-center justify-center gap-2 px-4 py-2.5 text-sm font-medium text-white bg-blue-600 rounded-lg hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+            >
+              {copiedFeedback ? (
+                <>
+                  <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
+                  </svg>
+                  {t('copied')}
+                </>
+              ) : (
+                <>
+                  <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
+                  </svg>
+                  {t('copyResult')}
+                </>
+              )}
+            </button>
+            <button
+              onClick={handleReset}
+              className="px-4 py-2.5 text-sm font-medium text-gray-700 bg-gray-100 rounded-lg hover:bg-gray-200 transition-colors"
+            >
+              {t('reset')}
+            </button>
           </div>
         </div>
+
+        {/* Conversion History */}
+        {history.length > 0 && (
+          <div className="mt-6 bg-white rounded-xl border border-gray-200 p-4">
+            <div className="flex items-center justify-between mb-3">
+              <h3 className="text-sm font-semibold text-gray-700">{t('history')}</h3>
+              <button
+                onClick={() => setHistory([])}
+                className="text-xs text-gray-400 hover:text-gray-600 transition-colors"
+              >
+                {t('clearHistory')}
+              </button>
+            </div>
+            <div className="space-y-2">
+              {history.map((entry, i) => (
+                <button
+                  key={i}
+                  onClick={() => {
+                    setFromZone(entry.from);
+                    setToZone(entry.to);
+                    setDate(entry.date);
+                    setTime(entry.time);
+                  }}
+                  className="w-full text-left p-3 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors"
+                >
+                  <div className="text-xs text-gray-500">
+                    {entry.from.replace(/_/g, ' ')} → {entry.to.replace(/_/g, ' ')}
+                  </div>
+                  <div className="text-sm font-medium text-gray-800">
+                    {entry.time} → {entry.result}
+                  </div>
+                </button>
+              ))}
+            </div>
+          </div>
+        )}
 
         <article className="mt-12 prose prose-gray max-w-none">
           <h2 className="text-2xl font-bold text-gray-900 mb-4">{seo.title}</h2>
