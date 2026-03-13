@@ -8,7 +8,17 @@ import AdPlaceholder from './AdPlaceholder';
 import AffiliateBox from './AffiliateBox';
 import EmbedTool from './EmbedTool';
 import EmailCapture from './EmailCapture';
+import ShareTool from './ShareTool';
 import { tools, type Locale } from '@/lib/translations';
+
+const toolCounterTranslations: Record<string, string> = {
+  en: '69+ Free Tools Available',
+  it: '69+ Strumenti Gratuiti Disponibili',
+  es: '69+ Herramientas Gratuitas Disponibles',
+  fr: '69+ Outils Gratuits Disponibles',
+  de: '69+ Kostenlose Tools Verfügbar',
+  pt: '69+ Ferramentas Gratuitas Disponíveis',
+};
 
 const howToTranslations: Record<string, {
   howToUse: string;
@@ -182,6 +192,16 @@ export default function ToolPageWrapper({ toolSlug, children, faqItems }: ToolPa
       )}
       <Breadcrumbs toolSlug={toolSlug} />
 
+      {/* Tool counter social proof */}
+      <div className="my-3 flex items-center gap-2 text-sm text-gray-500 dark:text-gray-400">
+        <span className="inline-flex items-center gap-1 rounded-full bg-green-100 dark:bg-green-900/30 px-3 py-1 text-green-700 dark:text-green-400 font-medium text-xs">
+          <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" /></svg>
+          <a href={`/${lang}/tools`} className="hover:underline">
+            {toolCounterTranslations[lang] || toolCounterTranslations['en']}
+          </a>
+        </span>
+      </div>
+
       {/* Ad: horizontal banner before tool */}
       <AdPlaceholder
         slot="SLOT_BEFORE_TOOL"
@@ -190,6 +210,11 @@ export default function ToolPageWrapper({ toolSlug, children, faqItems }: ToolPa
       />
 
       {children}
+
+      {/* Share & Social */}
+      <div className="mt-6 flex items-center justify-between flex-wrap gap-3">
+        <ShareTool toolSlug={toolSlug} />
+      </div>
 
       {/* Ad: rectangle after tool / before SEO article */}
       <AdPlaceholder

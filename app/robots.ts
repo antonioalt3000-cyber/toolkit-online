@@ -6,9 +6,14 @@ export default function robots(): MetadataRoute.Robots {
       {
         userAgent: '*',
         allow: '/',
-        disallow: '/api/',
+        disallow: ['/api/'],
+      },
+      {
+        userAgent: 'Googlebot',
+        allow: '/',
       },
     ],
     sitemap: 'https://toolkitonline.vip/sitemap.xml',
+    host: 'https://toolkitonline.vip',
   };
 }

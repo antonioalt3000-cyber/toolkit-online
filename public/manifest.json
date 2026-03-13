@@ -1,16 +1,32 @@
 {
-  "name": "ToolKit Online",
-  "short_name": "ToolKit",
-  "description": "Free online tools for everyday tasks. Calculators, converters, text tools and more.",
+  "name": "ToolKit Online - Free Online Tools",
+  "short_name": "ToolKit Online",
+  "description": "69+ free online tools: calculators, converters, generators, and more. No signup required.",
   "start_url": "/en",
   "display": "standalone",
+  "background_color": "#ffffff",
   "theme_color": "#2563eb",
-  "background_color": "#f9fafb",
+  "orientation": "any",
+  "categories": ["utilities", "productivity", "tools"],
+  "prefer_related_applications": false,
   "icons": [
     {
       "src": "/favicon.svg",
       "sizes": "any",
       "type": "image/svg+xml"
+    },
+    {
+      "src": "/icons/icon-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/icons/icon-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
     }
-  ]
+  ],
+  "screenshots": []
 }
