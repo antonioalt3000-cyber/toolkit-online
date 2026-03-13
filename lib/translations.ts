@@ -46,6 +46,10 @@ type CommonTranslation = {
   footerCompany: string;
   footerPopularTools: string;
   footerDescription: string;
+  footerAboutText: string;
+  footerSocialProof: string;
+  footerCopyright: string;
+  footerQuickLinks: string;
   relatedTools: string;
   toolOfTheDay: string;
   cookieMessage: string;
@@ -91,6 +95,10 @@ export const common: Record<Locale, CommonTranslation> = {
     footerCompany: 'Company',
     footerPopularTools: 'Popular Tools',
     footerDescription: 'Free online tools for everyday tasks. No registration required.',
+    footerAboutText: 'ToolKit Online is a free collection of 69+ online calculators, converters, and productivity tools. Available in 6 languages, our tools help millions of users worldwide with everyday tasks — no signup or download required.',
+    footerSocialProof: '69+ Free Tools | 6 Languages | No Signup Required',
+    footerCopyright: '2024-2026 ToolKit Online. All rights reserved.',
+    footerQuickLinks: 'Quick Links',
     relatedTools: 'Related Tools',
     toolOfTheDay: 'Tool of the Day',
     cookieMessage: 'We use cookies for analytics and ads.',
@@ -134,6 +142,10 @@ export const common: Record<Locale, CommonTranslation> = {
     footerCompany: 'Azienda',
     footerPopularTools: 'Strumenti Popolari',
     footerDescription: 'Strumenti online gratuiti per le attività quotidiane. Nessuna registrazione richiesta.',
+    footerAboutText: 'ToolKit Online è una raccolta gratuita di oltre 69 calcolatori, convertitori e strumenti di produttività online. Disponibile in 6 lingue, i nostri strumenti aiutano milioni di utenti in tutto il mondo nelle attività quotidiane — senza registrazione né download.',
+    footerSocialProof: '69+ Strumenti Gratuiti | 6 Lingue | Nessuna Registrazione',
+    footerCopyright: '2024-2026 ToolKit Online. Tutti i diritti riservati.',
+    footerQuickLinks: 'Link Rapidi',
     relatedTools: 'Strumenti Correlati',
     toolOfTheDay: 'Strumento del Giorno',
     cookieMessage: 'Utilizziamo i cookie per analisi e pubblicità.',
@@ -177,6 +189,10 @@ export const common: Record<Locale, CommonTranslation> = {
     footerCompany: 'Empresa',
     footerPopularTools: 'Herramientas Populares',
     footerDescription: 'Herramientas en línea gratuitas para tareas cotidianas. Sin registro necesario.',
+    footerAboutText: 'ToolKit Online es una colección gratuita de más de 69 calculadoras, convertidores y herramientas de productividad en línea. Disponible en 6 idiomas, nuestras herramientas ayudan a millones de usuarios en todo el mundo con tareas cotidianas — sin registro ni descarga.',
+    footerSocialProof: '69+ Herramientas Gratis | 6 Idiomas | Sin Registro',
+    footerCopyright: '2024-2026 ToolKit Online. Todos los derechos reservados.',
+    footerQuickLinks: 'Enlaces Rápidos',
     relatedTools: 'Herramientas Relacionadas',
     toolOfTheDay: 'Herramienta del Día',
     cookieMessage: 'Usamos cookies para análisis y publicidad.',
@@ -220,6 +236,10 @@ export const common: Record<Locale, CommonTranslation> = {
     footerCompany: 'Entreprise',
     footerPopularTools: 'Outils Populaires',
     footerDescription: 'Outils en ligne gratuits pour les tâches quotidiennes. Aucune inscription requise.',
+    footerAboutText: 'ToolKit Online est une collection gratuite de plus de 69 calculatrices, convertisseurs et outils de productivité en ligne. Disponible en 6 langues, nos outils aident des millions d\'utilisateurs dans le monde entier pour les tâches quotidiennes — sans inscription ni téléchargement.',
+    footerSocialProof: '69+ Outils Gratuits | 6 Langues | Sans Inscription',
+    footerCopyright: '2024-2026 ToolKit Online. Tous droits réservés.',
+    footerQuickLinks: 'Liens Rapides',
     relatedTools: 'Outils Connexes',
     toolOfTheDay: 'Outil du Jour',
     cookieMessage: 'Nous utilisons des cookies pour les analyses et la publicité.',
@@ -263,6 +283,10 @@ export const common: Record<Locale, CommonTranslation> = {
     footerCompany: 'Unternehmen',
     footerPopularTools: 'Beliebte Werkzeuge',
     footerDescription: 'Kostenlose Online-Tools für alltägliche Aufgaben. Keine Registrierung erforderlich.',
+    footerAboutText: 'ToolKit Online ist eine kostenlose Sammlung von über 69 Online-Rechnern, Umrechnern und Produktivitätswerkzeugen. Verfügbar in 6 Sprachen, helfen unsere Tools Millionen von Nutzern weltweit bei alltäglichen Aufgaben — ohne Anmeldung oder Download.',
+    footerSocialProof: '69+ Kostenlose Tools | 6 Sprachen | Ohne Anmeldung',
+    footerCopyright: '2024-2026 ToolKit Online. Alle Rechte vorbehalten.',
+    footerQuickLinks: 'Schnellzugriff',
     relatedTools: 'Verwandte Werkzeuge',
     toolOfTheDay: 'Werkzeug des Tages',
     cookieMessage: 'Wir verwenden Cookies für Analysen und Werbung.',
@@ -306,6 +330,10 @@ export const common: Record<Locale, CommonTranslation> = {
     footerCompany: 'Empresa',
     footerPopularTools: 'Ferramentas Populares',
     footerDescription: 'Ferramentas online gratuitas para tarefas do dia a dia. Sem registro necessário.',
+    footerAboutText: 'ToolKit Online é uma coleção gratuita de mais de 69 calculadoras, conversores e ferramentas de produtividade online. Disponível em 6 idiomas, nossas ferramentas ajudam milhões de usuários em todo o mundo com tarefas cotidianas — sem cadastro ou download.',
+    footerSocialProof: '69+ Ferramentas Gratis | 6 Idiomas | Sem Cadastro',
+    footerCopyright: '2024-2026 ToolKit Online. Todos os direitos reservados.',
+    footerQuickLinks: 'Links Rápidos',
     relatedTools: 'Ferramentas Relacionadas',
     toolOfTheDay: 'Ferramenta do Dia',
     cookieMessage: 'Usamos cookies para análises e publicidade.',
