@@ -4,6 +4,40 @@ import { useParams } from 'next/navigation';
 import { tools, type Locale } from '@/lib/translations';
 import ToolPageWrapper from '@/components/ToolPageWrapper';
 
+type Unit = 'px' | 'cm' | 'in';
+interface Measurement { w: number; h: number; d: number; unit: Unit }
+
+const PX_PER_INCH = 96;
+const PX_PER_CM = PX_PER_INCH / 2.54;
+
+function convertFromPx(px: number, unit: Unit): number {
+  if (unit === 'cm') return px / PX_PER_CM;
+  if (unit === 'in') return px / PX_PER_INCH;
+  return px;
+}
+
+function fmtVal(v: number, unit: Unit): string {
+  if (unit === 'px') return Math.round(v).toString();
+  return v.toFixed(2);
+}
+
+function unitSuffix(unit: Unit): string {
+  if (unit === 'cm') return 'cm';
+  if (unit === 'in') return 'in';
+  return 'px';
+}
+
+const PRESETS = [
+  { name: 'Favicon', w: 16, h: 16 },
+  { name: 'App Icon', w: 64, h: 64 },
+  { name: 'Thumbnail', w: 150, h: 150 },
+  { name: 'Avatar', w: 256, h: 256 },
+  { name: 'Banner', w: 728, h: 90 },
+  { name: 'HD 720p', w: 1280, h: 720 },
+  { name: 'Full HD', w: 1920, h: 1080 },
+  { name: 'OG Image', w: 1200, h: 630 },
+];
+
 export default function PixelRuler() {
   const { lang } = useParams() as { lang: Locale };
   const toolT = tools['pixel-ruler'][lang];
@@ -13,16 +47,27 @@ export default function PixelRuler() {
   const [isDrawing, setIsDrawing] = useState(false);
   const [manualW, setManualW] = useState('');
   const [manualH, setManualH] = useState('');
+  const [unit, setUnit] = useState<Unit>('px');
+  const [history, setHistory] = useState<Measurement[]>([]);
+  const [copied, setCopied] = useState(false);
   const canvasRef = useRef<HTMLDivElement>(null);
 
   const labels = {
     startMeasuring: { en: 'Click and drag to measure', it: 'Clicca e trascina per misurare', es: 'Haz clic y arrastra para medir', fr: 'Cliquez et glissez pour mesurer', de: 'Klicken und ziehen zum Messen', pt: 'Clique e arraste para medir' },
-    width: { en: 'Width (px)', it: 'Larghezza (px)', es: 'Ancho (px)', fr: 'Largeur (px)', de: 'Breite (px)', pt: 'Largura (px)' },
-    height: { en: 'Height (px)', it: 'Altezza (px)', es: 'Alto (px)', fr: 'Hauteur (px)', de: 'Höhe (px)', pt: 'Altura (px)' },
-    diagonal: { en: 'Diagonal (px)', it: 'Diagonale (px)', es: 'Diagonal (px)', fr: 'Diagonale (px)', de: 'Diagonale (px)', pt: 'Diagonal (px)' },
+    width: { en: 'Width', it: 'Larghezza', es: 'Ancho', fr: 'Largeur', de: 'Breite', pt: 'Largura' },
+    height: { en: 'Height', it: 'Altezza', es: 'Alto', fr: 'Hauteur', de: 'Höhe', pt: 'Altura' },
+    diagonal: { en: 'Diagonal', it: 'Diagonale', es: 'Diagonal', fr: 'Diagonale', de: 'Diagonale', pt: 'Diagonal' },
     manualMode: { en: 'Manual Pixel Calculator', it: 'Calcolatore Pixel Manuale', es: 'Calculadora de Píxeles Manual', fr: 'Calculateur de Pixels Manuel', de: 'Manueller Pixel-Rechner', pt: 'Calculadora de Pixels Manual' },
     reset: { en: 'Reset', it: 'Resetta', es: 'Reiniciar', fr: 'Réinitialiser', de: 'Zurücksetzen', pt: 'Redefinir' },
     measureArea: { en: 'Measurement Area', it: 'Area di Misurazione', es: 'Área de Medición', fr: 'Zone de Mesure', de: 'Messbereich', pt: 'Área de Medição' },
+    copyResult: { en: 'Copy Result', it: 'Copia Risultato', es: 'Copiar Resultado', fr: 'Copier le Résultat', de: 'Ergebnis Kopieren', pt: 'Copiar Resultado' },
+    copiedMsg: { en: 'Copied!', it: 'Copiato!', es: '¡Copiado!', fr: 'Copié !', de: 'Kopiert!', pt: 'Copiado!' },
+    history: { en: 'History', it: 'Cronologia', es: 'Historial', fr: 'Historique', de: 'Verlauf', pt: 'Histórico' },
+    clearHistory: { en: 'Clear', it: 'Cancella', es: 'Borrar', fr: 'Effacer', de: 'Löschen', pt: 'Limpar' },
+    noHistory: { en: 'No measurements yet', it: 'Nessuna misurazione', es: 'Sin mediciones aún', fr: 'Aucune mesure', de: 'Noch keine Messungen', pt: 'Nenhuma medição ainda' },
+    unitLabel: { en: 'Unit', it: 'Unità', es: 'Unidad', fr: 'Unité', de: 'Einheit', pt: 'Unidade' },
+    presets: { en: 'Preset Sizes', it: 'Dimensioni Predefinite', es: 'Tamaños Predefinidos', fr: 'Tailles Prédéfinies', de: 'Voreingestellte Größen', pt: 'Tamanhos Predefinidos' },
+    currentMeasurement: { en: 'Current Measurement', it: 'Misurazione Attuale', es: 'Medición Actual', fr: 'Mesure Actuelle', de: 'Aktuelle Messung', pt: 'Medição Atual' },
   } as Record<string, Record<Locale, string>>;
 
   const handleMouseDown = useCallback((e: React.MouseEvent<HTMLDivElement>) => {
@@ -43,16 +88,31 @@ export default function PixelRuler() {
   }, [isDrawing]);
 
   const handleMouseUp = useCallback(() => {
+    if (isDrawing && startPoint && endPoint) {
+      const w = Math.abs(endPoint.x - startPoint.x);
+      const h = Math.abs(endPoint.y - startPoint.y);
+      if (w + h > 0) {
+        const d = Math.sqrt(w * w + h * h);
+        setHistory(prev => [{ w, h, d, unit: 'px' as Unit }, ...prev].slice(0, 5));
+      }
+    }
     setIsDrawing(false);
-  }, []);
+  }, [isDrawing, startPoint, endPoint]);
 
   const dx = startPoint && endPoint ? Math.abs(endPoint.x - startPoint.x) : 0;
   const dy = startPoint && endPoint ? Math.abs(endPoint.y - startPoint.y) : 0;
   const diag = Math.sqrt(dx * dx + dy * dy);
 
+  const dxDisplay = convertFromPx(dx, unit);
+  const dyDisplay = convertFromPx(dy, unit);
+  const diagDisplay = convertFromPx(diag, unit);
+
   const mW = parseFloat(manualW) || 0;
   const mH = parseFloat(manualH) || 0;
   const manualDiag = Math.sqrt(mW * mW + mH * mH);
+  const manualDiagDisplay = convertFromPx(manualDiag, unit);
+  const mWDisplay = convertFromPx(mW, unit);
+  const mHDisplay = convertFromPx(mH, unit);
 
   const selectionStyle = startPoint && endPoint ? {
     left: Math.min(startPoint.x, endPoint.x),
@@ -60,6 +120,27 @@ export default function PixelRuler() {
     width: dx,
     height: dy,
   } : null;
+
+  const hasMeasurement = startPoint && endPoint && !isDrawing && dx + dy > 0;
+
+  const handleCopy = useCallback(() => {
+    const s = unitSuffix(unit);
+    const text = `${fmtVal(dxDisplay, unit)} x ${fmtVal(dyDisplay, unit)} ${s} (diagonal: ${fmtVal(diagDisplay, unit)} ${s})`;
+    navigator.clipboard.writeText(text).then(() => {
+      setCopied(true);
+      setTimeout(() => setCopied(false), 1500);
+    });
+  }, [dxDisplay, dyDisplay, diagDisplay, unit]);
+
+  const handleReset = () => {
+    setStartPoint(null);
+    setEndPoint(null);
+  };
+
+  const handlePreset = (w: number, h: number) => {
+    setManualW(w.toString());
+    setManualH(h.toString());
+  };
 
   const seoContent: Record<Locale, { title: string; paragraphs: string[]; faq: { q: string; a: string }[] }> = {
     en: {
@@ -156,12 +237,31 @@ export default function PixelRuler() {
 
   const seo = seoContent[lang];
   const [openFaq, setOpenFaq] = useState<number | null>(null);
+  const s = unitSuffix(unit);
 
   return (
     <ToolPageWrapper toolSlug="pixel-ruler" faqItems={seo.faq}>
       <div className="max-w-2xl mx-auto">
         <h1 className="text-3xl font-bold text-gray-900 mb-2">{toolT.name}</h1>
         <p className="text-gray-600 mb-6">{toolT.description}</p>
+
+        {/* Unit Toggle */}
+        <div className="flex items-center gap-2 mb-4">
+          <span className="text-sm font-medium text-gray-700">{labels.unitLabel[lang]}:</span>
+          {(['px', 'cm', 'in'] as Unit[]).map((u) => (
+            <button
+              key={u}
+              onClick={() => setUnit(u)}
+              className={`px-3 py-1 text-sm rounded-md font-medium transition-colors ${
+                unit === u
+                  ? 'bg-blue-600 text-white'
+                  : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
+              }`}
+            >
+              {u}
+            </button>
+          ))}
+        </div>
 
         <div className="bg-white rounded-xl border border-gray-200 p-6 space-y-4">
           <h2 className="text-lg font-semibold text-gray-800">{labels.measureArea[lang]}</h2>
@@ -206,29 +306,105 @@ export default function PixelRuler() {
             )}
           </div>
 
-          {startPoint && endPoint && !isDrawing && dx + dy > 0 && (
-            <div className="grid grid-cols-3 gap-3">
-              <div className="bg-blue-50 p-3 rounded-lg text-center">
-                <div className="text-xs text-gray-500">{labels.width[lang]}</div>
-                <div className="text-xl font-bold text-gray-900">{dx}</div>
-              </div>
-              <div className="bg-green-50 p-3 rounded-lg text-center">
-                <div className="text-xs text-gray-500">{labels.height[lang]}</div>
-                <div className="text-xl font-bold text-gray-900">{dy}</div>
-              </div>
-              <div className="bg-purple-50 p-3 rounded-lg text-center">
-                <div className="text-xs text-gray-500">{labels.diagonal[lang]}</div>
-                <div className="text-xl font-bold text-gray-900">{diag.toFixed(1)}</div>
+          {/* Result Cards */}
+          {hasMeasurement && (
+            <div>
+              <h3 className="text-sm font-semibold text-gray-700 mb-2">{labels.currentMeasurement[lang]}</h3>
+              <div className="grid grid-cols-3 gap-3">
+                <div className="bg-blue-50 border border-blue-200 p-3 rounded-lg text-center">
+                  <div className="text-xs text-blue-600 font-medium">{labels.width[lang]}</div>
+                  <div className="text-xl font-bold text-gray-900">{fmtVal(dxDisplay, unit)}</div>
+                  <div className="text-xs text-blue-400">{s}</div>
+                </div>
+                <div className="bg-green-50 border border-green-200 p-3 rounded-lg text-center">
+                  <div className="text-xs text-green-600 font-medium">{labels.height[lang]}</div>
+                  <div className="text-xl font-bold text-gray-900">{fmtVal(dyDisplay, unit)}</div>
+                  <div className="text-xs text-green-400">{s}</div>
+                </div>
+                <div className="bg-purple-50 border border-purple-200 p-3 rounded-lg text-center">
+                  <div className="text-xs text-purple-600 font-medium">{labels.diagonal[lang]}</div>
+                  <div className="text-xl font-bold text-gray-900">{fmtVal(diagDisplay, unit)}</div>
+                  <div className="text-xs text-purple-400">{s}</div>
+                </div>
               </div>
             </div>
           )}
 
-          <button
-            onClick={() => { setStartPoint(null); setEndPoint(null); }}
-            className="text-sm text-blue-600 hover:text-blue-800 font-medium"
-          >
-            {labels.reset[lang]}
-          </button>
+          {/* Action Buttons */}
+          <div className="flex gap-3">
+            <button
+              onClick={handleReset}
+              className="px-4 py-2 text-sm font-medium text-gray-700 bg-gray-100 hover:bg-gray-200 rounded-lg transition-colors"
+            >
+              {labels.reset[lang]}
+            </button>
+            {hasMeasurement && (
+              <button
+                onClick={handleCopy}
+                className={`px-4 py-2 text-sm font-medium rounded-lg transition-colors ${
+                  copied
+                    ? 'bg-green-500 text-white'
+                    : 'bg-blue-600 text-white hover:bg-blue-700'
+                }`}
+              >
+                {copied ? labels.copiedMsg[lang] : labels.copyResult[lang]}
+              </button>
+            )}
+          </div>
+        </div>
+
+        {/* History */}
+        <div className="bg-white rounded-xl border border-gray-200 p-6 space-y-3 mt-6">
+          <div className="flex items-center justify-between">
+            <h2 className="text-lg font-semibold text-gray-800">{labels.history[lang]}</h2>
+            {history.length > 0 && (
+              <button
+                onClick={() => setHistory([])}
+                className="text-sm text-red-500 hover:text-red-700 font-medium transition-colors"
+              >
+                {labels.clearHistory[lang]}
+              </button>
+            )}
+          </div>
+          {history.length === 0 ? (
+            <p className="text-sm text-gray-400">{labels.noHistory[lang]}</p>
+          ) : (
+            <div className="space-y-2">
+              {history.map((m, i) => {
+                const hw = convertFromPx(m.w, unit);
+                const hh = convertFromPx(m.h, unit);
+                const hd = convertFromPx(m.d, unit);
+                return (
+                  <div key={i} className="flex items-center justify-between bg-gray-50 rounded-lg px-4 py-2 text-sm">
+                    <span className="text-gray-500 font-mono">#{history.length - i}</span>
+                    <span className="text-gray-800 font-medium">
+                      {fmtVal(hw, unit)} x {fmtVal(hh, unit)} {s}
+                    </span>
+                    <span className="text-purple-600 font-medium">
+                      diag: {fmtVal(hd, unit)} {s}
+                    </span>
+                  </div>
+                );
+              })}
+            </div>
+          )}
+        </div>
+
+        {/* Preset Sizes */}
+        <div className="bg-white rounded-xl border border-gray-200 p-6 space-y-3 mt-6">
+          <h2 className="text-lg font-semibold text-gray-800">{labels.presets[lang]}</h2>
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
+            {PRESETS.map((preset) => (
+              <button
+                key={preset.name}
+                onClick={() => handlePreset(preset.w, preset.h)}
+                className="px-3 py-2 text-sm bg-gray-50 hover:bg-blue-50 border border-gray-200 hover:border-blue-300 rounded-lg transition-colors text-left"
+              >
+                <div className="font-medium text-gray-800">{preset.name}</div>
+                <div className="text-xs text-gray-500">{preset.w} x {preset.h} px</div>
+              </button>
+            ))}
+          </div>
         </div>
 
         {/* Manual Calculator */}
@@ -236,19 +412,31 @@ export default function PixelRuler() {
           <h2 className="text-lg font-semibold text-gray-800">{labels.manualMode[lang]}</h2>
           <div className="grid grid-cols-2 gap-4">
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">{labels.width[lang]}</label>
+              <label className="block text-sm font-medium text-gray-700 mb-1">{labels.width[lang]} (px)</label>
               <input type="number" value={manualW} onChange={(e) => setManualW(e.target.value)} placeholder="1920" className="w-full border border-gray-300 rounded-lg px-4 py-2 text-lg focus:ring-2 focus:ring-blue-500" />
             </div>
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">{labels.height[lang]}</label>
+              <label className="block text-sm font-medium text-gray-700 mb-1">{labels.height[lang]} (px)</label>
               <input type="number" value={manualH} onChange={(e) => setManualH(e.target.value)} placeholder="1080" className="w-full border border-gray-300 rounded-lg px-4 py-2 text-lg focus:ring-2 focus:ring-blue-500" />
             </div>
           </div>
           {(mW > 0 || mH > 0) && (
-            <div className="bg-purple-50 p-4 rounded-lg text-center">
-              <div className="text-sm text-gray-500">{labels.diagonal[lang]}</div>
-              <div className="text-3xl font-bold text-gray-900">{manualDiag.toFixed(1)} px</div>
-              <div className="text-xs text-gray-400 mt-1">{mW} x {mH} px</div>
+            <div className="grid grid-cols-3 gap-3">
+              <div className="bg-blue-50 border border-blue-200 p-3 rounded-lg text-center">
+                <div className="text-xs text-blue-600 font-medium">{labels.width[lang]}</div>
+                <div className="text-xl font-bold text-gray-900">{fmtVal(mWDisplay, unit)}</div>
+                <div className="text-xs text-blue-400">{s}</div>
+              </div>
+              <div className="bg-green-50 border border-green-200 p-3 rounded-lg text-center">
+                <div className="text-xs text-green-600 font-medium">{labels.height[lang]}</div>
+                <div className="text-xl font-bold text-gray-900">{fmtVal(mHDisplay, unit)}</div>
+                <div className="text-xs text-green-400">{s}</div>
+              </div>
+              <div className="bg-purple-50 border border-purple-200 p-3 rounded-lg text-center">
+                <div className="text-xs text-purple-600 font-medium">{labels.diagonal[lang]}</div>
+                <div className="text-xl font-bold text-gray-900">{fmtVal(manualDiagDisplay, unit)}</div>
+                <div className="text-xs text-purple-400">{s}</div>
+              </div>
             </div>
           )}
         </div>

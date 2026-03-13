@@ -1,8 +1,71 @@
 'use client';
-import { useState, useMemo } from 'react';
+import { useState, useMemo, useCallback } from 'react';
 import { useParams } from 'next/navigation';
 import { tools, type Locale } from '@/lib/translations';
 import ToolPageWrapper from '@/components/ToolPageWrapper';
+
+const CHAR_NAMES: Record<string, string> = {
+  '\u2190': 'leftwards arrow left', '\u2191': 'upwards arrow up', '\u2192': 'rightwards arrow right', '\u2193': 'downwards arrow down',
+  '\u2194': 'left right arrow horizontal', '\u2195': 'up down arrow vertical', '\u2196': 'north west arrow upper left', '\u2197': 'north east arrow upper right',
+  '\u2198': 'south east arrow lower right', '\u2199': 'south west arrow lower left', '\u21A9': 'hook arrow left return', '\u21AA': 'hook arrow right',
+  '\u27A1': 'black rightwards arrow right', '\u2B05': 'leftwards black arrow left', '\u2B06': 'upwards black arrow up', '\u2B07': 'downwards black arrow down',
+  '\u21D0': 'double leftwards arrow', '\u21D1': 'double upwards arrow', '\u21D2': 'double rightwards arrow implies', '\u21D3': 'double downwards arrow',
+  '\u21D4': 'double left right arrow equivalent', '\u21D5': 'double up down arrow', '\u27F5': 'long leftwards arrow', '\u27F6': 'long rightwards arrow',
+  '\u00B1': 'plus minus sign', '\u00D7': 'multiplication sign times', '\u00F7': 'division sign divide', '\u2260': 'not equal to inequality',
+  '\u2264': 'less than or equal to', '\u2265': 'greater than or equal to', '\u221E': 'infinity', '\u2211': 'summation sigma sum',
+  '\u220F': 'product pi', '\u221A': 'square root radical', '\u222B': 'integral calculus', '\u2202': 'partial differential',
+  '\u2207': 'nabla del gradient', '\u2248': 'almost equal approximately', '\u2261': 'identical to congruent', '\u2282': 'subset of',
+  '\u2283': 'superset of', '\u2286': 'subset of or equal to', '\u2287': 'superset of or equal to', '\u2208': 'element of member',
+  '\u2209': 'not element of', '\u2205': 'empty set null', '\u2229': 'intersection cap', '\u222A': 'union cup',
+  '\u00B2': 'superscript two squared', '\u00B3': 'superscript three cubed', '\u2070': 'superscript zero', '\u00BC': 'fraction one quarter',
+  '\u00BD': 'fraction one half', '\u00BE': 'fraction three quarters',
+  '$': 'dollar sign currency usd', '\u20AC': 'euro sign currency eur', '\u00A3': 'pound sign sterling gbp', '\u00A5': 'yen sign yuan jpy cny',
+  '\u20A3': 'french franc sign', '\u20B9': 'indian rupee sign inr', '\u20A9': 'won sign korean krw', '\u20BD': 'ruble sign russian rub',
+  '\u20B1': 'peso sign php', '\u20AB': 'dong sign vietnamese vnd', '\u20BA': 'turkish lira sign try', '\u20B4': 'hryvnia sign ukrainian uah',
+  '\u20BF': 'bitcoin sign crypto btc', '\u00A2': 'cent sign', '\u20A0': 'euro-currency sign', '\u20A1': 'colon sign costa rica',
+  '\u20A2': 'cruzeiro sign brazil', '\u20A4': 'lira sign italian', '\u20A6': 'naira sign nigerian ngn', '\u20A7': 'peseta sign spanish',
+  '\u20A8': 'rupee sign',
+  '\u2022': 'bullet point dot', '\u2023': 'triangular bullet', '\u25E6': 'white bullet circle', '\u2043': 'hyphen bullet',
+  '\u2219': 'bullet operator dot', '\u00B7': 'middle dot interpunct', '\u2013': 'en dash', '\u2014': 'em dash',
+  '\u2026': 'horizontal ellipsis dots', '\u00AB': 'left double angle guillemet', '\u00BB': 'right double angle guillemet',
+  '\u2018': 'left single quotation mark', '\u2019': 'right single quotation mark apostrophe', '\u201C': 'left double quotation mark',
+  '\u201D': 'right double quotation mark', '\u2039': 'left single angle guillemet', '\u203A': 'right single angle guillemet',
+  '\u00A7': 'section sign', '\u00B6': 'pilcrow paragraph sign', '\u2020': 'dagger cross', '\u2021': 'double dagger',
+  '\u203B': 'reference mark', '\u2042': 'asterism',
+  '\u25A0': 'black square', '\u25A1': 'white square', '\u25AA': 'black small square', '\u25AB': 'white small square',
+  '\u25B2': 'black up triangle', '\u25B3': 'white up triangle', '\u25BC': 'black down triangle', '\u25BD': 'white down triangle',
+  '\u25C6': 'black diamond', '\u25C7': 'white diamond', '\u25CB': 'white circle', '\u25CF': 'black circle',
+  '\u25D0': 'circle left half black', '\u25D1': 'circle right half black', '\u2605': 'black star', '\u2606': 'white star',
+  '\u2660': 'black spade suit', '\u2663': 'black club suit', '\u2665': 'black heart suit', '\u2666': 'black diamond suit',
+  '\u2764': 'heavy red heart love', '\u2716': 'heavy multiplication x cross', '\u2714': 'heavy check mark tick', '\u2718': 'heavy ballot x cross',
+  '\u00A9': 'copyright sign', '\u00AE': 'registered sign trademark', '\u2122': 'trade mark sign', '\u00B0': 'degree sign temperature',
+  '\u2103': 'degree celsius temperature', '\u2109': 'degree fahrenheit temperature', '\u00B5': 'micro sign mu', '\u2126': 'ohm sign omega resistance',
+  '\u212B': 'angstrom sign', '\u266A': 'eighth note music', '\u266B': 'beamed eighth notes music', '\u266C': 'beamed sixteenth notes music',
+  '\u266D': 'music flat sign', '\u266E': 'music natural sign', '\u266F': 'music sharp sign', '\u2602': 'umbrella rain',
+  '\u2603': 'snowman winter', '\u2604': 'comet', '\u2615': 'hot beverage coffee tea', '\u231A': 'watch clock time',
+  '\u231B': 'hourglass time', '\u23F0': 'alarm clock time', '\u2328': 'keyboard', '\u2709': 'envelope email mail',
+  '\u{1F600}': 'grinning face happy smile', '\u{1F601}': 'grinning face smiling eyes', '\u{1F602}': 'face tears of joy laughing lol',
+  '\u{1F603}': 'smiling face open mouth happy', '\u{1F604}': 'smiling face open mouth smiling eyes', '\u{1F605}': 'smiling face open mouth cold sweat',
+  '\u{1F606}': 'smiling face open mouth closed eyes', '\u{1F609}': 'winking face wink', '\u{1F60A}': 'smiling face smiling eyes blush',
+  '\u{1F60D}': 'smiling face heart eyes love', '\u{1F618}': 'face blowing kiss love', '\u{1F60E}': 'smiling face sunglasses cool',
+  '\u{1F914}': 'thinking face hmm', '\u{1F923}': 'rolling on floor laughing rofl', '\u{1F62D}': 'loudly crying face sad',
+  '\u{1F621}': 'pouting face angry mad', '\u{1F44D}': 'thumbs up like approve', '\u{1F44E}': 'thumbs down dislike disapprove',
+  '\u{1F44F}': 'clapping hands applause bravo', '\u{1F64F}': 'folded hands pray please thank you',
+  '\u{1F525}': 'fire flame hot lit', '\u{2728}': 'sparkles stars magic', '\u{1F4A1}': 'light bulb idea',
+  '\u{1F680}': 'rocket launch space', '\u{2705}': 'check mark button done yes', '\u{274C}': 'cross mark no cancel',
+  '\u{26A0}': 'warning sign caution alert', '\u{1F4E7}': 'email envelope mail message', '\u{1F3AF}': 'direct hit target bullseye',
+  '\u{1F4BB}': 'laptop computer pc',
+};
+
+// Greek letters - programmatically add names
+const GREEK_UPPER = ['Alpha','Beta','Gamma','Delta','Epsilon','Zeta','Eta','Theta','Iota','Kappa','Lambda','Mu','Nu','Xi','Omicron','Pi','Rho','Sigma','Tau','Upsilon','Phi','Chi','Psi','Omega'];
+const GREEK_LOWER = ['alpha','beta','gamma','delta','epsilon','zeta','eta','theta','iota','kappa','lambda','mu','nu','xi','omicron','pi','rho','sigma','tau','upsilon','phi','chi','psi','omega'];
+for (let i = 0; i < GREEK_UPPER.length; i++) {
+  CHAR_NAMES[String.fromCodePoint(0x0391 + i + (i >= 17 ? 1 : 0))] = `greek capital letter ${GREEK_UPPER[i].toLowerCase()}`;
+}
+for (let i = 0; i < GREEK_LOWER.length; i++) {
+  CHAR_NAMES[String.fromCodePoint(0x03B1 + i + (i >= 17 ? 1 : 0))] = `greek small letter ${GREEK_LOWER[i]}`;
+}
 
 const CATEGORIES = [
   {
@@ -71,21 +134,30 @@ export default function CharacterMap() {
     cssCode: { en: 'CSS Code', it: 'Codice CSS', es: 'Código CSS', fr: 'Code CSS', de: 'CSS-Code', pt: 'Código CSS' },
     copyChar: { en: 'Copy Character', it: 'Copia Carattere', es: 'Copiar Carácter', fr: 'Copier Caractère', de: 'Zeichen Kopieren', pt: 'Copiar Caractere' },
     copyCode: { en: 'Copy Code', it: 'Copia Codice', es: 'Copiar Código', fr: 'Copier Code', de: 'Code Kopieren', pt: 'Copiar Código' },
+    reset: { en: 'Reset', it: 'Reimposta', es: 'Restablecer', fr: 'Réinitialiser', de: 'Zurücksetzen', pt: 'Redefinir' },
+    history: { en: 'History', it: 'Cronologia', es: 'Historial', fr: 'Historique', de: 'Verlauf', pt: 'Histórico' },
+    noResults: { en: 'No characters found', it: 'Nessun carattere trovato', es: 'No se encontraron caracteres', fr: 'Aucun caractère trouvé', de: 'Keine Zeichen gefunden', pt: 'Nenhum caractere encontrado' },
+    all: { en: 'All', it: 'Tutti', es: 'Todos', fr: 'Tous', de: 'Alle', pt: 'Todos' },
   } as Record<string, Record<Locale, string>>;
 
   const allChars = useMemo(() => CATEGORIES.flatMap(c => c.chars.map(ch => ({ char: ch, category: c.id }))), []);
 
   const filteredChars = useMemo(() => {
+    let base = allChars;
+    if (selectedCategory !== 'all' && !search.trim()) {
+      const cat = CATEGORIES.find(c => c.id === selectedCategory);
+      base = cat ? cat.chars.map(ch => ({ char: ch, category: cat.id })) : [];
+    }
     if (search.trim()) {
       const s = search.trim().toLowerCase();
       return allChars.filter(({ char }) => {
         const code = char.codePointAt(0) || 0;
         const hex = code.toString(16).toUpperCase();
-        return char.includes(s) || `U+${hex}`.toLowerCase().includes(s) || `&#${code};`.includes(s);
+        const name = (CHAR_NAMES[char] || '').toLowerCase();
+        return char.includes(s) || `U+${hex}`.toLowerCase().includes(s) || `&#${code};`.includes(s) || name.includes(s);
       });
     }
-    const cat = CATEGORIES.find(c => c.id === selectedCategory);
-    return cat ? cat.chars.map(ch => ({ char: ch, category: cat.id })) : [];
+    return base;
   }, [search, selectedCategory, allChars]);
 
   const copyToClipboard = (char: string) => {
@@ -93,11 +165,18 @@ export default function CharacterMap() {
     setCopied(char);
     setSelectedChar(char);
     setRecentlyUsed(prev => {
-      const updated = [char, ...prev.filter(c => c !== char)].slice(0, 20);
+      const updated = [char, ...prev.filter(c => c !== char)].slice(0, 10);
       return updated;
     });
     setTimeout(() => setCopied(null), 1500);
   };
+
+  const handleReset = useCallback(() => {
+    setSearch('');
+    setSelectedCategory('arrows');
+    setSelectedChar(null);
+    setCopied(null);
+  }, []);
 
   const getCharInfo = (char: string) => {
     const code = char.codePointAt(0) || 0;
@@ -216,40 +295,55 @@ export default function CharacterMap() {
         <p className="text-gray-600 mb-6">{toolT.description}</p>
 
         <div className="bg-white rounded-xl border border-gray-200 p-6 space-y-4">
-          {/* Search */}
-          <input
-            type="text"
-            value={search}
-            onChange={(e) => setSearch(e.target.value)}
-            placeholder={labels.search[lang]}
-            className="w-full border border-gray-300 rounded-lg px-4 py-2 focus:ring-2 focus:ring-blue-500"
-          />
+          {/* Search + Reset */}
+          <div className="flex gap-2">
+            <input
+              type="text"
+              value={search}
+              onChange={(e) => setSearch(e.target.value)}
+              placeholder={labels.search[lang]}
+              className="flex-1 border border-gray-300 rounded-lg px-4 py-2 focus:ring-2 focus:ring-blue-500"
+            />
+            {(search || selectedCategory !== 'arrows' || selectedChar) && (
+              <button
+                onClick={handleReset}
+                className="px-4 py-2 text-sm font-medium text-gray-600 bg-gray-100 rounded-lg hover:bg-gray-200 transition-colors whitespace-nowrap"
+              >
+                {labels.reset[lang]}
+              </button>
+            )}
+          </div>
 
-          {/* Category tabs */}
-          {!search && (
-            <div className="flex flex-wrap gap-1.5">
-              {CATEGORIES.map((cat) => (
-                <button
-                  key={cat.id}
-                  onClick={() => setSelectedCategory(cat.id)}
-                  className={`text-xs px-3 py-1.5 rounded-full font-medium transition-colors ${selectedCategory === cat.id ? 'bg-blue-600 text-white' : 'bg-gray-100 text-gray-600 hover:bg-gray-200'}`}
-                >
-                  {CATEGORY_LABELS[cat.id][lang]}
-                </button>
-              ))}
-            </div>
-          )}
+          {/* Category quick-filter buttons */}
+          <div className="flex flex-wrap gap-1.5">
+            <button
+              onClick={() => { setSelectedCategory('all'); setSearch(''); }}
+              className={`text-xs px-3 py-1.5 rounded-full font-medium transition-colors ${selectedCategory === 'all' && !search ? 'bg-blue-600 text-white' : 'bg-gray-100 text-gray-600 hover:bg-gray-200'}`}
+            >
+              {labels.all[lang]}
+            </button>
+            {CATEGORIES.map((cat) => (
+              <button
+                key={cat.id}
+                onClick={() => { setSelectedCategory(cat.id); setSearch(''); }}
+                className={`text-xs px-3 py-1.5 rounded-full font-medium transition-colors ${selectedCategory === cat.id && !search ? 'bg-blue-600 text-white' : 'bg-gray-100 text-gray-600 hover:bg-gray-200'}`}
+              >
+                {CATEGORY_LABELS[cat.id][lang]}
+              </button>
+            ))}
+          </div>
 
-          {/* Recently used */}
+          {/* History — recently copied characters */}
           {recentlyUsed.length > 0 && (
             <div>
-              <div className="text-xs font-medium text-gray-500 mb-1">{labels.recentlyUsed[lang]}</div>
+              <div className="text-xs font-medium text-gray-500 mb-1">{labels.history[lang]}</div>
               <div className="flex flex-wrap gap-1">
                 {recentlyUsed.map((char, i) => (
                   <button
                     key={i}
                     onClick={() => copyToClipboard(char)}
-                    className="w-9 h-9 flex items-center justify-center text-lg border border-gray-200 rounded hover:bg-blue-50 hover:border-blue-300 transition-colors"
+                    className={`w-9 h-9 flex items-center justify-center text-lg border rounded transition-colors ${copied === char ? 'bg-green-100 border-green-400' : 'border-blue-200 bg-blue-50 hover:bg-blue-100 hover:border-blue-400'}`}
+                    title={CHAR_NAMES[char] || getCharInfo(char).unicode}
                   >
                     {char}
                   </button>
@@ -260,21 +354,25 @@ export default function CharacterMap() {
 
           {/* Character grid */}
           <div className="text-xs text-gray-400 mb-1">{labels.clickToCopy[lang]}</div>
-          <div className="grid grid-cols-8 sm:grid-cols-10 gap-1 max-h-64 overflow-y-auto">
-            {filteredChars.map(({ char }, i) => (
-              <button
-                key={i}
-                onClick={() => copyToClipboard(char)}
-                className={`w-full aspect-square flex items-center justify-center text-xl border rounded transition-all hover:bg-blue-50 hover:border-blue-300 hover:scale-110 ${copied === char ? 'bg-green-100 border-green-400' : selectedChar === char ? 'bg-blue-50 border-blue-400' : 'border-gray-200'}`}
-                title={getCharInfo(char).unicode}
-              >
-                {char}
-              </button>
-            ))}
-          </div>
+          {filteredChars.length === 0 ? (
+            <div className="text-center text-sm text-gray-400 py-8">{labels.noResults[lang]}</div>
+          ) : (
+            <div className="grid grid-cols-8 sm:grid-cols-10 gap-1 max-h-64 overflow-y-auto">
+              {filteredChars.map(({ char }, i) => (
+                <button
+                  key={i}
+                  onClick={() => copyToClipboard(char)}
+                  className={`w-full aspect-square flex items-center justify-center text-xl border rounded transition-colors hover:bg-blue-50 hover:border-blue-300 hover:scale-110 ${copied === char ? 'bg-green-100 border-green-400' : selectedChar === char ? 'bg-blue-50 border-blue-400' : 'border-gray-200'}`}
+                  title={CHAR_NAMES[char] ? `${CHAR_NAMES[char]} (${getCharInfo(char).unicode})` : getCharInfo(char).unicode}
+                >
+                  {char}
+                </button>
+              ))}
+            </div>
+          )}
 
           {copied && (
-            <div className="text-center text-sm text-green-600 font-medium">{labels.copied[lang]}</div>
+            <div className="text-center text-sm text-green-600 font-medium animate-pulse">{labels.copied[lang]}</div>
           )}
 
           {/* Character info panel */}
@@ -284,16 +382,19 @@ export default function CharacterMap() {
               <div className="flex items-center gap-4 mb-3">
                 <span className="text-5xl">{selectedChar}</span>
                 <div className="space-y-1 text-sm">
+                  {CHAR_NAMES[selectedChar] && (
+                    <div className="text-gray-600 font-medium capitalize">{CHAR_NAMES[selectedChar]}</div>
+                  )}
                   <div><span className="text-gray-500">{labels.unicode[lang]}:</span> <code className="bg-white px-2 py-0.5 rounded text-gray-800">{charInfo.unicode}</code></div>
                   <div><span className="text-gray-500">{labels.htmlEntity[lang]}:</span> <code className="bg-white px-2 py-0.5 rounded text-gray-800">{charInfo.html}</code></div>
                   <div><span className="text-gray-500">{labels.cssCode[lang]}:</span> <code className="bg-white px-2 py-0.5 rounded text-gray-800">{charInfo.css}</code></div>
                 </div>
               </div>
               <div className="flex gap-2">
-                <button onClick={() => copyToClipboard(selectedChar)} className="text-xs bg-blue-600 text-white px-3 py-1.5 rounded hover:bg-blue-700">
+                <button onClick={() => copyToClipboard(selectedChar)} className="text-xs bg-blue-600 text-white px-3 py-1.5 rounded hover:bg-blue-700 transition-colors">
                   {labels.copyChar[lang]}
                 </button>
-                <button onClick={() => { navigator.clipboard.writeText(charInfo.html); setCopied(selectedChar); setTimeout(() => setCopied(null), 1500); }} className="text-xs bg-gray-600 text-white px-3 py-1.5 rounded hover:bg-gray-700">
+                <button onClick={() => { navigator.clipboard.writeText(charInfo.html); setCopied(selectedChar); setTimeout(() => setCopied(null), 1500); }} className="text-xs bg-gray-600 text-white px-3 py-1.5 rounded hover:bg-gray-700 transition-colors">
                   {labels.copyCode[lang]} (HTML)
                 </button>
               </div>

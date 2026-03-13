@@ -1,5 +1,5 @@
 'use client';
-import { useState } from 'react';
+import { useState, useCallback } from 'react';
 import { useParams } from 'next/navigation';
 import { tools, type Locale } from '@/lib/translations';
 import ToolPageWrapper from '@/components/ToolPageWrapper';
@@ -53,12 +53,24 @@ function hslToRgb(h: number, s: number, l: number): [number, number, number] {
   ];
 }
 
+function rgbToCmyk(r: number, g: number, b: number): [number, number, number, number] {
+  if (r === 0 && g === 0 && b === 0) return [0, 0, 0, 100];
+  const rr = r / 255, gg = g / 255, bb = b / 255;
+  const k = 1 - Math.max(rr, gg, bb);
+  const c = (1 - rr - k) / (1 - k);
+  const m = (1 - gg - k) / (1 - k);
+  const y = (1 - bb - k) / (1 - k);
+  return [Math.round(c * 100), Math.round(m * 100), Math.round(y * 100), Math.round(k * 100)];
+}
+
+const DEFAULT_HEX = 'FF5733';
+
 export default function ColorConverter() {
   const { lang } = useParams() as { lang: Locale };
   const toolT = tools['color-converter'][lang];
 
   const [mode, setMode] = useState<'hex' | 'rgb' | 'hsl'>('hex');
-  const [hexInput, setHexInput] = useState('FF5733');
+  const [hexInput, setHexInput] = useState(DEFAULT_HEX);
   const [rInput, setRInput] = useState('255');
   const [gInput, setGInput] = useState('87');
   const [bInput, setBInput] = useState('51');
@@ -66,34 +78,45 @@ export default function ColorConverter() {
   const [sInput, setSInput] = useState('100');
   const [lInput, setLInput] = useState('60');
   const [copiedField, setCopiedField] = useState<string | null>(null);
+  const [history, setHistory] = useState<string[]>([]);
 
-  const labels = {
-    inputMode: { en: 'Input Format', it: 'Formato di Input', es: 'Formato de Entrada', fr: 'Format d\'Entrée', de: 'Eingabeformat', pt: 'Formato de Entrada' },
-    results: { en: 'Conversion Results', it: 'Risultati Conversione', es: 'Resultados de Conversión', fr: 'Résultats de Conversion', de: 'Konvertierungsergebnisse', pt: 'Resultados da Conversão' },
-    preview: { en: 'Color Preview', it: 'Anteprima Colore', es: 'Vista Previa del Color', fr: 'Aperçu de la Couleur', de: 'Farbvorschau', pt: 'Pré-visualização da Cor' },
-    invalid: { en: 'Invalid color value', it: 'Valore colore non valido', es: 'Valor de color no válido', fr: 'Valeur de couleur invalide', de: 'Ungültiger Farbwert', pt: 'Valor de cor inválido' },
-    copied: { en: 'Copied!', it: 'Copiato!', es: '¡Copiado!', fr: 'Copié !', de: 'Kopiert!', pt: 'Copiado!' },
-  } as Record<string, Record<Locale, string>>;
+  const labels: Record<string, Record<Locale, string>> = {
+    inputMode: { en: 'Input Format', it: 'Formato di Input', es: 'Formato de Entrada', fr: 'Format d\'Entr\u00e9e', de: 'Eingabeformat', pt: 'Formato de Entrada' },
+    results: { en: 'Conversion Results', it: 'Risultati Conversione', es: 'Resultados de Conversi\u00f3n', fr: 'R\u00e9sultats de Conversion', de: 'Konvertierungsergebnisse', pt: 'Resultados da Convers\u00e3o' },
+    preview: { en: 'Color Preview', it: 'Anteprima Colore', es: 'Vista Previa del Color', fr: 'Aper\u00e7u de la Couleur', de: 'Farbvorschau', pt: 'Pr\u00e9-visualiza\u00e7\u00e3o da Cor' },
+    invalid: { en: 'Invalid color value', it: 'Valore colore non valido', es: 'Valor de color no v\u00e1lido', fr: 'Valeur de couleur invalide', de: 'Ung\u00fcltiger Farbwert', pt: 'Valor de cor inv\u00e1lido' },
+    copied: { en: 'Copied!', it: 'Copiato!', es: '\u00a1Copiado!', fr: 'Copi\u00e9 !', de: 'Kopiert!', pt: 'Copiado!' },
+    copy: { en: 'Copy', it: 'Copia', es: 'Copiar', fr: 'Copier', de: 'Kopieren', pt: 'Copiar' },
+    reset: { en: 'Reset', it: 'Ripristina', es: 'Restablecer', fr: 'R\u00e9initialiser', de: 'Zur\u00fccksetzen', pt: 'Redefinir' },
+    history: { en: 'Recent Colors', it: 'Colori Recenti', es: 'Colores Recientes', fr: 'Couleurs R\u00e9centes', de: 'Letzte Farben', pt: 'Cores Recentes' },
+    clearHistory: { en: 'Clear', it: 'Cancella', es: 'Borrar', fr: 'Effacer', de: 'L\u00f6schen', pt: 'Limpar' },
+    invalidHex: { en: 'Enter a valid 6-digit HEX code', it: 'Inserisci un codice HEX valido a 6 cifre', es: 'Introduce un c\u00f3digo HEX v\u00e1lido de 6 d\u00edgitos', fr: 'Entrez un code HEX valide \u00e0 6 chiffres', de: 'Geben Sie einen g\u00fcltigen 6-stelligen HEX-Code ein', pt: 'Insira um c\u00f3digo HEX v\u00e1lido de 6 d\u00edgitos' },
+    invalidRgb: { en: 'RGB values must be between 0 and 255', it: 'I valori RGB devono essere tra 0 e 255', es: 'Los valores RGB deben estar entre 0 y 255', fr: 'Les valeurs RGB doivent \u00eatre entre 0 et 255', de: 'RGB-Werte m\u00fcssen zwischen 0 und 255 liegen', pt: 'Os valores RGB devem estar entre 0 e 255' },
+    invalidHsl: { en: 'H: 0-360, S: 0-100, L: 0-100', it: 'H: 0-360, S: 0-100, L: 0-100', es: 'H: 0-360, S: 0-100, L: 0-100', fr: 'H: 0-360, S: 0-100, L: 0-100', de: 'H: 0-360, S: 0-100, L: 0-100', pt: 'H: 0-360, S: 0-100, L: 0-100' },
+  };
 
-  const getColor = (): { hex: string; rgb: [number, number, number]; hsl: [number, number, number] } | null => {
+  const getColor = (): { hex: string; rgb: [number, number, number]; hsl: [number, number, number]; cmyk: [number, number, number, number] } | null => {
     try {
       if (mode === 'hex') {
         const rgb = hexToRgb(hexInput);
         if (!rgb) return null;
         const hsl = rgbToHsl(rgb[0], rgb[1], rgb[2]);
-        return { hex: '#' + hexInput.replace('#', '').toUpperCase(), rgb, hsl };
+        const cmyk = rgbToCmyk(rgb[0], rgb[1], rgb[2]);
+        return { hex: '#' + hexInput.replace('#', '').toUpperCase(), rgb, hsl, cmyk };
       } else if (mode === 'rgb') {
         const r = parseInt(rInput), g = parseInt(gInput), b = parseInt(bInput);
         if (isNaN(r) || isNaN(g) || isNaN(b) || r < 0 || r > 255 || g < 0 || g > 255 || b < 0 || b > 255) return null;
         const hex = rgbToHex(r, g, b);
         const hsl = rgbToHsl(r, g, b);
-        return { hex, rgb: [r, g, b], hsl };
+        const cmyk = rgbToCmyk(r, g, b);
+        return { hex, rgb: [r, g, b], hsl, cmyk };
       } else {
         const h = parseInt(hInput), s = parseInt(sInput), l = parseInt(lInput);
         if (isNaN(h) || isNaN(s) || isNaN(l) || h < 0 || h > 360 || s < 0 || s > 100 || l < 0 || l > 100) return null;
         const rgb = hslToRgb(h, s, l);
         const hex = rgbToHex(rgb[0], rgb[1], rgb[2]);
-        return { hex, rgb, hsl: [h, s, l] };
+        const cmyk = rgbToCmyk(rgb[0], rgb[1], rgb[2]);
+        return { hex, rgb, hsl: [h, s, l], cmyk };
       }
     } catch {
       return null;
@@ -101,6 +124,28 @@ export default function ColorConverter() {
   };
 
   const color = getColor();
+
+  const getValidationMessage = (): string | null => {
+    if (color) return null;
+    if (mode === 'hex') {
+      const cleaned = hexInput.replace('#', '');
+      if (!cleaned) return null;
+      if (!/^[0-9a-fA-F]{6}$/.test(cleaned)) return labels.invalidHex[lang];
+    } else if (mode === 'rgb') {
+      const r = parseInt(rInput), g = parseInt(gInput), b = parseInt(bInput);
+      if ((rInput && (isNaN(r) || r < 0 || r > 255)) || (gInput && (isNaN(g) || g < 0 || g > 255)) || (bInput && (isNaN(b) || b < 0 || b > 255))) {
+        return labels.invalidRgb[lang];
+      }
+    } else {
+      const h = parseInt(hInput), s = parseInt(sInput), l = parseInt(lInput);
+      if ((hInput && (isNaN(h) || h < 0 || h > 360)) || (sInput && (isNaN(s) || s < 0 || s > 100)) || (lInput && (isNaN(l) || l < 0 || l > 100))) {
+        return labels.invalidHsl[lang];
+      }
+    }
+    return null;
+  };
+
+  const validationMsg = getValidationMessage();
 
   const copyToClipboard = (text: string, field: string) => {
     navigator.clipboard.writeText(text);
@@ -118,14 +163,79 @@ export default function ColorConverter() {
     }
   };
 
+  const addToHistory = useCallback((hexValue: string) => {
+    setHistory(prev => {
+      const normalized = hexValue.toUpperCase().replace('#', '');
+      const filtered = prev.filter(h => h !== normalized);
+      return [normalized, ...filtered].slice(0, 10);
+    });
+  }, []);
+
+  const handleConvert = () => {
+    if (color) {
+      addToHistory(color.hex);
+    }
+  };
+
+  const handleHistoryClick = (hex: string) => {
+    setMode('hex');
+    setHexInput(hex);
+    syncFromHex(hex);
+  };
+
+  const handleReset = () => {
+    setMode('hex');
+    setHexInput(DEFAULT_HEX);
+    setRInput('255'); setGInput('87'); setBInput('51');
+    setHInput('11'); setSInput('100'); setLInput('60');
+    setCopiedField(null);
+  };
+
+  // Determine text color for contrast on the preview swatch
+  const getContrastColor = (hex: string): string => {
+    const rgb = hexToRgb(hex);
+    if (!rgb) return '#000000';
+    const luminance = (0.299 * rgb[0] + 0.587 * rgb[1] + 0.114 * rgb[2]) / 255;
+    return luminance > 0.5 ? '#000000' : '#FFFFFF';
+  };
+
+  // Card border accent colors for each format
+  const cardAccents: Record<string, string> = {
+    hex: 'border-l-blue-500',
+    rgb: 'border-l-green-500',
+    hsl: 'border-l-purple-500',
+    cmyk: 'border-l-amber-500',
+  };
+
+  const cardBgs: Record<string, string> = {
+    hex: 'bg-blue-50',
+    rgb: 'bg-green-50',
+    hsl: 'bg-purple-50',
+    cmyk: 'bg-amber-50',
+  };
+
+  const cardTextAccents: Record<string, string> = {
+    hex: 'text-blue-700',
+    rgb: 'text-green-700',
+    hsl: 'text-purple-700',
+    cmyk: 'text-amber-700',
+  };
+
+  const cardBtnBgs: Record<string, string> = {
+    hex: 'bg-blue-100 hover:bg-blue-200 text-blue-700',
+    rgb: 'bg-green-100 hover:bg-green-200 text-green-700',
+    hsl: 'bg-purple-100 hover:bg-purple-200 text-purple-700',
+    cmyk: 'bg-amber-100 hover:bg-amber-200 text-amber-700',
+  };
+
   const seoContent: Record<Locale, { title: string; paragraphs: string[]; faq: { q: string; a: string }[] }> = {
     en: {
-      title: 'Free Color Converter – Convert Between HEX, RGB & HSL Color Formats',
+      title: 'Free Color Converter \u2013 Convert Between HEX, RGB & HSL Color Formats',
       paragraphs: [
         'Color representation in digital design uses multiple formats, each suited for different contexts. HEX codes are the web standard, RGB is used in screens and programming, and HSL provides an intuitive way to describe colors by hue, saturation, and lightness. Understanding how to convert between these formats is essential for web developers, graphic designers, and UI/UX professionals.',
         'HEX (hexadecimal) colors use a 6-digit code preceded by a hash symbol, like #FF5733. Each pair of digits represents the red, green, and blue channels respectively, with values from 00 (0) to FF (255). This compact notation is the most common format in CSS and web design.',
         'RGB (Red, Green, Blue) defines colors by specifying the intensity of each primary color channel on a scale of 0 to 255. The format rgb(255, 87, 51) represents the same color as #FF5733. RGB is the native color model for screens and monitors, as each pixel physically emits red, green, and blue light.',
-        'HSL (Hue, Saturation, Lightness) describes colors in a more human-intuitive way. Hue is the color angle on the color wheel (0-360 degrees), saturation is the color intensity (0-100%), and lightness is how light or dark the color is (0-100%). HSL makes it easy to create color variations — just adjust lightness for shades and tints, or saturation for muted versions.',
+        'HSL (Hue, Saturation, Lightness) describes colors in a more human-intuitive way. Hue is the color angle on the color wheel (0-360 degrees), saturation is the color intensity (0-100%), and lightness is how light or dark the color is (0-100%). HSL makes it easy to create color variations \u2014 just adjust lightness for shades and tints, or saturation for muted versions.',
       ],
       faq: [
         { q: 'What is the difference between HEX and RGB?', a: 'HEX and RGB represent the same color model (red, green, blue channels) but in different notation. HEX uses hexadecimal digits (00-FF), while RGB uses decimal numbers (0-255). #FF5733 in HEX equals rgb(255, 87, 51) in RGB. HEX is more common in CSS, while RGB is used in programming and design software.' },
@@ -136,83 +246,83 @@ export default function ColorConverter() {
       ],
     },
     it: {
-      title: 'Convertitore di Colori Gratuito – Converti tra Formati HEX, RGB e HSL',
+      title: 'Convertitore di Colori Gratuito \u2013 Converti tra Formati HEX, RGB e HSL',
       paragraphs: [
-        'La rappresentazione dei colori nel design digitale utilizza molteplici formati, ognuno adatto a contesti diversi. I codici HEX sono lo standard web, RGB è usato negli schermi e nella programmazione, e HSL offre un modo intuitivo per descrivere i colori tramite tonalità, saturazione e luminosità.',
-        'I colori HEX (esadecimali) usano un codice a 6 cifre preceduto dal simbolo hash, come #FF5733. Ogni coppia di cifre rappresenta i canali rosso, verde e blu rispettivamente, con valori da 00 (0) a FF (255). Questa notazione compatta è il formato più comune in CSS e web design.',
-        'RGB (Rosso, Verde, Blu) definisce i colori specificando l\'intensità di ogni canale primario su una scala da 0 a 255. Il formato rgb(255, 87, 51) rappresenta lo stesso colore di #FF5733. RGB è il modello nativo per schermi e monitor.',
-        'HSL (Tonalità, Saturazione, Luminosità) descrive i colori in modo più intuitivo. La tonalità è l\'angolo sulla ruota dei colori (0-360 gradi), la saturazione è l\'intensità (0-100%) e la luminosità indica quanto chiaro o scuro è il colore (0-100%).',
+        'La rappresentazione dei colori nel design digitale utilizza molteplici formati, ognuno adatto a contesti diversi. I codici HEX sono lo standard web, RGB \u00e8 usato negli schermi e nella programmazione, e HSL offre un modo intuitivo per descrivere i colori tramite tonalit\u00e0, saturazione e luminosit\u00e0.',
+        'I colori HEX (esadecimali) usano un codice a 6 cifre preceduto dal simbolo hash, come #FF5733. Ogni coppia di cifre rappresenta i canali rosso, verde e blu rispettivamente, con valori da 00 (0) a FF (255). Questa notazione compatta \u00e8 il formato pi\u00f9 comune in CSS e web design.',
+        'RGB (Rosso, Verde, Blu) definisce i colori specificando l\'intensit\u00e0 di ogni canale primario su una scala da 0 a 255. Il formato rgb(255, 87, 51) rappresenta lo stesso colore di #FF5733. RGB \u00e8 il modello nativo per schermi e monitor.',
+        'HSL (Tonalit\u00e0, Saturazione, Luminosit\u00e0) descrive i colori in modo pi\u00f9 intuitivo. La tonalit\u00e0 \u00e8 l\'angolo sulla ruota dei colori (0-360 gradi), la saturazione \u00e8 l\'intensit\u00e0 (0-100%) e la luminosit\u00e0 indica quanto chiaro o scuro \u00e8 il colore (0-100%).',
       ],
       faq: [
-        { q: 'Qual è la differenza tra HEX e RGB?', a: 'HEX e RGB rappresentano lo stesso modello colore ma con notazione diversa. HEX usa cifre esadecimali (00-FF), mentre RGB usa numeri decimali (0-255). #FF5733 in HEX equivale a rgb(255, 87, 51) in RGB.' },
-        { q: 'Perché HSL è utile per i designer?', a: 'HSL è intuitivo perché separa l\'identità del colore (tonalità) dalle sue proprietà (saturazione e luminosità). Per scurire un colore, basta diminuire la luminosità. Per trovare il complementare, aggiungere 180 alla tonalità.' },
-        { q: 'Come trovo il colore complementare?', a: 'In HSL, il colore complementare si trova aggiungendo 180 gradi al valore della tonalità. Per esempio, se il colore ha una tonalità di 11 gradi, il complementare ha una tonalità di 191 gradi.' },
-        { q: 'Posso usare questi formati in CSS?', a: 'Sì, tutti e tre i formati funzionano in CSS. HEX: color: #FF5733; RGB: color: rgb(255, 87, 51); HSL: color: hsl(11, 100%, 60%). Il CSS moderno supporta anche la trasparenza alpha con rgba() e hsla().' },
-        { q: 'Cos\'è la ruota dei colori?', a: 'La ruota dei colori dispone i colori in cerchio in base alla tonalità: 0/360 gradi è rosso, 60 è giallo, 120 è verde, 180 è ciano, 240 è blu e 300 è magenta. HSL usa questa ruota come base per il componente tonalità.' },
+        { q: 'Qual \u00e8 la differenza tra HEX e RGB?', a: 'HEX e RGB rappresentano lo stesso modello colore ma con notazione diversa. HEX usa cifre esadecimali (00-FF), mentre RGB usa numeri decimali (0-255). #FF5733 in HEX equivale a rgb(255, 87, 51) in RGB.' },
+        { q: 'Perch\u00e9 HSL \u00e8 utile per i designer?', a: 'HSL \u00e8 intuitivo perch\u00e9 separa l\'identit\u00e0 del colore (tonalit\u00e0) dalle sue propriet\u00e0 (saturazione e luminosit\u00e0). Per scurire un colore, basta diminuire la luminosit\u00e0. Per trovare il complementare, aggiungere 180 alla tonalit\u00e0.' },
+        { q: 'Come trovo il colore complementare?', a: 'In HSL, il colore complementare si trova aggiungendo 180 gradi al valore della tonalit\u00e0. Per esempio, se il colore ha una tonalit\u00e0 di 11 gradi, il complementare ha una tonalit\u00e0 di 191 gradi.' },
+        { q: 'Posso usare questi formati in CSS?', a: 'S\u00ec, tutti e tre i formati funzionano in CSS. HEX: color: #FF5733; RGB: color: rgb(255, 87, 51); HSL: color: hsl(11, 100%, 60%). Il CSS moderno supporta anche la trasparenza alpha con rgba() e hsla().' },
+        { q: 'Cos\'\u00e8 la ruota dei colori?', a: 'La ruota dei colori dispone i colori in cerchio in base alla tonalit\u00e0: 0/360 gradi \u00e8 rosso, 60 \u00e8 giallo, 120 \u00e8 verde, 180 \u00e8 ciano, 240 \u00e8 blu e 300 \u00e8 magenta. HSL usa questa ruota come base per il componente tonalit\u00e0.' },
       ],
     },
     es: {
-      title: 'Conversor de Colores Gratis – Convierte entre Formatos HEX, RGB y HSL',
+      title: 'Conversor de Colores Gratis \u2013 Convierte entre Formatos HEX, RGB y HSL',
       paragraphs: [
-        'La representación de colores en el diseño digital utiliza múltiples formatos. Los códigos HEX son el estándar web, RGB se usa en pantallas y programación, y HSL proporciona una forma intuitiva de describir colores mediante tono, saturación y luminosidad.',
-        'Los colores HEX (hexadecimales) usan un código de 6 dígitos precedido por el símbolo hash, como #FF5733. Cada par de dígitos representa los canales rojo, verde y azul respectivamente, con valores de 00 (0) a FF (255).',
+        'La representaci\u00f3n de colores en el dise\u00f1o digital utiliza m\u00faltiples formatos. Los c\u00f3digos HEX son el est\u00e1ndar web, RGB se usa en pantallas y programaci\u00f3n, y HSL proporciona una forma intuitiva de describir colores mediante tono, saturaci\u00f3n y luminosidad.',
+        'Los colores HEX (hexadecimales) usan un c\u00f3digo de 6 d\u00edgitos precedido por el s\u00edmbolo hash, como #FF5733. Cada par de d\u00edgitos representa los canales rojo, verde y azul respectivamente, con valores de 00 (0) a FF (255).',
         'RGB (Rojo, Verde, Azul) define los colores especificando la intensidad de cada canal primario en una escala de 0 a 255. El formato rgb(255, 87, 51) representa el mismo color que #FF5733.',
-        'HSL (Tono, Saturación, Luminosidad) describe los colores de forma más intuitiva. El tono es el ángulo en la rueda de colores (0-360 grados), la saturación es la intensidad (0-100%) y la luminosidad indica qué tan claro u oscuro es el color.',
+        'HSL (Tono, Saturaci\u00f3n, Luminosidad) describe los colores de forma m\u00e1s intuitiva. El tono es el \u00e1ngulo en la rueda de colores (0-360 grados), la saturaci\u00f3n es la intensidad (0-100%) y la luminosidad indica qu\u00e9 tan claro u oscuro es el color.',
       ],
       faq: [
-        { q: '¿Cuál es la diferencia entre HEX y RGB?', a: 'HEX y RGB representan el mismo modelo de color pero con notación diferente. HEX usa dígitos hexadecimales (00-FF), mientras que RGB usa números decimales (0-255). #FF5733 en HEX equivale a rgb(255, 87, 51) en RGB.' },
-        { q: '¿Por qué HSL es útil para diseñadores?', a: 'HSL es intuitivo porque separa la identidad del color (tono) de sus propiedades (saturación y luminosidad). Para oscurecer un color, solo disminuye la luminosidad. Para encontrar el complementario, suma 180 al tono.' },
-        { q: '¿Cómo encuentro el color complementario?', a: 'En HSL, el color complementario se encuentra sumando 180 grados al valor del tono. Por ejemplo, si el color tiene un tono de 11 grados, el complementario tiene un tono de 191 grados.' },
-        { q: '¿Puedo usar estos formatos en CSS?', a: 'Sí, los tres formatos funcionan en CSS. HEX: color: #FF5733; RGB: color: rgb(255, 87, 51); HSL: color: hsl(11, 100%, 60%).' },
-        { q: '¿Qué es la rueda de colores?', a: 'La rueda de colores organiza los colores en círculo según su tono: 0/360 grados es rojo, 60 es amarillo, 120 es verde, 180 es cian, 240 es azul y 300 es magenta.' },
+        { q: '\u00bfCu\u00e1l es la diferencia entre HEX y RGB?', a: 'HEX y RGB representan el mismo modelo de color pero con notaci\u00f3n diferente. HEX usa d\u00edgitos hexadecimales (00-FF), mientras que RGB usa n\u00fameros decimales (0-255). #FF5733 en HEX equivale a rgb(255, 87, 51) en RGB.' },
+        { q: '\u00bfPor qu\u00e9 HSL es \u00fatil para dise\u00f1adores?', a: 'HSL es intuitivo porque separa la identidad del color (tono) de sus propiedades (saturaci\u00f3n y luminosidad). Para oscurecer un color, solo disminuye la luminosidad. Para encontrar el complementario, suma 180 al tono.' },
+        { q: '\u00bfC\u00f3mo encuentro el color complementario?', a: 'En HSL, el color complementario se encuentra sumando 180 grados al valor del tono. Por ejemplo, si el color tiene un tono de 11 grados, el complementario tiene un tono de 191 grados.' },
+        { q: '\u00bfPuedo usar estos formatos en CSS?', a: 'S\u00ed, los tres formatos funcionan en CSS. HEX: color: #FF5733; RGB: color: rgb(255, 87, 51); HSL: color: hsl(11, 100%, 60%).' },
+        { q: '\u00bfQu\u00e9 es la rueda de colores?', a: 'La rueda de colores organiza los colores en c\u00edrculo seg\u00fan su tono: 0/360 grados es rojo, 60 es amarillo, 120 es verde, 180 es cian, 240 es azul y 300 es magenta.' },
       ],
     },
     fr: {
-      title: 'Convertisseur de Couleurs Gratuit – Convertissez entre les Formats HEX, RGB et HSL',
+      title: 'Convertisseur de Couleurs Gratuit \u2013 Convertissez entre les Formats HEX, RGB et HSL',
       paragraphs: [
-        'La représentation des couleurs en design numérique utilise plusieurs formats. Les codes HEX sont le standard web, RGB est utilisé pour les écrans et la programmation, et HSL offre une façon intuitive de décrire les couleurs par teinte, saturation et luminosité.',
-        'Les couleurs HEX (hexadécimales) utilisent un code à 6 chiffres précédé du symbole dièse, comme #FF5733. Chaque paire de chiffres représente les canaux rouge, vert et bleu respectivement, avec des valeurs de 00 (0) à FF (255).',
-        'RGB (Rouge, Vert, Bleu) définit les couleurs en spécifiant l\'intensité de chaque canal primaire sur une échelle de 0 à 255. Le format rgb(255, 87, 51) représente la même couleur que #FF5733.',
-        'HSL (Teinte, Saturation, Luminosité) décrit les couleurs de manière plus intuitive. La teinte est l\'angle sur le cercle chromatique (0-360 degrés), la saturation est l\'intensité (0-100%) et la luminosité indique à quel point la couleur est claire ou foncée.',
+        'La repr\u00e9sentation des couleurs en design num\u00e9rique utilise plusieurs formats. Les codes HEX sont le standard web, RGB est utilis\u00e9 pour les \u00e9crans et la programmation, et HSL offre une fa\u00e7on intuitive de d\u00e9crire les couleurs par teinte, saturation et luminosit\u00e9.',
+        'Les couleurs HEX (hexad\u00e9cimales) utilisent un code \u00e0 6 chiffres pr\u00e9c\u00e9d\u00e9 du symbole di\u00e8se, comme #FF5733. Chaque paire de chiffres repr\u00e9sente les canaux rouge, vert et bleu respectivement, avec des valeurs de 00 (0) \u00e0 FF (255).',
+        'RGB (Rouge, Vert, Bleu) d\u00e9finit les couleurs en sp\u00e9cifiant l\'intensit\u00e9 de chaque canal primaire sur une \u00e9chelle de 0 \u00e0 255. Le format rgb(255, 87, 51) repr\u00e9sente la m\u00eame couleur que #FF5733.',
+        'HSL (Teinte, Saturation, Luminosit\u00e9) d\u00e9crit les couleurs de mani\u00e8re plus intuitive. La teinte est l\'angle sur le cercle chromatique (0-360 degr\u00e9s), la saturation est l\'intensit\u00e9 (0-100%) et la luminosit\u00e9 indique \u00e0 quel point la couleur est claire ou fonc\u00e9e.',
       ],
       faq: [
-        { q: 'Quelle est la différence entre HEX et RGB ?', a: 'HEX et RGB représentent le même modèle de couleur mais avec une notation différente. HEX utilise des chiffres hexadécimaux (00-FF), tandis que RGB utilise des nombres décimaux (0-255). #FF5733 en HEX équivaut à rgb(255, 87, 51) en RGB.' },
-        { q: 'Pourquoi HSL est-il utile pour les designers ?', a: 'HSL est intuitif car il sépare l\'identité de la couleur (teinte) de ses propriétés (saturation et luminosité). Pour assombrir une couleur, diminuez la luminosité. Pour trouver le complémentaire, ajoutez 180 à la teinte.' },
-        { q: 'Comment trouver la couleur complémentaire ?', a: 'En HSL, la couleur complémentaire se trouve en ajoutant 180 degrés à la valeur de teinte. Par exemple, si la couleur a une teinte de 11 degrés, la complémentaire a une teinte de 191 degrés.' },
+        { q: 'Quelle est la diff\u00e9rence entre HEX et RGB ?', a: 'HEX et RGB repr\u00e9sentent le m\u00eame mod\u00e8le de couleur mais avec une notation diff\u00e9rente. HEX utilise des chiffres hexad\u00e9cimaux (00-FF), tandis que RGB utilise des nombres d\u00e9cimaux (0-255). #FF5733 en HEX \u00e9quivaut \u00e0 rgb(255, 87, 51) en RGB.' },
+        { q: 'Pourquoi HSL est-il utile pour les designers ?', a: 'HSL est intuitif car il s\u00e9pare l\'identit\u00e9 de la couleur (teinte) de ses propri\u00e9t\u00e9s (saturation et luminosit\u00e9). Pour assombrir une couleur, diminuez la luminosit\u00e9. Pour trouver le compl\u00e9mentaire, ajoutez 180 \u00e0 la teinte.' },
+        { q: 'Comment trouver la couleur compl\u00e9mentaire ?', a: 'En HSL, la couleur compl\u00e9mentaire se trouve en ajoutant 180 degr\u00e9s \u00e0 la valeur de teinte. Par exemple, si la couleur a une teinte de 11 degr\u00e9s, la compl\u00e9mentaire a une teinte de 191 degr\u00e9s.' },
         { q: 'Puis-je utiliser ces formats en CSS ?', a: 'Oui, les trois formats fonctionnent en CSS. HEX : color: #FF5733; RGB : color: rgb(255, 87, 51); HSL : color: hsl(11, 100%, 60%).' },
-        { q: 'Qu\'est-ce que le cercle chromatique ?', a: 'Le cercle chromatique organise les couleurs en cercle selon leur teinte : 0/360 degrés est rouge, 60 est jaune, 120 est vert, 180 est cyan, 240 est bleu et 300 est magenta.' },
+        { q: 'Qu\'est-ce que le cercle chromatique ?', a: 'Le cercle chromatique organise les couleurs en cercle selon leur teinte : 0/360 degr\u00e9s est rouge, 60 est jaune, 120 est vert, 180 est cyan, 240 est bleu et 300 est magenta.' },
       ],
     },
     de: {
-      title: 'Kostenloser Farbkonverter – Zwischen HEX, RGB und HSL Farbformaten Konvertieren',
+      title: 'Kostenloser Farbkonverter \u2013 Zwischen HEX, RGB und HSL Farbformaten Konvertieren',
       paragraphs: [
-        'Die Farbdarstellung im digitalen Design verwendet mehrere Formate. HEX-Codes sind der Web-Standard, RGB wird in Bildschirmen und Programmierung verwendet, und HSL bietet eine intuitive Beschreibung durch Farbton, Sättigung und Helligkeit.',
-        'HEX-Farben (hexadezimal) verwenden einen 6-stelligen Code mit vorangestelltem Hash-Symbol, wie #FF5733. Jedes Ziffernpaar repräsentiert die Rot-, Grün- und Blau-Kanäle mit Werten von 00 (0) bis FF (255).',
-        'RGB (Rot, Grün, Blau) definiert Farben durch Angabe der Intensität jedes Primärkanals auf einer Skala von 0 bis 255. Das Format rgb(255, 87, 51) repräsentiert dieselbe Farbe wie #FF5733.',
-        'HSL (Farbton, Sättigung, Helligkeit) beschreibt Farben intuitiver. Der Farbton ist der Winkel auf dem Farbrad (0-360 Grad), die Sättigung ist die Intensität (0-100%) und die Helligkeit gibt an, wie hell oder dunkel die Farbe ist.',
+        'Die Farbdarstellung im digitalen Design verwendet mehrere Formate. HEX-Codes sind der Web-Standard, RGB wird in Bildschirmen und Programmierung verwendet, und HSL bietet eine intuitive Beschreibung durch Farbton, S\u00e4ttigung und Helligkeit.',
+        'HEX-Farben (hexadezimal) verwenden einen 6-stelligen Code mit vorangestelltem Hash-Symbol, wie #FF5733. Jedes Ziffernpaar repr\u00e4sentiert die Rot-, Gr\u00fcn- und Blau-Kan\u00e4le mit Werten von 00 (0) bis FF (255).',
+        'RGB (Rot, Gr\u00fcn, Blau) definiert Farben durch Angabe der Intensit\u00e4t jedes Prim\u00e4rkanals auf einer Skala von 0 bis 255. Das Format rgb(255, 87, 51) repr\u00e4sentiert dieselbe Farbe wie #FF5733.',
+        'HSL (Farbton, S\u00e4ttigung, Helligkeit) beschreibt Farben intuitiver. Der Farbton ist der Winkel auf dem Farbrad (0-360 Grad), die S\u00e4ttigung ist die Intensit\u00e4t (0-100%) und die Helligkeit gibt an, wie hell oder dunkel die Farbe ist.',
       ],
       faq: [
-        { q: 'Was ist der Unterschied zwischen HEX und RGB?', a: 'HEX und RGB repräsentieren dasselbe Farbmodell, aber mit unterschiedlicher Notation. HEX verwendet hexadezimale Ziffern (00-FF), während RGB Dezimalzahlen (0-255) verwendet. #FF5733 in HEX entspricht rgb(255, 87, 51) in RGB.' },
-        { q: 'Warum ist HSL für Designer nützlich?', a: 'HSL ist intuitiv, weil es die Farbidentität (Farbton) von ihren Eigenschaften (Sättigung und Helligkeit) trennt. Um eine Farbe dunkler zu machen, verringern Sie die Helligkeit. Für die Komplementärfarbe addieren Sie 180 zum Farbton.' },
-        { q: 'Wie finde ich die Komplementärfarbe?', a: 'In HSL findet man die Komplementärfarbe, indem man 180 Grad zum Farbtonwert addiert. Beispiel: Hat die Farbe einen Farbton von 11 Grad, hat die Komplementärfarbe einen Farbton von 191 Grad.' },
+        { q: 'Was ist der Unterschied zwischen HEX und RGB?', a: 'HEX und RGB repr\u00e4sentieren dasselbe Farbmodell, aber mit unterschiedlicher Notation. HEX verwendet hexadezimale Ziffern (00-FF), w\u00e4hrend RGB Dezimalzahlen (0-255) verwendet. #FF5733 in HEX entspricht rgb(255, 87, 51) in RGB.' },
+        { q: 'Warum ist HSL f\u00fcr Designer n\u00fctzlich?', a: 'HSL ist intuitiv, weil es die Farbidentit\u00e4t (Farbton) von ihren Eigenschaften (S\u00e4ttigung und Helligkeit) trennt. Um eine Farbe dunkler zu machen, verringern Sie die Helligkeit. F\u00fcr die Komplement\u00e4rfarbe addieren Sie 180 zum Farbton.' },
+        { q: 'Wie finde ich die Komplement\u00e4rfarbe?', a: 'In HSL findet man die Komplement\u00e4rfarbe, indem man 180 Grad zum Farbtonwert addiert. Beispiel: Hat die Farbe einen Farbton von 11 Grad, hat die Komplement\u00e4rfarbe einen Farbton von 191 Grad.' },
         { q: 'Kann ich diese Formate in CSS verwenden?', a: 'Ja, alle drei Formate funktionieren in CSS. HEX: color: #FF5733; RGB: color: rgb(255, 87, 51); HSL: color: hsl(11, 100%, 60%).' },
-        { q: 'Was ist das Farbrad?', a: 'Das Farbrad ordnet Farben im Kreis nach ihrem Farbton: 0/360 Grad ist Rot, 60 ist Gelb, 120 ist Grün, 180 ist Cyan, 240 ist Blau und 300 ist Magenta.' },
+        { q: 'Was ist das Farbrad?', a: 'Das Farbrad ordnet Farben im Kreis nach ihrem Farbton: 0/360 Grad ist Rot, 60 ist Gelb, 120 ist Gr\u00fcn, 180 ist Cyan, 240 ist Blau und 300 ist Magenta.' },
       ],
     },
     pt: {
-      title: 'Conversor de Cores Grátis – Converta entre Formatos HEX, RGB e HSL',
+      title: 'Conversor de Cores Gr\u00e1tis \u2013 Converta entre Formatos HEX, RGB e HSL',
       paragraphs: [
-        'A representação de cores no design digital utiliza múltiplos formatos. Códigos HEX são o padrão web, RGB é usado em telas e programação, e HSL oferece uma forma intuitiva de descrever cores através de matiz, saturação e luminosidade.',
-        'As cores HEX (hexadecimais) usam um código de 6 dígitos precedido pelo símbolo hash, como #FF5733. Cada par de dígitos representa os canais vermelho, verde e azul respectivamente, com valores de 00 (0) a FF (255).',
-        'RGB (Vermelho, Verde, Azul) define cores especificando a intensidade de cada canal primário em uma escala de 0 a 255. O formato rgb(255, 87, 51) representa a mesma cor que #FF5733.',
-        'HSL (Matiz, Saturação, Luminosidade) descreve cores de forma mais intuitiva. O matiz é o ângulo na roda de cores (0-360 graus), a saturação é a intensidade (0-100%) e a luminosidade indica quão clara ou escura a cor é.',
+        'A representa\u00e7\u00e3o de cores no design digital utiliza m\u00faltiplos formatos. C\u00f3digos HEX s\u00e3o o padr\u00e3o web, RGB \u00e9 usado em telas e programa\u00e7\u00e3o, e HSL oferece uma forma intuitiva de descrever cores atrav\u00e9s de matiz, satura\u00e7\u00e3o e luminosidade.',
+        'As cores HEX (hexadecimais) usam um c\u00f3digo de 6 d\u00edgitos precedido pelo s\u00edmbolo hash, como #FF5733. Cada par de d\u00edgitos representa os canais vermelho, verde e azul respectivamente, com valores de 00 (0) a FF (255).',
+        'RGB (Vermelho, Verde, Azul) define cores especificando a intensidade de cada canal prim\u00e1rio em uma escala de 0 a 255. O formato rgb(255, 87, 51) representa a mesma cor que #FF5733.',
+        'HSL (Matiz, Satura\u00e7\u00e3o, Luminosidade) descreve cores de forma mais intuitiva. O matiz \u00e9 o \u00e2ngulo na roda de cores (0-360 graus), a satura\u00e7\u00e3o \u00e9 a intensidade (0-100%) e a luminosidade indica qu\u00e3o clara ou escura a cor \u00e9.',
       ],
       faq: [
-        { q: 'Qual a diferença entre HEX e RGB?', a: 'HEX e RGB representam o mesmo modelo de cor mas com notação diferente. HEX usa dígitos hexadecimais (00-FF), enquanto RGB usa números decimais (0-255). #FF5733 em HEX equivale a rgb(255, 87, 51) em RGB.' },
-        { q: 'Por que HSL é útil para designers?', a: 'HSL é intuitivo porque separa a identidade da cor (matiz) de suas propriedades (saturação e luminosidade). Para escurecer uma cor, diminua a luminosidade. Para encontrar a complementar, some 180 ao matiz.' },
-        { q: 'Como encontro a cor complementar?', a: 'Em HSL, a cor complementar é encontrada somando 180 graus ao valor do matiz. Por exemplo, se a cor tem matiz de 11 graus, a complementar tem matiz de 191 graus.' },
-        { q: 'Posso usar esses formatos em CSS?', a: 'Sim, os três formatos funcionam em CSS. HEX: color: #FF5733; RGB: color: rgb(255, 87, 51); HSL: color: hsl(11, 100%, 60%).' },
-        { q: 'O que é a roda de cores?', a: 'A roda de cores organiza as cores em círculo segundo seu matiz: 0/360 graus é vermelho, 60 é amarelo, 120 é verde, 180 é ciano, 240 é azul e 300 é magenta.' },
+        { q: 'Qual a diferen\u00e7a entre HEX e RGB?', a: 'HEX e RGB representam o mesmo modelo de cor mas com nota\u00e7\u00e3o diferente. HEX usa d\u00edgitos hexadecimais (00-FF), enquanto RGB usa n\u00fameros decimais (0-255). #FF5733 em HEX equivale a rgb(255, 87, 51) em RGB.' },
+        { q: 'Por que HSL \u00e9 \u00fatil para designers?', a: 'HSL \u00e9 intuitivo porque separa a identidade da cor (matiz) de suas propriedades (satura\u00e7\u00e3o e luminosidade). Para escurecer uma cor, diminua a luminosidade. Para encontrar a complementar, some 180 ao matiz.' },
+        { q: 'Como encontro a cor complementar?', a: 'Em HSL, a cor complementar \u00e9 encontrada somando 180 graus ao valor do matiz. Por exemplo, se a cor tem matiz de 11 graus, a complementar tem matiz de 191 graus.' },
+        { q: 'Posso usar esses formatos em CSS?', a: 'Sim, os tr\u00eas formatos funcionam em CSS. HEX: color: #FF5733; RGB: color: rgb(255, 87, 51); HSL: color: hsl(11, 100%, 60%).' },
+        { q: 'O que \u00e9 a roda de cores?', a: 'A roda de cores organiza as cores em c\u00edrculo segundo seu matiz: 0/360 graus \u00e9 vermelho, 60 \u00e9 amarelo, 120 \u00e9 verde, 180 \u00e9 ciano, 240 \u00e9 azul e 300 \u00e9 magenta.' },
       ],
     },
   };
@@ -226,18 +336,20 @@ export default function ColorConverter() {
         <h1 className="text-3xl font-bold text-gray-900 mb-2">{toolT.name}</h1>
         <p className="text-gray-600 mb-6">{toolT.description}</p>
 
-        <div className="bg-white rounded-xl border border-gray-200 p-6 space-y-4">
+        <div className="bg-white rounded-xl border border-gray-200 p-6 space-y-5">
+          {/* Input mode selector */}
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-1">{labels.inputMode[lang]}</label>
             <div className="grid grid-cols-3 gap-2">
               {(['hex', 'rgb', 'hsl'] as const).map(m => (
-                <button key={m} onClick={() => setMode(m)} className={`px-4 py-2 rounded-lg border text-sm font-medium transition ${mode === m ? 'bg-blue-600 text-white border-blue-600' : 'bg-white text-gray-700 border-gray-300 hover:bg-gray-50'}`}>
+                <button key={m} onClick={() => setMode(m)} className={`px-4 py-2 rounded-lg border text-sm font-medium transition-colors ${mode === m ? 'bg-blue-600 text-white border-blue-600' : 'bg-white text-gray-700 border-gray-300 hover:bg-gray-50'}`}>
                   {m.toUpperCase()}
                 </button>
               ))}
             </div>
           </div>
 
+          {/* HEX input */}
           {mode === 'hex' && (
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-1">HEX</label>
@@ -248,6 +360,7 @@ export default function ColorConverter() {
             </div>
           )}
 
+          {/* RGB input */}
           {mode === 'rgb' && (
             <div className="grid grid-cols-3 gap-3">
               <div>
@@ -265,6 +378,7 @@ export default function ColorConverter() {
             </div>
           )}
 
+          {/* HSL input */}
           {mode === 'hsl' && (
             <div className="grid grid-cols-3 gap-3">
               <div>
@@ -282,38 +396,82 @@ export default function ColorConverter() {
             </div>
           )}
 
-          {!color && hexInput && (
-            <div className="p-3 bg-red-50 rounded-lg text-red-600 text-center font-medium">{labels.invalid[lang]}</div>
+          {/* Action buttons: Convert + Reset */}
+          <div className="flex gap-3">
+            <button onClick={handleConvert} disabled={!color} className={`flex-1 px-4 py-2.5 rounded-lg text-sm font-medium transition-colors ${color ? 'bg-blue-600 text-white hover:bg-blue-700' : 'bg-gray-200 text-gray-400 cursor-not-allowed'}`}>
+              {labels.results[lang].split(' ')[0]}
+            </button>
+            <button onClick={handleReset} className="px-4 py-2.5 rounded-lg border border-gray-300 text-sm font-medium text-gray-700 hover:bg-gray-50 transition-colors">
+              {labels.reset[lang]}
+            </button>
+          </div>
+
+          {/* Validation message */}
+          {validationMsg && (
+            <div className="p-3 bg-red-50 rounded-lg text-red-600 text-center text-sm font-medium">{validationMsg}</div>
           )}
 
+          {/* Large color preview */}
           {color && (
-            <>
-              <div className="flex items-center gap-4">
-                <div className="w-20 h-20 rounded-xl border border-gray-200 shadow-sm" style={{ backgroundColor: color.hex }} />
-                <div className="text-sm text-gray-500">{labels.preview[lang]}</div>
+            <div className="relative">
+              <div className="w-full h-32 rounded-xl border border-gray-200 shadow-inner flex items-center justify-center" style={{ backgroundColor: color.hex }}>
+                <span className="font-mono text-lg font-bold px-3 py-1 rounded-md" style={{ color: getContrastColor(color.hex), backgroundColor: 'rgba(0,0,0,0.15)' }}>
+                  {color.hex}
+                </span>
               </div>
+              <p className="text-xs text-gray-500 mt-1 text-center">{labels.preview[lang]}</p>
+            </div>
+          )}
 
-              <div className="space-y-3">
-                <h3 className="font-semibold text-gray-900">{labels.results[lang]}</h3>
+          {/* Result cards */}
+          {color && (
+            <div className="space-y-3">
+              <h3 className="font-semibold text-gray-900">{labels.results[lang]}</h3>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                 {([
                   ['hex', 'HEX', color.hex],
                   ['rgb', 'RGB', `rgb(${color.rgb[0]}, ${color.rgb[1]}, ${color.rgb[2]})`],
                   ['hsl', 'HSL', `hsl(${color.hsl[0]}, ${color.hsl[1]}%, ${color.hsl[2]}%)`],
+                  ['cmyk', 'CMYK', `cmyk(${color.cmyk[0]}%, ${color.cmyk[1]}%, ${color.cmyk[2]}%, ${color.cmyk[3]}%)`],
                 ] as [string, string, string][]).map(([key, label, value]) => (
-                  <div key={key} className="flex items-center justify-between bg-gray-50 rounded-lg px-4 py-3">
-                    <div>
-                      <div className="text-xs text-gray-500">{label}</div>
-                      <div className="font-mono text-lg font-bold text-gray-900">{value}</div>
-                    </div>
-                    <button onClick={() => copyToClipboard(value, key)} className="text-sm px-3 py-1 bg-blue-100 text-blue-700 rounded-md hover:bg-blue-200 transition">
-                      {copiedField === key ? labels.copied[lang] : '📋'}
+                  <div key={key} className={`rounded-lg border-l-4 ${cardAccents[key]} ${cardBgs[key]} px-4 py-3 flex flex-col gap-1`}>
+                    <div className={`text-xs font-semibold uppercase tracking-wide ${cardTextAccents[key]}`}>{label}</div>
+                    <div className="font-mono text-sm font-bold text-gray-900 break-all">{value}</div>
+                    <button
+                      onClick={() => copyToClipboard(value, key)}
+                      className={`mt-1 self-start text-xs px-3 py-1 rounded-md font-medium transition-colors ${cardBtnBgs[key]}`}
+                    >
+                      {copiedField === key ? labels.copied[lang] : labels.copy[lang]}
                     </button>
                   </div>
                 ))}
               </div>
-            </>
+            </div>
           )}
         </div>
+
+        {/* Color history */}
+        {history.length > 0 && (
+          <div className="mt-6 bg-white rounded-xl border border-gray-200 p-4">
+            <div className="flex items-center justify-between mb-3">
+              <h3 className="text-sm font-semibold text-gray-700">{labels.history[lang]}</h3>
+              <button onClick={() => setHistory([])} className="text-xs text-gray-400 hover:text-gray-600 transition-colors">
+                {labels.clearHistory[lang]}
+              </button>
+            </div>
+            <div className="flex flex-wrap gap-2">
+              {history.map((hex) => (
+                <button
+                  key={hex}
+                  onClick={() => handleHistoryClick(hex)}
+                  title={`#${hex}`}
+                  className="w-10 h-10 rounded-lg border-2 border-gray-200 hover:border-gray-400 transition-colors shadow-sm hover:scale-110 transform"
+                  style={{ backgroundColor: `#${hex}` }}
+                />
+              ))}
+            </div>
+          </div>
+        )}
 
         {/* SEO Article */}
         <article className="mt-12 prose prose-gray max-w-none">
@@ -329,7 +487,7 @@ export default function ColorConverter() {
               <div key={i} className="border border-gray-200 rounded-lg">
                 <button onClick={() => setOpenFaq(openFaq === i ? null : i)} className="w-full text-left px-4 py-3 font-medium text-gray-900 flex justify-between items-center">
                   {item.q}
-                  <span className="text-gray-400">{openFaq === i ? '−' : '+'}</span>
+                  <span className="text-gray-400">{openFaq === i ? '\u2212' : '+'}</span>
                 </button>
                 {openFaq === i && <div className="px-4 pb-3 text-gray-600">{item.a}</div>}
               </div>

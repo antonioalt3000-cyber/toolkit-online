@@ -15,6 +15,14 @@ interface IpInfo {
   postal?: string;
 }
 
+interface HistoryEntry {
+  ip: string;
+  city?: string;
+  country?: string;
+  org?: string;
+  timestamp: number;
+}
+
 export default function IpLookup() {
   const { lang } = useParams() as { lang: Locale };
   const toolT = tools['ip-lookup'][lang];
@@ -22,6 +30,9 @@ export default function IpLookup() {
   const [ipInfo, setIpInfo] = useState<IpInfo | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
+  const [copied, setCopied] = useState(false);
+  const [copiedAll, setCopiedAll] = useState(false);
+  const [history, setHistory] = useState<HistoryEntry[]>([]);
 
   const labels = {
     yourIp: { en: 'Your IP Address', it: 'Il Tuo Indirizzo IP', es: 'Tu Dirección IP', fr: 'Votre Adresse IP', de: 'Ihre IP-Adresse', pt: 'Seu Endereço IP' },
@@ -38,9 +49,40 @@ export default function IpLookup() {
     copy: { en: 'Copy IP', it: 'Copia IP', es: 'Copiar IP', fr: 'Copier IP', de: 'IP kopieren', pt: 'Copiar IP' },
     copied: { en: 'Copied!', it: 'Copiato!', es: '¡Copiado!', fr: 'Copié !', de: 'Kopiert!', pt: 'Copiado!' },
     na: { en: 'N/A', it: 'N/D', es: 'N/D', fr: 'N/D', de: 'K.A.', pt: 'N/D' },
+    copyAll: { en: 'Copy All Info', it: 'Copia Tutte le Info', es: 'Copiar Toda la Info', fr: 'Copier Toutes les Infos', de: 'Alle Infos Kopieren', pt: 'Copiar Todas as Infos' },
+    reset: { en: 'Reset', it: 'Resetta', es: 'Restablecer', fr: 'Réinitialiser', de: 'Zurücksetzen', pt: 'Redefinir' },
+    history: { en: 'Recent Lookups', it: 'Ricerche Recenti', es: 'Búsquedas Recientes', fr: 'Recherches Récentes', de: 'Letzte Abfragen', pt: 'Buscas Recentes' },
+    clearHistory: { en: 'Clear History', it: 'Cancella Cronologia', es: 'Borrar Historial', fr: 'Effacer l\'Historique', de: 'Verlauf Löschen', pt: 'Limpar Histórico' },
+    noHistory: { en: 'No lookups yet', it: 'Nessuna ricerca', es: 'Sin búsquedas', fr: 'Aucune recherche', de: 'Keine Abfragen', pt: 'Nenhuma busca' },
+    networkInfo: { en: 'Network Information', it: 'Informazioni di Rete', es: 'Información de Red', fr: 'Informations Réseau', de: 'Netzwerkinformationen', pt: 'Informações de Rede' },
+    locationInfo: { en: 'Location Details', it: 'Dettagli Posizione', es: 'Detalles de Ubicación', fr: 'Détails de Localisation', de: 'Standortdetails', pt: 'Detalhes de Localização' },
+    refresh: { en: 'Refresh', it: 'Aggiorna', es: 'Actualizar', fr: 'Actualiser', de: 'Aktualisieren', pt: 'Atualizar' },
   } as Record<string, Record<Locale, string>>;
 
-  const [copied, setCopied] = useState(false);
+  // Load history from localStorage
+  useEffect(() => {
+    try {
+      const saved = localStorage.getItem('ip-lookup-history');
+      if (saved) setHistory(JSON.parse(saved));
+    } catch {}
+  }, []);
+
+  const saveToHistory = (info: IpInfo) => {
+    const entry: HistoryEntry = {
+      ip: info.ip,
+      city: info.city,
+      country: info.country,
+      org: info.org,
+      timestamp: Date.now(),
+    };
+    setHistory(prev => {
+      // Don't add duplicate IPs consecutively
+      if (prev.length > 0 && prev[0].ip === entry.ip) return prev;
+      const updated = [entry, ...prev].slice(0, 5);
+      try { localStorage.setItem('ip-lookup-history', JSON.stringify(updated)); } catch {}
+      return updated;
+    });
+  };
 
   const fetchIpInfo = async () => {
     setLoading(true);
@@ -50,12 +92,14 @@ export default function IpLookup() {
       if (!res.ok) throw new Error('Failed');
       const data = await res.json();
       setIpInfo(data);
+      saveToHistory(data);
     } catch {
       try {
         const res = await fetch('https://api.ipify.org?format=json');
         if (!res.ok) throw new Error('Failed');
         const data = await res.json();
         setIpInfo({ ip: data.ip });
+        saveToHistory({ ip: data.ip });
       } catch {
         setError(labels.errorMsg[lang]);
       }
@@ -77,14 +121,45 @@ export default function IpLookup() {
     }
   };
 
-  const infoRows = ipInfo ? [
+  const copyAllInfo = () => {
+    if (!ipInfo) return;
+    const lines = [
+      `IP: ${ipInfo.ip}`,
+      ipInfo.city ? `${labels.city[lang]}: ${ipInfo.city}` : null,
+      ipInfo.region ? `${labels.region[lang]}: ${ipInfo.region}` : null,
+      ipInfo.country ? `${labels.country[lang]}: ${ipInfo.country}` : null,
+      ipInfo.postal ? `${labels.postalCode[lang]}: ${ipInfo.postal}` : null,
+      ipInfo.loc ? `${labels.location[lang]}: ${ipInfo.loc}` : null,
+      ipInfo.timezone ? `${labels.timezone[lang]}: ${ipInfo.timezone}` : null,
+      ipInfo.org ? `${labels.isp[lang]}: ${ipInfo.org}` : null,
+    ].filter(Boolean).join('\n');
+    navigator.clipboard.writeText(lines);
+    setCopiedAll(true);
+    setTimeout(() => setCopiedAll(false), 2000);
+  };
+
+  const resetResults = () => {
+    setIpInfo(null);
+    setError('');
+    setLoading(false);
+  };
+
+  const clearHistory = () => {
+    setHistory([]);
+    try { localStorage.removeItem('ip-lookup-history'); } catch {}
+  };
+
+  const networkRows = ipInfo ? [
+    { label: labels.isp[lang], value: ipInfo.org },
+  ] : [];
+
+  const locationRows = ipInfo ? [
     { label: labels.city[lang], value: ipInfo.city },
     { label: labels.region[lang], value: ipInfo.region },
     { label: labels.country[lang], value: ipInfo.country },
     { label: labels.postalCode[lang], value: ipInfo.postal },
     { label: labels.location[lang], value: ipInfo.loc },
     { label: labels.timezone[lang], value: ipInfo.timezone },
-    { label: labels.isp[lang], value: ipInfo.org },
   ] : [];
 
   const seoContent: Record<Locale, { title: string; paragraphs: string[]; faq: { q: string; a: string }[] }> = {
@@ -210,6 +285,7 @@ export default function IpLookup() {
 
           {ipInfo && !loading && (
             <>
+              {/* IP Address Card */}
               <div className="p-5 rounded-lg bg-blue-50 text-center">
                 <div className="text-sm text-gray-500 mb-1">{labels.yourIp[lang]}</div>
                 <div className="text-3xl font-bold text-blue-700 font-mono">{ipInfo.ip}</div>
@@ -221,19 +297,116 @@ export default function IpLookup() {
                 </button>
               </div>
 
-              {infoRows.some(r => r.value) && (
-                <div className="space-y-2">
-                  {infoRows.map((row, i) => row.value ? (
-                    <div key={i} className="flex justify-between items-center py-2 border-b border-gray-100">
-                      <span className="text-sm text-gray-500">{row.label}</span>
-                      <span className="text-sm font-medium text-gray-900">{row.value}</span>
-                    </div>
-                  ) : null)}
+              {/* Result Cards Grid */}
+              <div className="grid grid-cols-2 gap-3">
+                {ipInfo.city && (
+                  <div className="p-4 rounded-lg bg-green-50">
+                    <div className="text-xs text-gray-500 mb-1">{labels.city[lang]}</div>
+                    <div className="text-lg font-bold text-green-700">{ipInfo.city}</div>
+                  </div>
+                )}
+                {ipInfo.country && (
+                  <div className="p-4 rounded-lg bg-purple-50">
+                    <div className="text-xs text-gray-500 mb-1">{labels.country[lang]}</div>
+                    <div className="text-lg font-bold text-purple-700">{ipInfo.country}</div>
+                  </div>
+                )}
+                {ipInfo.region && (
+                  <div className="p-4 rounded-lg bg-orange-50">
+                    <div className="text-xs text-gray-500 mb-1">{labels.region[lang]}</div>
+                    <div className="text-lg font-bold text-orange-700">{ipInfo.region}</div>
+                  </div>
+                )}
+                {ipInfo.timezone && (
+                  <div className="p-4 rounded-lg bg-yellow-50">
+                    <div className="text-xs text-gray-500 mb-1">{labels.timezone[lang]}</div>
+                    <div className="text-lg font-bold text-yellow-700">{ipInfo.timezone}</div>
+                  </div>
+                )}
+              </div>
+
+              {/* Network Information Section */}
+              {ipInfo.org && (
+                <div>
+                  <h3 className="text-sm font-semibold text-gray-700 mb-2">{labels.networkInfo[lang]}</h3>
+                  <div className="p-4 rounded-lg bg-indigo-50">
+                    <div className="text-xs text-gray-500 mb-1">{labels.isp[lang]}</div>
+                    <div className="text-sm font-medium text-indigo-700">{ipInfo.org}</div>
+                  </div>
                 </div>
               )}
+
+              {/* Location Details Section */}
+              {locationRows.some(r => r.value) && (
+                <div>
+                  <h3 className="text-sm font-semibold text-gray-700 mb-2">{labels.locationInfo[lang]}</h3>
+                  <div className="space-y-2">
+                    {locationRows.map((row, i) => row.value ? (
+                      <div key={i} className="flex justify-between items-center py-2 border-b border-gray-100">
+                        <span className="text-sm text-gray-500">{row.label}</span>
+                        <span className="text-sm font-medium text-gray-900">{row.value}</span>
+                      </div>
+                    ) : null)}
+                  </div>
+                </div>
+              )}
+
+              {/* Action Buttons */}
+              <div className="flex gap-3">
+                <button
+                  onClick={copyAllInfo}
+                  className="flex-1 py-2 px-4 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors text-sm font-medium"
+                >
+                  {copiedAll ? labels.copied[lang] : labels.copyAll[lang]}
+                </button>
+                <button
+                  onClick={fetchIpInfo}
+                  className="flex-1 py-2 px-4 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors text-sm font-medium"
+                >
+                  {labels.refresh[lang]}
+                </button>
+                <button
+                  onClick={resetResults}
+                  className="flex-1 py-2 px-4 bg-gray-600 text-white rounded-lg hover:bg-gray-700 transition-colors text-sm font-medium"
+                >
+                  {labels.reset[lang]}
+                </button>
+              </div>
             </>
           )}
         </div>
+
+        {/* History Section */}
+        {history.length > 0 && (
+          <div className="mt-6 bg-white rounded-xl border border-gray-200 p-6">
+            <div className="flex justify-between items-center mb-3">
+              <h3 className="text-sm font-semibold text-gray-700">{labels.history[lang]}</h3>
+              <button
+                onClick={clearHistory}
+                className="text-xs text-red-500 hover:text-red-700 transition-colors"
+              >
+                {labels.clearHistory[lang]}
+              </button>
+            </div>
+            <div className="space-y-2">
+              {history.map((entry, i) => (
+                <div key={i} className="flex justify-between items-center py-2 px-3 bg-gray-50 rounded-lg">
+                  <div>
+                    <span className="text-sm font-mono font-medium text-gray-900">{entry.ip}</span>
+                    {(entry.city || entry.country) && (
+                      <span className="text-xs text-gray-500 ml-2">
+                        {[entry.city, entry.country].filter(Boolean).join(', ')}
+                      </span>
+                    )}
+                  </div>
+                  <span className="text-xs text-gray-400">
+                    {new Date(entry.timestamp).toLocaleTimeString()}
+                  </span>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
 
         {/* SEO Article */}
         <article className="mt-12 prose prose-gray max-w-none">

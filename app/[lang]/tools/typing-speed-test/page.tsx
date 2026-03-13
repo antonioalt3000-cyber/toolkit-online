@@ -4,7 +4,34 @@ import { useParams } from 'next/navigation';
 import { tools, type Locale } from '@/lib/translations';
 import ToolPageWrapper from '@/components/ToolPageWrapper';
 
-const sampleTexts: Record<Locale, string[]> = {
+const sampleTextsEasy: Record<Locale, string[]> = {
+  en: [
+    'The cat sat on the mat. The dog ran in the park. The sun is warm and the sky is blue. I like to read books and play games.',
+    'It is a nice day. The birds sing in the tree. We go to the shop to buy food. She has a red hat and a blue bag.',
+  ],
+  it: [
+    'Il gatto si siede sul tappeto. Il cane corre nel parco. Il sole è caldo e il cielo è blu. Mi piace leggere libri e giocare.',
+    'È una bella giornata. Gli uccelli cantano sull\'albero. Andiamo al negozio a comprare del cibo. Lei ha un cappello rosso.',
+  ],
+  es: [
+    'El gato se sienta en la alfombra. El perro corre en el parque. El sol es cálido y el cielo es azul. Me gusta leer libros y jugar.',
+    'Es un buen día. Los pájaros cantan en el árbol. Vamos a la tienda a comprar comida. Ella tiene un sombrero rojo.',
+  ],
+  fr: [
+    'Le chat est assis sur le tapis. Le chien court dans le parc. Le soleil est chaud et le ciel est bleu. J\'aime lire des livres et jouer.',
+    'C\'est une belle journée. Les oiseaux chantent dans l\'arbre. Nous allons au magasin acheter de la nourriture. Elle a un chapeau rouge.',
+  ],
+  de: [
+    'Die Katze sitzt auf der Matte. Der Hund läuft im Park. Die Sonne ist warm und der Himmel ist blau. Ich lese gerne Bücher und spiele.',
+    'Es ist ein schöner Tag. Die Vögel singen im Baum. Wir gehen in den Laden um Essen zu kaufen. Sie hat einen roten Hut.',
+  ],
+  pt: [
+    'O gato senta no tapete. O cachorro corre no parque. O sol é quente e o céu é azul. Eu gosto de ler livros e jogar.',
+    'É um bom dia. Os pássaros cantam na árvore. Vamos à loja comprar comida. Ela tem um chapéu vermelho.',
+  ],
+};
+
+const sampleTextsMedium: Record<Locale, string[]> = {
   en: [
     'The quick brown fox jumps over the lazy dog. Programming is the art of telling another human what one wants the computer to do. Every great developer you know got there by solving problems they were unqualified to solve until they actually did it.',
     'Technology is best when it brings people together. The best way to predict the future is to invent it. Innovation distinguishes between a leader and a follower. Stay hungry, stay foolish. Think different and make a difference.',
@@ -37,6 +64,43 @@ const sampleTexts: Record<Locale, string[]> = {
   ],
 };
 
+const sampleTextsHard: Record<Locale, string[]> = {
+  en: [
+    'Extraordinary accomplishments require unprecedented determination; the juxtaposition of theoretical knowledge and practical experience distinguishes exceptional professionals from their contemporaries. Sophisticated algorithms, meticulously engineered architectures, and comprehensive documentation contribute significantly to sustainable software development methodologies.',
+    'Notwithstanding the overwhelming complexity of distributed microservice architectures, experienced practitioners systematically decompose multifaceted requirements into manageable, independently deployable components. Asynchronous communication paradigms, event-driven choreography, and fault-tolerant orchestration patterns fundamentally reshape contemporary enterprise applications.',
+  ],
+  it: [
+    'Risultati straordinari richiedono determinazione senza precedenti; la giustapposizione di conoscenza teorica ed esperienza pratica distingue i professionisti eccezionali dai loro contemporanei. Algoritmi sofisticati, architetture meticolosamente ingegnerizzate e documentazione completa contribuiscono significativamente alle metodologie di sviluppo software sostenibili.',
+    'Nonostante la complessità schiacciante delle architetture a microservizi distribuiti, i professionisti esperti scompongono sistematicamente requisiti multiformi in componenti gestibili e distribuibili indipendentemente.',
+  ],
+  es: [
+    'Los logros extraordinarios requieren una determinación sin precedentes; la yuxtaposición del conocimiento teórico y la experiencia práctica distingue a los profesionales excepcionales de sus contemporáneos. Los algoritmos sofisticados, las arquitecturas meticulosamente diseñadas y la documentación integral contribuyen significativamente a las metodologías de desarrollo de software sostenibles.',
+    'A pesar de la abrumadora complejidad de las arquitecturas de microservicios distribuidos, los profesionales experimentados descomponen sistemáticamente los requisitos multifacéticos en componentes manejables e independientemente desplegables.',
+  ],
+  fr: [
+    'Des réalisations extraordinaires exigent une détermination sans précédent; la juxtaposition des connaissances théoriques et de l\'expérience pratique distingue les professionnels exceptionnels de leurs contemporains. Des algorithmes sophistiqués, des architectures méticuleusement conçues et une documentation complète contribuent significativement aux méthodologies de développement logiciel durables.',
+    'Malgré la complexité écrasante des architectures de microservices distribués, les praticiens expérimentés décomposent systématiquement les exigences multiformes en composants gérables et déployables indépendamment.',
+  ],
+  de: [
+    'Außergewöhnliche Leistungen erfordern beispiellose Entschlossenheit; die Gegenüberstellung von theoretischem Wissen und praktischer Erfahrung unterscheidet außergewöhnliche Fachleute von ihren Zeitgenossen. Ausgefeilte Algorithmen, sorgfältig entwickelte Architekturen und umfassende Dokumentation tragen wesentlich zu nachhaltigen Softwareentwicklungsmethoden bei.',
+    'Ungeachtet der überwältigenden Komplexität verteilter Microservice-Architekturen zerlegen erfahrene Praktiker systematisch vielschichtige Anforderungen in handhabbare, unabhängig einsetzbare Komponenten.',
+  ],
+  pt: [
+    'Realizações extraordinárias exigem determinação sem precedentes; a justaposição do conhecimento teórico e da experiência prática distingue profissionais excepcionais de seus contemporâneos. Algoritmos sofisticados, arquiteturas meticulosamente projetadas e documentação abrangente contribuem significativamente para metodologias de desenvolvimento de software sustentáveis.',
+    'Apesar da complexidade esmagadora das arquiteturas de microsserviços distribuídos, praticantes experientes decompõem sistematicamente requisitos multifacetados em componentes gerenciáveis e implantáveis independentemente.',
+  ],
+};
+
+type Difficulty = 'easy' | 'medium' | 'hard';
+
+interface HistoryEntry {
+  wpm: number;
+  accuracy: number;
+  time: number;
+  difficulty: Difficulty;
+  timestamp: number;
+}
+
 export default function TypingSpeedTest() {
   const { lang } = useParams() as { lang: Locale };
   const toolT = tools['typing-speed-test'][lang];
@@ -55,25 +119,52 @@ export default function TypingSpeedTest() {
     testComplete: { en: 'Test Complete!', it: 'Test Completato!', es: '¡Prueba Completada!', fr: 'Test Terminé !', de: 'Test Abgeschlossen!', pt: 'Teste Completo!' },
     seconds: { en: 's', it: 's', es: 's', fr: 's', de: 's', pt: 's' },
     ready: { en: 'Click the text area and start typing to begin', it: 'Clicca l\'area di testo e inizia a digitare', es: 'Haz clic en el área de texto y comienza a escribir', fr: 'Cliquez sur la zone de texte et commencez à taper', de: 'Klicken Sie auf das Textfeld und beginnen Sie zu tippen', pt: 'Clique na área de texto e comece a digitar' },
+    copyResult: { en: 'Copy Result', it: 'Copia Risultato', es: 'Copiar Resultado', fr: 'Copier Résultat', de: 'Ergebnis Kopieren', pt: 'Copiar Resultado' },
+    copied: { en: 'Copied!', it: 'Copiato!', es: '¡Copiado!', fr: 'Copié !', de: 'Kopiert!', pt: 'Copiado!' },
+    reset: { en: 'Reset', it: 'Resetta', es: 'Restablecer', fr: 'Réinitialiser', de: 'Zurücksetzen', pt: 'Redefinir' },
+    history: { en: 'Recent Results', it: 'Risultati Recenti', es: 'Resultados Recientes', fr: 'Résultats Récents', de: 'Letzte Ergebnisse', pt: 'Resultados Recentes' },
+    clearHistory: { en: 'Clear History', it: 'Cancella Cronologia', es: 'Borrar Historial', fr: 'Effacer l\'Historique', de: 'Verlauf Löschen', pt: 'Limpar Histórico' },
+    difficulty: { en: 'Difficulty', it: 'Difficoltà', es: 'Dificultad', fr: 'Difficulté', de: 'Schwierigkeit', pt: 'Dificuldade' },
+    easy: { en: 'Easy', it: 'Facile', es: 'Fácil', fr: 'Facile', de: 'Leicht', pt: 'Fácil' },
+    medium: { en: 'Medium', it: 'Medio', es: 'Medio', fr: 'Moyen', de: 'Mittel', pt: 'Médio' },
+    hard: { en: 'Hard', it: 'Difficile', es: 'Difícil', fr: 'Difficile', de: 'Schwer', pt: 'Difícil' },
+    progress: { en: 'Progress', it: 'Progresso', es: 'Progreso', fr: 'Progression', de: 'Fortschritt', pt: 'Progresso' },
   } as Record<string, Record<Locale, string>>;
 
+  const [difficulty, setDifficulty] = useState<Difficulty>('medium');
   const [sampleText, setSampleText] = useState('');
   const [userInput, setUserInput] = useState('');
   const [startTime, setStartTime] = useState<number | null>(null);
   const [endTime, setEndTime] = useState<number | null>(null);
   const [isActive, setIsActive] = useState(false);
   const [elapsed, setElapsed] = useState(0);
+  const [copied, setCopied] = useState(false);
+  const [history, setHistory] = useState<HistoryEntry[]>([]);
   const inputRef = useRef<HTMLTextAreaElement>(null);
   const timerRef = useRef<ReturnType<typeof setInterval> | null>(null);
 
-  const getRandomText = useCallback(() => {
-    const texts = sampleTexts[lang] || sampleTexts.en;
-    return texts[Math.floor(Math.random() * texts.length)];
+  const getTextsByDifficulty = useCallback((diff: Difficulty): string[] => {
+    const textMap = { easy: sampleTextsEasy, medium: sampleTextsMedium, hard: sampleTextsHard };
+    const texts = textMap[diff][lang] || textMap[diff].en;
+    return texts;
   }, [lang]);
 
+  const getRandomText = useCallback((diff: Difficulty) => {
+    const texts = getTextsByDifficulty(diff);
+    return texts[Math.floor(Math.random() * texts.length)];
+  }, [getTextsByDifficulty]);
+
+  // Load history from localStorage
   useEffect(() => {
-    setSampleText(getRandomText());
-  }, [getRandomText]);
+    try {
+      const saved = localStorage.getItem('typing-speed-history');
+      if (saved) setHistory(JSON.parse(saved));
+    } catch {}
+  }, []);
+
+  useEffect(() => {
+    setSampleText(getRandomText(difficulty));
+  }, [getRandomText, difficulty]);
 
   useEffect(() => {
     if (isActive && startTime && !endTime) {
@@ -83,6 +174,14 @@ export default function TypingSpeedTest() {
     }
     return () => { if (timerRef.current) clearInterval(timerRef.current); };
   }, [isActive, startTime, endTime]);
+
+  const saveToHistory = (entry: HistoryEntry) => {
+    setHistory(prev => {
+      const updated = [entry, ...prev].slice(0, 5);
+      try { localStorage.setItem('typing-speed-history', JSON.stringify(updated)); } catch {}
+      return updated;
+    });
+  };
 
   const handleInputChange = (value: string) => {
     if (endTime) return;
@@ -96,9 +195,29 @@ export default function TypingSpeedTest() {
 
     // Check if test is complete
     if (value.length >= sampleText.length) {
-      setEndTime(Date.now());
+      const now = Date.now();
+      setEndTime(now);
       setIsActive(false);
       if (timerRef.current) clearInterval(timerRef.current);
+
+      // Calculate final stats for history
+      const totalC = value.length;
+      let correctC = 0;
+      for (let i = 0; i < totalC; i++) {
+        if (value[i] === sampleText[i]) correctC++;
+      }
+      const timeMin = (now - (startTime || now)) / 60000;
+      const finalWpm = timeMin > 0 ? Math.round((correctC / 5) / timeMin) : 0;
+      const finalAccuracy = totalC > 0 ? Math.round((correctC / totalC) * 100) : 100;
+      const finalTime = Math.floor((now - (startTime || now)) / 1000);
+
+      saveToHistory({
+        wpm: finalWpm,
+        accuracy: finalAccuracy,
+        time: finalTime,
+        difficulty,
+        timestamp: Date.now(),
+      });
     }
   };
 
@@ -108,9 +227,25 @@ export default function TypingSpeedTest() {
     setEndTime(null);
     setIsActive(false);
     setElapsed(0);
-    setSampleText(getRandomText());
+    setSampleText(getRandomText(difficulty));
     if (timerRef.current) clearInterval(timerRef.current);
     inputRef.current?.focus();
+  };
+
+  const changeDifficulty = (diff: Difficulty) => {
+    setDifficulty(diff);
+    setUserInput('');
+    setStartTime(null);
+    setEndTime(null);
+    setIsActive(false);
+    setElapsed(0);
+    if (timerRef.current) clearInterval(timerRef.current);
+    setSampleText(getRandomText(diff));
+  };
+
+  const clearHistory = () => {
+    setHistory([]);
+    try { localStorage.removeItem('typing-speed-history'); } catch {}
   };
 
   // Calculate stats
@@ -127,6 +262,20 @@ export default function TypingSpeedTest() {
   const wpm = timeInMinutes > 0 ? Math.round(wordsTyped / timeInMinutes) : 0;
   const accuracy = totalChars > 0 ? Math.round((correctChars / totalChars) * 100) : 100;
   const isComplete = endTime !== null;
+  const progressPercent = sampleText.length > 0 ? (userInput.length / sampleText.length) * 100 : 0;
+
+  const copyResult = () => {
+    const text = `${labels.wpmFull[lang]}: ${wpm}\n${labels.accuracy[lang]}: ${accuracy}%\n${labels.time[lang]}: ${elapsed}${labels.seconds[lang]}\n${labels.characters[lang]}: ${correctChars}/${totalChars}\n${labels.errors[lang]}: ${errorChars}\n${labels.difficulty[lang]}: ${labels[difficulty][lang]}`;
+    navigator.clipboard.writeText(text);
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2000);
+  };
+
+  const difficultyButtons: { key: Difficulty; color: string; activeColor: string }[] = [
+    { key: 'easy', color: 'bg-green-100 text-green-700 hover:bg-green-200', activeColor: 'bg-green-600 text-white' },
+    { key: 'medium', color: 'bg-yellow-100 text-yellow-700 hover:bg-yellow-200', activeColor: 'bg-yellow-600 text-white' },
+    { key: 'hard', color: 'bg-red-100 text-red-700 hover:bg-red-200', activeColor: 'bg-red-600 text-white' },
+  ];
 
   const seoContent: Record<Locale, { title: string; paragraphs: string[]; faq: { q: string; a: string }[] }> = {
     en: {
@@ -232,7 +381,26 @@ export default function TypingSpeedTest() {
         <p className="text-gray-600 mb-6">{toolT.description}</p>
 
         <div className="bg-white rounded-xl border border-gray-200 p-6 space-y-4">
-          {/* Stats bar */}
+          {/* Difficulty Selector */}
+          <div>
+            <div className="text-sm font-medium text-gray-700 mb-2">{labels.difficulty[lang]}</div>
+            <div className="flex gap-2">
+              {difficultyButtons.map(({ key, color, activeColor }) => (
+                <button
+                  key={key}
+                  onClick={() => changeDifficulty(key)}
+                  disabled={isActive}
+                  className={`flex-1 py-2 px-3 rounded-lg text-sm font-medium transition-colors ${
+                    difficulty === key ? activeColor : color
+                  } ${isActive ? 'opacity-50 cursor-not-allowed' : ''}`}
+                >
+                  {labels[key][lang]}
+                </button>
+              ))}
+            </div>
+          </div>
+
+          {/* Stats bar - Result Cards */}
           <div className="grid grid-cols-4 gap-3">
             <div className="p-3 rounded-lg bg-blue-50 text-center">
               <div className="text-xs text-gray-500">{labels.wpm[lang]}</div>
@@ -266,11 +434,17 @@ export default function TypingSpeedTest() {
           </div>
 
           {/* Progress bar */}
-          <div className="w-full bg-gray-200 rounded-full h-2">
-            <div
-              className="bg-blue-600 h-2 rounded-full transition-all"
-              style={{ width: `${sampleText.length > 0 ? (userInput.length / sampleText.length) * 100 : 0}%` }}
-            />
+          <div>
+            <div className="flex justify-between text-xs text-gray-500 mb-1">
+              <span>{labels.progress[lang]}</span>
+              <span>{Math.min(Math.round(progressPercent), 100)}%</span>
+            </div>
+            <div className="w-full bg-gray-200 rounded-full h-2.5">
+              <div
+                className="bg-blue-600 h-2.5 rounded-full transition-all"
+                style={{ width: `${Math.min(progressPercent, 100)}%` }}
+              />
+            </div>
           </div>
 
           {/* Input area */}
@@ -294,15 +468,15 @@ export default function TypingSpeedTest() {
             <div className="p-5 rounded-lg bg-green-50 text-center">
               <div className="text-xl font-bold text-green-700 mb-2">{labels.testComplete[lang]}</div>
               <div className="grid grid-cols-3 gap-3 text-sm">
-                <div>
+                <div className="p-2 rounded-lg bg-blue-50">
                   <span className="text-gray-500">{labels.wpmFull[lang]}</span>
                   <div className="text-2xl font-bold text-blue-700">{wpm}</div>
                 </div>
-                <div>
+                <div className="p-2 rounded-lg bg-green-100">
                   <span className="text-gray-500">{labels.accuracy[lang]}</span>
                   <div className="text-2xl font-bold text-green-700">{accuracy}%</div>
                 </div>
-                <div>
+                <div className="p-2 rounded-lg bg-purple-50">
                   <span className="text-gray-500">{labels.characters[lang]}</span>
                   <div className="text-2xl font-bold text-gray-700">{correctChars}/{totalChars}</div>
                 </div>
@@ -310,13 +484,59 @@ export default function TypingSpeedTest() {
             </div>
           )}
 
-          <button
-            onClick={restart}
-            className="w-full py-2 px-4 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors text-sm font-medium"
-          >
-            {labels.restart[lang]}
-          </button>
+          {/* Action Buttons */}
+          <div className="flex gap-3">
+            <button
+              onClick={restart}
+              className="flex-1 py-2 px-4 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors text-sm font-medium"
+            >
+              {labels.restart[lang]}
+            </button>
+            {isComplete && (
+              <button
+                onClick={copyResult}
+                className="flex-1 py-2 px-4 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors text-sm font-medium"
+              >
+                {copied ? labels.copied[lang] : labels.copyResult[lang]}
+              </button>
+            )}
+            <button
+              onClick={restart}
+              className="py-2 px-4 bg-gray-600 text-white rounded-lg hover:bg-gray-700 transition-colors text-sm font-medium"
+            >
+              {labels.reset[lang]}
+            </button>
+          </div>
         </div>
+
+        {/* History Section */}
+        {history.length > 0 && (
+          <div className="mt-6 bg-white rounded-xl border border-gray-200 p-6">
+            <div className="flex justify-between items-center mb-3">
+              <h3 className="text-sm font-semibold text-gray-700">{labels.history[lang]}</h3>
+              <button
+                onClick={clearHistory}
+                className="text-xs text-red-500 hover:text-red-700 transition-colors"
+              >
+                {labels.clearHistory[lang]}
+              </button>
+            </div>
+            <div className="space-y-2">
+              {history.map((entry, i) => (
+                <div key={i} className="flex justify-between items-center py-2 px-3 bg-gray-50 rounded-lg">
+                  <div className="flex items-center gap-3">
+                    <span className="text-sm font-bold text-blue-700">{entry.wpm} {labels.wpm[lang]}</span>
+                    <span className="text-xs text-gray-500">{entry.accuracy}% {labels.accuracy[lang]}</span>
+                    <span className="text-xs px-2 py-0.5 rounded bg-gray-200 text-gray-600">{labels[entry.difficulty][lang]}</span>
+                  </div>
+                  <span className="text-xs text-gray-400">
+                    {entry.time}{labels.seconds[lang]} - {new Date(entry.timestamp).toLocaleTimeString()}
+                  </span>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
 
         {/* SEO Article */}
         <article className="mt-12 prose prose-gray max-w-none">

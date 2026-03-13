@@ -1,5 +1,5 @@
 'use client';
-import { useState } from 'react';
+import { useState, useCallback } from 'react';
 import { useParams } from 'next/navigation';
 import { tools, type Locale } from '@/lib/translations';
 import ToolPageWrapper from '@/components/ToolPageWrapper';
@@ -16,6 +16,15 @@ const PRESETS = [
   { label: 'Every Sunday at 3 AM', cron: '0 3 * * 0' },
   { label: 'Every 15 minutes', cron: '*/15 * * * *' },
 ];
+
+const QUICK_PRESETS: Record<string, { labels: Record<string, string>; cron: string }> = {
+  everyMinute: { labels: { en: 'Every Minute', it: 'Ogni Minuto', es: 'Cada Minuto', fr: 'Chaque Minute', de: 'Jede Minute', pt: 'Cada Minuto' }, cron: '* * * * *' },
+  hourly: { labels: { en: 'Hourly', it: 'Ogni Ora', es: 'Cada Hora', fr: 'Chaque Heure', de: 'Stündlich', pt: 'A Cada Hora' }, cron: '0 * * * *' },
+  daily: { labels: { en: 'Daily', it: 'Giornaliero', es: 'Diario', fr: 'Quotidien', de: 'Täglich', pt: 'Diário' }, cron: '0 0 * * *' },
+  weekly: { labels: { en: 'Weekly', it: 'Settimanale', es: 'Semanal', fr: 'Hebdomadaire', de: 'Wöchentlich', pt: 'Semanal' }, cron: '0 0 * * 0' },
+  monthly: { labels: { en: 'Monthly', it: 'Mensile', es: 'Mensual', fr: 'Mensuel', de: 'Monatlich', pt: 'Mensal' }, cron: '0 0 1 * *' },
+  yearly: { labels: { en: 'Yearly', it: 'Annuale', es: 'Anual', fr: 'Annuel', de: 'Jährlich', pt: 'Anual' }, cron: '0 0 1 1 *' },
+};
 
 function parseCronField(field: string, type: 'minute' | 'hour' | 'day' | 'month' | 'weekday'): string {
   const names: Record<string, Record<Locale, string>> = {
@@ -41,6 +50,49 @@ function parseCronField(field: string, type: 'minute' | 'hour' | 'day' | 'month'
     return months[idx] || field;
   }
   return `${names[type].en} ${field}`;
+}
+
+function validateCronField(field: string, min: number, max: number): boolean {
+  if (field === '*') return true;
+  if (field.startsWith('*/')) {
+    const step = parseInt(field.slice(2));
+    return !isNaN(step) && step >= 1 && step <= max;
+  }
+  if (field.includes(',')) {
+    return field.split(',').every(v => {
+      const n = parseInt(v.trim());
+      return !isNaN(n) && n >= min && n <= max;
+    });
+  }
+  if (field.includes('-')) {
+    const parts = field.split('-');
+    if (parts.length !== 2) return false;
+    const [start, end] = parts.map(Number);
+    return !isNaN(start) && !isNaN(end) && start >= min && end <= max && start <= end;
+  }
+  const val = parseInt(field);
+  return !isNaN(val) && val >= min && val <= max;
+}
+
+function validateCron(expression: string): { valid: boolean; error: string } {
+  const parts = expression.trim().split(/\s+/);
+  if (parts.length !== 5) return { valid: false, error: 'Must have exactly 5 fields' };
+
+  const [minute, hour, day, month, weekday] = parts;
+  const checks = [
+    { field: minute, min: 0, max: 59, name: 'Minute' },
+    { field: hour, min: 0, max: 23, name: 'Hour' },
+    { field: day, min: 1, max: 31, name: 'Day' },
+    { field: month, min: 1, max: 12, name: 'Month' },
+    { field: weekday, min: 0, max: 7, name: 'Weekday' },
+  ];
+
+  for (const c of checks) {
+    if (!validateCronField(c.field, c.min, c.max)) {
+      return { valid: false, error: `Invalid ${c.name}: ${c.field}` };
+    }
+  }
+  return { valid: true, error: '' };
 }
 
 function explainCron(expression: string): string {
@@ -156,6 +208,12 @@ function getNextRuns(expression: string, count: number = 5): string[] {
   return results;
 }
 
+interface HistoryEntry {
+  expression: string;
+  description: string;
+  timestamp: number;
+}
+
 export default function CronExpressionGenerator() {
   const { lang } = useParams() as { lang: Locale };
   const toolT = tools['cron-expression-generator'][lang];
@@ -167,8 +225,9 @@ export default function CronExpressionGenerator() {
   const [weekday, setWeekday] = useState('*');
   const [customInput, setCustomInput] = useState('');
   const [copied, setCopied] = useState(false);
+  const [history, setHistory] = useState<HistoryEntry[]>([]);
 
-  const labels = {
+  const labels: Record<string, Record<Locale, string>> = {
     minute: { en: 'Minute', it: 'Minuto', es: 'Minuto', fr: 'Minute', de: 'Minute', pt: 'Minuto' },
     hour: { en: 'Hour', it: 'Ora', es: 'Hora', fr: 'Heure', de: 'Stunde', pt: 'Hora' },
     dayMonth: { en: 'Day (Month)', it: 'Giorno (Mese)', es: 'Día (Mes)', fr: 'Jour (Mois)', de: 'Tag (Monat)', pt: 'Dia (Mês)' },
@@ -177,12 +236,24 @@ export default function CronExpressionGenerator() {
     explanation: { en: 'Explanation', it: 'Spiegazione', es: 'Explicación', fr: 'Explication', de: 'Erklärung', pt: 'Explicação' },
     nextRuns: { en: 'Next 5 runs', it: 'Prossime 5 esecuzioni', es: 'Próximas 5 ejecuciones', fr: '5 prochaines exécutions', de: 'Nächste 5 Ausführungen', pt: 'Próximas 5 execuções' },
     presets: { en: 'Common Presets', it: 'Preset Comuni', es: 'Presets Comunes', fr: 'Préréglages Courants', de: 'Gängige Vorlagen', pt: 'Presets Comuns' },
+    quickPresets: { en: 'Quick Presets', it: 'Preset Rapidi', es: 'Presets Rápidos', fr: 'Préréglages Rapides', de: 'Schnellvorlagen', pt: 'Presets Rápidos' },
     parseCustom: { en: 'Parse Custom Expression', it: 'Analizza Espressione', es: 'Analizar Expresión', fr: 'Analyser Expression', de: 'Ausdruck Analysieren', pt: 'Analisar Expressão' },
     copy: { en: 'Copy', it: 'Copia', es: 'Copiar', fr: 'Copier', de: 'Kopieren', pt: 'Copiar' },
     copied: { en: 'Copied!', it: 'Copiato!', es: '¡Copiado!', fr: 'Copié !', de: 'Kopiert!', pt: 'Copiado!' },
-  } as Record<string, Record<Locale, string>>;
+    reset: { en: 'Reset', it: 'Ripristina', es: 'Restablecer', fr: 'Réinitialiser', de: 'Zurücksetzen', pt: 'Redefinir' },
+    cronExpression: { en: 'Cron Expression', it: 'Espressione Cron', es: 'Expresión Cron', fr: 'Expression Cron', de: 'Cron-Ausdruck', pt: 'Expressão Cron' },
+    valid: { en: 'Valid', it: 'Valida', es: 'Válida', fr: 'Valide', de: 'Gültig', pt: 'Válida' },
+    invalid: { en: 'Invalid', it: 'Non valida', es: 'Inválida', fr: 'Invalide', de: 'Ungültig', pt: 'Inválida' },
+    history: { en: 'History', it: 'Cronologia', es: 'Historial', fr: 'Historique', de: 'Verlauf', pt: 'Histórico' },
+    saveToHistory: { en: 'Save to History', it: 'Salva in Cronologia', es: 'Guardar en Historial', fr: 'Sauvegarder', de: 'Speichern', pt: 'Salvar no Histórico' },
+    clearHistory: { en: 'Clear', it: 'Cancella', es: 'Borrar', fr: 'Effacer', de: 'Löschen', pt: 'Limpar' },
+    noHistory: { en: 'No saved expressions yet', it: 'Nessuna espressione salvata', es: 'Sin expresiones guardadas', fr: 'Aucune expression sauvegardée', de: 'Noch keine gespeicherten Ausdrücke', pt: 'Nenhuma expressão salva ainda' },
+    use: { en: 'Use', it: 'Usa', es: 'Usar', fr: 'Utiliser', de: 'Verwenden', pt: 'Usar' },
+    validation: { en: 'Validation', it: 'Validazione', es: 'Validación', fr: 'Validation', de: 'Validierung', pt: 'Validação' },
+  };
 
   const expression = `${minute} ${hour} ${day} ${month} ${weekday}`;
+  const validation = validateCron(expression);
 
   const applyPreset = (cron: string) => {
     const parts = cron.split(' ');
@@ -191,6 +262,15 @@ export default function CronExpressionGenerator() {
     setDay(parts[2]);
     setMonth(parts[3]);
     setWeekday(parts[4]);
+  };
+
+  const resetFields = () => {
+    setMinute('*');
+    setHour('*');
+    setDay('*');
+    setMonth('*');
+    setWeekday('*');
+    setCustomInput('');
   };
 
   const parseCustom = () => {
@@ -208,6 +288,21 @@ export default function CronExpressionGenerator() {
     navigator.clipboard.writeText(expression);
     setCopied(true);
     setTimeout(() => setCopied(false), 2000);
+  };
+
+  const saveToHistory = useCallback(() => {
+    if (!validation.valid) return;
+    const desc = explainCron(expression);
+    setHistory(prev => {
+      const exists = prev.some(h => h.expression === expression);
+      if (exists) return prev;
+      const next = [{ expression, description: desc, timestamp: Date.now() }, ...prev];
+      return next.slice(0, 5);
+    });
+  }, [expression, validation.valid]);
+
+  const loadFromHistory = (entry: HistoryEntry) => {
+    applyPreset(entry.expression);
   };
 
   const nextRuns = getNextRuns(expression);
@@ -316,12 +411,45 @@ export default function CronExpressionGenerator() {
         <p className="text-gray-600 mb-6">{toolT.description}</p>
 
         <div className="bg-white rounded-xl border border-gray-200 p-6 space-y-4">
-          {/* Generated expression */}
-          <div className="bg-gray-900 text-green-400 font-mono text-2xl p-4 rounded-lg text-center flex items-center justify-center gap-3">
-            <span>{expression}</span>
-            <button onClick={copyToClipboard} className="text-sm bg-gray-700 hover:bg-gray-600 text-white px-3 py-1 rounded">
-              {copied ? labels.copied[lang] : labels.copy[lang]}
-            </button>
+          {/* Result Card */}
+          <div className={`${validation.valid ? 'bg-green-50 border-green-200' : 'bg-red-50 border-red-200'} border-2 rounded-xl p-5`}>
+            <div className="text-xs font-medium text-gray-500 uppercase tracking-wide mb-2">{labels.cronExpression[lang]}</div>
+            <div className="font-mono text-3xl font-bold text-gray-900 text-center mb-3 tracking-wider">
+              {expression}
+            </div>
+            <div className="flex items-center justify-center gap-2">
+              <span className={`inline-flex items-center text-xs font-medium px-2 py-0.5 rounded-full ${validation.valid ? 'bg-green-100 text-green-700' : 'bg-red-100 text-red-700'}`}>
+                {validation.valid ? labels.valid[lang] : labels.invalid[lang]}
+              </span>
+              {!validation.valid && (
+                <span className="text-xs text-red-600">{validation.error}</span>
+              )}
+            </div>
+            <div className="flex items-center justify-center gap-2 mt-3">
+              <button
+                onClick={copyToClipboard}
+                className={`text-sm font-medium px-4 py-1.5 rounded-lg transition-colors ${
+                  copied
+                    ? 'bg-green-600 text-white'
+                    : 'bg-green-600 hover:bg-green-700 text-white'
+                }`}
+              >
+                {copied ? labels.copied[lang] : labels.copy[lang]}
+              </button>
+              <button
+                onClick={resetFields}
+                className="text-sm font-medium px-4 py-1.5 rounded-lg bg-gray-200 hover:bg-gray-300 text-gray-700 transition-colors"
+              >
+                {labels.reset[lang]}
+              </button>
+              <button
+                onClick={saveToHistory}
+                disabled={!validation.valid}
+                className="text-sm font-medium px-4 py-1.5 rounded-lg bg-blue-600 hover:bg-blue-700 text-white transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+              >
+                {labels.saveToHistory[lang]}
+              </button>
+            </div>
           </div>
 
           {/* Field labels */}
@@ -348,8 +476,24 @@ export default function CronExpressionGenerator() {
             <div className="text-blue-900 font-semibold">{explainCron(expression)}</div>
           </div>
 
+          {/* Quick Presets */}
+          <div>
+            <div className="text-sm font-medium text-gray-700 mb-2">{labels.quickPresets[lang]}</div>
+            <div className="grid grid-cols-3 sm:grid-cols-6 gap-2">
+              {Object.entries(QUICK_PRESETS).map(([key, preset]) => (
+                <button
+                  key={key}
+                  onClick={() => applyPreset(preset.cron)}
+                  className="text-xs font-medium bg-blue-50 hover:bg-blue-100 text-blue-700 hover:text-blue-800 px-3 py-2 rounded-lg border border-blue-200 hover:border-blue-300 transition-colors"
+                >
+                  {preset.labels[lang]}
+                </button>
+              ))}
+            </div>
+          </div>
+
           {/* Next runs */}
-          {nextRuns.length > 0 && (
+          {validation.valid && nextRuns.length > 0 && (
             <div className="bg-green-50 p-4 rounded-lg">
               <div className="text-sm font-medium text-green-800 mb-2">{labels.nextRuns[lang]}</div>
               <ul className="space-y-1">
@@ -377,10 +521,42 @@ export default function CronExpressionGenerator() {
             <div className="text-sm font-medium text-gray-700 mb-2">{labels.parseCustom[lang]}</div>
             <div className="flex gap-2">
               <input type="text" value={customInput} onChange={(e) => setCustomInput(e.target.value)} placeholder="*/5 * * * *" className="flex-1 border border-gray-300 rounded-lg px-3 py-2 font-mono focus:ring-2 focus:ring-blue-500" />
-              <button onClick={parseCustom} className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 text-sm font-medium">
+              <button onClick={parseCustom} className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 text-sm font-medium transition-colors">
                 Parse
               </button>
             </div>
+          </div>
+
+          {/* History */}
+          <div>
+            <div className="flex items-center justify-between mb-2">
+              <div className="text-sm font-medium text-gray-700">{labels.history[lang]}</div>
+              {history.length > 0 && (
+                <button onClick={() => setHistory([])} className="text-xs text-red-500 hover:text-red-700 transition-colors">
+                  {labels.clearHistory[lang]}
+                </button>
+              )}
+            </div>
+            {history.length === 0 ? (
+              <p className="text-xs text-gray-400 italic">{labels.noHistory[lang]}</p>
+            ) : (
+              <div className="space-y-1.5">
+                {history.map((entry, i) => (
+                  <div key={i} className="flex items-center justify-between bg-gray-50 rounded-lg px-3 py-2 border border-gray-100">
+                    <div className="flex-1 min-w-0">
+                      <span className="font-mono text-sm text-gray-900 font-medium">{entry.expression}</span>
+                      <span className="text-xs text-gray-500 ml-2 truncate">{entry.description}</span>
+                    </div>
+                    <button
+                      onClick={() => loadFromHistory(entry)}
+                      className="text-xs font-medium text-blue-600 hover:text-blue-800 ml-2 px-2 py-1 rounded hover:bg-blue-50 transition-colors"
+                    >
+                      {labels.use[lang]}
+                    </button>
+                  </div>
+                ))}
+              </div>
+            )}
           </div>
         </div>
 
