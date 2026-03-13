@@ -19,6 +19,14 @@ const labels: Record<string, Record<string, string>> = {
   copied: { en: 'Copied!', it: 'Copiato!', es: 'Copiado!', fr: 'Copié!', de: 'Kopiert!', pt: 'Copiado!' },
   history: { en: 'History', it: 'Cronologia', es: 'Historial', fr: 'Historique', de: 'Verlauf', pt: 'Histórico' },
   clearHistory: { en: 'Clear History', it: 'Cancella Cronologia', es: 'Borrar Historial', fr: 'Effacer Historique', de: 'Verlauf Löschen', pt: 'Limpar Histórico' },
+  disclaimer: {
+    en: 'This calculator provides estimates only. Actual payroll varies by jurisdiction. Consult a tax professional for accurate calculations.',
+    it: 'Questo calcolatore fornisce solo stime. La busta paga effettiva varia per giurisdizione. Consulta un commercialista per calcoli precisi.',
+    es: 'Esta calculadora proporciona solo estimaciones. La nómina real varía por jurisdicción. Consulte a un profesional fiscal.',
+    fr: 'Ce calculateur fournit uniquement des estimations. La paie réelle varie selon la juridiction. Consultez un fiscaliste.',
+    de: 'Dieser Rechner liefert nur Schätzungen. Die tatsächliche Gehaltsabrechnung variiert je nach Rechtsgebiet. Konsultieren Sie einen Steuerberater.',
+    pt: 'Esta calculadora fornece apenas estimativas. A folha real varia por jurisdição. Consulte um profissional fiscal.',
+  },
   invalidSalary: { en: 'Salary must be greater than 0', it: 'Lo stipendio deve essere maggiore di 0', es: 'El salario debe ser mayor que 0', fr: 'Le salaire doit être supérieur à 0', de: 'Gehalt muss größer als 0 sein', pt: 'O salário deve ser maior que 0' },
   payrollBreakdown: { en: 'Payroll Breakdown', it: 'Dettaglio Busta Paga', es: 'Desglose de Nómina', fr: 'Détail de la Paie', de: 'Gehaltsaufschlüsselung', pt: 'Detalhamento da Folha' },
   grossAnnual: { en: 'Gross Annual', it: 'Lordo Annuo', es: 'Bruto Anual', fr: 'Brut Annuel', de: 'Brutto Jährlich', pt: 'Bruto Anual' },
@@ -275,6 +283,12 @@ export default function PayrollCalculator() {
       <div className="max-w-2xl mx-auto">
         <h1 className="text-3xl font-bold text-gray-900 mb-2">{toolT.name}</h1>
         <p className="text-gray-600 mb-6">{toolT.description}</p>
+
+        {/* Financial Disclaimer */}
+        <div className="bg-amber-50 border border-amber-200 rounded-lg p-3 mb-6 flex items-start gap-2">
+          <svg className="w-5 h-5 text-amber-500 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.964-.833-2.732 0L4.082 16.5c-.77.833.192 2.5 1.732 2.5z" /></svg>
+          <p className="text-sm text-amber-800">{labels.disclaimer[lang]}</p>
+        </div>
 
         <div className="bg-white rounded-xl border border-gray-200 p-6 space-y-4">
           {/* Gross Salary Input */}
