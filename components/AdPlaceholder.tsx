@@ -58,22 +58,6 @@ export default function AdPlaceholder({
     );
   }
 
-  // Placeholder: subtle, non-intrusive, responsive
-  return (
-    <div
-      className={`w-full flex items-center justify-center ${className}`}
-      style={{ minHeight: styles.minHeight }}
-      aria-hidden="true"
-    >
-      <div className="w-full max-w-3xl mx-auto">
-        <div className="border border-dashed border-gray-200 rounded-lg bg-gray-50/50 flex items-center justify-center py-2 sm:py-3"
-          style={{ minHeight: styles.mobileMinHeight }}
-        >
-          <span className="text-[10px] text-gray-300 select-none tracking-wider uppercase">
-            Ad Space
-          </span>
-        </div>
-      </div>
-    </div>
-  );
+  // Before AdSense approval: render nothing (no fake placeholders)
+  return null;
 }

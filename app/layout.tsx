@@ -65,6 +65,12 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
+        {/* Google AdSense — must be in <head> for crawler verification */}
+        <script
+          async
+          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7033623734141087"
+          crossOrigin="anonymous"
+        />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
