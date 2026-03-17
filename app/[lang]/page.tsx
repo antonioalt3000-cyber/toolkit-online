@@ -30,6 +30,10 @@ export default async function HomePage({ params }: { params: Promise<{ lang: str
         searchPlaceholder: t.searchPlaceholder,
         categories: t.categories,
         toolOfTheDay: t.toolOfTheDay,
+        introTitle: t.introTitle,
+        introText1: t.introText1,
+        introText2: t.introText2,
+        introText3: t.introText3,
       }}
     />
   );

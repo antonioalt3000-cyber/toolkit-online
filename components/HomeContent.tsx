@@ -18,6 +18,10 @@ type CommonData = {
   searchPlaceholder: string;
   categories: Record<string, string>;
   toolOfTheDay: string;
+  introTitle: string;
+  introText1: string;
+  introText2: string;
+  introText3: string;
 };
 
 interface HomeContentProps {
@@ -193,6 +197,18 @@ export default function HomeContent({ categories, toolsData, locale, common: t }
           </svg>
           <p className="text-lg">No tools found for &ldquo;{search}&rdquo;</p>
         </div>
+      )}
+
+      {/* About Section - Editorial Content for SEO */}
+      {!query && (
+        <section className="mt-16 mb-8 bg-gray-50 rounded-2xl p-8">
+          <h2 className="text-2xl font-bold text-gray-800 mb-4">{t.introTitle}</h2>
+          <div className="prose prose-gray max-w-none text-gray-600 leading-relaxed space-y-4">
+            <p>{t.introText1}</p>
+            <p>{t.introText2}</p>
+            <p>{t.introText3}</p>
+          </div>
+        </section>
       )}
     </div>
   );

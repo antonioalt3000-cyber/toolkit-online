@@ -140,6 +140,11 @@ export default function Footer() {
                 </Link>
               </li>
               <li>
+                <Link href={`/${lang}/blog`} className="text-gray-400 hover:text-white transition-colors">
+                  Blog
+                </Link>
+              </li>
+              <li>
                 <a href="/sitemap.xml" className="text-gray-400 hover:text-white transition-colors">
                   {t.footerSitemap}
                 </a>

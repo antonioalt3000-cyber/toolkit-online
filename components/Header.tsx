@@ -24,6 +24,17 @@ export default function Header() {
         <Link href={`/${lang}`} className="text-xl font-bold text-blue-600 hover:text-blue-700">
           🛠 {t.siteTitle}
         </Link>
+        <nav className="hidden sm:flex items-center gap-4 ml-6">
+          <Link href={`/${lang}/tools`} className="text-sm text-gray-600 hover:text-blue-600 transition-colors font-medium">
+            {t.footerAllTools}
+          </Link>
+          <Link href={`/${lang}/blog`} className="text-sm text-gray-600 hover:text-blue-600 transition-colors font-medium">
+            Blog
+          </Link>
+          <Link href={`/${lang}/about`} className="text-sm text-gray-600 hover:text-blue-600 transition-colors font-medium">
+            {t.footerAbout}
+          </Link>
+        </nav>
         <div className="flex items-center gap-2">
           {locales.map((l) => (
             <Link

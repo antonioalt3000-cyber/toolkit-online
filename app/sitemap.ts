@@ -1,5 +1,6 @@
 import type { MetadataRoute } from 'next';
 import { toolList, locales } from '@/lib/translations';
+import { blogSlugs } from '@/lib/blog';
 
 const BASE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://toolkitonline.vip';
 
@@ -47,6 +48,38 @@ export default function sitemap(): MetadataRoute.Sitemap {
         alternates: {
           languages: Object.fromEntries(
             locales.map((l) => [l, `${BASE_URL}/${l}/tools/${tool}`])
+          ),
+        },
+      });
+    }
+  }
+
+  // Blog index page for each locale
+  for (const locale of locales) {
+    entries.push({
+      url: `${BASE_URL}/${locale}/blog`,
+      lastModified: new Date(),
+      changeFrequency: 'weekly',
+      priority: 0.8,
+      alternates: {
+        languages: Object.fromEntries(
+          locales.map((l) => [l, `${BASE_URL}/${l}/blog`])
+        ),
+      },
+    });
+  }
+
+  // Blog article pages for each locale
+  for (const slug of blogSlugs) {
+    for (const locale of locales) {
+      entries.push({
+        url: `${BASE_URL}/${locale}/blog/${slug}`,
+        lastModified: new Date(),
+        changeFrequency: 'monthly',
+        priority: 0.7,
+        alternates: {
+          languages: Object.fromEntries(
+            locales.map((l) => [l, `${BASE_URL}/${l}/blog/${slug}`])
           ),
         },
       });
