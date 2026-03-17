@@ -71,6 +71,16 @@ export default function RootLayout({
             __html: `window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('consent','default',{ad_storage:'denied',ad_user_data:'denied',ad_personalization:'denied',analytics_storage:'denied',functionality_storage:'granted',security_storage:'granted',wait_for_update:500});`,
           }}
         />
+        {/* Google Analytics 4 — loads with consent denied, respects Consent Mode v2 */}
+        <script
+          async
+          src="https://www.googletagmanager.com/gtag/js?id=G-30KL6W6WJY"
+        />
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `gtag('js', new Date());gtag('config', 'G-30KL6W6WJY');`,
+          }}
+        />
         {/* Google AdSense — loads with consent denied, respects Consent Mode v2 */}
         <script
           async
