@@ -7,7 +7,7 @@ import FeedbackWidget from './FeedbackWidget';
 import AdPlaceholder from './AdPlaceholder';
 import EmbedTool from './EmbedTool';
 import ShareTool from './ShareTool';
-import SupportButton from './SupportButton';
+
 import { tools, type Locale } from '@/lib/translations';
 
 const toolCounterTranslations: Record<string, string> = {
@@ -191,8 +191,6 @@ export default function ToolPageWrapper({ toolSlug, children, faqItems }: ToolPa
 
       <FeedbackWidget toolSlug={toolSlug} />
 
-      {/* Support / Donations */}
-      <SupportButton />
 
       <RelatedTools currentSlug={toolSlug} />
 

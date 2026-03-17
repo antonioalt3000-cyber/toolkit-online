@@ -12,6 +12,10 @@ const content: Record<Locale, { title: string; lastUpdated: string; sections: { 
         body: 'Welcome to ToolKit Online. Your privacy is important to us. This Privacy Policy explains how we collect, use, and protect information when you visit our website at toolkitonline.vip. We comply with the EU General Data Protection Regulation (GDPR) and applicable privacy laws.',
       },
       {
+        heading: 'Data Controller',
+        body: 'The data controller for this website is ToolKit Online, reachable at info@toolkitonline.vip. ToolKit Online is an independent web project operated from the European Union. For any questions or requests regarding your personal data, you can contact us at the email address above.',
+      },
+      {
         heading: 'Information We Collect',
         body: 'We do not collect personal data such as names, email addresses, or phone numbers. Our tools run entirely in your browser, and the data you enter into our tools is never sent to our servers. Some tools may use your browser\'s local storage (localStorage) to save your preferences and tool settings locally on your device — this data never leaves your device.',
       },
@@ -64,6 +68,10 @@ const content: Record<Locale, { title: string; lastUpdated: string; sections: { 
       {
         heading: 'Introduzione',
         body: 'Benvenuti su ToolKit Online. La tua privacy è importante per noi. Questa Informativa sulla Privacy spiega come raccogliamo, utilizziamo e proteggiamo le informazioni quando visiti il nostro sito web toolkitonline.vip. Rispettiamo il Regolamento Generale sulla Protezione dei Dati (GDPR) dell\'Unione Europea e le leggi sulla privacy applicabili.',
+      },
+      {
+        heading: 'Titolare del Trattamento',
+        body: 'Il titolare del trattamento dei dati per questo sito web e ToolKit Online, raggiungibile all\'indirizzo info@toolkitonline.vip. ToolKit Online e un progetto web indipendente operante dall\'Unione Europea. Per qualsiasi domanda o richiesta riguardante i tuoi dati personali, puoi contattarci all\'indirizzo email sopra indicato.',
       },
       {
         heading: 'Informazioni che Raccogliamo',
@@ -120,6 +128,10 @@ const content: Record<Locale, { title: string; lastUpdated: string; sections: { 
         body: 'Bienvenido a ToolKit Online. Tu privacidad es importante para nosotros. Esta Política de Privacidad explica cómo recopilamos, usamos y protegemos la información cuando visitas nuestro sitio web toolkitonline.vip. Cumplimos con el Reglamento General de Protección de Datos (RGPD) de la Unión Europea y las leyes de privacidad aplicables.',
       },
       {
+        heading: 'Responsable del Tratamiento',
+        body: 'El responsable del tratamiento de datos de este sitio web es ToolKit Online, contactable en info@toolkitonline.vip. ToolKit Online es un proyecto web independiente operado desde la Union Europea.',
+      },
+      {
         heading: 'Información que Recopilamos',
         body: 'No recopilamos datos personales como nombres, direcciones de correo electrónico o números de teléfono. Nuestras herramientas funcionan completamente en tu navegador y los datos que introduces nunca se envían a nuestros servidores. Algunas herramientas pueden utilizar el almacenamiento local del navegador (localStorage) para guardar tus preferencias y configuraciones de herramientas localmente en tu dispositivo — estos datos nunca salen de tu dispositivo.',
       },
@@ -172,6 +184,10 @@ const content: Record<Locale, { title: string; lastUpdated: string; sections: { 
       {
         heading: 'Introduction',
         body: 'Bienvenue sur ToolKit Online. Votre vie privée est importante pour nous. Cette Politique de Confidentialité explique comment nous collectons, utilisons et protégeons les informations lorsque vous visitez notre site web toolkitonline.vip. Nous respectons le Règlement Général sur la Protection des Données (RGPD) de l\'Union Européenne et les lois applicables en matière de confidentialité.',
+      },
+      {
+        heading: 'Responsable du Traitement',
+        body: 'Le responsable du traitement des donnees de ce site web est ToolKit Online, joignable a info@toolkitonline.vip. ToolKit Online est un projet web independant opere depuis l\'Union Europeenne.',
       },
       {
         heading: 'Informations que Nous Collectons',
@@ -228,6 +244,10 @@ const content: Record<Locale, { title: string; lastUpdated: string; sections: { 
         body: 'Willkommen bei ToolKit Online. Ihre Privatsphäre ist uns wichtig. Diese Datenschutzrichtlinie erklärt, wie wir Informationen sammeln, verwenden und schützen, wenn Sie unsere Website toolkitonline.vip besuchen. Wir halten die Datenschutz-Grundverordnung (DSGVO) der Europäischen Union und geltende Datenschutzgesetze ein.',
       },
       {
+        heading: 'Verantwortlicher',
+        body: 'Der Verantwortliche fur die Datenverarbeitung dieser Website ist ToolKit Online, erreichbar unter info@toolkitonline.vip. ToolKit Online ist ein unabhangiges Webprojekt mit Sitz in der Europaischen Union.',
+      },
+      {
         heading: 'Informationen, die wir Sammeln',
         body: 'Wir sammeln keine persönlichen Daten wie Namen, E-Mail-Adressen oder Telefonnummern. Unsere Werkzeuge laufen vollständig in Ihrem Browser und die von Ihnen eingegebenen Daten werden niemals an unsere Server gesendet. Einige Werkzeuge können den lokalen Speicher Ihres Browsers (localStorage) nutzen, um Ihre Einstellungen und Werkzeugkonfigurationen lokal auf Ihrem Gerät zu speichern — diese Daten verlassen niemals Ihr Gerät.',
       },
@@ -280,6 +300,10 @@ const content: Record<Locale, { title: string; lastUpdated: string; sections: { 
       {
         heading: 'Introdução',
         body: 'Bem-vindo ao ToolKit Online. Sua privacidade é importante para nós. Esta Política de Privacidade explica como coletamos, usamos e protegemos informações quando você visita nosso site toolkitonline.vip. Cumprimos o Regulamento Geral sobre a Proteção de Dados (RGPD) da União Europeia e as leis de privacidade aplicáveis.',
+      },
+      {
+        heading: 'Responsavel pelo Tratamento',
+        body: 'O responsavel pelo tratamento de dados deste site e ToolKit Online, contactavel em info@toolkitonline.vip. ToolKit Online e um projeto web independente operado a partir da Uniao Europeia.',
       },
       {
         heading: 'Informações que Coletamos',
