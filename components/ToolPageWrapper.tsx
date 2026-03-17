@@ -11,12 +11,12 @@ import ShareTool from './ShareTool';
 import { tools, type Locale } from '@/lib/translations';
 
 const toolCounterTranslations: Record<string, string> = {
-  en: '99+ Free Tools Available',
-  it: '99+ Strumenti Gratuiti Disponibili',
-  es: '99+ Herramientas Gratuitas Disponibles',
-  fr: '99+ Outils Gratuits Disponibles',
-  de: '99+ Kostenlose Tools Verfügbar',
-  pt: '99+ Ferramentas Gratuitas Disponíveis',
+  en: '144+ Free Tools Available',
+  it: '144+ Strumenti Gratuiti Disponibili',
+  es: '144+ Herramientas Gratuitas Disponibles',
+  fr: '144+ Outils Gratuits Disponibles',
+  de: '144+ Kostenlose Tools Verfügbar',
+  pt: '144+ Ferramentas Gratuitas Disponíveis',
 };
 
 const howToTranslations: Record<string, {
