@@ -54,6 +54,23 @@ export default function sitemap(): MetadataRoute.Sitemap {
     }
   }
 
+  // Static pages (about, contact, faq, privacy, terms) for each locale
+  for (const page of ['about', 'contact', 'faq', 'privacy', 'terms']) {
+    for (const locale of locales) {
+      entries.push({
+        url: `${BASE_URL}/${locale}/${page}`,
+        lastModified: new Date(),
+        changeFrequency: 'monthly',
+        priority: 0.6,
+        alternates: {
+          languages: Object.fromEntries(
+            locales.map((l) => [l, `${BASE_URL}/${l}/${page}`])
+          ),
+        },
+      });
+    }
+  }
+
   // Blog index page for each locale
   for (const locale of locales) {
     entries.push({

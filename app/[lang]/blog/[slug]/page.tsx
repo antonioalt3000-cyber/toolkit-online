@@ -23,8 +23,23 @@ export default function BlogArticlePage() {
 
   const t = article.translations[lang];
 
+  const jsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'Article',
+    headline: t.title,
+    datePublished: article.date,
+    author: { '@type': 'Organization', name: 'ToolKit Online' },
+    publisher: { '@type': 'Organization', name: 'ToolKit Online', url: 'https://toolkitonline.vip' },
+    description: t.excerpt,
+    mainEntityOfPage: { '@type': 'WebPage', '@id': `https://toolkitonline.vip/${lang}/blog/${slug}` },
+  };
+
   return (
     <div className="max-w-3xl mx-auto px-4 py-12">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
       <Link href={`/${lang}/blog`} className="text-sm text-blue-600 hover:underline mb-6 inline-block">
         ← {backLabels[lang]}
       </Link>

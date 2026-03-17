@@ -34,6 +34,8 @@ export default async function HomePage({ params }: { params: Promise<{ lang: str
         introText1: t.introText1,
         introText2: t.introText2,
         introText3: t.introText3,
+        blogTitle: t.blogTitle,
+        blogReadMore: t.blogReadMore,
       }}
     />
   );

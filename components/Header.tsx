@@ -31,6 +31,9 @@ export default function Header() {
           <Link href={`/${lang}/blog`} className="text-sm text-gray-600 hover:text-blue-600 transition-colors font-medium">
             Blog
           </Link>
+          <Link href={`/${lang}/faq`} className="text-sm text-gray-600 hover:text-blue-600 transition-colors font-medium">
+            FAQ
+          </Link>
           <Link href={`/${lang}/about`} className="text-sm text-gray-600 hover:text-blue-600 transition-colors font-medium">
             {t.footerAbout}
           </Link>

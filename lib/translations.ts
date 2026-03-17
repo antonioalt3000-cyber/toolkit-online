@@ -59,6 +59,8 @@ type CommonTranslation = {
   introText1: string;
   introText2: string;
   introText3: string;
+  blogTitle: string;
+  blogReadMore: string;
 };
 
 export const common: Record<Locale, CommonTranslation> = {
@@ -112,6 +114,8 @@ export const common: Record<Locale, CommonTranslation> = {
     introText1: 'ToolKit Online is a comprehensive collection of over 114 free online tools designed to simplify your everyday tasks. Whether you need to calculate a loan payment, convert units, format JSON, generate a strong password, or compress an image, our tools are built to be fast, accurate, and easy to use. Every tool runs entirely in your browser, which means your data never leaves your device — ensuring complete privacy and instant results.',
     introText2: 'Our platform is organized into seven intuitive categories: Finance, Text, Health & Lifestyle, Conversion, Developer, Math, and Images. Each tool comes with detailed guides, frequently asked questions, and related tool suggestions to help you find exactly what you need. Available in six languages — English, Italian, Spanish, French, German, and Portuguese — ToolKit Online serves users worldwide without barriers.',
     introText3: 'We believe essential digital tools should be free and accessible to everyone. That is why ToolKit Online requires no registration, no downloads, and no hidden fees. Our tools are continuously updated and improved based on user feedback, and new tools are added regularly. Bookmark us and come back whenever you need a reliable online utility.',
+    blogTitle: 'Latest from Our Blog',
+    blogReadMore: 'View all articles',
   },
   it: {
     siteTitle: 'ToolKit Online',
@@ -163,6 +167,8 @@ export const common: Record<Locale, CommonTranslation> = {
     introText1: 'ToolKit Online è una raccolta completa di oltre 114 strumenti online gratuiti progettati per semplificare le tue attività quotidiane. Che tu debba calcolare la rata di un prestito, convertire unità di misura, formattare JSON, generare una password sicura o comprimere un\'immagine, i nostri strumenti sono pensati per essere veloci, precisi e facili da usare. Ogni strumento funziona interamente nel tuo browser, il che significa che i tuoi dati non lasciano mai il tuo dispositivo — garantendo privacy completa e risultati istantanei.',
     introText2: 'La nostra piattaforma è organizzata in sette categorie intuitive: Finanza, Testo, Salute e Stile di vita, Conversione, Sviluppo, Matematica e Immagini. Ogni strumento include guide dettagliate, domande frequenti e suggerimenti di strumenti correlati per aiutarti a trovare esattamente ciò di cui hai bisogno. Disponibile in sei lingue — inglese, italiano, spagnolo, francese, tedesco e portoghese — ToolKit Online serve utenti in tutto il mondo senza barriere.',
     introText3: 'Crediamo che gli strumenti digitali essenziali debbano essere gratuiti e accessibili a tutti. Ecco perché ToolKit Online non richiede registrazione, download né costi nascosti. I nostri strumenti vengono continuamente aggiornati e migliorati in base al feedback degli utenti, e nuovi strumenti vengono aggiunti regolarmente. Aggiungici ai preferiti e torna ogni volta che hai bisogno di un\'utilità online affidabile.',
+    blogTitle: 'Dal Nostro Blog',
+    blogReadMore: 'Tutti gli articoli',
   },
   es: {
     siteTitle: 'ToolKit Online',
@@ -214,6 +220,8 @@ export const common: Record<Locale, CommonTranslation> = {
     introText1: 'ToolKit Online es una colección completa de más de 114 herramientas en línea gratuitas diseñadas para simplificar tus tareas diarias. Ya sea que necesites calcular la cuota de un préstamo, convertir unidades, formatear JSON, generar una contraseña segura o comprimir una imagen, nuestras herramientas están diseñadas para ser rápidas, precisas y fáciles de usar. Cada herramienta funciona completamente en tu navegador, lo que significa que tus datos nunca salen de tu dispositivo — garantizando privacidad total y resultados instantáneos.',
     introText2: 'Nuestra plataforma está organizada en siete categorías intuitivas: Finanzas, Texto, Salud y Estilo de vida, Conversión, Desarrollo, Matemáticas e Imágenes. Cada herramienta incluye guías detalladas, preguntas frecuentes y sugerencias de herramientas relacionadas para ayudarte a encontrar exactamente lo que necesitas. Disponible en seis idiomas — inglés, italiano, español, francés, alemán y portugués — ToolKit Online sirve a usuarios de todo el mundo sin barreras.',
     introText3: 'Creemos que las herramientas digitales esenciales deben ser gratuitas y accesibles para todos. Por eso ToolKit Online no requiere registro, descargas ni costos ocultos. Nuestras herramientas se actualizan y mejoran continuamente en base a los comentarios de los usuarios, y se añaden nuevas herramientas regularmente. Guárdanos en tus favoritos y vuelve siempre que necesites una utilidad en línea confiable.',
+    blogTitle: 'De Nuestro Blog',
+    blogReadMore: 'Ver todos los articulos',
   },
   fr: {
     siteTitle: 'ToolKit Online',
@@ -265,6 +273,8 @@ export const common: Record<Locale, CommonTranslation> = {
     introText1: 'ToolKit Online est une collection complète de plus de 114 outils en ligne gratuits conçus pour simplifier vos tâches quotidiennes. Que vous ayez besoin de calculer une mensualité de prêt, convertir des unités, formater du JSON, générer un mot de passe sécurisé ou compresser une image, nos outils sont conçus pour être rapides, précis et faciles à utiliser. Chaque outil fonctionne entièrement dans votre navigateur, ce qui signifie que vos données ne quittent jamais votre appareil — garantissant une confidentialité totale et des résultats instantanés.',
     introText2: 'Notre plateforme est organisée en sept catégories intuitives : Finance, Texte, Santé et Mode de vie, Conversion, Développement, Mathématiques et Images. Chaque outil est accompagné de guides détaillés, de questions fréquentes et de suggestions d\'outils connexes pour vous aider à trouver exactement ce dont vous avez besoin. Disponible en six langues — anglais, italien, espagnol, français, allemand et portugais — ToolKit Online sert des utilisateurs du monde entier sans barrières.',
     introText3: 'Nous croyons que les outils numériques essentiels doivent être gratuits et accessibles à tous. C\'est pourquoi ToolKit Online ne nécessite aucune inscription, aucun téléchargement et aucun frais caché. Nos outils sont continuellement mis à jour et améliorés en fonction des retours des utilisateurs, et de nouveaux outils sont ajoutés régulièrement. Ajoutez-nous à vos favoris et revenez chaque fois que vous avez besoin d\'un utilitaire en ligne fiable.',
+    blogTitle: 'De Notre Blog',
+    blogReadMore: 'Voir tous les articles',
   },
   de: {
     siteTitle: 'ToolKit Online',
@@ -316,6 +326,8 @@ export const common: Record<Locale, CommonTranslation> = {
     introText1: 'ToolKit Online ist eine umfassende Sammlung von über 114 kostenlosen Online-Tools, die entwickelt wurden, um Ihre täglichen Aufgaben zu vereinfachen. Ob Sie eine Kreditrate berechnen, Einheiten umrechnen, JSON formatieren, ein sicheres Passwort generieren oder ein Bild komprimieren müssen — unsere Tools sind schnell, präzise und einfach zu bedienen. Jedes Tool läuft vollständig in Ihrem Browser, was bedeutet, dass Ihre Daten Ihr Gerät nie verlassen — für vollständigen Datenschutz und sofortige Ergebnisse.',
     introText2: 'Unsere Plattform ist in sieben intuitive Kategorien unterteilt: Finanzen, Text, Gesundheit und Lebensstil, Umrechnung, Entwickler, Mathematik und Bilder. Jedes Tool enthält ausführliche Anleitungen, häufig gestellte Fragen und Vorschläge für verwandte Tools, damit Sie genau das finden, was Sie brauchen. Verfügbar in sechs Sprachen — Englisch, Italienisch, Spanisch, Französisch, Deutsch und Portugiesisch — bedient ToolKit Online Nutzer weltweit ohne Einschränkungen.',
     introText3: 'Wir glauben, dass wesentliche digitale Werkzeuge kostenlos und für alle zugänglich sein sollten. Deshalb erfordert ToolKit Online keine Registrierung, keine Downloads und keine versteckten Gebühren. Unsere Tools werden kontinuierlich aktualisiert und auf Basis von Nutzerfeedback verbessert, und regelmäßig kommen neue Tools hinzu. Setzen Sie ein Lesezeichen und kommen Sie zurück, wann immer Sie ein zuverlässiges Online-Werkzeug benötigen.',
+    blogTitle: 'Aus Unserem Blog',
+    blogReadMore: 'Alle Artikel ansehen',
   },
   pt: {
     siteTitle: 'ToolKit Online',
@@ -367,6 +379,8 @@ export const common: Record<Locale, CommonTranslation> = {
     introText1: 'O ToolKit Online é uma coleção abrangente de mais de 114 ferramentas online gratuitas projetadas para simplificar suas tarefas diárias. Seja para calcular a parcela de um empréstimo, converter unidades, formatar JSON, gerar uma senha forte ou comprimir uma imagem, nossas ferramentas são feitas para ser rápidas, precisas e fáceis de usar. Cada ferramenta funciona inteiramente no seu navegador, o que significa que seus dados nunca saem do seu dispositivo — garantindo privacidade completa e resultados instantâneos.',
     introText2: 'Nossa plataforma está organizada em sete categorias intuitivas: Finanças, Texto, Saúde e Estilo de vida, Conversão, Desenvolvimento, Matemática e Imagens. Cada ferramenta inclui guias detalhados, perguntas frequentes e sugestões de ferramentas relacionadas para ajudá-lo a encontrar exatamente o que precisa. Disponível em seis idiomas — inglês, italiano, espanhol, francês, alemão e português — o ToolKit Online atende usuários em todo o mundo sem barreiras.',
     introText3: 'Acreditamos que ferramentas digitais essenciais devem ser gratuitas e acessíveis a todos. É por isso que o ToolKit Online não exige cadastro, downloads nem taxas ocultas. Nossas ferramentas são continuamente atualizadas e melhoradas com base no feedback dos usuários, e novas ferramentas são adicionadas regularmente. Adicione-nos aos favoritos e volte sempre que precisar de um utilitário online confiável.',
+    blogTitle: 'Do Nosso Blog',
+    blogReadMore: 'Ver todos os artigos',
   },
 };
 

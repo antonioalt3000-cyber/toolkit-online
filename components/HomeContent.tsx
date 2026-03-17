@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import ToolCard from '@/components/ToolCard';
 import AdPlaceholder from '@/components/AdPlaceholder';
+import { blogArticles } from '@/lib/blog';
 
 type ToolData = {
   name: string;
@@ -22,6 +23,8 @@ type CommonData = {
   introText1: string;
   introText2: string;
   introText3: string;
+  blogTitle: string;
+  blogReadMore: string;
 };
 
 interface HomeContentProps {
@@ -197,6 +200,29 @@ export default function HomeContent({ categories, toolsData, locale, common: t }
           </svg>
           <p className="text-lg">No tools found for &ldquo;{search}&rdquo;</p>
         </div>
+      )}
+
+      {/* Latest from Blog */}
+      {!query && (
+        <section className="mt-12 mb-8">
+          <div className="flex items-center justify-between mb-6">
+            <h2 className="text-2xl font-bold text-gray-800">{t.blogTitle}</h2>
+            <a href={`/${locale}/blog`} className="text-sm font-semibold text-blue-600 hover:underline">{t.blogReadMore} →</a>
+          </div>
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
+            {blogArticles.slice(0, 3).map((article) => {
+              const at = article.translations[locale as 'en' | 'it' | 'es' | 'fr' | 'de' | 'pt'];
+              if (!at) return null;
+              return (
+                <a key={article.slug} href={`/${locale}/blog/${article.slug}`} className="block border border-gray-200 rounded-xl p-5 hover:shadow-md transition-shadow">
+                  <span className="text-xs font-semibold text-blue-600 bg-blue-50 px-2 py-0.5 rounded">{article.category}</span>
+                  <h3 className="mt-2 font-bold text-gray-900 line-clamp-2">{at.title}</h3>
+                  <p className="mt-1 text-sm text-gray-500 line-clamp-2">{at.excerpt}</p>
+                </a>
+              );
+            })}
+          </div>
+        </section>
       )}
 
       {/* About Section - Editorial Content for SEO */}

@@ -166,6 +166,11 @@ export default function Footer() {
                   {t.footerContact}
                 </Link>
               </li>
+              <li>
+                <Link href={`/${lang}/faq`} className="text-gray-400 hover:text-white transition-colors">
+                  FAQ
+                </Link>
+              </li>
             </ul>
           </div>
 
