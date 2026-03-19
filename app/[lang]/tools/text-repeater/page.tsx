@@ -104,6 +104,8 @@ export default function TextRepeater() {
         'Il ripetitore di testo offre opzioni flessibili per i separatori, incluse nuove righe, spazi, virgole o qualsiasi delimitatore personalizzato. Puoi anche aggiungere numeri di riga sequenziali a ogni ripetizione, rendendo facile tracciare le singole voci nel risultato. L\'opzione inverti testo ti permette di specchiare l\'input prima della ripetizione.',
         'Gli sviluppatori usano frequentemente i ripetitori di testo per generare dati di test, popolare campi di database o creare input per la validazione dei form. I creatori di contenuti si affidano al testo ripetuto per mockup visivi, test di layout e prototipi di design. Gli studenti lo usano per compilare modelli e generare materiale di pratica.',
         'Tutta l\'elaborazione avviene nel tuo browser — il tuo testo non viene mai caricato su alcun server. Il conteggio in tempo reale di caratteri e parole ti aiuta a monitorare la dimensione dell\'output. I preset rapidi per 10, 50, 100 e 500 ripetizioni ti permettono di selezionare le quantità più comuni istantaneamente.',
+        'Il nostro ripetitore di parole è lo strumento ideale per chi cerca un modo rapido e affidabile per ripetere testo online. A differenza di altri servizi, questo ripetitore testo online funziona interamente nel browser, senza limiti di utilizzo e senza registrazione. Puoi ripeti testo gratis tutte le volte che vuoi: basta inserire il contenuto, scegliere il numero di ripetizioni e copiare il risultato. Il ripetitore di testo è perfetto anche per esercizi di dattilografia, test di stress per campi di input o per creare contenuti ripetitivi per scopi creativi.',
+        'Se hai bisogno di analizzare il testo generato, puoi usare il nostro <a href="/it/tools/word-counter">contatore di parole</a> per verificare la lunghezza esatta dell\'output. Per modificare la formattazione del testo ripetuto — ad esempio trasformarlo tutto in maiuscolo o minuscolo — prova il <a href="/it/tools/text-case-converter">convertitore maiuscole/minuscole</a>. Combinando questi strumenti con il ripetitore parole, hai a disposizione un kit completo per manipolare qualsiasi tipo di testo in modo veloce e gratuito.',
       ],
       faq: [
         { q: 'Qual è il numero massimo di ripetizioni?', a: 'Puoi ripetere il testo fino a 10.000 volte. Per output molto grandi, il browser potrebbe impiegare un momento per renderizzare il risultato, ma tutta l\'elaborazione avviene localmente sul tuo dispositivo.' },
@@ -111,6 +113,9 @@ export default function TextRepeater() {
         { q: 'Cosa fa l\'opzione numeri di riga?', a: 'Quando attivata, ogni ripetizione è preceduta da un numero sequenziale (1., 2., 3., ecc.). Questo è utile per creare elenchi numerati o tracciare le singole voci nell\'output.' },
         { q: 'Come funziona l\'opzione inverti testo?', a: 'L\'opzione inverti testo specchia ogni carattere dell\'input prima di ripetere. Ad esempio, "Ciao" diventa "oaiC". Viene applicata a ogni istanza ripetuta, non all\'ordine complessivo dell\'output.' },
         { q: 'Il mio testo viene salvato o inviato a un server?', a: 'No. Tutta l\'elaborazione avviene interamente nel tuo browser tramite JavaScript. Il tuo testo non lascia mai il tuo dispositivo, garantendo completa privacy e sicurezza.' },
+        { q: 'Come ripetere un testo più volte?', a: 'È semplicissimo: incolla o digita il testo nel campo di input, imposta il numero di ripetizioni desiderato (da 1 a 10.000) e il testo verrà duplicato automaticamente nel campo risultato. Puoi scegliere il separatore tra ogni ripetizione e poi copiare tutto con un clic.' },
+        { q: 'Qual è il miglior ripetitore di parole online?', a: 'Il nostro ripetitore di parole online è uno dei più completi disponibili: supporta fino a 10.000 ripetizioni, separatori personalizzati, numeri di riga e inversione del testo. Funziona gratis, senza registrazione e senza pubblicità invasive, direttamente nel tuo browser.' },
+        { q: 'Come copiare un testo ripetuto?', a: 'Dopo aver generato il testo ripetuto, clicca sul pulsante "Copia negli Appunti" sotto il campo risultato. Il testo verrà copiato automaticamente e potrai incollarlo ovunque: in un documento, un\'email, un editor di codice o qualsiasi altra applicazione.' },
       ],
     },
     es: {
@@ -315,7 +320,7 @@ export default function TextRepeater() {
         {/* SEO Article */}
         <article className="mt-12 prose prose-gray max-w-none">
           <h2 className="text-2xl font-bold text-gray-900 mb-4">{seo.title}</h2>
-          {seo.paragraphs.map((p, i) => <p key={i} className="text-gray-700 leading-relaxed mb-4">{p}</p>)}
+          {seo.paragraphs.map((p, i) => <p key={i} className="text-gray-700 leading-relaxed mb-4" dangerouslySetInnerHTML={{ __html: p }} />)}
         </article>
 
         {/* FAQ Accordion */}

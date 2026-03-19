@@ -50,9 +50,10 @@ const seoContent: Record<Locale, { title: string; paragraphs: string[]; faq: { q
   it: {
     title: 'Come Calcolare il Costo del Carburante per un Viaggio',
     paragraphs: [
-      'Stai pianificando un viaggio in auto o calcoli il costo del pendolarismo quotidiano? Conoscere in anticipo il costo del carburante ti aiuta a fare un budget preciso e a confrontare i costi di guida con alternative come treni o aerei. Le spese di carburante dipendono da tre fattori principali: la distanza, il consumo del tuo veicolo e il prezzo del carburante nella tua zona.',
-      'Il nostro calcolatore supporta sia il sistema metrico (litri per 100 km) che quello imperiale (miglia per gallone). Inserisci la distanza, il consumo del tuo veicolo e il prezzo del carburante, e il calcolatore mostra istantaneamente quanto carburante userai e quanto costera il viaggio. L\'opzione andata e ritorno raddoppia automaticamente la distanza.',
+      'Stai pianificando un viaggio in auto o calcoli il costo del pendolarismo quotidiano? Conoscere in anticipo il costo del carburante ti aiuta a fare un budget preciso e a confrontare i costi di guida con alternative come treni o aerei. Le spese di carburante dipendono da tre fattori principali: la distanza, il consumo del tuo veicolo e il prezzo del carburante nella tua zona. Il calcolo consumi carburante e fondamentale per chi percorre molti chilometri ogni giorno, sia per lavoro che per svago.',
+      'Il nostro calcolatore supporta sia il sistema metrico (litri per 100 km) che quello imperiale (miglia per gallone). Inserisci la distanza, il consumo del tuo veicolo e il prezzo del carburante, e il calcolatore mostra istantaneamente quanto carburante userai e quanto costera il viaggio. L\'opzione andata e ritorno raddoppia automaticamente la distanza. Grazie a questo strumento puoi effettuare il calcolo consumo benzina o diesel in pochi secondi, ottenendo una stima precisa del costo viaggio prima ancora di partire.',
       'Questo strumento e utile per confrontare l\'efficienza di diversi veicoli, pianificare budget vacanze, calcolare spese di trasferta aziendali o decidere se guidare o prendere i mezzi pubblici. Sperimentando con diversi consumi, puoi stimare quanto risparmieresti passando a un veicolo piu efficiente o ibrido/elettrico.',
+      'Il calcolo consumo auto e un\'operazione che ogni automobilista dovrebbe fare regolarmente. Conoscere esattamente quanto consuma la propria vettura permette di pianificare le spese mensili e di scegliere il percorso piu conveniente. Ad esempio, se devi affrontare un lungo viaggio, il calcolo carburante ti aiuta a sapere quante soste per il rifornimento saranno necessarie e quanto budget destinare alla benzina. Se hai bisogno di <a href="/it/tools/speed-calculator">calcolare la velocita</a> media del tuo tragitto o di usare il nostro <a href="/it/tools/unit-converter">convertitore di unita</a> per confrontare consumi in sistemi diversi, trovi tutto su ToolKit Online.',
     ],
     faq: [
       { q: 'Come calcolo il costo del carburante al chilometro?', a: 'Moltiplica il consumo (L/100km) per il prezzo al litro, poi dividi per 100. Esempio: se la tua auto consuma 7 L/100km e il carburante costa 1,80 euro/litro: (7 x 1,80) / 100 = 0,126 euro al km.' },
@@ -60,6 +61,9 @@ const seoContent: Record<Locale, { title: string; paragraphs: string[]; faq: { q
       { q: 'Qual e il consumo medio di un\'auto?', a: 'Un\'auto moderna tipica consuma 6-9 L/100km. I SUV 8-12 L/100km. I veicoli ibridi 3-5 L/100km. Le city car possono raggiungere 4-6 L/100km.' },
       { q: 'E piu economico guidare o volare per lunghi viaggi?', a: 'Per viaggiatori singoli su tratte oltre 300-400 km, volare e spesso piu economico considerando carburante, pedaggi e usura. Pero guidare diventa conveniente con 2+ passeggeri che condividono i costi.' },
       { q: 'Come posso ridurre il consumo di carburante?', a: 'Mantieni velocita costanti, evita accelerazioni brusche, tieni i pneumatici alla pressione corretta, rimuovi i portapacchi quando non in uso, evita il motore al minimo e fai la manutenzione regolare. Queste abitudini possono ridurre il consumo del 10-25%.' },
+      { q: 'Come calcolare il consumo di carburante dell\'auto?', a: 'Per il calcolo consumo auto, fai un pieno completo e annota i chilometri del contachilometri. Guida normalmente fino al prossimo rifornimento, poi fai di nuovo il pieno e annota i litri inseriti e i nuovi chilometri. Dividi i litri per i chilometri percorsi e moltiplica per 100: otterrai il consumo in L/100km. Ad esempio, se hai percorso 500 km con 35 litri, il consumo e (35/500) x 100 = 7 L/100km.' },
+      { q: 'Come si calcola il costo del carburante per un viaggio?', a: 'Per calcolare il costo viaggio in auto, devi conoscere tre dati: la distanza in chilometri, il consumo medio del veicolo (L/100km) e il prezzo al litro del carburante. Moltiplica la distanza per il consumo, dividi per 100 e poi moltiplica per il prezzo al litro. Con il nostro calcolatore puoi farlo automaticamente inserendo i tre valori.' },
+      { q: 'Quanto costa un pieno di benzina?', a: 'Il costo di un pieno dipende dalla capacita del serbatoio e dal prezzo della benzina. Un\'auto media ha un serbatoio da 45-55 litri. Con un prezzo medio di circa 1,80 euro/litro, un pieno costa tra 81 e 99 euro. Per le auto diesel il prezzo al litro e leggermente inferiore, mentre per il GPL si aggira intorno a 0,70-0,80 euro/litro, rendendo il pieno molto piu economico.' },
     ],
   },
   es: {
@@ -374,7 +378,7 @@ export default function FuelCostCalculator() {
 
         <article className="mt-12 prose prose-gray max-w-none">
           <h2 className="text-2xl font-bold text-gray-900 mb-4">{seo.title}</h2>
-          {seo.paragraphs.map((p, i) => <p key={i} className="text-gray-700 leading-relaxed mb-4">{p}</p>)}
+          {seo.paragraphs.map((p, i) => <p key={i} className="text-gray-700 leading-relaxed mb-4" dangerouslySetInnerHTML={{ __html: p }} />)}
         </article>
 
         <section className="mt-10 mb-8">
