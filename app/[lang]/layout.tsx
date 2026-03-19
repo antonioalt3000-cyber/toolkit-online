@@ -6,6 +6,7 @@ import CookieConsent from '@/components/CookieConsent';
 import ConsentManager from '@/components/ConsentManager';
 import { locales, common, type Locale } from '@/lib/translations';
 import HtmlLang from '@/components/HtmlLang';
+import ServiceWorkerRegistration from '@/components/ServiceWorkerRegistration';
 import { BASE_URL } from '@/lib/seo';
 
 export function generateStaticParams() {
@@ -50,6 +51,7 @@ export default async function LangLayout({
   return (
     <div lang={lang}>
       <HtmlLang />
+      <ServiceWorkerRegistration />
       <Header />
       <main className="max-w-6xl mx-auto px-4 py-8">{children}</main>
       <Footer />

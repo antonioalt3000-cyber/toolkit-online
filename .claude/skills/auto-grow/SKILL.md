@@ -4,36 +4,68 @@ description: Automatically suggests and creates new high-volume tools when a ses
 user-invocable: true
 ---
 
-## Auto-Grow: espandi automaticamente il sito
+## Auto-Grow: crescita data-driven basata su dati reali
 
-Controlla quanti tool ci sono attualmente nel progetto, confronta con la lista di tool ad alto volume da creare, e proponi all'utente di crearne di nuovi.
+Sistema intelligente che usa dati Google Search Console per decidere quali tool creare.
 
-### Tool ad alto volume da aggiungere (in ordine di priorità):
-1. compound-interest-calculator (finance) — ~450K ricerche/mese
-2. scientific-calculator (math) — ~1M ricerche/mese
-3. gpa-calculator (math) — ~300K ricerche/mese
-4. fraction-calculator (math) — HIGH
-5. stopwatch (math) — HIGH
-6. paycheck-calculator (finance) — HIGH
-7. sales-tax-calculator (finance) — HIGH
-8. investment-calculator (finance) — HIGH
-9. profit-margin-calculator (finance) — MEDIUM
-10. savings-goal-calculator (finance) — MEDIUM
-11. square-root-calculator (math) — MEDIUM
-12. standard-deviation-calculator (math) — MEDIUM
-13. ideal-weight-calculator (health) — MEDIUM
-14. body-fat-calculator (health) — MEDIUM
-15. water-intake-calculator (health) — MEDIUM
-16. macro-calculator (health) — MEDIUM
-17. url-encoder (dev) — MEDIUM
-18. hash-generator (dev) — MEDIUM
-19. text-diff (dev) — MEDIUM
-20. timestamp-converter (conversion) — MEDIUM
-21. roman-numeral-converter (conversion) — MEDIUM
-22. number-base-converter (conversion) — MEDIUM
+### Step 1: Conta tool attuali
 
-### Steps:
-1. Count current tools in lib/translations.ts
-2. Show the user how many tools exist and suggest the next batch to create
-3. Ask the user if they want to proceed
-4. If yes, use /add-tools-batch to create them in parallel
+Leggi `lib/translations.ts` e conta i tool in `toolList`. Mostra il conteggio per categoria usando `getToolsByCategory()`.
+
+### Step 2: Analizza dati GSC (se disponibile)
+
+1. Usa `mcp__google-search-console__get_search_analytics` con `dimensions: "query"` per gli ultimi 28 giorni
+2. Identifica query che portano impressioni ma NON hanno un tool corrispondente → domanda organica reale
+3. Analizza quali categorie performano meglio (più impressioni per tool)
+
+### Step 3: Prioritizza nuovi tool
+
+Algoritmo di priorità:
+- **Tier 1 — Domanda reale**: Query GSC che portano impressioni senza tool corrispondente
+- **Tier 2 — Categoria forte**: Tool in categorie che performano bene (es. finance se ha più impressioni/tool)
+- **Tier 3 — Gap categoria**: Categorie sottorappresentate (bilanciamento del portfolio)
+- **Tier 4 — Alto volume generico**: Tool con alto volume di ricerca stimato
+
+### Step 4: Aggiorna growth queue
+
+Aggiorna `C:\Users\ftass\.claude\projects\C--Users-ftass-toolkit-online\memory\growth-queue.md` con:
+```markdown
+## Growth Queue — Aggiornata [DATA]
+### Target: 200 tool entro Q2 2026
+
+| # | Slug | Categoria | Fonte | Priorità | Stato |
+|---|------|-----------|-------|----------|-------|
+| 1 | [slug] | [cat] | [GSC/volume/gap] | [1-4] | queued |
+```
+
+### Step 5: Proponi batch
+
+Presenta all'utente i top 10 tool raccomandati con:
+- Slug e categoria
+- Perché sono prioritari (fonte dati)
+- Stima del potenziale
+
+Chiedi all'utente quanti tool vuole creare e quali.
+
+### Step 6: Esegui
+
+Se l'utente approva, usa `/add-tools-batch [slug1,slug2,...] [category]` per creare i tool in parallelo.
+
+### Step 7: Aggiorna stato
+
+Dopo la creazione, aggiorna `growth-queue.md` cambiando lo stato dei tool creati da `queued` a `created`.
+
+### Fallback (senza dati GSC)
+
+Se GSC non è disponibile, usa questa lista statica di tool ad alto volume:
+
+1. savings-goal-calculator (finance) — ~200K ricerche/mese
+2. tip-splitting-calculator (finance) — ~100K ricerche/mese
+3. reading-time-calculator (text) — ~80K ricerche/mese
+4. heart-rate-zone-calculator (health) — ~150K ricerche/mese
+5. bra-size-calculator (health) — ~500K ricerche/mese
+6. shoe-size-converter (conversion) — ~300K ricerche/mese
+7. yaml-formatter (dev) — ~100K ricerche/mese
+8. sql-formatter (dev) — ~200K ricerche/mese
+9. quadratic-equation-solver (math) — ~150K ricerche/mese
+10. photo-collage-maker (images) — ~200K ricerche/mese

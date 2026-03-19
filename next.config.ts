@@ -19,6 +19,13 @@ const nextConfig: NextConfig = {
           { key: 'Cache-Control', value: 'public, s-maxage=3600, stale-while-revalidate=86400' },
         ],
       },
+      {
+        source: '/sw.js',
+        headers: [
+          { key: 'Service-Worker-Allowed', value: '/' },
+          { key: 'Cache-Control', value: 'no-cache' },
+        ],
+      },
     ];
   },
   async redirects() {

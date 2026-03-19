@@ -14,6 +14,7 @@ Deploy ToolKit Online to production.
 3. **Stage files**: Add all changed files with `git add -A`
 4. **Commit**: Create a commit with the provided message or auto-generate one based on changes. Always include `Co-Authored-By: Claude Opus 4.6 <noreply@anthropic.com>`
 5. **Push**: Run `git push` to trigger Vercel auto-deploy
-6. **Wait**: Wait 90 seconds for Vercel deploy
-7. **Verify**: Fetch https://toolkitonline.vip to confirm the site is live
-8. **Report**: Show commit hash, files changed, and deployment status
+6. **Ping Google sitemap**: Run `curl -s "https://www.google.com/ping?sitemap=https://toolkitonline.vip/sitemap.xml"` to notify Google of sitemap updates
+7. **Wait**: Wait 90 seconds for Vercel deploy
+8. **Verify**: Fetch https://toolkitonline.vip to confirm the site is live
+9. **Report**: Show commit hash, files changed, deployment status, and sitemap ping result
