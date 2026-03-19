@@ -1,5 +1,11 @@
 # ToolKit Online — Project Context
 
+## ⚡ AZIONE AUTOMATICA AD OGNI SESSIONE
+All'inizio di ogni sessione, DEVI:
+1. Salutare l'utente e ricordargli di lanciare `/learn` per il ciclo di analisi automatico
+2. Se l'utente dice "vai" o "inizia" o simili, esegui `/learn` automaticamente
+3. Il sistema `/learn` analizza i dati GSC, confronta con lo storico, e suggerisce le priorità
+
 ## Overview
 Portfolio di micro-tool gratuiti per generare traffico SEO e monetizzare con Google AdSense.
 - **URL:** https://toolkitonline.vip
@@ -57,16 +63,25 @@ image-compressor, image-resizer, photo-editor, pixel-ruler, meme-generator, pixe
 - Layout tool: max-w-2xl
 
 ## Skill disponibili (slash commands)
+### Sistema autodidatta (ciclo di crescita)
+- `/learn` — Ciclo completo: analisi GSC → confronto storico → raccomandazioni (ESEGUIRE AD OGNI SESSIONE)
+- `/dashboard` — Analisi performance GSC + classificazione pagine in bucket
+- `/seo-optimize [slug]` — Ottimizzazione SEO basata su dati GSC reali
+- `/index-boost` — Boost indicizzazione con hub pages, blog mirati
+- `/auto-blog [topic]` — Genera articoli SEO con link interni
+- `/auto-grow` — Crescita data-driven: suggerisce nuovi tool basati su query GSC
+
+### Operativi
 - `/new-tool [slug] [category]` — Crea un nuovo tool completo
-- `/deploy [messaggio]` — Build + commit + push + verifica
+- `/deploy [messaggio]` — Build + commit + push + ping sitemap + verifica
 - `/seo-check [slug]` — Analisi SEO di un tool
 - `/add-tools-batch [slug1,slug2,...] [category]` — Crea tool in batch
-- `/publish-article [topic]` — Pubblica articolo su Dev.to (richiede API key)
+- `/publish-article [topic]` — Pubblica articolo su Dev.to
 
-## Prossimi passi
-- Attendere approvazione AdSense
-- Target raggiunto: 99 tool (obiettivo iniziale 100+) — continuare ad espandere
-- Creare account Dev.to + Sellix per automazione
-- Articoli SEO su Dev.to per backlink
-- Prodotti digitali su Sellix
-- Google Analytics (GA4 Measurement ID)
+## Stato attuale (Marzo 2026)
+- **143 tool** = 858 pagine + 42 pagine hub categoria = **900 pagine**
+- **GA4**: G-30KL6W6WJY — collegato a Search Console ✅
+- **AdSense**: in attesa approvazione
+- **PWA**: Service Worker attivo
+- **text-repeater IT**: posizione 7 (prima pagina Google!)
+- **fuel-cost-calculator IT**: posizione 10.9 (quasi prima pagina)
