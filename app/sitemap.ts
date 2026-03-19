@@ -4,6 +4,8 @@ import { blogSlugs } from '@/lib/blog';
 
 const BASE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://toolkitonline.vip';
 
+const categories = ['finance', 'text', 'health', 'conversion', 'dev', 'math', 'images'] as const;
+
 export default function sitemap(): MetadataRoute.Sitemap {
   const entries: MetadataRoute.Sitemap = [];
 
@@ -48,6 +50,23 @@ export default function sitemap(): MetadataRoute.Sitemap {
         alternates: {
           languages: Object.fromEntries(
             locales.map((l) => [l, `${BASE_URL}/${l}/tools/${tool}`])
+          ),
+        },
+      });
+    }
+  }
+
+  // Category hub pages for each locale
+  for (const category of categories) {
+    for (const locale of locales) {
+      entries.push({
+        url: `${BASE_URL}/${locale}/tools/category/${category}`,
+        lastModified: new Date(),
+        changeFrequency: 'weekly',
+        priority: 0.85,
+        alternates: {
+          languages: Object.fromEntries(
+            locales.map((l) => [l, `${BASE_URL}/${l}/tools/category/${category}`])
           ),
         },
       });
