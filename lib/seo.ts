@@ -18,9 +18,12 @@ export function generateToolMetadata(toolSlug: string, lang: string): Metadata {
     description: toolData.metaDescription,
     alternates: {
       canonical: canonicalUrl,
-      languages: Object.fromEntries(
-        locales.map((l) => [l, `${BASE_URL}/${l}/tools/${toolSlug}`])
-      ),
+      languages: {
+        ...Object.fromEntries(
+          locales.map((l) => [l, `${BASE_URL}/${l}/tools/${toolSlug}`])
+        ),
+        'x-default': `${BASE_URL}/en/tools/${toolSlug}`,
+      },
     },
     openGraph: {
       title: toolData.metaTitle,

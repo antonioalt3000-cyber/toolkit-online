@@ -246,7 +246,7 @@ export default function QrCodeGenerator() {
         'QR codes (Quick Response codes) have become an essential tool for bridging the physical and digital worlds. From restaurant menus and business cards to product packaging and event tickets, QR codes provide instant access to URLs, text, and other data simply by scanning with a smartphone camera. Our free QR code generator lets you create custom QR codes instantly.',
         'Simply type or paste any text or URL into the input field, and the QR code is generated in real time. You can adjust the QR code size to control its density and detail level. Larger sizes produce codes with more modules, which can encode longer text but require more space when printed. The generated code can be downloaded as a high-quality PNG image.',
         'QR codes work by encoding data in a two-dimensional grid of black and white modules. They include finder patterns (the three large squares in the corners) that help scanners locate and orient the code, timing patterns that establish the grid spacing, and data modules that contain the actual encoded information. Error correction capabilities allow QR codes to be read even when partially damaged.',
-        'Common uses for QR codes include sharing website URLs, Wi-Fi credentials, contact information (vCards), plain text messages, and geolocation coordinates. Businesses use them for marketing campaigns, product authentication, inventory tracking, and contactless payments. Generate your QR code now and download it for print or digital use.',
+        'Common uses for QR codes include sharing website URLs, Wi-Fi credentials, contact information (vCards), plain text messages, and geolocation coordinates. Businesses use them for marketing campaigns, product authentication, inventory tracking, and contactless payments. Generate your QR code now and download it for print or digital use. Explore also our <a href="/en/tools/barcode-generator" class="text-blue-600 underline">Barcode Generator</a> and <a href="/en/tools/password-generator" class="text-blue-600 underline">Password Generator</a> for more useful tools.',
       ],
       faq: [
         { q: 'What can I encode in a QR code?', a: 'You can encode any text, including website URLs, email addresses, phone numbers, Wi-Fi network credentials, plain text, GPS coordinates, and vCard contact information. The maximum capacity depends on the data type but can be up to 4,296 alphanumeric characters.' },
@@ -262,7 +262,7 @@ export default function QrCodeGenerator() {
         'I codici QR (Quick Response) sono diventati uno strumento essenziale per collegare il mondo fisico e digitale. Dai menu dei ristoranti ai biglietti da visita, dai packaging dei prodotti ai biglietti per eventi, i codici QR forniscono accesso istantaneo a URL, testo e altri dati semplicemente scansionando con la fotocamera dello smartphone.',
         'Digita o incolla qualsiasi testo o URL nel campo di input e il codice QR viene generato in tempo reale. Puoi regolare la dimensione per controllare la densità e il livello di dettaglio. Il codice generato può essere scaricato come immagine PNG di alta qualità.',
         'I codici QR funzionano codificando dati in una griglia bidimensionale di moduli bianchi e neri. Includono pattern di ricerca (i tre grandi quadrati negli angoli) che aiutano gli scanner a localizzare e orientare il codice, pattern di temporizzazione e moduli dati che contengono le informazioni codificate.',
-        'Gli usi comuni includono condivisione di URL, credenziali Wi-Fi, informazioni di contatto, messaggi di testo e coordinate GPS. Le aziende li usano per campagne marketing, autenticazione prodotti, tracciamento inventario e pagamenti contactless.',
+        'Gli usi comuni includono condivisione di URL, credenziali Wi-Fi, informazioni di contatto, messaggi di testo e coordinate GPS. Le aziende li usano per campagne marketing, autenticazione prodotti, tracciamento inventario e pagamenti contactless. Scopri anche il nostro <a href="/it/tools/barcode-generator" class="text-blue-600 underline">Generatore di Codici a Barre</a> e il <a href="/it/tools/password-generator" class="text-blue-600 underline">Generatore di Password</a> per altri strumenti utili.',
       ],
       faq: [
         { q: 'Cosa posso codificare in un codice QR?', a: 'Puoi codificare qualsiasi testo, inclusi URL, indirizzi email, numeri di telefono, credenziali Wi-Fi, testo semplice e informazioni di contatto vCard. La capacità massima può raggiungere 4.296 caratteri alfanumerici.' },
@@ -278,7 +278,7 @@ export default function QrCodeGenerator() {
         'Los códigos QR se han convertido en una herramienta esencial para conectar el mundo físico y digital. Desde menús de restaurantes hasta tarjetas de presentación, nuestro generador de códigos QR gratuito te permite crear códigos personalizados al instante.',
         'Escribe o pega cualquier texto o URL en el campo de entrada y el código QR se genera en tiempo real. Puedes ajustar el tamaño para controlar la densidad y nivel de detalle. El código generado puede descargarse como imagen PNG de alta calidad.',
         'Los códigos QR funcionan codificando datos en una cuadrícula bidimensional de módulos blancos y negros. Incluyen patrones de búsqueda, patrones de temporización y módulos de datos que contienen la información codificada.',
-        'Los usos comunes incluyen compartir URLs, credenciales Wi-Fi, información de contacto y coordenadas GPS. Las empresas los usan para campañas de marketing, autenticación de productos y pagos sin contacto.',
+        'Los usos comunes incluyen compartir URLs, credenciales Wi-Fi, información de contacto y coordenadas GPS. Las empresas los usan para campañas de marketing, autenticación de productos y pagos sin contacto. Explora también nuestro <a href="/es/tools/barcode-generator" class="text-blue-600 underline">Generador de Códigos de Barras</a> y el <a href="/es/tools/password-generator" class="text-blue-600 underline">Generador de Contraseñas</a> para más herramientas útiles.',
       ],
       faq: [
         { q: '¿Qué puedo codificar en un código QR?', a: 'Puedes codificar cualquier texto, incluyendo URLs, correos electrónicos, números de teléfono, credenciales Wi-Fi y información de contacto vCard.' },
@@ -294,7 +294,7 @@ export default function QrCodeGenerator() {
         'Les QR codes sont devenus un outil essentiel pour relier les mondes physique et numérique. Des menus de restaurant aux cartes de visite, notre générateur de QR codes gratuit vous permet de créer des codes personnalisés instantanément.',
         'Tapez ou collez n\'importe quel texte ou URL et le QR code est généré en temps réel. Vous pouvez ajuster la taille pour contrôler la densité et le niveau de détail. Le code généré peut être téléchargé en image PNG haute qualité.',
         'Les QR codes fonctionnent en encodant des données dans une grille bidimensionnelle de modules noirs et blancs. Ils incluent des motifs de recherche, des motifs de synchronisation et des modules de données contenant les informations encodées.',
-        'Les utilisations courantes incluent le partage d\'URLs, les identifiants Wi-Fi, les informations de contact et les coordonnées GPS. Les entreprises les utilisent pour le marketing, l\'authentification de produits et les paiements sans contact.',
+        'Les utilisations courantes incluent le partage d\'URLs, les identifiants Wi-Fi, les informations de contact et les coordonnées GPS. Les entreprises les utilisent pour le marketing, l\'authentification de produits et les paiements sans contact. Découvrez aussi notre <a href="/fr/tools/barcode-generator" class="text-blue-600 underline">Générateur de Codes-Barres</a> et le <a href="/fr/tools/password-generator" class="text-blue-600 underline">Générateur de Mots de Passe</a> pour d\'autres outils utiles.',
       ],
       faq: [
         { q: 'Que puis-je encoder dans un QR code ?', a: 'Vous pouvez encoder n\'importe quel texte, y compris des URLs, adresses email, numéros de téléphone, identifiants Wi-Fi et informations de contact vCard.' },
@@ -310,7 +310,7 @@ export default function QrCodeGenerator() {
         'QR-Codes sind zu einem unverzichtbaren Werkzeug geworden, um die physische und digitale Welt zu verbinden. Von Restaurantmenüs bis zu Visitenkarten ermöglicht unser kostenloser QR-Code-Generator das sofortige Erstellen individueller Codes.',
         'Geben Sie beliebigen Text oder eine URL ein, und der QR-Code wird in Echtzeit generiert. Sie können die Größe anpassen, um Dichte und Detaillevel zu steuern. Der generierte Code kann als PNG-Bild heruntergeladen werden.',
         'QR-Codes funktionieren durch Kodierung von Daten in einem zweidimensionalen Raster aus schwarzen und weißen Modulen. Sie enthalten Suchmuster, Timing-Muster und Datenmodule mit den kodierten Informationen.',
-        'Häufige Verwendungen sind das Teilen von URLs, Wi-Fi-Zugangsdaten, Kontaktinformationen und GPS-Koordinaten. Unternehmen nutzen sie für Marketing, Produktauthentifizierung und kontaktlose Zahlungen.',
+        'Häufige Verwendungen sind das Teilen von URLs, Wi-Fi-Zugangsdaten, Kontaktinformationen und GPS-Koordinaten. Unternehmen nutzen sie für Marketing, Produktauthentifizierung und kontaktlose Zahlungen. Entdecken Sie auch unseren <a href="/de/tools/barcode-generator" class="text-blue-600 underline">Barcode-Generator</a> und den <a href="/de/tools/password-generator" class="text-blue-600 underline">Passwort-Generator</a> für weitere nützliche Tools.',
       ],
       faq: [
         { q: 'Was kann ich in einem QR-Code kodieren?', a: 'Sie können beliebigen Text kodieren, einschließlich URLs, E-Mail-Adressen, Telefonnummern, Wi-Fi-Zugangsdaten und vCard-Kontaktinformationen.' },
@@ -326,7 +326,7 @@ export default function QrCodeGenerator() {
         'Os QR codes tornaram-se uma ferramenta essencial para conectar os mundos físico e digital. De menus de restaurantes a cartões de visita, nosso gerador de QR codes gratuito permite criar códigos personalizados instantaneamente.',
         'Digite ou cole qualquer texto ou URL no campo de entrada e o QR code é gerado em tempo real. Você pode ajustar o tamanho para controlar a densidade e nível de detalhe. O código gerado pode ser baixado como imagem PNG de alta qualidade.',
         'QR codes funcionam codificando dados em uma grade bidimensional de módulos pretos e brancos. Incluem padrões de busca, padrões de temporização e módulos de dados contendo as informações codificadas.',
-        'Usos comuns incluem compartilhar URLs, credenciais Wi-Fi, informações de contato e coordenadas GPS. Empresas os usam para campanhas de marketing, autenticação de produtos e pagamentos por aproximação.',
+        'Usos comuns incluem compartilhar URLs, credenciais Wi-Fi, informações de contato e coordenadas GPS. Empresas os usam para campanhas de marketing, autenticação de produtos e pagamentos por aproximação. Explore também nosso <a href="/pt/tools/barcode-generator" class="text-blue-600 underline">Gerador de Códigos de Barras</a> e o <a href="/pt/tools/password-generator" class="text-blue-600 underline">Gerador de Senhas</a> para mais ferramentas úteis.',
       ],
       faq: [
         { q: 'O que posso codificar em um QR code?', a: 'Você pode codificar qualquer texto, incluindo URLs, endereços de email, números de telefone, credenciais Wi-Fi e informações de contato vCard.' },
@@ -508,7 +508,7 @@ export default function QrCodeGenerator() {
 
         <article className="mt-12 prose prose-gray max-w-none">
           <h2 className="text-2xl font-bold text-gray-900 mb-4">{seo.title}</h2>
-          {seo.paragraphs.map((p, i) => <p key={i} className="text-gray-700 leading-relaxed mb-4">{p}</p>)}
+          {seo.paragraphs.map((p, i) => <p key={i} className="text-gray-700 leading-relaxed mb-4" dangerouslySetInnerHTML={{ __html: p }} />)}
         </article>
 
         <section className="mt-10 mb-8">

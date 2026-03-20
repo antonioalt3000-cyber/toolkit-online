@@ -165,6 +165,7 @@ export default function MortgageAmortization() {
         'Our free mortgage amortization calculator instantly generates a complete month-by-month breakdown. Simply enter your loan amount, annual interest rate, and loan term in years. The calculator uses the standard amortization formula: M = P[r(1+r)^n]/[(1+r)^n-1], where M is the monthly payment, P is the principal, r is the monthly interest rate, and n is the total number of payments.',
         'In the early years of a mortgage, a larger portion of each payment goes toward interest. As the loan matures, more of each payment is applied to the principal. This is why making extra principal payments early in the loan term can significantly reduce the total interest paid and shorten the loan duration.',
         'Whether you are comparing 15-year vs 30-year mortgages, evaluating refinancing options, or simply planning your household budget, our amortization calculator provides the detailed financial picture you need. All calculations are performed locally in your browser — no data is sent to any server.',
+        'For a quick estimate of your monthly payment without the full schedule, try our <a href="/${lang}/tools/mortgage-calculator">mortgage calculator</a>. If you are evaluating other types of loans, our <a href="/${lang}/tools/loan-calculator">loan calculator</a> covers personal, auto, and student loans. To see how your savings grow over time for a future down payment, check the <a href="/${lang}/tools/compound-interest-calculator">compound interest calculator</a>.',
       ],
       faq: [
         { q: 'What is mortgage amortization?', a: 'Mortgage amortization is the process of paying off a home loan through regular monthly payments that include both principal (the amount borrowed) and interest. Over time, the proportion of each payment that goes to principal increases while the interest portion decreases.' },
@@ -181,6 +182,7 @@ export default function MortgageAmortization() {
         'Il nostro calcolatore gratuito genera istantaneamente una ripartizione completa mese per mese. Inserisci l\'importo del prestito, il tasso di interesse annuo e la durata in anni. Il calcolatore utilizza la formula standard di ammortamento per calcolare la rata costante.',
         'Nei primi anni del mutuo, una parte maggiore di ogni rata va verso gli interessi. Man mano che il prestito matura, più soldi vengono applicati al capitale. Ecco perché effettuare pagamenti extra sul capitale nei primi anni può ridurre significativamente gli interessi totali.',
         'Che tu stia confrontando mutui a 15 o 30 anni, valutando opzioni di rifinanziamento o pianificando il bilancio familiare, il nostro calcolatore fornisce il quadro finanziario dettagliato di cui hai bisogno. Tutti i calcoli vengono eseguiti localmente nel browser.',
+        'Per una stima rapida della rata mensile senza il piano completo, prova il nostro <a href="/${lang}/tools/mortgage-calculator">calcolatore mutuo</a>. Per valutare altri tipi di prestiti, il <a href="/${lang}/tools/loan-calculator">calcolatore prestiti</a> copre personali, auto e finanziamenti. Per far crescere i risparmi per un futuro anticipo, consulta il <a href="/${lang}/tools/compound-interest-calculator">calcolatore interesse composto</a>.',
       ],
       faq: [
         { q: 'Cos\'è l\'ammortamento del mutuo?', a: 'L\'ammortamento è il processo di rimborso del mutuo attraverso rate mensili costanti che includono quota capitale e quota interessi. Nel tempo, la proporzione di ogni rata destinata al capitale aumenta mentre quella degli interessi diminuisce.' },
@@ -197,6 +199,7 @@ export default function MortgageAmortization() {
         'Nuestra calculadora gratuita genera instantáneamente un desglose completo mes a mes. Solo ingresa el monto del préstamo, la tasa de interés anual y el plazo en años. La calculadora usa la fórmula estándar de amortización para calcular la cuota fija mensual.',
         'En los primeros años de una hipoteca, una mayor parte de cada pago se destina a intereses. A medida que el préstamo madura, más dinero se aplica al capital. Por eso hacer pagos extra al capital al inicio puede reducir significativamente los intereses totales.',
         'Ya sea que estés comparando hipotecas a 15 o 30 años, evaluando refinanciamiento o planificando tu presupuesto, nuestra calculadora te da el panorama financiero detallado. Todos los cálculos se realizan localmente en tu navegador.',
+        'Para una estimación rápida de tu cuota mensual, prueba nuestra <a href="/${lang}/tools/mortgage-calculator">calculadora de hipoteca</a>. Para evaluar otros tipos de crédito, la <a href="/${lang}/tools/loan-calculator">calculadora de préstamos</a> cubre personales, auto y estudiantiles. Para hacer crecer tus ahorros para un futuro enganche, consulta la <a href="/${lang}/tools/compound-interest-calculator">calculadora de interés compuesto</a>.',
       ],
       faq: [
         { q: '¿Qué es la amortización hipotecaria?', a: 'La amortización hipotecaria es el proceso de pagar un préstamo mediante cuotas mensuales que incluyen capital e interés. Con el tiempo, la proporción de cada pago destinada al capital aumenta mientras la de interés disminuye.' },
@@ -213,6 +216,7 @@ export default function MortgageAmortization() {
         'Notre calculateur gratuit génère instantanément un détail complet mois par mois. Entrez le montant du prêt, le taux d\'intérêt annuel et la durée en années. Le calculateur utilise la formule standard d\'amortissement pour calculer la mensualité constante.',
         'Dans les premières années du prêt, une plus grande partie de chaque paiement va vers les intérêts. À mesure que le prêt avance, plus d\'argent est appliqué au capital. C\'est pourquoi effectuer des remboursements anticipés peut réduire significativement les intérêts totaux.',
         'Que vous compariez des prêts à 15 ou 30 ans, évaluiez un refinancement ou planifiez votre budget, notre calculateur fournit le détail financier nécessaire. Tous les calculs sont effectués localement dans votre navigateur.',
+        'Pour une estimation rapide de votre mensualité, essayez notre <a href="/${lang}/tools/mortgage-calculator">calculateur hypothécaire</a>. Pour évaluer d\'autres types de crédits, le <a href="/${lang}/tools/loan-calculator">calculateur de prêt</a> couvre les prêts personnels et auto. Pour faire fructifier votre épargne pour un futur apport, consultez le <a href="/${lang}/tools/compound-interest-calculator">calculateur d\'intérêts composés</a>.',
       ],
       faq: [
         { q: 'Qu\'est-ce que l\'amortissement hypothécaire ?', a: 'L\'amortissement hypothécaire est le processus de remboursement d\'un prêt immobilier par des mensualités incluant capital et intérêts. Au fil du temps, la part de chaque paiement consacrée au capital augmente tandis que celle des intérêts diminue.' },
@@ -229,6 +233,7 @@ export default function MortgageAmortization() {
         'Unser kostenloser Tilgungsrechner erstellt sofort eine vollständige monatliche Aufschlüsselung. Geben Sie einfach den Darlehensbetrag, den jährlichen Zinssatz und die Laufzeit in Jahren ein. Der Rechner verwendet die Standard-Annuitätenformel.',
         'In den ersten Jahren eines Hypothekendarlehens fließt ein größerer Teil jeder Rate in die Zinsen. Mit zunehmender Laufzeit wird mehr Geld auf die Tilgung angewendet. Deshalb können frühe Sondertilgungen die Gesamtzinsen erheblich reduzieren.',
         'Ob Sie 15- und 30-jährige Hypotheken vergleichen, Umschuldungsoptionen prüfen oder Ihr Haushaltsbudget planen — unser Tilgungsrechner liefert das detaillierte Finanzbild. Alle Berechnungen erfolgen lokal in Ihrem Browser.',
+        'Für eine schnelle Schätzung Ihrer monatlichen Rate ohne vollständigen Plan nutzen Sie unseren <a href="/${lang}/tools/mortgage-calculator">Hypothekenrechner</a>. Für andere Kreditarten hilft der <a href="/${lang}/tools/loan-calculator">Kreditrechner</a>. Um Ersparnisse für eine künftige Anzahlung wachsen zu lassen, nutzen Sie den <a href="/${lang}/tools/compound-interest-calculator">Zinseszinsrechner</a>.',
       ],
       faq: [
         { q: 'Was ist ein Tilgungsplan?', a: 'Ein Tilgungsplan zeigt die Aufschlüsselung jeder monatlichen Rate in Tilgungs- und Zinsanteil über die gesamte Darlehenslaufzeit. Der Tilgungsanteil steigt mit der Zeit, während der Zinsanteil sinkt.' },
@@ -245,6 +250,7 @@ export default function MortgageAmortization() {
         'Nossa calculadora gratuita gera instantaneamente um detalhamento completo mês a mês. Basta inserir o valor do empréstimo, a taxa de juros anual e o prazo em anos. A calculadora usa a fórmula padrão de amortização para calcular a parcela fixa.',
         'Nos primeiros anos de um financiamento, uma parcela maior de cada pagamento vai para juros. À medida que o empréstimo amadurece, mais dinheiro é aplicado ao principal. Por isso, fazer pagamentos extras no início pode reduzir significativamente os juros totais.',
         'Seja comparando financiamentos de 15 ou 30 anos, avaliando refinanciamento ou planejando seu orçamento, nossa calculadora fornece o panorama financeiro detalhado necessário. Todos os cálculos são feitos localmente no seu navegador.',
+        'Para uma estimativa rápida da parcela mensal, experimente a <a href="/${lang}/tools/mortgage-calculator">calculadora de hipoteca</a>. Para avaliar outros tipos de crédito, a <a href="/${lang}/tools/loan-calculator">calculadora de empréstimos</a> cobre pessoais, auto e estudantis. Para fazer crescer as poupanças para uma futura entrada, consulte a <a href="/${lang}/tools/compound-interest-calculator">calculadora de juros compostos</a>.',
       ],
       faq: [
         { q: 'O que é amortização de financiamento?', a: 'Amortização é o processo de pagamento de um empréstimo através de parcelas mensais que incluem principal e juros. Com o tempo, a proporção de cada pagamento destinada ao principal aumenta enquanto a de juros diminui.' },
@@ -411,7 +417,7 @@ export default function MortgageAmortization() {
         {/* SEO Article */}
         <article className="mt-12 prose prose-gray max-w-none">
           <h2 className="text-2xl font-bold text-gray-900 mb-4">{seo.title}</h2>
-          {seo.paragraphs.map((p, i) => <p key={i} className="text-gray-700 leading-relaxed mb-4">{p}</p>)}
+          {seo.paragraphs.map((p, i) => <p key={i} className="text-gray-700 leading-relaxed mb-4" dangerouslySetInnerHTML={{ __html: p.replace(/\$\{lang\}/g, lang) }} />)}
         </article>
 
         {/* FAQ Accordion */}

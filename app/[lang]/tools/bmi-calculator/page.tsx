@@ -91,7 +91,7 @@ export default function BmiCalculator() {
         'Body Mass Index (BMI) is a simple, widely-used screening tool that estimates whether a person has a healthy body weight relative to their height. Developed by Belgian mathematician Adolphe Quetelet in the 1830s, BMI remains one of the most common methods used by healthcare professionals for initial weight assessment.',
         'The formula is straightforward: BMI = weight (kg) / height (m)^2. Our calculator does the math for you — just enter your weight in kilograms and height in centimeters, and you instantly see your BMI along with the WHO classification: underweight (below 18.5), normal weight (18.5-24.9), overweight (25-29.9), or obese (30 and above).',
         'While BMI is useful as a quick screening tool, it has important limitations. It does not distinguish between muscle mass and fat mass, so athletes with high muscle density may be classified as overweight despite having low body fat. It also does not account for age, gender, ethnicity, or fat distribution.',
-        'For a more complete picture of your health, consider combining BMI with other measurements like waist circumference, waist-to-hip ratio, body fat percentage, or consulting a healthcare professional. BMI is a starting point, not a diagnosis.',
+        'For a more complete picture of your health, consider combining BMI with other measurements. Our <a href="/en/tools/body-fat-calculator" class="text-blue-600 underline">body fat calculator</a> provides a more detailed assessment of your body composition, while the <a href="/en/tools/calorie-calculator" class="text-blue-600 underline">calorie calculator</a> helps you determine daily calorie needs based on your activity level. You can also check your <a href="/en/tools/ideal-weight-calculator" class="text-blue-600 underline">ideal weight</a> based on height and frame size. BMI is a starting point, not a diagnosis — consult a healthcare professional for personalized advice.',
       ],
       faq: [
         { q: 'How is BMI calculated?', a: 'BMI is calculated by dividing your weight in kilograms by your height in meters squared. The formula is: BMI = weight (kg) / (height (m))^2. For example, a person weighing 70 kg and measuring 175 cm tall has a BMI of 70 / (1.75)^2 = 22.9.' },
@@ -107,7 +107,7 @@ export default function BmiCalculator() {
         'L\'Indice di Massa Corporea (BMI o IMC) è uno strumento di screening semplice e ampiamente utilizzato che stima se una persona ha un peso corporeo sano in relazione alla sua altezza. Sviluppato dal matematico belga Adolphe Quetelet negli anni 1830, il BMI rimane uno dei metodi più comuni usati dai professionisti sanitari.',
         'La formula è semplice: BMI = peso (kg) / altezza (m)^2. Il nostro calcolatore fa i calcoli per te — inserisci il peso in chilogrammi e l\'altezza in centimetri, e vedrai istantaneamente il tuo BMI con la classificazione OMS: sottopeso (sotto 18,5), normopeso (18,5-24,9), sovrappeso (25-29,9) o obesità (30 e oltre).',
         'Sebbene il BMI sia utile come strumento di screening rapido, ha importanti limitazioni. Non distingue tra massa muscolare e massa grassa, quindi atleti con alta densità muscolare potrebbero essere classificati come sovrappeso nonostante abbiano un basso grasso corporeo.',
-        'Per un quadro più completo della tua salute, considera di combinare il BMI con altre misure come la circonferenza vita, il rapporto vita-fianchi o la percentuale di grasso corporeo, oppure consulta un professionista sanitario.',
+        'Per un quadro più completo della tua salute, considera di combinare il BMI con altre misure. Il nostro <a href="/it/tools/body-fat-calculator" class="text-blue-600 underline">calcolatore di grasso corporeo</a> offre una valutazione più dettagliata della composizione corporea, mentre il <a href="/it/tools/calorie-calculator" class="text-blue-600 underline">calcolatore di calorie</a> ti aiuta a determinare il fabbisogno calorico giornaliero. Puoi anche verificare il tuo <a href="/it/tools/ideal-weight-calculator" class="text-blue-600 underline">peso ideale</a> in base ad altezza e struttura corporea.',
       ],
       faq: [
         { q: 'Come si calcola il BMI?', a: 'Il BMI si calcola dividendo il peso in chilogrammi per l\'altezza in metri al quadrato. La formula è: BMI = peso (kg) / (altezza (m))^2. Ad esempio, una persona di 70 kg alta 175 cm ha un BMI di 70 / (1,75)^2 = 22,9.' },
@@ -123,7 +123,7 @@ export default function BmiCalculator() {
         'El Índice de Masa Corporal (IMC) es una herramienta de evaluación simple y ampliamente utilizada que estima si una persona tiene un peso corporal saludable en relación con su altura. Desarrollado por el matemático belga Adolphe Quetelet en la década de 1830, el IMC sigue siendo uno de los métodos más comunes.',
         'La fórmula es sencilla: IMC = peso (kg) / altura (m)^2. Nuestra calculadora hace los cálculos por ti — solo ingresa tu peso en kilogramos y altura en centímetros, y verás instantáneamente tu IMC con la clasificación de la OMS.',
         'Aunque el IMC es útil como herramienta rápida, tiene limitaciones importantes. No distingue entre masa muscular y grasa, por lo que atletas con alta densidad muscular podrían clasificarse como sobrepeso a pesar de tener bajo porcentaje de grasa.',
-        'Para una imagen más completa de tu salud, considera combinar el IMC con otras medidas como la circunferencia de cintura o consultar a un profesional de la salud.',
+        'Para una imagen más completa de tu salud, combina el IMC con otras herramientas. Nuestra <a href="/es/tools/body-fat-calculator" class="text-blue-600 underline">calculadora de grasa corporal</a> ofrece un análisis más detallado, y la <a href="/es/tools/calorie-calculator" class="text-blue-600 underline">calculadora de calorías</a> te ayuda a determinar tus necesidades calóricas diarias. También puedes verificar tu <a href="/es/tools/ideal-weight-calculator" class="text-blue-600 underline">peso ideal</a> según tu altura.',
       ],
       faq: [
         { q: '¿Cómo se calcula el IMC?', a: 'El IMC se calcula dividiendo el peso en kilogramos por la altura en metros al cuadrado. Por ejemplo, una persona de 70 kg que mide 175 cm tiene un IMC de 70 / (1,75)^2 = 22,9.' },
@@ -139,7 +139,7 @@ export default function BmiCalculator() {
         'L\'Indice de Masse Corporelle (IMC) est un outil de dépistage simple et largement utilisé qui estime si une personne a un poids corporel sain par rapport à sa taille. Développé par le mathématicien belge Adolphe Quetelet dans les années 1830, l\'IMC reste l\'une des méthodes les plus courantes.',
         'La formule est simple : IMC = poids (kg) / taille (m)^2. Notre calculateur fait le calcul pour vous — entrez votre poids en kilogrammes et votre taille en centimètres, et vous verrez instantanément votre IMC avec la classification OMS.',
         'Bien que l\'IMC soit utile comme outil rapide, il a des limitations importantes. Il ne distingue pas la masse musculaire de la masse grasse, donc les athlètes pourraient être classés en surpoids malgré un faible pourcentage de graisse corporelle.',
-        'Pour une image plus complète de votre santé, combinez l\'IMC avec d\'autres mesures comme le tour de taille ou consultez un professionnel de santé.',
+        'Pour une image plus complète de votre santé, combinez l\'IMC avec d\'autres outils. Notre <a href="/fr/tools/body-fat-calculator" class="text-blue-600 underline">calculateur de masse grasse</a> offre une évaluation plus détaillée, et le <a href="/fr/tools/calorie-calculator" class="text-blue-600 underline">calculateur de calories</a> vous aide à déterminer vos besoins caloriques. Vous pouvez aussi vérifier votre <a href="/fr/tools/ideal-weight-calculator" class="text-blue-600 underline">poids idéal</a> selon votre taille.',
       ],
       faq: [
         { q: 'Comment l\'IMC est-il calculé ?', a: 'L\'IMC se calcule en divisant le poids en kilogrammes par la taille en mètres au carré. Par exemple, une personne de 70 kg mesurant 175 cm a un IMC de 70 / (1,75)^2 = 22,9.' },
@@ -155,7 +155,7 @@ export default function BmiCalculator() {
         'Der Body-Mass-Index (BMI) ist ein einfaches, weit verbreitetes Screening-Tool, das schätzt, ob eine Person ein gesundes Körpergewicht im Verhältnis zu ihrer Größe hat. Vom belgischen Mathematiker Adolphe Quetelet in den 1830er Jahren entwickelt, bleibt der BMI eine der häufigsten Methoden.',
         'Die Formel ist einfach: BMI = Gewicht (kg) / Größe (m)^2. Unser Rechner erledigt die Berechnung für Sie — geben Sie Ihr Gewicht in Kilogramm und Ihre Größe in Zentimetern ein, und Sie sehen sofort Ihren BMI mit der WHO-Klassifizierung.',
         'Obwohl der BMI als schnelles Screening-Tool nützlich ist, hat er wichtige Einschränkungen. Er unterscheidet nicht zwischen Muskelmasse und Fettmasse, sodass Sportler mit hoher Muskeldichte als übergewichtig eingestuft werden könnten.',
-        'Für ein vollständigeres Bild Ihrer Gesundheit kombinieren Sie den BMI mit anderen Messungen wie Taillenumfang oder konsultieren Sie einen Gesundheitsfachmann.',
+        'Für ein vollständigeres Bild Ihrer Gesundheit kombinieren Sie den BMI mit anderen Tools. Unser <a href="/de/tools/body-fat-calculator" class="text-blue-600 underline">Körperfett-Rechner</a> bietet eine detailliertere Bewertung, und der <a href="/de/tools/calorie-calculator" class="text-blue-600 underline">Kalorienrechner</a> hilft Ihnen, Ihren täglichen Kalorienbedarf zu bestimmen. Sie können auch Ihr <a href="/de/tools/ideal-weight-calculator" class="text-blue-600 underline">Idealgewicht</a> basierend auf Größe und Körperbau berechnen.',
       ],
       faq: [
         { q: 'Wie wird der BMI berechnet?', a: 'Der BMI wird berechnet, indem das Gewicht in Kilogramm durch die Größe in Metern zum Quadrat geteilt wird. Beispiel: Eine 70 kg schwere Person mit 175 cm hat einen BMI von 70 / (1,75)^2 = 22,9.' },
@@ -171,7 +171,7 @@ export default function BmiCalculator() {
         'O Índice de Massa Corporal (IMC) é uma ferramenta de triagem simples e amplamente utilizada que estima se uma pessoa tem um peso corporal saudável em relação à sua altura. Desenvolvido pelo matemático belga Adolphe Quetelet na década de 1830, o IMC continua sendo um dos métodos mais comuns.',
         'A fórmula é direta: IMC = peso (kg) / altura (m)^2. Nossa calculadora faz a conta para você — basta inserir seu peso em quilogramas e altura em centímetros, e você verá instantaneamente seu IMC com a classificação da OMS.',
         'Embora o IMC seja útil como ferramenta rápida, ele tem limitações importantes. Não distingue entre massa muscular e gordura, então atletas com alta densidade muscular podem ser classificados como sobrepeso apesar de terem baixo percentual de gordura.',
-        'Para uma visão mais completa da sua saúde, considere combinar o IMC com outras medidas como circunferência da cintura ou consultar um profissional de saúde.',
+        'Para uma visão mais completa da sua saúde, combine o IMC com outras ferramentas. Nossa <a href="/pt/tools/body-fat-calculator" class="text-blue-600 underline">calculadora de gordura corporal</a> oferece uma avaliação mais detalhada, e a <a href="/pt/tools/calorie-calculator" class="text-blue-600 underline">calculadora de calorias</a> ajuda a determinar suas necessidades calóricas diárias. Você também pode verificar seu <a href="/pt/tools/ideal-weight-calculator" class="text-blue-600 underline">peso ideal</a> com base na sua altura.',
       ],
       faq: [
         { q: 'Como o IMC é calculado?', a: 'O IMC é calculado dividindo o peso em quilogramas pela altura em metros ao quadrado. Por exemplo, uma pessoa de 70 kg com 175 cm tem um IMC de 70 / (1,75)^2 = 22,9.' },
@@ -289,7 +289,7 @@ export default function BmiCalculator() {
 
         <article className="mt-12 prose prose-gray max-w-none">
           <h2 className="text-2xl font-bold text-gray-900 mb-4">{seo.title}</h2>
-          {seo.paragraphs.map((p, i) => <p key={i} className="text-gray-700 leading-relaxed mb-4">{p}</p>)}
+          {seo.paragraphs.map((p, i) => <p key={i} className="text-gray-700 leading-relaxed mb-4" dangerouslySetInnerHTML={{ __html: p }} />)}
         </article>
 
         <section className="mt-10 mb-8">

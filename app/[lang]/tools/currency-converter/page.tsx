@@ -62,7 +62,7 @@ const seoContent: Record<Locale, { title: string; paragraphs: string[]; faq: { q
     paragraphs: [
       'Currency conversion is essential for international travel, online shopping from foreign retailers, sending money abroad, and understanding the value of assets denominated in different currencies. Exchange rates fluctuate constantly based on economic conditions, interest rates, geopolitical events, and market sentiment, making it important to check current rates before any significant transaction.',
       'Our free currency converter provides quick reference conversions between major world currencies including US Dollar, Euro, British Pound, Japanese Yen, Swiss Franc, Canadian Dollar, Australian Dollar, and Chinese Yuan. Simply enter the amount, select the source and target currencies, and get an instant conversion. The swap button makes it easy to reverse the direction of conversion.',
-      'While this tool uses approximate reference rates suitable for everyday estimation and travel planning, always verify with your bank or a live exchange rate service before making large financial transactions. Banks and transfer services typically add a margin to the mid-market rate, so the actual rate you receive may differ slightly from reference rates shown here.',
+      'While this tool uses approximate reference rates suitable for everyday estimation and travel planning, always verify with your bank or a live exchange rate service before making large financial transactions. Banks and transfer services typically add a margin to the mid-market rate, so the actual rate you receive may differ slightly from reference rates shown here. When traveling abroad, our <a href="/en/tools/tip-calculator" class="text-blue-600 underline">tip calculator</a> helps you figure out gratuities in local currency, and the <a href="/en/tools/unit-converter" class="text-blue-600 underline">unit converter</a> handles metric-imperial conversions you may encounter.',
     ],
     faq: [
       { q: 'What determines currency exchange rates?', a: 'Exchange rates are driven by supply and demand in foreign exchange markets. Key factors include interest rate differentials between countries, inflation rates, trade balances, political stability, economic performance, and central bank monetary policies.' },
@@ -77,7 +77,7 @@ const seoContent: Record<Locale, { title: string; paragraphs: string[]; faq: { q
     paragraphs: [
       'La conversione di valuta e essenziale per i viaggi internazionali, gli acquisti online da rivenditori esteri, l\'invio di denaro all\'estero e la comprensione del valore di attivita denominate in valute diverse. I tassi di cambio fluttuano costantemente in base alle condizioni economiche, ai tassi di interesse e agli eventi geopolitici.',
       'Il nostro convertitore di valute gratuito fornisce conversioni rapide tra le principali valute mondiali, inclusi Dollaro USA, Euro, Sterlina britannica, Yen giapponese, Franco svizzero, Dollaro canadese, Dollaro australiano e Yuan cinese. Basta inserire l\'importo, selezionare le valute e ottenere una conversione istantanea.',
-      'Sebbene questo strumento utilizzi tassi di riferimento approssimativi adatti alla stima quotidiana, verificate sempre con la vostra banca prima di transazioni finanziarie significative. Banche e servizi di trasferimento aggiungono generalmente un margine al tasso interbancario.',
+      'Sebbene questo strumento utilizzi tassi di riferimento approssimativi adatti alla stima quotidiana, verificate sempre con la vostra banca prima di transazioni finanziarie significative. Banche e servizi di trasferimento aggiungono generalmente un margine al tasso interbancario. Quando viaggiate all\'estero, il nostro <a href="/it/tools/tip-calculator" class="text-blue-600 underline">calcolatore di mance</a> vi aiuta a calcolare le mance nella valuta locale, e il <a href="/it/tools/unit-converter" class="text-blue-600 underline">convertitore di unità</a> gestisce le conversioni metriche-imperiali.',
     ],
     faq: [
       { q: 'Cosa determina i tassi di cambio?', a: 'I tassi di cambio sono determinati da domanda e offerta nel mercato forex. Fattori chiave includono differenziali nei tassi di interesse, inflazione, bilancia commerciale, stabilita politica e politiche monetarie delle banche centrali.' },
@@ -92,7 +92,7 @@ const seoContent: Record<Locale, { title: string; paragraphs: string[]; faq: { q
     paragraphs: [
       'La conversion de moneda es esencial para viajes internacionales, compras online en tiendas extranjeras, envio de dinero al exterior y comprension del valor de activos en diferentes monedas. Los tipos de cambio fluctuan constantemente segun condiciones economicas, tasas de interes y eventos geopoliticos.',
       'Nuestro conversor de monedas gratuito proporciona conversiones rapidas entre las principales monedas mundiales, incluyendo Dolar, Euro, Libra esterlina, Yen japones, Franco suizo, Dolar canadiense, Dolar australiano y Yuan chino. Solo introduce la cantidad, selecciona las monedas y obtendras una conversion instantanea.',
-      'Aunque esta herramienta usa tasas de referencia aproximadas para estimacion cotidiana, siempre verifica con tu banco antes de transacciones financieras significativas. Bancos y servicios de transferencia afiaden tipicamente un margen al tipo interbancario.',
+      'Aunque esta herramienta usa tasas de referencia aproximadas para estimacion cotidiana, siempre verifica con tu banco antes de transacciones financieras significativas. Bancos y servicios de transferencia afiaden tipicamente un margen al tipo interbancario. Cuando viajes al extranjero, nuestra <a href="/es/tools/tip-calculator" class="text-blue-600 underline">calculadora de propinas</a> te ayuda a calcular gratificaciones en moneda local, y el <a href="/es/tools/unit-converter" class="text-blue-600 underline">convertidor de unidades</a> gestiona conversiones metricas-imperiales.',
     ],
     faq: [
       { q: 'Que determina los tipos de cambio?', a: 'Los tipos de cambio estan determinados por oferta y demanda en los mercados forex. Factores clave incluyen diferenciales de tasas de interes, inflacion, balanza comercial, estabilidad politica y politicas monetarias de bancos centrales.' },
@@ -107,7 +107,7 @@ const seoContent: Record<Locale, { title: string; paragraphs: string[]; faq: { q
     paragraphs: [
       'La conversion de devises est essentielle pour les voyages internationaux, les achats en ligne chez des detaillants etrangers, les transferts d\'argent a l\'etranger et la comprehension de la valeur d\'actifs libelles en differentes monnaies. Les taux de change fluctuent constamment selon les conditions economiques et les evenements geopolitiques.',
       'Notre convertisseur de devises gratuit fournit des conversions rapides entre les principales monnaies mondiales, y compris Dollar US, Euro, Livre sterling, Yen japonais, Franc suisse, Dollar canadien, Dollar australien et Yuan chinois. Entrez simplement le montant, selectionnez les devises et obtenez une conversion instantanee.',
-      'Bien que cet outil utilise des taux de reference approximatifs pour l\'estimation quotidienne, verifiez toujours aupres de votre banque avant des transactions financieres importantes. Les banques ajoutent generalement une marge au taux interbancaire.',
+      'Bien que cet outil utilise des taux de reference approximatifs pour l\'estimation quotidienne, verifiez toujours aupres de votre banque avant des transactions financieres importantes. Les banques ajoutent generalement une marge au taux interbancaire. En voyage, notre <a href="/fr/tools/tip-calculator" class="text-blue-600 underline">calculateur de pourboires</a> vous aide a calculer les gratifications en monnaie locale, et le <a href="/fr/tools/unit-converter" class="text-blue-600 underline">convertisseur d\'unites</a> gere les conversions metriques-imperiales.',
     ],
     faq: [
       { q: 'Qu\'est-ce qui determine les taux de change?', a: 'Les taux sont determines par l\'offre et la demande sur les marches des changes. Les facteurs cles incluent les ecarts de taux d\'interet, l\'inflation, la balance commerciale, la stabilite politique et les politiques monetaires des banques centrales.' },
@@ -122,7 +122,7 @@ const seoContent: Record<Locale, { title: string; paragraphs: string[]; faq: { q
     paragraphs: [
       'Waehrungsumrechnung ist unentbehrlich fuer internationale Reisen, Online-Einkauefe bei auslaendischen Haendlern, Geldueberweisungen ins Ausland und das Verstaendnis des Werts von Vermoegenswerten in verschiedenen Waehrungen. Wechselkurse schwanken staendig aufgrund wirtschaftlicher Bedingungen und geopolitischer Ereignisse.',
       'Unser kostenloser Waehrungsrechner bietet schnelle Umrechnungen zwischen den wichtigsten Weltwaehrungen, darunter US-Dollar, Euro, Britisches Pfund, Japanischer Yen, Schweizer Franken, Kanadischer Dollar, Australischer Dollar und Chinesischer Yuan. Geben Sie einfach den Betrag ein, waehlen Sie die Waehrungen und erhalten Sie eine sofortige Umrechnung.',
-      'Obwohl dieses Tool ungefaehre Referenzkurse fuer alltaegliche Schaetzungen verwendet, ueberpruefen Sie immer bei Ihrer Bank, bevor Sie groessere Finanztransaktionen taetigen. Banken fuegen dem Interbankenkurs typischerweise eine Marge hinzu.',
+      'Obwohl dieses Tool ungefaehre Referenzkurse fuer alltaegliche Schaetzungen verwendet, ueberpruefen Sie immer bei Ihrer Bank, bevor Sie groessere Finanztransaktionen taetigen. Banken fuegen dem Interbankenkurs typischerweise eine Marge hinzu. Auf Reisen hilft unser <a href="/de/tools/tip-calculator" class="text-blue-600 underline">Trinkgeldrechner</a> bei der Berechnung in der Landeswaehrung, und der <a href="/de/tools/unit-converter" class="text-blue-600 underline">Einheitenumrechner</a> erledigt metrisch-imperiale Umrechnungen.',
     ],
     faq: [
       { q: 'Was bestimmt die Wechselkurse?', a: 'Wechselkurse werden durch Angebot und Nachfrage auf den Devisenmaerkten bestimmt. Wichtige Faktoren sind Zinsdifferenzen, Inflation, Handelsbilanz, politische Stabilitaet und Geldpolitik der Zentralbanken.' },
@@ -137,7 +137,7 @@ const seoContent: Record<Locale, { title: string; paragraphs: string[]; faq: { q
     paragraphs: [
       'A conversao de moeda e essencial para viagens internacionais, compras online em lojas estrangeiras, envio de dinheiro para o exterior e compreensao do valor de ativos em diferentes moedas. As taxas de cambio flutuam constantemente com base nas condicoes economicas e eventos geopoliticos.',
       'O nosso conversor de moedas gratuito fornece conversoes rapidas entre as principais moedas mundiais, incluindo Dolar americano, Euro, Libra esterlina, Iene japones, Franco suico, Dolar canadiano, Dolar australiano e Yuan chines. Basta introduzir o valor, selecionar as moedas e obter uma conversao instantanea.',
-      'Embora esta ferramenta use taxas de referencia aproximadas para estimativa quotidiana, verifique sempre com o seu banco antes de transacoes financeiras significativas. Os bancos adicionam tipicamente uma margem a taxa interbancaria.',
+      'Embora esta ferramenta use taxas de referencia aproximadas para estimativa quotidiana, verifique sempre com o seu banco antes de transacoes financeiras significativas. Os bancos adicionam tipicamente uma margem a taxa interbancaria. Quando viajar ao exterior, a nossa <a href="/pt/tools/tip-calculator" class="text-blue-600 underline">calculadora de gorjetas</a> ajuda a calcular gratificacoes na moeda local, e o <a href="/pt/tools/unit-converter" class="text-blue-600 underline">conversor de unidades</a> lida com conversoes metricas-imperiais.',
     ],
     faq: [
       { q: 'O que determina as taxas de cambio?', a: 'As taxas sao determinadas pela oferta e procura nos mercados cambiais. Fatores chave incluem diferenciais de taxas de juro, inflacao, balanca comercial, estabilidade politica e politicas monetarias dos bancos centrais.' },
@@ -365,7 +365,7 @@ export default function CurrencyConverter() {
 
         <article className="mt-12 prose prose-gray max-w-none">
           <h2 className="text-2xl font-bold text-gray-900 mb-4">{seo.title}</h2>
-          {seo.paragraphs.map((p, i) => <p key={i} className="text-gray-700 leading-relaxed mb-4">{p}</p>)}
+          {seo.paragraphs.map((p, i) => <p key={i} className="text-gray-700 leading-relaxed mb-4" dangerouslySetInnerHTML={{ __html: p }} />)}
         </article>
 
         <section className="mt-10 mb-8">

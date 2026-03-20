@@ -7,12 +7,15 @@ export const dynamic = 'force-dynamic';
 const BASE_URL = 'https://toolkitonline.vip';
 const categories = ['finance', 'text', 'health', 'conversion', 'dev', 'math', 'images'] as const;
 
-function buildUrl(loc: string, priority: number, alternates: Record<string, string>): string {
+function buildUrl(loc: string, priority: number, alternates: Record<string, string>, lastmod: string = '2026-03-20'): string {
+  // Always add x-default pointing to English version
+  const xDefault = alternates['en'] ? `<xhtml:link rel="alternate" hreflang="x-default" href="${alternates['en']}" />` : '';
   const hreflangs = Object.entries(alternates)
     .map(([lang, href]) => `<xhtml:link rel="alternate" hreflang="${lang}" href="${href}" />`)
-    .join('\n');
+    .join('\n') + (xDefault ? '\n' + xDefault : '');
   return `<url>
 <loc>${loc}</loc>
+<lastmod>${lastmod}</lastmod>
 ${hreflangs}
 <changefreq>weekly</changefreq>
 <priority>${priority}</priority>
@@ -25,20 +28,20 @@ function generateStaticSitemap(): string {
   // Home pages
   for (const locale of locales) {
     urls.push(buildUrl(`${BASE_URL}/${locale}`, 1.0,
-      Object.fromEntries(locales.map(l => [l, `${BASE_URL}/${l}`]))));
+      Object.fromEntries(locales.map(l => [l, `${BASE_URL}/${l}`])), '2026-03-01'));
   }
 
   // Tools listing
   for (const locale of locales) {
     urls.push(buildUrl(`${BASE_URL}/${locale}/tools`, 0.9,
-      Object.fromEntries(locales.map(l => [l, `${BASE_URL}/${l}/tools`]))));
+      Object.fromEntries(locales.map(l => [l, `${BASE_URL}/${l}/tools`])), '2026-03-15'));
   }
 
   // Category hubs
   for (const cat of categories) {
     for (const locale of locales) {
       urls.push(buildUrl(`${BASE_URL}/${locale}/tools/category/${cat}`, 0.9,
-        Object.fromEntries(locales.map(l => [l, `${BASE_URL}/${l}/tools/category/${cat}`]))));
+        Object.fromEntries(locales.map(l => [l, `${BASE_URL}/${l}/tools/category/${cat}`])), '2026-03-15'));
     }
   }
 
@@ -46,7 +49,7 @@ function generateStaticSitemap(): string {
   for (const page of ['about', 'contact', 'faq', 'privacy', 'terms']) {
     for (const locale of locales) {
       urls.push(buildUrl(`${BASE_URL}/${locale}/${page}`, 0.6,
-        Object.fromEntries(locales.map(l => [l, `${BASE_URL}/${l}/${page}`]))));
+        Object.fromEntries(locales.map(l => [l, `${BASE_URL}/${l}/${page}`])), '2026-03-01'));
     }
   }
 

@@ -91,6 +91,7 @@ export default function RetirementCalculator() {
         'The power of compound interest means that even small monthly contributions grow significantly over decades. Starting to save early gives your money more time to compound, which can make a dramatic difference in your final retirement balance. This calculator shows you exactly how your savings grow year by year so you can see the compounding effect in action.',
         'Inflation is a critical factor that many people overlook. A dollar today will not buy the same amount of goods in 30 years. Our calculator adjusts your projected savings for inflation so you can see the real purchasing power of your retirement fund, not just the nominal dollar amount.',
         'The 4% rule is a widely used guideline suggesting that you can safely withdraw 4% of your retirement savings each year without running out of money over a 30-year retirement. The calculator uses this rule to estimate your potential monthly income in retirement, giving you a practical benchmark for planning.',
+        'To understand how compound interest drives your retirement growth, explore our <a href="/${lang}/tools/compound-interest-calculator">compound interest calculator</a>. If you are also planning a home purchase as part of your financial strategy, our <a href="/${lang}/tools/mortgage-calculator">mortgage calculator</a> and <a href="/${lang}/tools/loan-calculator">loan calculator</a> can help you evaluate financing options.',
       ],
       faq: [
         { q: 'What is the 4% rule?', a: 'The 4% rule is a retirement planning guideline that suggests withdrawing 4% of your total retirement savings in the first year, then adjusting for inflation each subsequent year. Studies show this approach has a high probability of making your money last at least 30 years.' },
@@ -107,6 +108,7 @@ export default function RetirementCalculator() {
         'Il potere dell\'interesse composto fa sì che anche piccoli contributi mensili crescano significativamente nel corso dei decenni. Iniziare a risparmiare presto dà al denaro più tempo per capitalizzarsi, con un effetto drammatico sul saldo finale. Questo calcolatore mostra esattamente come crescono i risparmi anno dopo anno.',
         'L\'inflazione è un fattore critico spesso trascurato. Un euro oggi non comprerà la stessa quantità di beni tra 30 anni. Il nostro calcolatore adegua i risparmi proiettati all\'inflazione per mostrare il reale potere d\'acquisto del tuo fondo pensione.',
         'La regola del 4% è una linea guida ampiamente utilizzata che suggerisce di poter prelevare in sicurezza il 4% dei risparmi pensionistici ogni anno senza esaurire il capitale in 30 anni. Il calcolatore usa questa regola per stimare il potenziale reddito mensile in pensione.',
+        'Per capire come l\'interesse composto alimenta la crescita del tuo fondo pensione, esplora il nostro <a href="/${lang}/tools/compound-interest-calculator">calcolatore interesse composto</a>. Se stai pianificando anche un acquisto immobiliare, il <a href="/${lang}/tools/mortgage-calculator">calcolatore mutuo</a> e il <a href="/${lang}/tools/loan-calculator">calcolatore prestiti</a> possono aiutarti a valutare le opzioni di finanziamento.',
       ],
       faq: [
         { q: 'Cos\'è la regola del 4%?', a: 'La regola del 4% suggerisce di prelevare il 4% dei risparmi totali nel primo anno di pensione, adeguando poi per l\'inflazione. Gli studi mostrano che questo approccio ha un\'alta probabilità di far durare il denaro almeno 30 anni.' },
@@ -123,6 +125,7 @@ export default function RetirementCalculator() {
         'El poder del interés compuesto hace que incluso pequeñas contribuciones mensuales crezcan significativamente a lo largo de las décadas. Empezar a ahorrar temprano da a tu dinero más tiempo para capitalizarse, lo que puede marcar una diferencia dramática en tu saldo final de jubilación.',
         'La inflación es un factor crítico que muchas personas pasan por alto. Un dólar hoy no comprará la misma cantidad de bienes en 30 años. Nuestra calculadora ajusta tus ahorros proyectados por inflación para que puedas ver el poder adquisitivo real de tu fondo de jubilación.',
         'La regla del 4% es una guía ampliamente utilizada que sugiere que puedes retirar con seguridad el 4% de tus ahorros cada año sin quedarte sin dinero en 30 años. La calculadora usa esta regla para estimar tu potencial ingreso mensual en la jubilación.',
+        'Para entender cómo el interés compuesto impulsa el crecimiento de tu fondo de jubilación, explora nuestra <a href="/${lang}/tools/compound-interest-calculator">calculadora de interés compuesto</a>. Si planeas comprar una vivienda, nuestra <a href="/${lang}/tools/mortgage-calculator">calculadora de hipoteca</a> y <a href="/${lang}/tools/loan-calculator">calculadora de préstamos</a> te ayudarán a evaluar opciones.',
       ],
       faq: [
         { q: '¿Qué es la regla del 4%?', a: 'La regla del 4% sugiere retirar el 4% de tus ahorros totales en el primer año de jubilación, ajustando por inflación cada año. Los estudios muestran que este enfoque tiene alta probabilidad de hacer durar el dinero al menos 30 años.' },
@@ -139,6 +142,7 @@ export default function RetirementCalculator() {
         'La puissance des intérêts composés fait que même de petites contributions mensuelles croissent considérablement sur des décennies. Commencer tôt donne à votre argent plus de temps pour se capitaliser, ce qui peut faire une différence spectaculaire dans votre solde final de retraite.',
         'L\'inflation est un facteur critique souvent négligé. Un euro aujourd\'hui n\'achètera pas la même quantité de biens dans 30 ans. Notre calculateur ajuste vos projections à l\'inflation pour montrer le pouvoir d\'achat réel de votre fonds de retraite.',
         'La règle des 4% est un guide largement utilisé suggérant de retirer 4% de votre épargne retraite chaque année sans épuiser le capital sur 30 ans. Le calculateur utilise cette règle pour estimer votre revenu mensuel potentiel à la retraite.',
+        'Pour comprendre comment les intérêts composés alimentent la croissance de votre épargne, explorez notre <a href="/${lang}/tools/compound-interest-calculator">calculateur d\'intérêts composés</a>. Si vous planifiez un achat immobilier, notre <a href="/${lang}/tools/mortgage-calculator">calculateur hypothécaire</a> et <a href="/${lang}/tools/loan-calculator">calculateur de prêt</a> vous aideront à évaluer les options.',
       ],
       faq: [
         { q: 'Qu\'est-ce que la règle des 4% ?', a: 'La règle des 4% suggère de retirer 4% de votre épargne totale la première année de retraite, en ajustant pour l\'inflation ensuite. Les études montrent que cette approche a une forte probabilité de faire durer l\'argent au moins 30 ans.' },
@@ -155,6 +159,7 @@ export default function RetirementCalculator() {
         'Die Kraft des Zinseszinseffekts bewirkt, dass selbst kleine monatliche Beiträge über Jahrzehnte erheblich wachsen. Frühes Sparen gibt Ihrem Geld mehr Zeit sich zu vermehren, was einen dramatischen Unterschied in Ihrem endgültigen Rentenkapital ausmachen kann.',
         'Inflation ist ein kritischer Faktor, den viele übersehen. Ein Euro heute wird in 30 Jahren nicht dieselbe Menge an Gütern kaufen. Unser Rechner passt Ihre prognostizierten Ersparnisse an die Inflation an, damit Sie die reale Kaufkraft Ihres Rentenfonds sehen.',
         'Die 4%-Regel ist eine weit verbreitete Richtlinie, die vorschlägt, jährlich 4% Ihrer Rentenersparnisse zu entnehmen, ohne das Kapital in 30 Jahren aufzubrauchen. Der Rechner nutzt diese Regel zur Schätzung Ihres monatlichen Einkommens im Ruhestand.',
+        'Um zu verstehen, wie der Zinseszins das Wachstum Ihres Rentenfonds antreibt, nutzen Sie unseren <a href="/${lang}/tools/compound-interest-calculator">Zinseszinsrechner</a>. Wenn Sie auch einen Immobilienkauf planen, helfen Ihnen unser <a href="/${lang}/tools/mortgage-calculator">Hypothekenrechner</a> und <a href="/${lang}/tools/loan-calculator">Kreditrechner</a> bei der Bewertung.',
       ],
       faq: [
         { q: 'Was ist die 4%-Regel?', a: 'Die 4%-Regel empfiehlt, im ersten Rentenjahr 4% Ihrer Gesamtersparnis zu entnehmen und danach jährlich an die Inflation anzupassen. Studien zeigen, dass dieser Ansatz mit hoher Wahrscheinlichkeit mindestens 30 Jahre reicht.' },
@@ -171,6 +176,7 @@ export default function RetirementCalculator() {
         'O poder dos juros compostos faz com que até pequenas contribuições mensais cresçam significativamente ao longo das décadas. Começar a poupar cedo dá ao seu dinheiro mais tempo para se capitalizar, o que pode fazer uma diferença dramática no saldo final de aposentadoria.',
         'A inflação é um fator crítico frequentemente ignorado. Um real hoje não comprará a mesma quantidade de bens em 30 anos. Nossa calculadora ajusta suas projeções pela inflação para mostrar o poder de compra real do seu fundo de aposentadoria.',
         'A regra dos 4% é uma diretriz amplamente utilizada que sugere retirar 4% das suas economias por ano sem esgotar o capital em 30 anos. A calculadora usa essa regra para estimar sua renda mensal potencial na aposentadoria.',
+        'Para entender como os juros compostos impulsionam o crescimento da sua poupança, explore a nossa <a href="/${lang}/tools/compound-interest-calculator">calculadora de juros compostos</a>. Se também planeia comprar um imóvel, a <a href="/${lang}/tools/mortgage-calculator">calculadora de hipoteca</a> e a <a href="/${lang}/tools/loan-calculator">calculadora de empréstimos</a> ajudarão a avaliar as opções.',
       ],
       faq: [
         { q: 'O que é a regra dos 4%?', a: 'A regra dos 4% sugere retirar 4% da poupança total no primeiro ano de aposentadoria, ajustando pela inflação nos anos seguintes. Estudos mostram que essa abordagem tem alta probabilidade de fazer o dinheiro durar pelo menos 30 anos.' },
@@ -302,7 +308,7 @@ export default function RetirementCalculator() {
 
         <article className="mt-12 prose prose-gray max-w-none">
           <h2 className="text-2xl font-bold text-gray-900 mb-4">{seo.title}</h2>
-          {seo.paragraphs.map((p, i) => <p key={i} className="text-gray-700 leading-relaxed mb-4">{p}</p>)}
+          {seo.paragraphs.map((p, i) => <p key={i} className="text-gray-700 leading-relaxed mb-4" dangerouslySetInnerHTML={{ __html: p.replace(/\$\{lang\}/g, lang) }} />)}
         </article>
 
         <section className="mt-10 mb-8">

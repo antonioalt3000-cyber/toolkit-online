@@ -1,4 +1,5 @@
 # ToolKit Online — Project Context
+> **Info condivise portfolio:** vedi `C:/Users/ftass/portfolio-config.md` per account, API keys, monetizzazione, e convenzioni globali.
 
 ## ⚡ AZIONE AUTOMATICA AD OGNI SESSIONE
 All'inizio di ogni sessione, DEVI:

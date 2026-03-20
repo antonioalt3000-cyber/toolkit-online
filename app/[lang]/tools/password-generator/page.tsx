@@ -193,7 +193,7 @@ export default function PasswordGenerator() {
         'Using strong, unique passwords is the single most important step you can take to protect your online accounts. Our free password generator creates cryptographically secure random passwords using your browser\'s built-in crypto.getRandomValues() function, ensuring true randomness that cannot be predicted or reproduced.',
         'You can customize your passwords by selecting the character types to include: uppercase letters (A-Z), lowercase letters (a-z), numbers (0-9), and special symbols (!@#$%^&*). You can also adjust the password length from 4 to 128 characters. Security experts recommend passwords of at least 12-16 characters with all character types enabled for maximum protection.',
         'A 16-character password using all character types has approximately 95^16 possible combinations, which is over 4.4 x 10^31 possibilities. Even at a rate of a trillion guesses per second, it would take billions of years to crack such a password through brute force. This is why length and character diversity are the two most important factors in password strength.',
-        'Remember that each of your accounts should have a unique password. Reusing passwords means that a breach of one service exposes all your accounts. Use this generator to create a different strong password for each service, and store them in a reputable password manager like Bitwarden, 1Password, or KeePass.',
+        'Remember that each of your accounts should have a unique password. Reusing passwords means that a breach of one service exposes all your accounts. Use this generator to create a different strong password for each service, and store them in a reputable password manager like Bitwarden, 1Password, or KeePass. You can also verify your password\'s integrity with our <a href="/en/tools/hash-generator" class="text-blue-600 underline">hash generator</a>, or share login credentials securely using a <a href="/en/tools/qr-code-generator" class="text-blue-600 underline">QR code</a>.',
       ],
       faq: [
         { q: 'How long should my password be?', a: 'Security experts recommend at least 12-16 characters for important accounts. For maximum security, use 20+ characters. Our generator supports up to 128 characters. Longer passwords are exponentially harder to crack.' },
@@ -209,7 +209,7 @@ export default function PasswordGenerator() {
         'Usare password forti e uniche è il passo più importante per proteggere i tuoi account online. Il nostro generatore di password gratuito crea password casuali crittograficamente sicure utilizzando la funzione crypto.getRandomValues() integrata nel browser, garantendo una vera casualità che non può essere prevista o riprodotta.',
         'Puoi personalizzare le tue password selezionando i tipi di caratteri da includere: lettere maiuscole (A-Z), lettere minuscole (a-z), numeri (0-9) e simboli speciali (!@#$%^&*). Puoi anche regolare la lunghezza della password da 4 a 128 caratteri. Gli esperti di sicurezza raccomandano password di almeno 12-16 caratteri con tutti i tipi di caratteri abilitati.',
         'Una password di 16 caratteri con tutti i tipi di caratteri ha circa 95^16 combinazioni possibili, ovvero oltre 4,4 x 10^31 possibilità. Anche a un miliardo di tentativi al secondo, ci vorrebbero miliardi di anni per violare una tale password tramite forza bruta.',
-        'Ricorda che ogni tuo account dovrebbe avere una password unica. Riutilizzare le password significa che una violazione di un servizio espone tutti i tuoi account. Usa questo generatore per creare una password forte diversa per ogni servizio e conservale in un gestore di password affidabile.',
+        'Ricorda che ogni tuo account dovrebbe avere una password unica. Riutilizzare le password significa che una violazione di un servizio espone tutti i tuoi account. Usa questo generatore per creare una password forte diversa per ogni servizio e conservale in un gestore di password affidabile. Puoi anche verificare l\'integrità della tua password con il nostro <a href="/it/tools/hash-generator" class="text-blue-600 underline">generatore di hash</a>, o condividere credenziali in modo sicuro tramite un <a href="/it/tools/qr-code-generator" class="text-blue-600 underline">codice QR</a>.',
       ],
       faq: [
         { q: 'Quanto dovrebbe essere lunga la mia password?', a: 'Gli esperti di sicurezza raccomandano almeno 12-16 caratteri per gli account importanti. Per la massima sicurezza, usa 20+ caratteri. Il nostro generatore supporta fino a 128 caratteri.' },
@@ -225,7 +225,7 @@ export default function PasswordGenerator() {
         'Usar contraseñas fuertes y únicas es el paso más importante para proteger tus cuentas en línea. Nuestro generador de contraseñas gratuito crea contraseñas aleatorias criptográficamente seguras usando la función crypto.getRandomValues() del navegador, garantizando verdadera aleatoriedad.',
         'Puedes personalizar tus contraseñas seleccionando los tipos de caracteres: mayúsculas (A-Z), minúsculas (a-z), números (0-9) y símbolos especiales. También puedes ajustar la longitud de 4 a 128 caracteres. Los expertos recomiendan al menos 12-16 caracteres con todos los tipos habilitados.',
         'Una contraseña de 16 caracteres con todos los tipos tiene aproximadamente 95^16 combinaciones posibles, más de 4,4 x 10^31 posibilidades. Incluso a un billón de intentos por segundo, tomaría miles de millones de años descifrarla por fuerza bruta.',
-        'Recuerda que cada cuenta debe tener una contraseña única. Reutilizar contraseñas significa que una brecha en un servicio expone todas tus cuentas. Usa un gestor de contraseñas para almacenar contraseñas únicas.',
+        'Recuerda que cada cuenta debe tener una contraseña única. Reutilizar contraseñas significa que una brecha en un servicio expone todas tus cuentas. Usa un gestor de contraseñas para almacenar contraseñas únicas. También puedes verificar la integridad de tu contraseña con nuestro <a href="/es/tools/hash-generator" class="text-blue-600 underline">generador de hash</a>, o compartir credenciales de forma segura mediante un <a href="/es/tools/qr-code-generator" class="text-blue-600 underline">código QR</a>.',
       ],
       faq: [
         { q: '¿Qué tan larga debe ser mi contraseña?', a: 'Los expertos recomiendan al menos 12-16 caracteres para cuentas importantes. Para máxima seguridad, usa 20+ caracteres. Nuestro generador soporta hasta 128 caracteres.' },
@@ -241,7 +241,7 @@ export default function PasswordGenerator() {
         'Utiliser des mots de passe forts et uniques est l\'étape la plus importante pour protéger vos comptes en ligne. Notre générateur gratuit crée des mots de passe aléatoires cryptographiquement sécurisés en utilisant la fonction crypto.getRandomValues() du navigateur.',
         'Vous pouvez personnaliser vos mots de passe en sélectionnant les types de caractères : majuscules (A-Z), minuscules (a-z), chiffres (0-9) et symboles spéciaux. La longueur est réglable de 4 à 128 caractères. Les experts recommandent au moins 12-16 caractères avec tous les types activés.',
         'Un mot de passe de 16 caractères avec tous les types a environ 95^16 combinaisons possibles, soit plus de 4,4 x 10^31 possibilités. Même à un billion de tentatives par seconde, il faudrait des milliards d\'années pour le craquer par force brute.',
-        'Chaque compte devrait avoir un mot de passe unique. Réutiliser les mots de passe signifie qu\'une faille dans un service expose tous vos comptes. Utilisez un gestionnaire de mots de passe pour stocker des mots de passe uniques.',
+        'Chaque compte devrait avoir un mot de passe unique. Réutiliser les mots de passe signifie qu\'une faille dans un service expose tous vos comptes. Utilisez un gestionnaire de mots de passe pour stocker des mots de passe uniques. Vous pouvez aussi vérifier l\'intégrité de votre mot de passe avec notre <a href="/fr/tools/hash-generator" class="text-blue-600 underline">générateur de hash</a>, ou partager des identifiants de manière sécurisée via un <a href="/fr/tools/qr-code-generator" class="text-blue-600 underline">code QR</a>.',
       ],
       faq: [
         { q: 'Quelle longueur doit avoir mon mot de passe ?', a: 'Les experts recommandent au moins 12-16 caractères pour les comptes importants. Pour une sécurité maximale, utilisez 20+ caractères.' },
@@ -257,7 +257,7 @@ export default function PasswordGenerator() {
         'Starke, einzigartige Passwörter zu verwenden ist der wichtigste Schritt zum Schutz Ihrer Online-Konten. Unser kostenloser Passwort-Generator erstellt kryptographisch sichere Zufallspasswörter mit der browsereigenen crypto.getRandomValues()-Funktion.',
         'Sie können Ihre Passwörter anpassen: Großbuchstaben (A-Z), Kleinbuchstaben (a-z), Zahlen (0-9) und Sonderzeichen. Die Länge ist von 4 bis 128 Zeichen einstellbar. Sicherheitsexperten empfehlen mindestens 12-16 Zeichen mit allen Zeichentypen.',
         'Ein 16-Zeichen-Passwort mit allen Zeichentypen hat etwa 95^16 mögliche Kombinationen, über 4,4 x 10^31 Möglichkeiten. Selbst bei einer Billion Versuche pro Sekunde würde das Knacken Milliarden von Jahren dauern.',
-        'Jedes Konto sollte ein einzigartiges Passwort haben. Passwort-Wiederverwendung bedeutet, dass ein Datenleck bei einem Dienst alle Ihre Konten gefährdet. Verwenden Sie einen Passwort-Manager für einzigartige Passwörter.',
+        'Jedes Konto sollte ein einzigartiges Passwort haben. Passwort-Wiederverwendung bedeutet, dass ein Datenleck bei einem Dienst alle Ihre Konten gefährdet. Verwenden Sie einen Passwort-Manager für einzigartige Passwörter. Sie können auch die Integrität Ihres Passworts mit unserem <a href="/de/tools/hash-generator" class="text-blue-600 underline">Hash-Generator</a> überprüfen oder Anmeldedaten sicher über einen <a href="/de/tools/qr-code-generator" class="text-blue-600 underline">QR-Code</a> teilen.',
       ],
       faq: [
         { q: 'Wie lang sollte mein Passwort sein?', a: 'Sicherheitsexperten empfehlen mindestens 12-16 Zeichen für wichtige Konten. Für maximale Sicherheit verwenden Sie 20+ Zeichen.' },
@@ -273,7 +273,7 @@ export default function PasswordGenerator() {
         'Usar senhas fortes e únicas é o passo mais importante para proteger suas contas online. Nosso gerador de senhas gratuito cria senhas aleatórias criptograficamente seguras usando a função crypto.getRandomValues() do navegador.',
         'Você pode personalizar suas senhas selecionando os tipos de caracteres: maiúsculas (A-Z), minúsculas (a-z), números (0-9) e símbolos especiais. O comprimento é ajustável de 4 a 128 caracteres. Especialistas recomendam pelo menos 12-16 caracteres com todos os tipos habilitados.',
         'Uma senha de 16 caracteres com todos os tipos tem aproximadamente 95^16 combinações possíveis, mais de 4,4 x 10^31 possibilidades. Mesmo a um trilhão de tentativas por segundo, levaria bilhões de anos para quebrá-la por força bruta.',
-        'Cada conta deve ter uma senha única. Reutilizar senhas significa que uma violação em um serviço expõe todas as suas contas. Use um gerenciador de senhas para armazenar senhas únicas.',
+        'Cada conta deve ter uma senha única. Reutilizar senhas significa que uma violação em um serviço expõe todas as suas contas. Use um gerenciador de senhas para armazenar senhas únicas. Você também pode verificar a integridade da sua senha com nosso <a href="/pt/tools/hash-generator" class="text-blue-600 underline">gerador de hash</a>, ou compartilhar credenciais de forma segura usando um <a href="/pt/tools/qr-code-generator" class="text-blue-600 underline">QR code</a>.',
       ],
       faq: [
         { q: 'Qual deve ser o comprimento da minha senha?', a: 'Especialistas recomendam pelo menos 12-16 caracteres para contas importantes. Para máxima segurança, use 20+ caracteres.' },
@@ -428,7 +428,7 @@ export default function PasswordGenerator() {
 
         <article className="mt-12 prose prose-gray max-w-none">
           <h2 className="text-2xl font-bold text-gray-900 mb-4">{seo.title}</h2>
-          {seo.paragraphs.map((p, i) => <p key={i} className="text-gray-700 leading-relaxed mb-4">{p}</p>)}
+          {seo.paragraphs.map((p, i) => <p key={i} className="text-gray-700 leading-relaxed mb-4" dangerouslySetInnerHTML={{ __html: p }} />)}
         </article>
 
         <section className="mt-10 mb-8">

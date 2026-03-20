@@ -22,7 +22,10 @@ export async function generateMetadata({ params }: { params: Promise<{ lang: str
     description: t.siteDescription,
     alternates: {
       canonical: `${BASE_URL}/${locale}`,
-      languages: Object.fromEntries(locales.map((l) => [l, `${BASE_URL}/${l}`])),
+      languages: {
+        ...Object.fromEntries(locales.map((l) => [l, `${BASE_URL}/${l}`])),
+        'x-default': `${BASE_URL}/en`,
+      },
     },
     openGraph: {
       type: 'website',
