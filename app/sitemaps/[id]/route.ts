@@ -2,6 +2,8 @@ import { NextResponse } from 'next/server';
 import { locales, getToolsByCategory } from '@/lib/translations';
 import { blogSlugs } from '@/lib/blog';
 
+export const dynamic = 'force-dynamic';
+
 const BASE_URL = 'https://toolkitonline.vip';
 const categories = ['finance', 'text', 'health', 'conversion', 'dev', 'math', 'images'] as const;
 
@@ -88,10 +90,6 @@ function generateBlogSitemap(): string {
 }
 
 const VALID_IDS = ['static', ...categories, 'blog'] as const;
-
-export async function generateStaticParams() {
-  return VALID_IDS.map(id => ({ id }));
-}
 
 export async function GET(_request: Request, { params }: { params: Promise<{ id: string }> }) {
   const { id } = await params;
