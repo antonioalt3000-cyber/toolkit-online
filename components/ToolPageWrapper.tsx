@@ -11,12 +11,12 @@ import ShareTool from './ShareTool';
 import { tools, type Locale } from '@/lib/translations';
 
 const toolCounterTranslations: Record<string, string> = {
-  en: '144+ Free Tools Available',
-  it: '144+ Strumenti Gratuiti Disponibili',
-  es: '144+ Herramientas Gratuitas Disponibles',
-  fr: '144+ Outils Gratuits Disponibles',
-  de: '144+ Kostenlose Tools Verfügbar',
-  pt: '144+ Ferramentas Gratuitas Disponíveis',
+  en: '155+ Free Tools Available',
+  it: '155+ Strumenti Gratuiti Disponibili',
+  es: '155+ Herramientas Gratuitas Disponibles',
+  fr: '155+ Outils Gratuits Disponibles',
+  de: '155+ Kostenlose Tools Verfügbar',
+  pt: '155+ Ferramentas Gratuitas Disponíveis',
 };
 
 const howToTranslations: Record<string, {
@@ -112,6 +112,22 @@ export default function ToolPageWrapper({ toolSlug, children, faqItems }: ToolPa
     })),
   } : null;
 
+  const webAppSchema = toolT ? {
+    '@context': 'https://schema.org',
+    '@type': 'WebApplication',
+    name: toolT.name,
+    description: toolT.description,
+    url: `https://toolkitonline.vip/${lang}/tools/${toolSlug}`,
+    applicationCategory: 'UtilitiesApplication',
+    operatingSystem: 'Any',
+    offers: {
+      '@type': 'Offer',
+      price: '0',
+      priceCurrency: 'USD',
+    },
+    inLanguage: lang,
+  } : null;
+
   const ht = howToTranslations[lang] || howToTranslations['en'];
   const howToSchema = toolT ? {
     '@context': 'https://schema.org',
@@ -144,6 +160,12 @@ export default function ToolPageWrapper({ toolSlug, children, faqItems }: ToolPa
 
   return (
     <div>
+      {webAppSchema && (
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(webAppSchema) }}
+        />
+      )}
       {faqSchema && (
         <script
           type="application/ld+json"

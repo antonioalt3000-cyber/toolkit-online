@@ -419,6 +419,3096 @@ export const blogArticles: BlogArticle[] = [
       }
     }
   },
+  {
+    slug: 'how-to-calculate-bmi-what-it-means',
+    date: '2026-03-20',
+    category: 'health',
+    translations: {
+      en: {
+        title: 'How to Calculate Your BMI and What It Means',
+        excerpt: 'Learn the exact formula to calculate your Body Mass Index, understand the WHO weight categories, and discover why BMI is only one piece of the health puzzle.',
+        content: `Body Mass Index — BMI — remains one of the fastest ways to screen whether your weight falls in a healthy range relative to your height. Knowing how to calculate it yourself, and more importantly how to interpret the result, puts you in a stronger position to make informed health decisions.
+
+## The BMI Formula
+
+The metric formula is simple: BMI = weight (kg) / height (m) squared. If you weigh 80 kg and stand 1.78 m tall, your BMI is 80 / (1.78 x 1.78) = 25.2. For imperial units, multiply your weight in pounds by 703 and divide by your height in inches squared.
+
+Try our [BMI Calculator](/en/tools/bmi-calculator) for an instant result, or work it out on paper to understand the math.
+
+## WHO Weight Categories
+
+The World Health Organization defines four main brackets:
+- **Underweight**: below 18.5
+- **Normal weight**: 18.5 to 24.9
+- **Overweight**: 25.0 to 29.9
+- **Obese**: 30.0 and above
+
+Each bracket carries different statistical health risks at the population level. A BMI between 18.5 and 24.9 is generally associated with the lowest risk of chronic diseases such as type 2 diabetes, hypertension, and cardiovascular disease.
+
+## Why BMI Matters
+
+Large-scale epidemiological studies consistently link higher BMI values to increased risk of metabolic syndrome. Insurance companies, military organizations, and public health agencies use BMI because it requires only two measurements and produces a standardized, comparable number. For population-level screening, this simplicity is its greatest asset.
+
+## The Limitations You Should Know
+
+BMI cannot distinguish fat from muscle. A lean athlete with significant muscle mass may register as overweight despite having low body fat. Conversely, a sedentary person with little muscle might have a normal BMI while carrying excess visceral fat — the metabolically dangerous fat stored around internal organs.
+
+Age, sex, and ethnicity also affect interpretation. Women naturally carry a higher percentage of body fat than men at the same BMI. Older adults lose muscle mass with age, so a normal BMI may mask an unhealthy body composition. Some ethnic groups face elevated metabolic risk at BMI values considered normal for others.
+
+## Complementary Measurements
+
+For a fuller picture, combine BMI with:
+- **Waist circumference** — men above 102 cm and women above 88 cm face higher metabolic risk.
+- **Body fat percentage** — use our [Body Fat Calculator](/en/tools/body-fat-calculator) for an estimate based on skinfold or circumference methods.
+- **Waist-to-hip ratio** — another indicator of fat distribution.
+
+Blood work including fasting glucose, HbA1c, triglycerides, and HDL/LDL cholesterol completes the metabolic picture.
+
+## Practical Steps
+
+1. Calculate your BMI using our [BMI Calculator](/en/tools/bmi-calculator).
+2. Measure your waist at navel height with a soft tape.
+3. If either metric falls outside healthy ranges, schedule a conversation with your doctor.
+4. Track both numbers over time — trends matter more than snapshots.
+
+## FAQ
+
+**Is BMI accurate for athletes?**
+Not always. Athletes with high muscle mass often register as overweight. Body fat percentage is a better metric for physically active individuals.
+
+**Can children use the same BMI formula?**
+Children and teens use age- and sex-specific percentile charts rather than fixed cutoffs because their body composition changes as they grow.
+
+**How often should I check my BMI?**
+Once a month is enough for most people. Pair it with waist circumference for better context.
+
+**Does a normal BMI guarantee good health?**
+No. BMI is a screening tool, not a diagnosis. Normal-weight individuals can still have unhealthy metabolic profiles if they carry excess visceral fat or lead sedentary lifestyles.`
+      },
+      it: {
+        title: 'Come Calcolare il Tuo BMI e Cosa Significa',
+        excerpt: 'Impara la formula esatta per calcolare il tuo Indice di Massa Corporea, comprendi le categorie di peso dell\'OMS e scopri perché il BMI è solo un pezzo del puzzle della salute.',
+        content: `L'Indice di Massa Corporea — BMI — resta uno dei modi più rapidi per verificare se il tuo peso rientra in un range sano rispetto alla tua altezza. Sapere come calcolarlo e, soprattutto, come interpretare il risultato ti mette in una posizione migliore per prendere decisioni informate sulla tua salute.
+
+## La Formula del BMI
+
+La formula metrica è semplice: BMI = peso (kg) / altezza (m) al quadrato. Se pesi 80 kg e sei alto 1,78 m, il tuo BMI è 80 / (1,78 x 1,78) = 25,2.
+
+Prova il nostro [Calcolatore BMI](/it/tools/bmi-calculator) per un risultato istantaneo, oppure calcolalo a mano per capire la matematica.
+
+## Categorie di Peso dell'OMS
+
+L'Organizzazione Mondiale della Sanità definisce quattro fasce principali:
+- **Sottopeso**: sotto 18,5
+- **Normopeso**: da 18,5 a 24,9
+- **Sovrappeso**: da 25,0 a 29,9
+- **Obeso**: 30,0 e oltre
+
+Ogni fascia comporta diversi rischi statistici per la salute a livello di popolazione. Un BMI tra 18,5 e 24,9 è generalmente associato al rischio più basso di malattie croniche come diabete di tipo 2, ipertensione e malattie cardiovascolari.
+
+## Perché il BMI È Importante
+
+Studi epidemiologici su larga scala collegano costantemente valori di BMI più elevati a un aumento del rischio di sindrome metabolica. Le compagnie assicurative, le organizzazioni militari e le agenzie di salute pubblica usano il BMI perché richiede solo due misurazioni e produce un numero standardizzato e comparabile.
+
+## I Limiti Che Dovresti Conoscere
+
+Il BMI non può distinguere il grasso dal muscolo. Un atleta con massa muscolare significativa può risultare sovrappeso nonostante abbia poco grasso corporeo. Al contrario, una persona sedentaria con poco muscolo potrebbe avere un BMI normale pur avendo eccesso di grasso viscerale.
+
+Anche età, sesso ed etnia influenzano l'interpretazione. Le donne portano naturalmente una percentuale più alta di grasso corporeo rispetto agli uomini allo stesso BMI. Gli anziani perdono massa muscolare con l'età.
+
+## Misurazioni Complementari
+
+Per un quadro più completo, combina il BMI con:
+- **Circonferenza vita** — uomini sopra 102 cm e donne sopra 88 cm hanno rischio metabolico maggiore.
+- **Percentuale di grasso corporeo** — usa il nostro [Calcolatore Grasso Corporeo](/it/tools/body-fat-calculator).
+- **Rapporto vita-fianchi** — altro indicatore della distribuzione del grasso.
+
+## Passi Pratici
+
+1. Calcola il tuo BMI usando il nostro [Calcolatore BMI](/it/tools/bmi-calculator).
+2. Misura la tua vita all'altezza dell'ombelico con un metro morbido.
+3. Se uno dei valori è fuori range, parla con il tuo medico.
+4. Monitora entrambi i numeri nel tempo — le tendenze contano più delle singole misurazioni.
+
+## FAQ
+
+**Il BMI è accurato per gli atleti?**
+Non sempre. Gli atleti con alta massa muscolare risultano spesso sovrappeso. La percentuale di grasso corporeo è una metrica migliore.
+
+**I bambini possono usare la stessa formula?**
+I bambini usano grafici percentili specifici per età e sesso perché la loro composizione corporea cambia con la crescita.
+
+**Ogni quanto dovrei controllare il mio BMI?**
+Una volta al mese è sufficiente. Abbinalo alla circonferenza vita per un contesto migliore.
+
+**Un BMI normale garantisce buona salute?**
+No. Il BMI è uno strumento di screening, non una diagnosi.`
+      },
+      es: {
+        title: 'Cómo Calcular Tu IMC y Qué Significa',
+        excerpt: 'Aprende la fórmula exacta para calcular tu Índice de Masa Corporal, comprende las categorías de peso de la OMS y descubre por qué el IMC es solo una pieza del rompecabezas de la salud.',
+        content: `El Índice de Masa Corporal — IMC — sigue siendo una de las formas más rápidas de evaluar si tu peso está en un rango saludable en relación con tu altura. Saber calcularlo y, más importante, cómo interpretar el resultado, te coloca en mejor posición para tomar decisiones informadas sobre tu salud.
+
+## La Fórmula del IMC
+
+La fórmula métrica es simple: IMC = peso (kg) / altura (m) al cuadrado. Si pesas 80 kg y mides 1,78 m, tu IMC es 80 / (1,78 x 1,78) = 25,2.
+
+Prueba nuestro [Calculador de IMC](/es/tools/bmi-calculator) para un resultado instantáneo.
+
+## Categorías de Peso de la OMS
+
+La Organización Mundial de la Salud define cuatro franjas principales:
+- **Bajo peso**: menor de 18,5
+- **Peso normal**: 18,5 a 24,9
+- **Sobrepeso**: 25,0 a 29,9
+- **Obesidad**: 30,0 o más
+
+Un IMC entre 18,5 y 24,9 se asocia generalmente con el menor riesgo de enfermedades crónicas como diabetes tipo 2, hipertensión y enfermedades cardiovasculares.
+
+## Por Qué Importa el IMC
+
+Estudios epidemiológicos a gran escala vinculan consistentemente valores de IMC más altos con mayor riesgo de síndrome metabólico. Las aseguradoras y agencias de salud pública lo usan porque requiere solo dos mediciones y produce un número estandarizado y comparable.
+
+## Las Limitaciones Que Debes Conocer
+
+El IMC no distingue entre grasa y músculo. Un atleta musculoso puede clasificarse como con sobrepeso pese a tener poca grasa corporal. Una persona sedentaria podría tener un IMC normal mientras carga exceso de grasa visceral.
+
+La edad, el sexo y la etnia también afectan la interpretación. Las mujeres naturalmente tienen mayor porcentaje de grasa corporal que los hombres al mismo IMC.
+
+## Mediciones Complementarias
+
+Combina el IMC con:
+- **Circunferencia de cintura** — hombres por encima de 102 cm y mujeres por encima de 88 cm enfrentan mayor riesgo.
+- **Porcentaje de grasa corporal** — usa nuestro [Calculador de Grasa Corporal](/es/tools/body-fat-calculator).
+- **Relación cintura-cadera** — otro indicador de distribución de grasa.
+
+## Pasos Prácticos
+
+1. Calcula tu IMC con nuestro [Calculador de IMC](/es/tools/bmi-calculator).
+2. Mide tu cintura a la altura del ombligo.
+3. Si alguna métrica está fuera del rango saludable, consulta a tu médico.
+4. Monitorea ambos números en el tiempo.
+
+## FAQ
+
+**¿Es preciso el IMC para atletas?**
+No siempre. Los atletas con alta masa muscular frecuentemente se clasifican como con sobrepeso. El porcentaje de grasa corporal es mejor métrica.
+
+**¿Los niños pueden usar la misma fórmula?**
+Los niños usan tablas percentiles específicas por edad y sexo.
+
+**¿Con qué frecuencia debo verificar mi IMC?**
+Una vez al mes es suficiente. Combínalo con circunferencia de cintura.
+
+**¿Un IMC normal garantiza buena salud?**
+No. El IMC es una herramienta de detección, no un diagnóstico.`
+      },
+      fr: {
+        title: 'Comment Calculer Votre IMC et Ce Que Cela Signifie',
+        excerpt: 'Apprenez la formule exacte pour calculer votre Indice de Masse Corporelle, comprenez les catégories de poids de l\'OMS et découvrez pourquoi l\'IMC n\'est qu\'une pièce du puzzle santé.',
+        content: `L'Indice de Masse Corporelle — IMC — reste l'un des moyens les plus rapides pour vérifier si votre poids se situe dans une fourchette saine par rapport à votre taille. Savoir le calculer et, surtout, comment interpréter le résultat, vous met en meilleure position pour prendre des décisions éclairées sur votre santé.
+
+## La Formule de l'IMC
+
+La formule métrique est simple : IMC = poids (kg) / taille (m) au carré. Si vous pesez 80 kg et mesurez 1,78 m, votre IMC est 80 / (1,78 x 1,78) = 25,2.
+
+Essayez notre [Calculateur d'IMC](/fr/tools/bmi-calculator) pour un résultat instantané.
+
+## Catégories de Poids de l'OMS
+
+L'Organisation Mondiale de la Santé définit quatre tranches :
+- **Insuffisance pondérale** : en dessous de 18,5
+- **Poids normal** : 18,5 à 24,9
+- **Surpoids** : 25,0 à 29,9
+- **Obésité** : 30,0 et au-dessus
+
+Un IMC entre 18,5 et 24,9 est généralement associé au risque le plus faible de maladies chroniques.
+
+## Pourquoi l'IMC Est Important
+
+Des études épidémiologiques à grande échelle lient systématiquement des valeurs d'IMC plus élevées à un risque accru de syndrome métabolique. Les compagnies d'assurance et les agences de santé publique utilisent l'IMC car il ne nécessite que deux mesures et produit un nombre standardisé.
+
+## Les Limites à Connaître
+
+L'IMC ne distingue pas la graisse du muscle. Un athlète musclé peut être classé en surpoids malgré un faible taux de graisse corporelle. L'âge, le sexe et l'ethnicité influencent également l'interprétation.
+
+## Mesures Complémentaires
+
+Combinez l'IMC avec :
+- **Tour de taille** — hommes au-dessus de 102 cm et femmes au-dessus de 88 cm ont un risque métabolique plus élevé.
+- **Pourcentage de graisse corporelle** — utilisez notre [Calculateur de Graisse Corporelle](/fr/tools/body-fat-calculator).
+- **Rapport taille-hanches** — autre indicateur de distribution des graisses.
+
+## Étapes Pratiques
+
+1. Calculez votre IMC avec notre [Calculateur d'IMC](/fr/tools/bmi-calculator).
+2. Mesurez votre tour de taille au niveau du nombril.
+3. Si une mesure est hors norme, consultez votre médecin.
+4. Suivez ces chiffres dans le temps — les tendances comptent plus que les instantanés.
+
+## FAQ
+
+**L'IMC est-il précis pour les sportifs ?**
+Pas toujours. Les athlètes musclés sont souvent classés en surpoids. Le pourcentage de graisse corporelle est une meilleure métrique.
+
+**Les enfants peuvent-ils utiliser la même formule ?**
+Les enfants utilisent des courbes percentiles spécifiques à l'âge et au sexe.
+
+**À quelle fréquence vérifier mon IMC ?**
+Une fois par mois suffit. Associez-le au tour de taille.
+
+**Un IMC normal garantit-il une bonne santé ?**
+Non. L'IMC est un outil de dépistage, pas un diagnostic.`
+      },
+      de: {
+        title: 'Wie Sie Ihren BMI Berechnen und Was Er Bedeutet',
+        excerpt: 'Lernen Sie die exakte Formel zur Berechnung Ihres Body-Mass-Index, verstehen Sie die WHO-Gewichtskategorien und erfahren Sie, warum der BMI nur ein Teil des Gesundheitspuzzles ist.',
+        content: `Der Body-Mass-Index — BMI — bleibt eine der schnellsten Methoden, um zu prüfen, ob Ihr Gewicht im Verhältnis zu Ihrer Größe in einem gesunden Bereich liegt. Zu wissen, wie man ihn berechnet und vor allem, wie man das Ergebnis interpretiert, versetzt Sie in eine bessere Position für informierte Gesundheitsentscheidungen.
+
+## Die BMI-Formel
+
+Die metrische Formel ist einfach: BMI = Gewicht (kg) / Größe (m) zum Quadrat. Bei 80 kg und 1,78 m beträgt Ihr BMI 80 / (1,78 x 1,78) = 25,2.
+
+Probieren Sie unseren [BMI-Rechner](/de/tools/bmi-calculator) für ein sofortiges Ergebnis.
+
+## WHO-Gewichtskategorien
+
+Die Weltgesundheitsorganisation definiert vier Hauptbereiche:
+- **Untergewicht**: unter 18,5
+- **Normalgewicht**: 18,5 bis 24,9
+- **Übergewicht**: 25,0 bis 29,9
+- **Adipositas**: 30,0 und darüber
+
+Ein BMI zwischen 18,5 und 24,9 ist generell mit dem geringsten Risiko für chronische Krankheiten verbunden.
+
+## Warum der BMI Wichtig Ist
+
+Großangelegte epidemiologische Studien verknüpfen höhere BMI-Werte konsistent mit erhöhtem Risiko für metabolisches Syndrom. Versicherungen und Gesundheitsbehörden nutzen den BMI, weil er nur zwei Messungen benötigt und eine standardisierte Zahl liefert.
+
+## Die Grenzen, Die Sie Kennen Sollten
+
+Der BMI kann nicht zwischen Fett und Muskel unterscheiden. Ein muskulöser Athlet kann als übergewichtig eingestuft werden, obwohl er wenig Körperfett hat. Alter, Geschlecht und Ethnizität beeinflussen die Interpretation ebenfalls.
+
+## Ergänzende Messungen
+
+Kombinieren Sie den BMI mit:
+- **Taillenumfang** — Männer über 102 cm und Frauen über 88 cm haben ein höheres metabolisches Risiko.
+- **Körperfettanteil** — nutzen Sie unseren [Körperfett-Rechner](/de/tools/body-fat-calculator).
+- **Taille-Hüft-Verhältnis** — weiterer Indikator der Fettverteilung.
+
+## Praktische Schritte
+
+1. Berechnen Sie Ihren BMI mit unserem [BMI-Rechner](/de/tools/bmi-calculator).
+2. Messen Sie Ihren Taillenumfang auf Nabelhöhe.
+3. Liegt ein Wert außerhalb des gesunden Bereichs, sprechen Sie mit Ihrem Arzt.
+4. Verfolgen Sie beide Werte über die Zeit.
+
+## FAQ
+
+**Ist der BMI für Sportler genau?**
+Nicht immer. Muskulöse Athleten werden oft als übergewichtig eingestuft. Der Körperfettanteil ist eine bessere Metrik.
+
+**Können Kinder dieselbe Formel verwenden?**
+Kinder verwenden alters- und geschlechtsspezifische Perzentilkurven.
+
+**Wie oft sollte ich meinen BMI prüfen?**
+Einmal im Monat reicht. Kombinieren Sie ihn mit dem Taillenumfang.
+
+**Garantiert ein normaler BMI gute Gesundheit?**
+Nein. Der BMI ist ein Screening-Werkzeug, keine Diagnose.`
+      },
+      pt: {
+        title: 'Como Calcular Seu IMC e O Que Ele Significa',
+        excerpt: 'Aprenda a fórmula exata para calcular seu Índice de Massa Corporal, entenda as categorias de peso da OMS e descubra por que o IMC é apenas uma peça do quebra-cabeça da saúde.',
+        content: `O Índice de Massa Corporal — IMC — continua sendo uma das formas mais rápidas de verificar se seu peso está em uma faixa saudável em relação à sua altura. Saber como calculá-lo e, mais importante, como interpretar o resultado, coloca você em melhor posição para tomar decisões informadas sobre sua saúde.
+
+## A Fórmula do IMC
+
+A fórmula métrica é simples: IMC = peso (kg) / altura (m) ao quadrado. Se você pesa 80 kg e mede 1,78 m, seu IMC é 80 / (1,78 x 1,78) = 25,2.
+
+Experimente nosso [Calculador de IMC](/pt/tools/bmi-calculator) para um resultado instantâneo.
+
+## Categorias de Peso da OMS
+
+A Organização Mundial da Saúde define quatro faixas principais:
+- **Abaixo do peso**: abaixo de 18,5
+- **Peso normal**: 18,5 a 24,9
+- **Sobrepeso**: 25,0 a 29,9
+- **Obesidade**: 30,0 ou acima
+
+Um IMC entre 18,5 e 24,9 é geralmente associado ao menor risco de doenças crônicas como diabetes tipo 2 e doenças cardiovasculares.
+
+## Por Que o IMC É Importante
+
+Estudos epidemiológicos de larga escala vinculam consistentemente valores de IMC mais altos ao aumento do risco de síndrome metabólica. Seguradoras e agências de saúde pública usam o IMC porque requer apenas duas medições e produz um número padronizado.
+
+## As Limitações Que Você Deve Conhecer
+
+O IMC não distingue gordura de músculo. Um atleta musculoso pode ser classificado com sobrepeso apesar de ter pouca gordura corporal. Idade, sexo e etnia também afetam a interpretação.
+
+## Medições Complementares
+
+Combine o IMC com:
+- **Circunferência da cintura** — homens acima de 102 cm e mulheres acima de 88 cm têm risco metabólico maior.
+- **Percentual de gordura corporal** — use nosso [Calculador de Gordura Corporal](/pt/tools/body-fat-calculator).
+- **Relação cintura-quadril** — outro indicador de distribuição de gordura.
+
+## Passos Práticos
+
+1. Calcule seu IMC com nosso [Calculador de IMC](/pt/tools/bmi-calculator).
+2. Meça sua cintura na altura do umbigo.
+3. Se alguma métrica estiver fora da faixa saudável, consulte seu médico.
+4. Acompanhe ambos os números ao longo do tempo.
+
+## FAQ
+
+**O IMC é preciso para atletas?**
+Nem sempre. Atletas musculosos frequentemente são classificados com sobrepeso. O percentual de gordura corporal é uma métrica melhor.
+
+**Crianças podem usar a mesma fórmula?**
+Crianças usam tabelas percentis específicas por idade e sexo.
+
+**Com que frequência devo verificar meu IMC?**
+Uma vez por mês é suficiente. Combine com circunferência da cintura.
+
+**Um IMC normal garante boa saúde?**
+Não. O IMC é uma ferramenta de triagem, não um diagnóstico.`
+      }
+    }
+  },
+  {
+    slug: 'complete-guide-unit-conversion-tips-tricks',
+    date: '2026-03-20',
+    category: 'conversion',
+    translations: {
+      en: {
+        title: 'Complete Guide to Unit Conversion: Tips and Tricks',
+        excerpt: 'Master the art of converting between metric and imperial units, temperature scales, and more. Practical tips, common pitfalls, and mental shortcuts for everyday conversions.',
+        content: `Unit conversion is a skill you use more often than you realize — from following a recipe in cups when your measuring tools are in milliliters, to understanding speed limits abroad, to converting currencies while traveling. This guide covers the most practical conversions and the mental shortcuts that make them effortless.
+
+## The Metric System: A Foundation
+
+The metric system is built on powers of ten, which makes conversions within it beautifully simple. The prefixes tell you the multiplier: kilo means 1,000, centi means 1/100, and milli means 1/1,000. So 1 kilometer = 1,000 meters, 1 centimeter = 0.01 meters, and 1 milliliter = 0.001 liters. Moving between metric units is just a matter of shifting the decimal point.
+
+Use our [Unit Converter](/en/tools/unit-converter) to handle any metric conversion instantly.
+
+## Length: Metric vs Imperial
+
+The most common length conversions you will encounter:
+- 1 inch = 2.54 cm (exact)
+- 1 foot = 30.48 cm
+- 1 mile = 1.609 km
+- 1 meter = 3.281 feet
+
+**Mental shortcut**: To convert km to miles, multiply by 0.6. For miles to km, multiply by 1.6. A 100 km drive is roughly 60 miles.
+
+## Weight: Kilograms and Pounds
+
+- 1 kg = 2.205 pounds
+- 1 pound = 0.4536 kg
+- 1 ounce = 28.35 grams
+
+**Mental shortcut**: To convert kg to pounds, double the number and add 10%. So 70 kg is roughly 140 + 14 = 154 lbs (actual: 154.3).
+
+## Temperature: Celsius and Fahrenheit
+
+The conversion formula is F = (C x 9/5) + 32. Some key reference points to memorize:
+- 0°C = 32°F (water freezes)
+- 100°C = 212°F (water boils)
+- 37°C = 98.6°F (body temperature)
+- 20°C = 68°F (comfortable room temperature)
+
+Use our [Temperature Converter](/en/tools/temperature-converter) for precise results.
+
+**Mental shortcut**: Double the Celsius value and add 30 for a rough Fahrenheit estimate. 25°C becomes 50 + 30 = 80°F (actual: 77°F — close enough for daily use).
+
+## Volume: Liters and Gallons
+
+- 1 US gallon = 3.785 liters
+- 1 UK gallon = 4.546 liters (be careful — they differ!)
+- 1 cup = 236.6 ml
+- 1 fluid ounce = 29.57 ml
+
+Our [Cooking Converter](/en/tools/cooking-converter) handles recipe conversions between cups, tablespoons, milliliters, and more.
+
+## Common Conversion Pitfalls
+
+**Confusing US and UK measurements.** A US pint is 473 ml while a UK pint is 568 ml. A US gallon is 3.785 liters while a UK gallon is 4.546 liters.
+
+**Forgetting that weight and mass differ.** On Earth they are practically the same, but if you ever do science, the distinction between kilograms (mass) and newtons (force) matters.
+
+**Mixing up dry and liquid measures.** A cup of flour weighs about 125 g while a cup of water weighs about 236 g. Volume and weight are not interchangeable for solids.
+
+## Area and Speed
+
+- 1 square meter = 10.764 square feet
+- 1 acre = 4,047 square meters
+- 1 km/h = 0.621 mph
+
+Use our [Speed Calculator](/en/tools/speed-calculator) for distance, speed, and time conversions.
+
+## Tips for Remembering Conversions
+
+1. **Anchor to familiar values** — know that 1 meter is about 3.3 feet, and scale from there.
+2. **Use Fibonacci numbers** — the ratio between consecutive Fibonacci numbers approximates the km-to-miles conversion (8 km ≈ 5 miles, 13 km ≈ 8 miles).
+3. **Practice with daily life** — read both the metric and imperial values on food packaging.
+4. **Bookmark a converter** — our [Unit Converter](/en/tools/unit-converter) is free and covers all common unit types.
+
+## FAQ
+
+**Why does the US still use the imperial system?**
+Historical inertia. The US customary system evolved from British imperial units and is deeply embedded in infrastructure, manufacturing, and culture.
+
+**What is the most important conversion to memorize?**
+For everyday life, 1 kg ≈ 2.2 lbs and 1 mile ≈ 1.6 km cover most situations.
+
+**Are online converters accurate enough for engineering?**
+Our converter uses IEEE 754 double-precision arithmetic, which is accurate to 15 significant digits — more than sufficient for any practical application.
+
+**How do I convert between different currency units?**
+Currency conversion requires live exchange rates. Use our [Currency Converter](/en/tools/currency-converter) which pulls real-time data.`
+      },
+      it: {
+        title: 'Guida Completa alla Conversione di Unità: Trucchi e Consigli',
+        excerpt: 'Padroneggia l\'arte della conversione tra unità metriche e imperiali, scale di temperatura e altro. Consigli pratici, insidie comuni e scorciatoie mentali per le conversioni quotidiane.',
+        content: `La conversione di unità è un'abilità che usi più spesso di quanto pensi — dal seguire una ricetta in tazze quando i tuoi strumenti di misura sono in millilitri, al capire i limiti di velocità all'estero, al convertire valute in viaggio.
+
+## Il Sistema Metrico: Una Base
+
+Il sistema metrico si basa sulle potenze di dieci. I prefissi indicano il moltiplicatore: kilo significa 1.000, centi significa 1/100 e milli significa 1/1.000. Passare tra unità metriche è solo questione di spostare la virgola.
+
+Usa il nostro [Convertitore di Unità](/it/tools/unit-converter) per gestire qualsiasi conversione metrica.
+
+## Lunghezza: Metrico vs Imperiale
+
+- 1 pollice = 2,54 cm (esatto)
+- 1 piede = 30,48 cm
+- 1 miglio = 1,609 km
+- 1 metro = 3,281 piedi
+
+**Scorciatoia mentale**: Per convertire km in miglia, moltiplica per 0,6. Per miglia in km, moltiplica per 1,6.
+
+## Peso: Chilogrammi e Libbre
+
+- 1 kg = 2,205 libbre
+- 1 libbra = 0,4536 kg
+
+**Scorciatoia mentale**: Per convertire kg in libbre, raddoppia e aggiungi il 10%. Quindi 70 kg è circa 140 + 14 = 154 lbs.
+
+## Temperatura: Celsius e Fahrenheit
+
+La formula è F = (C x 9/5) + 32. Punti di riferimento chiave:
+- 0°C = 32°F (l'acqua congela)
+- 100°C = 212°F (l'acqua bolle)
+- 37°C = 98,6°F (temperatura corporea)
+
+Usa il nostro [Convertitore di Temperatura](/it/tools/temperature-converter) per risultati precisi.
+
+## Volume: Litri e Galloni
+
+- 1 gallone USA = 3,785 litri
+- 1 gallone UK = 4,546 litri (attenzione — sono diversi!)
+
+Il nostro [Convertitore per Cucina](/it/tools/cooking-converter) gestisce conversioni per ricette.
+
+## Insidie Comuni
+
+**Confondere misure USA e UK.** Una pinta USA è 473 ml mentre una pinta UK è 568 ml.
+**Confondere misure secche e liquide.** Una tazza di farina pesa circa 125 g mentre una tazza d'acqua pesa circa 236 g.
+
+## FAQ
+
+**Qual è la conversione più importante da memorizzare?**
+1 kg ≈ 2,2 lbs e 1 miglio ≈ 1,6 km coprono la maggior parte delle situazioni quotidiane.
+
+**I convertitori online sono abbastanza precisi per l'ingegneria?**
+Il nostro convertitore usa aritmetica a doppia precisione IEEE 754, accurata fino a 15 cifre significative.
+
+**Come converto tra valute diverse?**
+La conversione di valuta richiede tassi di cambio in tempo reale. Usa il nostro [Convertitore di Valuta](/it/tools/currency-converter).`
+      },
+      es: {
+        title: 'Guía Completa de Conversión de Unidades: Trucos y Consejos',
+        excerpt: 'Domina el arte de convertir entre unidades métricas e imperiales, escalas de temperatura y más. Consejos prácticos y atajos mentales para conversiones cotidianas.',
+        content: `La conversión de unidades es una habilidad que usas más de lo que crees — desde seguir una receta en tazas cuando tus herramientas están en mililitros, hasta entender límites de velocidad en el extranjero.
+
+## El Sistema Métrico
+
+El sistema métrico se basa en potencias de diez. Los prefijos indican el multiplicador: kilo significa 1.000, centi significa 1/100 y mili significa 1/1.000.
+
+Usa nuestro [Conversor de Unidades](/es/tools/unit-converter) para cualquier conversión.
+
+## Longitud: Métrico vs Imperial
+
+- 1 pulgada = 2,54 cm
+- 1 pie = 30,48 cm
+- 1 milla = 1,609 km
+
+**Atajo mental**: Para convertir km a millas, multiplica por 0,6.
+
+## Peso: Kilogramos y Libras
+
+- 1 kg = 2,205 libras
+- 1 libra = 0,4536 kg
+
+**Atajo mental**: Para convertir kg a libras, duplica y suma 10%.
+
+## Temperatura: Celsius y Fahrenheit
+
+F = (C x 9/5) + 32. Puntos de referencia:
+- 0°C = 32°F, 100°C = 212°F, 37°C = 98,6°F
+
+Usa nuestro [Conversor de Temperatura](/es/tools/temperature-converter).
+
+## Volumen
+
+- 1 galón USA = 3,785 litros
+- 1 galón UK = 4,546 litros
+
+Nuestro [Conversor de Cocina](/es/tools/cooking-converter) maneja conversiones de recetas.
+
+## Errores Comunes
+
+**Confundir medidas USA y UK.** Una pinta USA es 473 ml mientras una pinta UK es 568 ml.
+**Mezclar medidas secas y líquidas.** Una taza de harina pesa unos 125 g mientras una taza de agua pesa unos 236 g.
+
+## FAQ
+
+**¿Cuál es la conversión más importante de memorizar?**
+1 kg ≈ 2,2 lbs y 1 milla ≈ 1,6 km cubren la mayoría de situaciones.
+
+**¿Son los conversores online suficientemente precisos para ingeniería?**
+Nuestro conversor usa aritmética de doble precisión IEEE 754, precisa hasta 15 dígitos significativos.
+
+**¿Cómo convierto entre monedas?**
+La conversión de moneda requiere tasas de cambio en vivo. Usa nuestro [Conversor de Moneda](/es/tools/currency-converter).`
+      },
+      fr: {
+        title: 'Guide Complet de Conversion d\'Unités : Astuces et Conseils',
+        excerpt: 'Maîtrisez l\'art de la conversion entre unités métriques et impériales, échelles de température et plus. Astuces pratiques et raccourcis mentaux pour les conversions quotidiennes.',
+        content: `La conversion d'unités est une compétence que vous utilisez plus souvent que vous ne le pensez — de suivre une recette en tasses quand vos outils sont en millilitres, à comprendre les limitations de vitesse à l'étranger.
+
+## Le Système Métrique
+
+Le système métrique repose sur les puissances de dix. Les préfixes indiquent le multiplicateur : kilo signifie 1 000, centi signifie 1/100 et milli signifie 1/1 000.
+
+Utilisez notre [Convertisseur d'Unités](/fr/tools/unit-converter) pour toute conversion.
+
+## Longueur : Métrique vs Impérial
+
+- 1 pouce = 2,54 cm
+- 1 pied = 30,48 cm
+- 1 mile = 1,609 km
+
+**Raccourci mental** : Pour convertir des km en miles, multipliez par 0,6.
+
+## Poids : Kilogrammes et Livres
+
+- 1 kg = 2,205 livres
+- 1 livre = 0,4536 kg
+
+**Raccourci mental** : Doublez les kg et ajoutez 10% pour obtenir les livres.
+
+## Température : Celsius et Fahrenheit
+
+F = (C x 9/5) + 32. Points de référence :
+- 0°C = 32°F, 100°C = 212°F, 37°C = 98,6°F
+
+Utilisez notre [Convertisseur de Température](/fr/tools/temperature-converter).
+
+## Volume
+
+- 1 gallon US = 3,785 litres
+- 1 gallon UK = 4,546 litres
+
+Notre [Convertisseur de Cuisine](/fr/tools/cooking-converter) gère les conversions de recettes.
+
+## Pièges Courants
+
+**Confondre mesures US et UK.** Un pint US fait 473 ml tandis qu'un pint UK fait 568 ml.
+**Mélanger mesures sèches et liquides.** Une tasse de farine pèse environ 125 g tandis qu'une tasse d'eau pèse environ 236 g.
+
+## FAQ
+
+**Quelle conversion est la plus importante à mémoriser ?**
+1 kg ≈ 2,2 lbs et 1 mile ≈ 1,6 km couvrent la plupart des situations.
+
+**Les convertisseurs en ligne sont-ils assez précis pour l'ingénierie ?**
+Notre convertisseur utilise l'arithmétique double précision IEEE 754, précise à 15 chiffres significatifs.
+
+**Comment convertir entre devises ?**
+Utilisez notre [Convertisseur de Devises](/fr/tools/currency-converter) avec des taux en temps réel.`
+      },
+      de: {
+        title: 'Vollständiger Leitfaden zur Einheitenumrechnung: Tipps und Tricks',
+        excerpt: 'Meistern Sie die Umrechnung zwischen metrischen und imperialen Einheiten, Temperaturskalen und mehr. Praktische Tipps und mentale Abkürzungen für alltägliche Umrechnungen.',
+        content: `Einheitenumrechnung ist eine Fähigkeit, die Sie öfter nutzen als Sie denken — vom Befolgen eines Rezepts in Tassen, wenn Ihre Messwerkzeuge in Millilitern sind, bis zum Verstehen von Geschwindigkeitsbegrenzungen im Ausland.
+
+## Das Metrische System
+
+Das metrische System basiert auf Zehnerpotenzen. Die Präfixe geben den Multiplikator an: Kilo bedeutet 1.000, Zenti bedeutet 1/100 und Milli bedeutet 1/1.000.
+
+Nutzen Sie unseren [Einheitenumrechner](/de/tools/unit-converter) für jede Umrechnung.
+
+## Länge: Metrisch vs Imperial
+
+- 1 Zoll = 2,54 cm
+- 1 Fuß = 30,48 cm
+- 1 Meile = 1,609 km
+
+**Mentale Abkürzung**: Für km in Meilen multiplizieren Sie mit 0,6.
+
+## Gewicht: Kilogramm und Pfund
+
+- 1 kg = 2,205 Pfund
+- 1 Pfund = 0,4536 kg
+
+**Mentale Abkürzung**: Verdoppeln Sie die kg und addieren Sie 10% für Pfund.
+
+## Temperatur: Celsius und Fahrenheit
+
+F = (C x 9/5) + 32. Referenzpunkte:
+- 0°C = 32°F, 100°C = 212°F, 37°C = 98,6°F
+
+Nutzen Sie unseren [Temperaturumrechner](/de/tools/temperature-converter).
+
+## Volumen
+
+- 1 US-Gallone = 3,785 Liter
+- 1 UK-Gallone = 4,546 Liter
+
+Unser [Kocheinheiten-Umrechner](/de/tools/cooking-converter) erledigt Rezeptumrechnungen.
+
+## Häufige Fallen
+
+**US- und UK-Maße verwechseln.** Ein US-Pint sind 473 ml, ein UK-Pint 568 ml.
+**Trockene und flüssige Maße mischen.** Eine Tasse Mehl wiegt etwa 125 g, eine Tasse Wasser etwa 236 g.
+
+## FAQ
+
+**Welche Umrechnung ist am wichtigsten?**
+1 kg ≈ 2,2 lbs und 1 Meile ≈ 1,6 km decken die meisten Situationen ab.
+
+**Sind Online-Umrechner genau genug für Technik?**
+Unser Umrechner verwendet IEEE 754 Gleitkomma-Arithmetik mit doppelter Genauigkeit.
+
+**Wie rechne ich zwischen Währungen um?**
+Nutzen Sie unseren [Währungsumrechner](/de/tools/currency-converter) mit Echtzeit-Kursen.`
+      },
+      pt: {
+        title: 'Guia Completo de Conversão de Unidades: Dicas e Truques',
+        excerpt: 'Domine a arte da conversão entre unidades métricas e imperiais, escalas de temperatura e mais. Dicas práticas e atalhos mentais para conversões cotidianas.',
+        content: `A conversão de unidades é uma habilidade que você usa mais do que imagina — de seguir uma receita em xícaras quando seus instrumentos estão em mililitros, até entender limites de velocidade no exterior.
+
+## O Sistema Métrico
+
+O sistema métrico se baseia em potências de dez. Os prefixos indicam o multiplicador: quilo significa 1.000, centi significa 1/100 e mili significa 1/1.000.
+
+Use nosso [Conversor de Unidades](/pt/tools/unit-converter) para qualquer conversão.
+
+## Comprimento: Métrico vs Imperial
+
+- 1 polegada = 2,54 cm
+- 1 pé = 30,48 cm
+- 1 milha = 1,609 km
+
+**Atalho mental**: Para converter km em milhas, multiplique por 0,6.
+
+## Peso: Quilogramas e Libras
+
+- 1 kg = 2,205 libras
+- 1 libra = 0,4536 kg
+
+**Atalho mental**: Dobre os kg e some 10% para obter libras.
+
+## Temperatura: Celsius e Fahrenheit
+
+F = (C x 9/5) + 32. Pontos de referência:
+- 0°C = 32°F, 100°C = 212°F, 37°C = 98,6°F
+
+Use nosso [Conversor de Temperatura](/pt/tools/temperature-converter).
+
+## Volume
+
+- 1 galão USA = 3,785 litros
+- 1 galão UK = 4,546 litros
+
+Nosso [Conversor de Cozinha](/pt/tools/cooking-converter) lida com conversões de receitas.
+
+## Armadilhas Comuns
+
+**Confundir medidas USA e UK.** Um pint USA é 473 ml enquanto um pint UK é 568 ml.
+**Misturar medidas secas e líquidas.** Uma xícara de farinha pesa cerca de 125 g enquanto uma xícara de água pesa cerca de 236 g.
+
+## FAQ
+
+**Qual conversão é mais importante memorizar?**
+1 kg ≈ 2,2 lbs e 1 milha ≈ 1,6 km cobrem a maioria das situações.
+
+**Os conversores online são precisos o suficiente para engenharia?**
+Nosso conversor usa aritmética de dupla precisão IEEE 754, precisa até 15 dígitos significativos.
+
+**Como converto entre moedas?**
+Use nosso [Conversor de Moedas](/pt/tools/currency-converter) com taxas em tempo real.`
+      }
+    }
+  },
+  {
+    slug: 'loan-amortization-beginners-guide',
+    date: '2026-03-20',
+    category: 'finance',
+    translations: {
+      en: {
+        title: 'Understanding Loan Amortization: A Beginner\'s Guide',
+        excerpt: 'Demystify loan amortization schedules, understand how interest and principal payments shift over time, and learn strategies to pay off your mortgage or personal loan faster.',
+        content: `If you have ever taken out a mortgage, car loan, or personal loan, you have encountered amortization — even if you did not recognize it by name. Amortization is the process of spreading a loan into a series of fixed payments over time, where each payment covers both interest and a portion of the principal. Understanding how it works can save you thousands over the life of a loan.
+
+## How Amortization Works
+
+When you take out a fixed-rate loan, your monthly payment stays the same throughout the term. However, the split between interest and principal changes dramatically. In the early months, most of your payment goes toward interest. As the principal balance decreases, less interest accrues, and more of each payment goes toward reducing the principal.
+
+Use our [Mortgage Amortization Calculator](/en/tools/mortgage-amortization) to see exactly how your payments break down month by month.
+
+## The Math Behind the Payment
+
+The formula for a fixed monthly payment is: M = P[r(1+r)^n] / [(1+r)^n – 1], where P is the principal, r is the monthly interest rate (annual rate / 12), and n is the total number of payments.
+
+For a 200,000 euro loan at 4% annual interest over 30 years: r = 0.04/12 = 0.00333, n = 360 months. The monthly payment works out to approximately 954.83 euros. Over 30 years you pay a total of 343,739 euros — meaning 143,739 euros in interest alone.
+
+Try our [Loan Calculator](/en/tools/loan-calculator) to run your own numbers instantly.
+
+## The Early Payment Paradox
+
+Here is what surprises most borrowers: in that 200,000 euro example, your first monthly payment of 954.83 breaks down as 666.67 euros in interest and only 288.16 euros in principal. After five years, you have paid 57,290 euros but only reduced your principal by 18,415 euros. This is why the early years of a mortgage feel like you are barely making progress.
+
+## Strategies to Pay Off Faster
+
+**Make biweekly payments.** Instead of 12 monthly payments, make a half-payment every two weeks. This results in 26 half-payments (13 full payments) per year, adding one extra payment annually without feeling the pinch.
+
+**Round up your payments.** If your payment is 954.83 euros, round up to 1,000 euros. The extra 45.17 euros goes entirely to principal, and over 30 years this can shave off several years and thousands in interest.
+
+**Make one extra payment per year.** Putting a bonus or tax refund toward your loan principal can dramatically reduce the total interest paid and shorten the loan term.
+
+**Refinance when rates drop.** If interest rates fall significantly below your current rate, refinancing can lower your monthly payment or shorten your term. Use our [Mortgage Calculator](/en/tools/mortgage-calculator) to compare scenarios.
+
+## Fixed vs Variable Rate Amortization
+
+With a fixed-rate loan, the amortization schedule is predictable from day one. Variable-rate loans recalculate the interest portion when rates change, which can alter both your payment amount and the interest-principal split. Fixed rates offer certainty; variable rates offer potential savings if rates decline but carry risk if they rise.
+
+## The Amortization Schedule
+
+An amortization schedule is a table showing every payment over the life of the loan, broken down into interest, principal, and remaining balance. It reveals patterns that are invisible in the monthly payment amount alone. Our [Mortgage Amortization Calculator](/en/tools/mortgage-amortization) generates a complete schedule you can download and analyze.
+
+## When Amortization Does Not Apply
+
+Not all loans are amortized. Interest-only loans require you to pay only interest for a period before principal payments begin. Balloon loans have small payments followed by a large lump sum. Credit cards use revolving credit with minimum payments that can lead to decades of debt if you only pay the minimum. Understanding which type of loan you have is crucial for financial planning.
+
+## FAQ
+
+**What is negative amortization?**
+It occurs when your payment is less than the interest due, causing the loan balance to grow instead of shrink. This can happen with some adjustable-rate mortgages.
+
+**Should I pay extra on my mortgage or invest the money?**
+If your mortgage rate is lower than the expected investment return, investing may yield more. However, paying off the mortgage provides guaranteed returns equal to your interest rate and reduces financial risk.
+
+**How does amortization differ from depreciation?**
+Amortization spreads loan payments over time. Depreciation spreads the cost of a physical asset over its useful life. Both allocate costs over time but apply to different things.
+
+**Can I see my amortization schedule?**
+Yes. Use our [Mortgage Amortization Calculator](/en/tools/mortgage-amortization) or request one from your lender. It is your right to know exactly where your money goes.`
+      },
+      it: {
+        title: 'Capire l\'Ammortamento dei Prestiti: Guida per Principianti',
+        excerpt: 'Scopri come funzionano i piani di ammortamento, come cambiano interessi e capitale nel tempo, e impara strategie per estinguere mutui e prestiti più velocemente.',
+        content: `Se hai mai acceso un mutuo, un prestito auto o un prestito personale, hai incontrato l'ammortamento — anche se non lo conoscevi per nome. L'ammortamento è il processo di distribuzione di un prestito in una serie di pagamenti fissi nel tempo, dove ogni rata copre sia gli interessi che una parte del capitale.
+
+## Come Funziona l'Ammortamento
+
+Con un prestito a tasso fisso, la rata mensile resta uguale per tutta la durata. Tuttavia, la ripartizione tra interessi e capitale cambia drasticamente. Nei primi mesi, la maggior parte della rata va agli interessi. Man mano che il capitale diminuisce, maturano meno interessi e più soldi vanno a ridurre il debito residuo.
+
+Usa il nostro [Calcolatore di Ammortamento Mutuo](/it/tools/mortgage-amortization) per vedere come si ripartiscono le tue rate mese per mese.
+
+## La Matematica Dietro la Rata
+
+La formula per una rata mensile fissa è: M = P[r(1+r)^n] / [(1+r)^n – 1], dove P è il capitale, r è il tasso mensile (tasso annuo / 12), e n è il numero totale di rate.
+
+Per un prestito di 200.000 euro al 4% annuo su 30 anni, la rata mensile è circa 954,83 euro. In 30 anni paghi un totale di 343.739 euro — cioè 143.739 euro di soli interessi.
+
+Prova il nostro [Calcolatore Prestiti](/it/tools/loan-calculator) per fare i tuoi calcoli.
+
+## Strategie per Estinguere Prima
+
+**Arrotonda le rate.** Se la tua rata è 954,83 euro, arrotonda a 1.000. I 45,17 euro extra vanno interamente al capitale.
+
+**Fai un pagamento extra all'anno.** Mettere un bonus o un rimborso fiscale verso il capitale può ridurre drasticamente gli interessi totali.
+
+**Rifinanzia quando i tassi scendono.** Usa il nostro [Calcolatore Mutuo](/it/tools/mortgage-calculator) per confrontare scenari.
+
+## Tasso Fisso vs Variabile
+
+Con un tasso fisso, il piano di ammortamento è prevedibile dal primo giorno. I prestiti a tasso variabile ricalcolano la quota interessi quando i tassi cambiano, alterando sia la rata che la ripartizione interessi-capitale.
+
+## FAQ
+
+**Cos'è l'ammortamento negativo?**
+Si verifica quando la rata è inferiore agli interessi maturati, causando la crescita del debito residuo.
+
+**Dovrei pagare extra sul mutuo o investire?**
+Se il tasso del mutuo è inferiore al rendimento atteso dell'investimento, investire può rendere di più. Ma estinguere il mutuo offre un rendimento garantito pari al tuo tasso di interesse.
+
+**Posso vedere il mio piano di ammortamento?**
+Sì. Usa il nostro [Calcolatore di Ammortamento](/it/tools/mortgage-amortization) o richiedilo alla tua banca.`
+      },
+      es: {
+        title: 'Entendiendo la Amortización de Préstamos: Guía para Principiantes',
+        excerpt: 'Desmitifica los calendarios de amortización, comprende cómo cambian los pagos de intereses y capital, y aprende estrategias para pagar tu hipoteca más rápido.',
+        content: `Si alguna vez has sacado una hipoteca, préstamo de auto o préstamo personal, has encontrado la amortización. Es el proceso de distribuir un préstamo en una serie de pagos fijos donde cada cuota cubre tanto intereses como una porción del capital.
+
+## Cómo Funciona la Amortización
+
+Con un préstamo a tasa fija, tu pago mensual permanece igual. Sin embargo, la distribución entre intereses y capital cambia dramáticamente. En los primeros meses, la mayor parte va a intereses. A medida que el capital disminuye, se acumulan menos intereses.
+
+Usa nuestro [Calculador de Amortización Hipotecaria](/es/tools/mortgage-amortization) para ver el desglose mes a mes.
+
+## La Matemática
+
+Para un préstamo de 200.000 euros al 4% anual a 30 años, la cuota mensual es aproximadamente 954,83 euros. En 30 años pagas 343.739 euros — 143.739 euros solo en intereses.
+
+Prueba nuestro [Calculador de Préstamos](/es/tools/loan-calculator).
+
+## Estrategias para Pagar Más Rápido
+
+**Redondea tus pagos.** Si tu cuota es 954,83, redondea a 1.000. Lo extra va directamente al capital.
+**Haz un pago extra al año.** Un bono o devolución de impuestos dirigido al capital reduce significativamente los intereses totales.
+**Refinancia cuando bajen las tasas.** Usa nuestro [Calculador Hipotecario](/es/tools/mortgage-calculator).
+
+## FAQ
+
+**¿Qué es la amortización negativa?**
+Ocurre cuando tu pago es menor que los intereses acumulados, haciendo que el saldo del préstamo crezca.
+
+**¿Puedo ver mi calendario de amortización?**
+Sí. Usa nuestro [Calculador de Amortización](/es/tools/mortgage-amortization) o solicítalo a tu banco.`
+      },
+      fr: {
+        title: 'Comprendre l\'Amortissement des Prêts : Guide pour Débutants',
+        excerpt: 'Démystifiez les tableaux d\'amortissement, comprenez comment les paiements d\'intérêts et de capital évoluent, et apprenez des stratégies pour rembourser votre prêt plus vite.',
+        content: `Si vous avez déjà contracté un prêt immobilier, un crédit auto ou un prêt personnel, vous avez rencontré l'amortissement. C'est le processus de répartition d'un prêt en une série de versements fixes où chaque mensualité couvre à la fois les intérêts et une partie du capital.
+
+## Comment Fonctionne l'Amortissement
+
+Avec un prêt à taux fixe, votre mensualité reste identique. Cependant, la répartition entre intérêts et capital change radicalement. Dans les premiers mois, la majeure partie va aux intérêts.
+
+Utilisez notre [Calculateur d'Amortissement](/fr/tools/mortgage-amortization) pour voir la ventilation mois par mois.
+
+## Les Chiffres
+
+Pour un prêt de 200 000 euros à 4% annuel sur 30 ans, la mensualité est d'environ 954,83 euros. Sur 30 ans vous payez 343 739 euros — dont 143 739 euros d'intérêts seuls.
+
+Essayez notre [Calculateur de Prêt](/fr/tools/loan-calculator).
+
+## Stratégies pour Rembourser Plus Vite
+
+**Arrondissez vos mensualités.** De 954,83 à 1 000 euros. Le surplus va au capital.
+**Faites un versement supplémentaire par an.** Un bonus ou remboursement d'impôts versé au capital réduit significativement les intérêts totaux.
+**Renégociez quand les taux baissent.** Utilisez notre [Calculateur Hypothécaire](/fr/tools/mortgage-calculator).
+
+## FAQ
+
+**Qu'est-ce que l'amortissement négatif ?**
+Il survient quand votre mensualité est inférieure aux intérêts dus, faisant augmenter le solde du prêt.
+
+**Puis-je voir mon tableau d'amortissement ?**
+Oui. Utilisez notre [Calculateur d'Amortissement](/fr/tools/mortgage-amortization) ou demandez-le à votre banque.`
+      },
+      de: {
+        title: 'Darlehenstilgung Verstehen: Ein Leitfaden für Anfänger',
+        excerpt: 'Verstehen Sie Tilgungspläne, wie sich Zins- und Tilgungsanteile über die Zeit verschieben, und lernen Sie Strategien zur schnelleren Rückzahlung Ihres Darlehens.',
+        content: `Wenn Sie jemals eine Hypothek, einen Autokredit oder einen Privatkredit aufgenommen haben, sind Sie der Tilgung begegnet. Tilgung ist der Prozess der Verteilung eines Darlehens in eine Reihe fester Zahlungen, wobei jede Rate sowohl Zinsen als auch einen Teil des Kapitals abdeckt.
+
+## Wie Tilgung Funktioniert
+
+Bei einem Festzinsdarlehen bleibt Ihre monatliche Rate gleich. Die Aufteilung zwischen Zinsen und Tilgung ändert sich jedoch dramatisch. In den ersten Monaten fließt der Großteil in die Zinsen.
+
+Nutzen Sie unseren [Tilgungsrechner](/de/tools/mortgage-amortization) für die monatliche Aufschlüsselung.
+
+## Die Zahlen
+
+Für ein Darlehen von 200.000 Euro bei 4% Jahreszins über 30 Jahre beträgt die monatliche Rate etwa 954,83 Euro. Über 30 Jahre zahlen Sie insgesamt 343.739 Euro — davon 143.739 Euro nur an Zinsen.
+
+Probieren Sie unseren [Kreditrechner](/de/tools/loan-calculator).
+
+## Strategien für Schnellere Rückzahlung
+
+**Runden Sie Ihre Raten auf.** Von 954,83 auf 1.000 Euro. Der Überschuss geht ans Kapital.
+**Leisten Sie eine Sondertilgung pro Jahr.** Ein Bonus zum Kapital reduziert die Gesamtzinsen erheblich.
+**Umschulden bei sinkenden Zinsen.** Nutzen Sie unseren [Hypothekenrechner](/de/tools/mortgage-calculator).
+
+## FAQ
+
+**Was ist negative Tilgung?**
+Sie tritt auf, wenn Ihre Rate niedriger als die fälligen Zinsen ist, wodurch der Darlehenssaldo wächst.
+
+**Kann ich meinen Tilgungsplan einsehen?**
+Ja. Nutzen Sie unseren [Tilgungsrechner](/de/tools/mortgage-amortization) oder fordern Sie ihn bei Ihrer Bank an.`
+      },
+      pt: {
+        title: 'Entendendo a Amortização de Empréstimos: Guia para Iniciantes',
+        excerpt: 'Desmistifique tabelas de amortização, entenda como os pagamentos de juros e principal mudam ao longo do tempo, e aprenda estratégias para quitar seu financiamento mais rápido.',
+        content: `Se você já fez um financiamento imobiliário, empréstimo de carro ou empréstimo pessoal, encontrou a amortização. É o processo de distribuir um empréstimo em uma série de pagamentos fixos onde cada parcela cobre tanto juros quanto uma porção do principal.
+
+## Como Funciona a Amortização
+
+Com um empréstimo de taxa fixa, sua parcela mensal permanece igual. No entanto, a divisão entre juros e principal muda drasticamente. Nos primeiros meses, a maior parte vai para os juros.
+
+Use nosso [Calculador de Amortização](/pt/tools/mortgage-amortization) para ver a divisão mês a mês.
+
+## Os Números
+
+Para um empréstimo de 200.000 euros a 4% ao ano por 30 anos, a parcela mensal é aproximadamente 954,83 euros. Em 30 anos você paga 343.739 euros — sendo 143.739 euros apenas de juros.
+
+Experimente nosso [Calculador de Empréstimos](/pt/tools/loan-calculator).
+
+## Estratégias para Pagar Mais Rápido
+
+**Arredonde suas parcelas.** De 954,83 para 1.000 euros. O excedente vai para o principal.
+**Faça um pagamento extra por ano.** Um bônus ou restituição de impostos direcionado ao principal reduz significativamente os juros totais.
+**Refinancie quando as taxas caírem.** Use nosso [Calculador de Hipoteca](/pt/tools/mortgage-calculator).
+
+## FAQ
+
+**O que é amortização negativa?**
+Ocorre quando sua parcela é menor que os juros devidos, fazendo o saldo do empréstimo crescer.
+
+**Posso ver minha tabela de amortização?**
+Sim. Use nosso [Calculador de Amortização](/pt/tools/mortgage-amortization) ou solicite ao seu banco.`
+      }
+    }
+  },
+  {
+    slug: 'ultimate-guide-color-theory-designers',
+    date: '2026-03-20',
+    category: 'developer',
+    translations: {
+      en: {
+        title: 'The Ultimate Guide to Color Theory for Designers',
+        excerpt: 'Master color theory fundamentals: the color wheel, harmonies, contrast, psychology of color, and practical tips for building stunning palettes that convert.',
+        content: `Color is the single most powerful visual tool in a designer's arsenal. Studies show that people form a subconscious judgment about a product within 90 seconds, and up to 90% of that assessment is based on color alone. Whether you are designing a website, creating a brand identity, or picking paint for a room, understanding color theory transforms guesswork into informed, confident choices.
+
+## The Color Wheel
+
+The modern color wheel, based on the RGB model used by screens, arranges hues in a circle. Primary colors (red, green, blue) combine to create secondary colors (cyan, magenta, yellow), and mixing primaries with secondaries produces tertiary colors. This wheel is the foundation of every color harmony system.
+
+Use our [Color Picker](/en/tools/color-picker) to explore the color wheel interactively and extract exact hex, RGB, and HSL values.
+
+## Color Harmonies
+
+**Complementary** — colors opposite each other on the wheel (e.g., blue and orange). High contrast, energetic, great for calls to action.
+
+**Analogous** — colors adjacent on the wheel (e.g., blue, blue-green, green). Harmonious, calming, easy on the eyes. Perfect for backgrounds and content-heavy pages.
+
+**Triadic** — three colors equidistant on the wheel (e.g., red, yellow, blue). Balanced and vibrant, but use one dominant color and the others as accents.
+
+**Split-complementary** — a base color plus the two colors adjacent to its complement. Offers strong contrast without the tension of true complementary pairs.
+
+Generate complete harmonious palettes with our [Color Palette Generator](/en/tools/color-palette-generator).
+
+## Color Psychology
+
+Colors carry cultural and psychological associations that influence user behavior:
+
+- **Red** — urgency, passion, energy. Used for sale signs and error messages.
+- **Blue** — trust, stability, professionalism. Dominant in finance and tech brands.
+- **Green** — nature, health, growth. Common in organic and environmental brands.
+- **Yellow** — optimism, warmth, attention. Effective for highlights and warnings.
+- **Purple** — luxury, creativity, wisdom. Popular in beauty and premium brands.
+- **Orange** — enthusiasm, action, friendliness. Strong for CTAs and buy buttons.
+- **Black** — sophistication, power, elegance. Standard for luxury fashion.
+- **White** — cleanliness, simplicity, space. The foundation of minimalist design.
+
+## Contrast and Accessibility
+
+Beautiful colors mean nothing if users cannot read your text. The Web Content Accessibility Guidelines (WCAG) require a minimum contrast ratio of 4.5:1 for normal text and 3:1 for large text (18px+ or 14px+ bold).
+
+Use our [Color Converter](/en/tools/color-converter) to check contrast ratios between any two colors and ensure your designs meet accessibility standards.
+
+About 8% of men and 0.5% of women have some form of color vision deficiency. Never rely solely on color to convey meaning — always pair color with text labels, icons, or patterns.
+
+## Building a Palette from Scratch
+
+1. **Start with one color** that represents your brand or mood.
+2. **Choose a harmony** — complementary for energy, analogous for calm, triadic for balance.
+3. **Add neutrals** — a near-black for text, a near-white for backgrounds, and one or two grays.
+4. **Define semantic colors** — green for success, red for error, yellow for warning, blue for info.
+5. **Test at scale** — apply the palette to real UI elements before committing.
+
+Our [Gradient Generator](/en/tools/gradient-generator) can help you create smooth transitions between your palette colors.
+
+## HSL: The Designer's Best Friend
+
+While hex codes and RGB are the languages of code, HSL (Hue, Saturation, Lightness) is the most intuitive model for designers. Keeping the hue fixed and adjusting saturation and lightness lets you create tints, shades, and tones of any color systematically.
+
+## FAQ
+
+**How many colors should a palette have?**
+Most effective palettes use 3 to 5 colors plus neutrals. Too many colors create visual chaos; too few feel monotonous.
+
+**Should I design in dark mode or light mode first?**
+Start with light mode — it is more forgiving for contrast issues. Then adapt to dark mode by inverting lightness values while keeping hue and saturation consistent.
+
+**What is the 60-30-10 rule?**
+Use your dominant color for 60% of the design, secondary color for 30%, and accent color for 10%. This creates visual hierarchy and balance.
+
+**How do I pick colors that match a brand photo?**
+Use our [Color Picker](/en/tools/color-picker) to extract colors directly from any image by uploading it or using the eyedropper tool.`
+      },
+      it: {
+        title: 'La Guida Definitiva alla Teoria del Colore per Designer',
+        excerpt: 'Padroneggia i fondamenti della teoria del colore: la ruota cromatica, le armonie, il contrasto, la psicologia del colore e consigli pratici per creare palette straordinarie.',
+        content: `Il colore è lo strumento visivo più potente nell'arsenale di un designer. Gli studi mostrano che le persone formano un giudizio subconscio su un prodotto entro 90 secondi, e fino al 90% di quella valutazione si basa solo sul colore.
+
+## La Ruota Cromatica
+
+La ruota cromatica moderna, basata sul modello RGB, dispone le tonalità in un cerchio. Colori primari (rosso, verde, blu) si combinano per creare i secondari (ciano, magenta, giallo), e la miscelazione produce i terziari.
+
+Usa il nostro [Selettore Colore](/it/tools/color-picker) per esplorare la ruota cromatica interattivamente.
+
+## Armonie Cromatiche
+
+**Complementari** — colori opposti sulla ruota (es. blu e arancione). Alto contrasto, ideali per call-to-action.
+**Analoghi** — colori adiacenti (es. blu, blu-verde, verde). Armoniosi e rilassanti.
+**Triadici** — tre colori equidistanti. Equilibrati e vivaci.
+
+Genera palette complete con il nostro [Generatore di Palette](/it/tools/color-palette-generator).
+
+## Psicologia del Colore
+
+- **Rosso** — urgenza, passione, energia.
+- **Blu** — fiducia, stabilità, professionalità.
+- **Verde** — natura, salute, crescita.
+- **Giallo** — ottimismo, calore, attenzione.
+- **Viola** — lusso, creatività.
+- **Arancione** — entusiasmo, azione. Forte per i pulsanti CTA.
+
+## Contrasto e Accessibilità
+
+Le WCAG richiedono un rapporto di contrasto minimo di 4,5:1 per il testo normale. Usa il nostro [Convertitore di Colore](/it/tools/color-converter) per verificare i rapporti di contrasto. Circa l'8% degli uomini ha qualche forma di daltonismo — non affidarti solo al colore per comunicare significato.
+
+## Costruire una Palette
+
+1. Parti da un colore che rappresenta il tuo brand.
+2. Scegli un'armonia.
+3. Aggiungi neutri.
+4. Definisci colori semantici (verde per successo, rosso per errore).
+5. Testa su elementi UI reali.
+
+Il nostro [Generatore di Gradienti](/it/tools/gradient-generator) crea transizioni fluide tra i colori della palette.
+
+## FAQ
+
+**Quanti colori dovrebbe avere una palette?**
+3-5 colori più neutri. Troppi creano caos visivo; troppo pochi risultano monotoni.
+
+**Cos'è la regola 60-30-10?**
+Colore dominante al 60%, secondario al 30%, accento al 10%. Crea gerarchia e equilibrio visivo.
+
+**Come scelgo colori che corrispondono a una foto?**
+Usa il nostro [Selettore Colore](/it/tools/color-picker) per estrarre colori direttamente da qualsiasi immagine.`
+      },
+      es: {
+        title: 'La Guía Definitiva de Teoría del Color para Diseñadores',
+        excerpt: 'Domina los fundamentos de la teoría del color: la rueda cromática, armonías, contraste, psicología del color y consejos prácticos para crear paletas impactantes.',
+        content: `El color es la herramienta visual más poderosa en el arsenal de un diseñador. Los estudios muestran que las personas forman un juicio subconsciente sobre un producto en 90 segundos, y hasta el 90% se basa solo en el color.
+
+## La Rueda Cromática
+
+La rueda cromática moderna, basada en el modelo RGB, organiza los tonos en un círculo. Los colores primarios se combinan para crear secundarios, y la mezcla produce terciarios.
+
+Usa nuestro [Selector de Color](/es/tools/color-picker) para explorar la rueda cromática.
+
+## Armonías Cromáticas
+
+**Complementarios** — colores opuestos (ej. azul y naranja). Alto contraste.
+**Análogos** — colores adyacentes. Armoniosos y relajantes.
+**Triádicos** — tres colores equidistantes. Equilibrados y vibrantes.
+
+Genera paletas completas con nuestro [Generador de Paletas](/es/tools/color-palette-generator).
+
+## Psicología del Color
+
+- **Rojo** — urgencia, pasión, energía.
+- **Azul** — confianza, estabilidad, profesionalismo.
+- **Verde** — naturaleza, salud, crecimiento.
+- **Naranja** — entusiasmo, acción. Fuerte para botones CTA.
+
+## Contraste y Accesibilidad
+
+Las WCAG requieren una relación de contraste mínima de 4,5:1 para texto normal. Usa nuestro [Conversor de Color](/es/tools/color-converter) para verificar. Alrededor del 8% de los hombres tiene alguna forma de daltonismo.
+
+## Construir una Paleta
+
+1. Comienza con un color representativo de tu marca.
+2. Elige una armonía.
+3. Agrega neutros.
+4. Define colores semánticos.
+5. Prueba en elementos UI reales.
+
+Nuestro [Generador de Gradientes](/es/tools/gradient-generator) crea transiciones suaves.
+
+## FAQ
+
+**¿Cuántos colores debe tener una paleta?**
+3-5 colores más neutros.
+
+**¿Qué es la regla 60-30-10?**
+Color dominante al 60%, secundario al 30%, acento al 10%.
+
+**¿Cómo elijo colores que coincidan con una foto?**
+Usa nuestro [Selector de Color](/es/tools/color-picker) para extraer colores de cualquier imagen.`
+      },
+      fr: {
+        title: 'Le Guide Ultime de la Théorie des Couleurs pour Designers',
+        excerpt: 'Maîtrisez les fondamentaux de la théorie des couleurs : le cercle chromatique, les harmonies, le contraste, la psychologie des couleurs et des conseils pratiques pour créer des palettes performantes.',
+        content: `La couleur est l'outil visuel le plus puissant dans l'arsenal d'un designer. Les études montrent que les gens forment un jugement subconscient sur un produit en 90 secondes, et jusqu'à 90% de cette évaluation est basée sur la couleur seule.
+
+## Le Cercle Chromatique
+
+Le cercle chromatique moderne, basé sur le modèle RGB, arrange les teintes en cercle. Les couleurs primaires se combinent pour créer les secondaires, et le mélange produit les tertiaires.
+
+Utilisez notre [Sélecteur de Couleurs](/fr/tools/color-picker) pour explorer le cercle chromatique.
+
+## Harmonies Chromatiques
+
+**Complémentaires** — couleurs opposées (ex. bleu et orange). Fort contraste.
+**Analogues** — couleurs adjacentes. Harmonieuses et apaisantes.
+**Triadiques** — trois couleurs équidistantes. Équilibrées et vibrantes.
+
+Générez des palettes avec notre [Générateur de Palettes](/fr/tools/color-palette-generator).
+
+## Psychologie des Couleurs
+
+- **Rouge** — urgence, passion, énergie.
+- **Bleu** — confiance, stabilité, professionnalisme.
+- **Vert** — nature, santé, croissance.
+- **Orange** — enthousiasme, action. Fort pour les boutons CTA.
+
+## Contraste et Accessibilité
+
+Les WCAG exigent un ratio de contraste minimum de 4,5:1 pour le texte normal. Utilisez notre [Convertisseur de Couleurs](/fr/tools/color-converter). Environ 8% des hommes ont une forme de daltonisme.
+
+## Créer une Palette
+
+1. Commencez par une couleur représentative de votre marque.
+2. Choisissez une harmonie.
+3. Ajoutez des neutres.
+4. Définissez des couleurs sémantiques.
+5. Testez sur des éléments UI réels.
+
+Notre [Générateur de Dégradés](/fr/tools/gradient-generator) crée des transitions fluides.
+
+## FAQ
+
+**Combien de couleurs dans une palette ?**
+3 à 5 couleurs plus des neutres.
+
+**Qu'est-ce que la règle 60-30-10 ?**
+Couleur dominante à 60%, secondaire à 30%, accent à 10%.
+
+**Comment choisir des couleurs depuis une photo ?**
+Utilisez notre [Sélecteur de Couleurs](/fr/tools/color-picker) pour extraire des couleurs de n'importe quelle image.`
+      },
+      de: {
+        title: 'Der Ultimative Leitfaden zur Farbtheorie für Designer',
+        excerpt: 'Meistern Sie die Grundlagen der Farbtheorie: Farbkreis, Harmonien, Kontrast, Farbpsychologie und praktische Tipps für beeindruckende Paletten.',
+        content: `Farbe ist das stärkste visuelle Werkzeug im Arsenal eines Designers. Studien zeigen, dass Menschen innerhalb von 90 Sekunden ein unterbewusstes Urteil über ein Produkt fällen, und bis zu 90% dieser Bewertung basiert allein auf der Farbe.
+
+## Der Farbkreis
+
+Der moderne Farbkreis, basierend auf dem RGB-Modell, ordnet Farbtöne im Kreis an. Primärfarben kombinieren sich zu Sekundärfarben, und deren Mischung ergibt Tertiärfarben.
+
+Nutzen Sie unseren [Farbwähler](/de/tools/color-picker) zur interaktiven Erkundung des Farbkreises.
+
+## Farbharmonien
+
+**Komplementär** — gegenüberliegende Farben (z.B. Blau und Orange). Starker Kontrast.
+**Analog** — benachbarte Farben. Harmonisch und beruhigend.
+**Triadisch** — drei gleichmäßig verteilte Farben. Ausgewogen und lebendig.
+
+Generieren Sie Paletten mit unserem [Paletten-Generator](/de/tools/color-palette-generator).
+
+## Farbpsychologie
+
+- **Rot** — Dringlichkeit, Leidenschaft, Energie.
+- **Blau** — Vertrauen, Stabilität, Professionalität.
+- **Grün** — Natur, Gesundheit, Wachstum.
+- **Orange** — Enthusiasmus, Aktion. Stark für CTA-Buttons.
+
+## Kontrast und Barrierefreiheit
+
+Die WCAG verlangen ein Mindestkontranstverhältnis von 4,5:1 für normalen Text. Nutzen Sie unseren [Farbkonverter](/de/tools/color-converter). Etwa 8% der Männer haben eine Farbsehschwäche.
+
+## Eine Palette Erstellen
+
+1. Beginnen Sie mit einer Farbe, die Ihre Marke repräsentiert.
+2. Wählen Sie eine Harmonie.
+3. Fügen Sie Neutraltöne hinzu.
+4. Definieren Sie semantische Farben.
+5. Testen Sie an echten UI-Elementen.
+
+Unser [Verlaufsgenerator](/de/tools/gradient-generator) erstellt sanfte Übergänge.
+
+## FAQ
+
+**Wie viele Farben sollte eine Palette haben?**
+3-5 Farben plus Neutraltöne.
+
+**Was ist die 60-30-10-Regel?**
+Dominante Farbe zu 60%, Sekundärfarbe zu 30%, Akzentfarbe zu 10%.
+
+**Wie wähle ich Farben aus einem Foto?**
+Nutzen Sie unseren [Farbwähler](/de/tools/color-picker) zum Extrahieren von Farben aus Bildern.`
+      },
+      pt: {
+        title: 'O Guia Definitivo de Teoria das Cores para Designers',
+        excerpt: 'Domine os fundamentos da teoria das cores: o círculo cromático, harmonias, contraste, psicologia das cores e dicas práticas para criar paletas impressionantes.',
+        content: `A cor é a ferramenta visual mais poderosa no arsenal de um designer. Estudos mostram que as pessoas formam um julgamento subconsciente sobre um produto em 90 segundos, e até 90% dessa avaliação é baseada apenas na cor.
+
+## O Círculo Cromático
+
+O círculo cromático moderno, baseado no modelo RGB, organiza os matizes em um círculo. Cores primárias se combinam para criar secundárias, e a mistura produz terciárias.
+
+Use nosso [Seletor de Cores](/pt/tools/color-picker) para explorar o círculo cromático.
+
+## Harmonias Cromáticas
+
+**Complementares** — cores opostas (ex. azul e laranja). Alto contraste.
+**Análogas** — cores adjacentes. Harmoniosas e relaxantes.
+**Triádicas** — três cores equidistantes. Equilibradas e vibrantes.
+
+Gere paletas com nosso [Gerador de Paletas](/pt/tools/color-palette-generator).
+
+## Psicologia das Cores
+
+- **Vermelho** — urgência, paixão, energia.
+- **Azul** — confiança, estabilidade, profissionalismo.
+- **Verde** — natureza, saúde, crescimento.
+- **Laranja** — entusiasmo, ação. Forte para botões CTA.
+
+## Contraste e Acessibilidade
+
+As WCAG exigem razão de contraste mínima de 4,5:1 para texto normal. Use nosso [Conversor de Cores](/pt/tools/color-converter). Cerca de 8% dos homens tem alguma forma de daltonismo.
+
+## Construir uma Paleta
+
+1. Comece com uma cor representativa da sua marca.
+2. Escolha uma harmonia.
+3. Adicione neutros.
+4. Defina cores semânticas.
+5. Teste em elementos UI reais.
+
+Nosso [Gerador de Gradientes](/pt/tools/gradient-generator) cria transições suaves.
+
+## FAQ
+
+**Quantas cores uma paleta deve ter?**
+3-5 cores mais neutros.
+
+**O que é a regra 60-30-10?**
+Cor dominante a 60%, secundária a 30%, acento a 10%.
+
+**Como escolho cores de uma foto?**
+Use nosso [Seletor de Cores](/pt/tools/color-picker) para extrair cores de qualquer imagem.`
+      }
+    }
+  },
+  {
+    slug: 'how-to-use-regular-expressions-practical-guide',
+    date: '2026-03-20',
+    category: 'developer',
+    translations: {
+      en: {
+        title: 'How to Use Regular Expressions: A Practical Guide',
+        excerpt: 'Learn regex from scratch with real-world examples. Master pattern matching for email validation, data extraction, search-and-replace, and more.',
+        content: `Regular expressions — regex — are one of the most powerful and underutilized tools in a developer's toolkit. They let you describe patterns in text and then search, match, extract, or replace based on those patterns. Once you grasp the basics, tasks that would take dozens of lines of code become one-liners.
+
+## What Is a Regular Expression?
+
+A regular expression is a sequence of characters that defines a search pattern. The pattern \`/hello/\` matches the literal text "hello" anywhere in a string. But the real power comes from special characters — metacharacters — that let you describe classes of text rather than literal text.
+
+Test your patterns in real time with our [Regex Tester](/en/tools/regex-tester).
+
+## Essential Metacharacters
+
+- \`.\` — matches any single character except newline
+- \`*\` — matches zero or more of the preceding element
+- \`+\` — matches one or more of the preceding element
+- \`?\` — matches zero or one of the preceding element
+- \`^\` — matches the start of a string
+- \`$\` — matches the end of a string
+- \`[]\` — character class, matches any one character inside the brackets
+- \`()\` — grouping, captures matched text for later use
+- \`|\` — alternation, matches either the pattern before or after it
+- \`\\\` — escapes a metacharacter to match it literally
+
+## Character Classes in Detail
+
+\`[abc]\` matches any single character a, b, or c. \`[a-z]\` matches any lowercase letter. \`[0-9]\` matches any digit. \`[^abc]\` matches any character except a, b, or c.
+
+Shorthand classes save typing:
+- \`\\d\` — any digit (same as \`[0-9]\`)
+- \`\\w\` — any word character (same as \`[a-zA-Z0-9_]\`)
+- \`\\s\` — any whitespace (space, tab, newline)
+- \`\\D\`, \`\\W\`, \`\\S\` — the negations of the above
+
+## Quantifiers
+
+- \`{3}\` — exactly 3 occurrences
+- \`{2,5}\` — between 2 and 5 occurrences
+- \`{3,}\` — 3 or more occurrences
+- \`*\` — 0 or more (shorthand for \`{0,}\`)
+- \`+\` — 1 or more (shorthand for \`{1,}\`)
+- \`?\` — 0 or 1 (shorthand for \`{0,1}\`)
+
+## Real-World Examples
+
+**Validate an email address (basic):**
+\`^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$\`
+
+**Match a phone number (various formats):**
+\`^\\+?[0-9]{1,3}[\\s.-]?\\(?[0-9]{1,4}\\)?[\\s.-]?[0-9]{3,4}[\\s.-]?[0-9]{3,4}$\`
+
+**Extract URLs from text:**
+\`https?://[^\\\\s<>"{}|\\\\\\\\^\\\\[\\\\]]+\`
+
+**Find duplicate words:**
+\`\\b(\\w+)\\s+\\1\\b\`
+
+## Greedy vs Lazy Matching
+
+By default, quantifiers are greedy — they match as much text as possible. The pattern \`<.*>\` applied to \`<b>hello</b>\` matches the entire string because \`.*\` grabs everything between the first \`<\` and the last \`>\`. Adding \`?\` makes it lazy: \`<.*?>\` matches only \`<b>\`.
+
+## Lookahead and Lookbehind
+
+These are zero-width assertions — they check for a pattern without consuming characters.
+
+- \`(?=...)\` — positive lookahead: matches if followed by the pattern
+- \`(?!...)\` — negative lookahead: matches if NOT followed by the pattern
+- \`(?<=...)\` — positive lookbehind: matches if preceded by the pattern
+- \`(?<!...)\` — negative lookbehind: matches if NOT preceded by the pattern
+
+**Example**: Match numbers followed by "px" but do not include "px" in the match: \`\\d+(?=px)\`
+
+## Common Flags
+
+- \`g\` — global, find all matches
+- \`i\` — case-insensitive matching
+- \`m\` — multiline, \`^\` and \`$\` match line boundaries
+- \`s\` — dotall, \`.\` matches newlines too
+
+## Tips for Writing Better Regex
+
+1. **Start simple** — get a basic pattern working, then refine.
+2. **Test with edge cases** — empty strings, special characters, very long input.
+3. **Use comments** — many regex engines support \`(?#comment)\` or verbose mode.
+4. **Avoid catastrophic backtracking** — nested quantifiers like \`(a+)+\` can cause exponential processing time.
+5. **Use our [Regex Tester](/en/tools/regex-tester)** — it highlights matches in real time and explains the pattern.
+
+## FAQ
+
+**Which programming languages support regex?**
+Virtually all modern languages: JavaScript, Python, Java, C#, PHP, Ruby, Go, Rust, and more. Syntax is mostly the same with minor variations.
+
+**Are regex slow?**
+Simple patterns are extremely fast. Complex patterns with backtracking can be slow. Most real-world regex patterns execute in microseconds.
+
+**When should I NOT use regex?**
+Avoid regex for parsing nested structures like HTML or JSON — use proper parsers instead. Use our [JSON Formatter](/en/tools/json-formatter) for structured data.
+
+**How do I learn regex faster?**
+Practice with real problems. Our [Regex Tester](/en/tools/regex-tester) provides instant visual feedback that accelerates learning dramatically.`
+      },
+      it: {
+        title: 'Come Usare le Espressioni Regolari: Guida Pratica',
+        excerpt: 'Impara le regex da zero con esempi reali. Padroneggia il pattern matching per validazione email, estrazione dati, cerca-e-sostituisci e altro.',
+        content: `Le espressioni regolari — regex — sono uno degli strumenti più potenti e sottoutilizzati nel toolkit di uno sviluppatore. Ti permettono di descrivere pattern nel testo e poi cercare, abbinare, estrarre o sostituire in base a quei pattern.
+
+## Cos'è un'Espressione Regolare?
+
+Una regex è una sequenza di caratteri che definisce un pattern di ricerca. Il pattern \`/hello/\` corrisponde al testo letterale "hello". Ma il vero potere arriva dai metacaratteri che descrivono classi di testo.
+
+Testa i tuoi pattern in tempo reale con il nostro [Tester Regex](/it/tools/regex-tester).
+
+## Metacaratteri Essenziali
+
+- \`.\` — qualsiasi singolo carattere tranne newline
+- \`*\` — zero o più occorrenze dell'elemento precedente
+- \`+\` — una o più occorrenze
+- \`?\` — zero o una occorrenza
+- \`^\` — inizio stringa, \`$\` — fine stringa
+- \`[]\` — classe di caratteri
+- \`()\` — raggruppamento e cattura
+- \`|\` — alternativa
+
+## Classi di Caratteri
+
+\`[a-z]\` corrisponde a qualsiasi lettera minuscola. \`\\d\` qualsiasi cifra. \`\\w\` qualsiasi carattere alfanumerico. \`\\s\` qualsiasi spazio bianco.
+
+## Esempi Reali
+
+**Validare un'email:** \`^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$\`
+**Trovare parole duplicate:** \`\\b(\\w+)\\s+\\1\\b\`
+
+## Greedy vs Lazy
+
+I quantificatori sono greedy di default. \`<.*>\` su \`<b>hello</b>\` cattura tutto. Aggiungi \`?\` per renderlo lazy: \`<.*?>\` cattura solo \`<b>\`.
+
+## Consigli
+
+1. Parti semplice, poi raffina.
+2. Testa con casi limite.
+3. Evita il backtracking catastrofico.
+4. Usa il nostro [Tester Regex](/it/tools/regex-tester) per feedback visivo istantaneo.
+
+## FAQ
+
+**Quali linguaggi supportano le regex?**
+Praticamente tutti: JavaScript, Python, Java, PHP, Ruby, Go, Rust e altri.
+
+**Quando NON usare le regex?**
+Per parsing di strutture annidate come HTML o JSON. Usa il nostro [Formattatore JSON](/it/tools/json-formatter).
+
+**Come imparo più velocemente?**
+Pratica con problemi reali usando il nostro [Tester Regex](/it/tools/regex-tester).`
+      },
+      es: {
+        title: 'Cómo Usar Expresiones Regulares: Guía Práctica',
+        excerpt: 'Aprende regex desde cero con ejemplos reales. Domina el pattern matching para validación de emails, extracción de datos y más.',
+        content: `Las expresiones regulares — regex — son una de las herramientas más poderosas en el kit de un desarrollador. Te permiten describir patrones en texto y luego buscar, emparejar, extraer o reemplazar basándose en esos patrones.
+
+## ¿Qué Es una Expresión Regular?
+
+Una regex es una secuencia de caracteres que define un patrón de búsqueda. El poder real viene de los metacaracteres que describen clases de texto.
+
+Prueba tus patrones en tiempo real con nuestro [Probador de Regex](/es/tools/regex-tester).
+
+## Metacaracteres Esenciales
+
+- \`.\` — cualquier carácter excepto nueva línea
+- \`*\` — cero o más, \`+\` — uno o más, \`?\` — cero o uno
+- \`^\` — inicio de cadena, \`$\` — fin de cadena
+- \`[]\` — clase de caracteres, \`()\` — agrupación
+
+## Ejemplos Reales
+
+**Validar email:** \`^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$\`
+**Encontrar palabras duplicadas:** \`\\b(\\w+)\\s+\\1\\b\`
+
+## Greedy vs Lazy
+
+Los cuantificadores son greedy por defecto. Agrega \`?\` para hacerlos lazy.
+
+## Consejos
+
+1. Empieza simple, luego refina.
+2. Prueba con casos límite.
+3. Usa nuestro [Probador de Regex](/es/tools/regex-tester) para feedback visual.
+
+## FAQ
+
+**¿Cuándo NO usar regex?**
+Para parsear estructuras anidadas como HTML o JSON. Usa nuestro [Formateador JSON](/es/tools/json-formatter).
+
+**¿Cómo aprendo más rápido?**
+Practica con problemas reales en nuestro [Probador de Regex](/es/tools/regex-tester).`
+      },
+      fr: {
+        title: 'Comment Utiliser les Expressions Régulières : Guide Pratique',
+        excerpt: 'Apprenez les regex depuis zéro avec des exemples concrets. Maîtrisez le pattern matching pour la validation d\'emails, l\'extraction de données et plus.',
+        content: `Les expressions régulières — regex — sont l'un des outils les plus puissants dans la boîte à outils d'un développeur. Elles permettent de décrire des motifs dans du texte pour chercher, extraire ou remplacer.
+
+## Qu'est-ce qu'une Expression Régulière ?
+
+Une regex est une séquence de caractères définissant un motif de recherche. La puissance vient des métacaractères qui décrivent des classes de texte.
+
+Testez vos motifs en temps réel avec notre [Testeur de Regex](/fr/tools/regex-tester).
+
+## Métacaractères Essentiels
+
+- \`.\` — tout caractère sauf nouvelle ligne
+- \`*\` — zéro ou plus, \`+\` — un ou plus, \`?\` — zéro ou un
+- \`^\` — début de chaîne, \`$\` — fin de chaîne
+- \`[]\` — classe de caractères, \`()\` — groupement
+
+## Exemples Concrets
+
+**Valider un email :** \`^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$\`
+**Trouver des mots en double :** \`\\b(\\w+)\\s+\\1\\b\`
+
+## Greedy vs Lazy
+
+Les quantificateurs sont greedy par défaut. Ajoutez \`?\` pour les rendre lazy.
+
+## Conseils
+
+1. Commencez simple, puis affinez.
+2. Testez avec des cas limites.
+3. Utilisez notre [Testeur de Regex](/fr/tools/regex-tester) pour un retour visuel instantané.
+
+## FAQ
+
+**Quand NE PAS utiliser les regex ?**
+Pour parser des structures imbriquées comme HTML ou JSON. Utilisez notre [Formateur JSON](/fr/tools/json-formatter).
+
+**Comment apprendre plus vite ?**
+Pratiquez avec des problèmes réels sur notre [Testeur de Regex](/fr/tools/regex-tester).`
+      },
+      de: {
+        title: 'Reguläre Ausdrücke Verwenden: Ein Praktischer Leitfaden',
+        excerpt: 'Lernen Sie Regex von Grund auf mit praxisnahen Beispielen. Meistern Sie Pattern Matching für E-Mail-Validierung, Datenextraktion und mehr.',
+        content: `Reguläre Ausdrücke — Regex — gehören zu den mächtigsten Werkzeugen im Entwickler-Toolkit. Sie ermöglichen es, Muster in Text zu beschreiben und dann basierend auf diesen Mustern zu suchen, abzugleichen, zu extrahieren oder zu ersetzen.
+
+## Was Ist ein Regulärer Ausdruck?
+
+Eine Regex ist eine Zeichenfolge, die ein Suchmuster definiert. Die wahre Stärke kommt von Metazeichen, die Textklassen beschreiben.
+
+Testen Sie Ihre Muster in Echtzeit mit unserem [Regex-Tester](/de/tools/regex-tester).
+
+## Wesentliche Metazeichen
+
+- \`.\` — beliebiges Zeichen außer Zeilenumbruch
+- \`*\` — null oder mehr, \`+\` — eins oder mehr, \`?\` — null oder eins
+- \`^\` — Anfang der Zeichenkette, \`$\` — Ende
+- \`[]\` — Zeichenklasse, \`()\` — Gruppierung
+
+## Praxisbeispiele
+
+**E-Mail validieren:** \`^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$\`
+**Doppelte Wörter finden:** \`\\b(\\w+)\\s+\\1\\b\`
+
+## Greedy vs Lazy
+
+Quantifizierer sind standardmäßig greedy. Fügen Sie \`?\` hinzu, um sie lazy zu machen.
+
+## Tipps
+
+1. Beginnen Sie einfach, dann verfeinern.
+2. Testen Sie mit Grenzfällen.
+3. Nutzen Sie unseren [Regex-Tester](/de/tools/regex-tester) für sofortiges visuelles Feedback.
+
+## FAQ
+
+**Wann KEINE Regex verwenden?**
+Für das Parsen verschachtelter Strukturen wie HTML oder JSON. Nutzen Sie unseren [JSON-Formatierer](/de/tools/json-formatter).
+
+**Wie lerne ich schneller?**
+Üben Sie mit realen Problemen in unserem [Regex-Tester](/de/tools/regex-tester).`
+      },
+      pt: {
+        title: 'Como Usar Expressões Regulares: Guia Prático',
+        excerpt: 'Aprenda regex do zero com exemplos reais. Domine pattern matching para validação de email, extração de dados e mais.',
+        content: `Expressões regulares — regex — são uma das ferramentas mais poderosas no kit de um desenvolvedor. Permitem descrever padrões em texto para buscar, combinar, extrair ou substituir.
+
+## O Que É uma Expressão Regular?
+
+Uma regex é uma sequência de caracteres que define um padrão de busca. O poder real vem dos metacaracteres que descrevem classes de texto.
+
+Teste seus padrões em tempo real com nosso [Testador de Regex](/pt/tools/regex-tester).
+
+## Metacaracteres Essenciais
+
+- \`.\` — qualquer caractere exceto nova linha
+- \`*\` — zero ou mais, \`+\` — um ou mais, \`?\` — zero ou um
+- \`^\` — início da string, \`$\` — fim da string
+- \`[]\` — classe de caracteres, \`()\` — agrupamento
+
+## Exemplos Reais
+
+**Validar email:** \`^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$\`
+**Encontrar palavras duplicadas:** \`\\b(\\w+)\\s+\\1\\b\`
+
+## Greedy vs Lazy
+
+Quantificadores são greedy por padrão. Adicione \`?\` para torná-los lazy.
+
+## Dicas
+
+1. Comece simples, depois refine.
+2. Teste com casos limite.
+3. Use nosso [Testador de Regex](/pt/tools/regex-tester) para feedback visual instantâneo.
+
+## FAQ
+
+**Quando NÃO usar regex?**
+Para parsear estruturas aninhadas como HTML ou JSON. Use nosso [Formatador JSON](/pt/tools/json-formatter).
+
+**Como aprender mais rápido?**
+Pratique com problemas reais no nosso [Testador de Regex](/pt/tools/regex-tester).`
+      }
+    }
+  },
+  {
+    slug: 'password-security-create-unbreakable-passwords',
+    date: '2026-03-20',
+    category: 'developer',
+    translations: {
+      en: {
+        title: 'Password Security: How to Create Unbreakable Passwords',
+        excerpt: 'Learn why most passwords are dangerously weak, how attackers crack them, and the proven strategies for creating and managing truly secure passwords.',
+        content: `In 2025, the most commonly used password was still "123456." Despite years of warnings, data breaches, and high-profile hacks, millions of people continue to protect their most sensitive accounts with passwords that a modern computer can crack in under a second. This guide explains how password cracking works and how to defend against it.
+
+## How Attackers Crack Passwords
+
+**Brute force** tries every possible combination. A 6-character lowercase password has 308 million combinations — a modern GPU cracks it in seconds. An 8-character mixed-case password with numbers has 218 trillion combinations but still falls in hours.
+
+**Dictionary attacks** try common words and phrases. "sunshine," "football," and "iloveyou" are all in the top 50 most common passwords. Attackers also use leaked password databases — if your password appeared in any previous breach, it is in their dictionary.
+
+**Credential stuffing** reuses credentials from one breach on other sites. If you use the same password for your email and your bank, compromising one compromises both.
+
+Generate a strong random password instantly with our [Password Generator](/en/tools/password-generator).
+
+## What Makes a Password Strong?
+
+Password strength comes from two factors: **length** and **character diversity**. A 12-character password using lowercase, uppercase, numbers, and symbols has roughly 475 sextillion possible combinations. At one trillion guesses per second, that takes over 15,000 years to crack.
+
+The math is clear: **length matters more than complexity.** A 20-character password of only lowercase letters (26^20 = 19 septillion combinations) is stronger than an 8-character password with all character types (95^8 = 6.6 quadrillion combinations).
+
+## The Passphrase Strategy
+
+Instead of trying to remember "kX9#mP2$", use a passphrase: four or more random words strung together, like "correct-horse-battery-staple" (a famous example from XKCD). A four-word passphrase from a 7,776-word dictionary has 7,776^4 = 3.6 trillion combinations — and it is far easier to remember.
+
+Make passphrases even stronger by:
+- Adding a number or symbol between words
+- Capitalizing a random letter in each word
+- Including a word from a different language
+
+## Password Manager: The Essential Tool
+
+The only way to use a unique, strong password for every account is with a password manager. It generates, stores, and auto-fills passwords so you only need to remember one master password.
+
+Popular password managers encrypt your vault with AES-256 — the same encryption governments use for classified data. Even if the password manager's servers are breached, your encrypted vault is useless without your master password.
+
+## Two-Factor Authentication (2FA)
+
+Even the strongest password can be phished or leaked. Two-factor authentication adds a second layer: something you have (a phone, a hardware key) or something you are (fingerprint, face). Enable 2FA on every account that supports it — especially email, banking, and social media.
+
+## Common Password Mistakes
+
+1. **Reusing passwords** across multiple sites
+2. **Using personal information** (birthdays, pet names, addresses)
+3. **Simple substitutions** ("p@ssw0rd" is in every cracking dictionary)
+4. **Writing passwords on sticky notes** visible at your desk
+5. **Sharing passwords** via unencrypted email or chat
+6. **Never changing passwords** after a known breach
+
+## How to Check If You Have Been Breached
+
+Visit haveibeenpwned.com and enter your email address. It checks against billions of breached accounts. If your email appears, change the password for every affected service immediately.
+
+Use our [Password Generator](/en/tools/password-generator) to create strong replacements, and protect your accounts with our [Hash Generator](/en/tools/hash-generator) to verify file integrity.
+
+## FAQ
+
+**How long should my password be?**
+At least 12 characters, ideally 16 or more. Every additional character multiplies the cracking time exponentially.
+
+**Are password managers safe?**
+Yes. The risk of a password manager breach is far lower than the risk of reusing weak passwords. Choose a reputable manager with zero-knowledge encryption.
+
+**Should I change my passwords regularly?**
+Only if you suspect a breach. Frequent forced changes lead to weaker passwords as users adopt predictable patterns. Use strong, unique passwords and change them when needed.
+
+**Is biometric authentication more secure than passwords?**
+Biometrics are convenient but not a replacement. They cannot be changed if compromised (you cannot get new fingerprints). Best practice is biometrics plus a strong password or PIN.`
+      },
+      it: {
+        title: 'Sicurezza delle Password: Come Creare Password Inviolabili',
+        excerpt: 'Scopri perché la maggior parte delle password è pericolosamente debole, come gli attaccanti le violano, e le strategie comprovate per creare e gestire password veramente sicure.',
+        content: `Nel 2025, la password più usata era ancora "123456." Nonostante anni di avvertimenti, milioni di persone continuano a proteggere i loro account con password che un computer moderno può violare in meno di un secondo.
+
+## Come gli Attaccanti Violano le Password
+
+**Forza bruta** prova ogni combinazione possibile. Una password di 6 caratteri minuscoli ha 308 milioni di combinazioni — una GPU moderna la viola in secondi.
+
+**Attacchi dizionario** provano parole comuni e frasi. "sunshine," "football" e "iloveyou" sono tra le 50 password più comuni.
+
+**Credential stuffing** riutilizza credenziali da una violazione su altri siti. Se usi la stessa password per email e banca, comprometterne una compromette entrambe.
+
+Genera una password forte con il nostro [Generatore di Password](/it/tools/password-generator).
+
+## Cosa Rende una Password Forte?
+
+La forza viene da due fattori: **lunghezza** e **diversità dei caratteri**. La matematica è chiara: la lunghezza conta più della complessità. Una password di 20 caratteri minuscoli è più forte di una di 8 caratteri con tutti i tipi.
+
+## La Strategia delle Passphrase
+
+Invece di ricordare "kX9#mP2$", usa una passphrase: quattro o più parole casuali come "cavallo-corretto-batteria-punto". È più facile da ricordare e più sicura.
+
+## Password Manager
+
+L'unico modo per usare una password unica e forte per ogni account è con un password manager. Genera, salva e inserisce automaticamente le password.
+
+## Autenticazione a Due Fattori (2FA)
+
+Anche la password più forte può essere rubata tramite phishing. Il 2FA aggiunge un secondo livello di sicurezza. Attivalo su ogni account che lo supporta.
+
+## Errori Comuni
+
+1. Riutilizzare password su più siti
+2. Usare informazioni personali
+3. Sostituzioni semplici ("p@ssw0rd")
+4. Non cambiare mai le password dopo una violazione nota
+
+Usa il nostro [Generatore di Password](/it/tools/password-generator) per creare sostituti forti.
+
+## FAQ
+
+**Quanto dovrebbe essere lunga la mia password?**
+Almeno 12 caratteri, idealmente 16 o più.
+
+**I password manager sono sicuri?**
+Sì. Il rischio è molto inferiore rispetto al riutilizzo di password deboli.
+
+**Dovrei cambiare le password regolarmente?**
+Solo se sospetti una violazione. I cambi forzati frequenti portano a password più deboli.`
+      },
+      es: {
+        title: 'Seguridad de Contraseñas: Cómo Crear Contraseñas Inquebrantables',
+        excerpt: 'Aprende por qué la mayoría de las contraseñas son peligrosamente débiles, cómo los atacantes las descifran, y las estrategias probadas para crear contraseñas verdaderamente seguras.',
+        content: `En 2025, la contraseña más utilizada seguía siendo "123456." A pesar de años de advertencias, millones de personas continúan protegiendo sus cuentas con contraseñas que una computadora moderna puede descifrar en menos de un segundo.
+
+## Cómo los Atacantes Descifran Contraseñas
+
+**Fuerza bruta** prueba cada combinación posible. Una contraseña de 6 caracteres minúsculos tiene 308 millones de combinaciones — una GPU moderna la descifra en segundos.
+**Ataques de diccionario** prueban palabras y frases comunes.
+**Credential stuffing** reutiliza credenciales de una filtración en otros sitios.
+
+Genera una contraseña fuerte con nuestro [Generador de Contraseñas](/es/tools/password-generator).
+
+## ¿Qué Hace Fuerte una Contraseña?
+
+La fuerza viene de la **longitud** y la **diversidad de caracteres**. La longitud importa más que la complejidad.
+
+## La Estrategia de Frases Clave
+
+En lugar de "kX9#mP2$", usa una frase: cuatro o más palabras aleatorias. Es más fácil de recordar y más segura.
+
+## Gestor de Contraseñas
+
+El único modo de usar una contraseña única para cada cuenta es con un gestor de contraseñas.
+
+## Autenticación de Dos Factores (2FA)
+
+Actívalo en todas las cuentas que lo soporten.
+
+## FAQ
+
+**¿Cuánto debe medir mi contraseña?**
+Al menos 12 caracteres, idealmente 16 o más.
+
+**¿Son seguros los gestores de contraseñas?**
+Sí. El riesgo es muy inferior al de reutilizar contraseñas débiles.`
+      },
+      fr: {
+        title: 'Sécurité des Mots de Passe : Comment Créer des Mots de Passe Inviolables',
+        excerpt: 'Découvrez pourquoi la plupart des mots de passe sont dangereusement faibles, comment les attaquants les cassent, et les stratégies éprouvées pour créer des mots de passe vraiment sécurisés.',
+        content: `En 2025, le mot de passe le plus utilisé était encore "123456." Malgré des années d'avertissements, des millions de personnes continuent de protéger leurs comptes avec des mots de passe qu'un ordinateur moderne peut casser en moins d'une seconde.
+
+## Comment les Attaquants Cassent les Mots de Passe
+
+**Force brute** essaie chaque combinaison. Un mot de passe de 6 caractères minuscules a 308 millions de combinaisons — un GPU moderne le casse en secondes.
+**Attaques par dictionnaire** essaient des mots et phrases communs.
+**Bourrage d'identifiants** réutilise des identifiants d'une fuite sur d'autres sites.
+
+Générez un mot de passe fort avec notre [Générateur de Mots de Passe](/fr/tools/password-generator).
+
+## Qu'est-ce Qui Rend un Mot de Passe Fort ?
+
+La force vient de la **longueur** et de la **diversité des caractères**. La longueur compte plus que la complexité.
+
+## La Stratégie des Phrases de Passe
+
+Au lieu de "kX9#mP2$", utilisez une phrase : quatre mots aléatoires ou plus. Plus facile à retenir et plus sûre.
+
+## Gestionnaire de Mots de Passe
+
+Le seul moyen d'utiliser un mot de passe unique pour chaque compte est un gestionnaire de mots de passe.
+
+## FAQ
+
+**Quelle longueur pour mon mot de passe ?**
+Au moins 12 caractères, idéalement 16 ou plus.
+
+**Les gestionnaires sont-ils sûrs ?**
+Oui. Le risque est bien inférieur à celui de réutiliser des mots de passe faibles.`
+      },
+      de: {
+        title: 'Passwortsicherheit: Wie Sie Unknackbare Passwörter Erstellen',
+        excerpt: 'Erfahren Sie, warum die meisten Passwörter gefährlich schwach sind, wie Angreifer sie knacken, und die bewährten Strategien für wirklich sichere Passwörter.',
+        content: `2025 war das meistgenutzte Passwort immer noch "123456." Trotz jahrelanger Warnungen schützen Millionen Menschen ihre Konten mit Passwörtern, die ein moderner Computer in unter einer Sekunde knacken kann.
+
+## Wie Angreifer Passwörter Knacken
+
+**Brute Force** probiert jede mögliche Kombination. Ein 6-Zeichen-Passwort in Kleinbuchstaben hat 308 Millionen Kombinationen — eine moderne GPU knackt es in Sekunden.
+**Wörterbuchangriffe** probieren gängige Wörter und Phrasen.
+**Credential Stuffing** verwendet Zugangsdaten aus einem Leak auf anderen Seiten.
+
+Generieren Sie ein starkes Passwort mit unserem [Passwort-Generator](/de/tools/password-generator).
+
+## Was Macht ein Passwort Stark?
+
+Die Stärke kommt von **Länge** und **Zeichenvielfalt**. Länge zählt mehr als Komplexität.
+
+## Die Passphrasen-Strategie
+
+Statt "kX9#mP2$" verwenden Sie eine Passphrase: vier oder mehr zufällige Wörter. Leichter zu merken und sicherer.
+
+## Passwort-Manager
+
+Der einzige Weg, ein einzigartiges starkes Passwort für jedes Konto zu verwenden, ist ein Passwort-Manager.
+
+## FAQ
+
+**Wie lang sollte mein Passwort sein?**
+Mindestens 12 Zeichen, idealerweise 16 oder mehr.
+
+**Sind Passwort-Manager sicher?**
+Ja. Das Risiko ist weit geringer als die Wiederverwendung schwacher Passwörter.`
+      },
+      pt: {
+        title: 'Segurança de Senhas: Como Criar Senhas Inquebráveis',
+        excerpt: 'Aprenda por que a maioria das senhas é perigosamente fraca, como atacantes as quebram, e as estratégias comprovadas para criar senhas realmente seguras.',
+        content: `Em 2025, a senha mais utilizada ainda era "123456." Apesar de anos de avisos, milhões de pessoas continuam protegendo suas contas com senhas que um computador moderno pode quebrar em menos de um segundo.
+
+## Como Atacantes Quebram Senhas
+
+**Força bruta** tenta cada combinação possível. Uma senha de 6 caracteres minúsculos tem 308 milhões de combinações — uma GPU moderna a quebra em segundos.
+**Ataques de dicionário** tentam palavras e frases comuns.
+**Credential stuffing** reutiliza credenciais de um vazamento em outros sites.
+
+Gere uma senha forte com nosso [Gerador de Senhas](/pt/tools/password-generator).
+
+## O Que Torna uma Senha Forte?
+
+A força vem do **comprimento** e da **diversidade de caracteres**. O comprimento importa mais que a complexidade.
+
+## A Estratégia de Frases-Senha
+
+Em vez de "kX9#mP2$", use uma frase: quatro ou mais palavras aleatórias. Mais fácil de lembrar e mais segura.
+
+## Gerenciador de Senhas
+
+O único modo de usar uma senha única para cada conta é com um gerenciador de senhas.
+
+## FAQ
+
+**Qual deve ser o comprimento da minha senha?**
+Pelo menos 12 caracteres, idealmente 16 ou mais.
+
+**Os gerenciadores de senhas são seguros?**
+Sim. O risco é muito menor que reutilizar senhas fracas.`
+      }
+    }
+  },
+  {
+    slug: 'understanding-body-fat-percentage-how-to-measure',
+    date: '2026-03-20',
+    category: 'health',
+    translations: {
+      en: {
+        title: 'Understanding Body Fat Percentage and How to Measure It',
+        excerpt: 'Body fat percentage is a more meaningful health metric than weight alone. Learn what the ranges mean, the most common measurement methods, and how to track your progress effectively.',
+        content: `Your weight on a scale tells you almost nothing about your health. Two people who weigh the same can have radically different body compositions — one may be lean and muscular, the other carrying excess fat around vital organs. Body fat percentage cuts through the noise and gives you a number that actually matters.
+
+## What Is Body Fat Percentage?
+
+Body fat percentage is the proportion of your total body weight that is fat tissue. If you weigh 80 kg and have 16 kg of fat, your body fat percentage is 20%. The rest — muscle, bone, water, organs — is your lean mass.
+
+Use our [Body Fat Calculator](/en/tools/body-fat-calculator) for an estimate using the U.S. Navy circumference method.
+
+## Healthy Ranges
+
+Body fat ranges differ by sex because women naturally carry more essential fat for reproductive and hormonal functions.
+
+**Men:**
+- Essential fat: 2-5%
+- Athletes: 6-13%
+- Fitness: 14-17%
+- Average: 18-24%
+- Obese: 25%+
+
+**Women:**
+- Essential fat: 10-13%
+- Athletes: 14-20%
+- Fitness: 21-24%
+- Average: 25-31%
+- Obese: 32%+
+
+## Why Body Fat Matters More Than BMI
+
+BMI divides weight by height squared, treating all weight equally. It cannot tell a 90 kg bodybuilder from a 90 kg sedentary person. Body fat percentage directly measures what matters for metabolic health — the amount of adipose tissue, especially visceral fat surrounding internal organs.
+
+Check your BMI with our [BMI Calculator](/en/tools/bmi-calculator) and compare it with your body fat percentage for a complete picture.
+
+## Measurement Methods
+
+**Circumference method (Navy method):** Measures neck, waist, and hip circumferences. Accuracy: within 3-4%. This is what our [Body Fat Calculator](/en/tools/body-fat-calculator) uses — it is free, requires only a tape measure, and gives reliable estimates.
+
+**Skinfold calipers:** Pinch skin at specific body sites and measure the fold thickness. Accuracy: within 3-5% when performed by an experienced tester. Affordable and widely available.
+
+**Bioelectrical impedance analysis (BIA):** Sends a small electrical current through the body. Fat conducts electricity poorly, so higher resistance suggests higher fat. Accuracy varies widely with hydration, meal timing, and device quality.
+
+**DEXA scan:** Dual-energy X-ray absorptiometry. Considered the gold standard. Measures fat, muscle, and bone density with high precision. Cost: typically 50-150 euros per scan.
+
+**Hydrostatic weighing:** Underwater weighing based on the principle that fat is less dense than lean tissue. Very accurate but requires specialized equipment.
+
+## How to Track Progress
+
+1. **Measure consistently** — same time of day, same conditions (morning, fasted, before exercise).
+2. **Track trends, not single measurements** — daily fluctuations are normal due to water retention, food intake, and hormonal cycles.
+3. **Take measurements weekly or biweekly** — changes in body composition happen slowly.
+4. **Combine methods** — use circumference measurements plus progress photos plus how your clothes fit.
+
+Our [Ideal Weight Calculator](/en/tools/ideal-weight-calculator) can give you a target based on height and frame size, while the [Calorie Calculator](/en/tools/calorie-calculator) helps you plan nutrition for body composition goals.
+
+## The Role of Visceral Fat
+
+Not all body fat is equal. Subcutaneous fat (under the skin) is relatively harmless. Visceral fat (around organs in the abdomen) is strongly linked to type 2 diabetes, heart disease, and metabolic syndrome. Waist circumference above 102 cm in men or 88 cm in women indicates elevated visceral fat, regardless of total body fat percentage.
+
+## FAQ
+
+**Can I have too little body fat?**
+Yes. Dropping below essential fat levels (2-5% for men, 10-13% for women) impairs hormone production, immune function, and organ protection. This is seen in extreme dieting and some competitive athletes.
+
+**How fast can I safely reduce body fat?**
+A sustainable rate is 0.5-1% body fat per month, which corresponds to roughly 0.5-1 kg of fat loss per week. Faster loss risks muscle loss and metabolic adaptation.
+
+**Does muscle weigh more than fat?**
+A kilogram is a kilogram. But muscle is denser — it takes up about 18% less space than the same weight of fat. This is why body composition changes can be invisible on the scale.
+
+**What is the best exercise for reducing body fat?**
+A combination of resistance training (to preserve muscle) and moderate cardio (to increase calorie burn). Diet controls the deficit; exercise determines what you lose — fat rather than muscle.`
+      },
+      it: {
+        title: 'Capire la Percentuale di Grasso Corporeo e Come Misurarla',
+        excerpt: 'La percentuale di grasso corporeo è una metrica sanitaria più significativa del solo peso. Scopri cosa significano i range, i metodi di misurazione e come monitorare i progressi.',
+        content: `Il tuo peso sulla bilancia non dice quasi nulla sulla tua salute. Due persone che pesano uguale possono avere composizioni corporee radicalmente diverse. La percentuale di grasso corporeo taglia il rumore e ti dà un numero che conta davvero.
+
+## Cos'è la Percentuale di Grasso Corporeo?
+
+È la proporzione del tuo peso totale che è tessuto adiposo. Se pesi 80 kg e hai 16 kg di grasso, la tua percentuale è 20%.
+
+Usa il nostro [Calcolatore Grasso Corporeo](/it/tools/body-fat-calculator) per una stima con il metodo della Marina USA.
+
+## Range Salutari
+
+**Uomini:** Atleti 6-13%, Fitness 14-17%, Media 18-24%, Obeso 25%+
+**Donne:** Atlete 14-20%, Fitness 21-24%, Media 25-31%, Obesa 32%+
+
+## Perché Conta Più del BMI
+
+Il BMI tratta tutto il peso allo stesso modo. Non distingue un bodybuilder da una persona sedentaria. La percentuale di grasso misura direttamente ciò che conta per la salute metabolica.
+
+Controlla il tuo BMI con il [Calcolatore BMI](/it/tools/bmi-calculator) e confrontalo con il grasso corporeo.
+
+## Metodi di Misurazione
+
+**Metodo delle circonferenze (Navy):** Misura collo, vita e fianchi. Accuratezza: 3-4%. È quello che usa il nostro [Calcolatore](/it/tools/body-fat-calculator).
+**Plicometria:** Misura le pliche cutanee. Accuratezza: 3-5%.
+**Impedenziometria (BIA):** Corrente elettrica attraverso il corpo. Varia con l'idratazione.
+**DEXA scan:** Gold standard. Misura grasso, muscolo e densità ossea.
+
+## Come Monitorare i Progressi
+
+1. Misura alle stesse condizioni — mattina, a digiuno.
+2. Segui le tendenze, non le singole misurazioni.
+3. Misura settimanalmente o ogni due settimane.
+4. Combina metodi — circonferenze + foto + vestibilità abiti.
+
+Il [Calcolatore Calorie](/it/tools/calorie-calculator) aiuta a pianificare la nutrizione per obiettivi di composizione corporea.
+
+## FAQ
+
+**Si può avere troppo poco grasso?**
+Sì. Scendere sotto i livelli essenziali compromette la produzione ormonale e la funzione immunitaria.
+
+**Quanto velocemente posso ridurre il grasso?**
+Un tasso sostenibile è 0,5-1% al mese, circa 0,5-1 kg di grasso perso a settimana.
+
+**Il muscolo pesa più del grasso?**
+Il muscolo è più denso — occupa circa il 18% di spazio in meno rispetto allo stesso peso di grasso.`
+      },
+      es: {
+        title: 'Entendiendo el Porcentaje de Grasa Corporal y Cómo Medirlo',
+        excerpt: 'El porcentaje de grasa corporal es una métrica de salud más significativa que el peso solo. Aprende qué significan los rangos y los métodos de medición más comunes.',
+        content: `Tu peso en la báscula no dice casi nada sobre tu salud. Dos personas que pesan igual pueden tener composiciones corporales radicalmente diferentes. El porcentaje de grasa corporal te da un número que realmente importa.
+
+## ¿Qué Es el Porcentaje de Grasa Corporal?
+
+Es la proporción de tu peso total que es tejido graso. Si pesas 80 kg y tienes 16 kg de grasa, tu porcentaje es 20%.
+
+Usa nuestro [Calculador de Grasa Corporal](/es/tools/body-fat-calculator).
+
+## Rangos Saludables
+
+**Hombres:** Atletas 6-13%, Fitness 14-17%, Promedio 18-24%, Obeso 25%+
+**Mujeres:** Atletas 14-20%, Fitness 21-24%, Promedio 25-31%, Obesa 32%+
+
+## Por Qué Importa Más que el IMC
+
+El IMC trata todo el peso igual. El porcentaje de grasa mide directamente lo que importa para la salud metabólica.
+
+Verifica tu IMC con el [Calculador de IMC](/es/tools/bmi-calculator).
+
+## Métodos de Medición
+
+**Método de circunferencias (Navy):** Mide cuello, cintura y caderas. Es lo que usa nuestro [Calculador](/es/tools/body-fat-calculator).
+**Plicometría:** Mide pliegues cutáneos.
+**Impedancia bioeléctrica (BIA):** Corriente eléctrica a través del cuerpo.
+**DEXA scan:** Estándar de oro.
+
+## FAQ
+
+**¿Se puede tener muy poca grasa?**
+Sí. Caer debajo de los niveles esenciales compromete la función hormonal e inmunológica.
+
+**¿Cuán rápido puedo reducir la grasa?**
+Un ritmo sostenible es 0,5-1% mensual.
+
+**¿El músculo pesa más que la grasa?**
+El músculo es más denso — ocupa un 18% menos de espacio que el mismo peso de grasa.`
+      },
+      fr: {
+        title: 'Comprendre le Pourcentage de Graisse Corporelle et Comment le Mesurer',
+        excerpt: 'Le pourcentage de graisse corporelle est une métrique de santé plus significative que le poids seul. Découvrez ce que signifient les plages et les méthodes de mesure.',
+        content: `Votre poids sur la balance ne dit presque rien sur votre santé. Deux personnes du même poids peuvent avoir des compositions corporelles radicalement différentes. Le pourcentage de graisse corporelle vous donne un nombre qui compte vraiment.
+
+## Qu'est-ce que le Pourcentage de Graisse ?
+
+C'est la proportion de votre poids total qui est du tissu adipeux. Si vous pesez 80 kg avec 16 kg de graisse, votre pourcentage est 20%.
+
+Utilisez notre [Calculateur de Graisse Corporelle](/fr/tools/body-fat-calculator).
+
+## Plages Saines
+
+**Hommes :** Athlètes 6-13%, Fitness 14-17%, Moyenne 18-24%, Obèse 25%+
+**Femmes :** Athlètes 14-20%, Fitness 21-24%, Moyenne 25-31%, Obèse 32%+
+
+## Pourquoi C'est Plus Important que l'IMC
+
+L'IMC traite tout le poids de la même façon. Le pourcentage de graisse mesure directement ce qui compte pour la santé métabolique.
+
+Vérifiez votre IMC avec le [Calculateur d'IMC](/fr/tools/bmi-calculator).
+
+## Méthodes de Mesure
+
+**Méthode des circonférences (Navy) :** Mesure cou, taille et hanches. C'est ce qu'utilise notre [Calculateur](/fr/tools/body-fat-calculator).
+**Plis cutanés :** Mesure l'épaisseur des plis.
+**Impédancemétrie (BIA) :** Courant électrique à travers le corps.
+**DEXA scan :** Gold standard.
+
+## FAQ
+
+**Peut-on avoir trop peu de graisse ?**
+Oui. Descendre en dessous des niveaux essentiels compromet les fonctions hormonales et immunitaires.
+
+**À quel rythme puis-je réduire la graisse ?**
+Un rythme durable est 0,5-1% par mois.`
+      },
+      de: {
+        title: 'Körperfettanteil Verstehen und Richtig Messen',
+        excerpt: 'Der Körperfettanteil ist eine aussagekräftigere Gesundheitsmetrik als das Gewicht allein. Erfahren Sie, was die Bereiche bedeuten und welche Messmethoden es gibt.',
+        content: `Ihr Gewicht auf der Waage sagt fast nichts über Ihre Gesundheit aus. Zwei Personen mit gleichem Gewicht können radikal unterschiedliche Körperzusammensetzungen haben. Der Körperfettanteil gibt Ihnen eine Zahl, die wirklich zählt.
+
+## Was Ist der Körperfettanteil?
+
+Er ist der Anteil Ihres Gesamtgewichts, der Fettgewebe ist. Bei 80 kg mit 16 kg Fett beträgt Ihr Anteil 20%.
+
+Nutzen Sie unseren [Körperfett-Rechner](/de/tools/body-fat-calculator).
+
+## Gesunde Bereiche
+
+**Männer:** Athleten 6-13%, Fitness 14-17%, Durchschnitt 18-24%, Adipös 25%+
+**Frauen:** Athletinnen 14-20%, Fitness 21-24%, Durchschnitt 25-31%, Adipös 32%+
+
+## Warum Er Mehr Zählt als der BMI
+
+Der BMI behandelt alles Gewicht gleich. Der Körperfettanteil misst direkt, was für die metabolische Gesundheit zählt.
+
+Prüfen Sie Ihren BMI mit dem [BMI-Rechner](/de/tools/bmi-calculator).
+
+## Messmethoden
+
+**Umfangsmethode (Navy):** Misst Hals, Taille und Hüfte. Das nutzt unser [Rechner](/de/tools/body-fat-calculator).
+**Hautfaltendicke:** Misst Faltendicke an bestimmten Stellen.
+**Bioelektrische Impedanzanalyse (BIA):** Elektrischer Strom durch den Körper.
+**DEXA-Scan:** Goldstandard.
+
+## FAQ
+
+**Kann man zu wenig Körperfett haben?**
+Ja. Unter den essentiellen Werten werden Hormonfunktion und Immunsystem beeinträchtigt.
+
+**Wie schnell kann ich Fett reduzieren?**
+Ein nachhaltiges Tempo ist 0,5-1% pro Monat.`
+      },
+      pt: {
+        title: 'Entendendo o Percentual de Gordura Corporal e Como Medi-lo',
+        excerpt: 'O percentual de gordura corporal é uma métrica de saúde mais significativa que apenas o peso. Aprenda o que as faixas significam e os métodos de medição mais comuns.',
+        content: `Seu peso na balança não diz quase nada sobre sua saúde. Duas pessoas com o mesmo peso podem ter composições corporais radicalmente diferentes. O percentual de gordura corporal te dá um número que realmente importa.
+
+## O Que É o Percentual de Gordura Corporal?
+
+É a proporção do seu peso total que é tecido adiposo. Se você pesa 80 kg e tem 16 kg de gordura, seu percentual é 20%.
+
+Use nosso [Calculador de Gordura Corporal](/pt/tools/body-fat-calculator).
+
+## Faixas Saudáveis
+
+**Homens:** Atletas 6-13%, Fitness 14-17%, Média 18-24%, Obeso 25%+
+**Mulheres:** Atletas 14-20%, Fitness 21-24%, Média 25-31%, Obesa 32%+
+
+## Por Que Importa Mais que o IMC
+
+O IMC trata todo peso igualmente. O percentual de gordura mede diretamente o que importa para a saúde metabólica.
+
+Verifique seu IMC com o [Calculador de IMC](/pt/tools/bmi-calculator).
+
+## Métodos de Medição
+
+**Método de circunferências (Navy):** Mede pescoço, cintura e quadril. É o que nosso [Calculador](/pt/tools/body-fat-calculator) usa.
+**Dobras cutâneas:** Mede a espessura das dobras.
+**Bioimpedância (BIA):** Corrente elétrica pelo corpo.
+**DEXA scan:** Padrão-ouro.
+
+## FAQ
+
+**Pode-se ter muito pouca gordura?**
+Sim. Abaixo dos níveis essenciais, funções hormonais e imunológicas são comprometidas.
+
+**Quão rápido posso reduzir gordura?**
+Um ritmo sustentável é 0,5-1% por mês.`
+      }
+    }
+  },
+  {
+    slug: 'json-vs-xml-vs-yaml-data-format-comparison',
+    date: '2026-03-20',
+    category: 'developer',
+    translations: {
+      en: {
+        title: 'JSON vs XML vs YAML: Which Data Format Should You Use?',
+        excerpt: 'Compare the three most popular data serialization formats. Learn when to use JSON, XML, or YAML based on your project requirements, readability needs, and ecosystem constraints.',
+        content: `Every developer encounters the question sooner or later: JSON, XML, or YAML? Each format has strengths, weaknesses, and ideal use cases. Choosing the right one can simplify your architecture; choosing the wrong one creates unnecessary complexity. This guide breaks down the differences with practical examples and clear recommendations.
+
+## JSON: The Web Standard
+
+JSON (JavaScript Object Notation) is the dominant data format for web APIs, configuration files, and data interchange. Its syntax uses curly braces for objects, square brackets for arrays, and key-value pairs with colons.
+
+\`\`\`json
+{
+  "name": "Alice",
+  "age": 30,
+  "skills": ["JavaScript", "Python"],
+  "active": true
+}
+\`\`\`
+
+**Strengths:** Lightweight, human-readable, native to JavaScript, supported by every modern programming language, fastest to parse in most benchmarks.
+
+**Weaknesses:** No comments allowed (a common frustration for config files), no support for dates or binary data as native types, no schema validation built in.
+
+Format and validate your JSON with our [JSON Formatter](/en/tools/json-formatter).
+
+## XML: The Enterprise Veteran
+
+XML (Extensible Markup Language) uses opening and closing tags, attributes, and namespaces. It was the dominant data format before JSON took over for web applications.
+
+\`\`\`xml
+<person>
+  <name>Alice</name>
+  <age>30</age>
+  <skills>
+    <skill>JavaScript</skill>
+    <skill>Python</skill>
+  </skills>
+  <active>true</active>
+</person>
+\`\`\`
+
+**Strengths:** Built-in schema validation (XSD), namespaces for avoiding conflicts, comments supported, mature tooling (XSLT, XPath, XQuery), strong in enterprise systems (SOAP, SVG, XHTML).
+
+**Weaknesses:** Verbose — the same data takes 2-3x more characters than JSON. Harder for humans to read and write. Slower to parse.
+
+## YAML: The Human-Friendly Format
+
+YAML (YAML Ain't Markup Language) uses indentation instead of brackets or tags, making it the most human-readable of the three.
+
+\`\`\`yaml
+name: Alice
+age: 30
+skills:
+  - JavaScript
+  - Python
+active: true
+\`\`\`
+
+**Strengths:** Extremely readable, supports comments, references and anchors for reuse, multi-document files, widely used in DevOps (Docker Compose, Kubernetes, Ansible, GitHub Actions).
+
+**Weaknesses:** Whitespace-sensitive (indentation errors are common and hard to debug), implicit typing can cause surprises ("yes" becomes boolean true), security concerns with arbitrary code execution in some parsers, slower to parse than JSON.
+
+## Head-to-Head Comparison
+
+| Feature | JSON | XML | YAML |
+|---------|------|-----|------|
+| Readability | Good | Poor | Excellent |
+| Verbosity | Low | High | Very Low |
+| Comments | No | Yes | Yes |
+| Schema validation | External | Built-in (XSD) | External |
+| Parse speed | Fast | Moderate | Slow |
+| Native types | string, number, boolean, null, array, object | All text (types via schema) | string, number, boolean, null, array, map, date |
+| Web API standard | Yes | Legacy | Rare |
+| Config files | Common | Rare now | Very common |
+| Binary data | Base64 encoded | Base64 or CDATA | Base64 encoded |
+
+## When to Use Each
+
+**Choose JSON when:**
+- Building REST APIs or web services
+- Exchanging data between frontend and backend
+- Storing structured data in NoSQL databases
+- You need maximum parse performance
+- Interoperability with JavaScript is important
+
+**Choose XML when:**
+- Working with enterprise systems (SOAP, EDI)
+- Schema validation is critical (contracts between systems)
+- You need namespaces for complex document structures
+- Working with existing XML-based standards (SVG, RSS, XHTML)
+
+**Choose YAML when:**
+- Writing configuration files that humans edit frequently
+- Working with DevOps tools (Kubernetes, Docker, CI/CD)
+- Readability is the top priority
+- You need comments in your data files
+
+## Converting Between Formats
+
+You can convert between these formats using our tools:
+- [JSON Formatter](/en/tools/json-formatter) — validate and beautify JSON
+- [CSV to JSON](/en/tools/csv-to-json) — convert tabular data to JSON
+
+Most programming languages have libraries that can parse all three formats and convert between them seamlessly.
+
+## FAQ
+
+**Can I use comments in JSON?**
+Not in standard JSON. Some tools support JSONC (JSON with Comments) or JSON5, but these are not part of the official specification.
+
+**Is YAML a superset of JSON?**
+Technically yes — valid JSON is valid YAML. However, there are edge cases where parsing differs, so do not rely on this in practice.
+
+**Which format is most secure?**
+JSON is the safest by default because it has no code execution features. YAML parsers should always be configured with safe loading to prevent arbitrary code execution. XML is vulnerable to entity expansion attacks (billion laughs) if not configured properly.
+
+**Should I use TOML instead of YAML for config files?**
+TOML is gaining popularity for simple config files (Rust's Cargo.toml, Python's pyproject.toml). For flat or shallow configs, TOML is cleaner. For deeply nested configs, YAML is more practical.`
+      },
+      it: {
+        title: 'JSON vs XML vs YAML: Quale Formato Dati Dovresti Usare?',
+        excerpt: 'Confronta i tre formati di serializzazione dati più popolari. Scopri quando usare JSON, XML o YAML in base ai requisiti del tuo progetto.',
+        content: `Ogni sviluppatore incontra la domanda prima o poi: JSON, XML o YAML? Ogni formato ha punti di forza, debolezze e casi d'uso ideali.
+
+## JSON: Lo Standard del Web
+
+JSON è il formato dominante per API web e scambio dati. Sintassi con parentesi graffe, quadre e coppie chiave-valore.
+
+**Punti di forza:** Leggero, leggibile, nativo in JavaScript, supportato da tutti i linguaggi moderni, il più veloce da parsare.
+**Debolezze:** Nessun commento, nessun supporto nativo per date o dati binari.
+
+Formatta e valida il tuo JSON con il nostro [Formattatore JSON](/it/tools/json-formatter).
+
+## XML: Il Veterano Enterprise
+
+XML usa tag di apertura e chiusura, attributi e namespace. Era il formato dominante prima di JSON.
+
+**Punti di forza:** Validazione schema integrata (XSD), namespace, commenti supportati, strumenti maturi.
+**Debolezze:** Verboso — gli stessi dati richiedono 2-3x più caratteri rispetto a JSON.
+
+## YAML: Il Formato Human-Friendly
+
+YAML usa l'indentazione al posto di parentesi o tag, rendendolo il più leggibile dei tre.
+
+**Punti di forza:** Estremamente leggibile, supporta commenti, molto usato nel DevOps (Docker, Kubernetes, GitHub Actions).
+**Debolezze:** Sensibile agli spazi, la tipizzazione implicita può causare sorprese.
+
+## Quando Usare Ciascuno
+
+**JSON** per API REST e scambio dati web.
+**XML** per sistemi enterprise e quando serve validazione schema.
+**YAML** per file di configurazione e strumenti DevOps.
+
+Converti tra formati con [CSV a JSON](/it/tools/csv-to-json).
+
+## FAQ
+
+**Si possono usare commenti in JSON?**
+Non nel JSON standard.
+
+**YAML è un superset di JSON?**
+Tecnicamente sì, ma ci sono casi limite dove il parsing differisce.
+
+**Quale formato è più sicuro?**
+JSON è il più sicuro di default. I parser YAML devono essere configurati con safe loading.`
+      },
+      es: {
+        title: 'JSON vs XML vs YAML: ¿Qué Formato de Datos Deberías Usar?',
+        excerpt: 'Compara los tres formatos de serialización de datos más populares. Aprende cuándo usar JSON, XML o YAML según los requisitos de tu proyecto.',
+        content: `Todo desarrollador se enfrenta a la pregunta tarde o temprano: ¿JSON, XML o YAML? Cada formato tiene fortalezas, debilidades y casos de uso ideales.
+
+## JSON: El Estándar Web
+
+JSON es el formato dominante para APIs web e intercambio de datos.
+
+**Fortalezas:** Ligero, legible, nativo en JavaScript, soportado por todos los lenguajes modernos.
+**Debilidades:** Sin comentarios, sin soporte nativo para fechas.
+
+Formatea tu JSON con nuestro [Formateador JSON](/es/tools/json-formatter).
+
+## XML: El Veterano Empresarial
+
+XML usa etiquetas de apertura y cierre, atributos y namespaces.
+
+**Fortalezas:** Validación de esquema integrada (XSD), namespaces, comentarios, herramientas maduras.
+**Debilidades:** Verboso — los mismos datos requieren 2-3x más caracteres.
+
+## YAML: El Formato Amigable
+
+YAML usa indentación, siendo el más legible de los tres.
+
+**Fortalezas:** Extremadamente legible, soporta comentarios, muy usado en DevOps.
+**Debilidades:** Sensible a espacios, tipado implícito puede causar sorpresas.
+
+## Cuándo Usar Cada Uno
+
+**JSON** para APIs REST. **XML** para sistemas empresariales. **YAML** para archivos de configuración y DevOps.
+
+Convierte entre formatos con [CSV a JSON](/es/tools/csv-to-json).
+
+## FAQ
+
+**¿Se pueden usar comentarios en JSON?**
+No en JSON estándar.
+
+**¿Cuál formato es más seguro?**
+JSON es el más seguro por defecto.`
+      },
+      fr: {
+        title: 'JSON vs XML vs YAML : Quel Format de Données Choisir ?',
+        excerpt: 'Comparez les trois formats de sérialisation de données les plus populaires. Apprenez quand utiliser JSON, XML ou YAML selon vos besoins.',
+        content: `Chaque développeur rencontre la question tôt ou tard : JSON, XML ou YAML ? Chaque format a ses forces, faiblesses et cas d'utilisation idéaux.
+
+## JSON : Le Standard du Web
+
+JSON est le format dominant pour les API web et l'échange de données.
+
+**Forces :** Léger, lisible, natif en JavaScript, supporté par tous les langages modernes.
+**Faiblesses :** Pas de commentaires, pas de support natif pour les dates.
+
+Formatez votre JSON avec notre [Formateur JSON](/fr/tools/json-formatter).
+
+## XML : Le Vétéran Entreprise
+
+XML utilise des balises ouvrantes et fermantes, des attributs et des espaces de noms.
+
+**Forces :** Validation de schéma intégrée (XSD), espaces de noms, commentaires, outillage mature.
+**Faiblesses :** Verbeux — les mêmes données nécessitent 2-3x plus de caractères.
+
+## YAML : Le Format Lisible
+
+YAML utilise l'indentation, le rendant le plus lisible des trois.
+
+**Forces :** Extrêmement lisible, commentaires supportés, très utilisé en DevOps.
+**Faiblesses :** Sensible aux espaces, typage implicite peut surprendre.
+
+## Quand Utiliser Chacun
+
+**JSON** pour les API REST. **XML** pour les systèmes d'entreprise. **YAML** pour les fichiers de configuration et DevOps.
+
+Convertissez entre formats avec [CSV vers JSON](/fr/tools/csv-to-json).
+
+## FAQ
+
+**Peut-on utiliser des commentaires en JSON ?**
+Pas dans le JSON standard.
+
+**Quel format est le plus sûr ?**
+JSON est le plus sûr par défaut.`
+      },
+      de: {
+        title: 'JSON vs XML vs YAML: Welches Datenformat Sollten Sie Verwenden?',
+        excerpt: 'Vergleichen Sie die drei beliebtesten Datenserialisierungsformate. Erfahren Sie, wann Sie JSON, XML oder YAML verwenden sollten.',
+        content: `Jeder Entwickler steht früher oder später vor der Frage: JSON, XML oder YAML? Jedes Format hat Stärken, Schwächen und ideale Anwendungsfälle.
+
+## JSON: Der Web-Standard
+
+JSON ist das dominante Format für Web-APIs und Datenaustausch.
+
+**Stärken:** Leichtgewichtig, lesbar, nativ in JavaScript, von allen modernen Sprachen unterstützt.
+**Schwächen:** Keine Kommentare, keine native Unterstützung für Datumsangaben.
+
+Formatieren Sie Ihr JSON mit unserem [JSON-Formatierer](/de/tools/json-formatter).
+
+## XML: Der Enterprise-Veteran
+
+XML verwendet öffnende und schließende Tags, Attribute und Namensräume.
+
+**Stärken:** Eingebaute Schema-Validierung (XSD), Namensräume, Kommentare, ausgereifte Tools.
+**Schwächen:** Ausführlich — dieselben Daten benötigen 2-3x mehr Zeichen.
+
+## YAML: Das Menschenfreundliche Format
+
+YAML verwendet Einrückung und ist das lesbarste der drei Formate.
+
+**Stärken:** Extrem lesbar, Kommentare unterstützt, weit verbreitet in DevOps.
+**Schwächen:** Whitespace-sensitiv, implizite Typisierung kann überraschen.
+
+## Wann Welches Verwenden
+
+**JSON** für REST-APIs. **XML** für Enterprise-Systeme. **YAML** für Konfigurationsdateien und DevOps.
+
+Konvertieren Sie zwischen Formaten mit [CSV zu JSON](/de/tools/csv-to-json).
+
+## FAQ
+
+**Kann man Kommentare in JSON verwenden?**
+Nicht im Standard-JSON.
+
+**Welches Format ist am sichersten?**
+JSON ist standardmäßig am sichersten.`
+      },
+      pt: {
+        title: 'JSON vs XML vs YAML: Qual Formato de Dados Você Deve Usar?',
+        excerpt: 'Compare os três formatos de serialização de dados mais populares. Aprenda quando usar JSON, XML ou YAML com base nos requisitos do seu projeto.',
+        content: `Todo desenvolvedor encontra a pergunta mais cedo ou mais tarde: JSON, XML ou YAML? Cada formato tem pontos fortes, fracos e casos de uso ideais.
+
+## JSON: O Padrão da Web
+
+JSON é o formato dominante para APIs web e troca de dados.
+
+**Pontos fortes:** Leve, legível, nativo em JavaScript, suportado por todas as linguagens modernas.
+**Pontos fracos:** Sem comentários, sem suporte nativo para datas.
+
+Formate seu JSON com nosso [Formatador JSON](/pt/tools/json-formatter).
+
+## XML: O Veterano Empresarial
+
+XML usa tags de abertura e fechamento, atributos e namespaces.
+
+**Pontos fortes:** Validação de schema integrada (XSD), namespaces, comentários, ferramentas maduras.
+**Pontos fracos:** Verboso — os mesmos dados requerem 2-3x mais caracteres.
+
+## YAML: O Formato Amigável
+
+YAML usa indentação, sendo o mais legível dos três.
+
+**Pontos fortes:** Extremamente legível, comentários suportados, muito usado em DevOps.
+**Pontos fracos:** Sensível a espaços, tipagem implícita pode causar surpresas.
+
+## Quando Usar Cada Um
+
+**JSON** para APIs REST. **XML** para sistemas empresariais. **YAML** para arquivos de configuração e DevOps.
+
+Converta entre formatos com [CSV para JSON](/pt/tools/csv-to-json).
+
+## FAQ
+
+**Pode-se usar comentários em JSON?**
+Não no JSON padrão.
+
+**Qual formato é mais seguro?**
+JSON é o mais seguro por padrão.`
+      }
+    }
+  },
+  {
+    slug: 'how-to-calculate-compound-interest-grow-savings',
+    date: '2026-03-20',
+    category: 'finance',
+    translations: {
+      en: {
+        title: 'How to Calculate Compound Interest and Grow Your Savings',
+        excerpt: 'Understand the magic of compound interest — how it works, the formula behind it, and practical strategies to maximize your wealth over time.',
+        content: `Albert Einstein allegedly called compound interest "the eighth wonder of the world." Whether he actually said it or not, the sentiment is accurate: compound interest is the most powerful force in personal finance, and understanding it is the difference between building wealth and merely saving money.
+
+## What Is Compound Interest?
+
+Simple interest pays you a fixed percentage on your original deposit. Compound interest pays you interest on your interest. This seemingly small difference creates exponential growth over time.
+
+Imagine you deposit 10,000 euros at 5% annual interest. With simple interest, you earn 500 euros per year — always 500, regardless of how long you invest. After 30 years, you have 25,000 euros.
+
+With compound interest, you earn 500 euros the first year, but the second year you earn 5% on 10,500 euros (525 euros). The third year, 5% on 11,025 euros (551.25 euros). After 30 years, you have 43,219 euros — 72% more than simple interest.
+
+Calculate your own scenarios with our [Compound Interest Calculator](/en/tools/compound-interest-calculator).
+
+## The Formula
+
+A = P(1 + r/n)^(nt)
+
+Where:
+- **A** = final amount
+- **P** = principal (initial deposit)
+- **r** = annual interest rate (as decimal)
+- **n** = number of times interest compounds per year
+- **t** = number of years
+
+For 10,000 euros at 5% compounded monthly for 30 years: A = 10,000(1 + 0.05/12)^(12x30) = 10,000(1.004167)^360 = 44,677 euros.
+
+Notice that monthly compounding produces 44,677 euros versus 43,219 euros for annual compounding — more frequent compounding means more growth.
+
+## The Rule of 72
+
+Want a quick estimate of how long it takes to double your money? Divide 72 by the interest rate. At 6%, your money doubles in roughly 72/6 = 12 years. At 8%, it takes about 9 years. At 3%, it takes 24 years.
+
+Use our [Investment Calculator](/en/tools/investment-calculator) to model exact doubling times with your specific rate and contribution schedule.
+
+## The Three Levers of Compound Growth
+
+1. **Time** — the most powerful lever. Starting at age 25 versus 35 can nearly double your retirement balance, even with identical contributions and returns.
+
+2. **Rate of return** — even small differences matter enormously over decades. The difference between 6% and 8% on a 10,000 euro investment over 30 years is 57,435 vs 100,627 euros.
+
+3. **Regular contributions** — adding money consistently supercharges compounding. Contributing 200 euros per month at 7% for 30 years turns a 72,000 euro total contribution into 243,994 euros.
+
+## Compound Interest Working Against You
+
+Compound interest works both ways. Credit card debt at 20% APR compounds against you. A 5,000 euro balance making only minimum payments can take over 30 years to repay and cost more than 10,000 euros in interest.
+
+Use our [Debt Payoff Calculator](/en/tools/debt-payoff-calculator) to see exactly how much your debt costs and plan an accelerated payoff strategy.
+
+## Practical Strategies
+
+1. **Start now** — time is the ingredient you cannot buy later. Even small amounts benefit from decades of compounding.
+2. **Automate contributions** — set up automatic monthly transfers to your investment account.
+3. **Reinvest dividends** — let your returns compound instead of withdrawing them.
+4. **Minimize fees** — a 1% annual fee on a 100,000 euro portfolio costs you over 30,000 euros in lost compounding over 20 years.
+5. **Pay off high-interest debt first** — stopping compound interest working against you is mathematically equivalent to earning that rate of return.
+
+Our [ROI Calculator](/en/tools/roi-calculator) helps you compare different investment options and see which delivers the best compounded returns.
+
+## FAQ
+
+**Is compound interest the same as CAGR?**
+CAGR (Compound Annual Growth Rate) is the annual rate that an investment would need to grow from its beginning value to its ending value, assuming profits are reinvested. It is a way of expressing compounded returns.
+
+**How does inflation affect compound interest?**
+Inflation erodes the purchasing power of your returns. If your investment earns 6% but inflation is 3%, your real return is approximately 3%. Use our [Inflation Calculator](/en/tools/inflation-calculator) to understand the impact.
+
+**Should I prioritize saving or investing?**
+An emergency fund (3-6 months of expenses) in a savings account comes first. Beyond that, investing in diversified assets historically outperforms savings accounts due to higher compound growth rates.
+
+**What is the best compounding frequency?**
+Continuous compounding is theoretically best, but the practical difference between daily and monthly compounding is negligible. Focus on the interest rate and time horizon instead.`
+      },
+      it: {
+        title: 'Come Calcolare l\'Interesse Composto e Far Crescere i Tuoi Risparmi',
+        excerpt: 'Comprendi la magia dell\'interesse composto — come funziona, la formula e le strategie pratiche per massimizzare la tua ricchezza nel tempo.',
+        content: `L'interesse composto è la forza più potente nella finanza personale. Capirlo fa la differenza tra costruire ricchezza e semplicemente mettere da parte denaro.
+
+## Cos'è l'Interesse Composto?
+
+L'interesse semplice ti paga una percentuale fissa sul deposito originale. L'interesse composto ti paga interessi sugli interessi.
+
+Con 10.000 euro al 5% annuo, dopo 30 anni: interesse semplice = 25.000 euro, interesse composto = 43.219 euro — il 72% in più.
+
+Calcola i tuoi scenari con il nostro [Calcolatore Interesse Composto](/it/tools/compound-interest-calculator).
+
+## La Formula
+
+A = P(1 + r/n)^(nt)
+
+Per 10.000 euro al 5% composto mensilmente per 30 anni: A = 44.677 euro.
+
+## La Regola del 72
+
+Dividi 72 per il tasso di interesse per stimare gli anni necessari a raddoppiare. Al 6%, raddoppia in circa 12 anni.
+
+Usa il nostro [Calcolatore Investimenti](/it/tools/investment-calculator) per modellare scenari esatti.
+
+## Le Tre Leve della Crescita Composta
+
+1. **Tempo** — la leva più potente. Iniziare a 25 anni vs 35 può quasi raddoppiare il saldo pensionistico.
+2. **Tasso di rendimento** — piccole differenze contano enormemente su decenni.
+3. **Contributi regolari** — 200 euro al mese al 7% per 30 anni trasformano 72.000 euro in 243.994 euro.
+
+## L'Interesse Composto Contro di Te
+
+Il debito della carta di credito al 20% compone contro di te. Usa il nostro [Calcolatore Estinzione Debito](/it/tools/debt-payoff-calculator).
+
+## FAQ
+
+**Come influisce l'inflazione?**
+Se il tuo investimento rende il 6% ma l'inflazione è al 3%, il rendimento reale è circa il 3%. Usa il [Calcolatore Inflazione](/it/tools/inflation-calculator).
+
+**Dovrei dare priorità al risparmio o all'investimento?**
+Prima un fondo emergenza (3-6 mesi di spese). Poi investire in asset diversificati.`
+      },
+      es: {
+        title: 'Cómo Calcular el Interés Compuesto y Hacer Crecer Tus Ahorros',
+        excerpt: 'Comprende la magia del interés compuesto — cómo funciona, la fórmula y las estrategias prácticas para maximizar tu riqueza.',
+        content: `El interés compuesto es la fuerza más poderosa en las finanzas personales. Entenderlo es la diferencia entre construir riqueza y simplemente ahorrar dinero.
+
+## ¿Qué Es el Interés Compuesto?
+
+El interés simple te paga un porcentaje fijo sobre tu depósito original. El interés compuesto te paga intereses sobre tus intereses.
+
+Con 10.000 euros al 5% anual, después de 30 años: interés simple = 25.000 euros, interés compuesto = 43.219 euros.
+
+Calcula con nuestro [Calculador de Interés Compuesto](/es/tools/compound-interest-calculator).
+
+## La Fórmula
+
+A = P(1 + r/n)^(nt)
+
+## La Regla del 72
+
+Divide 72 entre la tasa de interés para estimar los años para duplicar. Al 6%, se duplica en unos 12 años.
+
+Usa nuestro [Calculador de Inversiones](/es/tools/investment-calculator).
+
+## Las Tres Palancas
+
+1. **Tiempo** — la palanca más poderosa. Empezar a los 25 vs 35 puede casi duplicar tu saldo de jubilación.
+2. **Tasa de rendimiento** — pequeñas diferencias importan enormemente.
+3. **Contribuciones regulares** — 200 euros/mes al 7% por 30 años = 243.994 euros.
+
+## El Interés Compuesto en Tu Contra
+
+Deuda de tarjeta al 20% compone contra ti. Usa nuestro [Calculador de Pago de Deuda](/es/tools/debt-payoff-calculator).
+
+## FAQ
+
+**¿Cómo afecta la inflación?**
+Si tu inversión rinde 6% pero la inflación es 3%, tu rendimiento real es aproximadamente 3%. Usa el [Calculador de Inflación](/es/tools/inflation-calculator).`
+      },
+      fr: {
+        title: 'Comment Calculer les Intérêts Composés et Faire Fructifier Votre Épargne',
+        excerpt: 'Comprenez la magie des intérêts composés — comment ils fonctionnent, la formule et les stratégies pratiques pour maximiser votre patrimoine.',
+        content: `Les intérêts composés sont la force la plus puissante en finances personnelles. Les comprendre fait la différence entre construire un patrimoine et simplement épargner.
+
+## Qu'est-ce que l'Intérêt Composé ?
+
+L'intérêt simple vous paie un pourcentage fixe sur votre dépôt initial. L'intérêt composé vous paie des intérêts sur vos intérêts.
+
+Avec 10 000 euros à 5% annuel, après 30 ans : intérêt simple = 25 000 euros, intérêt composé = 43 219 euros.
+
+Calculez avec notre [Calculateur d'Intérêts Composés](/fr/tools/compound-interest-calculator).
+
+## La Formule
+
+A = P(1 + r/n)^(nt)
+
+## La Règle de 72
+
+Divisez 72 par le taux d'intérêt. À 6%, votre argent double en environ 12 ans.
+
+Utilisez notre [Calculateur d'Investissement](/fr/tools/investment-calculator).
+
+## Les Trois Leviers
+
+1. **Le temps** — le levier le plus puissant.
+2. **Le taux de rendement** — de petites différences comptent sur des décennies.
+3. **Les contributions régulières** — 200 euros/mois à 7% pendant 30 ans = 243 994 euros.
+
+## Les Intérêts Composés Contre Vous
+
+La dette de carte de crédit à 20% compose contre vous. Utilisez notre [Calculateur de Remboursement](/fr/tools/debt-payoff-calculator).
+
+## FAQ
+
+**Comment l'inflation affecte-t-elle ?**
+Si votre investissement rapporte 6% mais l'inflation est à 3%, votre rendement réel est environ 3%. Utilisez le [Calculateur d'Inflation](/fr/tools/inflation-calculator).`
+      },
+      de: {
+        title: 'Zinseszins Berechnen und Ersparnisse Wachsen Lassen',
+        excerpt: 'Verstehen Sie die Macht des Zinseszinses — wie er funktioniert, die Formel und praktische Strategien zur Vermögensmaximierung.',
+        content: `Der Zinseszins ist die mächtigste Kraft in der persönlichen Finanzplanung. Ihn zu verstehen macht den Unterschied zwischen Vermögensaufbau und bloßem Sparen.
+
+## Was Ist Zinseszins?
+
+Einfacher Zins zahlt einen festen Prozentsatz auf die ursprüngliche Einlage. Zinseszins zahlt Zinsen auf Ihre Zinsen.
+
+Mit 10.000 Euro bei 5% jährlich, nach 30 Jahren: einfacher Zins = 25.000 Euro, Zinseszins = 43.219 Euro.
+
+Berechnen Sie mit unserem [Zinseszinsrechner](/de/tools/compound-interest-calculator).
+
+## Die Formel
+
+A = P(1 + r/n)^(nt)
+
+## Die 72er-Regel
+
+Teilen Sie 72 durch den Zinssatz. Bei 6% verdoppelt sich Ihr Geld in etwa 12 Jahren.
+
+Nutzen Sie unseren [Investitionsrechner](/de/tools/investment-calculator).
+
+## Die Drei Hebel
+
+1. **Zeit** — der mächtigste Hebel.
+2. **Rendite** — kleine Unterschiede zählen über Jahrzehnte.
+3. **Regelmäßige Beiträge** — 200 Euro/Monat bei 7% über 30 Jahre = 243.994 Euro.
+
+## Zinseszins Gegen Sie
+
+Kreditkartenschulden bei 20% arbeiten gegen Sie. Nutzen Sie unseren [Schuldenrückzahlungsrechner](/de/tools/debt-payoff-calculator).
+
+## FAQ
+
+**Wie beeinflusst die Inflation?**
+Wenn Ihre Anlage 6% bringt aber die Inflation 3% beträgt, ist Ihre reale Rendite etwa 3%. Nutzen Sie den [Inflationsrechner](/de/tools/inflation-calculator).`
+      },
+      pt: {
+        title: 'Como Calcular Juros Compostos e Fazer Suas Economias Crescerem',
+        excerpt: 'Entenda a magia dos juros compostos — como funcionam, a fórmula e as estratégias práticas para maximizar sua riqueza ao longo do tempo.',
+        content: `Os juros compostos são a força mais poderosa nas finanças pessoais. Entendê-los faz a diferença entre construir riqueza e simplesmente guardar dinheiro.
+
+## O Que São Juros Compostos?
+
+Juros simples pagam uma porcentagem fixa sobre o depósito original. Juros compostos pagam juros sobre seus juros.
+
+Com 10.000 euros a 5% ao ano, após 30 anos: juros simples = 25.000 euros, juros compostos = 43.219 euros.
+
+Calcule com nosso [Calculador de Juros Compostos](/pt/tools/compound-interest-calculator).
+
+## A Fórmula
+
+A = P(1 + r/n)^(nt)
+
+## A Regra dos 72
+
+Divida 72 pela taxa de juros. A 6%, seu dinheiro dobra em cerca de 12 anos.
+
+Use nosso [Calculador de Investimentos](/pt/tools/investment-calculator).
+
+## As Três Alavancas
+
+1. **Tempo** — a alavanca mais poderosa.
+2. **Taxa de retorno** — pequenas diferenças importam enormemente.
+3. **Contribuições regulares** — 200 euros/mês a 7% por 30 anos = 243.994 euros.
+
+## Juros Compostos Contra Você
+
+Dívida de cartão a 20% compõe contra você. Use nosso [Calculador de Quitação de Dívida](/pt/tools/debt-payoff-calculator).
+
+## FAQ
+
+**Como a inflação afeta?**
+Se seu investimento rende 6% mas a inflação é 3%, seu retorno real é aproximadamente 3%. Use o [Calculador de Inflação](/pt/tools/inflation-calculator).`
+      }
+    }
+  },
+  {
+    slug: 'image-optimization-web-compress-without-losing-quality',
+    date: '2026-03-20',
+    category: 'images',
+    translations: {
+      en: {
+        title: 'Image Optimization for Web: Compress Without Losing Quality',
+        excerpt: 'Learn how to dramatically reduce image file sizes while maintaining visual quality. Covers modern formats, compression techniques, responsive images, and lazy loading.',
+        content: `Images account for an average of 50% of a web page's total weight. A single unoptimized hero image can be larger than the entire HTML, CSS, and JavaScript of a page combined. Optimizing images is the single highest-impact performance improvement you can make, and it directly affects SEO rankings, user engagement, and conversion rates.
+
+## Why Image Optimization Matters
+
+Google has confirmed that page speed is a ranking factor. Core Web Vitals — specifically Largest Contentful Paint (LCP) — are directly affected by image sizes. A page that takes 4+ seconds to show its largest image will be penalized in search rankings.
+
+Beyond SEO, user behavior data is clear: 53% of mobile visitors abandon a page that takes longer than 3 seconds to load. Every 100ms of improvement in load time increases conversion rates by roughly 1%.
+
+Compress your images instantly with our [Image Compressor](/en/tools/image-compressor).
+
+## Image Formats Compared
+
+**JPEG** — best for photographs with gradients and many colors. Lossy compression. A quality setting of 80-85% is usually the sweet spot where file size drops 60-80% with minimal visible quality loss.
+
+**PNG** — best for images with transparency, sharp edges, text, or few colors (logos, icons, screenshots). Lossless compression, resulting in larger files than JPEG for photos.
+
+**WebP** — Google's modern format offering 25-35% smaller files than JPEG at equivalent quality, plus transparency support. Supported by all modern browsers since 2020.
+
+**AVIF** — the newest format, offering 50% smaller files than JPEG. Excellent quality but slower encoding. Browser support is growing rapidly.
+
+**SVG** — vector format for logos, icons, and illustrations. Infinitely scalable with tiny file sizes. Not suitable for photographs.
+
+## Compression Techniques
+
+**Lossy compression** removes data that the human eye is unlikely to notice. JPEG quality 85 versus 100 can reduce file size by 60% with no perceptible difference in most images. Our [Image Compressor](/en/tools/image-compressor) lets you adjust quality and see the results in real time.
+
+**Lossless compression** removes redundant data without any quality loss. PNG optimization tools can reduce file sizes by 10-30% by improving the compression algorithm without changing a single pixel.
+
+**Resizing** is the most overlooked optimization. An image displayed at 800x400 pixels that was uploaded at 4000x2000 pixels wastes 96% of its pixels. Always resize to the maximum display size. Our [Image Resizer](/en/tools/image-resizer) handles this with precise dimension controls.
+
+## Responsive Images
+
+Modern HTML provides the \`<picture>\` element and \`srcset\` attribute to serve different image sizes based on the viewer's screen. A mobile phone on a cellular connection should not download the same 2MB hero image as a desktop on fiber internet.
+
+Best practice: generate 3-4 sizes of each image (e.g., 400w, 800w, 1200w, 1600w) and let the browser choose the appropriate one using srcset.
+
+## Lazy Loading
+
+Images below the fold — those not visible without scrolling — should use lazy loading. Adding \`loading="lazy"\` to your \`<img>\` tags tells the browser to defer loading until the image approaches the viewport. This can reduce initial page weight by 50% or more on image-heavy pages.
+
+## Best Practices Checklist
+
+1. **Choose the right format** — WebP for photos, SVG for icons, PNG only when transparency is needed.
+2. **Compress aggressively** — use our [Image Compressor](/en/tools/image-compressor) at quality 80-85%.
+3. **Resize to display dimensions** — never serve a 4000px image in an 800px container. Use our [Image Resizer](/en/tools/image-resizer).
+4. **Use responsive images** — serve different sizes for different screens.
+5. **Implement lazy loading** — defer offscreen images.
+6. **Set explicit dimensions** — always include width and height attributes to prevent layout shift.
+7. **Use a CDN** — serve images from servers geographically close to your users.
+8. **Cache aggressively** — images rarely change, so set long cache expiration headers.
+
+## Measuring Results
+
+After optimizing, test your page with Google PageSpeed Insights or Lighthouse. Focus on the LCP metric — it should be under 2.5 seconds. Check the total page weight and confirm that images are no longer the bottleneck.
+
+## FAQ
+
+**How much quality loss is acceptable?**
+JPEG quality 80-85% is invisible to most viewers in most images. Below 70%, artifacts become noticeable, especially in gradients and flat color areas.
+
+**Should I convert all images to WebP?**
+Yes, for web delivery. WebP offers the best balance of quality, compression, and browser support. Keep originals in their source format for archival purposes.
+
+**Does image optimization affect SEO?**
+Absolutely. Faster pages rank higher, get lower bounce rates, and achieve better user engagement metrics — all of which Google considers in rankings.
+
+**What about AI-generated images?**
+AI images are typically generated at high quality and benefit from the same compression techniques. Run them through our [Image Compressor](/en/tools/image-compressor) before uploading to your site.`
+      },
+      it: {
+        title: 'Ottimizzazione Immagini per il Web: Comprimere Senza Perdere Qualità',
+        excerpt: 'Scopri come ridurre drasticamente le dimensioni dei file immagine mantenendo la qualità visiva. Formati moderni, tecniche di compressione e lazy loading.',
+        content: `Le immagini rappresentano in media il 50% del peso totale di una pagina web. Una singola immagine hero non ottimizzata può essere più grande di tutto l'HTML, CSS e JavaScript combinati. Ottimizzare le immagini è il miglioramento di performance con il maggiore impatto.
+
+## Perché l'Ottimizzazione È Importante
+
+Google ha confermato che la velocità della pagina è un fattore di ranking. I Core Web Vitals — specificamente il Largest Contentful Paint (LCP) — sono direttamente influenzati dalle dimensioni delle immagini.
+
+Comprimi le tue immagini con il nostro [Compressore Immagini](/it/tools/image-compressor).
+
+## Formati a Confronto
+
+**JPEG** — migliore per fotografie. Qualità 80-85% è il punto ottimale.
+**PNG** — per immagini con trasparenza, bordi netti, loghi.
+**WebP** — formato moderno, 25-35% più piccolo del JPEG, supportato da tutti i browser moderni.
+**AVIF** — il più nuovo, 50% più piccolo del JPEG.
+**SVG** — formato vettoriale per loghi e icone.
+
+## Tecniche di Compressione
+
+**Compressione lossy** rimuove dati che l'occhio umano difficilmente nota. JPEG qualità 85 vs 100 può ridurre del 60% senza differenza percepibile.
+
+**Ridimensionamento** è l'ottimizzazione più trascurata. Un'immagine mostrata a 800x400 px caricata a 4000x2000 px spreca il 96% dei pixel. Usa il nostro [Ridimensionatore Immagini](/it/tools/image-resizer).
+
+## Lazy Loading
+
+Le immagini sotto la piega dovrebbero usare \`loading="lazy"\`. Può ridurre il peso iniziale della pagina del 50% o più.
+
+## Checklist
+
+1. Scegli il formato giusto — WebP per foto, SVG per icone.
+2. Comprimi al 80-85% con il nostro [Compressore](/it/tools/image-compressor).
+3. Ridimensiona alle dimensioni di visualizzazione con il [Ridimensionatore](/it/tools/image-resizer).
+4. Usa immagini responsive.
+5. Implementa lazy loading.
+
+## FAQ
+
+**Quanta perdita di qualità è accettabile?**
+JPEG qualità 80-85% è invisibile alla maggior parte degli spettatori.
+
+**Dovrei convertire tutte le immagini in WebP?**
+Sì per il web. WebP offre il miglior equilibrio tra qualità, compressione e supporto browser.
+
+**L'ottimizzazione delle immagini influisce sulla SEO?**
+Assolutamente. Pagine più veloci si posizionano meglio.`
+      },
+      es: {
+        title: 'Optimización de Imágenes para Web: Comprimir Sin Perder Calidad',
+        excerpt: 'Aprende cómo reducir dramáticamente el tamaño de archivos de imagen manteniendo la calidad visual. Formatos modernos, técnicas de compresión y lazy loading.',
+        content: `Las imágenes representan en promedio el 50% del peso total de una página web. Optimizar imágenes es la mejora de rendimiento de mayor impacto que puedes hacer.
+
+## Por Qué Importa
+
+Google confirma que la velocidad de página es un factor de ranking. El LCP de los Core Web Vitals se ve directamente afectado por el tamaño de las imágenes.
+
+Comprime tus imágenes con nuestro [Compresor de Imágenes](/es/tools/image-compressor).
+
+## Formatos Comparados
+
+**JPEG** — mejor para fotografías. Calidad 80-85% es el punto óptimo.
+**PNG** — para transparencia y bordes nítidos.
+**WebP** — 25-35% más pequeño que JPEG.
+**AVIF** — el más nuevo, 50% más pequeño que JPEG.
+**SVG** — formato vectorial para logos e iconos.
+
+## Técnicas
+
+**Compresión lossy** elimina datos que el ojo humano difícilmente nota.
+**Redimensionamiento** es la optimización más ignorada. Usa nuestro [Redimensionador](/es/tools/image-resizer).
+
+## Lazy Loading
+
+Imágenes fuera de pantalla deberían usar \`loading="lazy"\`.
+
+## Checklist
+
+1. Formato correcto — WebP para fotos, SVG para iconos.
+2. Comprime al 80-85% con nuestro [Compresor](/es/tools/image-compressor).
+3. Redimensiona con el [Redimensionador](/es/tools/image-resizer).
+4. Imágenes responsive.
+5. Lazy loading.
+
+## FAQ
+
+**¿La optimización afecta la SEO?**
+Absolutamente. Páginas más rápidas se posicionan mejor.
+
+**¿Debería convertir todo a WebP?**
+Sí para la web. WebP ofrece el mejor equilibrio.`
+      },
+      fr: {
+        title: 'Optimisation des Images pour le Web : Compresser Sans Perdre en Qualité',
+        excerpt: 'Apprenez à réduire drastiquement la taille des images tout en maintenant la qualité visuelle. Formats modernes, techniques de compression et lazy loading.',
+        content: `Les images représentent en moyenne 50% du poids total d'une page web. Optimiser les images est l'amélioration de performance au plus grand impact.
+
+## Pourquoi C'est Important
+
+Google confirme que la vitesse de page est un facteur de classement. Le LCP des Core Web Vitals est directement affecté par la taille des images.
+
+Compressez vos images avec notre [Compresseur d'Images](/fr/tools/image-compressor).
+
+## Formats Comparés
+
+**JPEG** — idéal pour les photos. Qualité 80-85% est le sweet spot.
+**PNG** — pour la transparence et les bords nets.
+**WebP** — 25-35% plus petit que JPEG.
+**AVIF** — le plus récent, 50% plus petit que JPEG.
+**SVG** — format vectoriel pour logos et icônes.
+
+## Techniques
+
+**Compression lossy** supprime des données imperceptibles à l'œil.
+**Redimensionnement** est l'optimisation la plus négligée. Utilisez notre [Redimensionneur](/fr/tools/image-resizer).
+
+## Lazy Loading
+
+Les images hors écran devraient utiliser \`loading="lazy"\`.
+
+## Checklist
+
+1. Bon format — WebP pour photos, SVG pour icônes.
+2. Compressez à 80-85% avec notre [Compresseur](/fr/tools/image-compressor).
+3. Redimensionnez avec le [Redimensionneur](/fr/tools/image-resizer).
+4. Images responsive.
+5. Lazy loading.
+
+## FAQ
+
+**L'optimisation affecte-t-elle le SEO ?**
+Absolument. Les pages plus rapides sont mieux classées.
+
+**Faut-il tout convertir en WebP ?**
+Oui pour le web. WebP offre le meilleur équilibre.`
+      },
+      de: {
+        title: 'Bildoptimierung für das Web: Komprimieren Ohne Qualitätsverlust',
+        excerpt: 'Erfahren Sie, wie Sie Bilddateigrößen drastisch reduzieren und dabei die visuelle Qualität beibehalten. Moderne Formate, Komprimierungstechniken und Lazy Loading.',
+        content: `Bilder machen durchschnittlich 50% des Gesamtgewichts einer Webseite aus. Bildoptimierung ist die wirkungsvollste Performance-Verbesserung.
+
+## Warum Es Wichtig Ist
+
+Google bestätigt, dass Seitengeschwindigkeit ein Ranking-Faktor ist. Der LCP der Core Web Vitals wird direkt von Bildgrößen beeinflusst.
+
+Komprimieren Sie Ihre Bilder mit unserem [Bild-Kompressor](/de/tools/image-compressor).
+
+## Formate im Vergleich
+
+**JPEG** — am besten für Fotografien. Qualität 80-85% ist der Sweet Spot.
+**PNG** — für Transparenz und scharfe Kanten.
+**WebP** — 25-35% kleiner als JPEG.
+**AVIF** — das neueste Format, 50% kleiner als JPEG.
+**SVG** — Vektorformat für Logos und Icons.
+
+## Techniken
+
+**Verlustbehaftete Komprimierung** entfernt Daten, die das menschliche Auge kaum bemerkt.
+**Größenanpassung** ist die am meisten übersehene Optimierung. Nutzen Sie unseren [Bild-Verkleinerer](/de/tools/image-resizer).
+
+## Lazy Loading
+
+Bilder außerhalb des sichtbaren Bereichs sollten \`loading="lazy"\` verwenden.
+
+## Checkliste
+
+1. Richtiges Format — WebP für Fotos, SVG für Icons.
+2. Komprimieren bei 80-85% mit unserem [Kompressor](/de/tools/image-compressor).
+3. Größe anpassen mit dem [Verkleinerer](/de/tools/image-resizer).
+4. Responsive Bilder.
+5. Lazy Loading.
+
+## FAQ
+
+**Beeinflusst Bildoptimierung SEO?**
+Absolut. Schnellere Seiten ranken besser.
+
+**Sollte ich alles in WebP konvertieren?**
+Ja für das Web. WebP bietet das beste Gleichgewicht.`
+      },
+      pt: {
+        title: 'Otimização de Imagens para Web: Comprimir Sem Perder Qualidade',
+        excerpt: 'Aprenda como reduzir dramaticamente o tamanho de arquivos de imagem mantendo a qualidade visual. Formatos modernos, técnicas de compressão e lazy loading.',
+        content: `Imagens representam em média 50% do peso total de uma página web. Otimizar imagens é a melhoria de performance de maior impacto.
+
+## Por Que Importa
+
+O Google confirmou que velocidade de página é fator de ranking. O LCP dos Core Web Vitals é diretamente afetado pelo tamanho das imagens.
+
+Comprima suas imagens com nosso [Compressor de Imagens](/pt/tools/image-compressor).
+
+## Formatos Comparados
+
+**JPEG** — melhor para fotografias. Qualidade 80-85% é o ponto ideal.
+**PNG** — para transparência e bordas nítidas.
+**WebP** — 25-35% menor que JPEG.
+**AVIF** — o mais novo, 50% menor que JPEG.
+**SVG** — formato vetorial para logos e ícones.
+
+## Técnicas
+
+**Compressão lossy** remove dados que o olho humano dificilmente percebe.
+**Redimensionamento** é a otimização mais negligenciada. Use nosso [Redimensionador](/pt/tools/image-resizer).
+
+## Lazy Loading
+
+Imagens fora da tela devem usar \`loading="lazy"\`.
+
+## Checklist
+
+1. Formato certo — WebP para fotos, SVG para ícones.
+2. Comprima a 80-85% com nosso [Compressor](/pt/tools/image-compressor).
+3. Redimensione com o [Redimensionador](/pt/tools/image-resizer).
+4. Imagens responsivas.
+5. Lazy loading.
+
+## FAQ
+
+**A otimização afeta o SEO?**
+Absolutamente. Páginas mais rápidas têm melhor posicionamento.
+
+**Devo converter tudo para WebP?**
+Sim para a web. WebP oferece o melhor equilíbrio.`
+      }
+    }
+  },
 ];
 
 export const blogSlugs = blogArticles.map(a => a.slug);
