@@ -63,6 +63,68 @@ image-compressor, image-resizer, photo-editor, pixel-ruler, meme-generator, pixe
 - Ogni tool DEVE avere: ToolPageWrapper, SEO article (300-400 parole x6 lingue), FAQ accordion (4-5 domande)
 - Layout tool: max-w-2xl
 
+## ⚠️ STANDARD QUALITÀ — OBBLIGATORI (mai saltare)
+
+### Prima di scrivere codice
+1. **Leggi il pattern esistente**: apri 1-2 tool simili per capire la struttura ESATTA
+2. **Verifica traduzioni**: controlla che TUTTE le 6 lingue siano coperte
+3. **Pianifica edge cases**: input vuoti, numeri negativi, valori estremi, caratteri speciali
+
+### Durante la scrittura del codice
+- **MAI usare `any`** — usa tipi espliciti TypeScript
+- **MAI lasciare `console.log`** nel codice di produzione
+- **MAI hardcodare stringhe** — tutto in translations.ts
+- **Ogni input DEVE avere validazione** con messaggio di errore visibile
+- **Ogni tool DEVE avere**: copy button, reset button, stati di errore colorati
+- **Funzioni max 40 righe** — spezza in funzioni più piccole
+- **Nomi variabili descrittivi** — no `x`, `temp`, `data` generici
+
+### DOPO aver scritto il codice (SEMPRE, mai saltare!)
+1. **`npm run lint`** — fix tutti i warning/errori
+2. **`npm run build`** — verifica che compila senza errori
+3. **Controlla visivamente**: rileggi TUTTO il codice generato cercando:
+   - Import mancanti o inutilizzati
+   - Traduzioni mancanti in qualsiasi lingua
+   - Stati di errore non gestiti
+   - Bottoni senza onClick handler
+   - Stili Tailwind inconsistenti col resto del progetto
+4. **Test manuale mentale**: simula l'uso del tool passo per passo
+   - Cosa succede se l'input è vuoto?
+   - Cosa succede con valori negativi?
+   - Cosa succede con input molto lunghi?
+   - Il copy button funziona?
+   - Il reset pulisce tutto?
+
+### Sicurezza
+- **dangerouslySetInnerHTML**: il progetto ha 91+ occorrenze senza sanitizzazione. Per nuovo codice, se possibile usa JSX diretto. Se necessario dangerouslySetInnerHTML, usa solo con contenuto hardcoded/trustato, MAI con input utente.
+- **No eval()**, no innerHTML con dati utente, no dynamic import di URL utente
+
+### Se il build o lint FALLISCE
+- **NON dire "lo lascio a te da fixare"**
+- **FIX IMMEDIATAMENTE** prima di rispondere all'utente
+- **Ri-esegui build/lint** dopo il fix per confermare
+- **Solo quando tutto passa**, marca il task come completo
+
+### Checklist pre-deploy (usata da /deploy)
+```
+□ npm run lint → 0 errori
+□ npm run build → compilazione OK
+□ Traduzioni complete (6 lingue)
+□ SEO article presente (300-400 parole)
+□ FAQ accordion (4-5 domande)
+□ Meta tags (title, description) in tutte le lingue
+□ Internal links (2-3 link ad altri tool)
+□ Nessun console.log nel codice
+□ Nessun tipo `any`
+□ Validazione input presente
+□ Copy button funzionante
+□ Reset button funzionante
+□ Layout max-w-2xl rispettato
+□ ToolPageWrapper utilizzato
+□ Tool registrato in toolList
+□ Tool in getToolsByCategory()
+```
+
 ## Skill disponibili (slash commands)
 ### Sistema autodidatta (ciclo di crescita)
 - `/learn` — Ciclo completo: analisi GSC → confronto storico → raccomandazioni (ESEGUIRE AD OGNI SESSIONE)
@@ -73,11 +135,12 @@ image-compressor, image-resizer, photo-editor, pixel-ruler, meme-generator, pixe
 - `/auto-grow` — Crescita data-driven: suggerisce nuovi tool basati su query GSC
 
 ### Operativi
-- `/new-tool [slug] [category]` — Crea un nuovo tool completo
-- `/deploy [messaggio]` — Build + commit + push + ping sitemap + verifica
+- `/new-tool [slug] [category]` — Crea un nuovo tool completo (con quality check integrato)
+- `/deploy [messaggio]` — Quality gate + build + commit + push + verifica
 - `/seo-check [slug]` — Analisi SEO di un tool
-- `/add-tools-batch [slug1,slug2,...] [category]` — Crea tool in batch
+- `/add-tools-batch [slug1,slug2,...] [category]` — Crea tool in batch (con quality check)
 - `/publish-article [topic]` — Pubblica articolo su Dev.to
+- `/quality-check` — Scansione qualità codice: lint, build, any types, console.log, traduzioni
 
 ## Stato attuale (Marzo 2026)
 - **143 tool** = 858 pagine + 42 pagine hub categoria = **900 pagine**

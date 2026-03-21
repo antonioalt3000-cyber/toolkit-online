@@ -6,12 +6,19 @@
       "Bash(git *)",
       "Bash(npm run *)",
       "Bash(npx vercel *)",
+      "Bash(npx tsc *)",
+      "Bash(npx prettier *)",
       "Bash(curl -X POST https://dev.to/*)",
+      "Bash(curl *)",
       "Bash(nslookup *)",
       "Bash(sleep *)",
       "Bash(mkdir *)",
       "Bash(ls *)",
       "Bash(wc *)",
+      "Bash(cat *)",
+      "Bash(head *)",
+      "Bash(tail *)",
+      "Bash(chmod *)",
       "Read",
       "Write",
       "Edit",
@@ -20,7 +27,9 @@
     ],
     "deny": [
       "Bash(rm -rf /)",
-      "Bash(git push --force *)"
+      "Bash(git push --force *)",
+      "Edit(.env*)",
+      "Edit(package-lock.json)"
     ]
   },
   "env": {
@@ -29,11 +38,21 @@
   "hooks": {
     "PostToolUse": [
       {
-        "matcher": "Bash",
+        "matcher": "Write",
         "hooks": [
           {
             "type": "command",
-            "command": "echo ''"
+            "command": "bash -c 'FILE=$(cat | jq -r \".tool_input.file_path // empty\"); EXT=\"${FILE##*.}\"; if [[ \"$EXT\" =~ ^(ts|tsx|js|jsx)$ ]] && [ -f \"$FILE\" ]; then ISSUES=\"\"; if grep -qn \": any\" \"$FILE\" 2>/dev/null; then ISSUES=\"${ISSUES}⚠️ TIPO ANY trovato - usa tipo esplicito\\n\"; fi; if grep -qn \"console\\.log\" \"$FILE\" 2>/dev/null; then ISSUES=\"${ISSUES}⚠️ console.log trovato - rimuovere per produzione\\n\"; fi; if [ -n \"$ISSUES\" ]; then echo -e \"\\n🔍 QUALITY CHECK:\\n$ISSUES\" >&2; fi; fi; exit 0'"
+          }
+        ]
+      }
+    ],
+    "Stop": [
+      {
+        "hooks": [
+          {
+            "type": "prompt",
+            "prompt": "Before stopping, verify your work is complete: 1) Did you run 'npm run lint' if you edited .ts/.tsx files? 2) Did you run 'npm run build' if the user asked for deployment? 3) Are there any TypeScript errors, missing translations, or untested edge cases? If any check was skipped, do NOT stop - complete the verification first. Return {\"decision\": \"block\", \"reason\": \"Need to run quality checks\"} if checks were skipped, or {\"decision\": \"allow\"} if everything is verified."
           }
         ]
       }
