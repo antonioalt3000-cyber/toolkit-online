@@ -76,11 +76,11 @@ function parseMarkdown(md: string): string {
   // Ordered lists
   html = html.replace(/^\d+\.\s+(.+)$/gm, '<li class="ml-4 list-decimal">$1</li>');
 
+  // Images (MUST be before links since ![alt](url) contains [alt](url))
+  html = html.replace(/!\[([^\]]*)\]\(([^)]+)\)/g, '<img src="$2" alt="$1" class="max-w-full rounded my-2" />');
+
   // Links
   html = html.replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" class="text-blue-600 underline">$1</a>');
-
-  // Images
-  html = html.replace(/!\[([^\]]*)\]\(([^)]+)\)/g, '<img src="$2" alt="$1" class="max-w-full rounded my-2" />');
 
   // Paragraphs (double newlines)
   html = html.replace(/\n\n/g, '</p><p class="my-2">');
