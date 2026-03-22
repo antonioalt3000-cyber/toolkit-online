@@ -386,7 +386,7 @@ export const common: Record<Locale, CommonTranslation> = {
 
 export const tools: Record<string, Record<Locale, ToolTranslation>> = {
   'vat-calculator': {
-    en: { name: 'VAT Calculator', description: 'Calculate VAT (Value Added Tax) quickly. Add or remove VAT from any amount.', metaTitle: 'VAT Calculator Online — Add & Remove VAT Free', metaDescription: 'Free online VAT calculator. Add and remove VAT from any amount instantly. Calculate VAT for all rates. No signup needed!' },
+    en: { name: 'VAT Calculator', description: 'Calculate VAT (Value Added Tax) quickly. Add or remove VAT from any amount.', metaTitle: 'VAT Calculator Online — Add & Remove VAT Instantly | ToolKit Online', metaDescription: 'Free online VAT calculator. Add or remove VAT from any amount instantly. Supports UK, EU and international VAT rates. No signup needed!' },
     it: { name: 'Calcolo IVA', description: 'Calcola l\'IVA velocemente. Aggiungi o scorporo IVA da qualsiasi importo.', metaTitle: 'Calcolo IVA Online — Scorporo e Aggiunta IVA', metaDescription: 'Calcolatore IVA gratuito. Aggiungi o scorporo l\'IVA da qualsiasi importo. Supporta tutte le aliquote.' },
     es: { name: 'Calculadora de IVA', description: 'Calcula el IVA rápidamente. Añade o quita el IVA de cualquier cantidad.', metaTitle: 'Calculadora de IVA Online — Añadir o Quitar IVA', metaDescription: 'Calculadora de IVA gratuita. Añade o quita el IVA de cualquier cantidad al instante.' },
     fr: { name: 'Calculateur de TVA', description: 'Calculez la TVA rapidement. Ajoutez ou retirez la TVA de n\'importe quel montant.', metaTitle: 'Calculateur de TVA en ligne — Ajouter ou Retirer la TVA', metaDescription: 'Calculateur de TVA gratuit. Ajoutez ou retirez la TVA de n\'importe quel montant.' },
