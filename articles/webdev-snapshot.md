@@ -1,0 +1,2022 @@
+- generic [active] [ref=e1]:
+  - link "Ir al contenido principal" [ref=e2] [cursor=pointer]:
+    - /url: "#main-content"
+    - generic [ref=e4]: Ir al contenido principal
+  - generic [ref=e7]:
+    - generic:
+      - generic:
+        - generic [ref=e8]:
+          - generic: "webdev: reddit para desarrolladores web"
+        - banner [ref=e11]:
+          - navigation [ref=e12]:
+            - generic [ref=e13]:
+              - button "Abrir menú" [ref=e17] [cursor=pointer]:
+                - img [ref=e20]
+                - generic [ref=e22]:
+                  - generic: Abrir menú
+              - generic:
+                - generic:
+                  - generic:
+                    - generic:
+                      - generic:
+                        - link "Principal":
+                          - /url: /
+            - search [ref=e34]:
+              - generic [ref=e36]:
+                - img [ref=e39]
+                - generic "Eliminar el filtro r/webdev y ampliar la búsqueda a todo Reddit" [ref=e42] [cursor=pointer]:
+                  - button [pressed] [ref=e43]:
+                    - generic [ref=e47]: r/webdev
+                  - img [ref=e49]
+                - textbox "Eliminar el filtro r/webdev y ampliar la búsqueda a todo Reddit" [ref=e52]:
+                  - /placeholder: Buscar en r/webdev
+            - generic [ref=e53]:
+              - generic [ref=e54]:
+                - button "Traducciones activadas" [ref=e62] [cursor=pointer]:
+                  - img [ref=e65]
+                - button "Chat abierto" [ref=e72] [cursor=pointer]:
+                  - img [ref=e75]
+                  - generic [ref=e77]:
+                    - generic: Chat abierto
+                - link "Publicar" [ref=e82] [cursor=pointer]:
+                  - /url: /r/webdev/submit/
+                  - img [ref=e85]
+                  - generic [ref=e87]:
+                    - generic: Publicar
+                - link "Abrir bandeja de entrada" [ref=e91] [cursor=pointer]:
+                  - /url: /notifications
+                  - img [ref=e94]
+                  - generic [ref=e96]:
+                    - generic: Abrir bandeja de entrada
+              - button "Avatar de usuario Expandir menú de usuario" [ref=e101] [cursor=pointer]:
+                - img "Avatar de usuario" [ref=e109]
+                - generic [ref=e111]:
+                  - generic: Expandir menú de usuario
+        - generic [ref=e113]:
+          - region "Acciones de la comunidad" [ref=e117]:
+            - generic [ref=e118]:
+              - heading "r/webdev" [level=1] [ref=e124]
+              - generic [ref=e125]:
+                - link "Crear publicación" [ref=e129] [cursor=pointer]:
+                  - /url: /r/webdev/submit
+                  - generic [ref=e130]:
+                    - img [ref=e132]
+                    - generic [ref=e134]: Crear publicación
+                - generic [ref=e136]:
+                  - button "Unirse" [ref=e139] [cursor=pointer]
+                  - button "Abrir menú de más opciones" [ref=e142] [cursor=pointer]:
+                    - img [ref=e145]
+          - main [ref=e149]:
+            - generic [ref=e150]:
+              - generic [ref=e152]:
+                - tab "Feed" [selected] [ref=e153] [cursor=pointer]:
+                  - generic [ref=e156]: Feed
+                - tab "Acerca de" [ref=e157] [cursor=pointer]:
+                  - generic [ref=e160]: Acerca de
+              - generic [ref=e162]:
+                - generic "Ordenar por" [ref=e166]:
+                  - 'button "Ordenar por: Más nuevos" [ref=e168] [cursor=pointer]':
+                    - generic [ref=e170]: Más nuevos
+                - generic "Ver" [ref=e176]:
+                  - 'button "Vista: Tarjeta" [ref=e178] [cursor=pointer]'
+            - generic [ref=e184]:
+              - button "contraer/expandir lo más destacado de la comunidad" [ref=e185] [cursor=pointer]:
+                - heading "Lo más destacado de la comunidad" [level=3] [ref=e186]:
+                  - img [ref=e187]
+                  - generic [ref=e189]: Lo más destacado de la comunidad
+                - button "contraer/expandir lo más destacado de la comunidad" [ref=e191]:
+                  - img [ref=e194]
+              - list [ref=e198]:
+                - generic:
+                  - listitem [ref=e199]:
+                    - link "Hilo Mensual de \"Empezando\" / Carrera en Desarrollo Web 21 votos • 58 comentarios AutoModerator" [ref=e200] [cursor=pointer]:
+                      - /url: /r/webdev/comments/1qswnox/monthly_getting_started_web_dev_career_thread/
+                      - generic [ref=e204]:
+                        - generic [ref=e205]:
+                          - heading "Hilo Mensual de \"Empezando\" / Carrera en Desarrollo Web" [level=2] [ref=e208]
+                          - generic [ref=e211]:
+                            - generic [ref=e212]: "21"
+                            - text: votos •
+                            - generic [ref=e213]: "58"
+                            - text: comentarios
+                        - img "AutoModerator" [ref=e220]
+                  - listitem [ref=e221]:
+                    - link "Hilo Mensual de \"Empezando\" / Carrera en Desarrollo Web 11 votos • 14 comentarios AutoModerator" [ref=e222] [cursor=pointer]:
+                      - /url: /r/webdev/comments/1rhvl5m/monthly_getting_started_web_dev_career_thread/
+                      - generic [ref=e226]:
+                        - generic [ref=e227]:
+                          - heading "Hilo Mensual de \"Empezando\" / Carrera en Desarrollo Web" [level=2] [ref=e230]
+                          - generic [ref=e233]:
+                            - generic [ref=e234]: "11"
+                            - text: votos •
+                            - generic [ref=e235]: "14"
+                            - text: comentarios
+                        - img "AutoModerator" [ref=e242]
+            - 'generic "webdev: reddit para desarrolladores web"'
+            - generic [ref=e244]:
+              - heading "Feed" [level=1] [ref=e246]
+              - generic:
+                - article "WordPress.com lanza oficialmente herramientas de escritura con IA — ¿Y qué pasa con los sitios autohospedados que no usan Gutenberg?" [ref=e247]:
+                  - generic [ref=e248] [cursor=pointer]:
+                    - link "WordPress.com lanza oficialmente herramientas de escritura con IA — ¿Y qué pasa con los sitios autohospedados que no usan Gutenberg?" [ref=e249]:
+                      - /url: /r/webdev/comments/1rz6l0o/wordpresscom_officially_ships_ai_write_tools_what/
+                      - generic [ref=e250]:
+                        - generic: WordPress.com lanza oficialmente herramientas de escritura con IA — ¿Y qué pasa con los sitios autohospedados que no usan Gutenberg?
+                    - generic [ref=e251]:
+                      - generic [ref=e253]:
+                        - generic [ref=e254]:
+                          - 'link "Autor: u/webmyc" [ref=e259]':
+                            - /url: /user/webmyc/
+                            - generic [ref=e260]:
+                              - img "Avatar de u/webmyc" [ref=e263]
+                              - generic [ref=e264]: u/webmyc
+                          - generic [ref=e265]: •
+                          - time [ref=e267]: hace 23 min
+                        - generic [ref=e272]:
+                          - button "Abrir acciones de usuario" [ref=e276]:
+                            - img [ref=e279]
+                          - generic [ref=e282]:
+                            - tooltip "Valora esta traducción":
+                              - generic:
+                                - generic:
+                                  - paragraph: Valora esta traducción
+                      - generic [ref=e283]:
+                        - link "WordPress.com lanza oficialmente herramientas de escritura con IA — ¿Y qué pasa con los sitios autohospedados que no usan Gutenberg?" [ref=e285]:
+                          - /url: /r/webdev/comments/1rz6l0o/wordpresscom_officially_ships_ai_write_tools_what/
+                          - text: WordPress.com lanza oficialmente herramientas de escritura con IA — ¿Y qué pasa con los sitios autohospedados que no usan Gutenberg?
+                        - link "https://www.respira.press/blog/respira-vs-wordpress-com-mcp" [ref=e288]:
+                          - /url: https://www.respira.press/blog/respira-vs-wordpress-com-mcp
+                      - generic [ref=e290]:
+                        - link "r/webdev - WordPress.com lanza oficialmente herramientas de escritura con IA — ¿Y qué pasa con los sitios autohospedados que no usan Gutenberg?" [ref=e291]:
+                          - /url: https://www.respira.press/blog/respira-vs-wordpress-com-mcp
+                          - img "r/webdev - WordPress.com lanza oficialmente herramientas de escritura con IA — ¿Y qué pasa con los sitios autohospedados que no usan Gutenberg?" [ref=e292]
+                        - generic:
+                          - generic:
+                            - img
+                    - generic "Acciones disponibles para esta publicación" [ref=e294]:
+                      - generic [ref=e297]:
+                        - button "Upvote" [ref=e298]:
+                          - img [ref=e300]
+                          - generic [ref=e302]:
+                            - generic: Upvote
+                        - generic [ref=e304]: "3"
+                        - button "Downvote" [ref=e305]:
+                          - img [ref=e307]
+                          - generic [ref=e309]:
+                            - generic: Downvote
+                      - link "0 Ir a los comentarios" [ref=e310]:
+                        - /url: /r/webdev/comments/1rz6l0o/wordpresscom_officially_ships_ai_write_tools_what/
+                        - generic [ref=e311]:
+                          - img [ref=e313]
+                          - generic [ref=e316]: "0"
+                        - generic [ref=e317]:
+                          - generic: Ir a los comentarios
+                      - button "Premiar" [ref=e319]:
+                        - img [ref=e322]
+                      - button "Compartir" [ref=e327]:
+                        - generic [ref=e328]:
+                          - img [ref=e330]
+                          - generic [ref=e332]: Compartir
+                - separator [ref=e333]
+                - generic [ref=e334]:
+                  - 'generic "Advertisement: Connect Weglot and get a fully translated site displayed in minutes. AI + human review." [ref=e335]':
+                    - 'link "Advertisement: Connect Weglot and get a fully translated site displayed in minutes. AI + human review." [ref=e336] [cursor=pointer]':
+                      - /url: https://alb.reddit.com/cr?za=lzklYcULJ_yzsPF6n_UcuF2qB-FZS8MDcMOgiKHhTqej6HyxTcUoMKXbT8Z0FGLBU_JmPLY-9YAsQphnvRwp1Mb110Edu9TqtiP2gYJosLMob4pk93BfnhQJfXZiojh0gp5LEeBvPDGtSpKaeJdEOhtLqIJvY8KY8gHbIcspa8OlJp4IsflKc_UnwPFfiXhJNqjibITuxQwrVu0SOA0Gm98Qb5nDXV4KMu07pX264UDQclHEC1SVf4Ok9XTZ0Xl7XzXomUBy58BRhgQLjs7MWjD7nXByRfSCIiPc6lXRUCL9uSWY3_8neCjsJolLtrM1U1Y5as4Fwk8mS4OvkyMup_oHu7MaoZVnW-v3VZ6bazwgO2Wxwv2zqJt6Ot1YSfO0MO7qpE11rJ7dWadgmEfQWUfH7kGuejyw0fs_v2ot6RFeoyNsiLWc1ugVMSTlilMDTdX8DifyhZ7AUJsJIiU3qRV0V3Dqd1g7HY56oj5hQ9Cj4sRgHUOA4HsSR489v5lrj_1952hRyvoMVpPDqb9C31vI7YYvrGy1mvmNm95w712DILJEyOCalq6m8905hCeRXQhyvhTtyTv5HcgqhTSBWNrus-ZaVZmsTETU9SJBeY3ePHZs5Yz3a8GGO9yKkYunyZeZVmIjV2VRJUmuSnv25fG0IFpHtNMaUcEA3rJ1dYtDevTgMdNL9kKCF4-K0xD9D-IE8LwEzSYy4a0GWqHuBNlLFdAIOW3rkmvhH4jyvFUPcMhhfDfxS5FGzzWlUppY&zp=0AE-7dSPpi84Pc2RCzhllPMyGjFeu9b--EJMGdfNcERF_rKzX3a_mod9IPKpwUQXi26E5xFZYG0JWOj2uKaxUMCoEqAw4A0M9LnSdemjdlKh2-PgUHotczpzV8XK8m_tNVENiOnCS_16VCaG1AI37Qk1ee2eFLOZO6NsZsdBHLXSDYC4CKgETgoHELdKM8BPgPi0-B1L8F7AB7EQARMW_bMD8giPIVyj8555KXau4--Fh8r4VtlsOLQ3B2zvhqlFBHqwRmzD49T8MO-KxnPwLAybFXP82a3B0hgMALW9ghasV2G0FpX0DR1-_PoN8JoAhTS4vwwIhzkxofW55I8
+                  - generic [ref=e337]:
+                    - generic [ref=e338]:
+                      - link "Avatar de u/Weglot u/Weglot" [ref=e341] [cursor=pointer]:
+                        - /url: /user/Weglot/
+                        - img "Avatar de u/Weglot" [ref=e346]
+                        - generic [ref=e347]: u/Weglot
+                      - generic [ref=e348]: •
+                      - link "Patrocinado" [ref=e350] [cursor=pointer]:
+                        - /url: /user/Weglot/
+                        - generic [ref=e351]: Patrocinado
+                      - link [ref=e353] [cursor=pointer]:
+                        - /url: https://alb.reddit.com/cr?za=lzklYcULJ_yzsPF6n_UcuF2qB-FZS8MDcMOgiKHhTqej6HyxTcUoMKXbT8Z0FGLBU_JmPLY-9YAsQphnvRwp1Mb110Edu9TqtiP2gYJosLMob4pk93BfnhQJfXZiojh0gp5LEeBvPDGtSpKaeJdEOhtLqIJvY8KY8gHbIcspa8OlJp4IsflKc_UnwPFfiXhJNqjibITuxQwrVu0SOA0Gm98Qb5nDXV4KMu07pX264UDQclHEC1SVf4Ok9XTZ0Xl7XzXomUBy58BRhgQLjs7MWjD7nXByRfSCIiPc6lXRUCL9uSWY3_8neCjsJolLtrM1U1Y5as4Fwk8mS4OvkyMup_oHu7MaoZVnW-v3VZ6bazwgO2Wxwv2zqJt6Ot1YSfO0MO7qpE11rJ7dWadgmEfQWUfH7kGuejyw0fs_v2ot6RFeoyNsiLWc1ugVMSTlilMDTdX8DifyhZ7AUJsJIiU3qRV0V3Dqd1g7HY56oj5hQ9Cj4sRgHUOA4HsSR489v5lrj_1952hRyvoMVpPDqb9C31vI7YYvrGy1mvmNm95w712DILJEyOCalq6m8905hCeRXQhyvhTtyTv5HcgqhTSBWNrus-ZaVZmsTETU9SJBeY3ePHZs5Yz3a8GGO9yKkYunyZeZVmIjV2VRJUmuSnv25fG0IFpHtNMaUcEA3rJ1dYtDevTgMdNL9kKCF4-K0xD9D-IE8LwEzSYy4a0GWqHuBNlLFdAIOW3rkmvhH4jyvFUPcMhhfDfxS5FGzzWlUppY&zp=0AE-7dSPpi84Pc2RCzhllPMyGjFeu9b--EJMGdfNcERF_rKzX3a_mod9IPKpwUQXi26E5xFZYG0JWOj2uKaxUMCoEqAw4A0M9LnSdemjdlKh2-PgUHotczpzV8XK8m_tNVENiOnCS_16VCaG1AI37Qk1ee2eFLOZO6NsZsdBHLXSDYC4CKgETgoHELdKM8BPgPi0-B1L8F7AB7EQARMW_bMD8giPIVyj8555KXau4--Fh8r4VtlsOLQ3B2zvhqlFBHqwRmzD49T8MO-KxnPwLAybFXP82a3B0hgMALW9ghasV2G0FpX0DR1-_PoN8JoAhTS4vwwIhzkxofW55I8
+                    - button "Abrir acciones de usuario" [ref=e358] [cursor=pointer]:
+                      - img [ref=e361]
+                  - heading "Connect Weglot and get a fully translated site displayed in minutes. AI + human review." [level=2] [ref=e365]:
+                    - link "Connect Weglot and get a fully translated site displayed in minutes. AI + human review." [ref=e368] [cursor=pointer]:
+                      - /url: https://alb.reddit.com/cr?za=lzklYcULJ_yzsPF6n_UcuF2qB-FZS8MDcMOgiKHhTqej6HyxTcUoMKXbT8Z0FGLBU_JmPLY-9YAsQphnvRwp1Mb110Edu9TqtiP2gYJosLMob4pk93BfnhQJfXZiojh0gp5LEeBvPDGtSpKaeJdEOhtLqIJvY8KY8gHbIcspa8OlJp4IsflKc_UnwPFfiXhJNqjibITuxQwrVu0SOA0Gm98Qb5nDXV4KMu07pX264UDQclHEC1SVf4Ok9XTZ0Xl7XzXomUBy58BRhgQLjs7MWjD7nXByRfSCIiPc6lXRUCL9uSWY3_8neCjsJolLtrM1U1Y5as4Fwk8mS4OvkyMup_oHu7MaoZVnW-v3VZ6bazwgO2Wxwv2zqJt6Ot1YSfO0MO7qpE11rJ7dWadgmEfQWUfH7kGuejyw0fs_v2ot6RFeoyNsiLWc1ugVMSTlilMDTdX8DifyhZ7AUJsJIiU3qRV0V3Dqd1g7HY56oj5hQ9Cj4sRgHUOA4HsSR489v5lrj_1952hRyvoMVpPDqb9C31vI7YYvrGy1mvmNm95w712DILJEyOCalq6m8905hCeRXQhyvhTtyTv5HcgqhTSBWNrus-ZaVZmsTETU9SJBeY3ePHZs5Yz3a8GGO9yKkYunyZeZVmIjV2VRJUmuSnv25fG0IFpHtNMaUcEA3rJ1dYtDevTgMdNL9kKCF4-K0xD9D-IE8LwEzSYy4a0GWqHuBNlLFdAIOW3rkmvhH4jyvFUPcMhhfDfxS5FGzzWlUppY&zp=0AE-7dSPpi84Pc2RCzhllPMyGjFeu9b--EJMGdfNcERF_rKzX3a_mod9IPKpwUQXi26E5xFZYG0JWOj2uKaxUMCoEqAw4A0M9LnSdemjdlKh2-PgUHotczpzV8XK8m_tNVENiOnCS_16VCaG1AI37Qk1ee2eFLOZO6NsZsdBHLXSDYC4CKgETgoHELdKM8BPgPi0-B1L8F7AB7EQARMW_bMD8giPIVyj8555KXau4--Fh8r4VtlsOLQ3B2zvhqlFBHqwRmzD49T8MO-KxnPwLAybFXP82a3B0hgMALW9ghasV2G0FpX0DR1-_PoN8JoAhTS4vwwIhzkxofW55I8
+                      - generic: Connect Weglot and get a fully translated site displayed in minutes. AI + human review.
+                  - generic [ref=e369]:
+                    - link "Connect Weglot and get a fully translated site displayed in minutes. AI + human review." [ref=e373] [cursor=pointer]:
+                      - /url: https://alb.reddit.com/cr?za=lzklYcULJ_yzsPF6n_UcuF2qB-FZS8MDcMOgiKHhTqej6HyxTcUoMKXbT8Z0FGLBU_JmPLY-9YAsQphnvRwp1Mb110Edu9TqtiP2gYJosLMob4pk93BfnhQJfXZiojh0gp5LEeBvPDGtSpKaeJdEOhtLqIJvY8KY8gHbIcspa8OlJp4IsflKc_UnwPFfiXhJNqjibITuxQwrVu0SOA0Gm98Qb5nDXV4KMu07pX264UDQclHEC1SVf4Ok9XTZ0Xl7XzXomUBy58BRhgQLjs7MWjD7nXByRfSCIiPc6lXRUCL9uSWY3_8neCjsJolLtrM1U1Y5as4Fwk8mS4OvkyMup_oHu7MaoZVnW-v3VZ6bazwgO2Wxwv2zqJt6Ot1YSfO0MO7qpE11rJ7dWadgmEfQWUfH7kGuejyw0fs_v2ot6RFeoyNsiLWc1ugVMSTlilMDTdX8DifyhZ7AUJsJIiU3qRV0V3Dqd1g7HY56oj5hQ9Cj4sRgHUOA4HsSR489v5lrj_1952hRyvoMVpPDqb9C31vI7YYvrGy1mvmNm95w712DILJEyOCalq6m8905hCeRXQhyvhTtyTv5HcgqhTSBWNrus-ZaVZmsTETU9SJBeY3ePHZs5Yz3a8GGO9yKkYunyZeZVmIjV2VRJUmuSnv25fG0IFpHtNMaUcEA3rJ1dYtDevTgMdNL9kKCF4-K0xD9D-IE8LwEzSYy4a0GWqHuBNlLFdAIOW3rkmvhH4jyvFUPcMhhfDfxS5FGzzWlUppY&zp=0AE-7dSPpi84Pc2RCzhllPMyGjFeu9b--EJMGdfNcERF_rKzX3a_mod9IPKpwUQXi26E5xFZYG0JWOj2uKaxUMCoEqAw4A0M9LnSdemjdlKh2-PgUHotczpzV8XK8m_tNVENiOnCS_16VCaG1AI37Qk1ee2eFLOZO6NsZsdBHLXSDYC4CKgETgoHELdKM8BPgPi0-B1L8F7AB7EQARMW_bMD8giPIVyj8555KXau4--Fh8r4VtlsOLQ3B2zvhqlFBHqwRmzD49T8MO-KxnPwLAybFXP82a3B0hgMALW9ghasV2G0FpX0DR1-_PoN8JoAhTS4vwwIhzkxofW55I8
+                      - img "Connect Weglot and get a fully translated site displayed in minutes. AI + human review." [ref=e375]
+                    - separator [ref=e376]
+                    - generic [ref=e377]:
+                      - link [ref=e379] [cursor=pointer]:
+                        - /url: https://alb.reddit.com/cr?za=lzklYcULJ_yzsPF6n_UcuF2qB-FZS8MDcMOgiKHhTqej6HyxTcUoMKXbT8Z0FGLBU_JmPLY-9YAsQphnvRwp1Mb110Edu9TqtiP2gYJosLMob4pk93BfnhQJfXZiojh0gp5LEeBvPDGtSpKaeJdEOhtLqIJvY8KY8gHbIcspa8OlJp4IsflKc_UnwPFfiXhJNqjibITuxQwrVu0SOA0Gm98Qb5nDXV4KMu07pX264UDQclHEC1SVf4Ok9XTZ0Xl7XzXomUBy58BRhgQLjs7MWjD7nXByRfSCIiPc6lXRUCL9uSWY3_8neCjsJolLtrM1U1Y5as4Fwk8mS4OvkyMup_oHu7MaoZVnW-v3VZ6bazwgO2Wxwv2zqJt6Ot1YSfO0MO7qpE11rJ7dWadgmEfQWUfH7kGuejyw0fs_v2ot6RFeoyNsiLWc1ugVMSTlilMDTdX8DifyhZ7AUJsJIiU3qRV0V3Dqd1g7HY56oj5hQ9Cj4sRgHUOA4HsSR489v5lrj_1952hRyvoMVpPDqb9C31vI7YYvrGy1mvmNm95w712DILJEyOCalq6m8905hCeRXQhyvhTtyTv5HcgqhTSBWNrus-ZaVZmsTETU9SJBeY3ePHZs5Yz3a8GGO9yKkYunyZeZVmIjV2VRJUmuSnv25fG0IFpHtNMaUcEA3rJ1dYtDevTgMdNL9kKCF4-K0xD9D-IE8LwEzSYy4a0GWqHuBNlLFdAIOW3rkmvhH4jyvFUPcMhhfDfxS5FGzzWlUppY&zp=0AE-7dSPpi84Pc2RCzhllPMyGjFeu9b--EJMGdfNcERF_rKzX3a_mod9IPKpwUQXi26E5xFZYG0JWOj2uKaxUMCoEqAw4A0M9LnSdemjdlKh2-PgUHotczpzV8XK8m_tNVENiOnCS_16VCaG1AI37Qk1ee2eFLOZO6NsZsdBHLXSDYC4CKgETgoHELdKM8BPgPi0-B1L8F7AB7EQARMW_bMD8giPIVyj8555KXau4--Fh8r4VtlsOLQ3B2zvhqlFBHqwRmzD49T8MO-KxnPwLAybFXP82a3B0hgMALW9ghasV2G0FpX0DR1-_PoN8JoAhTS4vwwIhzkxofW55I8
+                      - generic [ref=e380]:
+                        - link "weglot.com" [ref=e383] [cursor=pointer]:
+                          - /url: https://alb.reddit.com/cr?za=lzklYcULJ_yzsPF6n_UcuF2qB-FZS8MDcMOgiKHhTqej6HyxTcUoMKXbT8Z0FGLBU_JmPLY-9YAsQphnvRwp1Mb110Edu9TqtiP2gYJosLMob4pk93BfnhQJfXZiojh0gp5LEeBvPDGtSpKaeJdEOhtLqIJvY8KY8gHbIcspa8OlJp4IsflKc_UnwPFfiXhJNqjibITuxQwrVu0SOA0Gm98Qb5nDXV4KMu07pX264UDQclHEC1SVf4Ok9XTZ0Xl7XzXomUBy58BRhgQLjs7MWjD7nXByRfSCIiPc6lXRUCL9uSWY3_8neCjsJolLtrM1U1Y5as4Fwk8mS4OvkyMup_oHu7MaoZVnW-v3VZ6bazwgO2Wxwv2zqJt6Ot1YSfO0MO7qpE11rJ7dWadgmEfQWUfH7kGuejyw0fs_v2ot6RFeoyNsiLWc1ugVMSTlilMDTdX8DifyhZ7AUJsJIiU3qRV0V3Dqd1g7HY56oj5hQ9Cj4sRgHUOA4HsSR489v5lrj_1952hRyvoMVpPDqb9C31vI7YYvrGy1mvmNm95w712DILJEyOCalq6m8905hCeRXQhyvhTtyTv5HcgqhTSBWNrus-ZaVZmsTETU9SJBeY3ePHZs5Yz3a8GGO9yKkYunyZeZVmIjV2VRJUmuSnv25fG0IFpHtNMaUcEA3rJ1dYtDevTgMdNL9kKCF4-K0xD9D-IE8LwEzSYy4a0GWqHuBNlLFdAIOW3rkmvhH4jyvFUPcMhhfDfxS5FGzzWlUppY&zp=0AE-7dSPpi84Pc2RCzhllPMyGjFeu9b--EJMGdfNcERF_rKzX3a_mod9IPKpwUQXi26E5xFZYG0JWOj2uKaxUMCoEqAw4A0M9LnSdemjdlKh2-PgUHotczpzV8XK8m_tNVENiOnCS_16VCaG1AI37Qk1ee2eFLOZO6NsZsdBHLXSDYC4CKgETgoHELdKM8BPgPi0-B1L8F7AB7EQARMW_bMD8giPIVyj8555KXau4--Fh8r4VtlsOLQ3B2zvhqlFBHqwRmzD49T8MO-KxnPwLAybFXP82a3B0hgMALW9ghasV2G0FpX0DR1-_PoN8JoAhTS4vwwIhzkxofW55I8
+                          - generic: weglot.com
+                        - link "Registrarse" [ref=e385] [cursor=pointer]:
+                          - /url: https://alb.reddit.com/cr?za=lzklYcULJ_yzsPF6n_UcuF2qB-FZS8MDcMOgiKHhTqej6HyxTcUoMKXbT8Z0FGLBU_JmPLY-9YAsQphnvRwp1Mb110Edu9TqtiP2gYJosLMob4pk93BfnhQJfXZiojh0gp5LEeBvPDGtSpKaeJdEOhtLqIJvY8KY8gHbIcspa8OlJp4IsflKc_UnwPFfiXhJNqjibITuxQwrVu0SOA0Gm98Qb5nDXV4KMu07pX264UDQclHEC1SVf4Ok9XTZ0Xl7XzXomUBy58BRhgQLjs7MWjD7nXByRfSCIiPc6lXRUCL9uSWY3_8neCjsJolLtrM1U1Y5as4Fwk8mS4OvkyMup_oHu7MaoZVnW-v3VZ6bazwgO2Wxwv2zqJt6Ot1YSfO0MO7qpE11rJ7dWadgmEfQWUfH7kGuejyw0fs_v2ot6RFeoyNsiLWc1ugVMSTlilMDTdX8DifyhZ7AUJsJIiU3qRV0V3Dqd1g7HY56oj5hQ9Cj4sRgHUOA4HsSR489v5lrj_1952hRyvoMVpPDqb9C31vI7YYvrGy1mvmNm95w712DILJEyOCalq6m8905hCeRXQhyvhTtyTv5HcgqhTSBWNrus-ZaVZmsTETU9SJBeY3ePHZs5Yz3a8GGO9yKkYunyZeZVmIjV2VRJUmuSnv25fG0IFpHtNMaUcEA3rJ1dYtDevTgMdNL9kKCF4-K0xD9D-IE8LwEzSYy4a0GWqHuBNlLFdAIOW3rkmvhH4jyvFUPcMhhfDfxS5FGzzWlUppY&zp=0AE-7dSPpi84Pc2RCzhllPMyGjFeu9b--EJMGdfNcERF_rKzX3a_mod9IPKpwUQXi26E5xFZYG0JWOj2uKaxUMCoEqAw4A0M9LnSdemjdlKh2-PgUHotczpzV8XK8m_tNVENiOnCS_16VCaG1AI37Qk1ee2eFLOZO6NsZsdBHLXSDYC4CKgETgoHELdKM8BPgPi0-B1L8F7AB7EQARMW_bMD8giPIVyj8555KXau4--Fh8r4VtlsOLQ3B2zvhqlFBHqwRmzD49T8MO-KxnPwLAybFXP82a3B0hgMALW9ghasV2G0FpX0DR1-_PoN8JoAhTS4vwwIhzkxofW55I8
+                          - generic [ref=e387]:
+                            - generic: Registrarse
+                  - generic "Acciones disponibles para esta publicación" [ref=e388]:
+                    - generic [ref=e391]:
+                      - button "Upvote" [ref=e392] [cursor=pointer]:
+                        - img [ref=e394]
+                        - generic [ref=e396]:
+                          - generic: Upvote
+                      - text: Votar
+                      - button "Downvote" [ref=e397] [cursor=pointer]:
+                        - img [ref=e399]
+                        - generic [ref=e401]:
+                          - generic: Downvote
+                    - link "0 Ir a los comentarios" [ref=e402] [cursor=pointer]:
+                      - /url: /user/Weglot/comments/1rmf56h/connect_weglot_and_get_a_fully_translated_site/?p=1&impressionid=5891558986775329081
+                      - generic [ref=e403]:
+                        - img [ref=e405]
+                        - generic [ref=e408]: "0"
+                      - generic [ref=e409]:
+                        - generic: Ir a los comentarios
+                    - button "Compartir" [ref=e413] [cursor=pointer]:
+                      - generic [ref=e414]:
+                        - img [ref=e416]
+                        - generic [ref=e418]: Compartir
+                    - link [ref=e420] [cursor=pointer]:
+                      - /url: https://alb.reddit.com/cr?za=lzklYcULJ_yzsPF6n_UcuF2qB-FZS8MDcMOgiKHhTqej6HyxTcUoMKXbT8Z0FGLBU_JmPLY-9YAsQphnvRwp1Mb110Edu9TqtiP2gYJosLMob4pk93BfnhQJfXZiojh0gp5LEeBvPDGtSpKaeJdEOhtLqIJvY8KY8gHbIcspa8OlJp4IsflKc_UnwPFfiXhJNqjibITuxQwrVu0SOA0Gm98Qb5nDXV4KMu07pX264UDQclHEC1SVf4Ok9XTZ0Xl7XzXomUBy58BRhgQLjs7MWjD7nXByRfSCIiPc6lXRUCL9uSWY3_8neCjsJolLtrM1U1Y5as4Fwk8mS4OvkyMup_oHu7MaoZVnW-v3VZ6bazwgO2Wxwv2zqJt6Ot1YSfO0MO7qpE11rJ7dWadgmEfQWUfH7kGuejyw0fs_v2ot6RFeoyNsiLWc1ugVMSTlilMDTdX8DifyhZ7AUJsJIiU3qRV0V3Dqd1g7HY56oj5hQ9Cj4sRgHUOA4HsSR489v5lrj_1952hRyvoMVpPDqb9C31vI7YYvrGy1mvmNm95w712DILJEyOCalq6m8905hCeRXQhyvhTtyTv5HcgqhTSBWNrus-ZaVZmsTETU9SJBeY3ePHZs5Yz3a8GGO9yKkYunyZeZVmIjV2VRJUmuSnv25fG0IFpHtNMaUcEA3rJ1dYtDevTgMdNL9kKCF4-K0xD9D-IE8LwEzSYy4a0GWqHuBNlLFdAIOW3rkmvhH4jyvFUPcMhhfDfxS5FGzzWlUppY&zp=0AE-7dSPpi84Pc2RCzhllPMyGjFeu9b--EJMGdfNcERF_rKzX3a_mod9IPKpwUQXi26E5xFZYG0JWOj2uKaxUMCoEqAw4A0M9LnSdemjdlKh2-PgUHotczpzV8XK8m_tNVENiOnCS_16VCaG1AI37Qk1ee2eFLOZO6NsZsdBHLXSDYC4CKgETgoHELdKM8BPgPi0-B1L8F7AB7EQARMW_bMD8giPIVyj8555KXau4--Fh8r4VtlsOLQ3B2zvhqlFBHqwRmzD49T8MO-KxnPwLAybFXP82a3B0hgMALW9ghasV2G0FpX0DR1-_PoN8JoAhTS4vwwIhzkxofW55I8
+                - separator [ref=e421]
+                - separator [ref=e422]
+                - article "Chistes de Chuck Norris" [ref=e423]:
+                  - generic [ref=e424] [cursor=pointer]:
+                    - link "Chistes de Chuck Norris" [ref=e425]:
+                      - /url: /r/webdev/comments/1rz6g14/chuck_norris_jokes/
+                      - generic [ref=e426]:
+                        - generic: Chistes de Chuck Norris
+                    - generic [ref=e427]:
+                      - generic [ref=e429]:
+                        - generic [ref=e430]:
+                          - 'link "Autor: u/zigzeira" [ref=e435]':
+                            - /url: /user/zigzeira/
+                            - generic [ref=e436]:
+                              - img [ref=e441]
+                              - generic [ref=e443]: u/zigzeira
+                          - generic [ref=e444]: •
+                          - time [ref=e446]: hace 29 min
+                        - button "Abrir acciones de usuario" [ref=e451]:
+                          - img [ref=e454]
+                      - generic [ref=e456]:
+                        - link "Chistes de Chuck Norris" [ref=e458]:
+                          - /url: /r/webdev/comments/1rz6g14/chuck_norris_jokes/
+                        - link "https://chuck-norris-jokes-2026.vercel.app/" [ref=e461]:
+                          - /url: https://chuck-norris-jokes-2026.vercel.app/
+                    - generic "Acciones disponibles para esta publicación" [ref=e463]:
+                      - generic [ref=e466]:
+                        - button "Upvote" [ref=e467]:
+                          - img [ref=e469]
+                          - generic [ref=e471]:
+                            - generic: Upvote
+                        - generic [ref=e473]: "0"
+                        - button "Downvote" [ref=e474]:
+                          - img [ref=e476]
+                          - generic [ref=e478]:
+                            - generic: Downvote
+                      - link "0 Ir a los comentarios" [ref=e479]:
+                        - /url: /r/webdev/comments/1rz6g14/chuck_norris_jokes/
+                        - generic [ref=e480]:
+                          - img [ref=e482]
+                          - generic [ref=e485]: "0"
+                        - generic [ref=e486]:
+                          - generic: Ir a los comentarios
+                      - button "Premiar" [ref=e488]:
+                        - img [ref=e491]
+                      - button "Compartir" [ref=e496]:
+                        - generic [ref=e497]:
+                          - img [ref=e499]
+                          - generic [ref=e501]: Compartir
+                - separator [ref=e502]
+                - article "¿ESTA ES LA DEMO DEL SITIO WEB CORRECTA?" [ref=e503]:
+                  - generic [ref=e504] [cursor=pointer]:
+                    - link "¿ESTA ES LA DEMO DEL SITIO WEB CORRECTA?" [ref=e505]:
+                      - /url: /r/webdev/comments/1rz5y7f/is_this_right_website_demo_launch/
+                      - generic [ref=e506]:
+                        - generic: ¿ESTA ES LA DEMO DEL SITIO WEB CORRECTA?
+                    - generic [ref=e507]:
+                      - generic [ref=e509]:
+                        - generic [ref=e510]:
+                          - 'link "Autor: u/Dangerous-Status-609" [ref=e515]':
+                            - /url: /user/Dangerous-Status-609/
+                            - generic [ref=e516]:
+                              - img "Avatar de u/Dangerous-Status-609" [ref=e519]
+                              - generic [ref=e520]: u/Dangerous-Status-609
+                          - generic [ref=e521]: •
+                          - time [ref=e523]: hace 48 min
+                        - button "Abrir acciones de usuario" [ref=e528]:
+                          - img [ref=e531]
+                      - generic [ref=e533]:
+                        - link "¿ESTA ES LA DEMO DEL SITIO WEB CORRECTA?" [ref=e535]:
+                          - /url: /r/webdev/comments/1rz5y7f/is_this_right_website_demo_launch/
+                          - text: ¿ESTA ES LA DEMO DEL SITIO WEB CORRECTA?
+                        - 'link "Etiqueta: Discussion" [ref=e538]':
+                          - /url: /r/webdev/?f=flair_name%3A%22Discussion%22
+                          - 'generic "Etiqueta: Discussion" [ref=e540]': Discussion
+                        - link "https://streamlinedesk.in/" [ref=e543]:
+                          - /url: https://streamlinedesk.in/
+                    - generic "Acciones disponibles para esta publicación" [ref=e545]:
+                      - generic [ref=e548]:
+                        - button "Upvote" [ref=e549]:
+                          - img [ref=e551]
+                          - generic [ref=e553]:
+                            - generic: Upvote
+                        - generic [ref=e555]: "0"
+                        - button "Downvote" [ref=e556]:
+                          - img [ref=e558]
+                          - generic [ref=e560]:
+                            - generic: Downvote
+                      - link "4 Ir a los comentarios" [ref=e561]:
+                        - /url: /r/webdev/comments/1rz5y7f/is_this_right_website_demo_launch/
+                        - generic [ref=e562]:
+                          - img [ref=e564]
+                          - generic [ref=e567]: "4"
+                        - generic [ref=e568]:
+                          - generic: Ir a los comentarios
+                      - button "Premiar" [ref=e570]:
+                        - img [ref=e573]
+                      - button "Compartir" [ref=e578]:
+                        - generic [ref=e579]:
+                          - img [ref=e581]
+                          - generic [ref=e583]: Compartir
+                - separator [ref=e584]
+                - article "¿Cuál es el mejor proveedor de números de teléfono temporales para recibir SMS en línea?" [ref=e585]:
+                  - generic [ref=e586] [cursor=pointer]:
+                    - link "¿Cuál es el mejor proveedor de números de teléfono temporales para recibir SMS en línea?" [ref=e587]:
+                      - /url: /r/webdev/comments/1rz57qw/best_temporary_phone_number_provider_to_receive/
+                      - generic [ref=e588]:
+                        - generic: ¿Cuál es el mejor proveedor de números de teléfono temporales para recibir SMS en línea?
+                    - generic [ref=e589]:
+                      - generic [ref=e590]:
+                        - 'link "Autor: u/Safe-Temporary-4888" [ref=e595]':
+                          - /url: /user/Safe-Temporary-4888/
+                          - generic [ref=e596]:
+                            - img [ref=e601]
+                            - generic [ref=e603]: u/Safe-Temporary-4888
+                        - generic [ref=e604]: •
+                        - time [ref=e606]: hace 1 h
+                      - button "Abrir acciones de usuario" [ref=e611]:
+                        - img [ref=e614]
+                    - generic [ref=e617]:
+                      - heading "¿Cuál es el mejor proveedor de números de teléfono temporales para recibir SMS en línea?" [level=2] [ref=e618]:
+                        - link "¿Cuál es el mejor proveedor de números de teléfono temporales para recibir SMS en línea?" [ref=e619]:
+                          - /url: /r/webdev/comments/1rz57qw/best_temporary_phone_number_provider_to_receive/
+                      - generic [ref=e620]:
+                        - generic:
+                          - link "Hola a todos, una pregunta rápida. Solo quiero usar números desechables baratos para verificar mi número y evitar que mi número real termine en un montón de listas de spam. ¿Cuál es el mejor proveedor de números temporales para recibir SMS en línea actualmente? No quiero una suscripción mensual, solo un sitio sencillo de pago por uso donde pueda obtener un número limpio, recibir el SMS de verificación y desecharlo. ¿Alguna recomendación?":
+                            - /url: /r/webdev/comments/1rz57qw/best_temporary_phone_number_provider_to_receive/
+                            - generic:
+                              - generic:
+                                - paragraph: Hola a todos, una pregunta rápida.
+                                - paragraph: Solo quiero usar números desechables baratos para verificar mi número y evitar que mi número real termine en un montón de listas de spam.
+                                - paragraph: ¿Cuál es el mejor proveedor de números temporales para recibir SMS en línea actualmente? No quiero una suscripción mensual, solo un sitio sencillo de pago por uso donde pueda obtener un número limpio, recibir el SMS de verificación y desecharlo. ¿Alguna recomendación?
+                      - 'link "Etiqueta: Question" [ref=e623]':
+                        - /url: /r/webdev/?f=flair_name%3A%22Question%22
+                        - 'generic "Etiqueta: Question" [ref=e625]': Question
+                    - generic "Acciones disponibles para esta publicación" [ref=e626]:
+                      - generic [ref=e629]:
+                        - button "Upvote" [ref=e630]:
+                          - img [ref=e632]
+                          - generic [ref=e634]:
+                            - generic: Upvote
+                        - generic [ref=e636]: "4"
+                        - button "Downvote" [ref=e637]:
+                          - img [ref=e639]
+                          - generic [ref=e641]:
+                            - generic: Downvote
+                      - link "3 Ir a los comentarios" [ref=e642]:
+                        - /url: /r/webdev/comments/1rz57qw/best_temporary_phone_number_provider_to_receive/
+                        - generic [ref=e643]:
+                          - img [ref=e645]
+                          - generic [ref=e648]: "3"
+                        - generic [ref=e649]:
+                          - generic: Ir a los comentarios
+                      - button "Premiar" [ref=e651]:
+                        - img [ref=e654]
+                      - button "Compartir" [ref=e659]:
+                        - generic [ref=e660]:
+                          - img [ref=e662]
+                          - generic [ref=e664]: Compartir
+                - separator [ref=e665]
+                - article "En la era de la IA, \"¿Puedes llevar un caballo al agua, pero no puedes obligarlo a beber?\", ¿sigue siendo relevante?" [ref=e666]:
+                  - generic [ref=e667] [cursor=pointer]:
+                    - link "En la era de la IA, \"¿Puedes llevar un caballo al agua, pero no puedes obligarlo a beber?\", ¿sigue siendo relevante?" [ref=e668]:
+                      - /url: /r/webdev/comments/1rz4xlo/in_the_age_of_ai_you_can_lead_a_horse_to_water/
+                      - generic [ref=e669]:
+                        - generic: En la era de la IA, "¿Puedes llevar un caballo al agua, pero no puedes obligarlo a beber?", ¿sigue siendo relevante?
+                    - generic [ref=e670]:
+                      - generic [ref=e671]:
+                        - 'link "Autor: u/marine_surfer" [ref=e676]':
+                          - /url: /user/marine_surfer/
+                          - generic [ref=e677]:
+                            - img "Avatar de u/marine_surfer" [ref=e680]
+                            - generic [ref=e681]: u/marine_surfer
+                        - generic [ref=e682]: •
+                        - time [ref=e684]: hace 1 h
+                      - button "Abrir acciones de usuario" [ref=e689]:
+                        - img [ref=e692]
+                    - generic [ref=e695]:
+                      - heading "En la era de la IA, \"¿Puedes llevar un caballo al agua, pero no puedes obligarlo a beber?\", ¿sigue siendo relevante?" [level=2] [ref=e696]:
+                        - link "En la era de la IA, \"¿Puedes llevar un caballo al agua, pero no puedes obligarlo a beber?\", ¿sigue siendo relevante?" [ref=e697]:
+                          - /url: /r/webdev/comments/1rz4xlo/in_the_age_of_ai_you_can_lead_a_horse_to_water/
+                      - generic [ref=e698]:
+                        - generic:
+                          - link:
+                            - /url: /r/webdev/comments/1rz4xlo/in_the_age_of_ai_you_can_lead_a_horse_to_water/
+                            - generic:
+                              - generic:
+                                - paragraph: En la era de la IA, "¿Puedes llevar un caballo al agua, pero no puedes obligarlo a beber?", ¿sigue siendo relevante? La IA puede guiar a una persona para crear un sitio web/aplicación, pero ¿tendrá la fuerza de voluntad para hacerlo? Creo que es muy importante responder a esto. En mi humilde opinión, la mayoría de la gente se topará con su primer obstáculo y se rendirá. Usarán los fondos que tienen y contratarán a alguien, a menos que ya tengan las habilidades.
+                                - paragraph: Desde una perspectiva empresarial,
+                                - paragraph: Las únicas personas que veo realmente tratando de construir con IA ya están con lo justo y de todas formas no serían buenos clientes para trabajar. Las empresas que recortan gastos y los CEOs con los momentos "¡Ajá!" están destinados a fracasar a menos que sean un poco expertos en tecnología. ¿Opiniones?
+                                - paragraph: Me gustaría ver más investigación sobre esto. La única competencia que veo es de empresas que reducen personal porque la IA permite que la gente técnica sea más eficiente. No necesariamente significa que habrá menos consumidores o clientes.
+                    - generic "Acciones disponibles para esta publicación" [ref=e699]:
+                      - generic [ref=e702]:
+                        - button "Upvote" [ref=e703]:
+                          - img [ref=e705]
+                          - generic [ref=e707]:
+                            - generic: Upvote
+                        - generic [ref=e709]: "0"
+                        - button "Downvote" [ref=e710]:
+                          - img [ref=e712]
+                          - generic [ref=e714]:
+                            - generic: Downvote
+                      - link "6 Ir a los comentarios" [ref=e715]:
+                        - /url: /r/webdev/comments/1rz4xlo/in_the_age_of_ai_you_can_lead_a_horse_to_water/
+                        - generic [ref=e716]:
+                          - img [ref=e718]
+                          - generic [ref=e721]: "6"
+                        - generic [ref=e722]:
+                          - generic: Ir a los comentarios
+                      - button "Premiar" [ref=e724]:
+                        - img [ref=e727]
+                      - button "Compartir" [ref=e732]:
+                        - generic [ref=e733]:
+                          - img [ref=e735]
+                          - generic [ref=e737]: Compartir
+                - separator [ref=e738]
+                - article "¿Qué tanto creen que los colores LCH afectan la accesibilidad?" [ref=e739]:
+                  - generic [ref=e740] [cursor=pointer]:
+                    - link "¿Qué tanto creen que los colores LCH afectan la accesibilidad?" [ref=e741]:
+                      - /url: /r/webdev/comments/1rz47a7/how_much_do_you_think_lch_colors_hurt/
+                      - generic [ref=e742]:
+                        - generic: ¿Qué tanto creen que los colores LCH afectan la accesibilidad?
+                    - generic [ref=e743]:
+                      - generic [ref=e744]:
+                        - 'link "Autor: u/WildWildWasp" [ref=e749]':
+                          - /url: /user/WildWildWasp/
+                          - generic [ref=e750]:
+                            - img "Avatar de u/WildWildWasp" [ref=e753]
+                            - generic [ref=e754]: u/WildWildWasp
+                        - generic [ref=e755]: •
+                        - time [ref=e757]: hace 2 h
+                      - button "Abrir acciones de usuario" [ref=e762]:
+                        - img [ref=e765]
+                    - generic [ref=e768]:
+                      - heading "¿Qué tanto creen que los colores LCH afectan la accesibilidad?" [level=2] [ref=e769]:
+                        - link "¿Qué tanto creen que los colores LCH afectan la accesibilidad?" [ref=e770]:
+                          - /url: /r/webdev/comments/1rz47a7/how_much_do_you_think_lch_colors_hurt/
+                      - generic [ref=e771]:
+                        - generic:
+                          - link:
+                            - /url: /r/webdev/comments/1rz47a7/how_much_do_you_think_lch_colors_hurt/
+                            - generic:
+                              - generic:
+                                - paragraph: "Así que últimamente me he metido de lleno en el rollo de LCH y me encanta lo fácil que es trabajar con él, y lo mucho mejor que se ven los resultados. Lo uso en lugar de RGB en casi cualquier situación donde necesito que los colores se vean bien. Pero hay un problema: los colores LCH todavía no son muy universales, digamos. Algunos navegadores más viejos o más de nicho tienen problemas con ellos, o de plano no los muestran."
+                                - paragraph: Hasta ahora no he tenido ningún problema con mis proyectos, nunca he tenido quejas ni problemas por usar LCH. Pero me sigue dando cosa saber que es *tan* nuevo que es cuestionable.
+                                - paragraph: He intentado buscar en Google discusiones sobre su practicidad, pero lo único que encuentro son artículos sesudos sobre cómo LCH es el futuro y todos deberíamos usarlo. ¡Ya lo estoy usando, no necesito que me convenzan! Solo quiero saber las opiniones y experiencias de otras personas.
+                                - paragraph: También conozco culori, parece que sí soluciona algunas preocupaciones, pero no puedo decir que lo entienda del todo, ni es útil si solo tienes acceso a los archivos CSS.
+                                - paragraph: "edit: Para que quede claro, me refiero a la accesibilidad en los NAVEGADORES. Sé que el modo de color que uses no tiene ningún efecto en el ojo humano. Esto no se trata de fatiga visual o legibilidad de la interfaz, sino de que los colores funcionen técnicamente."
+                      - 'link "Etiqueta: Discussion" [ref=e774]':
+                        - /url: /r/webdev/?f=flair_name%3A%22Discussion%22
+                        - 'generic "Etiqueta: Discussion" [ref=e776]': Discussion
+                    - generic "Acciones disponibles para esta publicación" [ref=e777]:
+                      - generic [ref=e780]:
+                        - button "Upvote" [ref=e781]:
+                          - img [ref=e783]
+                          - generic [ref=e785]:
+                            - generic: Upvote
+                        - generic [ref=e787]: "1"
+                        - button "Downvote" [ref=e788]:
+                          - img [ref=e790]
+                          - generic [ref=e792]:
+                            - generic: Downvote
+                      - link "6 Ir a los comentarios" [ref=e793]:
+                        - /url: /r/webdev/comments/1rz47a7/how_much_do_you_think_lch_colors_hurt/
+                        - generic [ref=e794]:
+                          - img [ref=e796]
+                          - generic [ref=e799]: "6"
+                        - generic [ref=e800]:
+                          - generic: Ir a los comentarios
+                      - button "Premiar" [ref=e802]:
+                        - img [ref=e805]
+                      - button "Compartir" [ref=e810]:
+                        - generic [ref=e811]:
+                          - img [ref=e813]
+                          - generic [ref=e815]: Compartir
+                - separator [ref=e816]
+                - article "Una guía para crear tus propias simulaciones de física interactivas basadas en la web desde cero con solo HTML5/JavaScript -- no se necesitan transpilers súper limitantes" [ref=e817]:
+                  - generic [ref=e818] [cursor=pointer]:
+                    - link "Una guía para crear tus propias simulaciones de física interactivas basadas en la web desde cero con solo HTML5/JavaScript -- no se necesitan transpilers súper limitantes" [ref=e819]:
+                      - /url: /r/webdev/comments/1rz384z/a_guide_to_making_your_own_interactive_webbased/
+                      - generic [ref=e820]:
+                        - generic: Una guía para crear tus propias simulaciones de física interactivas basadas en la web desde cero con solo HTML5/JavaScript -- no se necesitan transpilers súper limitantes
+                    - generic [ref=e821]:
+                      - generic [ref=e823]:
+                        - generic [ref=e824]:
+                          - 'link "Autor: u/PrettyPicturesNotTxt" [ref=e829]':
+                            - /url: /user/PrettyPicturesNotTxt/
+                            - generic [ref=e830]:
+                              - img "Avatar de u/PrettyPicturesNotTxt" [ref=e833]
+                              - generic [ref=e834]: u/PrettyPicturesNotTxt
+                          - generic [ref=e835]: •
+                          - time [ref=e837]: hace 3 h
+                        - button "Abrir acciones de usuario" [ref=e842]:
+                          - img [ref=e845]
+                      - generic [ref=e847]:
+                        - link "Una guía para crear tus propias simulaciones de física interactivas basadas en la web desde cero con solo HTML5/JavaScript -- no se necesitan transpilers súper limitantes" [ref=e849]:
+                          - /url: /r/webdev/comments/1rz384z/a_guide_to_making_your_own_interactive_webbased/
+                        - 'link "Etiqueta: Resource" [ref=e852]':
+                          - /url: /r/webdev/?f=flair_name%3A%22Resource%22
+                          - 'generic "Etiqueta: Resource" [ref=e854]': Resource
+                        - link "https://physics.weber.edu/schroeder/html5/" [ref=e857]:
+                          - /url: https://physics.weber.edu/schroeder/html5/
+                    - generic "Acciones disponibles para esta publicación" [ref=e859]:
+                      - generic [ref=e862]:
+                        - button "Upvote" [ref=e863]:
+                          - img [ref=e865]
+                          - generic [ref=e867]:
+                            - generic: Upvote
+                        - generic [ref=e869]: "0"
+                        - button "Downvote" [ref=e870]:
+                          - img [ref=e872]
+                          - generic [ref=e874]:
+                            - generic: Downvote
+                      - link "0 Ir a los comentarios" [ref=e875]:
+                        - /url: /r/webdev/comments/1rz384z/a_guide_to_making_your_own_interactive_webbased/
+                        - generic [ref=e876]:
+                          - img [ref=e878]
+                          - generic [ref=e881]: "0"
+                        - generic [ref=e882]:
+                          - generic: Ir a los comentarios
+                      - button "Premiar" [ref=e884]:
+                        - img [ref=e887]
+                      - button "Compartir" [ref=e892]:
+                        - generic [ref=e893]:
+                          - img [ref=e895]
+                          - generic [ref=e897]: Compartir
+                - separator [ref=e898]
+                - generic [ref=e899]:
+                  - 'generic "Advertisement: Regulations are tough, breaches are worse. Twilio easily secures your stack and keeps you compliant across industries and regions." [ref=e900]':
+                    - 'link "Advertisement: Regulations are tough, breaches are worse. Twilio easily secures your stack and keeps you compliant across industries and regions." [ref=e901] [cursor=pointer]':
+                      - /url: https://alb.reddit.com/cr?za=Pr1BFHujzlwS3iOBzLgj4STJXHPFH8qESzQFr82DiIzx8msTumXPIG-FprLm7C6GVqC71nRqiE9LbZR5v2JTQuDgN8_dUB99q9SIu2K4isjRLC_0jv4EX4tV8EnM9y_ct81RxrVwJyW2Sg7TSfWqKoyVYT5iiWB1f0Sn2vQAx31RO4FUz68gOZrzMPZ562lkFO8YFJ2AKhVXe0cHrSH-h3tB2XIrlip5h-h41JK2TaMyecmEFOt1FXQwRGYZM_e16zV0OT8qvoaC5JAo4UO0vsnbIIo3CnQpb1d-5DN4OC3wZ8-X04IXuXIRLew8JxzzPa6YdeI8bS7rlgZL5zW0DyhQGG6zDvLcdmtpS5aBfNCq4dI91iYquhfRbzpfNZGBKgf5rhqrPcUn954YVttxNM0u0VTRhH-OeQjZMjSM6oaO583gdcZFh739QFXgwaEnl90impD9cuQ4nDW37h3S36MPbt-Bvx9xkO0D7JkKu2bPqPOGFySa8KUU1TFs8vr2_1dIuLFU5rmr_y1x41Mjnu5Gh8NfS4rWRAuH7PX78E41dtc_GZPb71aZZ_3XmHBsgD6RW3dNmVJ9GWr6iC6_AhQXIZ4qfL4CtZaNtyWD5tLpCRiqWqgE7YX-EOJSJa_OX7gL3gbVkM-Ed5J5GTcdfMSE1l5edw-ZOMXgGE_UrDB-FgSDBtxdVbi4MuH5lzu7hCRV0Z7_4Ix-DKJJwNMZA3n7_po9UG4imQFSEXoYgUak0fu_TUElLXvPsAFpUe8M&zp=uCEJ1Am8RZRyEfXVlIhhAv7phK5f7SvaSR-CWjwfVUepy6cFVTQqkeMnMQT0qZxP7KjpxVbolTcDKkcpg5v2a6nOhCksOk2INNBfwRfoOcrwlV4hj8SQspq8Hm71NyKsbuM4WRWC9B11O4-ixrzscpj_NtWfor4oGlpEGGgJw0G1gkVdtfmmWHUg7PGEYb4vKdmX_kSzcb3oDLVBI-1P_RJwnWK7axjxUzHNWDWco_d5Kt6Vs52otHKlYFyK9OSB2b-KNLsZinuaXREQOEhbIgxVTVEZAANPrEGFzIhv2xwXUfc0GPJjUzS8eeMZ53nQZvEjMmyl7CRyAQxJmV3u1OZZK3mzjDzugRFiBOPsXtdbFbxpIHKnu_e92KhcuU7aYBRUIoLkkHCkxUYvvNiusYYahH7nmSEx3x6hxsHyfOyjI33XnC7XBUDqYuFtlzZWS1-fLvyK6s_jr-0bMfDYMzDOJL7i-e9NiMx4YadarSh4UldPgeMmCZcSf7WHEfOD8KRbf_qymyI9_CL8Ykhm
+                  - generic [ref=e902]:
+                    - generic [ref=e903]:
+                      - link "Avatar de u/twilio u/twilio" [ref=e906] [cursor=pointer]:
+                        - /url: /user/twilio/
+                        - generic [ref=e910]:
+                          - img "Avatar de u/twilio"
+                        - generic [ref=e911]: u/twilio
+                      - generic [ref=e912]: •
+                      - link "Patrocinado" [ref=e914] [cursor=pointer]:
+                        - /url: /user/twilio/
+                        - generic [ref=e915]: Patrocinado
+                      - link [ref=e917] [cursor=pointer]:
+                        - /url: https://alb.reddit.com/cr?za=Pr1BFHujzlwS3iOBzLgj4STJXHPFH8qESzQFr82DiIzx8msTumXPIG-FprLm7C6GVqC71nRqiE9LbZR5v2JTQuDgN8_dUB99q9SIu2K4isjRLC_0jv4EX4tV8EnM9y_ct81RxrVwJyW2Sg7TSfWqKoyVYT5iiWB1f0Sn2vQAx31RO4FUz68gOZrzMPZ562lkFO8YFJ2AKhVXe0cHrSH-h3tB2XIrlip5h-h41JK2TaMyecmEFOt1FXQwRGYZM_e16zV0OT8qvoaC5JAo4UO0vsnbIIo3CnQpb1d-5DN4OC3wZ8-X04IXuXIRLew8JxzzPa6YdeI8bS7rlgZL5zW0DyhQGG6zDvLcdmtpS5aBfNCq4dI91iYquhfRbzpfNZGBKgf5rhqrPcUn954YVttxNM0u0VTRhH-OeQjZMjSM6oaO583gdcZFh739QFXgwaEnl90impD9cuQ4nDW37h3S36MPbt-Bvx9xkO0D7JkKu2bPqPOGFySa8KUU1TFs8vr2_1dIuLFU5rmr_y1x41Mjnu5Gh8NfS4rWRAuH7PX78E41dtc_GZPb71aZZ_3XmHBsgD6RW3dNmVJ9GWr6iC6_AhQXIZ4qfL4CtZaNtyWD5tLpCRiqWqgE7YX-EOJSJa_OX7gL3gbVkM-Ed5J5GTcdfMSE1l5edw-ZOMXgGE_UrDB-FgSDBtxdVbi4MuH5lzu7hCRV0Z7_4Ix-DKJJwNMZA3n7_po9UG4imQFSEXoYgUak0fu_TUElLXvPsAFpUe8M&zp=uCEJ1Am8RZRyEfXVlIhhAv7phK5f7SvaSR-CWjwfVUepy6cFVTQqkeMnMQT0qZxP7KjpxVbolTcDKkcpg5v2a6nOhCksOk2INNBfwRfoOcrwlV4hj8SQspq8Hm71NyKsbuM4WRWC9B11O4-ixrzscpj_NtWfor4oGlpEGGgJw0G1gkVdtfmmWHUg7PGEYb4vKdmX_kSzcb3oDLVBI-1P_RJwnWK7axjxUzHNWDWco_d5Kt6Vs52otHKlYFyK9OSB2b-KNLsZinuaXREQOEhbIgxVTVEZAANPrEGFzIhv2xwXUfc0GPJjUzS8eeMZ53nQZvEjMmyl7CRyAQxJmV3u1OZZK3mzjDzugRFiBOPsXtdbFbxpIHKnu_e92KhcuU7aYBRUIoLkkHCkxUYvvNiusYYahH7nmSEx3x6hxsHyfOyjI33XnC7XBUDqYuFtlzZWS1-fLvyK6s_jr-0bMfDYMzDOJL7i-e9NiMx4YadarSh4UldPgeMmCZcSf7WHEfOD8KRbf_qymyI9_CL8Ykhm
+                    - button "Abrir acciones de usuario" [ref=e922] [cursor=pointer]:
+                      - img [ref=e925]
+                  - heading "Regulations are tough, breaches are worse. Twilio easily secures your stack and keeps you compliant across industries and regions." [level=2] [ref=e929]:
+                    - link "Regulations are tough, breaches are worse. Twilio easily secures your stack and keeps you compliant across industries and regions." [ref=e932] [cursor=pointer]:
+                      - /url: https://alb.reddit.com/cr?za=Pr1BFHujzlwS3iOBzLgj4STJXHPFH8qESzQFr82DiIzx8msTumXPIG-FprLm7C6GVqC71nRqiE9LbZR5v2JTQuDgN8_dUB99q9SIu2K4isjRLC_0jv4EX4tV8EnM9y_ct81RxrVwJyW2Sg7TSfWqKoyVYT5iiWB1f0Sn2vQAx31RO4FUz68gOZrzMPZ562lkFO8YFJ2AKhVXe0cHrSH-h3tB2XIrlip5h-h41JK2TaMyecmEFOt1FXQwRGYZM_e16zV0OT8qvoaC5JAo4UO0vsnbIIo3CnQpb1d-5DN4OC3wZ8-X04IXuXIRLew8JxzzPa6YdeI8bS7rlgZL5zW0DyhQGG6zDvLcdmtpS5aBfNCq4dI91iYquhfRbzpfNZGBKgf5rhqrPcUn954YVttxNM0u0VTRhH-OeQjZMjSM6oaO583gdcZFh739QFXgwaEnl90impD9cuQ4nDW37h3S36MPbt-Bvx9xkO0D7JkKu2bPqPOGFySa8KUU1TFs8vr2_1dIuLFU5rmr_y1x41Mjnu5Gh8NfS4rWRAuH7PX78E41dtc_GZPb71aZZ_3XmHBsgD6RW3dNmVJ9GWr6iC6_AhQXIZ4qfL4CtZaNtyWD5tLpCRiqWqgE7YX-EOJSJa_OX7gL3gbVkM-Ed5J5GTcdfMSE1l5edw-ZOMXgGE_UrDB-FgSDBtxdVbi4MuH5lzu7hCRV0Z7_4Ix-DKJJwNMZA3n7_po9UG4imQFSEXoYgUak0fu_TUElLXvPsAFpUe8M&zp=uCEJ1Am8RZRyEfXVlIhhAv7phK5f7SvaSR-CWjwfVUepy6cFVTQqkeMnMQT0qZxP7KjpxVbolTcDKkcpg5v2a6nOhCksOk2INNBfwRfoOcrwlV4hj8SQspq8Hm71NyKsbuM4WRWC9B11O4-ixrzscpj_NtWfor4oGlpEGGgJw0G1gkVdtfmmWHUg7PGEYb4vKdmX_kSzcb3oDLVBI-1P_RJwnWK7axjxUzHNWDWco_d5Kt6Vs52otHKlYFyK9OSB2b-KNLsZinuaXREQOEhbIgxVTVEZAANPrEGFzIhv2xwXUfc0GPJjUzS8eeMZ53nQZvEjMmyl7CRyAQxJmV3u1OZZK3mzjDzugRFiBOPsXtdbFbxpIHKnu_e92KhcuU7aYBRUIoLkkHCkxUYvvNiusYYahH7nmSEx3x6hxsHyfOyjI33XnC7XBUDqYuFtlzZWS1-fLvyK6s_jr-0bMfDYMzDOJL7i-e9NiMx4YadarSh4UldPgeMmCZcSf7WHEfOD8KRbf_qymyI9_CL8Ykhm
+                      - generic: Regulations are tough, breaches are worse. Twilio easily secures your stack and keeps you compliant across industries and regions.
+                  - generic [ref=e933]:
+                    - generic [ref=e937]:
+                      - generic [ref=e938]:
+                        - generic [ref=e939]:
+                          - list [ref=e941]:
+                            - listitem [ref=e942]:
+                              - link [ref=e944] [cursor=pointer]:
+                                - /url: https://alb.reddit.com/cr?za=Pr1BFHujzlwS3iOBzLgj4STJXHPFH8qESzQFr82DiIzx8msTumXPIG-FprLm7C6GVqC71nRqiE9LbZR5v2JTQuDgN8_dUB99q9SIu2K4isjRLC_0jv4EX4tV8EnM9y_ct81RxrVwJyW2Sg7TSfWqKoyVYT5iiWB1f0Sn2vQAx31RO4FUz68gOZrzMPZ562lkFO8YFJ2AKhVXe0cHrSH-h3tB2XIrlip5h-h41JK2TaMyecmEFOt1FXQwRGYZM_e16zV0OT8qvoaC5JAo4UO0vsnbIIo3CnQpb1d-5DN4OC3wZ8-X04IXuXIRLew8JxzzPa6YdeI8bS7rlgZL5zW0DyhQGG6zDvLcdmtpS5aBfNCq4dI91iYquhfRbzpfNZGBKgf5rhqrPcUn954YVttxNM0u0VTRhH-OeQjZMjSM6oaO583gdcZFh739QFXgwaEnl90impD9cuQ4nDW37h3S36MPbt-Bvx9xkO0D7JkKu2bPqPOGFySa8KUU1TFs8vr2_1dIuLFU5rmr_y1x41Mjnu5Gh8NfS4rWRAuH7PX78E41dtc_GZPb71aZZ_3XmHBsgD6RW3dNmVJ9GWr6iC6_AhQXIZ4qfL4CtZaNtyWD5tLpCRiqWqgE7YX-EOJSJa_OX7gL3gbVkM-Ed5J5GTcdfMSE1l5edw-ZOMXgGE_UrDB-FgSDBtxdVbi4MuH5lzu7hCRV0Z7_4Ix-DKJJwNMZA3n7_po9UG4imQFSEXoYgUak0fu_TUElLXvPsAFpUe8M&zp=sSxuGTcyNwRNtlip7azpfZuK9L_i1SJdM-xyX1Q-yBlwnwJtKWPPuj9H4WawU2sG7HyLxi9cu_qDHi-dTZ2mzMdWM7RsbfB1EOO5NlB85NNpTAzs2C0F2dLhWRiOE4KnwOKubI0zObi9boBfO19jvQtbgqiPKMR3R1u0im24jDWTJ05n4ZKBsb2Ig604c-xZEuYvd0KDNoLvqa6Sz__A583n6qtB9yhMeD44Hwjlg4jeDza1E2B_pEn0qwA6z4iO06mN4u3Wx9eYOcT1WoPKgIGJ9AEP9AZVXpjZTWQp56J-9U1x_ZVqsMkaBC6SLh1Dbqe0_bEnbBkKcHMMjWQ6E7HPyoeztJ0Bl3XF0b8YIkKKfw3ZQCa_mGRZ3xWiiEln9WOYpJtiTCHfYdtWx7_fVM7c2J5X6sTgb8em7_vrJtINx1iZfACKs6BnejBoHmHjEBJ_m2DvGslMq9rXo32K_xcjvOA94eVNvNpIm65jegI42euGeZMp-Hxa6JTL6gYJ-MS5UaJkVZJdhat3C0H2t3aEj_QR
+                                - figure [ref=e945]:
+                                  - img "Regulations are tough, breaches are worse. Twilio easily secures your stack and keeps you compliant across industries and regions." [ref=e946]
+                          - group [ref=e951]:
+                            - button "Página 1 (Página actual)" [ref=e953] [cursor=pointer]:
+                              - generic [ref=e954]:
+                                - generic: Página 1 (Página actual)
+                            - button "Página 2" [ref=e955] [cursor=pointer]:
+                              - generic [ref=e956]:
+                                - generic: Página 2
+                            - button [ref=e957]
+                        - generic [ref=e960]:
+                          - button "Página anterior" [disabled]:
+                            - generic:
+                              - generic:
+                                - img
+                        - button "Siguiente página" [ref=e963] [cursor=pointer]:
+                          - img [ref=e966]
+                      - generic [ref=e968]:
+                        - generic: Elemento1 de 3
+                    - separator [ref=e969]
+                    - generic [ref=e970]:
+                      - link [ref=e972] [cursor=pointer]:
+                        - /url: https://alb.reddit.com/cr?za=Pr1BFHujzlwS3iOBzLgj4STJXHPFH8qESzQFr82DiIzx8msTumXPIG-FprLm7C6GVqC71nRqiE9LbZR5v2JTQuDgN8_dUB99q9SIu2K4isjRLC_0jv4EX4tV8EnM9y_ct81RxrVwJyW2Sg7TSfWqKoyVYT5iiWB1f0Sn2vQAx31RO4FUz68gOZrzMPZ562lkFO8YFJ2AKhVXe0cHrSH-h3tB2XIrlip5h-h41JK2TaMyecmEFOt1FXQwRGYZM_e16zV0OT8qvoaC5JAo4UO0vsnbIIo3CnQpb1d-5DN4OC3wZ8-X04IXuXIRLew8JxzzPa6YdeI8bS7rlgZL5zW0DyhQGG6zDvLcdmtpS5aBfNCq4dI91iYquhfRbzpfNZGBKgf5rhqrPcUn954YVttxNM0u0VTRhH-OeQjZMjSM6oaO583gdcZFh739QFXgwaEnl90impD9cuQ4nDW37h3S36MPbt-Bvx9xkO0D7JkKu2bPqPOGFySa8KUU1TFs8vr2_1dIuLFU5rmr_y1x41Mjnu5Gh8NfS4rWRAuH7PX78E41dtc_GZPb71aZZ_3XmHBsgD6RW3dNmVJ9GWr6iC6_AhQXIZ4qfL4CtZaNtyWD5tLpCRiqWqgE7YX-EOJSJa_OX7gL3gbVkM-Ed5J5GTcdfMSE1l5edw-ZOMXgGE_UrDB-FgSDBtxdVbi4MuH5lzu7hCRV0Z7_4Ix-DKJJwNMZA3n7_po9UG4imQFSEXoYgUak0fu_TUElLXvPsAFpUe8M&zp=sSxuGTcyNwRNtlip7azpfZuK9L_i1SJdM-xyX1Q-yBlwnwJtKWPPuj9H4WawU2sG7HyLxi9cu_qDHi-dTZ2mzMdWM7RsbfB1EOO5NlB85NNpTAzs2C0F2dLhWRiOE4KnwOKubI0zObi9boBfO19jvQtbgqiPKMR3R1u0im24jDWTJ05n4ZKBsb2Ig604c-xZEuYvd0KDNoLvqa6Sz__A583n6qtB9yhMeD44Hwjlg4jeDza1E2B_pEn0qwA6z4iO06mN4u3Wx9eYOcT1WoPKgIGJ9AEP9AZVXpjZTWQp56J-9U1x_ZVqsMkaBC6SLh1Dbqe0_bEnbBkKcHMMjWQ6E7HPyoeztJ0Bl3XF0b8YIkKKfw3ZQCa_mGRZ3xWiiEln9WOYpJtiTCHfYdtWx7_fVM7c2J5X6sTgb8em7_vrJtINx1iZfACKs6BnejBoHmHjEBJ_m2DvGslMq9rXo32K_xcjvOA94eVNvNpIm65jegI42euGeZMp-Hxa6JTL6gYJ-MS5UaJkVZJdhat3C0H2t3aEj_QR
+                      - generic [ref=e973]:
+                        - link "twilio.com" [ref=e978] [cursor=pointer]:
+                          - /url: https://alb.reddit.com/cr?za=Pr1BFHujzlwS3iOBzLgj4STJXHPFH8qESzQFr82DiIzx8msTumXPIG-FprLm7C6GVqC71nRqiE9LbZR5v2JTQuDgN8_dUB99q9SIu2K4isjRLC_0jv4EX4tV8EnM9y_ct81RxrVwJyW2Sg7TSfWqKoyVYT5iiWB1f0Sn2vQAx31RO4FUz68gOZrzMPZ562lkFO8YFJ2AKhVXe0cHrSH-h3tB2XIrlip5h-h41JK2TaMyecmEFOt1FXQwRGYZM_e16zV0OT8qvoaC5JAo4UO0vsnbIIo3CnQpb1d-5DN4OC3wZ8-X04IXuXIRLew8JxzzPa6YdeI8bS7rlgZL5zW0DyhQGG6zDvLcdmtpS5aBfNCq4dI91iYquhfRbzpfNZGBKgf5rhqrPcUn954YVttxNM0u0VTRhH-OeQjZMjSM6oaO583gdcZFh739QFXgwaEnl90impD9cuQ4nDW37h3S36MPbt-Bvx9xkO0D7JkKu2bPqPOGFySa8KUU1TFs8vr2_1dIuLFU5rmr_y1x41Mjnu5Gh8NfS4rWRAuH7PX78E41dtc_GZPb71aZZ_3XmHBsgD6RW3dNmVJ9GWr6iC6_AhQXIZ4qfL4CtZaNtyWD5tLpCRiqWqgE7YX-EOJSJa_OX7gL3gbVkM-Ed5J5GTcdfMSE1l5edw-ZOMXgGE_UrDB-FgSDBtxdVbi4MuH5lzu7hCRV0Z7_4Ix-DKJJwNMZA3n7_po9UG4imQFSEXoYgUak0fu_TUElLXvPsAFpUe8M&zp=sSxuGTcyNwRNtlip7azpfZuK9L_i1SJdM-xyX1Q-yBlwnwJtKWPPuj9H4WawU2sG7HyLxi9cu_qDHi-dTZ2mzMdWM7RsbfB1EOO5NlB85NNpTAzs2C0F2dLhWRiOE4KnwOKubI0zObi9boBfO19jvQtbgqiPKMR3R1u0im24jDWTJ05n4ZKBsb2Ig604c-xZEuYvd0KDNoLvqa6Sz__A583n6qtB9yhMeD44Hwjlg4jeDza1E2B_pEn0qwA6z4iO06mN4u3Wx9eYOcT1WoPKgIGJ9AEP9AZVXpjZTWQp56J-9U1x_ZVqsMkaBC6SLh1Dbqe0_bEnbBkKcHMMjWQ6E7HPyoeztJ0Bl3XF0b8YIkKKfw3ZQCa_mGRZ3xWiiEln9WOYpJtiTCHfYdtWx7_fVM7c2J5X6sTgb8em7_vrJtINx1iZfACKs6BnejBoHmHjEBJ_m2DvGslMq9rXo32K_xcjvOA94eVNvNpIm65jegI42euGeZMp-Hxa6JTL6gYJ-MS5UaJkVZJdhat3C0H2t3aEj_QR
+                          - generic: twilio.com
+                        - link "Registrarse" [ref=e981] [cursor=pointer]:
+                          - /url: https://alb.reddit.com/cr?za=Pr1BFHujzlwS3iOBzLgj4STJXHPFH8qESzQFr82DiIzx8msTumXPIG-FprLm7C6GVqC71nRqiE9LbZR5v2JTQuDgN8_dUB99q9SIu2K4isjRLC_0jv4EX4tV8EnM9y_ct81RxrVwJyW2Sg7TSfWqKoyVYT5iiWB1f0Sn2vQAx31RO4FUz68gOZrzMPZ562lkFO8YFJ2AKhVXe0cHrSH-h3tB2XIrlip5h-h41JK2TaMyecmEFOt1FXQwRGYZM_e16zV0OT8qvoaC5JAo4UO0vsnbIIo3CnQpb1d-5DN4OC3wZ8-X04IXuXIRLew8JxzzPa6YdeI8bS7rlgZL5zW0DyhQGG6zDvLcdmtpS5aBfNCq4dI91iYquhfRbzpfNZGBKgf5rhqrPcUn954YVttxNM0u0VTRhH-OeQjZMjSM6oaO583gdcZFh739QFXgwaEnl90impD9cuQ4nDW37h3S36MPbt-Bvx9xkO0D7JkKu2bPqPOGFySa8KUU1TFs8vr2_1dIuLFU5rmr_y1x41Mjnu5Gh8NfS4rWRAuH7PX78E41dtc_GZPb71aZZ_3XmHBsgD6RW3dNmVJ9GWr6iC6_AhQXIZ4qfL4CtZaNtyWD5tLpCRiqWqgE7YX-EOJSJa_OX7gL3gbVkM-Ed5J5GTcdfMSE1l5edw-ZOMXgGE_UrDB-FgSDBtxdVbi4MuH5lzu7hCRV0Z7_4Ix-DKJJwNMZA3n7_po9UG4imQFSEXoYgUak0fu_TUElLXvPsAFpUe8M&zp=sSxuGTcyNwRNtlip7azpfZuK9L_i1SJdM-xyX1Q-yBlwnwJtKWPPuj9H4WawU2sG7HyLxi9cu_qDHi-dTZ2mzMdWM7RsbfB1EOO5NlB85NNpTAzs2C0F2dLhWRiOE4KnwOKubI0zObi9boBfO19jvQtbgqiPKMR3R1u0im24jDWTJ05n4ZKBsb2Ig604c-xZEuYvd0KDNoLvqa6Sz__A583n6qtB9yhMeD44Hwjlg4jeDza1E2B_pEn0qwA6z4iO06mN4u3Wx9eYOcT1WoPKgIGJ9AEP9AZVXpjZTWQp56J-9U1x_ZVqsMkaBC6SLh1Dbqe0_bEnbBkKcHMMjWQ6E7HPyoeztJ0Bl3XF0b8YIkKKfw3ZQCa_mGRZ3xWiiEln9WOYpJtiTCHfYdtWx7_fVM7c2J5X6sTgb8em7_vrJtINx1iZfACKs6BnejBoHmHjEBJ_m2DvGslMq9rXo32K_xcjvOA94eVNvNpIm65jegI42euGeZMp-Hxa6JTL6gYJ-MS5UaJkVZJdhat3C0H2t3aEj_QR
+                          - generic [ref=e983]:
+                            - generic: Registrarse
+                  - generic "Acciones disponibles para esta publicación" [ref=e984]:
+                    - generic [ref=e987]:
+                      - button "Upvote" [ref=e988] [cursor=pointer]:
+                        - img [ref=e990]
+                        - generic [ref=e992]:
+                          - generic: Upvote
+                      - text: Votar
+                      - button "Downvote" [ref=e993] [cursor=pointer]:
+                        - img [ref=e995]
+                        - generic [ref=e997]:
+                          - generic: Downvote
+                    - link "0 Ir a los comentarios" [ref=e998] [cursor=pointer]:
+                      - /url: /user/twilio/comments/1mcbd7w/regulations_are_tough_breaches_are_worse_twilio/?p=1&impressionid=5620490140733462770
+                      - generic [ref=e999]:
+                        - img [ref=e1001]
+                        - generic [ref=e1004]: "0"
+                      - generic [ref=e1005]:
+                        - generic: Ir a los comentarios
+                    - button "Compartir" [ref=e1009] [cursor=pointer]:
+                      - generic [ref=e1010]:
+                        - img [ref=e1012]
+                        - generic [ref=e1014]: Compartir
+                    - link [ref=e1016] [cursor=pointer]:
+                      - /url: https://alb.reddit.com/cr?za=Pr1BFHujzlwS3iOBzLgj4STJXHPFH8qESzQFr82DiIzx8msTumXPIG-FprLm7C6GVqC71nRqiE9LbZR5v2JTQuDgN8_dUB99q9SIu2K4isjRLC_0jv4EX4tV8EnM9y_ct81RxrVwJyW2Sg7TSfWqKoyVYT5iiWB1f0Sn2vQAx31RO4FUz68gOZrzMPZ562lkFO8YFJ2AKhVXe0cHrSH-h3tB2XIrlip5h-h41JK2TaMyecmEFOt1FXQwRGYZM_e16zV0OT8qvoaC5JAo4UO0vsnbIIo3CnQpb1d-5DN4OC3wZ8-X04IXuXIRLew8JxzzPa6YdeI8bS7rlgZL5zW0DyhQGG6zDvLcdmtpS5aBfNCq4dI91iYquhfRbzpfNZGBKgf5rhqrPcUn954YVttxNM0u0VTRhH-OeQjZMjSM6oaO583gdcZFh739QFXgwaEnl90impD9cuQ4nDW37h3S36MPbt-Bvx9xkO0D7JkKu2bPqPOGFySa8KUU1TFs8vr2_1dIuLFU5rmr_y1x41Mjnu5Gh8NfS4rWRAuH7PX78E41dtc_GZPb71aZZ_3XmHBsgD6RW3dNmVJ9GWr6iC6_AhQXIZ4qfL4CtZaNtyWD5tLpCRiqWqgE7YX-EOJSJa_OX7gL3gbVkM-Ed5J5GTcdfMSE1l5edw-ZOMXgGE_UrDB-FgSDBtxdVbi4MuH5lzu7hCRV0Z7_4Ix-DKJJwNMZA3n7_po9UG4imQFSEXoYgUak0fu_TUElLXvPsAFpUe8M&zp=uCEJ1Am8RZRyEfXVlIhhAv7phK5f7SvaSR-CWjwfVUepy6cFVTQqkeMnMQT0qZxP7KjpxVbolTcDKkcpg5v2a6nOhCksOk2INNBfwRfoOcrwlV4hj8SQspq8Hm71NyKsbuM4WRWC9B11O4-ixrzscpj_NtWfor4oGlpEGGgJw0G1gkVdtfmmWHUg7PGEYb4vKdmX_kSzcb3oDLVBI-1P_RJwnWK7axjxUzHNWDWco_d5Kt6Vs52otHKlYFyK9OSB2b-KNLsZinuaXREQOEhbIgxVTVEZAANPrEGFzIhv2xwXUfc0GPJjUzS8eeMZ53nQZvEjMmyl7CRyAQxJmV3u1OZZK3mzjDzugRFiBOPsXtdbFbxpIHKnu_e92KhcuU7aYBRUIoLkkHCkxUYvvNiusYYahH7nmSEx3x6hxsHyfOyjI33XnC7XBUDqYuFtlzZWS1-fLvyK6s_jr-0bMfDYMzDOJL7i-e9NiMx4YadarSh4UldPgeMmCZcSf7WHEfOD8KRbf_qymyI9_CL8Ykhm
+                - separator [ref=e1017]
+                - 'article "Actualización: Construí un panel de análisis para el panel de administración de mi portafolio" [ref=e1018]':
+                  - generic [ref=e1019] [cursor=pointer]:
+                    - 'link "Actualización: Construí un panel de análisis para el panel de administración de mi portafolio" [ref=e1020]':
+                      - /url: /r/webdev/comments/1rz36yk/update_built_analytics_dashboard_for_my_portfolio/
+                      - generic [ref=e1021]:
+                        - generic: "Actualización: Construí un panel de análisis para el panel de administración de mi portafolio"
+                    - generic [ref=e1022]:
+                      - generic [ref=e1023]:
+                        - 'link "Autor: u/iamspiiderman" [ref=e1028]':
+                          - /url: /user/iamspiiderman/
+                          - generic [ref=e1029]:
+                            - img [ref=e1034]
+                            - generic [ref=e1036]: u/iamspiiderman
+                        - generic [ref=e1037]: •
+                        - time [ref=e1039]: hace 3 h
+                      - button "Abrir acciones de usuario" [ref=e1044]:
+                        - img [ref=e1047]
+                    - generic [ref=e1050]:
+                      - 'heading "Actualización: Construí un panel de análisis para el panel de administración de mi portafolio" [level=2] [ref=e1051]':
+                        - 'link "Actualización: Construí un panel de análisis para el panel de administración de mi portafolio" [ref=e1052]':
+                          - /url: /r/webdev/comments/1rz36yk/update_built_analytics_dashboard_for_my_portfolio/
+                      - 'link "Etiqueta: Discussion" [ref=e1055]':
+                        - /url: /r/webdev/?f=flair_name%3A%22Discussion%22
+                        - 'generic "Etiqueta: Discussion" [ref=e1057]': Discussion
+                    - generic [ref=e1062]:
+                      - generic [ref=e1063]:
+                        - generic [ref=e1064]:
+                          - list [ref=e1066]:
+                            - listitem [ref=e1067]:
+                              - figure [ref=e1068]:
+                                - 'img "r/webdev - Actualización: Construí un panel de análisis para el panel de administración de mi portafolio" [ref=e1069]'
+                          - group [ref=e1074]:
+                            - button "Página 1 (Página actual)" [ref=e1076]:
+                              - generic [ref=e1077]:
+                                - generic: Página 1 (Página actual)
+                            - button "Página 2" [ref=e1078]:
+                              - generic [ref=e1079]:
+                                - generic: Página 2
+                        - generic [ref=e1081]:
+                          - button "Página anterior" [disabled]:
+                            - generic:
+                              - generic:
+                                - img
+                        - button "Siguiente página" [ref=e1084]:
+                          - img [ref=e1087]
+                      - generic [ref=e1089]:
+                        - generic: Elemento1 de 2
+                    - generic "Acciones disponibles para esta publicación" [ref=e1090]:
+                      - generic [ref=e1093]:
+                        - button "Upvote" [ref=e1094]:
+                          - img [ref=e1096]
+                          - generic [ref=e1098]:
+                            - generic: Upvote
+                        - generic [ref=e1100]: "0"
+                        - button "Downvote" [ref=e1101]:
+                          - img [ref=e1103]
+                          - generic [ref=e1105]:
+                            - generic: Downvote
+                      - link "3 Ir a los comentarios" [ref=e1106]:
+                        - /url: /r/webdev/comments/1rz36yk/update_built_analytics_dashboard_for_my_portfolio/
+                        - generic [ref=e1107]:
+                          - img [ref=e1109]
+                          - generic [ref=e1112]: "3"
+                        - generic [ref=e1113]:
+                          - generic: Ir a los comentarios
+                      - button "Premiar" [ref=e1115]:
+                        - img [ref=e1118]
+                      - button "Compartir" [ref=e1123]:
+                        - generic [ref=e1124]:
+                          - img [ref=e1126]
+                          - generic [ref=e1128]: Compartir
+                - separator [ref=e1129]
+                - article "¿Qué hago?" [ref=e1130]:
+                  - generic [ref=e1131] [cursor=pointer]:
+                    - link "¿Qué hago?" [ref=e1132]:
+                      - /url: /r/webdev/comments/1rz30sc/what_should_i_do/
+                      - generic [ref=e1133]:
+                        - generic: ¿Qué hago?
+                    - generic [ref=e1134]:
+                      - generic [ref=e1135]:
+                        - 'link "Autor: u/Anony_Void" [ref=e1140]':
+                          - /url: /user/Anony_Void/
+                          - generic [ref=e1141]:
+                            - img [ref=e1146]
+                            - generic [ref=e1148]: u/Anony_Void
+                        - generic [ref=e1149]: •
+                        - time [ref=e1151]: hace 3 h
+                      - button "Abrir acciones de usuario" [ref=e1156]:
+                        - img [ref=e1159]
+                    - generic [ref=e1162]:
+                      - heading "¿Qué hago?" [level=2] [ref=e1163]:
+                        - link "¿Qué hago?" [ref=e1164]:
+                          - /url: /r/webdev/comments/1rz30sc/what_should_i_do/
+                      - generic [ref=e1165]:
+                        - generic:
+                          - link:
+                            - /url: /r/webdev/comments/1rz30sc/what_should_i_do/
+                            - generic:
+                              - generic:
+                                - paragraph: Así que soy estudiante de último año de ingeniería y aprendí Desarrollo Android (Kotlin) y puedo decir que tengo bastante confianza porque me gustó mucho aprenderlo. Pero en las prácticas de mi universidad me colocaron en una startup para un puesto de desarrollador web (se podría decir full stack) y terminé usando JavaScript.
+                                - paragraph: Pero mi problema actual es que no sé nada de JavaScript (puedo entender lo que el código dice y hace) y estamos usando Next.js, con la mayor parte del desarrollo hecho por IA, lo cual no es un problema. El problema principal es que, como no aprendí JavaScript ni todo el desarrollo web como lo hice con el Desarrollo Android, no puedo estar seguro de si el código que la IA está generando es válido o no. Si la sintaxis que usa es de la vieja escuela o si los patrones que genera siguen las buenas prácticas.
+                                - paragraph: La razón de mi ansiedad es que siempre he tenido ansiedad al generar código con IA, pero el otro día estaba tratando de averiguar cómo instalar una extensión de Chrome a través de la CLI y la LLM no se negó y comenzó a cocinar, y estuve peleando con eso durante 2 días y descubrí más tarde, a medianoche, que Google lo había desaprobado el año pasado.
+                                - paragraph: En este punto, no sé qué hacer porque no sé cómo aprender este mundo masivo del desarrollo web. Mi principal ventaja en este momento es que puedo entender el código, lo que está diciendo, y no tengo la capacidad de ver tutoriales o aprender los fundamentos. ¿Alguien como yo que siguió un cierto patrón para aprender? (Estoy abierto a cualquier sugerencia, así que por favor comparte tu patrón, ¡lo intentaré seguro! :) \)
+                    - generic "Acciones disponibles para esta publicación" [ref=e1166]:
+                      - generic [ref=e1169]:
+                        - button "Upvote" [ref=e1170]:
+                          - img [ref=e1172]
+                          - generic [ref=e1174]:
+                            - generic: Upvote
+                        - generic [ref=e1176]: "0"
+                        - button "Downvote" [ref=e1177]:
+                          - img [ref=e1179]
+                          - generic [ref=e1181]:
+                            - generic: Downvote
+                      - link "0 Ir a los comentarios" [ref=e1182]:
+                        - /url: /r/webdev/comments/1rz30sc/what_should_i_do/
+                        - generic [ref=e1183]:
+                          - img [ref=e1185]
+                          - generic [ref=e1188]: "0"
+                        - generic [ref=e1189]:
+                          - generic: Ir a los comentarios
+                      - button "Premiar" [ref=e1191]:
+                        - img [ref=e1194]
+                      - button "Compartir" [ref=e1199]:
+                        - generic [ref=e1200]:
+                          - img [ref=e1202]
+                          - generic [ref=e1204]: Compartir
+                - separator [ref=e1205]
+                - article "Recomienden un framework web / lenguaje optimizado para codificación asistida por IA" [ref=e1206]:
+                  - generic [ref=e1207] [cursor=pointer]:
+                    - link "Recomienden un framework web / lenguaje optimizado para codificación asistida por IA" [ref=e1208]:
+                      - /url: /r/webdev/comments/1rz2p5e/recommend_a_webframework_language_optimized_for/
+                      - generic [ref=e1209]:
+                        - generic: Recomienden un framework web / lenguaje optimizado para codificación asistida por IA
+                    - generic [ref=e1210]:
+                      - generic [ref=e1211]:
+                        - 'link "Autor: u/ea_man" [ref=e1216]':
+                          - /url: /user/ea_man/
+                          - generic [ref=e1217]:
+                            - img [ref=e1222]
+                            - generic [ref=e1224]: u/ea_man
+                        - generic [ref=e1225]: •
+                        - time [ref=e1227]: hace 3 h
+                      - button "Abrir acciones de usuario" [ref=e1232]:
+                        - img [ref=e1235]
+                    - generic [ref=e1238]:
+                      - heading "Recomienden un framework web / lenguaje optimizado para codificación asistida por IA" [level=2] [ref=e1239]:
+                        - link "Recomienden un framework web / lenguaje optimizado para codificación asistida por IA" [ref=e1240]:
+                          - /url: /r/webdev/comments/1rz2p5e/recommend_a_webframework_language_optimized_for/
+                      - generic [ref=e1241]:
+                        - generic:
+                          - link:
+                            - /url: /r/webdev/comments/1rz2p5e/recommend_a_webframework_language_optimized_for/
+                            - generic:
+                              - generic:
+                                - paragraph:
+                                  - text: "Ahora, mayormente uso Python / Django / PostgreSQL en un VPS. Estoy buscando una solución moderna para un desarrollador solitario, hecha a medida para la codificación asistida con modelos de lenguaje. Los requisitos son: Preferiría seguir usando PgSQL sin"
+                                  - emphasis: fuckeries
+                                  - text: personalizadas / Docker, tiene que ser de código abierto y, posiblemente, basado en un esfuerzo comunitario en lugar de un solo actor que pueda cambiar las reglas del juego sin previo aviso.
+                                - paragraph:
+                                  - text: "En cuanto al lenguaje, diría algo como TypeScript: algo más estricto que Python, que no tenga indentación obligatoria por sintaxis, ya que necesito inyectar / comparar / pegar código, y cuanto menos"
+                                  - emphasis: boilerplate
+                                  - text: "mejor, para mantener el contexto bajo. O sea: seguiré usando Python / Django, por supuesto, así que no hace falta que me recomienden algo así."
+                                - paragraph:
+                                  - text: "Estoy mirando: *"
+                                  - link "https://wasp.sh/":
+                                    - /url: https://wasp.sh/
+                                  - text: ": parece el mejor hasta ahora, pero todavía está en beta * Encore.ts: fuertemente basado en IA, pero no estoy seguro del despliegue, parece un proyecto de una sola empresa * AdonisJS: algo así como el candidato de la vieja escuela, flexible pero menos orientado a la IA * Django: Python sigue siendo uno de los mejores lenguajes para IA, hay mucho"
+                                  - emphasis: boilerplate
+                                  - text: pero es un proyecto sólido como una roca
+                                - paragraph: Así que pregunto si alguien por aquí ha estado trabajando con alguno de estos y tiene algún comentario útil o algo más que no haya listado.
+                                - paragraph: Por favor, mantengan el odio a la IA lejos de este post. Si no les gusta esto, simplemente pasen a otro hilo, esto es para gente que sabe programar y usar herramientas.
+                    - generic "Acciones disponibles para esta publicación" [ref=e1242]:
+                      - generic [ref=e1245]:
+                        - button "Upvote" [ref=e1246]:
+                          - img [ref=e1248]
+                          - generic [ref=e1250]:
+                            - generic: Upvote
+                        - generic [ref=e1252]: "0"
+                        - button "Downvote" [ref=e1253]:
+                          - img [ref=e1255]
+                          - generic [ref=e1257]:
+                            - generic: Downvote
+                      - link "6 Ir a los comentarios" [ref=e1258]:
+                        - /url: /r/webdev/comments/1rz2p5e/recommend_a_webframework_language_optimized_for/
+                        - generic [ref=e1259]:
+                          - img [ref=e1261]
+                          - generic [ref=e1264]: "6"
+                        - generic [ref=e1265]:
+                          - generic: Ir a los comentarios
+                      - button "Premiar" [ref=e1267]:
+                        - img [ref=e1270]
+                      - button "Compartir" [ref=e1275]:
+                        - generic [ref=e1276]:
+                          - img [ref=e1278]
+                          - generic [ref=e1280]: Compartir
+                - separator [ref=e1281]
+                - article "Necesitaba bases de datos relacionales bien completas para diferentes apps que estaba construyendo. Armé otra app para solucionar eso." [ref=e1282]:
+                  - generic [ref=e1283] [cursor=pointer]:
+                    - link "Necesitaba bases de datos relacionales bien completas para diferentes apps que estaba construyendo. Armé otra app para solucionar eso." [ref=e1284]:
+                      - /url: /r/webdev/comments/1rz2nhw/needed_fully_loaded_relational_databases_for/
+                      - generic [ref=e1285]:
+                        - generic: Necesitaba bases de datos relacionales bien completas para diferentes apps que estaba construyendo. Armé otra app para solucionar eso.
+                    - generic [ref=e1286]:
+                      - generic [ref=e1287]:
+                        - 'link "Autor: u/coolreddy" [ref=e1292]':
+                          - /url: /user/coolreddy/
+                          - generic [ref=e1293]:
+                            - img "Avatar de u/coolreddy" [ref=e1296]
+                            - generic [ref=e1297]: u/coolreddy
+                        - generic [ref=e1298]: •
+                        - time [ref=e1300]: hace 3 h
+                      - button "Abrir acciones de usuario" [ref=e1305]:
+                        - img [ref=e1308]
+                    - generic [ref=e1311]:
+                      - heading "Necesitaba bases de datos relacionales bien completas para diferentes apps que estaba construyendo. Armé otra app para solucionar eso." [level=2] [ref=e1312]:
+                        - link "Necesitaba bases de datos relacionales bien completas para diferentes apps que estaba construyendo. Armé otra app para solucionar eso." [ref=e1313]:
+                          - /url: /r/webdev/comments/1rz2nhw/needed_fully_loaded_relational_databases_for/
+                      - generic [ref=e1314]:
+                        - generic:
+                          - link:
+                            - /url: /r/webdev/comments/1rz2nhw/needed_fully_loaded_relational_databases_for/
+                            - generic:
+                              - generic:
+                                - paragraph: "He estado construyendo varias aplicaciones en los últimos meses. Cada vez, tenía el mismo problema: Para probar y demostrar cualquiera de las aplicaciones, siempre necesitaba una base de datos relevante llena de datos realistas con los que trabajar."
+                                - paragraph: Usar la IA (Claude y Codex) funcionaba para algunas tablas, filas y columnas, pero cuando necesitaba conjuntos de datos más grandes con relaciones intactas y claves foráneas, se volvía un lío.
+                                - paragraph:
+                                  - text: Así que construí una herramienta
+                                  - link "aquí":
+                                    - /url: https://db.synthehol.ai/
+                                  - text: para manejarlo correctamente.
+                                - paragraph: "El enfoque técnico que realmente funcionó:"
+                                - paragraph:
+                                  - strong: Generación topológica.
+                                  - text: El sistema resuelve el grafo de dependencias de claves foráneas y genera las tablas en el orden correcto. Primero las tablas padre, luego las hijas, con cada clave foránea apuntando a una fila padre real.
+                                - paragraph:
+                                  - strong: Modelado de cardinalidad.
+                                  - text: En lugar de distribuciones uniformes, el generador usa distribuciones que coinciden con patrones del mundo real. Los recuentos de pedidos por usuario siguen una binomial negativa. Las marcas de tiempo de actividad se agrupan en torno a las horas de trabajo con una variación estacional realista. No configuras nada de esto. El sistema lo infiere de la estructura del esquema y los nombres de las columnas.
+                                - paragraph:
+                                  - strong: Consistencia entre tablas.
+                                  - text: Esta fue la parte más difícil, por ejemplo, una fecha de pago debería ser posterior a la fecha de la factura. El departamento y el salario de un empleado deberían coincidir con su puesto de trabajo en la moneda de ese país. Estas no se declaran como restricciones de clave foránea en el esquema, son reglas de negocio implícitas. El sistema las infiere de las convenciones de nomenclatura y las relaciones de las tablas.
+                                - paragraph:
+                                  - strong: Esquema a partir de un lenguaje sencillo.
+                                  - text: Describes lo que necesitas ("una aplicación SaaS con organizaciones, usuarios, proyectos, tareas y un registro de actividad") y construye el esquema completo con todas las relaciones, tipos de columnas y restricciones. Luego genera los datos de una vez.
+                                - paragraph:
+                                  - link "La aplicación":
+                                    - /url: https://db.synthehol.ai/
+                                  - text: usa un motor de generación (no-LLM), la parte que realmente resuelve el grafo de restricciones y modela las distribuciones. Parece que depender 100% de los LLM para generar estos datos no era escalable ni tampoco muy confiable.
+                                - paragraph:
+                                  - text: Si alguien se ha quedado atascado en el bucle de "genérame una base de datos de prueba", espero que les sea útil,
+                                  - link "échenle un vistazo":
+                                    - /url: https://db.synthehol.ai/
+                                  - text: y espero sus comentarios.
+                                - paragraph: Lo siguiente, construir MCP para esto.
+                      - 'link "Etiqueta: Resource" [ref=e1317]':
+                        - /url: /r/webdev/?f=flair_name%3A%22Resource%22
+                        - 'generic "Etiqueta: Resource" [ref=e1319]': Resource
+                    - generic "Acciones disponibles para esta publicación" [ref=e1320]:
+                      - generic [ref=e1323]:
+                        - button "Upvote" [ref=e1324]:
+                          - img [ref=e1326]
+                          - generic [ref=e1328]:
+                            - generic: Upvote
+                        - generic [ref=e1330]: "1"
+                        - button "Downvote" [ref=e1331]:
+                          - img [ref=e1333]
+                          - generic [ref=e1335]:
+                            - generic: Downvote
+                      - link "1 Ir a los comentarios" [ref=e1336]:
+                        - /url: /r/webdev/comments/1rz2nhw/needed_fully_loaded_relational_databases_for/
+                        - generic [ref=e1337]:
+                          - img [ref=e1339]
+                          - generic [ref=e1342]: "1"
+                        - generic [ref=e1343]:
+                          - generic: Ir a los comentarios
+                      - button "Premiar" [ref=e1345]:
+                        - img [ref=e1348]
+                      - button "Compartir" [ref=e1353]:
+                        - generic [ref=e1354]:
+                          - img [ref=e1356]
+                          - generic [ref=e1358]: Compartir
+                - separator [ref=e1359]
+                - article "¿Cómo se ponen las mayúsculas?" [ref=e1360]:
+                  - generic [ref=e1361] [cursor=pointer]:
+                    - link "¿Cómo se ponen las mayúsculas?" [ref=e1362]:
+                      - /url: /r/webdev/comments/1rz0oqf/how_do_you_capitalize_letters/
+                      - generic [ref=e1363]:
+                        - generic: ¿Cómo se ponen las mayúsculas?
+                    - generic [ref=e1364]:
+                      - generic [ref=e1365]:
+                        - 'link "Autor: u/otusek" [ref=e1370]':
+                          - /url: /user/otusek/
+                          - generic [ref=e1371]:
+                            - img [ref=e1376]
+                            - generic [ref=e1378]: u/otusek
+                        - generic [ref=e1379]: •
+                        - time [ref=e1381]: hace 4 h
+                      - button "Abrir acciones de usuario" [ref=e1386]:
+                        - img [ref=e1389]
+                    - generic [ref=e1392]:
+                      - heading "¿Cómo se ponen las mayúsculas?" [level=2] [ref=e1393]:
+                        - link "¿Cómo se ponen las mayúsculas?" [ref=e1394]:
+                          - /url: /r/webdev/comments/1rz0oqf/how_do_you_capitalize_letters/
+                      - generic [ref=e1395]:
+                        - generic:
+                          - link "Puede sonar como una pregunta rara, pero voy a ser directo. ¿Cuál es la forma correcta de escribir? \"¿Apps más usadas\" o \"¿Apps Más Usadas\"? :P":
+                            - /url: /r/webdev/comments/1rz0oqf/how_do_you_capitalize_letters/
+                            - generic:
+                              - generic:
+                                - paragraph: Puede sonar como una pregunta rara, pero voy a ser directo. ¿Cuál es la forma correcta de escribir? "¿Apps más usadas" o "¿Apps Más Usadas"? :P
+                      - 'link "Etiqueta: Question" [ref=e1398]':
+                        - /url: /r/webdev/?f=flair_name%3A%22Question%22
+                        - 'generic "Etiqueta: Question" [ref=e1400]': Question
+                    - generic "Acciones disponibles para esta publicación" [ref=e1401]:
+                      - generic [ref=e1404]:
+                        - button "Upvote" [ref=e1405]:
+                          - img [ref=e1407]
+                          - generic [ref=e1409]:
+                            - generic: Upvote
+                        - generic [ref=e1411]: "0"
+                        - button "Downvote" [ref=e1412]:
+                          - img [ref=e1414]
+                          - generic [ref=e1416]:
+                            - generic: Downvote
+                      - link "17 Ir a los comentarios" [ref=e1417]:
+                        - /url: /r/webdev/comments/1rz0oqf/how_do_you_capitalize_letters/
+                        - generic [ref=e1418]:
+                          - img [ref=e1420]
+                          - generic [ref=e1423]: "17"
+                        - generic [ref=e1424]:
+                          - generic: Ir a los comentarios
+                      - button "Premiar" [ref=e1426]:
+                        - img [ref=e1429]
+                      - button "Compartir" [ref=e1434]:
+                        - generic [ref=e1435]:
+                          - img [ref=e1437]
+                          - generic [ref=e1439]: Compartir
+                - separator [ref=e1440]
+                - article "Una vez le hice una página web a un amigo." [ref=e1441]:
+                  - generic [ref=e1442] [cursor=pointer]:
+                    - link "Una vez le hice una página web a un amigo." [ref=e1443]:
+                      - /url: /r/webdev/comments/1ryzfdz/i_made_a_website_for_a_friend_once/
+                      - generic [ref=e1444]:
+                        - generic: Una vez le hice una página web a un amigo.
+                    - generic [ref=e1445]:
+                      - generic [ref=e1446]:
+                        - 'link "Autor: u/sh4manik" [ref=e1451]':
+                          - /url: /user/sh4manik/
+                          - generic [ref=e1452]:
+                            - img [ref=e1457]
+                            - generic [ref=e1459]: u/sh4manik
+                        - generic [ref=e1460]: •
+                        - time [ref=e1462]: hace 5 h
+                      - button "Abrir acciones de usuario" [ref=e1467]:
+                        - img [ref=e1470]
+                    - generic [ref=e1473]:
+                      - heading "Una vez le hice una página web a un amigo." [level=2] [ref=e1474]:
+                        - link "Una vez le hice una página web a un amigo." [ref=e1475]:
+                          - /url: /r/webdev/comments/1ryzfdz/i_made_a_website_for_a_friend_once/
+                      - generic [ref=e1476]:
+                        - generic:
+                          - link:
+                            - /url: /r/webdev/comments/1ryzfdz/i_made_a_website_for_a_friend_once/
+                            - generic:
+                              - generic:
+                                - paragraph: ¡Hola a todos! :)
+                                - paragraph: En el Día del Maestro, en lugar de los profes, los estudiantes eran los que daban las clases. Ese día no hubo clases aburridas. Durante una de las clases, empezamos a jugar Kahoot, y a mi amigo y a mí se nos ocurrió de inmediato agregarle bots al juego. Él le dio clic a la primera página web y estaba llena de anuncios. Era muy molesto solo escribir unas cuantas letras ahí.
+                                - paragraph: Ahí fue cuando pensé, ¿por qué no hacer mi propia página web? De hecho, también podría usarla yo mismo. Primero intenté usar Playwright, pero fue una mala idea, porque usaba demasiada memoria y el hosting se caía a cada rato. Después, encontré una librería más sencilla que lo manejaba todo fácilmente. Ese fue un día muy bueno.
+                                - paragraph: Sí, mi página web también tiene anuncios, pero no son molestos y no se interponen.
+                                - paragraph: Todo esto me hizo darme cuenta de que las ideas no siempre surgen solo de sentarse y pensar. A veces surgen por casualidad, cuando pasa algo inesperado. ¿Qué opinan ustedes de eso?
+                                - paragraph:
+                                  - text: "Para los desarrolladores interesados en el código fuente:"
+                                  - link "github.com/sh4man4ik/KahootBomber":
+                                    - /url: https://github.com/sh4man4ik/KahootBomber
+                                - paragraph:
+                                  - text: "Si solo quieres probar la página web:"
+                                  - link "kahoot-bomber.vercel.app":
+                                    - /url: https://kahoot-bomber.vercel.app
+                    - generic "Acciones disponibles para esta publicación" [ref=e1477]:
+                      - generic [ref=e1480]:
+                        - button "Upvote" [ref=e1481]:
+                          - img [ref=e1483]
+                          - generic [ref=e1485]:
+                            - generic: Upvote
+                        - generic [ref=e1487]: "0"
+                        - button "Downvote" [ref=e1488]:
+                          - img [ref=e1490]
+                          - generic [ref=e1492]:
+                            - generic: Downvote
+                      - link "5 Ir a los comentarios" [ref=e1493]:
+                        - /url: /r/webdev/comments/1ryzfdz/i_made_a_website_for_a_friend_once/
+                        - generic [ref=e1494]:
+                          - img [ref=e1496]
+                          - generic [ref=e1499]: "5"
+                        - generic [ref=e1500]:
+                          - generic: Ir a los comentarios
+                      - button "Premiar" [ref=e1502]:
+                        - img [ref=e1505]
+                      - button "Compartir" [ref=e1510]:
+                        - generic [ref=e1511]:
+                          - img [ref=e1513]
+                          - generic [ref=e1515]: Compartir
+                - separator [ref=e1516]
+                - article "Construí un inspector de solicitudes para Cloudflare Tunnels porque cloudflared no tiene un equivalente al panel de ngrok" [ref=e1517]:
+                  - generic [ref=e1518] [cursor=pointer]:
+                    - link "Construí un inspector de solicitudes para Cloudflare Tunnels porque cloudflared no tiene un equivalente al panel de ngrok" [ref=e1519]:
+                      - /url: /r/webdev/comments/1ryyemp/i_built_a_request_inspector_for_cloudflare/
+                      - generic [ref=e1520]:
+                        - generic: Construí un inspector de solicitudes para Cloudflare Tunnels porque cloudflared no tiene un equivalente al panel de ngrok
+                    - generic [ref=e1521]:
+                      - generic [ref=e1522]:
+                        - 'link "Autor: u/Blockbusterandy" [ref=e1527]':
+                          - /url: /user/Blockbusterandy/
+                          - generic [ref=e1528]:
+                            - generic [ref=e1530]:
+                              - img [ref=e1532]
+                              - img [ref=e1536]
+                              - img [ref=e1539]
+                            - generic [ref=e1541]: u/Blockbusterandy
+                        - generic [ref=e1542]: •
+                        - time [ref=e1544]: hace 6 h
+                      - button "Abrir acciones de usuario" [ref=e1549]:
+                        - img [ref=e1552]
+                    - generic [ref=e1555]:
+                      - heading "Construí un inspector de solicitudes para Cloudflare Tunnels porque cloudflared no tiene un equivalente al panel de ngrok" [level=2] [ref=e1556]:
+                        - link "Construí un inspector de solicitudes para Cloudflare Tunnels porque cloudflared no tiene un equivalente al panel de ngrok" [ref=e1557]:
+                          - /url: /r/webdev/comments/1ryyemp/i_built_a_request_inspector_for_cloudflare/
+                      - generic [ref=e1558]:
+                        - generic:
+                          - link:
+                            - /url: /r/webdev/comments/1ryyemp/i_built_a_request_inspector_for_cloudflare/
+                            - generic:
+                              - generic:
+                                - paragraph: "Si te cambiaste de ngrok a cloudflared, probablemente notaste que le falta algo: un inspector de solicitudes integrado. No hay forma de ver qué tráfico está llegando a tu túnel, qué encabezados se están enviando, cómo se ven los cuerpos de las respuestas."
+                                - paragraph: Así que construí uno.
+                                - paragraph:
+                                  - strong: "Cómo funciona:"
+                                  - text: Un proxy ligero de Node.js (cero dependencias de npm, solo el módulo
+                                  - code: http
+                                  - text: integrado) se encuentra entre cloudflared y tu app. Captura cada par de solicitud/respuesta y los transmite a un panel de Next.js a través de SSE.
+                                - text: cloudflared → Proxy (:8080) → Tu App (:3000) ↓ SSE (:4040) ↓ Interfaz de Usuario del Inspector (/inspector)
+                                - paragraph:
+                                  - strong: "Qué te muestra:"
+                                - list:
+                                  - listitem:
+                                    - paragraph: Encabezados completos de solicitud y respuesta
+                                  - listitem:
+                                    - paragraph: Cuerpos con resaltado de sintaxis — JSON, GraphQL, GraphQL-over-JSON, HTML, XML, JavaScript, datos de formulario, multipart
+                                  - listitem:
+                                    - paragraph: Códigos de estado, duración, marcas de tiempo
+                                  - listitem:
+                                    - paragraph: Feed SSE en vivo, sin sondeo
+                                - paragraph:
+                                  - strong: Para usarlo
+                                  - text: ", solo apunta cloudflared a"
+                                  - code: :8080
+                                  - text: en lugar del puerto de tu app y ejecuta
+                                  - code: npm run dev:inspect
+                                  - text: .
+                                - paragraph: "Es de código abierto y estoy buscando activamente colaboradores: la inspección de WebSocket, la repetición de solicitudes y un wrapper de CLI están en la lista de deseos."
+                                - paragraph:
+                                  - text: "Repo:"
+                                  - link "https://github.com/BlockbusterAndy/cloudflare-tunnel-inspector":
+                                    - /url: https://github.com/BlockbusterAndy/cloudflare-tunnel-inspector
+                                - paragraph: Con gusto respondo preguntas sobre cómo se construyó.
+                      - 'link "Etiqueta: Resource" [ref=e1561]':
+                        - /url: /r/webdev/?f=flair_name%3A%22Resource%22
+                        - 'generic "Etiqueta: Resource" [ref=e1563]': Resource
+                    - generic "Acciones disponibles para esta publicación" [ref=e1564]:
+                      - generic [ref=e1567]:
+                        - button "Upvote" [ref=e1568]:
+                          - img [ref=e1570]
+                          - generic [ref=e1572]:
+                            - generic: Upvote
+                        - generic [ref=e1574]: "1"
+                        - button "Downvote" [ref=e1575]:
+                          - img [ref=e1577]
+                          - generic [ref=e1579]:
+                            - generic: Downvote
+                      - link "0 Ir a los comentarios" [ref=e1580]:
+                        - /url: /r/webdev/comments/1ryyemp/i_built_a_request_inspector_for_cloudflare/
+                        - generic [ref=e1581]:
+                          - img [ref=e1583]
+                          - generic [ref=e1586]: "0"
+                        - generic [ref=e1587]:
+                          - generic: Ir a los comentarios
+                      - button "Premiar" [ref=e1589]:
+                        - img [ref=e1592]
+                      - button "Compartir" [ref=e1597]:
+                        - generic [ref=e1598]:
+                          - img [ref=e1600]
+                          - generic [ref=e1602]: Compartir
+                - separator [ref=e1603]
+                - generic [ref=e1604]:
+                  - 'generic "Advertisement: Considering a move? Check out Woo’s practical guide to a seamless ecommerce platform migration." [ref=e1605]':
+                    - 'link "Advertisement: Considering a move? Check out Woo’s practical guide to a seamless ecommerce platform migration." [ref=e1606] [cursor=pointer]':
+                      - /url: https://alb.reddit.com/cr?za=_EFHKA3PkhxeaeYy-9_ykvTUzro5OAQig0O2WnqICnHrEr7vbd75AEIajkwloNQiQpIpCHn48PNBnTRkWYW2ba6hLR8aAOLzY1_TiHzD98Lu5oMqjdx1gi3pRZwuNGOXjzoUvQe0tZq639Ru_lwHXws8b_e-v1525wfrf_9KJYFZKz-5Uao_6HCvcQ1EeuieWn861WRMCxE-45uG9rw9PsQUUepzh3jQ6IDR83oeM2xnyXFCeaWIyTdoInFlSgHNsx3WsKzZEVaNggwHxe9pSjJ9eL2latmWevhIGKtLXtuXOBNLUG1AmLS3Ex_5Z4fdVPoqrggLdVEQkgkiPgmztrBtcZ2atvrPBf3uNF1VpNjDd8N8za85fm_AYQm2p-COWUF5QVz0NLAkhLmOk_3kSYCQTBzXp_VSf-RsYwWzOqnZMy-OiVZgAR9RpsXI8doz5O69LALvr9jc2wUWyuhk7Eqiv5iPuhDm8HsrW_eZQV4eElp00V8bAlMwczJmaXPIs_79TGt7jxLDANJjUez1XIctgxL_bqhw-BGvI91HcehCp4ZJd5ACPudtdYGPtAwn7_HjTm6WfSR6pJLgmlQ4alvK3mgJuFApbGSoYCuwLvFq-bHIzTAN6XYnBBZRytTlyvVuv64JJJU29KY5gXBpZgabtRdfT9LiuktFao-jP0CBQxlnI8Po7gq7uUtF6_uhWR1_rroGUtltrSI4DTA4Whhsww9bKIBAwMUiZlSVF9N1CCtxH7UT8lgAwxAycV2Pqgfu3aDNgg-mKWv7KkOp38wqKwxGWHrGU6K_Mm7-LauY9CS9IDvqh7w2t10FUi9eysqWAC_O3g7BNH4FEcUUqglNkgNG0grfL1QvVJOimHOKXU4xEU95u8EfV_p6j7uIAisWJiOmJIQtYAg3q9iAeu9OVMfoNNw8oan5QMbVvC6OltyoNUmwmlE0m_GjdoMH6ZO3DpA_dqL8fs2ABhdSm8ZuULJfOps0aYQGowMKahfv0LxtFqZNUXSwg0DiD2rVRyyPFrsJuzu1arOfMGJauZ5GZnOMrXfFLZOsVhj3av_gCpn-4tx-8_H34_HHPLbknxYF93u_J2QLI3r_bAfJ9niUYt-rnp-lzr1c3qYMVJ39OAcKJpltttz2W-MXh0Oeo9yNHFxvd9twOuFXmM2IqDYy8cclwn2ApBqWGL6BShG1EKLHIWX9JaeFvnHIBZlcuGeOVoXbYwdebDY73GqXw-EhToMGFtf3C4vfRVSfu9EOjV2q6NU8TdQZX4Bzss7r7VR3nuLZFw84Dpd2omxluV4rMXr8Ou80p-ZNjNpBHKItBU3ucsUHMjT95YTcb_kaAH4v53-OA-RbItQGDn7aHZD09n6P8TqPh9uhBC12XE8mGFzzLKSc5VU5jYpHTJKbz8w3SYnT1P5ysyl3sulUAqpLy53qkLT6GDqlWndOwCuOzdfw3ozVEXPxfoYBhg&zp=e3KVZYUE0XLyRtoDQMDKqcw6Ilzy4XOrar1ZLV2Xvsw79Y0diMNtA1HqAMlGrQBnOkhfhlT09-XbGWgpEHDDwM1RQfhKa9CvzgEvO_DLRxiOlvpE42vFqrNblGq2dzihZp08fSnAgPXtyW8h_2qE_2mZByS3Kp9PEAEVHJ8BgS5jkR2OMhL6FDxmgdJ_QkYFO0bgY0tPEk_ktBW8nSombpGkTO2cyblcYS3Xq2JRSE5hhQwKBfM35ThoQDjbh7J0uvxDuR_EdB-U4Zj8DDvNvgYnSHNxtwk5jgIuDoL3h-M_fyamsK1a3RMYrzwp_AsBhzgo2c874p4_haQYPgz5roiuGvnKxWVyraSifZid_dpmCx9vcLpf7LFlayyw1q8Eq-zaKMtSmRTwlhFa6rTsHRiojsDmUcBTLuejnkNblQE4RIfjdMhzvu51rPAXytIU17z-5ojFuBRo64vRJezrTCqR3EgF5ACzGvY
+                  - generic [ref=e1607]:
+                    - generic [ref=e1608]:
+                      - link "Avatar de u/woocommerce-ads u/woocommerce-ads" [ref=e1611] [cursor=pointer]:
+                        - /url: /user/woocommerce-ads/
+                        - img "Avatar de u/woocommerce-ads" [ref=e1616]
+                        - generic [ref=e1617]: u/woocommerce-ads
+                      - generic [ref=e1618]: •
+                      - link "Patrocinado" [ref=e1620] [cursor=pointer]:
+                        - /url: /user/woocommerce-ads/
+                        - generic [ref=e1621]: Patrocinado
+                      - link [ref=e1623] [cursor=pointer]:
+                        - /url: https://alb.reddit.com/cr?za=_EFHKA3PkhxeaeYy-9_ykvTUzro5OAQig0O2WnqICnHrEr7vbd75AEIajkwloNQiQpIpCHn48PNBnTRkWYW2ba6hLR8aAOLzY1_TiHzD98Lu5oMqjdx1gi3pRZwuNGOXjzoUvQe0tZq639Ru_lwHXws8b_e-v1525wfrf_9KJYFZKz-5Uao_6HCvcQ1EeuieWn861WRMCxE-45uG9rw9PsQUUepzh3jQ6IDR83oeM2xnyXFCeaWIyTdoInFlSgHNsx3WsKzZEVaNggwHxe9pSjJ9eL2latmWevhIGKtLXtuXOBNLUG1AmLS3Ex_5Z4fdVPoqrggLdVEQkgkiPgmztrBtcZ2atvrPBf3uNF1VpNjDd8N8za85fm_AYQm2p-COWUF5QVz0NLAkhLmOk_3kSYCQTBzXp_VSf-RsYwWzOqnZMy-OiVZgAR9RpsXI8doz5O69LALvr9jc2wUWyuhk7Eqiv5iPuhDm8HsrW_eZQV4eElp00V8bAlMwczJmaXPIs_79TGt7jxLDANJjUez1XIctgxL_bqhw-BGvI91HcehCp4ZJd5ACPudtdYGPtAwn7_HjTm6WfSR6pJLgmlQ4alvK3mgJuFApbGSoYCuwLvFq-bHIzTAN6XYnBBZRytTlyvVuv64JJJU29KY5gXBpZgabtRdfT9LiuktFao-jP0CBQxlnI8Po7gq7uUtF6_uhWR1_rroGUtltrSI4DTA4Whhsww9bKIBAwMUiZlSVF9N1CCtxH7UT8lgAwxAycV2Pqgfu3aDNgg-mKWv7KkOp38wqKwxGWHrGU6K_Mm7-LauY9CS9IDvqh7w2t10FUi9eysqWAC_O3g7BNH4FEcUUqglNkgNG0grfL1QvVJOimHOKXU4xEU95u8EfV_p6j7uIAisWJiOmJIQtYAg3q9iAeu9OVMfoNNw8oan5QMbVvC6OltyoNUmwmlE0m_GjdoMH6ZO3DpA_dqL8fs2ABhdSm8ZuULJfOps0aYQGowMKahfv0LxtFqZNUXSwg0DiD2rVRyyPFrsJuzu1arOfMGJauZ5GZnOMrXfFLZOsVhj3av_gCpn-4tx-8_H34_HHPLbknxYF93u_J2QLI3r_bAfJ9niUYt-rnp-lzr1c3qYMVJ39OAcKJpltttz2W-MXh0Oeo9yNHFxvd9twOuFXmM2IqDYy8cclwn2ApBqWGL6BShG1EKLHIWX9JaeFvnHIBZlcuGeOVoXbYwdebDY73GqXw-EhToMGFtf3C4vfRVSfu9EOjV2q6NU8TdQZX4Bzss7r7VR3nuLZFw84Dpd2omxluV4rMXr8Ou80p-ZNjNpBHKItBU3ucsUHMjT95YTcb_kaAH4v53-OA-RbItQGDn7aHZD09n6P8TqPh9uhBC12XE8mGFzzLKSc5VU5jYpHTJKbz8w3SYnT1P5ysyl3sulUAqpLy53qkLT6GDqlWndOwCuOzdfw3ozVEXPxfoYBhg&zp=e3KVZYUE0XLyRtoDQMDKqcw6Ilzy4XOrar1ZLV2Xvsw79Y0diMNtA1HqAMlGrQBnOkhfhlT09-XbGWgpEHDDwM1RQfhKa9CvzgEvO_DLRxiOlvpE42vFqrNblGq2dzihZp08fSnAgPXtyW8h_2qE_2mZByS3Kp9PEAEVHJ8BgS5jkR2OMhL6FDxmgdJ_QkYFO0bgY0tPEk_ktBW8nSombpGkTO2cyblcYS3Xq2JRSE5hhQwKBfM35ThoQDjbh7J0uvxDuR_EdB-U4Zj8DDvNvgYnSHNxtwk5jgIuDoL3h-M_fyamsK1a3RMYrzwp_AsBhzgo2c874p4_haQYPgz5roiuGvnKxWVyraSifZid_dpmCx9vcLpf7LFlayyw1q8Eq-zaKMtSmRTwlhFa6rTsHRiojsDmUcBTLuejnkNblQE4RIfjdMhzvu51rPAXytIU17z-5ojFuBRo64vRJezrTCqR3EgF5ACzGvY
+                    - button "Abrir acciones de usuario" [ref=e1628] [cursor=pointer]:
+                      - img [ref=e1631]
+                  - heading "Considering a move? Check out Woo’s practical guide to a seamless ecommerce platform migration." [level=2] [ref=e1635]:
+                    - link "Considering a move? Check out Woo’s practical guide to a seamless ecommerce platform migration." [ref=e1638] [cursor=pointer]:
+                      - /url: https://alb.reddit.com/cr?za=_EFHKA3PkhxeaeYy-9_ykvTUzro5OAQig0O2WnqICnHrEr7vbd75AEIajkwloNQiQpIpCHn48PNBnTRkWYW2ba6hLR8aAOLzY1_TiHzD98Lu5oMqjdx1gi3pRZwuNGOXjzoUvQe0tZq639Ru_lwHXws8b_e-v1525wfrf_9KJYFZKz-5Uao_6HCvcQ1EeuieWn861WRMCxE-45uG9rw9PsQUUepzh3jQ6IDR83oeM2xnyXFCeaWIyTdoInFlSgHNsx3WsKzZEVaNggwHxe9pSjJ9eL2latmWevhIGKtLXtuXOBNLUG1AmLS3Ex_5Z4fdVPoqrggLdVEQkgkiPgmztrBtcZ2atvrPBf3uNF1VpNjDd8N8za85fm_AYQm2p-COWUF5QVz0NLAkhLmOk_3kSYCQTBzXp_VSf-RsYwWzOqnZMy-OiVZgAR9RpsXI8doz5O69LALvr9jc2wUWyuhk7Eqiv5iPuhDm8HsrW_eZQV4eElp00V8bAlMwczJmaXPIs_79TGt7jxLDANJjUez1XIctgxL_bqhw-BGvI91HcehCp4ZJd5ACPudtdYGPtAwn7_HjTm6WfSR6pJLgmlQ4alvK3mgJuFApbGSoYCuwLvFq-bHIzTAN6XYnBBZRytTlyvVuv64JJJU29KY5gXBpZgabtRdfT9LiuktFao-jP0CBQxlnI8Po7gq7uUtF6_uhWR1_rroGUtltrSI4DTA4Whhsww9bKIBAwMUiZlSVF9N1CCtxH7UT8lgAwxAycV2Pqgfu3aDNgg-mKWv7KkOp38wqKwxGWHrGU6K_Mm7-LauY9CS9IDvqh7w2t10FUi9eysqWAC_O3g7BNH4FEcUUqglNkgNG0grfL1QvVJOimHOKXU4xEU95u8EfV_p6j7uIAisWJiOmJIQtYAg3q9iAeu9OVMfoNNw8oan5QMbVvC6OltyoNUmwmlE0m_GjdoMH6ZO3DpA_dqL8fs2ABhdSm8ZuULJfOps0aYQGowMKahfv0LxtFqZNUXSwg0DiD2rVRyyPFrsJuzu1arOfMGJauZ5GZnOMrXfFLZOsVhj3av_gCpn-4tx-8_H34_HHPLbknxYF93u_J2QLI3r_bAfJ9niUYt-rnp-lzr1c3qYMVJ39OAcKJpltttz2W-MXh0Oeo9yNHFxvd9twOuFXmM2IqDYy8cclwn2ApBqWGL6BShG1EKLHIWX9JaeFvnHIBZlcuGeOVoXbYwdebDY73GqXw-EhToMGFtf3C4vfRVSfu9EOjV2q6NU8TdQZX4Bzss7r7VR3nuLZFw84Dpd2omxluV4rMXr8Ou80p-ZNjNpBHKItBU3ucsUHMjT95YTcb_kaAH4v53-OA-RbItQGDn7aHZD09n6P8TqPh9uhBC12XE8mGFzzLKSc5VU5jYpHTJKbz8w3SYnT1P5ysyl3sulUAqpLy53qkLT6GDqlWndOwCuOzdfw3ozVEXPxfoYBhg&zp=e3KVZYUE0XLyRtoDQMDKqcw6Ilzy4XOrar1ZLV2Xvsw79Y0diMNtA1HqAMlGrQBnOkhfhlT09-XbGWgpEHDDwM1RQfhKa9CvzgEvO_DLRxiOlvpE42vFqrNblGq2dzihZp08fSnAgPXtyW8h_2qE_2mZByS3Kp9PEAEVHJ8BgS5jkR2OMhL6FDxmgdJ_QkYFO0bgY0tPEk_ktBW8nSombpGkTO2cyblcYS3Xq2JRSE5hhQwKBfM35ThoQDjbh7J0uvxDuR_EdB-U4Zj8DDvNvgYnSHNxtwk5jgIuDoL3h-M_fyamsK1a3RMYrzwp_AsBhzgo2c874p4_haQYPgz5roiuGvnKxWVyraSifZid_dpmCx9vcLpf7LFlayyw1q8Eq-zaKMtSmRTwlhFa6rTsHRiojsDmUcBTLuejnkNblQE4RIfjdMhzvu51rPAXytIU17z-5ojFuBRo64vRJezrTCqR3EgF5ACzGvY
+                      - generic: Considering a move? Check out Woo’s practical guide to a seamless ecommerce platform migration.
+                  - generic [ref=e1639]:
+                    - link "Considering a move? Check out Woo’s practical guide to a seamless ecommerce platform migration." [ref=e1643] [cursor=pointer]:
+                      - /url: https://alb.reddit.com/cr?za=_EFHKA3PkhxeaeYy-9_ykvTUzro5OAQig0O2WnqICnHrEr7vbd75AEIajkwloNQiQpIpCHn48PNBnTRkWYW2ba6hLR8aAOLzY1_TiHzD98Lu5oMqjdx1gi3pRZwuNGOXjzoUvQe0tZq639Ru_lwHXws8b_e-v1525wfrf_9KJYFZKz-5Uao_6HCvcQ1EeuieWn861WRMCxE-45uG9rw9PsQUUepzh3jQ6IDR83oeM2xnyXFCeaWIyTdoInFlSgHNsx3WsKzZEVaNggwHxe9pSjJ9eL2latmWevhIGKtLXtuXOBNLUG1AmLS3Ex_5Z4fdVPoqrggLdVEQkgkiPgmztrBtcZ2atvrPBf3uNF1VpNjDd8N8za85fm_AYQm2p-COWUF5QVz0NLAkhLmOk_3kSYCQTBzXp_VSf-RsYwWzOqnZMy-OiVZgAR9RpsXI8doz5O69LALvr9jc2wUWyuhk7Eqiv5iPuhDm8HsrW_eZQV4eElp00V8bAlMwczJmaXPIs_79TGt7jxLDANJjUez1XIctgxL_bqhw-BGvI91HcehCp4ZJd5ACPudtdYGPtAwn7_HjTm6WfSR6pJLgmlQ4alvK3mgJuFApbGSoYCuwLvFq-bHIzTAN6XYnBBZRytTlyvVuv64JJJU29KY5gXBpZgabtRdfT9LiuktFao-jP0CBQxlnI8Po7gq7uUtF6_uhWR1_rroGUtltrSI4DTA4Whhsww9bKIBAwMUiZlSVF9N1CCtxH7UT8lgAwxAycV2Pqgfu3aDNgg-mKWv7KkOp38wqKwxGWHrGU6K_Mm7-LauY9CS9IDvqh7w2t10FUi9eysqWAC_O3g7BNH4FEcUUqglNkgNG0grfL1QvVJOimHOKXU4xEU95u8EfV_p6j7uIAisWJiOmJIQtYAg3q9iAeu9OVMfoNNw8oan5QMbVvC6OltyoNUmwmlE0m_GjdoMH6ZO3DpA_dqL8fs2ABhdSm8ZuULJfOps0aYQGowMKahfv0LxtFqZNUXSwg0DiD2rVRyyPFrsJuzu1arOfMGJauZ5GZnOMrXfFLZOsVhj3av_gCpn-4tx-8_H34_HHPLbknxYF93u_J2QLI3r_bAfJ9niUYt-rnp-lzr1c3qYMVJ39OAcKJpltttz2W-MXh0Oeo9yNHFxvd9twOuFXmM2IqDYy8cclwn2ApBqWGL6BShG1EKLHIWX9JaeFvnHIBZlcuGeOVoXbYwdebDY73GqXw-EhToMGFtf3C4vfRVSfu9EOjV2q6NU8TdQZX4Bzss7r7VR3nuLZFw84Dpd2omxluV4rMXr8Ou80p-ZNjNpBHKItBU3ucsUHMjT95YTcb_kaAH4v53-OA-RbItQGDn7aHZD09n6P8TqPh9uhBC12XE8mGFzzLKSc5VU5jYpHTJKbz8w3SYnT1P5ysyl3sulUAqpLy53qkLT6GDqlWndOwCuOzdfw3ozVEXPxfoYBhg&zp=e3KVZYUE0XLyRtoDQMDKqcw6Ilzy4XOrar1ZLV2Xvsw79Y0diMNtA1HqAMlGrQBnOkhfhlT09-XbGWgpEHDDwM1RQfhKa9CvzgEvO_DLRxiOlvpE42vFqrNblGq2dzihZp08fSnAgPXtyW8h_2qE_2mZByS3Kp9PEAEVHJ8BgS5jkR2OMhL6FDxmgdJ_QkYFO0bgY0tPEk_ktBW8nSombpGkTO2cyblcYS3Xq2JRSE5hhQwKBfM35ThoQDjbh7J0uvxDuR_EdB-U4Zj8DDvNvgYnSHNxtwk5jgIuDoL3h-M_fyamsK1a3RMYrzwp_AsBhzgo2c874p4_haQYPgz5roiuGvnKxWVyraSifZid_dpmCx9vcLpf7LFlayyw1q8Eq-zaKMtSmRTwlhFa6rTsHRiojsDmUcBTLuejnkNblQE4RIfjdMhzvu51rPAXytIU17z-5ojFuBRo64vRJezrTCqR3EgF5ACzGvY
+                      - img "Considering a move? Check out Woo’s practical guide to a seamless ecommerce platform migration." [ref=e1645]
+                    - separator [ref=e1646]
+                    - generic [ref=e1647]:
+                      - link [ref=e1649] [cursor=pointer]:
+                        - /url: https://alb.reddit.com/cr?za=_EFHKA3PkhxeaeYy-9_ykvTUzro5OAQig0O2WnqICnHrEr7vbd75AEIajkwloNQiQpIpCHn48PNBnTRkWYW2ba6hLR8aAOLzY1_TiHzD98Lu5oMqjdx1gi3pRZwuNGOXjzoUvQe0tZq639Ru_lwHXws8b_e-v1525wfrf_9KJYFZKz-5Uao_6HCvcQ1EeuieWn861WRMCxE-45uG9rw9PsQUUepzh3jQ6IDR83oeM2xnyXFCeaWIyTdoInFlSgHNsx3WsKzZEVaNggwHxe9pSjJ9eL2latmWevhIGKtLXtuXOBNLUG1AmLS3Ex_5Z4fdVPoqrggLdVEQkgkiPgmztrBtcZ2atvrPBf3uNF1VpNjDd8N8za85fm_AYQm2p-COWUF5QVz0NLAkhLmOk_3kSYCQTBzXp_VSf-RsYwWzOqnZMy-OiVZgAR9RpsXI8doz5O69LALvr9jc2wUWyuhk7Eqiv5iPuhDm8HsrW_eZQV4eElp00V8bAlMwczJmaXPIs_79TGt7jxLDANJjUez1XIctgxL_bqhw-BGvI91HcehCp4ZJd5ACPudtdYGPtAwn7_HjTm6WfSR6pJLgmlQ4alvK3mgJuFApbGSoYCuwLvFq-bHIzTAN6XYnBBZRytTlyvVuv64JJJU29KY5gXBpZgabtRdfT9LiuktFao-jP0CBQxlnI8Po7gq7uUtF6_uhWR1_rroGUtltrSI4DTA4Whhsww9bKIBAwMUiZlSVF9N1CCtxH7UT8lgAwxAycV2Pqgfu3aDNgg-mKWv7KkOp38wqKwxGWHrGU6K_Mm7-LauY9CS9IDvqh7w2t10FUi9eysqWAC_O3g7BNH4FEcUUqglNkgNG0grfL1QvVJOimHOKXU4xEU95u8EfV_p6j7uIAisWJiOmJIQtYAg3q9iAeu9OVMfoNNw8oan5QMbVvC6OltyoNUmwmlE0m_GjdoMH6ZO3DpA_dqL8fs2ABhdSm8ZuULJfOps0aYQGowMKahfv0LxtFqZNUXSwg0DiD2rVRyyPFrsJuzu1arOfMGJauZ5GZnOMrXfFLZOsVhj3av_gCpn-4tx-8_H34_HHPLbknxYF93u_J2QLI3r_bAfJ9niUYt-rnp-lzr1c3qYMVJ39OAcKJpltttz2W-MXh0Oeo9yNHFxvd9twOuFXmM2IqDYy8cclwn2ApBqWGL6BShG1EKLHIWX9JaeFvnHIBZlcuGeOVoXbYwdebDY73GqXw-EhToMGFtf3C4vfRVSfu9EOjV2q6NU8TdQZX4Bzss7r7VR3nuLZFw84Dpd2omxluV4rMXr8Ou80p-ZNjNpBHKItBU3ucsUHMjT95YTcb_kaAH4v53-OA-RbItQGDn7aHZD09n6P8TqPh9uhBC12XE8mGFzzLKSc5VU5jYpHTJKbz8w3SYnT1P5ysyl3sulUAqpLy53qkLT6GDqlWndOwCuOzdfw3ozVEXPxfoYBhg&zp=e3KVZYUE0XLyRtoDQMDKqcw6Ilzy4XOrar1ZLV2Xvsw79Y0diMNtA1HqAMlGrQBnOkhfhlT09-XbGWgpEHDDwM1RQfhKa9CvzgEvO_DLRxiOlvpE42vFqrNblGq2dzihZp08fSnAgPXtyW8h_2qE_2mZByS3Kp9PEAEVHJ8BgS5jkR2OMhL6FDxmgdJ_QkYFO0bgY0tPEk_ktBW8nSombpGkTO2cyblcYS3Xq2JRSE5hhQwKBfM35ThoQDjbh7J0uvxDuR_EdB-U4Zj8DDvNvgYnSHNxtwk5jgIuDoL3h-M_fyamsK1a3RMYrzwp_AsBhzgo2c874p4_haQYPgz5roiuGvnKxWVyraSifZid_dpmCx9vcLpf7LFlayyw1q8Eq-zaKMtSmRTwlhFa6rTsHRiojsDmUcBTLuejnkNblQE4RIfjdMhzvu51rPAXytIU17z-5ojFuBRo64vRJezrTCqR3EgF5ACzGvY
+                      - generic [ref=e1650]:
+                        - link "woocommerce.com" [ref=e1653] [cursor=pointer]:
+                          - /url: https://alb.reddit.com/cr?za=_EFHKA3PkhxeaeYy-9_ykvTUzro5OAQig0O2WnqICnHrEr7vbd75AEIajkwloNQiQpIpCHn48PNBnTRkWYW2ba6hLR8aAOLzY1_TiHzD98Lu5oMqjdx1gi3pRZwuNGOXjzoUvQe0tZq639Ru_lwHXws8b_e-v1525wfrf_9KJYFZKz-5Uao_6HCvcQ1EeuieWn861WRMCxE-45uG9rw9PsQUUepzh3jQ6IDR83oeM2xnyXFCeaWIyTdoInFlSgHNsx3WsKzZEVaNggwHxe9pSjJ9eL2latmWevhIGKtLXtuXOBNLUG1AmLS3Ex_5Z4fdVPoqrggLdVEQkgkiPgmztrBtcZ2atvrPBf3uNF1VpNjDd8N8za85fm_AYQm2p-COWUF5QVz0NLAkhLmOk_3kSYCQTBzXp_VSf-RsYwWzOqnZMy-OiVZgAR9RpsXI8doz5O69LALvr9jc2wUWyuhk7Eqiv5iPuhDm8HsrW_eZQV4eElp00V8bAlMwczJmaXPIs_79TGt7jxLDANJjUez1XIctgxL_bqhw-BGvI91HcehCp4ZJd5ACPudtdYGPtAwn7_HjTm6WfSR6pJLgmlQ4alvK3mgJuFApbGSoYCuwLvFq-bHIzTAN6XYnBBZRytTlyvVuv64JJJU29KY5gXBpZgabtRdfT9LiuktFao-jP0CBQxlnI8Po7gq7uUtF6_uhWR1_rroGUtltrSI4DTA4Whhsww9bKIBAwMUiZlSVF9N1CCtxH7UT8lgAwxAycV2Pqgfu3aDNgg-mKWv7KkOp38wqKwxGWHrGU6K_Mm7-LauY9CS9IDvqh7w2t10FUi9eysqWAC_O3g7BNH4FEcUUqglNkgNG0grfL1QvVJOimHOKXU4xEU95u8EfV_p6j7uIAisWJiOmJIQtYAg3q9iAeu9OVMfoNNw8oan5QMbVvC6OltyoNUmwmlE0m_GjdoMH6ZO3DpA_dqL8fs2ABhdSm8ZuULJfOps0aYQGowMKahfv0LxtFqZNUXSwg0DiD2rVRyyPFrsJuzu1arOfMGJauZ5GZnOMrXfFLZOsVhj3av_gCpn-4tx-8_H34_HHPLbknxYF93u_J2QLI3r_bAfJ9niUYt-rnp-lzr1c3qYMVJ39OAcKJpltttz2W-MXh0Oeo9yNHFxvd9twOuFXmM2IqDYy8cclwn2ApBqWGL6BShG1EKLHIWX9JaeFvnHIBZlcuGeOVoXbYwdebDY73GqXw-EhToMGFtf3C4vfRVSfu9EOjV2q6NU8TdQZX4Bzss7r7VR3nuLZFw84Dpd2omxluV4rMXr8Ou80p-ZNjNpBHKItBU3ucsUHMjT95YTcb_kaAH4v53-OA-RbItQGDn7aHZD09n6P8TqPh9uhBC12XE8mGFzzLKSc5VU5jYpHTJKbz8w3SYnT1P5ysyl3sulUAqpLy53qkLT6GDqlWndOwCuOzdfw3ozVEXPxfoYBhg&zp=e3KVZYUE0XLyRtoDQMDKqcw6Ilzy4XOrar1ZLV2Xvsw79Y0diMNtA1HqAMlGrQBnOkhfhlT09-XbGWgpEHDDwM1RQfhKa9CvzgEvO_DLRxiOlvpE42vFqrNblGq2dzihZp08fSnAgPXtyW8h_2qE_2mZByS3Kp9PEAEVHJ8BgS5jkR2OMhL6FDxmgdJ_QkYFO0bgY0tPEk_ktBW8nSombpGkTO2cyblcYS3Xq2JRSE5hhQwKBfM35ThoQDjbh7J0uvxDuR_EdB-U4Zj8DDvNvgYnSHNxtwk5jgIuDoL3h-M_fyamsK1a3RMYrzwp_AsBhzgo2c874p4_haQYPgz5roiuGvnKxWVyraSifZid_dpmCx9vcLpf7LFlayyw1q8Eq-zaKMtSmRTwlhFa6rTsHRiojsDmUcBTLuejnkNblQE4RIfjdMhzvu51rPAXytIU17z-5ojFuBRo64vRJezrTCqR3EgF5ACzGvY
+                          - generic: woocommerce.com
+                        - link "Descargar" [ref=e1655] [cursor=pointer]:
+                          - /url: https://alb.reddit.com/cr?za=_EFHKA3PkhxeaeYy-9_ykvTUzro5OAQig0O2WnqICnHrEr7vbd75AEIajkwloNQiQpIpCHn48PNBnTRkWYW2ba6hLR8aAOLzY1_TiHzD98Lu5oMqjdx1gi3pRZwuNGOXjzoUvQe0tZq639Ru_lwHXws8b_e-v1525wfrf_9KJYFZKz-5Uao_6HCvcQ1EeuieWn861WRMCxE-45uG9rw9PsQUUepzh3jQ6IDR83oeM2xnyXFCeaWIyTdoInFlSgHNsx3WsKzZEVaNggwHxe9pSjJ9eL2latmWevhIGKtLXtuXOBNLUG1AmLS3Ex_5Z4fdVPoqrggLdVEQkgkiPgmztrBtcZ2atvrPBf3uNF1VpNjDd8N8za85fm_AYQm2p-COWUF5QVz0NLAkhLmOk_3kSYCQTBzXp_VSf-RsYwWzOqnZMy-OiVZgAR9RpsXI8doz5O69LALvr9jc2wUWyuhk7Eqiv5iPuhDm8HsrW_eZQV4eElp00V8bAlMwczJmaXPIs_79TGt7jxLDANJjUez1XIctgxL_bqhw-BGvI91HcehCp4ZJd5ACPudtdYGPtAwn7_HjTm6WfSR6pJLgmlQ4alvK3mgJuFApbGSoYCuwLvFq-bHIzTAN6XYnBBZRytTlyvVuv64JJJU29KY5gXBpZgabtRdfT9LiuktFao-jP0CBQxlnI8Po7gq7uUtF6_uhWR1_rroGUtltrSI4DTA4Whhsww9bKIBAwMUiZlSVF9N1CCtxH7UT8lgAwxAycV2Pqgfu3aDNgg-mKWv7KkOp38wqKwxGWHrGU6K_Mm7-LauY9CS9IDvqh7w2t10FUi9eysqWAC_O3g7BNH4FEcUUqglNkgNG0grfL1QvVJOimHOKXU4xEU95u8EfV_p6j7uIAisWJiOmJIQtYAg3q9iAeu9OVMfoNNw8oan5QMbVvC6OltyoNUmwmlE0m_GjdoMH6ZO3DpA_dqL8fs2ABhdSm8ZuULJfOps0aYQGowMKahfv0LxtFqZNUXSwg0DiD2rVRyyPFrsJuzu1arOfMGJauZ5GZnOMrXfFLZOsVhj3av_gCpn-4tx-8_H34_HHPLbknxYF93u_J2QLI3r_bAfJ9niUYt-rnp-lzr1c3qYMVJ39OAcKJpltttz2W-MXh0Oeo9yNHFxvd9twOuFXmM2IqDYy8cclwn2ApBqWGL6BShG1EKLHIWX9JaeFvnHIBZlcuGeOVoXbYwdebDY73GqXw-EhToMGFtf3C4vfRVSfu9EOjV2q6NU8TdQZX4Bzss7r7VR3nuLZFw84Dpd2omxluV4rMXr8Ou80p-ZNjNpBHKItBU3ucsUHMjT95YTcb_kaAH4v53-OA-RbItQGDn7aHZD09n6P8TqPh9uhBC12XE8mGFzzLKSc5VU5jYpHTJKbz8w3SYnT1P5ysyl3sulUAqpLy53qkLT6GDqlWndOwCuOzdfw3ozVEXPxfoYBhg&zp=e3KVZYUE0XLyRtoDQMDKqcw6Ilzy4XOrar1ZLV2Xvsw79Y0diMNtA1HqAMlGrQBnOkhfhlT09-XbGWgpEHDDwM1RQfhKa9CvzgEvO_DLRxiOlvpE42vFqrNblGq2dzihZp08fSnAgPXtyW8h_2qE_2mZByS3Kp9PEAEVHJ8BgS5jkR2OMhL6FDxmgdJ_QkYFO0bgY0tPEk_ktBW8nSombpGkTO2cyblcYS3Xq2JRSE5hhQwKBfM35ThoQDjbh7J0uvxDuR_EdB-U4Zj8DDvNvgYnSHNxtwk5jgIuDoL3h-M_fyamsK1a3RMYrzwp_AsBhzgo2c874p4_haQYPgz5roiuGvnKxWVyraSifZid_dpmCx9vcLpf7LFlayyw1q8Eq-zaKMtSmRTwlhFa6rTsHRiojsDmUcBTLuejnkNblQE4RIfjdMhzvu51rPAXytIU17z-5ojFuBRo64vRJezrTCqR3EgF5ACzGvY
+                          - generic [ref=e1657]:
+                            - generic: Descargar
+                  - generic "Acciones disponibles para esta publicación" [ref=e1658]:
+                    - generic [ref=e1661]:
+                      - button "Upvote" [ref=e1662] [cursor=pointer]:
+                        - img [ref=e1664]
+                        - generic [ref=e1666]:
+                          - generic: Upvote
+                      - text: Votar
+                      - button "Downvote" [ref=e1667] [cursor=pointer]:
+                        - img [ref=e1669]
+                        - generic [ref=e1671]:
+                          - generic: Downvote
+                    - link "0 Ir a los comentarios" [ref=e1672] [cursor=pointer]:
+                      - /url: /user/woocommerce-ads/comments/1rj8l7x/considering_a_move_check_out_woos_practical_guide/?p=1&impressionid=5620490140733528306
+                      - generic [ref=e1673]:
+                        - img [ref=e1675]
+                        - generic [ref=e1678]: "0"
+                      - generic [ref=e1679]:
+                        - generic: Ir a los comentarios
+                    - button "Compartir" [ref=e1683] [cursor=pointer]:
+                      - generic [ref=e1684]:
+                        - img [ref=e1686]
+                        - generic [ref=e1688]: Compartir
+                    - link [ref=e1690] [cursor=pointer]:
+                      - /url: https://alb.reddit.com/cr?za=_EFHKA3PkhxeaeYy-9_ykvTUzro5OAQig0O2WnqICnHrEr7vbd75AEIajkwloNQiQpIpCHn48PNBnTRkWYW2ba6hLR8aAOLzY1_TiHzD98Lu5oMqjdx1gi3pRZwuNGOXjzoUvQe0tZq639Ru_lwHXws8b_e-v1525wfrf_9KJYFZKz-5Uao_6HCvcQ1EeuieWn861WRMCxE-45uG9rw9PsQUUepzh3jQ6IDR83oeM2xnyXFCeaWIyTdoInFlSgHNsx3WsKzZEVaNggwHxe9pSjJ9eL2latmWevhIGKtLXtuXOBNLUG1AmLS3Ex_5Z4fdVPoqrggLdVEQkgkiPgmztrBtcZ2atvrPBf3uNF1VpNjDd8N8za85fm_AYQm2p-COWUF5QVz0NLAkhLmOk_3kSYCQTBzXp_VSf-RsYwWzOqnZMy-OiVZgAR9RpsXI8doz5O69LALvr9jc2wUWyuhk7Eqiv5iPuhDm8HsrW_eZQV4eElp00V8bAlMwczJmaXPIs_79TGt7jxLDANJjUez1XIctgxL_bqhw-BGvI91HcehCp4ZJd5ACPudtdYGPtAwn7_HjTm6WfSR6pJLgmlQ4alvK3mgJuFApbGSoYCuwLvFq-bHIzTAN6XYnBBZRytTlyvVuv64JJJU29KY5gXBpZgabtRdfT9LiuktFao-jP0CBQxlnI8Po7gq7uUtF6_uhWR1_rroGUtltrSI4DTA4Whhsww9bKIBAwMUiZlSVF9N1CCtxH7UT8lgAwxAycV2Pqgfu3aDNgg-mKWv7KkOp38wqKwxGWHrGU6K_Mm7-LauY9CS9IDvqh7w2t10FUi9eysqWAC_O3g7BNH4FEcUUqglNkgNG0grfL1QvVJOimHOKXU4xEU95u8EfV_p6j7uIAisWJiOmJIQtYAg3q9iAeu9OVMfoNNw8oan5QMbVvC6OltyoNUmwmlE0m_GjdoMH6ZO3DpA_dqL8fs2ABhdSm8ZuULJfOps0aYQGowMKahfv0LxtFqZNUXSwg0DiD2rVRyyPFrsJuzu1arOfMGJauZ5GZnOMrXfFLZOsVhj3av_gCpn-4tx-8_H34_HHPLbknxYF93u_J2QLI3r_bAfJ9niUYt-rnp-lzr1c3qYMVJ39OAcKJpltttz2W-MXh0Oeo9yNHFxvd9twOuFXmM2IqDYy8cclwn2ApBqWGL6BShG1EKLHIWX9JaeFvnHIBZlcuGeOVoXbYwdebDY73GqXw-EhToMGFtf3C4vfRVSfu9EOjV2q6NU8TdQZX4Bzss7r7VR3nuLZFw84Dpd2omxluV4rMXr8Ou80p-ZNjNpBHKItBU3ucsUHMjT95YTcb_kaAH4v53-OA-RbItQGDn7aHZD09n6P8TqPh9uhBC12XE8mGFzzLKSc5VU5jYpHTJKbz8w3SYnT1P5ysyl3sulUAqpLy53qkLT6GDqlWndOwCuOzdfw3ozVEXPxfoYBhg&zp=e3KVZYUE0XLyRtoDQMDKqcw6Ilzy4XOrar1ZLV2Xvsw79Y0diMNtA1HqAMlGrQBnOkhfhlT09-XbGWgpEHDDwM1RQfhKa9CvzgEvO_DLRxiOlvpE42vFqrNblGq2dzihZp08fSnAgPXtyW8h_2qE_2mZByS3Kp9PEAEVHJ8BgS5jkR2OMhL6FDxmgdJ_QkYFO0bgY0tPEk_ktBW8nSombpGkTO2cyblcYS3Xq2JRSE5hhQwKBfM35ThoQDjbh7J0uvxDuR_EdB-U4Zj8DDvNvgYnSHNxtwk5jgIuDoL3h-M_fyamsK1a3RMYrzwp_AsBhzgo2c874p4_haQYPgz5roiuGvnKxWVyraSifZid_dpmCx9vcLpf7LFlayyw1q8Eq-zaKMtSmRTwlhFa6rTsHRiojsDmUcBTLuejnkNblQE4RIfjdMhzvu51rPAXytIU17z-5ojFuBRo64vRJezrTCqR3EgF5ACzGvY
+                - separator [ref=e1691]
+                - article "¿Seguro para diseñadores web?" [ref=e1692]:
+                  - generic [ref=e1693] [cursor=pointer]:
+                    - link "¿Seguro para diseñadores web?" [ref=e1694]:
+                      - /url: /r/webdev/comments/1ryyav0/insurance_for_web_designers/
+                      - generic [ref=e1695]:
+                        - generic: ¿Seguro para diseñadores web?
+                    - generic [ref=e1696]:
+                      - generic [ref=e1697]:
+                        - 'link "Autor: u/MattfromNEXT" [ref=e1702]':
+                          - /url: /user/MattfromNEXT/
+                          - generic [ref=e1703]:
+                            - img [ref=e1708]
+                            - generic [ref=e1710]: u/MattfromNEXT
+                        - generic [ref=e1711]: •
+                        - time [ref=e1713]: hace 6 h
+                      - button "Abrir acciones de usuario" [ref=e1718]:
+                        - img [ref=e1721]
+                    - generic [ref=e1724]:
+                      - heading "¿Seguro para diseñadores web?" [level=2] [ref=e1725]:
+                        - link "¿Seguro para diseñadores web?" [ref=e1726]:
+                          - /url: /r/webdev/comments/1ryyav0/insurance_for_web_designers/
+                      - generic [ref=e1727]:
+                        - generic:
+                          - link:
+                            - /url: /r/webdev/comments/1ryyav0/insurance_for_web_designers/
+                            - generic:
+                              - generic:
+                                - paragraph:
+                                  - text: Vi un hilo de
+                                  - link:
+                                    - /url: https://www.reddit.com/r/webdev/comments/powftw/does_anyone_carry_general_liability_insurance_for/
+                                  - text: de hace unos años sobre la responsabilidad civil general vs. la responsabilidad profesional (seguro de errores y omisiones) para desarrolladores web y quería volver a tocar el tema, ya que el panorama ha cambiado bastante.
+                                - paragraph: Ahora, más clientes exigen cobertura de seguro, y los riesgos de responsabilidad civil han evolucionado, con demandas por accesibilidad y filtraciones de datos que se han vuelto más comunes.
+                                - paragraph: "Aquí está la diferencia entre los dos que necesitas saber si trabajas como consultor:"
+                                - paragraph: La responsabilidad civil general puede cubrir accidentes físicos y daños a la propiedad. Derramas café en la laptop de un cliente, alguien se tropieza con los cables en su oficina, dañas accidentalmente su equipo durante una visita al sitio.
+                                - paragraph: Errores y Omisiones (Responsabilidad Profesional) puede cubrir errores en tu trabajo real. El cliente afirma que tu código causó que su sitio se cayera durante el Black Friday, problemas de accesibilidad que llevaron a demandas de la ADA, vulnerabilidades de seguridad en tu trabajo de desarrollo.
+                                - paragraph: "Escribir código no es lo primero que se le viene a la mente a mucha gente cuando piensan en seguros, pero hay bastantes escenarios en los que los desarrolladores web pueden ser responsables, especialmente si trabajas como contratista:"
+                                - paragraph: "Demandas de accesibilidad: las demandas de la ADA contra sitios web están explotando. Incluso si no te nombran directamente, los clientes a menudo intentan arrastrar a los desarrolladores a estos casos. Tener cobertura de E&O que incluya específicamente problemas de accesibilidad se está volviendo crucial."
+                                - paragraph: "Problemas de rendimiento: tus recomendaciones de optimización de código arruinan la velocidad de su sitio durante el lanzamiento de un producto, lo que les cuesta ventas."
+                                - paragraph: "Fallos de integración: la integración de la pasarela de pago que construiste tiene problemas que causan fallos en las transacciones durante la temporada alta."
+                                - paragraph: "El escudo de la LLC no es a prueba de balas: aunque formar una LLC ayuda, no te protege de la responsabilidad personal en casos de negligencia profesional. El seguro llena ese vacío."
+                                - paragraph: "Lenguaje contractual a tener en cuenta: los clientes a menudo exigen cobertura de \"indemnización profesional\" o \"E&O tecnológica\". Asegúrate de que tu póliza cubra específicamente el trabajo de desarrollo web, no todas las pólizas de E&O son iguales."
+                      - 'link "Etiqueta: Discussion" [ref=e1730]':
+                        - /url: /r/webdev/?f=flair_name%3A%22Discussion%22
+                        - 'generic "Etiqueta: Discussion" [ref=e1732]': Discussion
+                    - generic "Acciones disponibles para esta publicación" [ref=e1733]:
+                      - generic [ref=e1736]:
+                        - button "Upvote" [ref=e1737]:
+                          - img [ref=e1739]
+                          - generic [ref=e1741]:
+                            - generic: Upvote
+                        - generic [ref=e1743]: "10"
+                        - button "Downvote" [ref=e1744]:
+                          - img [ref=e1746]
+                          - generic [ref=e1748]:
+                            - generic: Downvote
+                      - link "4 Ir a los comentarios" [ref=e1749]:
+                        - /url: /r/webdev/comments/1ryyav0/insurance_for_web_designers/
+                        - generic [ref=e1750]:
+                          - img [ref=e1752]
+                          - generic [ref=e1755]: "4"
+                        - generic [ref=e1756]:
+                          - generic: Ir a los comentarios
+                      - button "Premiar" [ref=e1758]:
+                        - img [ref=e1761]
+                      - button "Compartir" [ref=e1766]:
+                        - generic [ref=e1767]:
+                          - img [ref=e1769]
+                          - generic [ref=e1771]: Compartir
+                - separator [ref=e1772]
+                - article "¿Alguien ha construido su propio sistema de afiliados casero?" [ref=e1773]:
+                  - generic [ref=e1774] [cursor=pointer]:
+                    - link "¿Alguien ha construido su propio sistema de afiliados casero?" [ref=e1775]:
+                      - /url: /r/webdev/comments/1ryxq4n/anyone_built_their_own_homegrown_affiliate_system/
+                      - generic [ref=e1776]:
+                        - generic: ¿Alguien ha construido su propio sistema de afiliados casero?
+                    - generic [ref=e1777]:
+                      - generic [ref=e1778]:
+                        - 'link "Autor: u/flipsnapnet" [ref=e1783]':
+                          - /url: /user/flipsnapnet/
+                          - generic [ref=e1784]:
+                            - img [ref=e1789]
+                            - generic [ref=e1791]: u/flipsnapnet
+                        - generic [ref=e1792]: •
+                        - time [ref=e1794]: hace 6 h
+                      - button "Abrir acciones de usuario" [ref=e1799]:
+                        - img [ref=e1802]
+                    - generic [ref=e1805]:
+                      - heading "¿Alguien ha construido su propio sistema de afiliados casero?" [level=2] [ref=e1806]:
+                        - link "¿Alguien ha construido su propio sistema de afiliados casero?" [ref=e1807]:
+                          - /url: /r/webdev/comments/1ryxq4n/anyone_built_their_own_homegrown_affiliate_system/
+                      - generic [ref=e1808]:
+                        - generic:
+                          - link "Tengo una app que tiene un paywall. Los usuarios tienen que registrarse, ir al producto y pagar usando los enlaces de pago de Stripe, que luego regresan al sitio. En lugar de usar Impact Radius, pensé en construir el mío propio, pero ¿alguien ha hecho esto y tiene un patrón confiable contra el fraude y esas cosas?":
+                            - /url: /r/webdev/comments/1ryxq4n/anyone_built_their_own_homegrown_affiliate_system/
+                            - generic:
+                              - generic:
+                                - paragraph: Tengo una app que tiene un paywall. Los usuarios tienen que registrarse, ir al producto y pagar usando los enlaces de pago de Stripe, que luego regresan al sitio. En lugar de usar Impact Radius, pensé en construir el mío propio, pero ¿alguien ha hecho esto y tiene un patrón confiable contra el fraude y esas cosas?
+                    - generic "Acciones disponibles para esta publicación" [ref=e1809]:
+                      - generic [ref=e1812]:
+                        - button "Upvote" [ref=e1813]:
+                          - img [ref=e1815]
+                          - generic [ref=e1817]:
+                            - generic: Upvote
+                        - generic [ref=e1819]: "2"
+                        - button "Downvote" [ref=e1820]:
+                          - img [ref=e1822]
+                          - generic [ref=e1824]:
+                            - generic: Downvote
+                      - link "2 Ir a los comentarios" [ref=e1825]:
+                        - /url: /r/webdev/comments/1ryxq4n/anyone_built_their_own_homegrown_affiliate_system/
+                        - generic [ref=e1826]:
+                          - img [ref=e1828]
+                          - generic [ref=e1831]: "2"
+                        - generic [ref=e1832]:
+                          - generic: Ir a los comentarios
+                      - button "Premiar" [ref=e1834]:
+                        - img [ref=e1837]
+                      - button "Compartir" [ref=e1842]:
+                        - generic [ref=e1843]:
+                          - img [ref=e1845]
+                          - generic [ref=e1847]: Compartir
+                - separator [ref=e1848]
+                - article "Construí una extensión de Chrome que agrega los archivos modificados, los commits y las adiciones/eliminaciones directamente en cada tarjeta en la lista de PRs en GitHub." [ref=e1849]:
+                  - generic [ref=e1850] [cursor=pointer]:
+                    - link "Construí una extensión de Chrome que agrega los archivos modificados, los commits y las adiciones/eliminaciones directamente en cada tarjeta en la lista de PRs en GitHub." [ref=e1851]:
+                      - /url: /r/webdev/comments/1ryx6yo/built_a_chrome_extension_that_adds_files_changed/
+                      - generic [ref=e1852]:
+                        - generic: Construí una extensión de Chrome que agrega los archivos modificados, los commits y las adiciones/eliminaciones directamente en cada tarjeta en la lista de PRs en GitHub.
+                    - generic [ref=e1853]:
+                      - generic [ref=e1854]:
+                        - 'link "Autor: u/Legitimate-Oil1763" [ref=e1859]':
+                          - /url: /user/Legitimate-Oil1763/
+                          - generic [ref=e1860]:
+                            - img "Avatar de u/Legitimate-Oil1763" [ref=e1863]
+                            - generic [ref=e1864]: u/Legitimate-Oil1763
+                        - generic [ref=e1865]: •
+                        - time [ref=e1867]: hace 6 h
+                      - button "Abrir acciones de usuario" [ref=e1872]:
+                        - img [ref=e1875]
+                    - generic [ref=e1878]:
+                      - heading "Construí una extensión de Chrome que agrega los archivos modificados, los commits y las adiciones/eliminaciones directamente en cada tarjeta en la lista de PRs en GitHub." [level=2] [ref=e1879]:
+                        - link "Construí una extensión de Chrome que agrega los archivos modificados, los commits y las adiciones/eliminaciones directamente en cada tarjeta en la lista de PRs en GitHub." [ref=e1880]:
+                          - /url: /r/webdev/comments/1ryx6yo/built_a_chrome_extension_that_adds_files_changed/
+                      - 'link "Etiqueta: Showoff Saturday" [ref=e1883]':
+                        - /url: /r/webdev/?f=flair_name%3A%22Showoff%20Saturday%22
+                        - 'generic "Etiqueta: Showoff Saturday" [ref=e1885]': Showoff Saturday
+                    - img "r/webdev - Construí una extensión de Chrome que agrega los archivos modificados, los commits y las adiciones/eliminaciones directamente en cada tarjeta en la lista de PRs en GitHub." [ref=e1891]
+                    - generic "Acciones disponibles para esta publicación" [ref=e1892]:
+                      - generic [ref=e1895]:
+                        - button "Upvote" [ref=e1896]:
+                          - img [ref=e1898]
+                          - generic [ref=e1900]:
+                            - generic: Upvote
+                        - generic [ref=e1902]: "2"
+                        - button "Downvote" [ref=e1903]:
+                          - img [ref=e1905]
+                          - generic [ref=e1907]:
+                            - generic: Downvote
+                      - link "3 Ir a los comentarios" [ref=e1908]:
+                        - /url: /r/webdev/comments/1ryx6yo/built_a_chrome_extension_that_adds_files_changed/
+                        - generic [ref=e1909]:
+                          - img [ref=e1911]
+                          - generic [ref=e1914]: "3"
+                        - generic [ref=e1915]:
+                          - generic: Ir a los comentarios
+                      - button "Premiar" [ref=e1917]:
+                        - img [ref=e1920]
+                      - button "Compartir" [ref=e1925]:
+                        - generic [ref=e1926]:
+                          - img [ref=e1928]
+                          - generic [ref=e1930]: Compartir
+                - separator [ref=e1931]
+                - article "Construí una herramienta de animación en canvas con p5.js y React — notas sobre lo que realmente causó problemas" [ref=e1932]:
+                  - generic [ref=e1933] [cursor=pointer]:
+                    - link "Construí una herramienta de animación en canvas con p5.js y React — notas sobre lo que realmente causó problemas" [ref=e1934]:
+                      - /url: /r/webdev/comments/1ryx3t5/built_a_canvas_animation_tool_with_p5js_and_react/
+                      - generic [ref=e1935]:
+                        - generic: Construí una herramienta de animación en canvas con p5.js y React — notas sobre lo que realmente causó problemas
+                    - generic [ref=e1936]:
+                      - generic [ref=e1937]:
+                        - 'link "Autor: u/3mo-ahmed" [ref=e1942]':
+                          - /url: /user/3mo-ahmed/
+                          - generic [ref=e1943]:
+                            - img [ref=e1948]
+                            - generic [ref=e1950]: u/3mo-ahmed
+                        - generic [ref=e1951]: •
+                        - time [ref=e1953]: hace 6 h
+                      - button "Abrir acciones de usuario" [ref=e1958]:
+                        - img [ref=e1961]
+                    - generic [ref=e1964]:
+                      - heading "Construí una herramienta de animación en canvas con p5.js y React — notas sobre lo que realmente causó problemas" [level=2] [ref=e1965]:
+                        - link "Construí una herramienta de animación en canvas con p5.js y React — notas sobre lo que realmente causó problemas" [ref=e1966]:
+                          - /url: /r/webdev/comments/1ryx3t5/built_a_canvas_animation_tool_with_p5js_and_react/
+                      - generic [ref=e1967]:
+                        - generic:
+                          - link:
+                            - /url: /r/webdev/comments/1ryx3t5/built_a_canvas_animation_tool_with_p5js_and_react/
+                            - generic:
+                              - generic:
+                                - paragraph: "Terminé un proyecto secundario: un generador de tipografía cinética para el navegador. Cinco estilos de animación, exportación al lado del cliente a MP4/GIF usando la API MediaRecorder, sin backend."
+                                - paragraph: "Un par de cosas que no eran obvias:"
+                                - paragraph: La exportación con MediaRecorder se quedaba trabada al 90%. El problema era que llamaba a recorder.stop() mal — necesitaba recolectar los pedazos cada 100ms con recorder.start(100) y usar setInterval para rastrear el tiempo transcurrido.
+                                - paragraph: "La exportación a WebM funcionaba bien en Chrome. Luego alguien intentó compartirlo en WhatsApp: 'formato no soportado'. Agregué detección de prioridad MP4: MediaRecorder.isTypeSupported('video/mp4') primero, WebM como respaldo."
+                                - paragraph: p5.js + React necesita una gestión cuidadosa de las referencias. Los cierres obsoletos dentro de draw() significaban que los cambios en la interfaz de usuario no se reflejaban en vivo. Lo arreglé leyendo de useRef dentro del bucle y actualizando las referencias junto con setState.
+                                - paragraph:
+                                  - text: La herramienta está en vivo en
+                                  - link "ahmedraouf.online/lab":
+                                    - /url: http://ahmedraouf.online/lab
+                                - paragraph: ¿Alguien más se ha topado con el muro de WebM/WhatsApp? ¿Y cuál es su enfoque para mantener el estado del boceto de p5 en sincronía con React?
+                    - generic "Acciones disponibles para esta publicación" [ref=e1968]:
+                      - generic [ref=e1971]:
+                        - button "Upvote" [ref=e1972]:
+                          - img [ref=e1974]
+                          - generic [ref=e1976]:
+                            - generic: Upvote
+                        - generic [ref=e1978]: "0"
+                        - button "Downvote" [ref=e1979]:
+                          - img [ref=e1981]
+                          - generic [ref=e1983]:
+                            - generic: Downvote
+                      - link "0 Ir a los comentarios" [ref=e1984]:
+                        - /url: /r/webdev/comments/1ryx3t5/built_a_canvas_animation_tool_with_p5js_and_react/
+                        - generic [ref=e1985]:
+                          - img [ref=e1987]
+                          - generic [ref=e1990]: "0"
+                        - generic [ref=e1991]:
+                          - generic: Ir a los comentarios
+                      - button "Premiar" [ref=e1993]:
+                        - img [ref=e1996]
+                      - button "Compartir" [ref=e2001]:
+                        - generic [ref=e2002]:
+                          - img [ref=e2004]
+                          - generic [ref=e2006]: Compartir
+                - separator [ref=e2007]
+                - article "Me armé una página donde podés calificar cualquier país del 1 al 10." [ref=e2008]:
+                  - generic [ref=e2009] [cursor=pointer]:
+                    - link "Me armé una página donde podés calificar cualquier país del 1 al 10." [ref=e2010]:
+                      - /url: /r/webdev/comments/1ryvmjd/i_built_a_site_where_you_can_rate_any_country/
+                      - generic [ref=e2011]:
+                        - generic: Me armé una página donde podés calificar cualquier país del 1 al 10.
+                    - generic [ref=e2012]:
+                      - generic [ref=e2013]:
+                        - 'link "Autor: u/Fantastic-Bath7604" [ref=e2018]':
+                          - /url: /user/Fantastic-Bath7604/
+                          - generic [ref=e2019]:
+                            - img "Avatar de u/Fantastic-Bath7604" [ref=e2022]
+                            - generic [ref=e2023]: u/Fantastic-Bath7604
+                        - generic [ref=e2024]: •
+                        - time [ref=e2026]: hace 7 h
+                      - button "Abrir acciones de usuario" [ref=e2031]:
+                        - img [ref=e2034]
+                    - heading "Me armé una página donde podés calificar cualquier país del 1 al 10." [level=2] [ref=e2038]:
+                      - link "Me armé una página donde podés calificar cualquier país del 1 al 10." [ref=e2039]:
+                        - /url: /r/webdev/comments/1ryvmjd/i_built_a_site_where_you_can_rate_any_country/
+                    - img "r/webdev - Me armé una página donde podés calificar cualquier país del 1 al 10." [ref=e2045]
+                    - generic "Acciones disponibles para esta publicación" [ref=e2046]:
+                      - generic [ref=e2049]:
+                        - button "Upvote" [ref=e2050]:
+                          - img [ref=e2052]
+                          - generic [ref=e2054]:
+                            - generic: Upvote
+                        - generic [ref=e2056]: "0"
+                        - button "Downvote" [ref=e2057]:
+                          - img [ref=e2059]
+                          - generic [ref=e2061]:
+                            - generic: Downvote
+                      - link "15 Ir a los comentarios" [ref=e2062]:
+                        - /url: /r/webdev/comments/1ryvmjd/i_built_a_site_where_you_can_rate_any_country/
+                        - generic [ref=e2063]:
+                          - img [ref=e2065]
+                          - generic [ref=e2068]: "15"
+                        - generic [ref=e2069]:
+                          - generic: Ir a los comentarios
+                      - button "Premiar" [ref=e2071]:
+                        - img [ref=e2074]
+                      - button "Compartir" [ref=e2079]:
+                        - generic [ref=e2080]:
+                          - img [ref=e2082]
+                          - generic [ref=e2084]: Compartir
+                - separator [ref=e2085]
+                - article "Relajándote con la IA, No Estás Atrasado" [ref=e2086]:
+                  - generic [ref=e2087] [cursor=pointer]:
+                    - link "Relajándote con la IA, No Estás Atrasado" [ref=e2088]:
+                      - /url: /r/webdev/comments/1ryva4t/chilling_on_ai_youre_not_behind/
+                      - generic [ref=e2089]:
+                        - generic: Relajándote con la IA, No Estás Atrasado
+                    - generic [ref=e2090]:
+                      - generic [ref=e2091]:
+                        - 'link "Autor: u/Slight_Republic_4242" [ref=e2096]':
+                          - /url: /user/Slight_Republic_4242/
+                          - generic [ref=e2097]:
+                            - img "Avatar de u/Slight_Republic_4242" [ref=e2100]
+                            - generic [ref=e2101]: u/Slight_Republic_4242
+                        - generic [ref=e2102]: •
+                        - time [ref=e2104]: hace 8 h
+                      - button "Abrir acciones de usuario" [ref=e2109]:
+                        - img [ref=e2112]
+                    - generic [ref=e2115]:
+                      - heading "Relajándote con la IA, No Estás Atrasado" [level=2] [ref=e2116]:
+                        - link "Relajándote con la IA, No Estás Atrasado" [ref=e2117]:
+                          - /url: /r/webdev/comments/1ryva4t/chilling_on_ai_youre_not_behind/
+                      - generic [ref=e2118]:
+                        - generic:
+                          - link:
+                            - /url: /r/webdev/comments/1ryva4t/chilling_on_ai_youre_not_behind/
+                            - generic:
+                              - generic:
+                                - paragraph: "Así que el año pasado estuve atascado en una consultora bien pesada con el tema de la IA, y la verdad, fue intenso. Cada reunión, propuesta, contratación... todo era sobre IA. Después me fui y empecé a hablar con devs de otras empresas y ¡wow!, tremenda diferencia. La mayoría de los equipos están contratando por lo mismo que hace 5 años: backend, SQL, debugging... solo que ahora hacen todo eso con más IA en sus flujos de trabajo. La IA es solo una palabra de moda en las ofertas de trabajo. Yo también uso herramientas de IA: autocompletado, generación de pruebas, resúmenes de PRs. Pero es como el 10% de mi día. El resto es seguir descubriendo casos extremos, hacer que las cosas no se rompan, optimizar cosas. Lo difícil sigue siendo difícil. He visto gente que se metió de lleno en la IA esperando ser superestrellas, pero la mayoría no cambió mucho. Mientras tanto, internet hace que parezca que todos están lanzando 10 apps a la semana con IA y que sos un dinosaurio si no lo hacés. No, para nada. La mayoría de los buenos devs que conozco solo están haciendo el trabajo, aprendiendo cuando surge algo útil e ignorando el ruido. No estás atrasado, respirá."
+                    - generic "Acciones disponibles para esta publicación" [ref=e2119]:
+                      - generic [ref=e2122]:
+                        - button "Upvote" [ref=e2123]:
+                          - img [ref=e2125]
+                          - generic [ref=e2127]:
+                            - generic: Upvote
+                        - generic [ref=e2129]: "211"
+                        - button "Downvote" [ref=e2130]:
+                          - img [ref=e2132]
+                          - generic [ref=e2134]:
+                            - generic: Downvote
+                      - link "57 Ir a los comentarios" [ref=e2135]:
+                        - /url: /r/webdev/comments/1ryva4t/chilling_on_ai_youre_not_behind/
+                        - generic [ref=e2136]:
+                          - img [ref=e2138]
+                          - generic [ref=e2141]: "57"
+                        - generic [ref=e2142]:
+                          - generic: Ir a los comentarios
+                      - button "Premiar" [ref=e2144]:
+                        - img [ref=e2147]
+                      - button "Compartir" [ref=e2152]:
+                        - generic [ref=e2153]:
+                          - img [ref=e2155]
+                          - generic [ref=e2157]: Compartir
+                - separator [ref=e2158]
+                - article "Ahora que prácticamente cualquiera puede programar un software con Vibecode, ¿cómo acabará esto?" [ref=e2159]:
+                  - generic [ref=e2160] [cursor=pointer]:
+                    - link "Ahora que prácticamente cualquiera puede programar un software con Vibecode, ¿cómo acabará esto?" [ref=e2161]:
+                      - /url: /r/webdev/comments/1ryuwq8/after_literally_everybody_can_vibecode_a_software/
+                      - generic [ref=e2162]:
+                        - generic: Ahora que prácticamente cualquiera puede programar un software con Vibecode, ¿cómo acabará esto?
+                    - generic [ref=e2163]:
+                      - generic [ref=e2164]:
+                        - 'link "Autor: u/Artistic-Yam8045" [ref=e2169]':
+                          - /url: /user/Artistic-Yam8045/
+                          - generic [ref=e2170]:
+                            - img "Avatar de u/Artistic-Yam8045" [ref=e2173]
+                            - generic [ref=e2174]: u/Artistic-Yam8045
+                        - generic [ref=e2175]: •
+                        - time [ref=e2177]: hace 8 h
+                      - button "Abrir acciones de usuario" [ref=e2182]:
+                        - img [ref=e2185]
+                    - generic [ref=e2188]:
+                      - heading "Ahora que prácticamente cualquiera puede programar un software con Vibecode, ¿cómo acabará esto?" [level=2] [ref=e2189]:
+                        - link "Ahora que prácticamente cualquiera puede programar un software con Vibecode, ¿cómo acabará esto?" [ref=e2190]:
+                          - /url: /r/webdev/comments/1ryuwq8/after_literally_everybody_can_vibecode_a_software/
+                      - generic [ref=e2191]:
+                        - generic:
+                          - link "Hoy en día cualquiera puede crear software. Pero, ¿a dónde nos llevará esto? ¿Qué consecuencias tendrá? Aunque muchos digan que el vibecoding es una porquería, estas IA pueden hacer cosas increíbles. Simplemente no sé adónde nos llevará todo esto. ¿Cuál crees que es el siguiente paso? ¿Dispositivos con software? ¿Qué opinas? Realmente no sé qué pensar al respecto.":
+                            - /url: /r/webdev/comments/1ryuwq8/after_literally_everybody_can_vibecode_a_software/
+                            - generic:
+                              - generic:
+                                - paragraph: Hoy en día cualquiera puede crear software. Pero, ¿a dónde nos llevará esto? ¿Qué consecuencias tendrá? Aunque muchos digan que el vibecoding es una porquería, estas IA pueden hacer cosas increíbles. Simplemente no sé adónde nos llevará todo esto. ¿Cuál crees que es el siguiente paso? ¿Dispositivos con software? ¿Qué opinas? Realmente no sé qué pensar al respecto.
+                    - generic "Acciones disponibles para esta publicación" [ref=e2192]:
+                      - generic [ref=e2195]:
+                        - button "Upvote" [ref=e2196]:
+                          - img [ref=e2198]
+                          - generic [ref=e2200]:
+                            - generic: Upvote
+                        - generic [ref=e2202]: "0"
+                        - button "Downvote" [ref=e2203]:
+                          - img [ref=e2205]
+                          - generic [ref=e2207]:
+                            - generic: Downvote
+                      - link "27 Ir a los comentarios" [ref=e2208]:
+                        - /url: /r/webdev/comments/1ryuwq8/after_literally_everybody_can_vibecode_a_software/
+                        - generic [ref=e2209]:
+                          - img [ref=e2211]
+                          - generic [ref=e2214]: "27"
+                        - generic [ref=e2215]:
+                          - generic: Ir a los comentarios
+                      - button "Premiar" [ref=e2217]:
+                        - img [ref=e2220]
+                      - button "Compartir" [ref=e2225]:
+                        - generic [ref=e2226]:
+                          - img [ref=e2228]
+                          - generic [ref=e2230]: Compartir
+                - separator [ref=e2231]
+                - generic [ref=e2232]:
+                  - 'generic "Advertisement: Spot conflicts before they happen with GitKraken Desktop – Download now on Windows, Mac & Linux" [ref=e2233]':
+                    - 'link "Advertisement: Spot conflicts before they happen with GitKraken Desktop – Download now on Windows, Mac & Linux" [ref=e2234] [cursor=pointer]':
+                      - /url: https://alb.reddit.com/cr?za=tfp0wynvigcd4qwQE6V8yF5RT3DcmR0Z33xCKlpwY-syCXTvVz9sAUIS9bDMfCt73G2hST24RDE-Xvg5HG4Keh0Oc_HjG23zZnkG4RWbaJgV4Ys2gapJFG6R0lrFBLwaRO8dq5gNq0xdWJ9Cbq_Z9kK0NNdWDBfqbLnQDtdi9W13jrvzi-FqXwFa9uckwyPWTiHu189H_KyFaTr8mzYZtjiJ3xgTNPQU8JIhn-4ijH5fBXzbsoGCEv2RuFRukij9_vbPzgyKr8SVv76no5x3aRv60T1xOMyydvDNYbLYf_nmcY9F6f09Y1HCYsoN5iin-Dyur7rzy1wY6dQGn8rXbsvR3-ecqmh4yUom3_ylVh-P38aJ9MiaJgjJbVccKz7etU-9Ma-g4WHtaiU_Gk-K2cLlBCouxAgbNskqfSgDF3snGvdzU49itVOfqAqCX_KexanxLLXTCKZ-4wIrlsXLC2OKdiHi-CWETH4293Uc0gDWy1YnpvQs3zYcMC8EIv4cPizP61U_Zs3DGnQ9_98qbfq24h-kBCUPiOt8DjgktzcQDxEsNQLl8fQV6U37nDdvKO5IAzwEUmDBQIJJNG6vTqAe2EWEkNDv39ez4VFXr4Q6ALsqs5WKg-91CgeK9HDBd9zdmuRWWQsoEZegwCvWq_xf8lw7t6iH8dUFG9Pa0SFELRTQjLctkzO2-OJhVqVTfbLERPO5XrrnNtclHs38DJP4TWf5N8HdkU4K3nbrHu8O9a-nkopixjXxlY3y8Q&zp=svTVLkAvSjTuQta7Bxyk8yHzrPaQOTx9niY2x_E7-VpFQA284YvYcWA91kUyUHEhKN4drwgIp1RpNAXBsco7TzI1PbaFNFWZSZo_duZfNXXjq2IycSCJqPiLe9-Sy0op_7o6TzdkBiH7Bf7B7eemeP4glkYI2Ca2VMm8pVytXxCRBSTvjzr64Kx9EVZEHlSUCWEBhk4QiGK0vSf6FfP--KivT0f8Rdf7-QxC74vx9jf1dtQAdpoipOZJlGakZNSO4BVA5-dsNXoEEzgkY3HiTn49uGBzuqseD1b9lMVqCGfFEf3PsD_NbMfiAnE5nKZLG2T2mMaskP6EsebaieOxr5E6IxhDrx9_GZZAvQi2I0Dk99JWGuN9aQvTuNfl3-l8m_jJnqWCWb6GvDQdU56Q7T-XBw7TjrxtP061P7Lxl6A_49p5O5P9ZQ
+                  - generic [ref=e2235]:
+                    - generic [ref=e2236]:
+                      - link "Avatar de u/GitKraken u/GitKraken" [ref=e2239] [cursor=pointer]:
+                        - /url: /user/GitKraken/
+                        - generic [ref=e2243]:
+                          - img "Avatar de u/GitKraken"
+                        - generic [ref=e2244]: u/GitKraken
+                      - generic [ref=e2245]: •
+                      - link "Patrocinado" [ref=e2247] [cursor=pointer]:
+                        - /url: /user/GitKraken/
+                        - generic [ref=e2248]: Patrocinado
+                      - link [ref=e2250] [cursor=pointer]:
+                        - /url: https://alb.reddit.com/cr?za=tfp0wynvigcd4qwQE6V8yF5RT3DcmR0Z33xCKlpwY-syCXTvVz9sAUIS9bDMfCt73G2hST24RDE-Xvg5HG4Keh0Oc_HjG23zZnkG4RWbaJgV4Ys2gapJFG6R0lrFBLwaRO8dq5gNq0xdWJ9Cbq_Z9kK0NNdWDBfqbLnQDtdi9W13jrvzi-FqXwFa9uckwyPWTiHu189H_KyFaTr8mzYZtjiJ3xgTNPQU8JIhn-4ijH5fBXzbsoGCEv2RuFRukij9_vbPzgyKr8SVv76no5x3aRv60T1xOMyydvDNYbLYf_nmcY9F6f09Y1HCYsoN5iin-Dyur7rzy1wY6dQGn8rXbsvR3-ecqmh4yUom3_ylVh-P38aJ9MiaJgjJbVccKz7etU-9Ma-g4WHtaiU_Gk-K2cLlBCouxAgbNskqfSgDF3snGvdzU49itVOfqAqCX_KexanxLLXTCKZ-4wIrlsXLC2OKdiHi-CWETH4293Uc0gDWy1YnpvQs3zYcMC8EIv4cPizP61U_Zs3DGnQ9_98qbfq24h-kBCUPiOt8DjgktzcQDxEsNQLl8fQV6U37nDdvKO5IAzwEUmDBQIJJNG6vTqAe2EWEkNDv39ez4VFXr4Q6ALsqs5WKg-91CgeK9HDBd9zdmuRWWQsoEZegwCvWq_xf8lw7t6iH8dUFG9Pa0SFELRTQjLctkzO2-OJhVqVTfbLERPO5XrrnNtclHs38DJP4TWf5N8HdkU4K3nbrHu8O9a-nkopixjXxlY3y8Q&zp=svTVLkAvSjTuQta7Bxyk8yHzrPaQOTx9niY2x_E7-VpFQA284YvYcWA91kUyUHEhKN4drwgIp1RpNAXBsco7TzI1PbaFNFWZSZo_duZfNXXjq2IycSCJqPiLe9-Sy0op_7o6TzdkBiH7Bf7B7eemeP4glkYI2Ca2VMm8pVytXxCRBSTvjzr64Kx9EVZEHlSUCWEBhk4QiGK0vSf6FfP--KivT0f8Rdf7-QxC74vx9jf1dtQAdpoipOZJlGakZNSO4BVA5-dsNXoEEzgkY3HiTn49uGBzuqseD1b9lMVqCGfFEf3PsD_NbMfiAnE5nKZLG2T2mMaskP6EsebaieOxr5E6IxhDrx9_GZZAvQi2I0Dk99JWGuN9aQvTuNfl3-l8m_jJnqWCWb6GvDQdU56Q7T-XBw7TjrxtP061P7Lxl6A_49p5O5P9ZQ
+                    - button "Abrir acciones de usuario" [ref=e2255] [cursor=pointer]:
+                      - img [ref=e2258]
+                  - heading "Spot conflicts before they happen with GitKraken Desktop – Download now on Windows, Mac & Linux" [level=2] [ref=e2262]:
+                    - link "Spot conflicts before they happen with GitKraken Desktop – Download now on Windows, Mac & Linux" [ref=e2265] [cursor=pointer]:
+                      - /url: https://alb.reddit.com/cr?za=tfp0wynvigcd4qwQE6V8yF5RT3DcmR0Z33xCKlpwY-syCXTvVz9sAUIS9bDMfCt73G2hST24RDE-Xvg5HG4Keh0Oc_HjG23zZnkG4RWbaJgV4Ys2gapJFG6R0lrFBLwaRO8dq5gNq0xdWJ9Cbq_Z9kK0NNdWDBfqbLnQDtdi9W13jrvzi-FqXwFa9uckwyPWTiHu189H_KyFaTr8mzYZtjiJ3xgTNPQU8JIhn-4ijH5fBXzbsoGCEv2RuFRukij9_vbPzgyKr8SVv76no5x3aRv60T1xOMyydvDNYbLYf_nmcY9F6f09Y1HCYsoN5iin-Dyur7rzy1wY6dQGn8rXbsvR3-ecqmh4yUom3_ylVh-P38aJ9MiaJgjJbVccKz7etU-9Ma-g4WHtaiU_Gk-K2cLlBCouxAgbNskqfSgDF3snGvdzU49itVOfqAqCX_KexanxLLXTCKZ-4wIrlsXLC2OKdiHi-CWETH4293Uc0gDWy1YnpvQs3zYcMC8EIv4cPizP61U_Zs3DGnQ9_98qbfq24h-kBCUPiOt8DjgktzcQDxEsNQLl8fQV6U37nDdvKO5IAzwEUmDBQIJJNG6vTqAe2EWEkNDv39ez4VFXr4Q6ALsqs5WKg-91CgeK9HDBd9zdmuRWWQsoEZegwCvWq_xf8lw7t6iH8dUFG9Pa0SFELRTQjLctkzO2-OJhVqVTfbLERPO5XrrnNtclHs38DJP4TWf5N8HdkU4K3nbrHu8O9a-nkopixjXxlY3y8Q&zp=svTVLkAvSjTuQta7Bxyk8yHzrPaQOTx9niY2x_E7-VpFQA284YvYcWA91kUyUHEhKN4drwgIp1RpNAXBsco7TzI1PbaFNFWZSZo_duZfNXXjq2IycSCJqPiLe9-Sy0op_7o6TzdkBiH7Bf7B7eemeP4glkYI2Ca2VMm8pVytXxCRBSTvjzr64Kx9EVZEHlSUCWEBhk4QiGK0vSf6FfP--KivT0f8Rdf7-QxC74vx9jf1dtQAdpoipOZJlGakZNSO4BVA5-dsNXoEEzgkY3HiTn49uGBzuqseD1b9lMVqCGfFEf3PsD_NbMfiAnE5nKZLG2T2mMaskP6EsebaieOxr5E6IxhDrx9_GZZAvQi2I0Dk99JWGuN9aQvTuNfl3-l8m_jJnqWCWb6GvDQdU56Q7T-XBw7TjrxtP061P7Lxl6A_49p5O5P9ZQ
+                      - generic: Spot conflicts before they happen with GitKraken Desktop – Download now on Windows, Mac & Linux
+                  - generic [ref=e2266]:
+                    - link "Spot conflicts before they happen with GitKraken Desktop – Download now on Windows, Mac & Linux" [ref=e2270] [cursor=pointer]:
+                      - /url: https://alb.reddit.com/cr?za=tfp0wynvigcd4qwQE6V8yF5RT3DcmR0Z33xCKlpwY-syCXTvVz9sAUIS9bDMfCt73G2hST24RDE-Xvg5HG4Keh0Oc_HjG23zZnkG4RWbaJgV4Ys2gapJFG6R0lrFBLwaRO8dq5gNq0xdWJ9Cbq_Z9kK0NNdWDBfqbLnQDtdi9W13jrvzi-FqXwFa9uckwyPWTiHu189H_KyFaTr8mzYZtjiJ3xgTNPQU8JIhn-4ijH5fBXzbsoGCEv2RuFRukij9_vbPzgyKr8SVv76no5x3aRv60T1xOMyydvDNYbLYf_nmcY9F6f09Y1HCYsoN5iin-Dyur7rzy1wY6dQGn8rXbsvR3-ecqmh4yUom3_ylVh-P38aJ9MiaJgjJbVccKz7etU-9Ma-g4WHtaiU_Gk-K2cLlBCouxAgbNskqfSgDF3snGvdzU49itVOfqAqCX_KexanxLLXTCKZ-4wIrlsXLC2OKdiHi-CWETH4293Uc0gDWy1YnpvQs3zYcMC8EIv4cPizP61U_Zs3DGnQ9_98qbfq24h-kBCUPiOt8DjgktzcQDxEsNQLl8fQV6U37nDdvKO5IAzwEUmDBQIJJNG6vTqAe2EWEkNDv39ez4VFXr4Q6ALsqs5WKg-91CgeK9HDBd9zdmuRWWQsoEZegwCvWq_xf8lw7t6iH8dUFG9Pa0SFELRTQjLctkzO2-OJhVqVTfbLERPO5XrrnNtclHs38DJP4TWf5N8HdkU4K3nbrHu8O9a-nkopixjXxlY3y8Q&zp=svTVLkAvSjTuQta7Bxyk8yHzrPaQOTx9niY2x_E7-VpFQA284YvYcWA91kUyUHEhKN4drwgIp1RpNAXBsco7TzI1PbaFNFWZSZo_duZfNXXjq2IycSCJqPiLe9-Sy0op_7o6TzdkBiH7Bf7B7eemeP4glkYI2Ca2VMm8pVytXxCRBSTvjzr64Kx9EVZEHlSUCWEBhk4QiGK0vSf6FfP--KivT0f8Rdf7-QxC74vx9jf1dtQAdpoipOZJlGakZNSO4BVA5-dsNXoEEzgkY3HiTn49uGBzuqseD1b9lMVqCGfFEf3PsD_NbMfiAnE5nKZLG2T2mMaskP6EsebaieOxr5E6IxhDrx9_GZZAvQi2I0Dk99JWGuN9aQvTuNfl3-l8m_jJnqWCWb6GvDQdU56Q7T-XBw7TjrxtP061P7Lxl6A_49p5O5P9ZQ
+                      - img "Spot conflicts before they happen with GitKraken Desktop – Download now on Windows, Mac & Linux" [ref=e2272]
+                    - separator [ref=e2273]
+                    - generic [ref=e2274]:
+                      - link [ref=e2276] [cursor=pointer]:
+                        - /url: https://alb.reddit.com/cr?za=tfp0wynvigcd4qwQE6V8yF5RT3DcmR0Z33xCKlpwY-syCXTvVz9sAUIS9bDMfCt73G2hST24RDE-Xvg5HG4Keh0Oc_HjG23zZnkG4RWbaJgV4Ys2gapJFG6R0lrFBLwaRO8dq5gNq0xdWJ9Cbq_Z9kK0NNdWDBfqbLnQDtdi9W13jrvzi-FqXwFa9uckwyPWTiHu189H_KyFaTr8mzYZtjiJ3xgTNPQU8JIhn-4ijH5fBXzbsoGCEv2RuFRukij9_vbPzgyKr8SVv76no5x3aRv60T1xOMyydvDNYbLYf_nmcY9F6f09Y1HCYsoN5iin-Dyur7rzy1wY6dQGn8rXbsvR3-ecqmh4yUom3_ylVh-P38aJ9MiaJgjJbVccKz7etU-9Ma-g4WHtaiU_Gk-K2cLlBCouxAgbNskqfSgDF3snGvdzU49itVOfqAqCX_KexanxLLXTCKZ-4wIrlsXLC2OKdiHi-CWETH4293Uc0gDWy1YnpvQs3zYcMC8EIv4cPizP61U_Zs3DGnQ9_98qbfq24h-kBCUPiOt8DjgktzcQDxEsNQLl8fQV6U37nDdvKO5IAzwEUmDBQIJJNG6vTqAe2EWEkNDv39ez4VFXr4Q6ALsqs5WKg-91CgeK9HDBd9zdmuRWWQsoEZegwCvWq_xf8lw7t6iH8dUFG9Pa0SFELRTQjLctkzO2-OJhVqVTfbLERPO5XrrnNtclHs38DJP4TWf5N8HdkU4K3nbrHu8O9a-nkopixjXxlY3y8Q&zp=svTVLkAvSjTuQta7Bxyk8yHzrPaQOTx9niY2x_E7-VpFQA284YvYcWA91kUyUHEhKN4drwgIp1RpNAXBsco7TzI1PbaFNFWZSZo_duZfNXXjq2IycSCJqPiLe9-Sy0op_7o6TzdkBiH7Bf7B7eemeP4glkYI2Ca2VMm8pVytXxCRBSTvjzr64Kx9EVZEHlSUCWEBhk4QiGK0vSf6FfP--KivT0f8Rdf7-QxC74vx9jf1dtQAdpoipOZJlGakZNSO4BVA5-dsNXoEEzgkY3HiTn49uGBzuqseD1b9lMVqCGfFEf3PsD_NbMfiAnE5nKZLG2T2mMaskP6EsebaieOxr5E6IxhDrx9_GZZAvQi2I0Dk99JWGuN9aQvTuNfl3-l8m_jJnqWCWb6GvDQdU56Q7T-XBw7TjrxtP061P7Lxl6A_49p5O5P9ZQ
+                      - generic [ref=e2277]:
+                        - link "gitkraken.com" [ref=e2280] [cursor=pointer]:
+                          - /url: https://alb.reddit.com/cr?za=tfp0wynvigcd4qwQE6V8yF5RT3DcmR0Z33xCKlpwY-syCXTvVz9sAUIS9bDMfCt73G2hST24RDE-Xvg5HG4Keh0Oc_HjG23zZnkG4RWbaJgV4Ys2gapJFG6R0lrFBLwaRO8dq5gNq0xdWJ9Cbq_Z9kK0NNdWDBfqbLnQDtdi9W13jrvzi-FqXwFa9uckwyPWTiHu189H_KyFaTr8mzYZtjiJ3xgTNPQU8JIhn-4ijH5fBXzbsoGCEv2RuFRukij9_vbPzgyKr8SVv76no5x3aRv60T1xOMyydvDNYbLYf_nmcY9F6f09Y1HCYsoN5iin-Dyur7rzy1wY6dQGn8rXbsvR3-ecqmh4yUom3_ylVh-P38aJ9MiaJgjJbVccKz7etU-9Ma-g4WHtaiU_Gk-K2cLlBCouxAgbNskqfSgDF3snGvdzU49itVOfqAqCX_KexanxLLXTCKZ-4wIrlsXLC2OKdiHi-CWETH4293Uc0gDWy1YnpvQs3zYcMC8EIv4cPizP61U_Zs3DGnQ9_98qbfq24h-kBCUPiOt8DjgktzcQDxEsNQLl8fQV6U37nDdvKO5IAzwEUmDBQIJJNG6vTqAe2EWEkNDv39ez4VFXr4Q6ALsqs5WKg-91CgeK9HDBd9zdmuRWWQsoEZegwCvWq_xf8lw7t6iH8dUFG9Pa0SFELRTQjLctkzO2-OJhVqVTfbLERPO5XrrnNtclHs38DJP4TWf5N8HdkU4K3nbrHu8O9a-nkopixjXxlY3y8Q&zp=svTVLkAvSjTuQta7Bxyk8yHzrPaQOTx9niY2x_E7-VpFQA284YvYcWA91kUyUHEhKN4drwgIp1RpNAXBsco7TzI1PbaFNFWZSZo_duZfNXXjq2IycSCJqPiLe9-Sy0op_7o6TzdkBiH7Bf7B7eemeP4glkYI2Ca2VMm8pVytXxCRBSTvjzr64Kx9EVZEHlSUCWEBhk4QiGK0vSf6FfP--KivT0f8Rdf7-QxC74vx9jf1dtQAdpoipOZJlGakZNSO4BVA5-dsNXoEEzgkY3HiTn49uGBzuqseD1b9lMVqCGfFEf3PsD_NbMfiAnE5nKZLG2T2mMaskP6EsebaieOxr5E6IxhDrx9_GZZAvQi2I0Dk99JWGuN9aQvTuNfl3-l8m_jJnqWCWb6GvDQdU56Q7T-XBw7TjrxtP061P7Lxl6A_49p5O5P9ZQ
+                          - generic: gitkraken.com
+                        - link "Descargar" [ref=e2282] [cursor=pointer]:
+                          - /url: https://alb.reddit.com/cr?za=tfp0wynvigcd4qwQE6V8yF5RT3DcmR0Z33xCKlpwY-syCXTvVz9sAUIS9bDMfCt73G2hST24RDE-Xvg5HG4Keh0Oc_HjG23zZnkG4RWbaJgV4Ys2gapJFG6R0lrFBLwaRO8dq5gNq0xdWJ9Cbq_Z9kK0NNdWDBfqbLnQDtdi9W13jrvzi-FqXwFa9uckwyPWTiHu189H_KyFaTr8mzYZtjiJ3xgTNPQU8JIhn-4ijH5fBXzbsoGCEv2RuFRukij9_vbPzgyKr8SVv76no5x3aRv60T1xOMyydvDNYbLYf_nmcY9F6f09Y1HCYsoN5iin-Dyur7rzy1wY6dQGn8rXbsvR3-ecqmh4yUom3_ylVh-P38aJ9MiaJgjJbVccKz7etU-9Ma-g4WHtaiU_Gk-K2cLlBCouxAgbNskqfSgDF3snGvdzU49itVOfqAqCX_KexanxLLXTCKZ-4wIrlsXLC2OKdiHi-CWETH4293Uc0gDWy1YnpvQs3zYcMC8EIv4cPizP61U_Zs3DGnQ9_98qbfq24h-kBCUPiOt8DjgktzcQDxEsNQLl8fQV6U37nDdvKO5IAzwEUmDBQIJJNG6vTqAe2EWEkNDv39ez4VFXr4Q6ALsqs5WKg-91CgeK9HDBd9zdmuRWWQsoEZegwCvWq_xf8lw7t6iH8dUFG9Pa0SFELRTQjLctkzO2-OJhVqVTfbLERPO5XrrnNtclHs38DJP4TWf5N8HdkU4K3nbrHu8O9a-nkopixjXxlY3y8Q&zp=svTVLkAvSjTuQta7Bxyk8yHzrPaQOTx9niY2x_E7-VpFQA284YvYcWA91kUyUHEhKN4drwgIp1RpNAXBsco7TzI1PbaFNFWZSZo_duZfNXXjq2IycSCJqPiLe9-Sy0op_7o6TzdkBiH7Bf7B7eemeP4glkYI2Ca2VMm8pVytXxCRBSTvjzr64Kx9EVZEHlSUCWEBhk4QiGK0vSf6FfP--KivT0f8Rdf7-QxC74vx9jf1dtQAdpoipOZJlGakZNSO4BVA5-dsNXoEEzgkY3HiTn49uGBzuqseD1b9lMVqCGfFEf3PsD_NbMfiAnE5nKZLG2T2mMaskP6EsebaieOxr5E6IxhDrx9_GZZAvQi2I0Dk99JWGuN9aQvTuNfl3-l8m_jJnqWCWb6GvDQdU56Q7T-XBw7TjrxtP061P7Lxl6A_49p5O5P9ZQ
+                          - generic [ref=e2284]:
+                            - generic: Descargar
+                  - generic "Acciones disponibles para esta publicación" [ref=e2285]:
+                    - generic [ref=e2288]:
+                      - button "Upvote" [ref=e2289] [cursor=pointer]:
+                        - img [ref=e2291]
+                        - generic [ref=e2293]:
+                          - generic: Upvote
+                      - generic [ref=e2295]: "18"
+                      - button "Downvote" [ref=e2296] [cursor=pointer]:
+                        - img [ref=e2298]
+                        - generic [ref=e2300]:
+                          - generic: Downvote
+                    - link "0 Ir a los comentarios" [ref=e2301] [cursor=pointer]:
+                      - /url: /user/GitKraken/comments/1or77b4/spot_conflicts_before_they_happen_with_gitkraken/?p=1&impressionid=5620490140733593842
+                      - generic [ref=e2302]:
+                        - img [ref=e2304]
+                        - generic [ref=e2307]: "0"
+                      - generic [ref=e2308]:
+                        - generic: Ir a los comentarios
+                    - button "Compartir" [ref=e2312] [cursor=pointer]:
+                      - generic [ref=e2313]:
+                        - img [ref=e2315]
+                        - generic [ref=e2317]: Compartir
+                    - link [ref=e2319] [cursor=pointer]:
+                      - /url: https://alb.reddit.com/cr?za=tfp0wynvigcd4qwQE6V8yF5RT3DcmR0Z33xCKlpwY-syCXTvVz9sAUIS9bDMfCt73G2hST24RDE-Xvg5HG4Keh0Oc_HjG23zZnkG4RWbaJgV4Ys2gapJFG6R0lrFBLwaRO8dq5gNq0xdWJ9Cbq_Z9kK0NNdWDBfqbLnQDtdi9W13jrvzi-FqXwFa9uckwyPWTiHu189H_KyFaTr8mzYZtjiJ3xgTNPQU8JIhn-4ijH5fBXzbsoGCEv2RuFRukij9_vbPzgyKr8SVv76no5x3aRv60T1xOMyydvDNYbLYf_nmcY9F6f09Y1HCYsoN5iin-Dyur7rzy1wY6dQGn8rXbsvR3-ecqmh4yUom3_ylVh-P38aJ9MiaJgjJbVccKz7etU-9Ma-g4WHtaiU_Gk-K2cLlBCouxAgbNskqfSgDF3snGvdzU49itVOfqAqCX_KexanxLLXTCKZ-4wIrlsXLC2OKdiHi-CWETH4293Uc0gDWy1YnpvQs3zYcMC8EIv4cPizP61U_Zs3DGnQ9_98qbfq24h-kBCUPiOt8DjgktzcQDxEsNQLl8fQV6U37nDdvKO5IAzwEUmDBQIJJNG6vTqAe2EWEkNDv39ez4VFXr4Q6ALsqs5WKg-91CgeK9HDBd9zdmuRWWQsoEZegwCvWq_xf8lw7t6iH8dUFG9Pa0SFELRTQjLctkzO2-OJhVqVTfbLERPO5XrrnNtclHs38DJP4TWf5N8HdkU4K3nbrHu8O9a-nkopixjXxlY3y8Q&zp=svTVLkAvSjTuQta7Bxyk8yHzrPaQOTx9niY2x_E7-VpFQA284YvYcWA91kUyUHEhKN4drwgIp1RpNAXBsco7TzI1PbaFNFWZSZo_duZfNXXjq2IycSCJqPiLe9-Sy0op_7o6TzdkBiH7Bf7B7eemeP4glkYI2Ca2VMm8pVytXxCRBSTvjzr64Kx9EVZEHlSUCWEBhk4QiGK0vSf6FfP--KivT0f8Rdf7-QxC74vx9jf1dtQAdpoipOZJlGakZNSO4BVA5-dsNXoEEzgkY3HiTn49uGBzuqseD1b9lMVqCGfFEf3PsD_NbMfiAnE5nKZLG2T2mMaskP6EsebaieOxr5E6IxhDrx9_GZZAvQi2I0Dk99JWGuN9aQvTuNfl3-l8m_jJnqWCWb6GvDQdU56Q7T-XBw7TjrxtP061P7Lxl6A_49p5O5P9ZQ
+                - separator [ref=e2320]
+                - article "¿Alguien por aquí ha implementado páginas de SEO programático sin joder la calidad del sitio?" [ref=e2321]:
+                  - generic [ref=e2322] [cursor=pointer]:
+                    - link "¿Alguien por aquí ha implementado páginas de SEO programático sin joder la calidad del sitio?" [ref=e2323]:
+                      - /url: /r/webdev/comments/1ryuo6q/has_anyone_here_implemented_programmatic_seo/
+                      - generic [ref=e2324]:
+                        - generic: ¿Alguien por aquí ha implementado páginas de SEO programático sin joder la calidad del sitio?
+                    - generic [ref=e2325]:
+                      - generic [ref=e2326]:
+                        - 'link "Autor: u/Barmon_easy" [ref=e2331]':
+                          - /url: /user/Barmon_easy/
+                          - generic [ref=e2332]:
+                            - img [ref=e2337]
+                            - generic [ref=e2339]: u/Barmon_easy
+                        - generic [ref=e2340]: •
+                        - time [ref=e2342]: hace 8 h
+                      - button "Abrir acciones de usuario" [ref=e2347]:
+                        - img [ref=e2350]
+                    - generic [ref=e2353]:
+                      - heading "¿Alguien por aquí ha implementado páginas de SEO programático sin joder la calidad del sitio?" [level=2] [ref=e2354]:
+                        - link "¿Alguien por aquí ha implementado páginas de SEO programático sin joder la calidad del sitio?" [ref=e2355]:
+                          - /url: /r/webdev/comments/1ryuo6q/has_anyone_here_implemented_programmatic_seo/
+                      - generic [ref=e2356]:
+                        - generic:
+                          - 'link "¡Hola 👋! Estoy trabajando en un proyecto donde estamos considerando generar un montón de páginas que apunten a palabras clave de cola larga. La idea es crear páginas estructuradas (comparaciones, alternativas, basadas en la ubicación, etc.), pero me preocupan algunas cosas: ¿Cómo evitas que estas páginas parezcan de baja calidad o spam? ¿En qué momento la escala empieza a perjudicar el SEO en lugar de ayudar? ¿Cómo manejas el enlazado interno a gran escala? ¿Alguien ha visto un éxito real con esto en sitios más pequeños? Por lo que he probado hasta ahora: La indexación ocurre, pero la consistencia varía La estructura importa mucho más que el volumen de contenido Me da curiosidad escuchar a la gente que realmente ha implementado esto en producción."':
+                            - /url: /r/webdev/comments/1ryuo6q/has_anyone_here_implemented_programmatic_seo/
+                            - generic:
+                              - generic:
+                                - paragraph: ¡Hola 👋!
+                                - paragraph: Estoy trabajando en un proyecto donde estamos considerando generar un montón de páginas que apunten a palabras clave de cola larga.
+                                - paragraph: "La idea es crear páginas estructuradas (comparaciones, alternativas, basadas en la ubicación, etc.), pero me preocupan algunas cosas:"
+                                - list:
+                                  - listitem:
+                                    - paragraph: ¿Cómo evitas que estas páginas parezcan de baja calidad o spam?
+                                  - listitem:
+                                    - paragraph: ¿En qué momento la escala empieza a perjudicar el SEO en lugar de ayudar?
+                                  - listitem:
+                                    - paragraph: ¿Cómo manejas el enlazado interno a gran escala?
+                                  - listitem:
+                                    - paragraph: ¿Alguien ha visto un éxito real con esto en sitios más pequeños?
+                                - paragraph: "Por lo que he probado hasta ahora:"
+                                - list:
+                                  - listitem:
+                                    - paragraph: La indexación ocurre, pero la consistencia varía
+                                  - listitem:
+                                    - paragraph: La estructura importa mucho más que el volumen de contenido
+                                - paragraph: Me da curiosidad escuchar a la gente que realmente ha implementado esto en producción.
+                      - 'link "Etiqueta: Question" [ref=e2359]':
+                        - /url: /r/webdev/?f=flair_name%3A%22Question%22
+                        - 'generic "Etiqueta: Question" [ref=e2361]': Question
+                    - generic "Acciones disponibles para esta publicación" [ref=e2362]:
+                      - generic [ref=e2365]:
+                        - button "Upvote" [ref=e2366]:
+                          - img [ref=e2368]
+                          - generic [ref=e2370]:
+                            - generic: Upvote
+                        - generic [ref=e2372]: "0"
+                        - button "Downvote" [ref=e2373]:
+                          - img [ref=e2375]
+                          - generic [ref=e2377]:
+                            - generic: Downvote
+                      - link "10 Ir a los comentarios" [ref=e2378]:
+                        - /url: /r/webdev/comments/1ryuo6q/has_anyone_here_implemented_programmatic_seo/
+                        - generic [ref=e2379]:
+                          - img [ref=e2381]
+                          - generic [ref=e2384]: "10"
+                        - generic [ref=e2385]:
+                          - generic: Ir a los comentarios
+                      - button "Premiar" [ref=e2387]:
+                        - img [ref=e2390]
+                      - button "Compartir" [ref=e2395]:
+                        - generic [ref=e2396]:
+                          - img [ref=e2398]
+                          - generic [ref=e2400]: Compartir
+                - separator [ref=e2401]
+                - article "He estado construyendo un simulador de vuelo arcade basado en la web usando Three.js y CesiumJS" [ref=e2402]:
+                  - generic [ref=e2403] [cursor=pointer]:
+                    - link "He estado construyendo un simulador de vuelo arcade basado en la web usando Three.js y CesiumJS" [ref=e2404]:
+                      - /url: /r/webdev/comments/1ryuk3p/ive_been_building_a_webbased_flight_arcade/
+                      - generic [ref=e2405]:
+                        - generic: He estado construyendo un simulador de vuelo arcade basado en la web usando Three.js y CesiumJS
+                    - generic [ref=e2406]:
+                      - generic [ref=e2407]:
+                        - 'link "Autor: u/dimartarmizi" [ref=e2412]':
+                          - /url: /user/dimartarmizi/
+                          - generic [ref=e2413]:
+                            - img "Avatar de u/dimartarmizi" [ref=e2416]
+                            - generic [ref=e2417]: u/dimartarmizi
+                        - generic [ref=e2418]: •
+                        - time [ref=e2420]: hace 8 h
+                      - button "Abrir acciones de usuario" [ref=e2425]:
+                        - img [ref=e2428]
+                    - heading "He estado construyendo un simulador de vuelo arcade basado en la web usando Three.js y CesiumJS" [level=2] [ref=e2432]:
+                      - link "He estado construyendo un simulador de vuelo arcade basado en la web usando Three.js y CesiumJS" [ref=e2433]:
+                        - /url: /r/webdev/comments/1ryuk3p/ive_been_building_a_webbased_flight_arcade/
+                    - img "r/webdev - He estado construyendo un simulador de vuelo arcade basado en la web usando Three.js y CesiumJS" [ref=e2439]
+                    - generic "Acciones disponibles para esta publicación" [ref=e2440]:
+                      - generic [ref=e2443]:
+                        - button "Upvote" [ref=e2444]:
+                          - img [ref=e2446]
+                          - generic [ref=e2448]:
+                            - generic: Upvote
+                        - generic [ref=e2450]: "44"
+                        - button "Downvote" [ref=e2451]:
+                          - img [ref=e2453]
+                          - generic [ref=e2455]:
+                            - generic: Downvote
+                      - link "10 Ir a los comentarios" [ref=e2456]:
+                        - /url: /r/webdev/comments/1ryuk3p/ive_been_building_a_webbased_flight_arcade/
+                        - generic [ref=e2457]:
+                          - img [ref=e2459]
+                          - generic [ref=e2462]: "10"
+                        - generic [ref=e2463]:
+                          - generic: Ir a los comentarios
+                      - button "Premiar" [ref=e2465]:
+                        - img [ref=e2468]
+                      - button "Compartir" [ref=e2473]:
+                        - generic [ref=e2474]:
+                          - img [ref=e2476]
+                          - generic [ref=e2478]: Compartir
+                - separator [ref=e2479]
+                - article "¿Todavía hay gente que contrata a desarrolladores para hacer una página web?" [ref=e2480]:
+                  - generic [ref=e2481] [cursor=pointer]:
+                    - link "¿Todavía hay gente que contrata a desarrolladores para hacer una página web?" [ref=e2482]:
+                      - /url: /r/webdev/comments/1ryu98l/do_people_still_hire_developers_to_build_a_website/
+                      - generic [ref=e2483]:
+                        - generic: ¿Todavía hay gente que contrata a desarrolladores para hacer una página web?
+                    - generic [ref=e2484]:
+                      - generic [ref=e2485]:
+                        - 'link "Autor: u/Evening_Acadia_6021" [ref=e2490]':
+                          - /url: /user/Evening_Acadia_6021/
+                          - generic [ref=e2491]:
+                            - img "Avatar de u/Evening_Acadia_6021" [ref=e2494]
+                            - generic [ref=e2495]: u/Evening_Acadia_6021
+                        - generic [ref=e2496]: •
+                        - time [ref=e2498]: hace 8 h
+                      - button "Abrir acciones de usuario" [ref=e2503]:
+                        - img [ref=e2506]
+                    - generic [ref=e2509]:
+                      - heading "¿Todavía hay gente que contrata a desarrolladores para hacer una página web?" [level=2] [ref=e2510]:
+                        - link "¿Todavía hay gente que contrata a desarrolladores para hacer una página web?" [ref=e2511]:
+                          - /url: /r/webdev/comments/1ryu98l/do_people_still_hire_developers_to_build_a_website/
+                      - generic [ref=e2512]:
+                        - generic:
+                          - link "Veo que la gente sigue publicando \"Puedo construir tu sitio web\", \"Puedo construir un sitio web para tu negocio\". Este post es para ellos. ¿De verdad les sigue pagando gente por un sitio web básico? Hace poco vi un post donde alguien decía que podía construir un sitio web por 2000 rupias (aproximadamente $22). ¿En serio? ¿Por qué alguien te pagaría 2000 rupias (aproximadamente $22) cuando pueden ir a Emergent o Zolly y construir lo mismo por $5? No entiendo. ¿Me estoy perdiendo de algo?":
+                            - /url: /r/webdev/comments/1ryu98l/do_people_still_hire_developers_to_build_a_website/
+                            - generic:
+                              - generic:
+                                - paragraph: Veo que la gente sigue publicando "Puedo construir tu sitio web", "Puedo construir un sitio web para tu negocio". Este post es para ellos. ¿De verdad les sigue pagando gente por un sitio web básico?
+                                - paragraph: Hace poco vi un post donde alguien decía que podía construir un sitio web por 2000 rupias (aproximadamente $22). ¿En serio?
+                                - paragraph: ¿Por qué alguien te pagaría 2000 rupias (aproximadamente $22) cuando pueden ir a Emergent o Zolly y construir lo mismo por $5?
+                                - paragraph: No entiendo. ¿Me estoy perdiendo de algo?
+                      - 'link "Etiqueta: Discussion" [ref=e2515]':
+                        - /url: /r/webdev/?f=flair_name%3A%22Discussion%22
+                        - 'generic "Etiqueta: Discussion" [ref=e2517]': Discussion
+                    - generic "Acciones disponibles para esta publicación" [ref=e2518]:
+                      - generic [ref=e2521]:
+                        - button "Upvote" [ref=e2522]:
+                          - img [ref=e2524]
+                          - generic [ref=e2526]:
+                            - generic: Upvote
+                        - generic [ref=e2528]: "0"
+                        - button "Downvote" [ref=e2529]:
+                          - img [ref=e2531]
+                          - generic [ref=e2533]:
+                            - generic: Downvote
+                      - link "50 Ir a los comentarios" [ref=e2534]:
+                        - /url: /r/webdev/comments/1ryu98l/do_people_still_hire_developers_to_build_a_website/
+                        - generic [ref=e2535]:
+                          - img [ref=e2537]
+                          - generic [ref=e2540]: "50"
+                        - generic [ref=e2541]:
+                          - generic: Ir a los comentarios
+                      - button "Premiar" [ref=e2543]:
+                        - img [ref=e2546]
+                      - button "Compartir" [ref=e2551]:
+                        - generic [ref=e2552]:
+                          - img [ref=e2554]
+                          - generic [ref=e2556]: Compartir
+                - separator [ref=e2557]
+                - article "¿Cómo hacen las pruebas beta de algo que construyeron?" [ref=e2558]:
+                  - generic [ref=e2559] [cursor=pointer]:
+                    - link "¿Cómo hacen las pruebas beta de algo que construyeron?" [ref=e2560]:
+                      - /url: /r/webdev/comments/1rytz5m/how_do_you_beta_test_something_you_built/
+                      - generic [ref=e2561]:
+                        - generic: ¿Cómo hacen las pruebas beta de algo que construyeron?
+                    - generic [ref=e2562]:
+                      - generic [ref=e2563]:
+                        - 'link "Autor: u/StardustOfEarth" [ref=e2568]':
+                          - /url: /user/StardustOfEarth/
+                          - generic [ref=e2569]:
+                            - img "Avatar de u/StardustOfEarth" [ref=e2572]
+                            - generic [ref=e2573]: u/StardustOfEarth
+                        - generic [ref=e2574]: •
+                        - time [ref=e2576]: hace 9 h
+                      - button "Abrir acciones de usuario" [ref=e2581]:
+                        - img [ref=e2584]
+                    - generic [ref=e2587]:
+                      - heading "¿Cómo hacen las pruebas beta de algo que construyeron?" [level=2] [ref=e2588]:
+                        - link "¿Cómo hacen las pruebas beta de algo que construyeron?" [ref=e2589]:
+                          - /url: /r/webdev/comments/1rytz5m/how_do_you_beta_test_something_you_built/
+                      - generic [ref=e2590]:
+                        - generic:
+                          - link "Bueno, he estado trabajando en un proyecto por un tiempito, y me pregunto cómo decide la gente cómo hacer las pruebas beta de su proyecto. El proyecto se mueve más en el espacio social, así que estoy tratando de pensar en la mejor manera de hacerlo.":
+                            - /url: /r/webdev/comments/1rytz5m/how_do_you_beta_test_something_you_built/
+                            - generic:
+                              - generic:
+                                - paragraph: Bueno, he estado trabajando en un proyecto por un tiempito, y me pregunto cómo decide la gente cómo hacer las pruebas beta de su proyecto. El proyecto se mueve más en el espacio social, así que estoy tratando de pensar en la mejor manera de hacerlo.
+                      - 'link "Etiqueta: Question" [ref=e2593]':
+                        - /url: /r/webdev/?f=flair_name%3A%22Question%22
+                        - 'generic "Etiqueta: Question" [ref=e2595]': Question
+                    - generic "Acciones disponibles para esta publicación" [ref=e2596]:
+                      - generic [ref=e2599]:
+                        - button "Upvote" [ref=e2600]:
+                          - img [ref=e2602]
+                          - generic [ref=e2604]:
+                            - generic: Upvote
+                        - generic [ref=e2606]: "1"
+                        - button "Downvote" [ref=e2607]:
+                          - img [ref=e2609]
+                          - generic [ref=e2611]:
+                            - generic: Downvote
+                      - link "4 Ir a los comentarios" [ref=e2612]:
+                        - /url: /r/webdev/comments/1rytz5m/how_do_you_beta_test_something_you_built/
+                        - generic [ref=e2613]:
+                          - img [ref=e2615]
+                          - generic [ref=e2618]: "4"
+                        - generic [ref=e2619]:
+                          - generic: Ir a los comentarios
+                      - button "Premiar" [ref=e2621]:
+                        - img [ref=e2624]
+                      - button "Compartir" [ref=e2629]:
+                        - generic [ref=e2630]:
+                          - img [ref=e2632]
+                          - generic [ref=e2634]: Compartir
+                - separator [ref=e2635]
+                - article "Por qué las matemáticas de Headcount mienten" [ref=e2636]:
+                  - generic [ref=e2637] [cursor=pointer]:
+                    - link "Por qué las matemáticas de Headcount mienten" [ref=e2638]:
+                      - /url: /r/webdev/comments/1rysvbv/why_headcount_math_lies/
+                      - generic [ref=e2639]:
+                        - generic: Por qué las matemáticas de Headcount mienten
+                    - generic [ref=e2640]:
+                      - generic [ref=e2642]:
+                        - generic [ref=e2643]:
+                          - 'link "Autor: u/Dear-Economics-315" [ref=e2648]':
+                            - /url: /user/Dear-Economics-315/
+                            - generic [ref=e2649]:
+                              - img [ref=e2654]
+                              - generic [ref=e2656]: u/Dear-Economics-315
+                          - generic [ref=e2657]: •
+                          - time [ref=e2659]: hace 10 h
+                        - button "Abrir acciones de usuario" [ref=e2664]:
+                          - img [ref=e2667]
+                      - generic [ref=e2669]:
+                        - link "Por qué las matemáticas de Headcount mienten" [ref=e2671]:
+                          - /url: /r/webdev/comments/1rysvbv/why_headcount_math_lies/
+                        - link "https://yusufaytas.com/why-headcount-math-lies/" [ref=e2674]:
+                          - /url: https://yusufaytas.com/why-headcount-math-lies/
+                      - generic [ref=e2676]:
+                        - link "r/webdev - Por qué las matemáticas de Headcount mienten" [ref=e2677]:
+                          - /url: https://yusufaytas.com/why-headcount-math-lies/
+                          - img "r/webdev - Por qué las matemáticas de Headcount mienten" [ref=e2678]
+                        - generic:
+                          - generic:
+                            - img
+                    - generic "Acciones disponibles para esta publicación" [ref=e2680]:
+                      - generic [ref=e2683]:
+                        - button "Upvote" [ref=e2684]:
+                          - img [ref=e2686]
+                          - generic [ref=e2688]:
+                            - generic: Upvote
+                        - generic [ref=e2690]: "1"
+                        - button "Downvote" [ref=e2691]:
+                          - img [ref=e2693]
+                          - generic [ref=e2695]:
+                            - generic: Downvote
+                      - link "0 Ir a los comentarios" [ref=e2696]:
+                        - /url: /r/webdev/comments/1rysvbv/why_headcount_math_lies/
+                        - generic [ref=e2697]:
+                          - img [ref=e2699]
+                          - generic [ref=e2702]: "0"
+                        - generic [ref=e2703]:
+                          - generic: Ir a los comentarios
+                      - button "Premiar" [ref=e2705]:
+                        - img [ref=e2708]
+                      - button "Compartir" [ref=e2713]:
+                        - generic [ref=e2714]:
+                          - img [ref=e2716]
+                          - generic [ref=e2718]: Compartir
+                - separator [ref=e2719]
+                - article "Construí una herramienta que analiza mensajes de texto para ayudar a la gente a entender las señales confusas." [ref=e2720]:
+                  - generic [ref=e2721] [cursor=pointer]:
+                    - link "Construí una herramienta que analiza mensajes de texto para ayudar a la gente a entender las señales confusas." [ref=e2722]:
+                      - /url: /r/webdev/comments/1rys0yb/i_built_a_tool_that_analyzes_text_messages_to/
+                      - generic [ref=e2723]:
+                        - generic: Construí una herramienta que analiza mensajes de texto para ayudar a la gente a entender las señales confusas.
+                    - generic [ref=e2724]:
+                      - generic [ref=e2725]:
+                        - 'link "Autor: u/douaclo" [ref=e2730]':
+                          - /url: /user/douaclo/
+                          - generic [ref=e2731]:
+                            - img "Avatar de u/douaclo" [ref=e2734]
+                            - generic [ref=e2735]: u/douaclo
+                        - generic [ref=e2736]: •
+                        - time [ref=e2738]: hace 11 h
+                      - button "Abrir acciones de usuario" [ref=e2743]:
+                        - img [ref=e2746]
+                    - generic [ref=e2749]:
+                      - heading "Construí una herramienta que analiza mensajes de texto para ayudar a la gente a entender las señales confusas." [level=2] [ref=e2750]:
+                        - link "Construí una herramienta que analiza mensajes de texto para ayudar a la gente a entender las señales confusas." [ref=e2751]:
+                          - /url: /r/webdev/comments/1rys0yb/i_built_a_tool_that_analyzes_text_messages_to/
+                      - generic [ref=e2752]:
+                        - generic:
+                          - 'link "Me di cuenta de un patrón que se repetía en las citas modernas: la gente siempre tratando de descifrar qué significan los mensajes de texto. Cosas como: respuestas más cortas no hacen preguntas de vuelta respuestas más lentas las conversaciones se vuelven unilaterales Yo mismo pasé por eso y terminé pensando demasiado en todo, tratando de averiguar si alguien estaba ocupado o simplemente perdiendo el interés. Así que empecé a construir una pequeña herramienta que analiza las conversaciones de texto e intenta dar una lectura más clara del tono y el esfuerzo. Todavía estoy en las primeras etapas, pero tengo curiosidad: ¿Creen que esto es algo que la gente realmente usaría? ¿O esto es simplemente complicar un problema que la gente debería manejar de manera diferente?"':
+                            - /url: /r/webdev/comments/1rys0yb/i_built_a_tool_that_analyzes_text_messages_to/
+                            - generic:
+                              - generic:
+                                - paragraph: "Me di cuenta de un patrón que se repetía en las citas modernas: la gente siempre tratando de descifrar qué significan los mensajes de texto."
+                                - paragraph: "Cosas como:"
+                                - list:
+                                  - listitem:
+                                    - paragraph: respuestas más cortas
+                                  - listitem:
+                                    - paragraph: no hacen preguntas de vuelta
+                                  - listitem:
+                                    - paragraph: respuestas más lentas
+                                  - listitem:
+                                    - paragraph: las conversaciones se vuelven unilaterales
+                                - paragraph: Yo mismo pasé por eso y terminé pensando demasiado en todo, tratando de averiguar si alguien estaba ocupado o simplemente perdiendo el interés.
+                                - paragraph: Así que empecé a construir una pequeña herramienta que analiza las conversaciones de texto e intenta dar una lectura más clara del tono y el esfuerzo.
+                                - paragraph: "Todavía estoy en las primeras etapas, pero tengo curiosidad:"
+                                - paragraph: ¿Creen que esto es algo que la gente realmente usaría?
+                                - paragraph: ¿O esto es simplemente complicar un problema que la gente debería manejar de manera diferente?
+                    - generic "Acciones disponibles para esta publicación" [ref=e2753]:
+                      - generic [ref=e2756]:
+                        - button "Upvote" [ref=e2757]:
+                          - img [ref=e2759]
+                          - generic [ref=e2761]:
+                            - generic: Upvote
+                        - generic [ref=e2763]: "3"
+                        - button "Downvote" [ref=e2764]:
+                          - img [ref=e2766]
+                          - generic [ref=e2768]:
+                            - generic: Downvote
+                      - link "15 Ir a los comentarios" [ref=e2769]:
+                        - /url: /r/webdev/comments/1rys0yb/i_built_a_tool_that_analyzes_text_messages_to/
+                        - generic [ref=e2770]:
+                          - img [ref=e2772]
+                          - generic [ref=e2775]: "15"
+                        - generic [ref=e2776]:
+                          - generic: Ir a los comentarios
+                      - button "Premiar" [ref=e2778]:
+                        - img [ref=e2781]
+                      - button "Compartir" [ref=e2786]:
+                        - generic [ref=e2787]:
+                          - img [ref=e2789]
+                          - generic [ref=e2791]: Compartir
+                - separator [ref=e2792]
+              - img [ref=e2798]

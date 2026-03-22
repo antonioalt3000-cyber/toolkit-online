@@ -1,0 +1,524 @@
+- generic [active] [ref=e1]:
+  - link "Ir al contenido principal" [ref=e2] [cursor=pointer]:
+    - /url: "#main-content"
+    - generic [ref=e4]: Ir al contenido principal
+  - generic [ref=e7]:
+    - generic:
+      - generic:
+        - generic [ref=e2813]:
+          - generic: "¿Qué tanto creen que los colores LCH afectan la accesibilidad? : r/webdev"
+        - banner [ref=e2816]:
+          - navigation [ref=e2817]:
+            - generic [ref=e2818]:
+              - button "Abrir menú" [ref=e2822] [cursor=pointer]:
+                - img [ref=e2825]
+                - generic [ref=e2827]:
+                  - generic: Abrir menú
+              - generic:
+                - generic:
+                  - generic:
+                    - generic:
+                      - generic:
+                        - link "Principal":
+                          - /url: /
+            - search [ref=e2837]:
+              - generic [ref=e2839]:
+                - img [ref=e2842]
+                - generic "Eliminar el filtro r/webdev y ampliar la búsqueda a todo Reddit" [ref=e2845] [cursor=pointer]:
+                  - button [pressed] [ref=e2846]:
+                    - generic [ref=e2850]: r/webdev
+                  - img [ref=e2852]
+                - textbox "Eliminar el filtro r/webdev y ampliar la búsqueda a todo Reddit" [ref=e2855]:
+                  - /placeholder: Buscar en r/webdev
+            - generic [ref=e2856]:
+              - generic [ref=e2857]:
+                - button "Traducciones activadas" [ref=e2865] [cursor=pointer]:
+                  - img [ref=e2868]
+                - button "Chat abierto" [ref=e3848] [cursor=pointer]:
+                  - img [ref=e3851]
+                  - generic [ref=e3853]:
+                    - generic: Chat abierto
+                - link "Publicar" [ref=e2887] [cursor=pointer]:
+                  - /url: /r/webdev/submit/
+                  - generic [ref=e2888]:
+                    - img [ref=e2890]
+                    - generic [ref=e2892]: Crear
+                  - generic [ref=e2893]:
+                    - generic: Publicar
+                - link "Abrir bandeja de entrada" [ref=e3856] [cursor=pointer]:
+                  - /url: /notifications
+                  - img [ref=e3859]
+                  - generic [ref=e3861]:
+                    - generic: Abrir bandeja de entrada
+              - button "Avatar de usuario Expandir menú de usuario" [ref=e2909] [cursor=pointer]:
+                - img "Avatar de usuario" [ref=e3864]
+                - generic [ref=e2913]:
+                  - generic: Expandir menú de usuario
+        - generic [ref=e2917]:
+          - main [ref=e2918]:
+            - 'generic "¿Qué tanto creen que los colores LCH afectan la accesibilidad? : r/webdev"'
+            - generic [ref=e2920]:
+              - generic [ref=e2921]:
+                - generic [ref=e2922]:
+                  - button "Volver" [ref=e2924] [cursor=pointer]:
+                    - img [ref=e2927]
+                    - generic [ref=e2929]:
+                      - generic: Volver
+                  - link "Ir a webdev" [ref=e2932] [cursor=pointer]:
+                    - /url: /r/webdev/
+                    - generic [ref=e2936]:
+                      - generic: Ir a webdev
+                  - group [ref=e2937]:
+                    - generic [ref=e2938]:
+                      - link "r/webdev" [ref=e2942] [cursor=pointer]:
+                        - /url: /r/webdev/
+                      - generic [ref=e2943]: •
+                      - time [ref=e2945]: hace 2 h
+                    - 'link "Autor: WildWildWasp" [ref=e2951] [cursor=pointer]':
+                      - /url: /user/WildWildWasp/
+                      - text: WildWildWasp
+                - button "Abrir acciones de usuario" [ref=e2956] [cursor=pointer]:
+                  - img [ref=e2959]
+              - generic [ref=e2962]:
+                - 'heading "Título de la publicación: ¿Qué tanto creen que los colores LCH afectan la accesibilidad?" [level=1] [ref=e2963]': ¿Qué tanto creen que los colores LCH afectan la accesibilidad?
+                - 'link "Etiqueta: Discussion" [ref=e2966] [cursor=pointer]':
+                  - /url: /r/webdev/?f=flair_name%3A%22Discussion%22
+                  - 'generic "Etiqueta: Discussion" [ref=e2968]': Discussion
+              - generic [ref=e2972]:
+                - paragraph [ref=e2973]: "Así que últimamente me he metido de lleno en el rollo de LCH y me encanta lo fácil que es trabajar con él, y lo mucho mejor que se ven los resultados. Lo uso en lugar de RGB en casi cualquier situación donde necesito que los colores se vean bien. Pero hay un problema: los colores LCH todavía no son muy universales, digamos. Algunos navegadores más viejos o más de nicho tienen problemas con ellos, o de plano no los muestran."
+                - paragraph [ref=e2974]: Hasta ahora no he tenido ningún problema con mis proyectos, nunca he tenido quejas ni problemas por usar LCH. Pero me sigue dando cosa saber que es *tan* nuevo que es cuestionable.
+                - paragraph [ref=e2975]: He intentado buscar en Google discusiones sobre su practicidad, pero lo único que encuentro son artículos sesudos sobre cómo LCH es el futuro y todos deberíamos usarlo. ¡Ya lo estoy usando, no necesito que me convenzan! Solo quiero saber las opiniones y experiencias de otras personas.
+                - paragraph [ref=e2976]: También conozco culori, parece que sí soluciona algunas preocupaciones, pero no puedo decir que lo entienda del todo, ni es útil si solo tienes acceso a los archivos CSS.
+                - paragraph [ref=e2977]: "edit: Para que quede claro, me refiero a la accesibilidad en los NAVEGADORES. Sé que el modo de color que uses no tiene ningún efecto en el ojo humano. Esto no se trata de fatiga visual o legibilidad de la interfaz, sino de que los colores funcionen técnicamente."
+              - generic "Acciones disponibles para esta publicación" [ref=e2978]:
+                - generic [ref=e2981]:
+                  - button "Upvote" [ref=e2982] [cursor=pointer]:
+                    - img [ref=e2984]
+                    - generic [ref=e2986]:
+                      - generic: Upvote
+                  - generic [ref=e2988]: "1"
+                  - button "Downvote" [ref=e2989] [cursor=pointer]:
+                    - img [ref=e2991]
+                    - generic [ref=e2993]:
+                      - generic: Downvote
+                - button "6 Ir a los comentarios" [ref=e2994] [cursor=pointer]:
+                  - generic [ref=e2995]:
+                    - img [ref=e2997]
+                    - generic [ref=e3000]: "6"
+                  - generic [ref=e3001]:
+                    - generic: Ir a los comentarios
+                - button "Premiar" [ref=e3003] [cursor=pointer]:
+                  - img [ref=e3006]
+                - button "Compartir" [ref=e3011] [cursor=pointer]:
+                  - generic [ref=e3012]:
+                    - img [ref=e3014]
+                    - generic [ref=e3016]: Compartir
+            - generic "Translate your site without rebuilding it" [ref=e3017]:
+              - generic [ref=e3018]:
+                - 'generic "Advertisement: Translate your site without rebuilding it" [ref=e3019]':
+                  - 'link "Advertisement: Translate your site without rebuilding it" [ref=e3020] [cursor=pointer]':
+                    - /url: https://alb.reddit.com/cr?za=F5RX5OqmSFx_jSoJS9OlrnnEBiNBkckICIA-RyMx_BRZ3B672UGxN1G0MfjUGjHGuGWwaTRSh00RB1ASO3TXHxeJKLhZtfhBlbNqYtvHQQ_RSm42h4rdqcHzkYpQpi6AZbQM2Ei8K4q5_Dg13Hah7-Rsaw8gerZEnG7QUsGiegD21dRs7ILVINbhNk56siB1BbG0deGtQB-tV4jWYa5BXebd2GYVi8TwmQP65ONQfTpCr_KBBYtHDax4JxPBj1ou852lRcUjarFxyVP4QYbK6mfSzi58JwYmTEE5CehLqX9sgirPJqvekTyhdGrmr3ddXghxKwKsV2ReIrUE7YgMngHlngozKYbuuanoZkiUb4s5GW91Q2QjJpBmiO1vf1mYR11SRBPpN4nWP7jRUERwq6X60tOaYqJkA3oHqPCJY-aouyDJdypIiGYN_XzONcFOaUytl8yx93XrKdfDWyD7NuVftc0wbOChFHrw5LGyGTapQV1VDcd6Vc5xeKnyyfKGY8E8Y7V5WaWoa9GcALH8LeQaulAldgdwiDbwZdbODYF522zKRgzpNKoIdhuRsSNbC-EhyhKgaNQ7l0DgWm-nhGm7AjFihowWvQLdF70cuDssmOvcTP7gkFKFlk5cCUBRGHQSaz_Wpala4B6OsyWh8JATXKyXupiIK2-EgBDQ62Uoc7wH7bTwca3NkD3TkJoMgd3BZGlWWNY0GhJwfrEetd0o5CAbhy8rR3sp8TRtOthYesd40JuOYTuH7RBbJvrc&zp=AAJHf0FS6D63VoJilcvLb_IqEH-JpPlNeCBfhJmRhtUkjIJ6rSVeGkr3B54O0CuvWK6aJ0KHdpdFiimRIg_507kq5D0IO43IbBhT_ETpwc1N7Ep7_ODWWhPvacpX1jlAaunv27VPQl2PCe7ylsu6UFA7RVBiemvX-izs9ujcWt6zROSrUu3Igb-Er-k0VP82wsm2XmfzgbVT2bMiYjmiS87Gm92IhKXHBIYCjfapHddnwLKXeWUIH-o8R_VQwSH-ozM7KJKLuCnoxacn7xBVk8ARFZkyTj4Be9F37g758B9CtIpFKd3nLbUpUrOwoYAM3IqmNcu3eBxlE_osoCE
+                - generic [ref=e3021]:
+                  - generic [ref=e3022]:
+                    - link "Avatar de u/Weglot Weglot" [ref=e3025] [cursor=pointer]:
+                      - /url: /user/Weglot/
+                      - img "Avatar de u/Weglot" [ref=e3030]
+                      - generic [ref=e3031]: Weglot
+                    - generic [ref=e3032]: •
+                    - link "Patrocinado" [ref=e3034] [cursor=pointer]:
+                      - /url: /user/Weglot/
+                      - generic [ref=e3035]: Patrocinado
+                    - link [ref=e3037] [cursor=pointer]:
+                      - /url: https://alb.reddit.com/cr?za=F5RX5OqmSFx_jSoJS9OlrnnEBiNBkckICIA-RyMx_BRZ3B672UGxN1G0MfjUGjHGuGWwaTRSh00RB1ASO3TXHxeJKLhZtfhBlbNqYtvHQQ_RSm42h4rdqcHzkYpQpi6AZbQM2Ei8K4q5_Dg13Hah7-Rsaw8gerZEnG7QUsGiegD21dRs7ILVINbhNk56siB1BbG0deGtQB-tV4jWYa5BXebd2GYVi8TwmQP65ONQfTpCr_KBBYtHDax4JxPBj1ou852lRcUjarFxyVP4QYbK6mfSzi58JwYmTEE5CehLqX9sgirPJqvekTyhdGrmr3ddXghxKwKsV2ReIrUE7YgMngHlngozKYbuuanoZkiUb4s5GW91Q2QjJpBmiO1vf1mYR11SRBPpN4nWP7jRUERwq6X60tOaYqJkA3oHqPCJY-aouyDJdypIiGYN_XzONcFOaUytl8yx93XrKdfDWyD7NuVftc0wbOChFHrw5LGyGTapQV1VDcd6Vc5xeKnyyfKGY8E8Y7V5WaWoa9GcALH8LeQaulAldgdwiDbwZdbODYF522zKRgzpNKoIdhuRsSNbC-EhyhKgaNQ7l0DgWm-nhGm7AjFihowWvQLdF70cuDssmOvcTP7gkFKFlk5cCUBRGHQSaz_Wpala4B6OsyWh8JATXKyXupiIK2-EgBDQ62Uoc7wH7bTwca3NkD3TkJoMgd3BZGlWWNY0GhJwfrEetd0o5CAbhy8rR3sp8TRtOthYesd40JuOYTuH7RBbJvrc&zp=AAJHf0FS6D63VoJilcvLb_IqEH-JpPlNeCBfhJmRhtUkjIJ6rSVeGkr3B54O0CuvWK6aJ0KHdpdFiimRIg_507kq5D0IO43IbBhT_ETpwc1N7Ep7_ODWWhPvacpX1jlAaunv27VPQl2PCe7ylsu6UFA7RVBiemvX-izs9ujcWt6zROSrUu3Igb-Er-k0VP82wsm2XmfzgbVT2bMiYjmiS87Gm92IhKXHBIYCjfapHddnwLKXeWUIH-o8R_VQwSH-ozM7KJKLuCnoxacn7xBVk8ARFZkyTj4Be9F37g758B9CtIpFKd3nLbUpUrOwoYAM3IqmNcu3eBxlE_osoCE
+                  - button "Abrir acciones de usuario" [ref=e3042] [cursor=pointer]:
+                    - img [ref=e3045]
+                - generic [ref=e3048]:
+                  - generic [ref=e3049]:
+                    - link "Translate your site without rebuilding it" [ref=e3051] [cursor=pointer]:
+                      - /url: https://alb.reddit.com/cr?za=F5RX5OqmSFx_jSoJS9OlrnnEBiNBkckICIA-RyMx_BRZ3B672UGxN1G0MfjUGjHGuGWwaTRSh00RB1ASO3TXHxeJKLhZtfhBlbNqYtvHQQ_RSm42h4rdqcHzkYpQpi6AZbQM2Ei8K4q5_Dg13Hah7-Rsaw8gerZEnG7QUsGiegD21dRs7ILVINbhNk56siB1BbG0deGtQB-tV4jWYa5BXebd2GYVi8TwmQP65ONQfTpCr_KBBYtHDax4JxPBj1ou852lRcUjarFxyVP4QYbK6mfSzi58JwYmTEE5CehLqX9sgirPJqvekTyhdGrmr3ddXghxKwKsV2ReIrUE7YgMngHlngozKYbuuanoZkiUb4s5GW91Q2QjJpBmiO1vf1mYR11SRBPpN4nWP7jRUERwq6X60tOaYqJkA3oHqPCJY-aouyDJdypIiGYN_XzONcFOaUytl8yx93XrKdfDWyD7NuVftc0wbOChFHrw5LGyGTapQV1VDcd6Vc5xeKnyyfKGY8E8Y7V5WaWoa9GcALH8LeQaulAldgdwiDbwZdbODYF522zKRgzpNKoIdhuRsSNbC-EhyhKgaNQ7l0DgWm-nhGm7AjFihowWvQLdF70cuDssmOvcTP7gkFKFlk5cCUBRGHQSaz_Wpala4B6OsyWh8JATXKyXupiIK2-EgBDQ62Uoc7wH7bTwca3NkD3TkJoMgd3BZGlWWNY0GhJwfrEetd0o5CAbhy8rR3sp8TRtOthYesd40JuOYTuH7RBbJvrc&zp=AAJHf0FS6D63VoJilcvLb_IqEH-JpPlNeCBfhJmRhtUkjIJ6rSVeGkr3B54O0CuvWK6aJ0KHdpdFiimRIg_507kq5D0IO43IbBhT_ETpwc1N7Ep7_ODWWhPvacpX1jlAaunv27VPQl2PCe7ylsu6UFA7RVBiemvX-izs9ujcWt6zROSrUu3Igb-Er-k0VP82wsm2XmfzgbVT2bMiYjmiS87Gm92IhKXHBIYCjfapHddnwLKXeWUIH-o8R_VQwSH-ozM7KJKLuCnoxacn7xBVk8ARFZkyTj4Be9F37g758B9CtIpFKd3nLbUpUrOwoYAM3IqmNcu3eBxlE_osoCE
+                      - generic: Translate your site without rebuilding it
+                    - generic [ref=e3052]:
+                      - link [ref=e3054] [cursor=pointer]:
+                        - /url: https://alb.reddit.com/cr?za=F5RX5OqmSFx_jSoJS9OlrnnEBiNBkckICIA-RyMx_BRZ3B672UGxN1G0MfjUGjHGuGWwaTRSh00RB1ASO3TXHxeJKLhZtfhBlbNqYtvHQQ_RSm42h4rdqcHzkYpQpi6AZbQM2Ei8K4q5_Dg13Hah7-Rsaw8gerZEnG7QUsGiegD21dRs7ILVINbhNk56siB1BbG0deGtQB-tV4jWYa5BXebd2GYVi8TwmQP65ONQfTpCr_KBBYtHDax4JxPBj1ou852lRcUjarFxyVP4QYbK6mfSzi58JwYmTEE5CehLqX9sgirPJqvekTyhdGrmr3ddXghxKwKsV2ReIrUE7YgMngHlngozKYbuuanoZkiUb4s5GW91Q2QjJpBmiO1vf1mYR11SRBPpN4nWP7jRUERwq6X60tOaYqJkA3oHqPCJY-aouyDJdypIiGYN_XzONcFOaUytl8yx93XrKdfDWyD7NuVftc0wbOChFHrw5LGyGTapQV1VDcd6Vc5xeKnyyfKGY8E8Y7V5WaWoa9GcALH8LeQaulAldgdwiDbwZdbODYF522zKRgzpNKoIdhuRsSNbC-EhyhKgaNQ7l0DgWm-nhGm7AjFihowWvQLdF70cuDssmOvcTP7gkFKFlk5cCUBRGHQSaz_Wpala4B6OsyWh8JATXKyXupiIK2-EgBDQ62Uoc7wH7bTwca3NkD3TkJoMgd3BZGlWWNY0GhJwfrEetd0o5CAbhy8rR3sp8TRtOthYesd40JuOYTuH7RBbJvrc&zp=AAJHf0FS6D63VoJilcvLb_IqEH-JpPlNeCBfhJmRhtUkjIJ6rSVeGkr3B54O0CuvWK6aJ0KHdpdFiimRIg_507kq5D0IO43IbBhT_ETpwc1N7Ep7_ODWWhPvacpX1jlAaunv27VPQl2PCe7ylsu6UFA7RVBiemvX-izs9ujcWt6zROSrUu3Igb-Er-k0VP82wsm2XmfzgbVT2bMiYjmiS87Gm92IhKXHBIYCjfapHddnwLKXeWUIH-o8R_VQwSH-ozM7KJKLuCnoxacn7xBVk8ARFZkyTj4Be9F37g758B9CtIpFKd3nLbUpUrOwoYAM3IqmNcu3eBxlE_osoCE
+                      - generic [ref=e3055]:
+                        - link "Más información" [ref=e3057] [cursor=pointer]:
+                          - /url: https://alb.reddit.com/cr?za=F5RX5OqmSFx_jSoJS9OlrnnEBiNBkckICIA-RyMx_BRZ3B672UGxN1G0MfjUGjHGuGWwaTRSh00RB1ASO3TXHxeJKLhZtfhBlbNqYtvHQQ_RSm42h4rdqcHzkYpQpi6AZbQM2Ei8K4q5_Dg13Hah7-Rsaw8gerZEnG7QUsGiegD21dRs7ILVINbhNk56siB1BbG0deGtQB-tV4jWYa5BXebd2GYVi8TwmQP65ONQfTpCr_KBBYtHDax4JxPBj1ou852lRcUjarFxyVP4QYbK6mfSzi58JwYmTEE5CehLqX9sgirPJqvekTyhdGrmr3ddXghxKwKsV2ReIrUE7YgMngHlngozKYbuuanoZkiUb4s5GW91Q2QjJpBmiO1vf1mYR11SRBPpN4nWP7jRUERwq6X60tOaYqJkA3oHqPCJY-aouyDJdypIiGYN_XzONcFOaUytl8yx93XrKdfDWyD7NuVftc0wbOChFHrw5LGyGTapQV1VDcd6Vc5xeKnyyfKGY8E8Y7V5WaWoa9GcALH8LeQaulAldgdwiDbwZdbODYF522zKRgzpNKoIdhuRsSNbC-EhyhKgaNQ7l0DgWm-nhGm7AjFihowWvQLdF70cuDssmOvcTP7gkFKFlk5cCUBRGHQSaz_Wpala4B6OsyWh8JATXKyXupiIK2-EgBDQ62Uoc7wH7bTwca3NkD3TkJoMgd3BZGlWWNY0GhJwfrEetd0o5CAbhy8rR3sp8TRtOthYesd40JuOYTuH7RBbJvrc&zp=AAJHf0FS6D63VoJilcvLb_IqEH-JpPlNeCBfhJmRhtUkjIJ6rSVeGkr3B54O0CuvWK6aJ0KHdpdFiimRIg_507kq5D0IO43IbBhT_ETpwc1N7Ep7_ODWWhPvacpX1jlAaunv27VPQl2PCe7ylsu6UFA7RVBiemvX-izs9ujcWt6zROSrUu3Igb-Er-k0VP82wsm2XmfzgbVT2bMiYjmiS87Gm92IhKXHBIYCjfapHddnwLKXeWUIH-o8R_VQwSH-ozM7KJKLuCnoxacn7xBVk8ARFZkyTj4Be9F37g758B9CtIpFKd3nLbUpUrOwoYAM3IqmNcu3eBxlE_osoCE
+                          - generic [ref=e3059]:
+                            - generic: Más información
+                        - link "weglot.com" [ref=e3062] [cursor=pointer]:
+                          - /url: https://alb.reddit.com/cr?za=F5RX5OqmSFx_jSoJS9OlrnnEBiNBkckICIA-RyMx_BRZ3B672UGxN1G0MfjUGjHGuGWwaTRSh00RB1ASO3TXHxeJKLhZtfhBlbNqYtvHQQ_RSm42h4rdqcHzkYpQpi6AZbQM2Ei8K4q5_Dg13Hah7-Rsaw8gerZEnG7QUsGiegD21dRs7ILVINbhNk56siB1BbG0deGtQB-tV4jWYa5BXebd2GYVi8TwmQP65ONQfTpCr_KBBYtHDax4JxPBj1ou852lRcUjarFxyVP4QYbK6mfSzi58JwYmTEE5CehLqX9sgirPJqvekTyhdGrmr3ddXghxKwKsV2ReIrUE7YgMngHlngozKYbuuanoZkiUb4s5GW91Q2QjJpBmiO1vf1mYR11SRBPpN4nWP7jRUERwq6X60tOaYqJkA3oHqPCJY-aouyDJdypIiGYN_XzONcFOaUytl8yx93XrKdfDWyD7NuVftc0wbOChFHrw5LGyGTapQV1VDcd6Vc5xeKnyyfKGY8E8Y7V5WaWoa9GcALH8LeQaulAldgdwiDbwZdbODYF522zKRgzpNKoIdhuRsSNbC-EhyhKgaNQ7l0DgWm-nhGm7AjFihowWvQLdF70cuDssmOvcTP7gkFKFlk5cCUBRGHQSaz_Wpala4B6OsyWh8JATXKyXupiIK2-EgBDQ62Uoc7wH7bTwca3NkD3TkJoMgd3BZGlWWNY0GhJwfrEetd0o5CAbhy8rR3sp8TRtOthYesd40JuOYTuH7RBbJvrc&zp=AAJHf0FS6D63VoJilcvLb_IqEH-JpPlNeCBfhJmRhtUkjIJ6rSVeGkr3B54O0CuvWK6aJ0KHdpdFiimRIg_507kq5D0IO43IbBhT_ETpwc1N7Ep7_ODWWhPvacpX1jlAaunv27VPQl2PCe7ylsu6UFA7RVBiemvX-izs9ujcWt6zROSrUu3Igb-Er-k0VP82wsm2XmfzgbVT2bMiYjmiS87Gm92IhKXHBIYCjfapHddnwLKXeWUIH-o8R_VQwSH-ozM7KJKLuCnoxacn7xBVk8ARFZkyTj4Be9F37g758B9CtIpFKd3nLbUpUrOwoYAM3IqmNcu3eBxlE_osoCE
+                          - generic: weglot.com
+                  - 'link "Thumbnail image: Translate your site without rebuilding it" [ref=e3065] [cursor=pointer]':
+                    - /url: https://alb.reddit.com/cr?za=F5RX5OqmSFx_jSoJS9OlrnnEBiNBkckICIA-RyMx_BRZ3B672UGxN1G0MfjUGjHGuGWwaTRSh00RB1ASO3TXHxeJKLhZtfhBlbNqYtvHQQ_RSm42h4rdqcHzkYpQpi6AZbQM2Ei8K4q5_Dg13Hah7-Rsaw8gerZEnG7QUsGiegD21dRs7ILVINbhNk56siB1BbG0deGtQB-tV4jWYa5BXebd2GYVi8TwmQP65ONQfTpCr_KBBYtHDax4JxPBj1ou852lRcUjarFxyVP4QYbK6mfSzi58JwYmTEE5CehLqX9sgirPJqvekTyhdGrmr3ddXghxKwKsV2ReIrUE7YgMngHlngozKYbuuanoZkiUb4s5GW91Q2QjJpBmiO1vf1mYR11SRBPpN4nWP7jRUERwq6X60tOaYqJkA3oHqPCJY-aouyDJdypIiGYN_XzONcFOaUytl8yx93XrKdfDWyD7NuVftc0wbOChFHrw5LGyGTapQV1VDcd6Vc5xeKnyyfKGY8E8Y7V5WaWoa9GcALH8LeQaulAldgdwiDbwZdbODYF522zKRgzpNKoIdhuRsSNbC-EhyhKgaNQ7l0DgWm-nhGm7AjFihowWvQLdF70cuDssmOvcTP7gkFKFlk5cCUBRGHQSaz_Wpala4B6OsyWh8JATXKyXupiIK2-EgBDQ62Uoc7wH7bTwca3NkD3TkJoMgd3BZGlWWNY0GhJwfrEetd0o5CAbhy8rR3sp8TRtOthYesd40JuOYTuH7RBbJvrc&zp=AAJHf0FS6D63VoJilcvLb_IqEH-JpPlNeCBfhJmRhtUkjIJ6rSVeGkr3B54O0CuvWK6aJ0KHdpdFiimRIg_507kq5D0IO43IbBhT_ETpwc1N7Ep7_ODWWhPvacpX1jlAaunv27VPQl2PCe7ylsu6UFA7RVBiemvX-izs9ujcWt6zROSrUu3Igb-Er-k0VP82wsm2XmfzgbVT2bMiYjmiS87Gm92IhKXHBIYCjfapHddnwLKXeWUIH-o8R_VQwSH-ozM7KJKLuCnoxacn7xBVk8ARFZkyTj4Be9F37g758B9CtIpFKd3nLbUpUrOwoYAM3IqmNcu3eBxlE_osoCE
+                    - 'img "Thumbnail image: Translate your site without rebuilding it" [ref=e3066]'
+            - generic [ref=e3069]:
+              - generic:
+                - textbox [ref=e3874]:
+                  - /placeholder: Únete a la conversación
+                - generic [ref=e3085]:
+                  - generic [ref=e3087]:
+                    - generic [ref=e3088]: "Ordenar por:"
+                    - button "Ordenar por Mejores" [ref=e3093] [cursor=pointer]:
+                      - generic [ref=e3095]: Mejores
+                  - button "Buscar comentarios Expandir la búsqueda de comentarios" [ref=e3102] [cursor=pointer]:
+                    - generic [ref=e3103]:
+                      - img [ref=e3106]
+                      - generic [ref=e3109]: Buscar comentarios
+                    - generic [ref=e3110]:
+                      - generic: Expandir la búsqueda de comentarios
+            - region "Comentarios" [ref=e3114]:
+              - heading "Sección de comentarios" [level=1] [ref=e3115]
+              - generic:
+                - article "Comentario de RisePuzzleheaded3935 hace 2 horas" [ref=e3117]:
+                  - generic "Metadatos del comentario de RisePuzzleheaded3935" [ref=e3118]:
+                    - link "Perfil de RisePuzzleheaded3935 --- avatar" [ref=e3124] [cursor=pointer]:
+                      - /url: /user/RisePuzzleheaded3935/
+                      - img "Avatar de u/RisePuzzleheaded3935" [ref=e3127]
+                    - generic [ref=e3132]:
+                      - link "Perfil de RisePuzzleheaded3935" [ref=e3136] [cursor=pointer]:
+                        - /url: /user/RisePuzzleheaded3935/
+                        - text: RisePuzzleheaded3935
+                      - generic [ref=e3137]: •
+                      - link "hace 2 h" [ref=e3138] [cursor=pointer]:
+                        - /url: /r/webdev/comments/1rz47a7/comment/objb30u/
+                        - time [ref=e3139]: hace 2 h
+                  - generic [ref=e3147]:
+                    - paragraph [ref=e3148]:
+                      - text: La ironía es que LCH en realidad
+                      - emphasis [ref=e3149]: ayuda
+                      - text: más a la accesibilidad que RGB. Porque LCH es perceptualmente uniforme, un valor de luminosidad del 50% se ve igual de brillante para el ojo humano, sin importar el tono.
+                    - paragraph [ref=e3150]:
+                      - text: En RGB/HSL, un azul 'puro' y un amarillo 'puro' pueden tener la misma luminosidad matemática pero contrastes visuales muy diferentes. Si usas LCH, puedes generar programáticamente paletas de colores accesibles donde la relación de contraste se mantiene consistente en todo el espectro. Siempre y cuando proporciones un fallback hex
+                      - link "estándar" [ref=e3151] [cursor=pointer]:
+                        - /url: https://developer.mozilla.org/en-US/docs/Web/CSS/color_value/lch
+                      - text: para navegadores más antiguos, en realidad estás construyendo un sistema más robusto, no uno más débil.
+                - article "Comentario de wspnut hace 2 horas" [ref=e3157]:
+                  - generic "Metadatos del comentario de wspnut" [ref=e3158]:
+                    - link "Perfil de wspnut --- avatar" [ref=e3164] [cursor=pointer]:
+                      - /url: /user/wspnut/
+                      - generic [ref=e3166]:
+                        - img [ref=e3168]
+                        - img [ref=e3172]
+                        - img [ref=e3175]
+                    - generic [ref=e3181]:
+                      - link "Perfil de wspnut" [ref=e3185] [cursor=pointer]:
+                        - /url: /user/wspnut/
+                        - text: wspnut
+                      - generic [ref=e3186]: •
+                      - link "hace 2 h" [ref=e3187] [cursor=pointer]:
+                        - /url: /r/webdev/comments/1rz47a7/comment/obj7omc/
+                        - time [ref=e3188]: hace 2 h
+                  - generic [ref=e3190]:
+                    - generic [ref=e3198]:
+                      - paragraph [ref=e3199]: Cualquier espacio de color se puede convertir en cualquier otro. No entiendo por qué crees que LCH vs. RGB tiene algo que ver con cómo se ven los resultados. La única diferencia está en cómo se construyen y mantienen los sistemas de diseño al seleccionar colores, pero eso es una limitación del diseñador, no de la tecnología.
+                      - paragraph [ref=e3200]: Al final del día, los monitores de computadora siguen aplicando la teoría del color aditivo estándar dentro de un rango fijo.
+                    - button "Toggle Comment Thread" [expanded] [ref=e3203] [cursor=pointer]:
+                      - img [ref=e3206]
+                    - generic [ref=e3210]:
+                      - 'article "Nivel del hilo de comentarios 1: respuesta de svbtlx3m hace 39 minutos" [ref=e3212]':
+                        - generic "Metadatos del comentario de svbtlx3m" [ref=e3213]:
+                          - link "Perfil de svbtlx3m --- avatar" [ref=e3219] [cursor=pointer]:
+                            - /url: /user/svbtlx3m/
+                            - img [ref=e3224]
+                          - generic [ref=e3230]:
+                            - link "Perfil de svbtlx3m" [ref=e3234] [cursor=pointer]:
+                              - /url: /user/svbtlx3m/
+                              - text: svbtlx3m
+                            - generic [ref=e3235]: •
+                            - link "hace 39 min" [ref=e3236] [cursor=pointer]:
+                              - /url: /r/webdev/comments/1rz47a7/comment/objm0g5/
+                              - time [ref=e3237]: hace 39 min
+                        - generic [ref=e3245]:
+                          - paragraph [ref=e3246]: Eso no es del todo cierto, porque el modelo LCH puede representar colores fuera de la gama de espacios como sRGB. El rango puede ser finito, pero es mucho más grande en un monitor Display P3, por ejemplo.
+                          - paragraph [ref=e3247]: Se puede convertir, pero no siempre sin pérdida. Si estás trabajando en una pantalla de amplia gama, tenés que tener cuidado con los cambios de color al ajustarte a sRGB, lo que puede afectar la accesibilidad.
+                      - 'article "Nivel del hilo de comentarios 1: respuesta de WildWildWasp hace 2 minutos" [ref=e3255]':
+                        - generic "Metadatos del comentario de WildWildWasp" [ref=e3256]:
+                          - link "Perfil de WildWildWasp --- avatar" [ref=e3262] [cursor=pointer]:
+                            - /url: /user/WildWildWasp/
+                            - img "Avatar de u/WildWildWasp" [ref=e3265]
+                          - generic [ref=e3270]:
+                            - link "Perfil de WildWildWasp" [ref=e3274] [cursor=pointer]:
+                              - /url: /user/WildWildWasp/
+                              - text: WildWildWasp
+                            - generic "Comentario destacado como autor original" [ref=e3277]: OP
+                            - generic [ref=e3278]: •
+                            - link "hace 2 min" [ref=e3279] [cursor=pointer]:
+                              - /url: /r/webdev/comments/1rz47a7/comment/objtrx9/
+                              - time [ref=e3280]: hace 2 min
+                        - paragraph [ref=e3289]: Definitivamente tiene un efecto, especialmente en cómo se calculan cosas como los degradados y los filtros a medida que los pasos se mueven a través del color de manera diferente. Además, como señaló la otra respuesta, tiene una gama más amplia.
+                - article "Comentario de chadsly hace 2 horas" [ref=e3295]:
+                  - generic "Metadatos del comentario de chadsly" [ref=e3296]:
+                    - link "Perfil de chadsly --- avatar" [ref=e3302] [cursor=pointer]:
+                      - /url: /user/chadsly/
+                      - img "Avatar de u/chadsly" [ref=e3305]
+                    - generic [ref=e3310]:
+                      - link "Perfil de chadsly" [ref=e3314] [cursor=pointer]:
+                        - /url: /user/chadsly/
+                        - text: chadsly
+                      - generic [ref=e3315]: •
+                      - link "hace 2 h" [ref=e3316] [cursor=pointer]:
+                        - /url: /r/webdev/comments/1rz47a7/comment/obj94u4/
+                        - time [ref=e3317]: hace 2 h
+                  - paragraph [ref=e3326]: No creo que LCH perjudique la accesibilidad por sí solo, lo que la daña son el mal contraste y los fallbacks débiles. Si tu fallback es sensato y sigues verificando el contraste en la interfaz de usuario renderizada, el espacio de color es más que nada un detalle de implementación. ¿Estás viendo problemas reales de los usuarios, o te preocupas más por la compatibilidad del navegador en teoría?
+                - article "Comentario de Caraes_Naur hace 1 hora" [ref=e3332]:
+                  - generic "Metadatos del comentario de Caraes_Naur" [ref=e3333]:
+                    - link "Perfil de Caraes_Naur --- avatar" [ref=e3339] [cursor=pointer]:
+                      - /url: /user/Caraes_Naur/
+                      - img "Avatar de u/Caraes_Naur" [ref=e3342]
+                    - generic [ref=e3347]:
+                      - link "Perfil de Caraes_Naur" [ref=e3351] [cursor=pointer]:
+                        - /url: /user/Caraes_Naur/
+                        - text: Caraes_Naur
+                      - generic [ref=e3352]: •
+                      - link "hace 1 h" [ref=e3353] [cursor=pointer]:
+                        - /url: /r/webdev/comments/1rz47a7/comment/objcu12/
+                        - time [ref=e3354]: hace 1 h
+                  - generic [ref=e3362]:
+                    - paragraph [ref=e3363]: LCH tiene problemas de precisión, por eso existe okLCH.
+                    - paragraph [ref=e3364]: Ningún modelo de color afecta la accesibilidad... lo que importa es la paleta de colores que se usa.
+                    - paragraph [ref=e3365]: Deberías probar HSL... probablemente el modelo de color más intuitivo desde la perspectiva del diseño (especialmente con los colores relativos de CSS). Tiene mejor soporte que LCH y okLCH.
+          - generic [ref=e3370]:
+            - complementary "Información de la comunidad" [ref=e3375]:
+              - generic [ref=e3376]:
+                - generic [ref=e3378]:
+                  - heading "Sección de información de la comunidad" [level=1] [ref=e3379]
+                  - generic [ref=e3380]:
+                    - link "r/webdev" [ref=e3382] [cursor=pointer]:
+                      - /url: /r/webdev/
+                      - generic [ref=e3383]: r/webdev
+                    - button "Unirse" [ref=e3387] [cursor=pointer]
+                  - generic [ref=e3388]:
+                    - generic [ref=e3389]: "webdev: reddit para desarrolladores web"
+                    - generic [ref=e3390]: "Una comunidad dedicada a todo lo relacionado con el desarrollo web: tanto front-end como back-end. Para preguntas más relacionadas con el diseño, prueba a /r/web_design."
+                    - button "Mostrar más" [ref=e3391] [cursor=pointer]:
+                      - generic [ref=e3393]: Mostrar más
+                    - generic [ref=e3394]:
+                      - generic [ref=e3396]:
+                        - img [ref=e3397]
+                        - text: Creada el 25 ene 2009
+                      - generic [ref=e3400]:
+                        - img [ref=e3401]
+                        - text: Público
+                  - generic [ref=e3403]:
+                    - generic [ref=e3404]:
+                      - strong [ref=e3406]:
+                        - generic: 665 mil
+                      - generic [ref=e3407]: visitantes semanales
+                    - generic [ref=e3408]:
+                      - strong [ref=e3410]:
+                        - generic: 12 mil
+                      - generic [ref=e3411]: colaboraciones semanales
+                - separator [ref=e3412]
+                - generic [ref=e3413]:
+                  - heading "Etiquetas de usuario" [level=2] [ref=e3415]:
+                    - generic [ref=e3416]: Etiquetas de usuario
+                  - button "Avatar de u/No-Worker-5959 No-Worker-5959" [ref=e3418]:
+                    - generic [ref=e3420]:
+                      - img "Avatar de u/No-Worker-5959" [ref=e3425]
+                      - generic [ref=e3427]: No-Worker-5959
+                - separator [ref=e3428]
+                - generic [ref=e3429]:
+                  - heading "Marcadores de comunidad" [level=2] [ref=e3431]:
+                    - generic [ref=e3432]: Marcadores de comunidad
+                  - generic [ref=e3433]:
+                    - link "Discordia" [ref=e3876] [cursor=pointer]:
+                      - /url: https://discord.gg/H9Jkc7p
+                      - generic [ref=e3438]: Discordia
+                    - link "Gorjeo" [ref=e3877] [cursor=pointer]:
+                      - /url: https://twitter.com/redditweb
+                      - generic [ref=e3443]: Gorjeo
+                    - link "YouTube" [ref=e3445] [cursor=pointer]:
+                      - /url: https://youtube.com/RedditWeb
+                      - generic [ref=e3448]: YouTube
+                    - link "Preguntas frecuentes" [ref=e3878] [cursor=pointer]:
+                      - /url: https://www.reddit.com/r/webdev/wiki/faq
+                      - generic [ref=e3453]: Preguntas frecuentes
+                - separator [ref=e3454]
+                - generic [ref=e3455]:
+                  - heading "Reglas de r/webdev" [level=2] [ref=e3457]:
+                    - generic [ref=e3458]: Reglas de r/webdev
+                  - generic [ref=e3459]:
+                    - group [ref=e3461]:
+                      - generic "1 No hay preguntas vagas de soporte sobre los editores WYSIWYG u otro software." [ref=e3879] [cursor=pointer]:
+                        - generic [ref=e3464]:
+                          - generic [ref=e3465]:
+                            - generic [ref=e3467]: "1"
+                            - heading "No hay preguntas vagas de soporte sobre los editores WYSIWYG u otro software." [level=2] [ref=e3880]
+                          - img [ref=e3474]
+                    - group [ref=e3477]:
+                      - generic "2 Sin memes, capturas de pantalla y chistes." [ref=e3881] [cursor=pointer]:
+                        - generic [ref=e3480]:
+                          - generic [ref=e3481]:
+                            - generic [ref=e3483]: "2"
+                            - heading "Sin memes, capturas de pantalla y chistes." [level=2] [ref=e3882]
+                          - img [ref=e3490]
+                    - group [ref=e3493]:
+                      - generic "3 Sin autopromoción" [ref=e3883] [cursor=pointer]:
+                        - generic [ref=e3496]:
+                          - generic [ref=e3497]:
+                            - generic [ref=e3499]: "3"
+                            - heading "Sin autopromoción" [level=2] [ref=e3884]
+                          - img [ref=e3506]
+                    - group [ref=e3509]:
+                      - generic "4 No se permiten promociones/solicitudes comerciales." [ref=e3885] [cursor=pointer]:
+                        - generic [ref=e3512]:
+                          - generic [ref=e3513]:
+                            - generic [ref=e3515]: "4"
+                            - heading "No se permiten promociones/solicitudes comerciales." [level=2] [ref=e3886]
+                          - img [ref=e3522]
+                    - group [ref=e3525]:
+                      - generic "5 No solicitar comentarios no el sábado" [ref=e3887] [cursor=pointer]:
+                        - generic [ref=e3528]:
+                          - generic [ref=e3529]:
+                            - generic [ref=e3531]: "5"
+                            - heading "No solicitar comentarios no el sábado" [level=2] [ref=e3888]
+                          - img [ref=e3538]
+                    - group [ref=e3541]:
+                      - generic "6 Pautas para preguntas de asistencia" [ref=e3889] [cursor=pointer]:
+                        - generic [ref=e3544]:
+                          - generic [ref=e3545]:
+                            - generic [ref=e3547]: "6"
+                            - heading "Pautas para preguntas de asistencia" [level=2] [ref=e3890]
+                          - img [ref=e3554]
+                    - group [ref=e3557]:
+                      - generic "7 Preguntas sobre carrera/introducción" [ref=e3891] [cursor=pointer]:
+                        - generic [ref=e3560]:
+                          - generic [ref=e3561]:
+                            - generic [ref=e3563]: "7"
+                            - heading "Preguntas sobre carrera/introducción" [level=2] [ref=e3892]
+                          - img [ref=e3570]
+                    - group [ref=e3573]:
+                      - generic "8 No low-effort posts/comments" [ref=e3574] [cursor=pointer]:
+                        - generic [ref=e3576]:
+                          - generic [ref=e3577]:
+                            - generic [ref=e3579]: "8"
+                            - heading "No low-effort posts/comments" [level=2] [ref=e3583]
+                          - img [ref=e3586]
+                - separator [ref=e3588]
+                - generic [ref=e3589]:
+                  - heading "Sábados de exhibición" [level=2] [ref=e3893]:
+                    - generic [ref=e3592]: Sábados de exhibición
+                  - generic [ref=e3894]:
+                    - paragraph [ref=e3895]: ¿Trabajas en algo y quieres compartirlo? ¡Los sábados de exhibición son para ti! Haz una nueva publicación el sábado y etiquétala [Showoff Saturday] y observa cómo aumentan las vistas.
+                    - paragraph [ref=e3896]: Compartir su proyecto, portafolio o cualquier otro contenido que desee mostrar o solicitar comentarios está limitado al Showoff Saturday. Si publica dicho contenido cualquier otro día, será eliminado.
+                - separator [ref=e3597]
+                - generic [ref=e3598]:
+                  - heading "Campo de golf" [level=2] [ref=e3897]:
+                    - generic [ref=e3601]: Campo de golf
+                  - generic [ref=e3602]:
+                    - link "Servidor de discordia Discord server" [ref=e3898] [cursor=pointer]:
+                      - /url: https://discord.gg/H9Jkc7p
+                      - generic [ref=e3606]: Servidor de discordia
+                      - generic [ref=e3607]:
+                        - generic: Discord server
+                    - link "cuenta de Twitter Twitter account" [ref=e3899] [cursor=pointer]:
+                      - /url: https://twitter.com/redditweb
+                      - generic [ref=e3611]: cuenta de Twitter
+                      - generic [ref=e3612]:
+                        - generic: Twitter account
+                    - link "canal de youtube YouTube channel" [ref=e3900] [cursor=pointer]:
+                      - /url: https://youtube.com/RedditWeb
+                      - generic [ref=e3616]: canal de youtube
+                      - generic [ref=e3617]:
+                        - generic: YouTube channel
+                - separator [ref=e3618]
+                - generic [ref=e3619]:
+                  - heading "Comunidades Relacionadas" [level=2] [ref=e3901]:
+                    - generic [ref=e3622]: Comunidades Relacionadas
+                  - generic [ref=e3629]:
+                    - link "r/web_design" [ref=e3632] [cursor=pointer]:
+                      - /url: /r/web_design
+                    - generic [ref=e3633]: 956.673 miembros
+                  - generic [ref=e3640]:
+                    - link "r/SaaS" [ref=e3643] [cursor=pointer]:
+                      - /url: /r/SaaS
+                    - generic [ref=e3644]: 629.511 miembros
+                - separator [ref=e3645]
+                - generic [ref=e3646]:
+                  - heading "Moderadores" [level=2] [ref=e3648]:
+                    - generic [ref=e3649]: Moderadores
+                  - link "Enviar mensaje a moderadores" [ref=e3651] [cursor=pointer]:
+                    - /url: https://www.reddit.com/message/compose?to=r/webdev
+                    - generic [ref=e3652]:
+                      - img [ref=e3654]
+                      - generic [ref=e3656]: Enviar mensaje a moderadores
+                  - generic [ref=e3658]:
+                    - img [ref=e3665]
+                    - generic [ref=e3669]:
+                      - link "u/snissn" [ref=e3670] [cursor=pointer]:
+                        - /url: /user/snissn/
+                      - 'generic "Etiqueta: expert" [ref=e3672]': expert
+                  - generic [ref=e3674]:
+                    - generic [ref=e3678]:
+                      - img [ref=e3680]
+                      - img [ref=e3684]
+                      - img [ref=e3687]
+                    - generic [ref=e3689]:
+                      - generic [ref=e3691]:
+                        - link "u/julian88888888" [ref=e3692] [cursor=pointer]:
+                          - /url: /user/julian88888888/
+                        - 'generic "Etiqueta: :snoo_dealwithit: Moderator" [ref=e3694]':
+                          - generic [ref=e3695]: Moderator
+                      - generic [ref=e3699]: Julian
+                  - generic [ref=e3701]:
+                    - img "Avatar de u/aflashyrhetoric" [ref=e3706]
+                    - generic [ref=e3709]:
+                      - link "u/aflashyrhetoric" [ref=e3710] [cursor=pointer]:
+                        - /url: /user/aflashyrhetoric/
+                      - 'generic "Etiqueta: front-end" [ref=e3712]': front-end
+                  - generic [ref=e3714]:
+                    - img "Avatar de u/so_much_reddit_T-T" [ref=e3719]
+                    - generic [ref=e3722]:
+                      - link "u/so_much_reddit_T-T" [ref=e3723] [cursor=pointer]:
+                        - /url: /user/so_much_reddit_T-T/
+                      - 'generic "Etiqueta: :snoo_dealwithit: Moderator" [ref=e3725]':
+                        - generic [ref=e3726]: Moderator
+                  - generic [ref=e3730]:
+                    - img "Avatar de u/AutoModerator" [ref=e3735]
+                    - link "u/AutoModerator" [ref=e3739] [cursor=pointer]:
+                      - /url: /user/AutoModerator/
+                  - generic [ref=e3741]:
+                    - generic [ref=e3745]:
+                      - img [ref=e3747]
+                      - img [ref=e3751]
+                      - img [ref=e3754]
+                    - generic [ref=e3756]:
+                      - link "u/CherryJimbo" [ref=e3759] [cursor=pointer]:
+                        - /url: /user/CherryJimbo/
+                      - generic [ref=e3761]: James Ross
+                  - generic [ref=e3763]:
+                    - img "Avatar de u/notcaffeinefree" [ref=e3768]
+                    - link "u/notcaffeinefree" [ref=e3772] [cursor=pointer]:
+                      - /url: /user/notcaffeinefree/
+                  - generic [ref=e3774]:
+                    - img [ref=e3781]
+                    - link "u/duckballista" [ref=e3786] [cursor=pointer]:
+                      - /url: /user/duckballista/
+                  - generic [ref=e3788]:
+                    - generic [ref=e3792]:
+                      - img [ref=e3794]
+                      - img [ref=e3798]
+                      - img [ref=e3801]
+                    - generic [ref=e3805]:
+                      - link "u/Gurgen" [ref=e3806] [cursor=pointer]:
+                        - /url: /user/Gurgen/
+                      - 'generic "Etiqueta: :snoo_dealwithit: Moderator" [ref=e3808]':
+                        - generic [ref=e3809]: Moderator
+                  - generic [ref=e3813]:
+                    - img "Avatar de u/sleepy_roger" [ref=e3818]
+                    - link "u/sleepy_roger" [ref=e3822] [cursor=pointer]:
+                      - /url: /user/sleepy_roger/
+                  - link "Ver todos los moderadores" [ref=e3823] [cursor=pointer]:
+                    - /url: /mod/webdev/moderators/
+                    - generic [ref=e3825]: Ver todos los moderadores
+            - generic [ref=e3827]:
+              - link "Reglas de Reddit" [ref=e3830] [cursor=pointer]:
+                - /url: https://www.redditinc.com/policies/content-policy
+              - link "Política de privacidad" [ref=e3833] [cursor=pointer]:
+                - /url: https://www.reddit.com/policies/privacy-policy
+              - link "Acuerdo del usuario" [ref=e3836] [cursor=pointer]:
+                - /url: https://www.redditinc.com/policies/user-agreement
+              - link "Accesibilidad" [ref=e3839] [cursor=pointer]:
+                - /url: https://support.reddithelp.com/hc/sections/38303584022676-Accessibility
+              - link "Reddit, Inc. © 2026. Todos los derechos reservados." [ref=e3841] [cursor=pointer]:
+                - /url: https://redditinc.com

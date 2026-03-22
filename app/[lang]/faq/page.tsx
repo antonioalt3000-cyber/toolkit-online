@@ -11,7 +11,7 @@ const faqContent: Record<Locale, { title: string; subtitle: string; items: FAQIt
     items: [
       {
         q: 'What is ToolKit Online?',
-        a: 'ToolKit Online is a free collection of 114+ browser-based tools designed to help you with everyday tasks like converting files, generating text, editing images, and much more. All tools run directly in your browser, so there is nothing to install and you can start using them immediately from any device.',
+        a: 'ToolKit Online is a free collection of 143+ browser-based tools designed to help you with everyday tasks like converting files, generating text, editing images, and much more. All tools run directly in your browser, so there is nothing to install and you can start using them immediately from any device.',
       },
       {
         q: 'Are the tools really free?',
@@ -27,7 +27,7 @@ const faqContent: Record<Locale, { title: string; subtitle: string; items: FAQIt
       },
       {
         q: 'How many tools are available?',
-        a: 'We currently offer over 114 free tools and we are constantly adding more. Our collection covers categories like text utilities, image tools, developer tools, converters, generators, calculators, and more. If you do not see a tool you need, feel free to suggest it.',
+        a: 'We currently offer over 143 free tools and we are constantly adding more. Our collection covers categories like text utilities, image tools, developer tools, converters, generators, calculators, and more. If you do not see a tool you need, feel free to suggest it.',
       },
       {
         q: 'What languages are supported?',
@@ -57,7 +57,7 @@ const faqContent: Record<Locale, { title: string; subtitle: string; items: FAQIt
     items: [
       {
         q: 'Cos\'è ToolKit Online?',
-        a: 'ToolKit Online è una raccolta gratuita di oltre 114 strumenti basati su browser, progettati per aiutarti nelle attività quotidiane come convertire file, generare testo, modificare immagini e molto altro. Tutti gli strumenti funzionano direttamente nel tuo browser, quindi non devi installare nulla e puoi iniziare a usarli immediatamente da qualsiasi dispositivo.',
+        a: 'ToolKit Online è una raccolta gratuita di oltre 143 strumenti basati su browser, progettati per aiutarti nelle attività quotidiane come convertire file, generare testo, modificare immagini e molto altro. Tutti gli strumenti funzionano direttamente nel tuo browser, quindi non devi installare nulla e puoi iniziare a usarli immediatamente da qualsiasi dispositivo.',
       },
       {
         q: 'Gli strumenti sono davvero gratuiti?',
@@ -73,7 +73,7 @@ const faqContent: Record<Locale, { title: string; subtitle: string; items: FAQIt
       },
       {
         q: 'Quanti strumenti sono disponibili?',
-        a: 'Attualmente offriamo oltre 114 strumenti gratuiti e ne aggiungiamo costantemente di nuovi. La nostra raccolta copre categorie come utilità di testo, strumenti per immagini, strumenti per sviluppatori, convertitori, generatori, calcolatrici e altro. Se non trovi lo strumento che ti serve, sentiti libero di suggerirlo.',
+        a: 'Attualmente offriamo oltre 143 strumenti gratuiti e ne aggiungiamo costantemente di nuovi. La nostra raccolta copre categorie come utilità di testo, strumenti per immagini, strumenti per sviluppatori, convertitori, generatori, calcolatrici e altro. Se non trovi lo strumento che ti serve, sentiti libero di suggerirlo.',
       },
       {
         q: 'Quali lingue sono supportate?',
@@ -103,7 +103,7 @@ const faqContent: Record<Locale, { title: string; subtitle: string; items: FAQIt
     items: [
       {
         q: '¿Qué es ToolKit Online?',
-        a: 'ToolKit Online es una colección gratuita de más de 114 herramientas en línea para tareas cotidianas como convertir archivos, generar texto y editar imágenes. Todas funcionan directamente en tu navegador sin necesidad de instalar nada.',
+        a: 'ToolKit Online es una colección gratuita de más de 143 herramientas en línea para tareas cotidianas como convertir archivos, generar texto y editar imágenes. Todas funcionan directamente en tu navegador sin necesidad de instalar nada.',
       },
       {
         q: '¿Las herramientas son realmente gratuitas?',
@@ -119,7 +119,7 @@ const faqContent: Record<Locale, { title: string; subtitle: string; items: FAQIt
       },
       {
         q: '¿Cuántas herramientas hay disponibles?',
-        a: 'Actualmente ofrecemos más de 114 herramientas gratuitas en categorías como texto, imágenes, desarrollo, conversores y más. Añadimos nuevas herramientas regularmente.',
+        a: 'Actualmente ofrecemos más de 143 herramientas gratuitas en categorías como texto, imágenes, desarrollo, conversores y más. Añadimos nuevas herramientas regularmente.',
       },
       {
         q: '¿Qué idiomas están disponibles?',
@@ -149,7 +149,7 @@ const faqContent: Record<Locale, { title: string; subtitle: string; items: FAQIt
     items: [
       {
         q: 'Qu\'est-ce que ToolKit Online ?',
-        a: 'ToolKit Online est une collection gratuite de plus de 114 outils en ligne pour les tâches quotidiennes comme la conversion de fichiers, la génération de texte et l\'édition d\'images. Tout fonctionne directement dans votre navigateur.',
+        a: 'ToolKit Online est une collection gratuite de plus de 143 outils en ligne pour les tâches quotidiennes comme la conversion de fichiers, la génération de texte et l\'édition d\'images. Tout fonctionne directement dans votre navigateur.',
       },
       {
         q: 'Les outils sont-ils vraiment gratuits ?',
@@ -165,7 +165,7 @@ const faqContent: Record<Locale, { title: string; subtitle: string; items: FAQIt
       },
       {
         q: 'Combien d\'outils sont disponibles ?',
-        a: 'Nous proposons actuellement plus de 114 outils gratuits dans des catégories comme le texte, les images, le développement et les convertisseurs. De nouveaux outils sont ajoutés régulièrement.',
+        a: 'Nous proposons actuellement plus de 143 outils gratuits dans des catégories comme le texte, les images, le développement et les convertisseurs. De nouveaux outils sont ajoutés régulièrement.',
       },
       {
         q: 'Quelles langues sont prises en charge ?',
@@ -195,7 +195,7 @@ const faqContent: Record<Locale, { title: string; subtitle: string; items: FAQIt
     items: [
       {
         q: 'Was ist ToolKit Online?',
-        a: 'ToolKit Online ist eine kostenlose Sammlung von über 114 Browser-Tools für alltägliche Aufgaben. Alles funktioniert direkt im Browser.',
+        a: 'ToolKit Online ist eine kostenlose Sammlung von über 143 Browser-Tools für alltägliche Aufgaben. Alles funktioniert direkt im Browser.',
       },
       {
         q: 'Sind die Tools wirklich kostenlos?',
@@ -211,7 +211,7 @@ const faqContent: Record<Locale, { title: string; subtitle: string; items: FAQIt
       },
       {
         q: 'Wie viele Tools gibt es?',
-        a: 'Über 114 kostenlose Tools in Kategorien wie Text, Bilder, Entwickler-Tools und Konverter. Neue werden regelmäßig hinzugefügt.',
+        a: 'Über 143 kostenlose Tools in Kategorien wie Text, Bilder, Entwickler-Tools und Konverter. Neue werden regelmäßig hinzugefügt.',
       },
       {
         q: 'Welche Sprachen werden unterstützt?',
@@ -241,7 +241,7 @@ const faqContent: Record<Locale, { title: string; subtitle: string; items: FAQIt
     items: [
       {
         q: 'O que é o ToolKit Online?',
-        a: 'O ToolKit Online é uma coleção gratuita de mais de 114 ferramentas online para tarefas do dia a dia. Tudo funciona diretamente no navegador.',
+        a: 'O ToolKit Online é uma coleção gratuita de mais de 143 ferramentas online para tarefas do dia a dia. Tudo funciona diretamente no navegador.',
       },
       {
         q: 'As ferramentas são mesmo gratuitas?',
@@ -257,7 +257,7 @@ const faqContent: Record<Locale, { title: string; subtitle: string; items: FAQIt
       },
       {
         q: 'Quantas ferramentas estão disponíveis?',
-        a: 'Mais de 114 ferramentas gratuitas em categorias como texto, imagens, desenvolvimento e conversores.',
+        a: 'Mais de 143 ferramentas gratuitas em categorias como texto, imagens, desenvolvimento e conversores.',
       },
       {
         q: 'Que idiomas são suportados?',

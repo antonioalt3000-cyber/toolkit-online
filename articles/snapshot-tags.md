@@ -1,0 +1,131 @@
+- generic [ref=e1]:
+  - link "DEV Community Home" [ref=e4] [cursor=pointer]:
+    - /url: /
+    - img "DEV Community" [ref=e5]
+  - generic [ref=e253]:
+    - generic [ref=e254]: New Post - DEV Community
+    - main [ref=e255]:
+      - form "Edit post" [ref=e280]:
+        - generic [ref=e257]:
+          - link "DEV Community Home" [ref=e281] [cursor=pointer]:
+            - /url: /
+            - img "DEV Community" [ref=e282]
+          - generic [ref=e262]: Create Post
+          - navigation "View post modes" [ref=e263]:
+            - list [ref=e264]:
+              - listitem [ref=e265]:
+                - button "Edit" [ref=e266] [cursor=pointer]
+              - listitem [ref=e267]:
+                - button "Preview" [ref=e268] [cursor=pointer]
+          - button "Close the editor" [ref=e283] [cursor=pointer]:
+            - img
+        - generic [ref=e271]:
+          - generic [ref=e272]:
+            - generic [ref=e285]:
+              - generic [ref=e286] [cursor=pointer]:
+                - text: Upload Cover Image
+                - button "Upload Cover Image Use a ratio of 1000:420 for best results."
+                - generic: Use a ratio of 1000:420 for best results.
+              - button "🍌 Generate Image" [ref=e287] [cursor=pointer]
+              - button "Cover Video Link" [ref=e288] [cursor=pointer]
+            - textbox "Post Title" [ref=e289]:
+              - /placeholder: New post title here...
+              - text: I Built 155+ Free Browser Tools — Here's What I Learned
+            - generic: showdev
+            - generic [ref=e290]: Add up to 4 tags
+            - generic [ref=e291]: Maximum 4 selections
+            - generic [ref=e292]:
+              - paragraph [ref=e293]: "Selected items:"
+              - list [ref=e294]:
+                - listitem [ref=e350]: webdev
+                - listitem [ref=e1019]: javascript
+                - listitem [ref=e1575]: opensource
+            - combobox [expanded] [ref=e296]:
+              - list [ref=e297]:
+                - listitem [ref=e351]:
+                  - group "webdev" [ref=e352]:
+                    - button "Edit webdev" [ref=e353]: "# webdev"
+                    - button "Remove webdev" [ref=e354] [cursor=pointer]:
+                      - img
+                - listitem [ref=e1020]:
+                  - group "javascript" [ref=e1021]:
+                    - button "Edit javascript" [ref=e1022]: "# javascript"
+                    - button "Remove javascript" [ref=e1023] [cursor=pointer]:
+                      - img
+                - listitem [ref=e1576]:
+                  - group "opensource" [ref=e1577]:
+                    - button "Edit opensource" [ref=e1578]: "# opensource"
+                    - button "Remove opensource" [ref=e1579] [cursor=pointer]:
+                      - img
+                - listitem [ref=e298]:
+                  - textbox "Add up to 4 tags" [active] [ref=e299]:
+                    - /placeholder: Add another...
+                    - text: showdev
+              - listbox "Add up to 4 tags" [ref=e336]:
+                - option "# showdev Show off what you've built!" [ref=e1162] [cursor=pointer]:
+                  - generic [ref=e1163]:
+                    - generic [ref=e1164]:
+                      - generic [ref=e1165]: "#"
+                      - generic [ref=e1166]: showdev
+                    - generic [ref=e1167]: Show off what you've built!
+          - generic [ref=e300]:
+            - toolbar "Markdown formatting toolbar" [ref=e302]:
+              - button "Bold" [ref=e303] [cursor=pointer]:
+                - img
+                - generic:
+                  - generic: Bold CTRL + B
+              - button "Italic" [ref=e304] [cursor=pointer]:
+                - img
+                - generic:
+                  - generic: Italic CTRL + I
+              - button "Link" [ref=e305] [cursor=pointer]:
+                - img
+                - generic:
+                  - generic: Link CTRL + K
+              - button "Ordered list" [ref=e306] [cursor=pointer]:
+                - img
+                - generic: Ordered list
+              - button "Unordered list" [ref=e307] [cursor=pointer]:
+                - img
+                - generic: Unordered list
+              - button "Heading" [ref=e308] [cursor=pointer]:
+                - img
+                - generic: Heading
+              - button "Quote" [ref=e309] [cursor=pointer]:
+                - img
+                - generic: Quote
+              - button "Code" [ref=e310] [cursor=pointer]:
+                - img
+                - generic: Code
+              - button "Code block" [ref=e311] [cursor=pointer]:
+                - img
+                - generic: Code block
+              - button "Embed" [ref=e312] [cursor=pointer]:
+                - img
+                - generic:
+                  - generic: Embed CTRL + SHIFT + K
+              - button "Upload image" [ref=e314]
+              - button "Upload image" [ref=e315] [cursor=pointer]:
+                - img
+                - generic: Upload image
+              - link "Upload Agent Session" [ref=e316] [cursor=pointer]:
+                - /url: /agent_sessions/new
+                - img [ref=e317]
+              - button "More options" [ref=e320] [cursor=pointer]:
+                - img
+            - textbox "Post Content" [ref=e323]:
+              - /placeholder: Write your post content here...
+        - generic [ref=e344]:
+          - heading "Tagging Guidelines" [level=4] [ref=e345]
+          - list [ref=e346]:
+            - listitem [ref=e347]: Tags help people find your post - think of them as the topics or categories that best describe your post.
+            - listitem [ref=e348]: Add up to four comma-separated tags per post. Use existing tags whenever possible.
+            - listitem [ref=e349]: Some tags have special posting guidelines - double check to make sure your post complies with them.
+        - generic [ref=e331]:
+          - button "Publish" [ref=e332] [cursor=pointer]
+          - button "Save draft" [ref=e333] [cursor=pointer]
+          - button "Advanced Post options" [ref=e334] [cursor=pointer]:
+            - img
+          - button "Revert new changes" [ref=e335] [cursor=pointer]
+    - button "Toggle AI Editor Helper" [ref=e279] [cursor=pointer]:
+      - generic: 🤖

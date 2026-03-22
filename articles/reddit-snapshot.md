@@ -1,0 +1,214 @@
+- generic [ref=e1]:
+  - link "Ir al contenido principal" [ref=e2] [cursor=pointer]:
+    - /url: "#main-content"
+    - generic [ref=e4]: Ir al contenido principal
+  - generic [ref=e6]:
+    - generic:
+      - generic [ref=e7]:
+        - generic: Ajustes - Perfil
+      - banner [ref=e10]:
+        - navigation [ref=e11]:
+          - generic [ref=e12]:
+            - button "Abrir menú" [ref=e16] [cursor=pointer]:
+              - img [ref=e19]
+              - generic [ref=e21]:
+                - generic: Abrir menú
+            - generic:
+              - generic:
+                - generic:
+                  - generic:
+                    - generic:
+                      - link "Principal":
+                        - /url: /
+          - search [ref=e33]:
+            - generic [ref=e35]:
+              - img [ref=e38]
+              - textbox "Preguntar" [ref=e41]:
+                - /placeholder: Encuentra lo que quieras
+              - separator [ref=e42]
+              - link "Preguntar" [ref=e46] [cursor=pointer]:
+                - /url: /answers/
+                - generic [ref=e47]:
+                  - img [ref=e49]
+                  - generic [ref=e51]: Preguntar
+          - generic [ref=e52]:
+            - generic [ref=e53]:
+              - button "Traducciones activadas" [ref=e61] [cursor=pointer]:
+                - img [ref=e64]
+              - button "Chat abierto" [ref=e71] [cursor=pointer]:
+                - img [ref=e74]
+                - generic [ref=e76]:
+                  - generic: Chat abierto
+              - link "Publicar" [ref=e81] [cursor=pointer]:
+                - /url: /submit
+                - generic [ref=e82]:
+                  - img [ref=e84]
+                  - generic [ref=e86]: Crear
+                - generic [ref=e87]:
+                  - generic: Publicar
+              - link "Abrir bandeja de entrada" [ref=e91] [cursor=pointer]:
+                - /url: /notifications
+                - img [ref=e94]
+                - generic [ref=e96]:
+                  - generic: Abrir bandeja de entrada
+            - button "Avatar de usuario Expandir menú de usuario" [ref=e101] [cursor=pointer]:
+              - img "Avatar de usuario" [ref=e109]
+              - generic [ref=e111]:
+                - generic: Expandir menú de usuario
+      - generic [ref=e115]:
+        - main [ref=e116]:
+          - generic [ref=e117]:
+            - heading "Ajustes" [level=1] [ref=e118]
+            - generic [ref=e123]:
+              - generic:
+                - link "Cuenta" [ref=e124] [cursor=pointer]:
+                  - /url: /settings/account
+                  - generic [ref=e127]: Cuenta
+                - link "Perfil" [ref=e128] [cursor=pointer]:
+                  - /url: /settings/profile
+                  - generic [ref=e131]: Perfil
+                - link "Privacidad" [ref=e132] [cursor=pointer]:
+                  - /url: /settings/privacy
+                  - generic [ref=e135]: Privacidad
+                - link "Preferencias" [ref=e136] [cursor=pointer]:
+                  - /url: /settings/preferences
+                  - generic [ref=e139]: Preferencias
+                - link "Notificaciones" [ref=e140] [cursor=pointer]:
+                  - /url: /settings/notifications
+                  - generic [ref=e143]: Notificaciones
+                - link "Correo electrónico" [ref=e144] [cursor=pointer]:
+                  - /url: /settings/emails
+                  - generic [ref=e147]: Correo electrónico
+            - generic [ref=e149]:
+              - heading "General" [level=2] [ref=e150]
+              - generic [ref=e153] [cursor=pointer]:
+                - generic [ref=e155]:
+                  - generic [ref=e156]: Nombre para mostrar
+                  - generic [ref=e157]: Si cambias tu nombre para mostrar, no modificarás tu nombre de usuario
+                - generic [ref=e160]:
+                  - generic [ref=e423]: ToolKit Online
+                  - 'button "Abrir modal para cambiar los ajustes: Nombre para mostrar" [ref=e161]':
+                    - img [ref=e164]
+              - generic [ref=e168] [cursor=pointer]:
+                - generic [ref=e171]: Acerca de la descripción
+                - 'button "Abrir modal para cambiar los ajustes: Acerca de la descripción" [ref=e175]':
+                  - img [ref=e178]
+              - generic [ref=e182] [cursor=pointer]:
+                - generic [ref=e184]:
+                  - generic [ref=e185]: Avatar
+                  - generic [ref=e186]: Edita tu avatar o sube una imagen
+                - 'button "Abrir modal para cambiar los ajustes: Avatar" [ref=e190]':
+                  - img [ref=e193]
+              - generic [ref=e197] [cursor=pointer]:
+                - generic [ref=e199]:
+                  - generic [ref=e200]: Banner
+                  - generic [ref=e201]: Subir una imagen de fondo de perfil
+                - 'button "Abrir modal para cambiar los ajustes: Banner" [ref=e205]':
+                  - img [ref=e208]
+              - generic [ref=e212] [cursor=pointer]:
+                - generic [ref=e215]: Enlaces a redes sociales
+                - 'button "Abrir modal para cambiar los ajustes: Enlaces a redes sociales" [ref=e219]':
+                  - img [ref=e222]
+              - generic [ref=e225] [cursor=pointer]:
+                - generic [ref=e227]:
+                  - generic [ref=e228]: Marcar como para adultos (18+)
+                  - generic [ref=e229]: Etiqueta tu perfil como 18+ y asegúrate de que no sea accesible a menores
+                - checkbox "Marcar como para adultos (18+)" [ref=e232]:
+                  - img [ref=e235]
+            - generic [ref=e237]:
+              - heading "Personalizar tu perfil" [level=2] [ref=e238]
+              - paragraph [ref=e239]: Gestiona el contenido que se muestra en tu perfil.
+              - generic [ref=e241]:
+                - generic [ref=e243] [cursor=pointer]:
+                  - generic [ref=e245]:
+                    - generic [ref=e246]: Contenido y actividad
+                    - generic [ref=e247]: Publicaciones, comentarios y comunidades en las que participas activamente
+                  - button "Contenido y actividad Publicaciones, comentarios y comunidades en las que participas activamente" [ref=e250]:
+                    - generic [ref=e252]: Mostrar todo
+                    - img [ref=e255]
+                - generic [ref=e257]:
+                  - button "Mostrar todo" [ref=e258]:
+                    - img [ref=e259]
+                    - generic [ref=e262]:
+                      - generic [ref=e263]: Mostrar todo
+                      - generic [ref=e264]: Muestra en tu perfil todas las publicaciones, comentarios y comunidades en las que participas activamente
+                    - radio [checked] [ref=e265] [cursor=pointer]:
+                      - img [ref=e266]
+                  - button "Personalizar" [ref=e269]:
+                    - img [ref=e270]
+                    - generic [ref=e272]:
+                      - generic [ref=e273]: Personalizar
+                      - generic [ref=e274]: Elige qué publicaciones, comentarios y comunidades en las que participas activamente se muestran en tu perfil
+                    - radio [ref=e275] [cursor=pointer]:
+                      - img [ref=e276]
+                  - button "Ocultar todo" [ref=e278]:
+                    - img [ref=e279]
+                    - generic [ref=e281]:
+                      - generic [ref=e282]: Ocultar todo
+                      - generic [ref=e283]: Oculta de tu perfil todas las publicaciones, comentarios y comunidades en las que participas activamente
+                    - radio [ref=e284] [cursor=pointer]:
+                      - img [ref=e285]
+              - generic [ref=e288] [cursor=pointer]:
+                - generic [ref=e290]:
+                  - generic [ref=e291]: 18+
+                  - generic [ref=e292]: Mostrar todas las publicaciones y comentarios 18+
+                - checkbox "18+" [checked] [ref=e295]:
+                  - img [ref=e298]
+              - generic [ref=e301] [cursor=pointer]:
+                - generic [ref=e303]:
+                  - generic [ref=e304]: Seguidores
+                  - generic [ref=e305]: Muestra tu recuento de seguidores
+                - checkbox "Seguidores" [ref=e308]:
+                  - img [ref=e311]
+              - generic [ref=e313]:
+                - link "La personalización de perfil" [ref=e314] [cursor=pointer]:
+                  - /url: https://support.reddithelp.com/hc/articles/360043471231
+                - text: solo se aplica a tu perfil, y tu contenido sigue siendo visible en las comunidades. Los moderadores de las comunidades en las que participas y los redditors con cuyas publicaciones de perfil interactúas pueden ver tu perfil completo si su labor de moderación así lo requiere.
+            - generic [ref=e316]:
+              - heading "Avanzado" [level=2] [ref=e317]
+              - link "Moderación de perfil" [ref=e318] [cursor=pointer]:
+                - /url: https://www.reddit.com/user/No-Worker-5959/about/edit/moderation
+                - generic [ref=e319]:
+                  - generic [ref=e322]: Moderación de perfil
+                  - img [ref=e326]
+            - generic "Ajustes - Perfil"
+        - generic [ref=e329]:
+          - link "Reglas de Reddit" [ref=e332] [cursor=pointer]:
+            - /url: https://www.redditinc.com/policies/content-policy
+          - link "Política de privacidad" [ref=e335] [cursor=pointer]:
+            - /url: https://www.reddit.com/policies/privacy-policy
+          - link "Acuerdo del usuario" [ref=e338] [cursor=pointer]:
+            - /url: https://www.redditinc.com/policies/user-agreement
+          - link "Accesibilidad" [ref=e341] [cursor=pointer]:
+            - /url: https://support.reddithelp.com/hc/sections/38303584022676-Accessibility
+          - generic [ref=e342]: •
+          - link "Reddit, Inc. © 2026. Todos los derechos reservados." [ref=e344] [cursor=pointer]:
+            - /url: https://redditinc.com
+      - dialog [ref=e463]:
+        - generic "Enlaces a redes sociales" [ref=e464]:
+          - generic [ref=e473]:
+            - generic:
+              - button "Cerrar cuadro de diálogo" [ref=e467] [cursor=pointer]:
+                - img [ref=e470]
+              - generic [ref=e474]:
+                - generic [ref=e476]: Enlaces a redes sociales
+                - generic [ref=e631]:
+                  - generic [ref=e636]:
+                    - generic:
+                      - generic:
+                        - generic: Texto a mostrar
+                      - text: "*"
+                    - textbox "Texto a mostrar" [ref=e637]: toolkitonline.vip
+                  - generic [ref=e643]:
+                    - generic:
+                      - generic:
+                        - generic: Personalizado URL
+                      - text: "*"
+                    - textbox "Personalizado URL" [ref=e644]:
+                      - /placeholder: https://website.com
+                      - text: https://toolkitonline.vip
+          - generic [ref=e622]:
+            - button "Cancelar" [ref=e623] [cursor=pointer]:
+              - generic [ref=e625]: Cancelar
+            - button "Guardar" [ref=e626] [cursor=pointer]:
+              - generic [ref=e628]: Guardar
