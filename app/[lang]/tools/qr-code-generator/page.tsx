@@ -1,5 +1,6 @@
 'use client';
 import { useState, useRef, useEffect, useCallback } from 'react';
+import QRCodeLib from 'qrcode';
 import { useParams } from 'next/navigation';
 import { tools, type Locale } from '@/lib/translations';
 import ToolPageWrapper from '@/components/ToolPageWrapper';
@@ -153,31 +154,19 @@ export default function QrCodeGenerator() {
 
   const modulePixelSize = sizePreset === 'small' ? 6 : sizePreset === 'large' ? 14 : 10;
 
-  const drawQR = useCallback(() => {
+  const drawQR = useCallback(async () => {
     if (!text.trim() || !canvasRef.current) return;
-    const canvas = canvasRef.current;
-    const ctx = canvas.getContext('2d');
-    if (!ctx) return;
-
-    const padding = 4;
-    const totalModules = qrSize + padding * 2;
-    canvas.width = totalModules * modulePixelSize;
-    canvas.height = totalModules * modulePixelSize;
-
-    ctx.fillStyle = bgColor;
-    ctx.fillRect(0, 0, canvas.width, canvas.height);
-
-    const matrix = generateQRMatrix(text, qrSize);
-
-    ctx.fillStyle = fgColor;
-    for (let r = 0; r < qrSize; r++) {
-      for (let c = 0; c < qrSize; c++) {
-        if (matrix[r][c]) {
-          ctx.fillRect((c + padding) * modulePixelSize, (r + padding) * modulePixelSize, modulePixelSize, modulePixelSize);
-        }
-      }
+    try {
+      await QRCodeLib.toCanvas(canvasRef.current, text, {
+        width: (qrSize + 8) * modulePixelSize,
+        margin: 4,
+        color: { dark: fgColor, light: bgColor },
+        errorCorrectionLevel: 'M',
+      });
+      setGenerated(true);
+    } catch {
+      setShowError(true);
     }
-    setGenerated(true);
   }, [text, qrSize, fgColor, bgColor, modulePixelSize]);
 
   useEffect(() => {

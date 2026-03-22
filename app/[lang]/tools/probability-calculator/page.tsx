@@ -56,7 +56,7 @@ export default function ProbabilityCalculator() {
   const computeSingle = () => {
     const f = parseFloat(favorable);
     const t = parseFloat(total);
-    if (!f || !t || t <= 0 || f < 0) return null;
+    if (isNaN(f) || isNaN(t) || t <= 0 || f < 0 || f > t) return null;
     const p = f / t;
     return { probability: p, formula: `P = ${f} / ${t}`, percentage: (p * 100).toFixed(2) };
   };
