@@ -25,35 +25,44 @@ ${hreflangs}
 function generateStaticSitemap(): string {
   const urls: string[] = [];
 
-  // Home pages
+  // Home pages — prioritize IT and EN
   for (const locale of locales) {
-    urls.push(buildUrl(`${BASE_URL}/${locale}`, 1.0,
-      Object.fromEntries(locales.map(l => [l, `${BASE_URL}/${l}`])), '2026-03-01'));
+    const priority = (locale === 'it' || locale === 'en') ? 1.0 : 0.5;
+    urls.push(buildUrl(`${BASE_URL}/${locale}`, priority,
+      Object.fromEntries(locales.map(l => [l, `${BASE_URL}/${l}`])), '2026-03-23'));
   }
 
-  // Tools listing
+  // Tools listing — prioritize IT and EN
   for (const locale of locales) {
-    urls.push(buildUrl(`${BASE_URL}/${locale}/tools`, 0.9,
-      Object.fromEntries(locales.map(l => [l, `${BASE_URL}/${l}/tools`])), '2026-03-15'));
+    const priority = (locale === 'it' || locale === 'en') ? 0.9 : 0.4;
+    urls.push(buildUrl(`${BASE_URL}/${locale}/tools`, priority,
+      Object.fromEntries(locales.map(l => [l, `${BASE_URL}/${l}/tools`])), '2026-03-23'));
   }
 
-  // Category hubs
+  // Category hubs — prioritize IT and EN
   for (const cat of categories) {
     for (const locale of locales) {
-      urls.push(buildUrl(`${BASE_URL}/${locale}/tools/category/${cat}`, 0.9,
-        Object.fromEntries(locales.map(l => [l, `${BASE_URL}/${l}/tools/category/${cat}`])), '2026-03-15'));
+      const priority = (locale === 'it' || locale === 'en') ? 0.9 : 0.4;
+      urls.push(buildUrl(`${BASE_URL}/${locale}/tools/category/${cat}`, priority,
+        Object.fromEntries(locales.map(l => [l, `${BASE_URL}/${l}/tools/category/${cat}`])), '2026-03-23'));
     }
   }
 
   // Static pages
   for (const page of ['about', 'contact', 'faq', 'privacy', 'terms']) {
     for (const locale of locales) {
-      urls.push(buildUrl(`${BASE_URL}/${locale}/${page}`, 0.6,
+      urls.push(buildUrl(`${BASE_URL}/${locale}/${page}`, 0.3,
         Object.fromEntries(locales.map(l => [l, `${BASE_URL}/${l}/${page}`])), '2026-03-01'));
     }
   }
 
   return urls.join('\n');
+}
+
+function getToolPriority(locale: string): number {
+  // Focus crawl budget on IT and EN pages first
+  if (locale === 'it' || locale === 'en') return 0.9;
+  return 0.3;
 }
 
 function generateCategorySitemap(category: string): string {
@@ -65,8 +74,9 @@ function generateCategorySitemap(category: string): string {
     for (const locale of locales) {
       urls.push(buildUrl(
         `${BASE_URL}/${locale}/tools/${tool}`,
-        locale === 'it' ? 0.8 : 0.6,
-        Object.fromEntries(locales.map(l => [l, `${BASE_URL}/${l}/tools/${tool}`]))
+        getToolPriority(locale),
+        Object.fromEntries(locales.map(l => [l, `${BASE_URL}/${l}/tools/${tool}`])),
+        '2026-03-23'
       ));
     }
   }

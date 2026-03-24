@@ -213,6 +213,25 @@ export default function ToolPageWrapper({ toolSlug, children, faqItems }: ToolPa
 
       <FeedbackWidget toolSlug={toolSlug} />
 
+      {/* SEO-friendly FAQ: uses native <details>/<summary> so answers are always in DOM
+          even when collapsed. Google fully indexes content inside <details> elements. */}
+      {faqItems && faqItems.length > 0 && (
+        <section className="mt-10 mb-8 max-w-2xl mx-auto" id="faq-seo">
+          <h2 className="text-2xl font-bold text-gray-900 mb-4">FAQ</h2>
+          <div className="space-y-2">
+            {faqItems.map((item, i) => (
+              <details key={i} className="border border-gray-200 rounded-lg group">
+                <summary className="w-full text-left px-4 py-3 font-medium text-gray-900 cursor-pointer list-none flex justify-between items-center [&::-webkit-details-marker]:hidden">
+                  {item.q}
+                  <span className="text-gray-400 group-open:hidden">+</span>
+                  <span className="text-gray-400 hidden group-open:inline">&minus;</span>
+                </summary>
+                <div className="px-4 pb-3 text-gray-600" dangerouslySetInnerHTML={{ __html: item.a }} />
+              </details>
+            ))}
+          </div>
+        </section>
+      )}
 
       <RelatedTools currentSlug={toolSlug} />
 

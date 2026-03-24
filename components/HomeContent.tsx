@@ -115,27 +115,45 @@ export default function HomeContent({ categories, toolsData, locale, common: t }
               />
             </div>
           </div>
+
+          {/* Category Quick Nav */}
+          <div className="mt-8 flex flex-wrap justify-center gap-2 sm:gap-3">
+            {Object.entries(categories).map(([catKey]) => (
+              <a
+                key={catKey}
+                href={`#cat-${catKey}`}
+                onClick={(e) => {
+                  e.preventDefault();
+                  setSearch('');
+                  const el = document.getElementById(`cat-${catKey}`);
+                  if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }}
+                className="flex items-center gap-1.5 bg-white/15 hover:bg-white/25 backdrop-blur-sm rounded-full px-4 py-2 text-sm font-medium text-white transition-colors"
+              >
+                <span>{categoryIcons[catKey] || '🔧'}</span>
+                <span>{t.categories[catKey] || catKey}</span>
+              </a>
+            ))}
+          </div>
         </div>
 
         {/* Stats Bar */}
-        <div className="relative z-10 mt-12 flex flex-wrap justify-center gap-4 sm:gap-8">
-          <div className="flex items-center gap-2 bg-white/15 backdrop-blur-sm rounded-full px-5 py-2.5">
-            <svg className="w-5 h-5 text-blue-200" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-              <path strokeLinecap="round" strokeLinejoin="round" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z" />
-            </svg>
-            <span className="font-semibold text-white text-sm">{t.statsTools}</span>
+        <div className="relative z-10 mt-10 grid grid-cols-2 sm:grid-cols-4 gap-4 max-w-2xl mx-auto">
+          <div className="text-center bg-white/15 backdrop-blur-sm rounded-xl px-4 py-3">
+            <div className="text-2xl sm:text-3xl font-extrabold text-white">143+</div>
+            <div className="text-xs sm:text-sm text-blue-200 font-medium mt-0.5">{t.statsTools}</div>
           </div>
-          <div className="flex items-center gap-2 bg-white/15 backdrop-blur-sm rounded-full px-5 py-2.5">
-            <svg className="w-5 h-5 text-blue-200" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-              <path strokeLinecap="round" strokeLinejoin="round" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-            </svg>
-            <span className="font-semibold text-white text-sm">{t.statsLanguages}</span>
+          <div className="text-center bg-white/15 backdrop-blur-sm rounded-xl px-4 py-3">
+            <div className="text-2xl sm:text-3xl font-extrabold text-white">6</div>
+            <div className="text-xs sm:text-sm text-blue-200 font-medium mt-0.5">{t.statsLanguages}</div>
           </div>
-          <div className="flex items-center gap-2 bg-white/15 backdrop-blur-sm rounded-full px-5 py-2.5">
-            <svg className="w-5 h-5 text-blue-200" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-              <path strokeLinecap="round" strokeLinejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-            </svg>
-            <span className="font-semibold text-white text-sm">{t.statsFree}</span>
+          <div className="text-center bg-white/15 backdrop-blur-sm rounded-xl px-4 py-3">
+            <div className="text-2xl sm:text-3xl font-extrabold text-white">900+</div>
+            <div className="text-xs sm:text-sm text-blue-200 font-medium mt-0.5">Pages</div>
+          </div>
+          <div className="text-center bg-white/15 backdrop-blur-sm rounded-xl px-4 py-3">
+            <div className="text-2xl sm:text-3xl font-extrabold text-white">100%</div>
+            <div className="text-xs sm:text-sm text-blue-200 font-medium mt-0.5">{t.statsFree}</div>
           </div>
         </div>
       </section>
@@ -188,7 +206,7 @@ export default function HomeContent({ categories, toolsData, locale, common: t }
               className="my-6"
             />
           )}
-          <section className="mb-12">
+          <section id={`cat-${catKey}`} className="mb-12 scroll-mt-4">
             <div className="flex items-center gap-3 mb-5">
               <span className="text-2xl">{categoryIcons[catKey] || '🔧'}</span>
               <h2 className="text-2xl font-bold text-gray-800">

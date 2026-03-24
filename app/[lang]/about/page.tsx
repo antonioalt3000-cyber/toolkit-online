@@ -1,248 +1,580 @@
 'use client';
 import { useParams } from 'next/navigation';
+import Link from 'next/link';
 import { type Locale } from '@/lib/translations';
 
-const content: Record<Locale, { title: string; sections: { heading: string; body: string }[] }> = {
+/* ------------------------------------------------------------------ */
+/*  Translations — all 6 languages, E-E-A-T optimized content         */
+/* ------------------------------------------------------------------ */
+
+interface AboutTranslation {
+  title: string;
+  subtitle: string;
+  stats: { label: string; value: string }[];
+  sections: {
+    id: string;
+    heading: string;
+    paragraphs: string[];
+  }[];
+  categoryLinks: { label: string; href: string }[];
+  contactCta: string;
+  contactEmail: string;
+}
+
+const translations: Record<Locale, AboutTranslation> = {
   en: {
     title: 'About ToolKit Online',
+    subtitle: 'Free, privacy-first online tools trusted by thousands of users worldwide.',
+    stats: [
+      { label: 'Free Tools', value: '143+' },
+      { label: 'Languages', value: '6' },
+      { label: 'Pages', value: '900+' },
+      { label: 'Cost', value: '100% Free' },
+    ],
     sections: [
       {
+        id: 'who-we-are',
+        heading: 'Who We Are',
+        paragraphs: [
+          'ToolKit Online is an independent web platform founded in 2024 with one clear purpose: to provide high-quality, free digital tools that anyone can use without barriers. We are a team of developers, designers, and productivity enthusiasts who believe that essential utilities — from financial calculators to image editors — should be accessible to everyone, regardless of budget or technical skill.',
+          'Our project started as a personal initiative to solve everyday problems quickly and efficiently. What began as a small collection of calculators and converters has grown into a comprehensive platform with over 143 tools spanning seven categories, serving thousands of users across six languages. Every tool we build is shaped by real user feedback, making ToolKit Online a truly community-driven resource that evolves to meet the needs of students, professionals, developers, and small business owners around the world.',
+          'We operate from the European Union and are committed to full compliance with the GDPR and all applicable privacy regulations. Our team brings years of experience in web development, user experience design, and search engine optimization, ensuring that every tool is not only functional but also fast, intuitive, and easy to find.',
+        ],
+      },
+      {
+        id: 'our-mission',
         heading: 'Our Mission',
-        body: 'ToolKit Online was born from a simple but powerful belief: essential digital tools should be free and accessible to everyone, everywhere. We are passionate about removing barriers to productivity, whether you are a student calculating a GPA, a developer formatting JSON, or a small business owner generating invoices. Our mission is to empower people with high-quality utilities that require no downloads, no sign-ups, and no hidden fees. We believe the internet should make life easier, and every tool we build reflects that commitment to simplicity and accessibility.',
+        paragraphs: [
+          'Our mission is simple: empower people with free, reliable, and privacy-respecting online tools. We believe the internet should make life easier, not harder. Too many utility websites are cluttered with intrusive ads, hidden paywalls, or require unnecessary sign-ups before you can use a basic calculator or converter.',
+          'ToolKit Online takes a different approach. Every one of our 143+ tools is completely free, requires no registration, and processes your data entirely in your browser. There are no premium tiers, no trial periods, and no feature locks. Whether you need to calculate a mortgage payment, format JSON code, compress an image, or convert units, you can do it instantly without obstacles. We sustain our platform through non-intrusive advertising that respects your browsing experience, so you can focus on what matters: getting things done.',
+        ],
       },
       {
-        heading: 'What We Offer',
-        body: 'ToolKit Online provides a comprehensive suite of over 143 free online tools organized across seven carefully curated categories: Finance (loan calculators, investment tools, invoice generators), Text (word counters, markdown preview, text-to-speech), Health (BMI calculator, calorie tracker, sleep calculator), Conversion (unit converter, CSV to JSON, PDF tools), Developer (JSON formatter, regex tester, QR code generator), Math (scientific calculator, chart maker, probability tools), and Images (photo editor, image compressor, background remover). Each tool is designed with a clean, intuitive interface so you can get results in seconds without any learning curve. We continuously expand our collection based on user feedback and emerging needs, adding new tools every month to ensure we cover the utilities you rely on most.',
+        id: 'why-143-tools',
+        heading: 'Why 143+ Free Tools',
+        paragraphs: [
+          'We designed ToolKit Online as a one-stop destination for the utilities people use most. Instead of bookmarking dozens of different websites for different tasks, you can find everything you need in one place. Our tools are organized into seven carefully curated categories:',
+          'Finance — VAT calculators, loan calculators, mortgage tools, invoice generators, investment calculators, and more. Text — Word counters, markdown preview, grammar checkers, text-to-speech, resume builders, and note-taking tools. Health — BMI calculators, calorie trackers, sleep calculators, pace calculators, and breathing exercises. Conversion — Unit converters, PDF tools, image-to-text, CSV to JSON, and encoding/decoding utilities. Developer — JSON formatters, regex testers, color pickers, QR code generators, hash generators, and speed tests. Math — Scientific calculators, chart makers, probability tools, grade calculators, and matrix operations. Images — Photo editors, image compressors, background removers, meme generators, and pixel art makers.',
+          'Each tool is designed to solve a specific problem quickly and efficiently. We continuously expand our collection based on user requests, search data, and emerging needs, adding new tools every month to keep ToolKit Online relevant and comprehensive.',
+        ],
       },
       {
-        heading: 'Our Story',
-        body: 'ToolKit Online started in 2024 as a small project with just a handful of calculators and converters. What began as a personal endeavor to solve everyday problems quickly grew into something much bigger. As users discovered our tools and shared them with friends and colleagues, we realized there was a massive demand for reliable, ad-light, free utilities on the web. Driven by community feedback and a passion for building useful software, we expanded rapidly from a dozen tools to over 143, spanning seven distinct categories. Every feature we have added has been shaped by real user requests, making ToolKit Online a truly community-driven platform that evolves with the needs of its users.',
+        id: 'technology',
+        heading: 'Our Technology Stack',
+        paragraphs: [
+          'ToolKit Online is built with modern, battle-tested web technologies to deliver the fastest and most reliable experience possible. Our platform runs on Next.js and React, leveraging server-side rendering and static generation for lightning-fast page loads and excellent search engine optimization. The entire frontend is developed with TypeScript for type safety and Tailwind CSS for a responsive design that works flawlessly on every device, from smartphones to ultra-wide desktop monitors.',
+          'Every tool processes data entirely client-side, meaning your information never leaves your browser and never touches our servers. This architecture eliminates server round-trips, delivers instant results, and provides an inherent layer of privacy protection. We deploy on Vercel with global CDN distribution, ensuring fast load times from any location in the world. Our Progressive Web App (PWA) support allows you to install ToolKit Online on your device for offline access to your favorite tools.',
+          'Performance is a core priority. We optimize every page for Core Web Vitals, implement lazy loading for heavy components, and minimize JavaScript bundles to ensure the fastest possible experience even on slower connections. Our infrastructure is designed to scale effortlessly, handling traffic spikes without degradation.',
+        ],
       },
       {
-        heading: 'Privacy & Security',
-        body: 'Your privacy is at the core of everything we do. All ToolKit Online tools process data entirely client-side, meaning your information never leaves your browser. We do not collect, store, or transmit any personal data you enter into our tools — whether it is financial figures, health metrics, or personal text. Our site is fully compliant with GDPR and international privacy regulations. The only analytics we use are anonymous, aggregated usage statistics through Google Analytics, solely to help us understand which tools are most popular and where we can improve. You can use every tool with complete confidence that your data remains yours and yours alone.',
+        id: 'privacy',
+        heading: 'Privacy & Trust',
+        paragraphs: [
+          'Privacy is not an afterthought at ToolKit Online — it is a foundational principle. All of our tools run entirely in your browser. The data you enter into any calculator, converter, or editor is processed locally on your device and is never sent to our servers. We do not collect, store, or have access to any personal data you use within our tools.',
+          'We are fully compliant with the EU General Data Protection Regulation (GDPR) and implement Google Consent Mode v2. Analytics and advertising cookies are only activated after your explicit opt-in through our cookie consent banner. You can manage your preferences at any time via the Cookie Settings link in the footer. We use HTTPS encryption for all connections and follow security best practices throughout our infrastructure.',
+          'Our commitment to transparency means we clearly explain what data we collect (only anonymous, aggregated usage statistics for improving our service) and what we do not collect (any personal data from tool usage). We believe trust is earned through actions, not words, and our privacy-first architecture demonstrates that commitment every time you use one of our tools.',
+        ],
       },
       {
-        heading: 'Our Technology',
-        body: 'ToolKit Online is built with cutting-edge web technologies to deliver the fastest, most reliable experience possible. Our platform runs on Next.js and React, leveraging server-side rendering for lightning-fast page loads and optimal SEO. The entire frontend is crafted with TypeScript for type safety and Tailwind CSS for a responsive, modern design that looks great on any device — from smartphones to ultra-wide monitors. Every tool is optimized for performance, with client-side processing that eliminates server round-trips and delivers instant results. We deploy on Vercel for global CDN distribution, ensuring fast load times no matter where you are in the world.',
-      },
-      {
-        heading: 'Always Free',
-        body: 'ToolKit Online is completely free to use, and it always will be. There are no paywalls, no premium tiers, no trial periods, and no hidden costs. We sustain our platform through non-intrusive advertising that respects your browsing experience. We made a deliberate choice to keep every single tool accessible to everyone, because we believe useful software should not be locked behind a subscription. Whether you use one tool or all 143, you will never be asked to pay a cent.',
-      },
-      {
-        heading: 'Available Worldwide',
-        body: 'We believe great tools should speak your language. ToolKit Online is fully available in six languages: English, Italian, Spanish, French, German, and Portuguese, covering billions of potential users across the globe. Every tool, every description, and every interface element is carefully translated to provide a native experience in each language. Our global infrastructure ensures fast load times from any location, and we are always exploring the addition of more languages based on user demand. No matter where you are, ToolKit Online is designed to feel like it was built just for you.',
-      },
-      {
-        heading: 'Get in Touch',
-        body: 'We love hearing from our users and your feedback directly shapes the future of ToolKit Online. Whether you have a suggestion for a new tool, want to report a bug, have a question about how something works, or simply want to share your experience, we are always happy to listen. Reach out to us at info@toolkitonline.vip and we will get back to you as quickly as possible. Your ideas have already helped us grow from a small project to a platform with over 143 tools, and we cannot wait to hear what you think we should build next.',
+        id: 'contact',
+        heading: 'Contact Us',
+        paragraphs: [
+          'We love hearing from our users — your feedback directly shapes the future of ToolKit Online. Whether you have a suggestion for a new tool, want to report an issue, have a question about functionality, or simply want to share your experience, we are always happy to listen.',
+          'Your ideas have already helped us grow from a small personal project to a platform with over 143 tools and 900+ pages in six languages. We review every message and strive to respond as quickly as possible. If you have a tool request, there is a good chance it will make it into our development roadmap.',
+        ],
       },
     ],
+    categoryLinks: [
+      { label: 'Finance Tools', href: '/#finance' },
+      { label: 'Text Tools', href: '/#text' },
+      { label: 'Health Tools', href: '/#health' },
+      { label: 'Developer Tools', href: '/#dev' },
+      { label: 'Math Tools', href: '/#math' },
+      { label: 'Conversion Tools', href: '/#conversion' },
+      { label: 'Image Tools', href: '/#images' },
+    ],
+    contactCta: 'Send us an email at',
+    contactEmail: 'info@toolkitonline.vip',
   },
+
   it: {
     title: 'Chi Siamo — ToolKit Online',
+    subtitle: 'Strumenti online gratuiti e orientati alla privacy, usati da migliaia di utenti in tutto il mondo.',
+    stats: [
+      { label: 'Strumenti Gratuiti', value: '143+' },
+      { label: 'Lingue', value: '6' },
+      { label: 'Pagine', value: '900+' },
+      { label: 'Costo', value: '100% Gratis' },
+    ],
     sections: [
       {
+        id: 'who-we-are',
+        heading: 'Chi Siamo',
+        paragraphs: [
+          'ToolKit Online e una piattaforma web indipendente fondata nel 2024 con uno scopo chiaro: fornire strumenti digitali gratuiti e di alta qualita che chiunque possa utilizzare senza barriere. Siamo un team di sviluppatori, designer e appassionati di produttivita che credono che le utility essenziali — dai calcolatori finanziari agli editor di immagini — debbano essere accessibili a tutti, indipendentemente dal budget o dalle competenze tecniche.',
+          'Il nostro progetto e iniziato come un\'iniziativa personale per risolvere problemi quotidiani in modo rapido ed efficiente. Quella che era una piccola collezione di calcolatori e convertitori e diventata una piattaforma completa con oltre 143 strumenti in sette categorie, che serve migliaia di utenti in sei lingue. Ogni strumento che costruiamo e plasmato dal feedback reale degli utenti, rendendo ToolKit Online una risorsa veramente guidata dalla community che si evolve per soddisfare le esigenze di studenti, professionisti, sviluppatori e piccoli imprenditori in tutto il mondo.',
+          'Operiamo dall\'Unione Europea e siamo impegnati nella piena conformita al GDPR e a tutte le normative sulla privacy applicabili. Il nostro team porta anni di esperienza nello sviluppo web, nel design dell\'esperienza utente e nell\'ottimizzazione per i motori di ricerca, assicurando che ogni strumento sia non solo funzionale ma anche veloce, intuitivo e facile da trovare.',
+        ],
+      },
+      {
+        id: 'our-mission',
         heading: 'La Nostra Missione',
-        body: 'ToolKit Online nasce da una convinzione semplice ma potente: gli strumenti digitali essenziali devono essere gratuiti e accessibili a tutti, ovunque. Siamo appassionati nel rimuovere le barriere alla produttività, che tu sia uno studente che calcola la media, uno sviluppatore che formatta JSON o un piccolo imprenditore che genera fatture. La nostra missione è dare alle persone utilità di alta qualità che non richiedono download, registrazioni o costi nascosti. Crediamo che internet debba rendere la vita più semplice, e ogni strumento che costruiamo riflette questo impegno verso la semplicità e l\'accessibilità.',
+        paragraphs: [
+          'La nostra missione e semplice: dare alle persone strumenti online gratuiti, affidabili e rispettosi della privacy. Crediamo che internet debba rendere la vita piu semplice, non piu complicata. Troppi siti di utility sono pieni di pubblicita invasive, paywall nascosti o richiedono registrazioni inutili prima di poter usare un semplice calcolatore o convertitore.',
+          'ToolKit Online adotta un approccio diverso. Ognuno dei nostri 143+ strumenti e completamente gratuito, non richiede registrazione e elabora i tuoi dati interamente nel tuo browser. Non ci sono livelli premium, periodi di prova o funzionalita bloccate. Che tu debba calcolare una rata del mutuo, formattare codice JSON, comprimere un\'immagine o convertire unita di misura, puoi farlo istantaneamente senza ostacoli. Sosteniamo la nostra piattaforma attraverso pubblicita non invasiva che rispetta la tua esperienza di navigazione, cosi puoi concentrarti su cio che conta: portare a termine le cose.',
+        ],
       },
       {
-        heading: 'Cosa Offriamo',
-        body: 'ToolKit Online offre una suite completa di oltre 143 strumenti online gratuiti organizzati in sette categorie curate: Finanza (calcolatori di prestiti, strumenti di investimento, generatori di fatture), Testo (contatore di parole, anteprima markdown, text-to-speech), Salute (calcolatore BMI, contatore calorie, calcolatore del sonno), Conversione (convertitore di unità, CSV in JSON, strumenti PDF), Sviluppatore (formattatore JSON, tester regex, generatore codici QR), Matematica (calcolatrice scientifica, creatore grafici, strumenti di probabilità) e Immagini (editor foto, compressore immagini, rimozione sfondo). Ogni strumento è progettato con un\'interfaccia pulita e intuitiva per ottenere risultati in pochi secondi. Espandiamo continuamente la nostra collezione sulla base del feedback degli utenti, aggiungendo nuovi strumenti ogni mese.',
+        id: 'why-143-tools',
+        heading: 'Perche oltre 143 Strumenti Gratuiti',
+        paragraphs: [
+          'Abbiamo progettato ToolKit Online come destinazione unica per le utility piu utilizzate. Invece di salvare decine di siti web diversi per compiti diversi, puoi trovare tutto cio di cui hai bisogno in un unico posto. I nostri strumenti sono organizzati in sette categorie accuratamente curate:',
+          'Finanza — Calcolatori IVA, calcolatori di prestiti, strumenti per mutui, generatori di fatture, calcolatori di investimenti e altro. Testo — Contatori di parole, anteprima markdown, correttori grammaticali, text-to-speech, creatori di curriculum e strumenti per appunti. Salute — Calcolatori BMI, tracker di calorie, calcolatori del sonno, calcolatori del passo e esercizi di respirazione. Conversione — Convertitori di unita, strumenti PDF, immagine-in-testo, CSV in JSON e utility di codifica/decodifica. Sviluppatore — Formattatori JSON, tester regex, selettori di colore, generatori di codici QR, generatori di hash e speed test. Matematica — Calcolatrici scientifiche, creatori di grafici, strumenti di probabilita, calcolatori di voti e operazioni con matrici. Immagini — Editor fotografici, compressori di immagini, rimozione sfondo, generatori di meme e creatori di pixel art.',
+          'Ogni strumento e progettato per risolvere un problema specifico in modo rapido ed efficiente. Espandiamo continuamente la nostra collezione basandoci sulle richieste degli utenti, i dati di ricerca e le esigenze emergenti, aggiungendo nuovi strumenti ogni mese per mantenere ToolKit Online rilevante e completo.',
+        ],
       },
       {
-        heading: 'La Nostra Storia',
-        body: 'ToolKit Online è nato nel 2024 come un piccolo progetto con pochi calcolatori e convertitori. Quello che era iniziato come un progetto personale per risolvere problemi quotidiani è cresciuto rapidamente in qualcosa di molto più grande. Man mano che gli utenti scoprivano i nostri strumenti e li condividevano con amici e colleghi, ci siamo resi conto dell\'enorme domanda di utilità gratuite, affidabili e leggere sul web. Guidati dal feedback della community e dalla passione per il software utile, siamo cresciuti rapidamente da una dozzina di strumenti a oltre 143, coprendo sette categorie distinte. Ogni funzionalità aggiunta è stata plasmata da richieste reali degli utenti, rendendo ToolKit Online una piattaforma veramente guidata dalla community.',
+        id: 'technology',
+        heading: 'Il Nostro Stack Tecnologico',
+        paragraphs: [
+          'ToolKit Online e costruito con tecnologie web moderne e collaudate per offrire l\'esperienza piu veloce e affidabile possibile. La nostra piattaforma funziona su Next.js e React, sfruttando il rendering lato server e la generazione statica per caricamenti ultra-rapidi e un\'eccellente ottimizzazione per i motori di ricerca. L\'intero frontend e sviluppato con TypeScript per la sicurezza dei tipi e Tailwind CSS per un design responsivo che funziona perfettamente su qualsiasi dispositivo, dagli smartphone ai monitor desktop ultra-wide.',
+          'Ogni strumento elabora i dati interamente lato client, il che significa che le tue informazioni non lasciano mai il tuo browser e non toccano mai i nostri server. Questa architettura elimina i round-trip con il server, fornisce risultati istantanei e offre un livello intrinseco di protezione della privacy. Deployiamo su Vercel con distribuzione CDN globale, garantendo tempi di caricamento rapidi da qualsiasi posizione nel mondo. Il supporto Progressive Web App (PWA) ti permette di installare ToolKit Online sul tuo dispositivo per l\'accesso offline ai tuoi strumenti preferiti.',
+          'Le prestazioni sono una priorita fondamentale. Ottimizziamo ogni pagina per i Core Web Vitals, implementiamo il lazy loading per i componenti pesanti e minimizziamo i bundle JavaScript per garantire l\'esperienza piu veloce possibile anche su connessioni piu lente. La nostra infrastruttura e progettata per scalare senza sforzo, gestendo picchi di traffico senza degradazioni.',
+        ],
       },
       {
-        heading: 'Privacy e Sicurezza',
-        body: 'La tua privacy è al centro di tutto ciò che facciamo. Tutti gli strumenti di ToolKit Online elaborano i dati interamente lato client, il che significa che le tue informazioni non lasciano mai il tuo browser. Non raccogliamo, memorizziamo o trasmettiamo alcun dato personale che inserisci nei nostri strumenti — che si tratti di dati finanziari, metriche sulla salute o testi personali. Il nostro sito è pienamente conforme al GDPR e alle normative internazionali sulla privacy. Le uniche analytics che utilizziamo sono statistiche di utilizzo anonime e aggregate tramite Google Analytics, esclusivamente per capire quali strumenti sono più popolari e dove possiamo migliorare. Puoi utilizzare ogni strumento con la completa certezza che i tuoi dati restano solo tuoi.',
+        id: 'privacy',
+        heading: 'Privacy e Fiducia',
+        paragraphs: [
+          'La privacy non e un ripensamento su ToolKit Online — e un principio fondamentale. Tutti i nostri strumenti funzionano interamente nel tuo browser. I dati che inserisci in qualsiasi calcolatore, convertitore o editor vengono elaborati localmente sul tuo dispositivo e non vengono mai inviati ai nostri server. Non raccogliamo, memorizziamo o abbiamo accesso ad alcun dato personale che utilizzi nei nostri strumenti.',
+          'Siamo pienamente conformi al Regolamento Generale sulla Protezione dei Dati (GDPR) dell\'UE e implementiamo Google Consent Mode v2. I cookie di analytics e pubblicita vengono attivati solo dopo il tuo consenso esplicito tramite il nostro banner dei cookie. Puoi gestire le tue preferenze in qualsiasi momento tramite il link Impostazioni Cookie nel footer. Utilizziamo la crittografia HTTPS per tutte le connessioni e seguiamo le best practice di sicurezza in tutta la nostra infrastruttura.',
+          'Il nostro impegno per la trasparenza significa che spieghiamo chiaramente quali dati raccogliamo (solo statistiche di utilizzo anonime e aggregate per migliorare il nostro servizio) e quali non raccogliamo (nessun dato personale dall\'uso degli strumenti). Crediamo che la fiducia si guadagni con i fatti, non con le parole, e la nostra architettura privacy-first dimostra questo impegno ogni volta che usi uno dei nostri strumenti.',
+        ],
       },
       {
-        heading: 'La Nostra Tecnologia',
-        body: 'ToolKit Online è costruito con tecnologie web all\'avanguardia per offrire l\'esperienza più veloce e affidabile possibile. La nostra piattaforma funziona su Next.js e React, sfruttando il rendering lato server per caricamenti ultra-rapidi e SEO ottimale. L\'intero frontend è sviluppato con TypeScript per la sicurezza dei tipi e Tailwind CSS per un design responsivo e moderno che appare perfetto su qualsiasi dispositivo — dagli smartphone ai monitor ultra-wide. Ogni strumento è ottimizzato per le prestazioni, con elaborazione lato client che elimina i round-trip al server e fornisce risultati istantanei. Deployamo su Vercel per la distribuzione CDN globale, garantendo tempi di caricamento rapidi ovunque tu sia nel mondo.',
-      },
-      {
-        heading: 'Sempre Gratuito',
-        body: 'ToolKit Online è completamente gratuito e lo sarà sempre. Non ci sono paywall, livelli premium, periodi di prova o costi nascosti. Sosteniamo la nostra piattaforma attraverso pubblicità non invasiva che rispetta la tua esperienza di navigazione. Abbiamo fatto la scelta deliberata di mantenere ogni singolo strumento accessibile a tutti, perché crediamo che il software utile non debba essere bloccato dietro un abbonamento. Che tu usi uno strumento o tutti e 143, non ti verrà mai chiesto di pagare un centesimo.',
-      },
-      {
-        heading: 'Disponibile in Tutto il Mondo',
-        body: 'Crediamo che i grandi strumenti debbano parlare la tua lingua. ToolKit Online è completamente disponibile in sei lingue: inglese, italiano, spagnolo, francese, tedesco e portoghese, coprendo miliardi di potenziali utenti in tutto il mondo. Ogni strumento, ogni descrizione e ogni elemento dell\'interfaccia è accuratamente tradotto per offrire un\'esperienza nativa in ogni lingua. La nostra infrastruttura globale garantisce tempi di caricamento rapidi da qualsiasi posizione, e stiamo sempre valutando l\'aggiunta di altre lingue in base alla domanda degli utenti. Ovunque tu sia, ToolKit Online è progettato per sembrare fatto su misura per te.',
-      },
-      {
+        id: 'contact',
         heading: 'Contattaci',
-        body: 'Amiamo ascoltare i nostri utenti e il vostro feedback plasma direttamente il futuro di ToolKit Online. Che tu abbia un suggerimento per un nuovo strumento, voglia segnalare un bug, abbia una domanda su come funziona qualcosa o semplicemente voglia condividere la tua esperienza, siamo sempre felici di ascoltarti. Scrivici a info@toolkitonline.vip e ti risponderemo il prima possibile. Le vostre idee ci hanno già aiutato a crescere da un piccolo progetto a una piattaforma con oltre 143 strumenti, e non vediamo l\'ora di scoprire cosa pensate dovremmo costruire dopo.',
+        paragraphs: [
+          'Amiamo ascoltare i nostri utenti — il vostro feedback plasma direttamente il futuro di ToolKit Online. Che tu abbia un suggerimento per un nuovo strumento, voglia segnalare un problema, abbia una domanda sulle funzionalita o semplicemente voglia condividere la tua esperienza, siamo sempre felici di ascoltarti.',
+          'Le vostre idee ci hanno gia aiutato a crescere da un piccolo progetto personale a una piattaforma con oltre 143 strumenti e 900+ pagine in sei lingue. Esaminiamo ogni messaggio e ci impegniamo a rispondere il piu rapidamente possibile. Se hai una richiesta per un nuovo strumento, ci sono buone probabilita che entri nella nostra roadmap di sviluppo.',
+        ],
       },
     ],
+    categoryLinks: [
+      { label: 'Strumenti Finanza', href: '/#finance' },
+      { label: 'Strumenti Testo', href: '/#text' },
+      { label: 'Strumenti Salute', href: '/#health' },
+      { label: 'Strumenti Sviluppatore', href: '/#dev' },
+      { label: 'Strumenti Matematica', href: '/#math' },
+      { label: 'Strumenti Conversione', href: '/#conversion' },
+      { label: 'Strumenti Immagini', href: '/#images' },
+    ],
+    contactCta: 'Scrivici a',
+    contactEmail: 'info@toolkitonline.vip',
   },
+
   es: {
     title: 'Acerca de ToolKit Online',
+    subtitle: 'Herramientas online gratuitas y enfocadas en la privacidad, utilizadas por miles de usuarios en todo el mundo.',
+    stats: [
+      { label: 'Herramientas Gratis', value: '143+' },
+      { label: 'Idiomas', value: '6' },
+      { label: 'Paginas', value: '900+' },
+      { label: 'Coste', value: '100% Gratis' },
+    ],
     sections: [
       {
-        heading: 'Nuestra Misión',
-        body: 'ToolKit Online nació de una creencia simple pero poderosa: las herramientas digitales esenciales deben ser gratuitas y accesibles para todos, en todas partes. Nos apasiona eliminar las barreras a la productividad, ya seas un estudiante calculando promedios, un desarrollador formateando JSON o un pequeño empresario generando facturas. Nuestra misión es empoderar a las personas con utilidades de alta calidad que no requieren descargas, registros ni costos ocultos. Creemos que internet debe facilitar la vida, y cada herramienta que construimos refleja ese compromiso con la simplicidad y la accesibilidad.',
+        id: 'who-we-are',
+        heading: 'Quienes Somos',
+        paragraphs: [
+          'ToolKit Online es una plataforma web independiente fundada en 2024 con un proposito claro: proporcionar herramientas digitales gratuitas y de alta calidad que cualquiera pueda usar sin barreras. Somos un equipo de desarrolladores, disenadores y entusiastas de la productividad que creen que las utilidades esenciales — desde calculadoras financieras hasta editores de imagenes — deben ser accesibles para todos, independientemente del presupuesto o la habilidad tecnica.',
+          'Nuestro proyecto comenzo como una iniciativa personal para resolver problemas cotidianos de manera rapida y eficiente. Lo que empezo como una pequena coleccion de calculadoras y conversores se ha convertido en una plataforma integral con mas de 143 herramientas en siete categorias, sirviendo a miles de usuarios en seis idiomas. Cada herramienta que construimos esta moldeada por comentarios reales de usuarios, haciendo de ToolKit Online un recurso verdaderamente impulsado por la comunidad que evoluciona para satisfacer las necesidades de estudiantes, profesionales, desarrolladores y pequenos empresarios de todo el mundo.',
+          'Operamos desde la Union Europea y estamos comprometidos con el pleno cumplimiento del RGPD y todas las regulaciones de privacidad aplicables. Nuestro equipo aporta anos de experiencia en desarrollo web, diseno de experiencia de usuario y optimizacion para motores de busqueda, asegurando que cada herramienta sea no solo funcional sino tambien rapida, intuitiva y facil de encontrar.',
+        ],
       },
       {
-        heading: 'Lo que Ofrecemos',
-        body: 'ToolKit Online proporciona un conjunto completo de más de 143 herramientas online gratuitas organizadas en siete categorías cuidadosamente curadas: Finanzas (calculadoras de préstamos, herramientas de inversión, generadores de facturas), Texto (contador de palabras, vista previa markdown, texto a voz), Salud (calculadora de IMC, contador de calorías, calculadora de sueño), Conversión (convertidor de unidades, CSV a JSON, herramientas PDF), Desarrollador (formateador JSON, tester de regex, generador de códigos QR), Matemáticas (calculadora científica, creador de gráficos, herramientas de probabilidad) e Imágenes (editor de fotos, compresor de imágenes, eliminador de fondos). Cada herramienta está diseñada con una interfaz limpia e intuitiva para que obtengas resultados en segundos. Expandimos continuamente nuestra colección basándonos en los comentarios de los usuarios, añadiendo nuevas herramientas cada mes.',
+        id: 'our-mission',
+        heading: 'Nuestra Mision',
+        paragraphs: [
+          'Nuestra mision es simple: empoderar a las personas con herramientas online gratuitas, confiables y respetuosas con la privacidad. Creemos que internet debe facilitar la vida, no complicarla. Demasiados sitios web de utilidades estan llenos de anuncios intrusivos, muros de pago ocultos o requieren registros innecesarios antes de poder usar una simple calculadora o conversor.',
+          'ToolKit Online adopta un enfoque diferente. Cada una de nuestras 143+ herramientas es completamente gratuita, no requiere registro y procesa tus datos completamente en tu navegador. No hay niveles premium, periodos de prueba ni funciones bloqueadas. Ya necesites calcular una cuota hipotecaria, formatear codigo JSON, comprimir una imagen o convertir unidades, puedes hacerlo instantaneamente sin obstaculos. Sostenemos nuestra plataforma a traves de publicidad no intrusiva que respeta tu experiencia de navegacion, para que puedas concentrarte en lo que importa: hacer las cosas.',
+        ],
       },
       {
-        heading: 'Nuestra Historia',
-        body: 'ToolKit Online comenzó en 2024 como un pequeño proyecto con solo un puñado de calculadoras y convertidores. Lo que empezó como un proyecto personal para resolver problemas cotidianos creció rápidamente en algo mucho más grande. A medida que los usuarios descubrían nuestras herramientas y las compartían con amigos y colegas, nos dimos cuenta de la enorme demanda de utilidades gratuitas, confiables y ligeras en la web. Impulsados por los comentarios de la comunidad y la pasión por construir software útil, crecimos rápidamente de una docena de herramientas a más de 143, abarcando siete categorías distintas. Cada función que hemos añadido ha sido moldeada por solicitudes reales de usuarios, haciendo de ToolKit Online una plataforma verdaderamente impulsada por la comunidad.',
+        id: 'why-143-tools',
+        heading: 'Por que mas de 143 Herramientas Gratuitas',
+        paragraphs: [
+          'Disenamos ToolKit Online como un destino unico para las utilidades que las personas mas utilizan. En lugar de guardar docenas de sitios web diferentes para distintas tareas, puedes encontrar todo lo que necesitas en un solo lugar. Nuestras herramientas estan organizadas en siete categorias cuidadosamente curadas:',
+          'Finanzas — Calculadoras de IVA, calculadoras de prestamos, herramientas hipotecarias, generadores de facturas, calculadoras de inversion y mas. Texto — Contadores de palabras, vista previa de markdown, correctores gramaticales, texto a voz, creadores de curriculum y herramientas de notas. Salud — Calculadoras de IMC, rastreadores de calorias, calculadoras de sueno, calculadoras de ritmo y ejercicios de respiracion. Conversion — Conversores de unidades, herramientas PDF, imagen a texto, CSV a JSON y utilidades de codificacion/decodificacion. Desarrollador — Formateadores JSON, testers de regex, selectores de color, generadores de codigos QR, generadores de hash y tests de velocidad. Matematicas — Calculadoras cientificas, creadores de graficos, herramientas de probabilidad, calculadoras de notas y operaciones con matrices. Imagenes — Editores de fotos, compresores de imagenes, eliminadores de fondo, generadores de memes y creadores de pixel art.',
+          'Cada herramienta esta disenada para resolver un problema especifico de manera rapida y eficiente. Expandimos continuamente nuestra coleccion basandonos en las solicitudes de los usuarios, datos de busqueda y necesidades emergentes, anadiendo nuevas herramientas cada mes para mantener ToolKit Online relevante y completo.',
+        ],
       },
       {
-        heading: 'Privacidad y Seguridad',
-        body: 'Tu privacidad está en el centro de todo lo que hacemos. Todas las herramientas de ToolKit Online procesan datos completamente en el lado del cliente, lo que significa que tu información nunca sale de tu navegador. No recopilamos, almacenamos ni transmitimos ningún dato personal que introduzcas en nuestras herramientas, ya sean cifras financieras, métricas de salud o textos personales. Nuestro sitio cumple totalmente con el RGPD y las regulaciones internacionales de privacidad. Las únicas analíticas que utilizamos son estadísticas de uso anónimas y agregadas a través de Google Analytics, exclusivamente para entender qué herramientas son más populares y dónde podemos mejorar. Puedes usar cada herramienta con la total confianza de que tus datos permanecen solo tuyos.',
+        id: 'technology',
+        heading: 'Nuestro Stack Tecnologico',
+        paragraphs: [
+          'ToolKit Online esta construido con tecnologias web modernas y probadas para ofrecer la experiencia mas rapida y confiable posible. Nuestra plataforma funciona sobre Next.js y React, aprovechando el renderizado del lado del servidor y la generacion estatica para cargas ultra-rapidas y una excelente optimizacion para motores de busqueda. Todo el frontend esta desarrollado con TypeScript para seguridad de tipos y Tailwind CSS para un diseno responsivo que funciona perfectamente en cualquier dispositivo, desde smartphones hasta monitores de escritorio ultra-anchos.',
+          'Cada herramienta procesa datos completamente del lado del cliente, lo que significa que tu informacion nunca sale de tu navegador y nunca toca nuestros servidores. Esta arquitectura elimina los viajes de ida y vuelta al servidor, entrega resultados instantaneos y proporciona una capa inherente de proteccion de privacidad. Desplegamos en Vercel con distribucion CDN global, asegurando tiempos de carga rapidos desde cualquier ubicacion del mundo. Nuestro soporte de Progressive Web App (PWA) te permite instalar ToolKit Online en tu dispositivo para acceso sin conexion a tus herramientas favoritas.',
+          'El rendimiento es una prioridad fundamental. Optimizamos cada pagina para Core Web Vitals, implementamos carga diferida para componentes pesados y minimizamos los bundles de JavaScript para garantizar la experiencia mas rapida posible incluso en conexiones mas lentas. Nuestra infraestructura esta disenada para escalar sin esfuerzo, manejando picos de trafico sin degradacion.',
+        ],
       },
       {
-        heading: 'Nuestra Tecnología',
-        body: 'ToolKit Online está construido con tecnologías web de vanguardia para ofrecer la experiencia más rápida y confiable posible. Nuestra plataforma funciona sobre Next.js y React, aprovechando el renderizado del lado del servidor para cargas ultrarrápidas y SEO óptimo. Todo el frontend está desarrollado con TypeScript para seguridad de tipos y Tailwind CSS para un diseño responsivo y moderno que se ve perfecto en cualquier dispositivo, desde smartphones hasta monitores ultraanchos. Cada herramienta está optimizada para el rendimiento, con procesamiento del lado del cliente que elimina las consultas al servidor y entrega resultados instantáneos. Desplegamos en Vercel para distribución CDN global, asegurando tiempos de carga rápidos sin importar dónde te encuentres.',
+        id: 'privacy',
+        heading: 'Privacidad y Confianza',
+        paragraphs: [
+          'La privacidad no es algo secundario en ToolKit Online — es un principio fundamental. Todas nuestras herramientas funcionan completamente en tu navegador. Los datos que introduces en cualquier calculadora, conversor o editor se procesan localmente en tu dispositivo y nunca se envian a nuestros servidores. No recopilamos, almacenamos ni tenemos acceso a ningun dato personal que utilices en nuestras herramientas.',
+          'Cumplimos plenamente con el Reglamento General de Proteccion de Datos (RGPD) de la UE e implementamos Google Consent Mode v2. Las cookies de analisis y publicidad solo se activan despues de tu consentimiento explicito a traves de nuestro banner de cookies. Puedes gestionar tus preferencias en cualquier momento a traves del enlace Configuracion de Cookies en el pie de pagina. Utilizamos cifrado HTTPS para todas las conexiones y seguimos las mejores practicas de seguridad en toda nuestra infraestructura.',
+          'Nuestro compromiso con la transparencia significa que explicamos claramente que datos recopilamos (solo estadisticas de uso anonimas y agregadas para mejorar nuestro servicio) y que no recopilamos (ningun dato personal del uso de herramientas). Creemos que la confianza se gana con hechos, no con palabras, y nuestra arquitectura privacy-first demuestra ese compromiso cada vez que usas una de nuestras herramientas.',
+        ],
       },
       {
-        heading: 'Siempre Gratis',
-        body: 'ToolKit Online es completamente gratuito y siempre lo será. No hay muros de pago, niveles premium, períodos de prueba ni costos ocultos. Sostenemos nuestra plataforma a través de publicidad no intrusiva que respeta tu experiencia de navegación. Tomamos la decisión deliberada de mantener cada herramienta accesible para todos, porque creemos que el software útil no debe estar bloqueado detrás de una suscripción. Ya uses una herramienta o las 143, nunca se te pedirá que pagues un centavo.',
-      },
-      {
-        heading: 'Disponible en Todo el Mundo',
-        body: 'Creemos que las grandes herramientas deben hablar tu idioma. ToolKit Online está completamente disponible en seis idiomas: inglés, italiano, español, francés, alemán y portugués, cubriendo miles de millones de usuarios potenciales en todo el mundo. Cada herramienta, cada descripción y cada elemento de la interfaz está cuidadosamente traducido para proporcionar una experiencia nativa en cada idioma. Nuestra infraestructura global asegura tiempos de carga rápidos desde cualquier ubicación, y siempre estamos explorando la adición de más idiomas según la demanda de los usuarios. Sin importar dónde estés, ToolKit Online está diseñado para sentirse como si hubiera sido creado solo para ti.',
-      },
-      {
-        heading: 'Ponte en Contacto',
-        body: 'Nos encanta escuchar a nuestros usuarios y sus comentarios moldean directamente el futuro de ToolKit Online. Ya sea que tengas una sugerencia para una nueva herramienta, quieras reportar un error, tengas una pregunta sobre cómo funciona algo o simplemente quieras compartir tu experiencia, siempre estamos felices de escucharte. Escríbenos a info@toolkitonline.vip y te responderemos lo antes posible. Tus ideas ya nos han ayudado a crecer de un pequeño proyecto a una plataforma con más de 143 herramientas, y estamos ansiosos por saber qué crees que deberíamos construir a continuación.',
+        id: 'contact',
+        heading: 'Contactanos',
+        paragraphs: [
+          'Nos encanta escuchar a nuestros usuarios — sus comentarios moldean directamente el futuro de ToolKit Online. Ya tengas una sugerencia para una nueva herramienta, quieras reportar un problema, tengas una pregunta sobre funcionalidad o simplemente quieras compartir tu experiencia, siempre estamos felices de escucharte.',
+          'Tus ideas ya nos han ayudado a crecer de un pequeno proyecto personal a una plataforma con mas de 143 herramientas y 900+ paginas en seis idiomas. Revisamos cada mensaje y nos esforzamos por responder lo mas rapido posible. Si tienes una solicitud de herramienta, hay buenas posibilidades de que entre en nuestra hoja de ruta de desarrollo.',
+        ],
       },
     ],
+    categoryLinks: [
+      { label: 'Herramientas Finanzas', href: '/#finance' },
+      { label: 'Herramientas Texto', href: '/#text' },
+      { label: 'Herramientas Salud', href: '/#health' },
+      { label: 'Herramientas Desarrollador', href: '/#dev' },
+      { label: 'Herramientas Matematicas', href: '/#math' },
+      { label: 'Herramientas Conversion', href: '/#conversion' },
+      { label: 'Herramientas Imagenes', href: '/#images' },
+    ],
+    contactCta: 'Escribenos a',
+    contactEmail: 'info@toolkitonline.vip',
   },
+
   fr: {
     title: 'A Propos de ToolKit Online',
+    subtitle: 'Outils en ligne gratuits et axes sur la confidentialite, utilises par des milliers d\'utilisateurs dans le monde.',
+    stats: [
+      { label: 'Outils Gratuits', value: '143+' },
+      { label: 'Langues', value: '6' },
+      { label: 'Pages', value: '900+' },
+      { label: 'Cout', value: '100% Gratuit' },
+    ],
     sections: [
       {
+        id: 'who-we-are',
+        heading: 'Qui Sommes-Nous',
+        paragraphs: [
+          'ToolKit Online est une plateforme web independante fondee en 2024 avec un objectif clair : fournir des outils numeriques gratuits et de haute qualite que tout le monde peut utiliser sans barrieres. Nous sommes une equipe de developpeurs, de designers et de passionnes de productivite qui croient que les utilitaires essentiels — des calculatrices financieres aux editeurs d\'images — doivent etre accessibles a tous, quel que soit le budget ou le niveau technique.',
+          'Notre projet a commence comme une initiative personnelle pour resoudre rapidement et efficacement les problemes du quotidien. Ce qui n\'etait qu\'une petite collection de calculatrices et de convertisseurs est devenu une plateforme complete avec plus de 143 outils repartis dans sept categories, servant des milliers d\'utilisateurs dans six langues. Chaque outil que nous construisons est faconne par les retours reels des utilisateurs, faisant de ToolKit Online une ressource veritablement guidee par la communaute qui evolue pour repondre aux besoins des etudiants, des professionnels, des developpeurs et des petits entrepreneurs du monde entier.',
+          'Nous operons depuis l\'Union europeenne et nous nous engageons a respecter pleinement le RGPD et toutes les reglementations applicables en matiere de confidentialite. Notre equipe apporte des annees d\'experience en developpement web, en conception d\'experience utilisateur et en optimisation pour les moteurs de recherche, garantissant que chaque outil soit non seulement fonctionnel mais aussi rapide, intuitif et facile a trouver.',
+        ],
+      },
+      {
+        id: 'our-mission',
         heading: 'Notre Mission',
-        body: 'ToolKit Online est né d\'une conviction simple mais puissante : les outils numériques essentiels doivent être gratuits et accessibles à tous, partout. Nous sommes passionnés par la suppression des obstacles à la productivité, que vous soyez un étudiant calculant sa moyenne, un développeur formatant du JSON ou un petit entrepreneur générant des factures. Notre mission est de donner aux gens des utilitaires de haute qualité qui ne nécessitent aucun téléchargement, aucune inscription et aucun frais caché. Nous croyons qu\'internet doit simplifier la vie, et chaque outil que nous construisons reflète cet engagement envers la simplicité et l\'accessibilité.',
+        paragraphs: [
+          'Notre mission est simple : donner aux gens des outils en ligne gratuits, fiables et respectueux de la vie privee. Nous croyons qu\'internet doit faciliter la vie, pas la compliquer. Trop de sites d\'utilitaires sont envahis de publicites intrusives, de murs de paiement caches ou exigent des inscriptions inutiles avant de pouvoir utiliser une simple calculatrice ou un convertisseur.',
+          'ToolKit Online adopte une approche differente. Chacun de nos 143+ outils est entierement gratuit, ne necessite aucune inscription et traite vos donnees entierement dans votre navigateur. Il n\'y a pas de niveaux premium, pas de periodes d\'essai et pas de fonctionnalites verrouillees. Que vous ayez besoin de calculer un paiement hypothecaire, de formater du code JSON, de compresser une image ou de convertir des unites, vous pouvez le faire instantanement sans obstacles. Nous soutenons notre plateforme grace a une publicite non intrusive qui respecte votre experience de navigation, afin que vous puissiez vous concentrer sur l\'essentiel : accomplir vos taches.',
+        ],
       },
       {
-        heading: 'Ce que Nous Offrons',
-        body: 'ToolKit Online propose une suite complète de plus de 143 outils en ligne gratuits organisés en sept catégories soigneusement sélectionnées : Finance (calculatrices de prêts, outils d\'investissement, générateurs de factures), Texte (compteur de mots, aperçu markdown, synthèse vocale), Santé (calculateur d\'IMC, compteur de calories, calculateur de sommeil), Conversion (convertisseur d\'unités, CSV vers JSON, outils PDF), Développeur (formateur JSON, testeur de regex, générateur de codes QR), Mathématiques (calculatrice scientifique, créateur de graphiques, outils de probabilité) et Images (éditeur photo, compresseur d\'images, suppresseur d\'arrière-plan). Chaque outil est conçu avec une interface propre et intuitive pour obtenir des résultats en quelques secondes. Nous élargissons continuellement notre collection en fonction des retours des utilisateurs, ajoutant de nouveaux outils chaque mois.',
+        id: 'why-143-tools',
+        heading: 'Pourquoi plus de 143 Outils Gratuits',
+        paragraphs: [
+          'Nous avons concu ToolKit Online comme une destination unique pour les utilitaires les plus utilises. Au lieu de mettre en favoris des dizaines de sites web differents pour differentes taches, vous pouvez trouver tout ce dont vous avez besoin en un seul endroit. Nos outils sont organises en sept categories soigneusement selectionnees :',
+          'Finance — Calculatrices de TVA, calculatrices de prets, outils hypothecaires, generateurs de factures, calculatrices d\'investissement et plus. Texte — Compteurs de mots, apercu markdown, correcteurs grammaticaux, synthese vocale, createurs de CV et outils de prise de notes. Sante — Calculateurs d\'IMC, suivi de calories, calculateurs de sommeil, calculateurs d\'allure et exercices de respiration. Conversion — Convertisseurs d\'unites, outils PDF, image en texte, CSV en JSON et utilitaires d\'encodage/decodage. Developpeur — Formateurs JSON, testeurs de regex, selecteurs de couleur, generateurs de codes QR, generateurs de hash et tests de vitesse. Mathematiques — Calculatrices scientifiques, createurs de graphiques, outils de probabilite, calculateurs de notes et operations matricielles. Images — Editeurs photo, compresseurs d\'images, suppresseurs d\'arriere-plan, generateurs de memes et createurs de pixel art.',
+          'Chaque outil est concu pour resoudre un probleme specifique rapidement et efficacement. Nous elargissons continuellement notre collection en fonction des demandes des utilisateurs, des donnees de recherche et des besoins emergents, ajoutant de nouveaux outils chaque mois pour garder ToolKit Online pertinent et complet.',
+        ],
       },
       {
-        heading: 'Notre Histoire',
-        body: 'ToolKit Online a démarré en 2024 comme un petit projet avec seulement une poignée de calculatrices et de convertisseurs. Ce qui avait commencé comme un projet personnel pour résoudre des problèmes quotidiens s\'est rapidement transformé en quelque chose de bien plus grand. Au fur et à mesure que les utilisateurs découvraient nos outils et les partageaient avec leurs amis et collègues, nous avons réalisé l\'immense demande pour des utilitaires gratuits, fiables et légers sur le web. Portés par les retours de la communauté et la passion de créer des logiciels utiles, nous sommes passés rapidement d\'une douzaine d\'outils à plus de 143, couvrant sept catégories distinctes. Chaque fonctionnalité ajoutée a été façonnée par de vraies demandes d\'utilisateurs, faisant de ToolKit Online une plateforme véritablement guidée par sa communauté.',
+        id: 'technology',
+        heading: 'Notre Stack Technologique',
+        paragraphs: [
+          'ToolKit Online est construit avec des technologies web modernes et eprouvees pour offrir l\'experience la plus rapide et la plus fiable possible. Notre plateforme fonctionne sur Next.js et React, exploitant le rendu cote serveur et la generation statique pour des chargements ultra-rapides et une excellente optimisation pour les moteurs de recherche. L\'ensemble du frontend est developpe avec TypeScript pour la surete des types et Tailwind CSS pour un design responsive qui fonctionne parfaitement sur tout appareil, des smartphones aux moniteurs de bureau ultra-larges.',
+          'Chaque outil traite les donnees entierement cote client, ce qui signifie que vos informations ne quittent jamais votre navigateur et ne touchent jamais nos serveurs. Cette architecture elimine les allers-retours serveur, fournit des resultats instantanes et offre une couche inherente de protection de la vie privee. Nous deployons sur Vercel avec une distribution CDN mondiale, garantissant des temps de chargement rapides depuis n\'importe quel endroit. Notre support Progressive Web App (PWA) vous permet d\'installer ToolKit Online sur votre appareil pour un acces hors ligne a vos outils preferes.',
+          'La performance est une priorite fondamentale. Nous optimisons chaque page pour les Core Web Vitals, implementons le chargement differé pour les composants lourds et minimisons les bundles JavaScript pour garantir l\'experience la plus rapide possible meme sur des connexions plus lentes. Notre infrastructure est concue pour evoluer sans effort, gerant les pics de trafic sans degradation.',
+        ],
       },
       {
-        heading: 'Confidentialité et Sécurité',
-        body: 'Votre vie privée est au coeur de tout ce que nous faisons. Tous les outils de ToolKit Online traitent les données entièrement côté client, ce qui signifie que vos informations ne quittent jamais votre navigateur. Nous ne collectons, ne stockons ni ne transmettons aucune donnée personnelle que vous saisissez dans nos outils, qu\'il s\'agisse de chiffres financiers, de métriques de santé ou de textes personnels. Notre site est entièrement conforme au RGPD et aux réglementations internationales sur la vie privée. Les seules analyses que nous utilisons sont des statistiques d\'utilisation anonymes et agrégées via Google Analytics, uniquement pour comprendre quels outils sont les plus populaires et où nous pouvons nous améliorer. Vous pouvez utiliser chaque outil en toute confiance, sachant que vos données restent les vôtres.',
+        id: 'privacy',
+        heading: 'Confidentialite et Confiance',
+        paragraphs: [
+          'La confidentialite n\'est pas une reflexion apres coup chez ToolKit Online — c\'est un principe fondamental. Tous nos outils fonctionnent entierement dans votre navigateur. Les donnees que vous saisissez dans n\'importe quelle calculatrice, convertisseur ou editeur sont traitees localement sur votre appareil et ne sont jamais envoyees a nos serveurs. Nous ne collectons, ne stockons ni n\'avons acces a aucune donnee personnelle que vous utilisez dans nos outils.',
+          'Nous sommes pleinement conformes au Reglement General sur la Protection des Donnees (RGPD) de l\'UE et implementons Google Consent Mode v2. Les cookies d\'analyse et de publicite ne sont actives qu\'apres votre consentement explicite via notre banniere de cookies. Vous pouvez gerer vos preferences a tout moment via le lien Parametres des Cookies en bas de page. Nous utilisons le chiffrement HTTPS pour toutes les connexions et suivons les meilleures pratiques de securite dans toute notre infrastructure.',
+          'Notre engagement envers la transparence signifie que nous expliquons clairement quelles donnees nous collectons (uniquement des statistiques d\'utilisation anonymes et agregees pour ameliorer notre service) et ce que nous ne collectons pas (aucune donnee personnelle provenant de l\'utilisation des outils). Nous croyons que la confiance se gagne par des actions, pas par des mots, et notre architecture axee sur la confidentialite demontre cet engagement a chaque fois que vous utilisez l\'un de nos outils.',
+        ],
       },
       {
-        heading: 'Notre Technologie',
-        body: 'ToolKit Online est construit avec des technologies web de pointe pour offrir l\'expérience la plus rapide et la plus fiable possible. Notre plateforme fonctionne sur Next.js et React, exploitant le rendu côté serveur pour des chargements ultra-rapides et un SEO optimal. L\'ensemble du frontend est développé avec TypeScript pour la sûreté des types et Tailwind CSS pour un design responsive et moderne qui s\'affiche parfaitement sur tout appareil, des smartphones aux écrans ultra-larges. Chaque outil est optimisé pour la performance, avec un traitement côté client qui élimine les allers-retours serveur et fournit des résultats instantanés. Nous déployons sur Vercel pour une distribution CDN mondiale, garantissant des temps de chargement rapides où que vous soyez.',
-      },
-      {
-        heading: 'Toujours Gratuit',
-        body: 'ToolKit Online est entièrement gratuit et le restera toujours. Il n\'y a pas de paywall, pas de niveau premium, pas de période d\'essai et pas de coûts cachés. Nous soutenons notre plateforme grâce à une publicité non intrusive qui respecte votre expérience de navigation. Nous avons fait le choix délibéré de garder chaque outil accessible à tous, car nous croyons que les logiciels utiles ne doivent pas être verrouillés derrière un abonnement. Que vous utilisiez un outil ou les 143, on ne vous demandera jamais de payer quoi que ce soit.',
-      },
-      {
-        heading: 'Disponible dans le Monde Entier',
-        body: 'Nous croyons que les grands outils doivent parler votre langue. ToolKit Online est entièrement disponible en six langues : anglais, italien, espagnol, français, allemand et portugais, couvrant des milliards d\'utilisateurs potentiels à travers le monde. Chaque outil, chaque description et chaque élément d\'interface est soigneusement traduit pour offrir une expérience native dans chaque langue. Notre infrastructure mondiale garantit des temps de chargement rapides depuis n\'importe quel endroit, et nous explorons constamment l\'ajout de nouvelles langues en fonction de la demande des utilisateurs. Où que vous soyez, ToolKit Online est conçu pour vous donner l\'impression d\'avoir été créé juste pour vous.',
-      },
-      {
+        id: 'contact',
         heading: 'Contactez-nous',
-        body: 'Nous adorons entendre nos utilisateurs et vos retours façonnent directement l\'avenir de ToolKit Online. Que vous ayez une suggestion pour un nouvel outil, souhaitiez signaler un bug, ayez une question sur le fonctionnement de quelque chose ou vouliez simplement partager votre expérience, nous sommes toujours heureux de vous écouter. Contactez-nous à info@toolkitonline.vip et nous vous répondrons dans les plus brefs délais. Vos idées nous ont déjà aidés à passer d\'un petit projet à une plateforme de plus de 143 outils, et nous avons hâte de découvrir ce que vous pensez que nous devrions construire ensuite.',
+        paragraphs: [
+          'Nous adorons entendre nos utilisateurs — vos retours faconnent directement l\'avenir de ToolKit Online. Que vous ayez une suggestion pour un nouvel outil, souhaitiez signaler un probleme, ayez une question sur une fonctionnalite ou vouliez simplement partager votre experience, nous sommes toujours heureux de vous ecouter.',
+          'Vos idees nous ont deja aides a passer d\'un petit projet personnel a une plateforme de plus de 143 outils et 900+ pages dans six langues. Nous examinons chaque message et nous efforcons de repondre le plus rapidement possible. Si vous avez une demande d\'outil, il y a de bonnes chances qu\'elle entre dans notre feuille de route de developpement.',
+        ],
       },
     ],
+    categoryLinks: [
+      { label: 'Outils Finance', href: '/#finance' },
+      { label: 'Outils Texte', href: '/#text' },
+      { label: 'Outils Sante', href: '/#health' },
+      { label: 'Outils Developpeur', href: '/#dev' },
+      { label: 'Outils Mathematiques', href: '/#math' },
+      { label: 'Outils Conversion', href: '/#conversion' },
+      { label: 'Outils Images', href: '/#images' },
+    ],
+    contactCta: 'Contactez-nous a',
+    contactEmail: 'info@toolkitonline.vip',
   },
+
   de: {
     title: 'Uber ToolKit Online',
+    subtitle: 'Kostenlose, datenschutzorientierte Online-Tools, denen Tausende von Nutzern weltweit vertrauen.',
+    stats: [
+      { label: 'Kostenlose Tools', value: '143+' },
+      { label: 'Sprachen', value: '6' },
+      { label: 'Seiten', value: '900+' },
+      { label: 'Kosten', value: '100% Kostenlos' },
+    ],
     sections: [
       {
+        id: 'who-we-are',
+        heading: 'Wer Wir Sind',
+        paragraphs: [
+          'ToolKit Online ist eine unabhangige Webplattform, die 2024 mit einem klaren Ziel gegrundet wurde: hochwertige, kostenlose digitale Werkzeuge bereitzustellen, die jeder ohne Barrieren nutzen kann. Wir sind ein Team aus Entwicklern, Designern und Produktivitatsbegeisterten, die glauben, dass wesentliche Hilfsmittel — von Finanzrechnern bis hin zu Bildeditoren — fur alle zuganglich sein sollten, unabhangig von Budget oder technischen Fahigkeiten.',
+          'Unser Projekt begann als personliche Initiative, um alltagliche Probleme schnell und effizient zu losen. Was als kleine Sammlung von Rechnern und Umrechnern begann, hat sich zu einer umfassenden Plattform mit uber 143 Werkzeugen in sieben Kategorien entwickelt, die Tausende von Nutzern in sechs Sprachen bedient. Jedes Werkzeug, das wir bauen, wird durch echtes Nutzerfeedback geformt, was ToolKit Online zu einer wirklich von der Community getriebenen Ressource macht, die sich entwickelt, um die Bedurfnisse von Studenten, Fachleuten, Entwicklern und Kleinunternehmern auf der ganzen Welt zu erfullen.',
+          'Wir operieren aus der Europaischen Union und verpflichten uns zur vollstandigen Einhaltung der DSGVO und aller geltenden Datenschutzbestimmungen. Unser Team bringt jahrelange Erfahrung in Webentwicklung, User-Experience-Design und Suchmaschinenoptimierung mit und stellt sicher, dass jedes Werkzeug nicht nur funktional, sondern auch schnell, intuitiv und leicht zu finden ist.',
+        ],
+      },
+      {
+        id: 'our-mission',
         heading: 'Unsere Mission',
-        body: 'ToolKit Online entstand aus einer einfachen, aber kraftvollen Überzeugung: Wesentliche digitale Werkzeuge sollten für alle kostenlos und zugänglich sein, überall. Wir sind leidenschaftlich daran interessiert, Produktivitätsbarrieren zu beseitigen, egal ob Sie ein Student sind, der seinen Notendurchschnitt berechnet, ein Entwickler, der JSON formatiert, oder ein Kleinunternehmer, der Rechnungen erstellt. Unsere Mission ist es, Menschen mit hochwertigen Hilfsmitteln auszustatten, die keine Downloads, keine Registrierungen und keine versteckten Kosten erfordern. Wir glauben, dass das Internet das Leben einfacher machen sollte, und jedes Werkzeug, das wir bauen, spiegelt dieses Engagement für Einfachheit und Zugänglichkeit wider.',
+        paragraphs: [
+          'Unsere Mission ist einfach: Menschen mit kostenlosen, zuverlassigen und datenschutzfreundlichen Online-Werkzeugen zu starken. Wir glauben, dass das Internet das Leben einfacher machen sollte, nicht schwieriger. Zu viele Utility-Websites sind mit aufdringlicher Werbung, versteckten Paywalls uberladen oder erfordern unnotige Registrierungen, bevor man einen einfachen Rechner oder Umrechner verwenden kann.',
+          'ToolKit Online verfolgt einen anderen Ansatz. Jedes unserer 143+ Werkzeuge ist vollstandig kostenlos, erfordert keine Registrierung und verarbeitet Ihre Daten vollstandig in Ihrem Browser. Es gibt keine Premium-Stufen, keine Testzeitraume und keine Funktionssperren. Ob Sie eine Hypothekenzahlung berechnen, JSON-Code formatieren, ein Bild komprimieren oder Einheiten umrechnen mussen — Sie konnen es sofort ohne Hindernisse tun. Wir finanzieren unsere Plattform durch unaufdringliche Werbung, die Ihr Surferlebnis respektiert, damit Sie sich auf das Wesentliche konzentrieren konnen: Dinge erledigen.',
+        ],
       },
       {
-        heading: 'Was Wir Bieten',
-        body: 'ToolKit Online bietet eine umfassende Suite von über 143 kostenlosen Online-Werkzeugen, organisiert in sieben sorgfältig zusammengestellten Kategorien: Finanzen (Kreditrechner, Investitionstools, Rechnungsgeneratoren), Text (Wortzähler, Markdown-Vorschau, Text-zu-Sprache), Gesundheit (BMI-Rechner, Kalorienzähler, Schlafrechner), Konvertierung (Einheitenumrechner, CSV zu JSON, PDF-Tools), Entwickler (JSON-Formatierer, Regex-Tester, QR-Code-Generator), Mathematik (wissenschaftlicher Taschenrechner, Diagramm-Ersteller, Wahrscheinlichkeitstools) und Bilder (Fotoeditor, Bildkompressor, Hintergrundentferner). Jedes Werkzeug ist mit einer sauberen, intuitiven Oberfläche gestaltet, damit Sie in Sekunden Ergebnisse erhalten. Wir erweitern unsere Sammlung kontinuierlich basierend auf Benutzerfeedback und fügen jeden Monat neue Werkzeuge hinzu.',
+        id: 'why-143-tools',
+        heading: 'Warum uber 143 Kostenlose Tools',
+        paragraphs: [
+          'Wir haben ToolKit Online als Allround-Ziel fur die am haufigsten genutzten Hilfsmittel konzipiert. Statt Dutzende verschiedener Websites fur verschiedene Aufgaben zu bookmarken, finden Sie alles, was Sie brauchen, an einem Ort. Unsere Werkzeuge sind in sieben sorgfaltig zusammengestellte Kategorien organisiert:',
+          'Finanzen — MwSt.-Rechner, Kreditrechner, Hypothekentools, Rechnungsgeneratoren, Investitionsrechner und mehr. Text — Wortzahler, Markdown-Vorschau, Grammatikprufer, Text-zu-Sprache, Lebenslauf-Ersteller und Notiztools. Gesundheit — BMI-Rechner, Kalorienzahler, Schlafrechner, Tempoberechner und Atemubungen. Konvertierung — Einheitenumrechner, PDF-Tools, Bild-zu-Text, CSV zu JSON und Kodierungs-/Dekodierungstools. Entwickler — JSON-Formatierer, Regex-Tester, Farbwahler, QR-Code-Generatoren, Hash-Generatoren und Geschwindigkeitstests. Mathematik — Wissenschaftliche Taschenrechner, Diagramm-Ersteller, Wahrscheinlichkeitstools, Notenrechner und Matrixoperationen. Bilder — Fotoeditoren, Bildkompressoren, Hintergrundentferner, Meme-Generatoren und Pixel-Art-Ersteller.',
+          'Jedes Werkzeug ist darauf ausgelegt, ein spezifisches Problem schnell und effizient zu losen. Wir erweitern unsere Sammlung kontinuierlich basierend auf Benutzeranfragen, Suchdaten und aufkommenden Bedurfnissen und fugen jeden Monat neue Werkzeuge hinzu, um ToolKit Online relevant und umfassend zu halten.',
+        ],
       },
       {
-        heading: 'Unsere Geschichte',
-        body: 'ToolKit Online begann 2024 als kleines Projekt mit nur einer Handvoll Rechnern und Umrechnern. Was als persönliches Projekt zur Lösung alltäglicher Probleme begann, wuchs schnell zu etwas viel Größerem heran. Als Nutzer unsere Werkzeuge entdeckten und sie mit Freunden und Kollegen teilten, erkannten wir die enorme Nachfrage nach zuverlässigen, werbe-leichten, kostenlosen Hilfsmitteln im Web. Angetrieben vom Feedback der Community und der Leidenschaft für nützliche Software sind wir schnell von einem Dutzend Werkzeugen auf über 143 gewachsen, die sieben verschiedene Kategorien abdecken. Jede Funktion, die wir hinzugefügt haben, wurde durch echte Benutzeranfragen geformt, wodurch ToolKit Online zu einer wirklich von der Community getriebenen Plattform geworden ist.',
+        id: 'technology',
+        heading: 'Unser Technologie-Stack',
+        paragraphs: [
+          'ToolKit Online ist mit modernen, bewahrten Webtechnologien gebaut, um die schnellste und zuverlassigste Erfahrung zu liefern. Unsere Plattform lauft auf Next.js und React und nutzt serverseitiges Rendering und statische Generierung fur blitzschnelle Seitenladezeiten und exzellente Suchmaschinenoptimierung. Das gesamte Frontend ist mit TypeScript fur Typsicherheit und Tailwind CSS fur ein responsives Design entwickelt, das auf jedem Gerat einwandfrei funktioniert — von Smartphones bis zu Ultra-Wide-Desktop-Monitoren.',
+          'Jedes Werkzeug verarbeitet Daten vollstandig clientseitig, was bedeutet, dass Ihre Informationen niemals Ihren Browser verlassen und niemals unsere Server beruhren. Diese Architektur eliminiert Server-Roundtrips, liefert sofortige Ergebnisse und bietet eine inharente Schicht des Datenschutzes. Wir deployen auf Vercel mit globaler CDN-Verteilung und garantieren schnelle Ladezeiten von jedem Standort der Welt. Unsere Progressive Web App (PWA) Unterstutzung ermoglicht es Ihnen, ToolKit Online auf Ihrem Gerat zu installieren, um offline auf Ihre Lieblingswerkzeuge zuzugreifen.',
+          'Leistung ist eine grundlegende Prioritat. Wir optimieren jede Seite fur Core Web Vitals, implementieren Lazy Loading fur schwere Komponenten und minimieren JavaScript-Bundles, um die schnellstmogliche Erfahrung auch bei langsameren Verbindungen zu gewahrleisten. Unsere Infrastruktur ist so konzipiert, dass sie muhelos skaliert und Verkehrsspitzen ohne Leistungseinbussen bewaltigt.',
+        ],
       },
       {
-        heading: 'Datenschutz und Sicherheit',
-        body: 'Ihre Privatsphäre steht im Mittelpunkt von allem, was wir tun. Alle Werkzeuge von ToolKit Online verarbeiten Daten vollständig clientseitig, was bedeutet, dass Ihre Informationen niemals Ihren Browser verlassen. Wir sammeln, speichern oder übertragen keine persönlichen Daten, die Sie in unsere Werkzeuge eingeben — seien es Finanzzahlen, Gesundheitsmetriken oder persönliche Texte. Unsere Website ist vollständig DSGVO-konform und entspricht internationalen Datenschutzbestimmungen. Die einzigen Analysen, die wir verwenden, sind anonyme, aggregierte Nutzungsstatistiken über Google Analytics, ausschließlich um zu verstehen, welche Werkzeuge am beliebtesten sind und wo wir uns verbessern können. Sie können jedes Werkzeug mit vollständigem Vertrauen nutzen, dass Ihre Daten nur Ihnen gehören.',
+        id: 'privacy',
+        heading: 'Datenschutz und Vertrauen',
+        paragraphs: [
+          'Datenschutz ist bei ToolKit Online kein nachtruglicher Gedanke — er ist ein grundlegendes Prinzip. Alle unsere Werkzeuge laufen vollstandig in Ihrem Browser. Die Daten, die Sie in irgendeinen Rechner, Umrechner oder Editor eingeben, werden lokal auf Ihrem Gerat verarbeitet und niemals an unsere Server gesendet. Wir sammeln, speichern oder haben Zugriff auf keine personlichen Daten, die Sie in unseren Werkzeugen verwenden.',
+          'Wir sind vollstandig konform mit der Datenschutz-Grundverordnung (DSGVO) der EU und implementieren Google Consent Mode v2. Analytics- und Werbe-Cookies werden nur nach Ihrer ausdrucklichen Zustimmung uber unser Cookie-Consent-Banner aktiviert. Sie konnen Ihre Praferenzen jederzeit uber den Link Cookie-Einstellungen in der Fusszeile verwalten. Wir verwenden HTTPS-Verschlusselung fur alle Verbindungen und befolgen Sicherheits-Best-Practices in unserer gesamten Infrastruktur.',
+          'Unser Engagement fur Transparenz bedeutet, dass wir klar erklaren, welche Daten wir sammeln (nur anonyme, aggregierte Nutzungsstatistiken zur Verbesserung unseres Dienstes) und welche wir nicht sammeln (keine personlichen Daten aus der Werkzeugnutzung). Wir glauben, dass Vertrauen durch Taten verdient wird, nicht durch Worte, und unsere datenschutzorientierte Architektur demonstriert dieses Engagement jedes Mal, wenn Sie eines unserer Werkzeuge nutzen.',
+        ],
       },
       {
-        heading: 'Unsere Technologie',
-        body: 'ToolKit Online ist mit modernsten Webtechnologien gebaut, um die schnellste und zuverlässigste Erfahrung zu liefern. Unsere Plattform läuft auf Next.js und React und nutzt serverseitiges Rendering für blitzschnelle Seitenladezeiten und optimale SEO. Das gesamte Frontend ist mit TypeScript für Typsicherheit und Tailwind CSS für ein responsives, modernes Design entwickelt, das auf jedem Gerät großartig aussieht — von Smartphones bis zu Ultra-Wide-Monitoren. Jedes Werkzeug ist auf Leistung optimiert, mit clientseitiger Verarbeitung, die Server-Roundtrips eliminiert und sofortige Ergebnisse liefert. Wir deployen auf Vercel für globale CDN-Verteilung und garantieren schnelle Ladezeiten, egal wo Sie sich befinden.',
-      },
-      {
-        heading: 'Immer Kostenlos',
-        body: 'ToolKit Online ist komplett kostenlos und wird es immer bleiben. Es gibt keine Paywalls, keine Premium-Stufen, keine Testphasen und keine versteckten Kosten. Wir finanzieren unsere Plattform durch unaufdringliche Werbung, die Ihr Surferlebnis respektiert. Wir haben die bewusste Entscheidung getroffen, jedes einzelne Werkzeug für alle zugänglich zu halten, weil wir glauben, dass nützliche Software nicht hinter einem Abonnement verschlossen sein sollte. Ob Sie ein Werkzeug oder alle 143 nutzen, Sie werden niemals gebeten, einen Cent zu zahlen.',
-      },
-      {
-        heading: 'Weltweit Verfügbar',
-        body: 'Wir glauben, dass großartige Werkzeuge Ihre Sprache sprechen sollten. ToolKit Online ist vollständig in sechs Sprachen verfügbar: Englisch, Italienisch, Spanisch, Französisch, Deutsch und Portugiesisch, und erreicht damit Milliarden potenzieller Nutzer auf der ganzen Welt. Jedes Werkzeug, jede Beschreibung und jedes Interface-Element ist sorgfältig übersetzt, um ein natives Erlebnis in jeder Sprache zu bieten. Unsere globale Infrastruktur gewährleistet schnelle Ladezeiten von jedem Standort aus, und wir prüfen ständig die Aufnahme weiterer Sprachen basierend auf der Nachfrage der Nutzer. Egal wo Sie sind, ToolKit Online ist so gestaltet, dass es sich anfühlt, als wäre es nur für Sie gemacht.',
-      },
-      {
+        id: 'contact',
         heading: 'Kontaktieren Sie Uns',
-        body: 'Wir hören gerne von unseren Nutzern, und Ihr Feedback gestaltet direkt die Zukunft von ToolKit Online. Ob Sie einen Vorschlag für ein neues Werkzeug haben, einen Fehler melden möchten, eine Frage zur Funktionsweise haben oder einfach Ihre Erfahrung teilen möchten — wir freuen uns immer, von Ihnen zu hören. Schreiben Sie uns an info@toolkitonline.vip und wir melden uns so schnell wie möglich bei Ihnen. Ihre Ideen haben uns bereits geholfen, von einem kleinen Projekt zu einer Plattform mit über 143 Werkzeugen zu wachsen, und wir können es kaum erwarten zu erfahren, was Sie denken, dass wir als Nächstes bauen sollten.',
+        paragraphs: [
+          'Wir horen gerne von unseren Nutzern — Ihr Feedback gestaltet direkt die Zukunft von ToolKit Online. Ob Sie einen Vorschlag fur ein neues Werkzeug haben, ein Problem melden mochten, eine Frage zur Funktionalitat haben oder einfach Ihre Erfahrung teilen mochten — wir freuen uns immer, von Ihnen zu horen.',
+          'Ihre Ideen haben uns bereits geholfen, von einem kleinen personlichen Projekt zu einer Plattform mit uber 143 Werkzeugen und 900+ Seiten in sechs Sprachen zu wachsen. Wir prufen jede Nachricht und bemuhen uns, so schnell wie moglich zu antworten. Wenn Sie eine Werkzeuganfrage haben, stehen die Chancen gut, dass sie in unsere Entwicklungs-Roadmap aufgenommen wird.',
+        ],
       },
     ],
+    categoryLinks: [
+      { label: 'Finanz-Tools', href: '/#finance' },
+      { label: 'Text-Tools', href: '/#text' },
+      { label: 'Gesundheits-Tools', href: '/#health' },
+      { label: 'Entwickler-Tools', href: '/#dev' },
+      { label: 'Mathe-Tools', href: '/#math' },
+      { label: 'Konvertierungs-Tools', href: '/#conversion' },
+      { label: 'Bild-Tools', href: '/#images' },
+    ],
+    contactCta: 'Schreiben Sie uns an',
+    contactEmail: 'info@toolkitonline.vip',
   },
+
   pt: {
     title: 'Sobre o ToolKit Online',
+    subtitle: 'Ferramentas online gratuitas e focadas em privacidade, usadas por milhares de utilizadores em todo o mundo.',
+    stats: [
+      { label: 'Ferramentas Gratis', value: '143+' },
+      { label: 'Idiomas', value: '6' },
+      { label: 'Paginas', value: '900+' },
+      { label: 'Custo', value: '100% Gratis' },
+    ],
     sections: [
       {
-        heading: 'Nossa Missão',
-        body: 'O ToolKit Online nasceu de uma crença simples, mas poderosa: as ferramentas digitais essenciais devem ser gratuitas e acessíveis a todos, em qualquer lugar. Somos apaixonados por remover barreiras à produtividade, seja você um estudante calculando médias, um desenvolvedor formatando JSON ou um pequeno empresário gerando faturas. Nossa missão é capacitar as pessoas com utilitários de alta qualidade que não exigem downloads, cadastros ou custos ocultos. Acreditamos que a internet deve facilitar a vida, e cada ferramenta que construímos reflete esse compromisso com a simplicidade e a acessibilidade.',
+        id: 'who-we-are',
+        heading: 'Quem Somos',
+        paragraphs: [
+          'O ToolKit Online e uma plataforma web independente fundada em 2024 com um proposito claro: fornecer ferramentas digitais gratuitas e de alta qualidade que qualquer pessoa possa usar sem barreiras. Somos uma equipa de desenvolvedores, designers e entusiastas de produtividade que acreditam que utilitarios essenciais — desde calculadoras financeiras a editores de imagens — devem ser acessiveis a todos, independentemente do orcamento ou competencia tecnica.',
+          'O nosso projeto comecou como uma iniciativa pessoal para resolver problemas do quotidiano de forma rapida e eficiente. O que comecou como uma pequena colecao de calculadoras e conversores tornou-se numa plataforma abrangente com mais de 143 ferramentas em sete categorias, servindo milhares de utilizadores em seis idiomas. Cada ferramenta que construimos e moldada pelo feedback real dos utilizadores, tornando o ToolKit Online um recurso verdadeiramente impulsionado pela comunidade que evolui para satisfazer as necessidades de estudantes, profissionais, desenvolvedores e pequenos empresarios em todo o mundo.',
+          'Operamos a partir da Uniao Europeia e estamos comprometidos com o pleno cumprimento do RGPD e de todas as regulamentacoes de privacidade aplicaveis. A nossa equipa traz anos de experiencia em desenvolvimento web, design de experiencia do utilizador e otimizacao para motores de busca, garantindo que cada ferramenta seja nao so funcional mas tambem rapida, intuitiva e facil de encontrar.',
+        ],
       },
       {
-        heading: 'O que Oferecemos',
-        body: 'O ToolKit Online oferece um conjunto completo de mais de 143 ferramentas online gratuitas organizadas em sete categorias cuidadosamente selecionadas: Finanças (calculadoras de empréstimos, ferramentas de investimento, geradores de faturas), Texto (contador de palavras, visualizador markdown, texto para fala), Saúde (calculadora de IMC, contador de calorias, calculadora de sono), Conversão (conversor de unidades, CSV para JSON, ferramentas PDF), Desenvolvedor (formatador JSON, testador de regex, gerador de códigos QR), Matemática (calculadora científica, criador de gráficos, ferramentas de probabilidade) e Imagens (editor de fotos, compressor de imagens, removedor de fundo). Cada ferramenta é projetada com uma interface limpa e intuitiva para que você obtenha resultados em segundos. Expandimos continuamente nossa coleção com base no feedback dos usuários, adicionando novas ferramentas todos os meses.',
+        id: 'our-mission',
+        heading: 'A Nossa Missao',
+        paragraphs: [
+          'A nossa missao e simples: capacitar as pessoas com ferramentas online gratuitas, confiaveis e respeitadoras da privacidade. Acreditamos que a internet deve facilitar a vida, nao complica-la. Demasiados sites de utilidades estao repletos de publicidade intrusiva, paywalls ocultos ou exigem registos desnecessarios antes de poder usar uma simples calculadora ou conversor.',
+          'O ToolKit Online adota uma abordagem diferente. Cada uma das nossas 143+ ferramentas e completamente gratuita, nao requer registo e processa os seus dados inteiramente no seu navegador. Nao ha niveis premium, periodos de teste nem funcionalidades bloqueadas. Quer precise de calcular uma prestacao hipotecaria, formatar codigo JSON, comprimir uma imagem ou converter unidades, pode faze-lo instantaneamente sem obstaculos. Sustentamos a nossa plataforma atraves de publicidade nao intrusiva que respeita a sua experiencia de navegacao, para que se possa concentrar no que importa: realizar as suas tarefas.',
+        ],
       },
       {
-        heading: 'Nossa História',
-        body: 'O ToolKit Online começou em 2024 como um pequeno projeto com apenas algumas calculadoras e conversores. O que começou como um projeto pessoal para resolver problemas do dia a dia rapidamente cresceu em algo muito maior. À medida que os usuários descobriam nossas ferramentas e as compartilhavam com amigos e colegas, percebemos a enorme demanda por utilitários gratuitos, confiáveis e leves na web. Impulsionados pelo feedback da comunidade e pela paixão por construir software útil, crescemos rapidamente de uma dúzia de ferramentas para mais de 143, abrangendo sete categorias distintas. Cada funcionalidade adicionada foi moldada por solicitações reais dos usuários, tornando o ToolKit Online uma plataforma verdadeiramente impulsionada pela comunidade.',
+        id: 'why-143-tools',
+        heading: 'Porque mais de 143 Ferramentas Gratuitas',
+        paragraphs: [
+          'Concebemos o ToolKit Online como um destino unico para os utilitarios que as pessoas mais utilizam. Em vez de guardar dezenas de sites diferentes para diferentes tarefas, pode encontrar tudo o que precisa num so lugar. As nossas ferramentas estao organizadas em sete categorias cuidadosamente selecionadas:',
+          'Financas — Calculadoras de IVA, calculadoras de emprestimos, ferramentas hipotecarias, geradores de faturas, calculadoras de investimento e mais. Texto — Contadores de palavras, pre-visualizacao markdown, corretores gramaticais, texto para fala, criadores de curriculo e ferramentas de notas. Saude — Calculadoras de IMC, rastreadores de calorias, calculadoras de sono, calculadoras de ritmo e exercicios de respiracao. Conversao — Conversores de unidades, ferramentas PDF, imagem para texto, CSV para JSON e utilitarios de codificacao/descodificacao. Desenvolvedor — Formatadores JSON, testadores de regex, seletores de cores, geradores de codigos QR, geradores de hash e testes de velocidade. Matematica — Calculadoras cientificas, criadores de graficos, ferramentas de probabilidade, calculadoras de notas e operacoes com matrizes. Imagens — Editores de fotos, compressores de imagens, removedores de fundo, geradores de memes e criadores de pixel art.',
+          'Cada ferramenta e concebida para resolver um problema especifico de forma rapida e eficiente. Expandimos continuamente a nossa colecao com base nos pedidos dos utilizadores, dados de pesquisa e necessidades emergentes, adicionando novas ferramentas todos os meses para manter o ToolKit Online relevante e abrangente.',
+        ],
       },
       {
-        heading: 'Privacidade e Segurança',
-        body: 'Sua privacidade está no centro de tudo o que fazemos. Todas as ferramentas do ToolKit Online processam dados inteiramente no lado do cliente, o que significa que suas informações nunca saem do seu navegador. Não coletamos, armazenamos ou transmitimos nenhum dado pessoal que você insere em nossas ferramentas — sejam dados financeiros, métricas de saúde ou textos pessoais. Nosso site é totalmente compatível com o LGPD e regulamentações internacionais de privacidade. As únicas análises que utilizamos são estatísticas de uso anônimas e agregadas através do Google Analytics, exclusivamente para entender quais ferramentas são mais populares e onde podemos melhorar. Você pode usar cada ferramenta com total confiança de que seus dados permanecem apenas seus.',
+        id: 'technology',
+        heading: 'O Nosso Stack Tecnologico',
+        paragraphs: [
+          'O ToolKit Online e construido com tecnologias web modernas e comprovadas para oferecer a experiencia mais rapida e confiavel possivel. A nossa plataforma funciona em Next.js e React, aproveitando a renderizacao do lado do servidor e a geracao estatica para carregamentos ultra-rapidos e excelente otimizacao para motores de busca. Todo o frontend e desenvolvido com TypeScript para seguranca de tipos e Tailwind CSS para um design responsivo que funciona perfeitamente em qualquer dispositivo, desde smartphones a monitores de desktop ultra-wide.',
+          'Cada ferramenta processa dados inteiramente do lado do cliente, o que significa que as suas informacoes nunca saem do seu navegador e nunca tocam os nossos servidores. Esta arquitetura elimina viagens de ida e volta ao servidor, fornece resultados instantaneos e oferece uma camada inerente de protecao de privacidade. Fazemos deploy no Vercel com distribuicao CDN global, garantindo tempos de carregamento rapidos de qualquer localizacao no mundo. O nosso suporte Progressive Web App (PWA) permite-lhe instalar o ToolKit Online no seu dispositivo para acesso offline as suas ferramentas favoritas.',
+          'O desempenho e uma prioridade fundamental. Otimizamos cada pagina para Core Web Vitals, implementamos carregamento diferido para componentes pesados e minimizamos os bundles JavaScript para garantir a experiencia mais rapida possivel mesmo em conexoes mais lentas. A nossa infraestrutura e projetada para escalar sem esforco, lidando com picos de trafego sem degradacao.',
+        ],
       },
       {
-        heading: 'Nossa Tecnologia',
-        body: 'O ToolKit Online é construído com tecnologias web de ponta para oferecer a experiência mais rápida e confiável possível. Nossa plataforma roda em Next.js e React, aproveitando a renderização do lado do servidor para carregamentos ultrarrápidos e SEO ideal. Todo o frontend é desenvolvido com TypeScript para segurança de tipos e Tailwind CSS para um design responsivo e moderno que fica ótimo em qualquer dispositivo — de smartphones a monitores ultrawide. Cada ferramenta é otimizada para desempenho, com processamento do lado do cliente que elimina viagens ao servidor e entrega resultados instantâneos. Fazemos deploy no Vercel para distribuição CDN global, garantindo tempos de carregamento rápidos não importa onde você esteja.',
+        id: 'privacy',
+        heading: 'Privacidade e Confianca',
+        paragraphs: [
+          'A privacidade nao e um pensamento secundario no ToolKit Online — e um principio fundamental. Todas as nossas ferramentas funcionam inteiramente no seu navegador. Os dados que introduz em qualquer calculadora, conversor ou editor sao processados localmente no seu dispositivo e nunca sao enviados para os nossos servidores. Nao recolhemos, armazenamos nem temos acesso a quaisquer dados pessoais que utilize nas nossas ferramentas.',
+          'Estamos totalmente em conformidade com o Regulamento Geral de Protecao de Dados (RGPD) da UE e implementamos o Google Consent Mode v2. Os cookies de analytics e publicidade so sao ativados apos o seu consentimento explicito atraves do nosso banner de cookies. Pode gerir as suas preferencias a qualquer momento atraves do link Configuracoes de Cookies no rodape. Utilizamos encriptacao HTTPS para todas as conexoes e seguimos as melhores praticas de seguranca em toda a nossa infraestrutura.',
+          'O nosso compromisso com a transparencia significa que explicamos claramente que dados recolhemos (apenas estatisticas de utilizacao anonimas e agregadas para melhorar o nosso servico) e o que nao recolhemos (nenhum dado pessoal da utilizacao das ferramentas). Acreditamos que a confianca se conquista com acoes, nao com palavras, e a nossa arquitetura focada na privacidade demonstra esse compromisso cada vez que utiliza uma das nossas ferramentas.',
+        ],
       },
       {
-        heading: 'Sempre Gratuito',
-        body: 'O ToolKit Online é completamente gratuito e sempre será. Não há paywalls, níveis premium, períodos de teste ou custos ocultos. Sustentamos nossa plataforma através de publicidade não intrusiva que respeita sua experiência de navegação. Fizemos a escolha deliberada de manter cada ferramenta acessível a todos, porque acreditamos que software útil não deve ser trancado atrás de uma assinatura. Seja usando uma ferramenta ou todas as 143, você nunca será solicitado a pagar um centavo.',
-      },
-      {
-        heading: 'Disponível em Todo o Mundo',
-        body: 'Acreditamos que grandes ferramentas devem falar o seu idioma. O ToolKit Online está totalmente disponível em seis idiomas: inglês, italiano, espanhol, francês, alemão e português, alcançando bilhões de usuários potenciais ao redor do mundo. Cada ferramenta, cada descrição e cada elemento da interface é cuidadosamente traduzido para proporcionar uma experiência nativa em cada idioma. Nossa infraestrutura global garante tempos de carregamento rápidos de qualquer localização, e estamos sempre avaliando a adição de mais idiomas com base na demanda dos usuários. Não importa onde você esteja, o ToolKit Online é projetado para parecer que foi feito sob medida para você.',
-      },
-      {
-        heading: 'Fale Conosco',
-        body: 'Adoramos ouvir nossos usuários e seu feedback molda diretamente o futuro do ToolKit Online. Seja para sugerir uma nova ferramenta, relatar um bug, fazer uma pergunta sobre como algo funciona ou simplesmente compartilhar sua experiência, estamos sempre felizes em ouvir. Escreva-nos em info@toolkitonline.vip e responderemos o mais rápido possível. Suas ideias já nos ajudaram a crescer de um pequeno projeto para uma plataforma com mais de 143 ferramentas, e mal podemos esperar para saber o que você acha que devemos construir a seguir.',
+        id: 'contact',
+        heading: 'Contacte-nos',
+        paragraphs: [
+          'Adoramos ouvir os nossos utilizadores — o vosso feedback molda diretamente o futuro do ToolKit Online. Quer tenha uma sugestao para uma nova ferramenta, queira reportar um problema, tenha uma questao sobre funcionalidade ou simplesmente queira partilhar a sua experiencia, estamos sempre felizes em ouvi-lo.',
+          'As suas ideias ja nos ajudaram a crescer de um pequeno projeto pessoal para uma plataforma com mais de 143 ferramentas e 900+ paginas em seis idiomas. Analisamos cada mensagem e esforçamo-nos por responder o mais rapidamente possivel. Se tem um pedido de ferramenta, ha boas hipoteses de que entre na nossa roadmap de desenvolvimento.',
+        ],
       },
     ],
+    categoryLinks: [
+      { label: 'Ferramentas Financas', href: '/#finance' },
+      { label: 'Ferramentas Texto', href: '/#text' },
+      { label: 'Ferramentas Saude', href: '/#health' },
+      { label: 'Ferramentas Desenvolvedor', href: '/#dev' },
+      { label: 'Ferramentas Matematica', href: '/#math' },
+      { label: 'Ferramentas Conversao', href: '/#conversion' },
+      { label: 'Ferramentas Imagens', href: '/#images' },
+    ],
+    contactCta: 'Envie-nos um email para',
+    contactEmail: 'info@toolkitonline.vip',
   },
 };
+
+/* ------------------------------------------------------------------ */
+/*  Component                                                          */
+/* ------------------------------------------------------------------ */
 
 export default function AboutPage() {
   const params = useParams();
   const lang = (params?.lang as Locale) || 'en';
-  const c = content[lang];
+  const t = translations[lang];
 
   return (
-    <div className="max-w-4xl mx-auto px-4 py-12">
-      <article className="prose prose-lg max-w-none">
-        <h1 className="text-3xl font-bold mb-8">{c.title}</h1>
-        {c.sections.map((section, i) => (
-          <div key={i} className="mb-6">
-            <h2 className="text-xl font-semibold mb-2">{section.heading}</h2>
-            <p className="text-gray-700 leading-relaxed">{section.body}</p>
+    <div className="max-w-4xl mx-auto">
+      {/* Hero / Header */}
+      <section className="relative bg-gradient-to-br from-blue-600 via-blue-700 to-indigo-800 rounded-2xl text-white px-6 py-14 mb-10 overflow-hidden">
+        <div className="absolute inset-0 opacity-10">
+          <div className="absolute top-0 right-0 w-72 h-72 bg-white rounded-full -translate-y-1/2 translate-x-1/3" />
+          <div className="absolute bottom-0 left-0 w-56 h-56 bg-white rounded-full translate-y-1/2 -translate-x-1/4" />
+        </div>
+        <div className="relative z-10 text-center">
+          <h1 className="text-3xl sm:text-4xl font-extrabold mb-4">{t.title}</h1>
+          <p className="text-blue-100 text-lg max-w-2xl mx-auto">{t.subtitle}</p>
+        </div>
+      </section>
+
+      {/* Stats Bar */}
+      <section className="grid grid-cols-2 sm:grid-cols-4 gap-4 mb-12">
+        {t.stats.map((stat) => (
+          <div
+            key={stat.label}
+            className="bg-white border border-gray-200 rounded-xl p-5 text-center shadow-sm hover:shadow-md transition-shadow"
+          >
+            <p className="text-2xl sm:text-3xl font-extrabold text-blue-600">{stat.value}</p>
+            <p className="text-sm text-gray-500 mt-1 font-medium">{stat.label}</p>
           </div>
         ))}
+      </section>
+
+      {/* Main Content Sections */}
+      <article className="space-y-10">
+        {t.sections.map((section) => (
+          <section
+            key={section.id}
+            id={section.id}
+            className="bg-white border border-gray-200 rounded-xl p-6 sm:p-8 shadow-sm"
+          >
+            <h2 className="text-2xl font-bold text-gray-900 mb-4 flex items-center gap-3">
+              <span className="inline-block w-1.5 h-7 bg-blue-600 rounded-full" />
+              {section.heading}
+            </h2>
+            <div className="space-y-4">
+              {section.paragraphs.map((paragraph, pIdx) => (
+                <p key={pIdx} className="text-gray-700 leading-relaxed">
+                  {paragraph}
+                </p>
+              ))}
+            </div>
+
+            {/* Internal links in the contact section */}
+            {section.id === 'contact' && (
+              <div className="mt-6 p-4 bg-blue-50 border border-blue-100 rounded-lg">
+                <p className="text-gray-800 font-medium">
+                  {t.contactCta}{' '}
+                  <a
+                    href={`mailto:${t.contactEmail}`}
+                    className="text-blue-600 hover:text-blue-800 font-semibold underline"
+                  >
+                    {t.contactEmail}
+                  </a>
+                </p>
+              </div>
+            )}
+          </section>
+        ))}
       </article>
+
+      {/* Category Links — internal linking for SEO */}
+      <section className="mt-12 mb-4 bg-gray-50 border border-gray-200 rounded-xl p-6 sm:p-8">
+        <h2 className="text-xl font-bold text-gray-900 mb-4">
+          {lang === 'it' ? 'Esplora i Nostri Strumenti' :
+           lang === 'es' ? 'Explora Nuestras Herramientas' :
+           lang === 'fr' ? 'Explorez Nos Outils' :
+           lang === 'de' ? 'Entdecken Sie Unsere Tools' :
+           lang === 'pt' ? 'Explore as Nossas Ferramentas' :
+           'Explore Our Tools'}
+        </h2>
+        <div className="flex flex-wrap gap-3">
+          {t.categoryLinks.map((link) => (
+            <Link
+              key={link.href}
+              href={`/${lang}${link.href}`}
+              className="inline-flex items-center px-4 py-2 bg-white border border-gray-300 rounded-lg text-sm font-medium text-gray-700 hover:bg-blue-50 hover:border-blue-300 hover:text-blue-700 transition-colors"
+            >
+              {link.label}
+            </Link>
+          ))}
+        </div>
+      </section>
     </div>
   );
 }
