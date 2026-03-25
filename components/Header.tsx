@@ -26,6 +26,18 @@ export default function Header() {
   };
 
   return (
+    <>
+    <a
+      href="#main-content"
+      className="sr-only focus:not-sr-only focus:absolute focus:top-2 focus:left-2 focus:z-[60] focus:bg-blue-600 focus:text-white focus:px-4 focus:py-2 focus:rounded-lg focus:shadow-lg focus:outline-none"
+    >
+      {lang === 'it' ? 'Vai al contenuto' :
+       lang === 'es' ? 'Ir al contenido' :
+       lang === 'fr' ? 'Aller au contenu' :
+       lang === 'de' ? 'Zum Inhalt springen' :
+       lang === 'pt' ? 'Ir para o conteudo' :
+       'Skip to content'}
+    </a>
     <header className="bg-white/95 backdrop-blur-md border-b border-gray-200/80 sticky top-0 z-50 shadow-sm">
       <div className="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between">
         {/* Logo */}
@@ -41,7 +53,7 @@ export default function Header() {
         </Link>
 
         {/* Desktop Nav */}
-        <nav className="hidden md:flex items-center gap-5">
+        <nav className="hidden md:flex items-center gap-5" aria-label="Main navigation">
           <Link href={`/${lang}`} className="text-sm font-medium text-gray-600 hover:text-blue-600 transition-colors">
             {navLabels.home[lang]}
           </Link>
@@ -130,5 +142,6 @@ export default function Header() {
         </div>
       )}
     </header>
+    </>
   );
 }

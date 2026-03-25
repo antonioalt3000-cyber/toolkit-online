@@ -77,6 +77,24 @@ const translations: Record<Locale, AboutTranslation> = {
         ],
       },
       {
+        id: 'ai-transparency',
+        heading: 'AI Transparency',
+        paragraphs: [
+          'ToolKit Online is committed to transparency regarding the use of artificial intelligence. Some of our tools may incorporate AI-based algorithms for text analysis, grammar checking, or AI text detection. When a tool uses AI technology, this is clearly indicated on the tool page itself.',
+          'Our website content, including SEO articles and tool descriptions, may be drafted with the assistance of AI language models and subsequently reviewed and edited by our team to ensure accuracy, quality, and relevance. We do not use AI to make automated decisions that affect users, and no AI system on our platform profiles or scores individual users.',
+          'We support the principles of the EU AI Act regarding transparency and disclosure, and we are committed to clearly informing users whenever AI plays a role in the functionality of our tools or the creation of our content.',
+        ],
+      },
+      {
+        id: 'accessibility',
+        heading: 'Accessibility Statement',
+        paragraphs: [
+          'ToolKit Online is committed to ensuring digital accessibility for all users, including people with disabilities. We strive to conform to the Web Content Accessibility Guidelines (WCAG) 2.1 Level AA standards across our entire platform.',
+          'Our accessibility efforts include: providing proper semantic HTML structure with correct heading hierarchy; ensuring all interactive elements are keyboard accessible; providing text alternatives for non-text content; maintaining sufficient color contrast ratios; supporting screen reader navigation with ARIA labels and landmarks; offering a skip-to-content link for keyboard users; and ensuring all form inputs have associated labels.',
+          'We continuously review and improve the accessibility of our platform. If you encounter any accessibility barriers or have suggestions for improvement, please contact us at info@toolkitonline.vip. We take all feedback seriously and aim to resolve accessibility issues promptly.',
+        ],
+      },
+      {
         id: 'contact',
         heading: 'Contact Us',
         paragraphs: [
@@ -150,6 +168,24 @@ const translations: Record<Locale, AboutTranslation> = {
           'La privacy non e un ripensamento su ToolKit Online — e un principio fondamentale. Tutti i nostri strumenti funzionano interamente nel tuo browser. I dati che inserisci in qualsiasi calcolatore, convertitore o editor vengono elaborati localmente sul tuo dispositivo e non vengono mai inviati ai nostri server. Non raccogliamo, memorizziamo o abbiamo accesso ad alcun dato personale che utilizzi nei nostri strumenti.',
           'Siamo pienamente conformi al Regolamento Generale sulla Protezione dei Dati (GDPR) dell\'UE e implementiamo Google Consent Mode v2. I cookie di analytics e pubblicita vengono attivati solo dopo il tuo consenso esplicito tramite il nostro banner dei cookie. Puoi gestire le tue preferenze in qualsiasi momento tramite il link Impostazioni Cookie nel footer. Utilizziamo la crittografia HTTPS per tutte le connessioni e seguiamo le best practice di sicurezza in tutta la nostra infrastruttura.',
           'Il nostro impegno per la trasparenza significa che spieghiamo chiaramente quali dati raccogliamo (solo statistiche di utilizzo anonime e aggregate per migliorare il nostro servizio) e quali non raccogliamo (nessun dato personale dall\'uso degli strumenti). Crediamo che la fiducia si guadagni con i fatti, non con le parole, e la nostra architettura privacy-first dimostra questo impegno ogni volta che usi uno dei nostri strumenti.',
+        ],
+      },
+      {
+        id: 'ai-transparency',
+        heading: 'Trasparenza sull\'Intelligenza Artificiale',
+        paragraphs: [
+          'ToolKit Online si impegna per la trasparenza riguardo all\'uso dell\'intelligenza artificiale. Alcuni dei nostri strumenti possono incorporare algoritmi basati sull\'IA per l\'analisi del testo, il controllo grammaticale o il rilevamento di testi generati dall\'IA. Quando uno strumento utilizza tecnologia IA, questo e chiaramente indicato sulla pagina dello strumento stesso.',
+          'I contenuti del nostro sito web, inclusi articoli SEO e descrizioni degli strumenti, possono essere redatti con l\'assistenza di modelli linguistici IA e successivamente revisionati e modificati dal nostro team per garantire accuratezza, qualita e rilevanza. Non utilizziamo l\'IA per prendere decisioni automatizzate che influenzano gli utenti, e nessun sistema IA sulla nostra piattaforma profila o valuta i singoli utenti.',
+          'Sosteniamo i principi dell\'EU AI Act riguardo alla trasparenza e alla divulgazione, e ci impegniamo a informare chiaramente gli utenti ogni volta che l\'IA svolge un ruolo nelle funzionalita dei nostri strumenti o nella creazione dei nostri contenuti.',
+        ],
+      },
+      {
+        id: 'accessibility',
+        heading: 'Dichiarazione di Accessibilita',
+        paragraphs: [
+          'ToolKit Online si impegna a garantire l\'accessibilita digitale per tutti gli utenti, comprese le persone con disabilita. Ci sforziamo di conformarci agli standard WCAG 2.1 Livello AA su tutta la nostra piattaforma.',
+          'I nostri sforzi per l\'accessibilita includono: fornire una struttura HTML semantica corretta con gerarchia dei titoli appropriata; garantire che tutti gli elementi interattivi siano accessibili da tastiera; fornire alternative testuali per i contenuti non testuali; mantenere rapporti di contrasto cromatico sufficienti; supportare la navigazione con screen reader tramite etichette ARIA e landmark; offrire un link per saltare al contenuto per gli utenti della tastiera; e garantire che tutti i campi dei moduli abbiano etichette associate.',
+          'Rivediamo e miglioriamo continuamente l\'accessibilita della nostra piattaforma. Se incontri barriere di accessibilita o hai suggerimenti per miglioramenti, contattaci a info@toolkitonline.vip. Prendiamo sul serio tutti i feedback e miriamo a risolvere i problemi di accessibilita tempestivamente.',
         ],
       },
       {
@@ -229,6 +265,24 @@ const translations: Record<Locale, AboutTranslation> = {
         ],
       },
       {
+        id: 'ai-transparency',
+        heading: 'Transparencia sobre Inteligencia Artificial',
+        paragraphs: [
+          'ToolKit Online esta comprometido con la transparencia respecto al uso de inteligencia artificial. Algunas de nuestras herramientas pueden incorporar algoritmos basados en IA para analisis de texto, revision gramatical o deteccion de textos generados por IA. Cuando una herramienta utiliza tecnologia IA, esto se indica claramente en la pagina de la herramienta.',
+          'El contenido de nuestro sitio web, incluyendo articulos SEO y descripciones de herramientas, puede ser redactado con la asistencia de modelos de lenguaje IA y posteriormente revisado y editado por nuestro equipo para garantizar precision, calidad y relevancia. No utilizamos IA para tomar decisiones automatizadas que afecten a los usuarios, y ningun sistema de IA en nuestra plataforma perfila o puntua a usuarios individuales.',
+          'Apoyamos los principios del EU AI Act respecto a la transparencia y divulgacion, y nos comprometemos a informar claramente a los usuarios cada vez que la IA desempene un papel en la funcionalidad de nuestras herramientas o en la creacion de nuestro contenido.',
+        ],
+      },
+      {
+        id: 'accessibility',
+        heading: 'Declaracion de Accesibilidad',
+        paragraphs: [
+          'ToolKit Online esta comprometido con garantizar la accesibilidad digital para todos los usuarios, incluidas las personas con discapacidad. Nos esforzamos por cumplir con los estandares WCAG 2.1 Nivel AA en toda nuestra plataforma.',
+          'Nuestros esfuerzos de accesibilidad incluyen: proporcionar una estructura HTML semantica correcta con jerarquia de encabezados apropiada; garantizar que todos los elementos interactivos sean accesibles por teclado; proporcionar alternativas textuales para contenido no textual; mantener ratios de contraste de color suficientes; soportar la navegacion con lectores de pantalla mediante etiquetas ARIA y landmarks; ofrecer un enlace para saltar al contenido para usuarios de teclado; y garantizar que todos los campos de formulario tengan etiquetas asociadas.',
+          'Revisamos y mejoramos continuamente la accesibilidad de nuestra plataforma. Si encuentras barreras de accesibilidad o tienes sugerencias de mejora, contactanos en info@toolkitonline.vip. Tomamos todos los comentarios en serio y nos esforzamos por resolver los problemas de accesibilidad de manera oportuna.',
+        ],
+      },
+      {
         id: 'contact',
         heading: 'Contactanos',
         paragraphs: [
@@ -302,6 +356,24 @@ const translations: Record<Locale, AboutTranslation> = {
           'La confidentialite n\'est pas une reflexion apres coup chez ToolKit Online — c\'est un principe fondamental. Tous nos outils fonctionnent entierement dans votre navigateur. Les donnees que vous saisissez dans n\'importe quelle calculatrice, convertisseur ou editeur sont traitees localement sur votre appareil et ne sont jamais envoyees a nos serveurs. Nous ne collectons, ne stockons ni n\'avons acces a aucune donnee personnelle que vous utilisez dans nos outils.',
           'Nous sommes pleinement conformes au Reglement General sur la Protection des Donnees (RGPD) de l\'UE et implementons Google Consent Mode v2. Les cookies d\'analyse et de publicite ne sont actives qu\'apres votre consentement explicite via notre banniere de cookies. Vous pouvez gerer vos preferences a tout moment via le lien Parametres des Cookies en bas de page. Nous utilisons le chiffrement HTTPS pour toutes les connexions et suivons les meilleures pratiques de securite dans toute notre infrastructure.',
           'Notre engagement envers la transparence signifie que nous expliquons clairement quelles donnees nous collectons (uniquement des statistiques d\'utilisation anonymes et agregees pour ameliorer notre service) et ce que nous ne collectons pas (aucune donnee personnelle provenant de l\'utilisation des outils). Nous croyons que la confiance se gagne par des actions, pas par des mots, et notre architecture axee sur la confidentialite demontre cet engagement a chaque fois que vous utilisez l\'un de nos outils.',
+        ],
+      },
+      {
+        id: 'ai-transparency',
+        heading: 'Transparence sur l\'Intelligence Artificielle',
+        paragraphs: [
+          'ToolKit Online s\'engage a la transparence concernant l\'utilisation de l\'intelligence artificielle. Certains de nos outils peuvent incorporer des algorithmes bases sur l\'IA pour l\'analyse de texte, la verification grammaticale ou la detection de textes generes par l\'IA. Lorsqu\'un outil utilise la technologie IA, cela est clairement indique sur la page de l\'outil.',
+          'Le contenu de notre site web, y compris les articles SEO et les descriptions d\'outils, peut etre redige avec l\'assistance de modeles de langage IA puis revise et edite par notre equipe pour garantir la precision, la qualite et la pertinence. Nous n\'utilisons pas l\'IA pour prendre des decisions automatisees affectant les utilisateurs, et aucun systeme d\'IA sur notre plateforme ne profile ou n\'evalue les utilisateurs individuels.',
+          'Nous soutenons les principes de l\'EU AI Act concernant la transparence et la divulgation, et nous nous engageons a informer clairement les utilisateurs chaque fois que l\'IA joue un role dans la fonctionnalite de nos outils ou la creation de notre contenu.',
+        ],
+      },
+      {
+        id: 'accessibility',
+        heading: 'Declaration d\'Accessibilite',
+        paragraphs: [
+          'ToolKit Online s\'engage a garantir l\'accessibilite numerique pour tous les utilisateurs, y compris les personnes handicapees. Nous nous efforcons de nous conformer aux normes WCAG 2.1 Niveau AA sur l\'ensemble de notre plateforme.',
+          'Nos efforts d\'accessibilite comprennent : fournir une structure HTML semantique correcte avec une hierarchie de titres appropriee ; garantir que tous les elements interactifs sont accessibles au clavier ; fournir des alternatives textuelles pour le contenu non textuel ; maintenir des ratios de contraste de couleur suffisants ; prendre en charge la navigation par lecteur d\'ecran avec des etiquettes ARIA et des reperes ; offrir un lien pour passer au contenu pour les utilisateurs clavier ; et garantir que tous les champs de formulaire ont des etiquettes associees.',
+          'Nous revoyons et ameliorons continuellement l\'accessibilite de notre plateforme. Si vous rencontrez des obstacles d\'accessibilite ou avez des suggestions d\'amelioration, contactez-nous a info@toolkitonline.vip. Nous prenons tous les retours au serieux et visons a resoudre les problemes d\'accessibilite rapidement.',
         ],
       },
       {
@@ -381,6 +453,24 @@ const translations: Record<Locale, AboutTranslation> = {
         ],
       },
       {
+        id: 'ai-transparency',
+        heading: 'KI-Transparenz',
+        paragraphs: [
+          'ToolKit Online verpflichtet sich zur Transparenz hinsichtlich des Einsatzes von Kunstlicher Intelligenz. Einige unserer Werkzeuge konnen KI-basierte Algorithmen fur Textanalyse, Grammatikprufung oder KI-Texterkennung einsetzen. Wenn ein Werkzeug KI-Technologie verwendet, wird dies deutlich auf der Werkzeugseite angegeben.',
+          'Der Inhalt unserer Website, einschliesslich SEO-Artikel und Werkzeugbeschreibungen, kann mit Unterstutzung von KI-Sprachmodellen erstellt und anschliessend von unserem Team uberpruft und bearbeitet werden, um Genauigkeit, Qualitat und Relevanz sicherzustellen. Wir verwenden keine KI, um automatisierte Entscheidungen zu treffen, die Benutzer betreffen, und kein KI-System auf unserer Plattform erstellt Profile oder bewertet einzelne Benutzer.',
+          'Wir unterstutzen die Prinzipien des EU AI Act bezuglich Transparenz und Offenlegung und verpflichten uns, Benutzer klar zu informieren, wann immer KI eine Rolle bei der Funktionalitat unserer Werkzeuge oder der Erstellung unserer Inhalte spielt.',
+        ],
+      },
+      {
+        id: 'accessibility',
+        heading: 'Erklarung zur Barrierefreiheit',
+        paragraphs: [
+          'ToolKit Online ist bestrebt, die digitale Barrierefreiheit fur alle Benutzer sicherzustellen, einschliesslich Menschen mit Behinderungen. Wir streben die Einhaltung der WCAG 2.1 Level AA Standards auf unserer gesamten Plattform an.',
+          'Unsere Bemuhungen zur Barrierefreiheit umfassen: Bereitstellung einer korrekten semantischen HTML-Struktur mit angemessener Uberschriftenhierarchie; Sicherstellung, dass alle interaktiven Elemente uber die Tastatur zuganglich sind; Bereitstellung von Textalternativen fur nicht-textuelle Inhalte; Aufrechterhaltung ausreichender Farbkontrastverhultnisse; Unterstutzung der Screenreader-Navigation mit ARIA-Labels und Landmarks; Bereitstellung eines Skip-to-Content-Links fur Tastaturbenutzer; und Sicherstellung, dass alle Formularfelder zugehorige Beschriftungen haben.',
+          'Wir uberprufen und verbessern kontinuierlich die Barrierefreiheit unserer Plattform. Wenn Sie auf Barrierefreiheitsbarrieren stossen oder Verbesserungsvorschlage haben, kontaktieren Sie uns unter info@toolkitonline.vip. Wir nehmen jedes Feedback ernst und bemichen uns, Barrierefreiheitsprobleme zeitnah zu beheben.',
+        ],
+      },
+      {
         id: 'contact',
         heading: 'Kontaktieren Sie Uns',
         paragraphs: [
@@ -454,6 +544,24 @@ const translations: Record<Locale, AboutTranslation> = {
           'A privacidade nao e um pensamento secundario no ToolKit Online — e um principio fundamental. Todas as nossas ferramentas funcionam inteiramente no seu navegador. Os dados que introduz em qualquer calculadora, conversor ou editor sao processados localmente no seu dispositivo e nunca sao enviados para os nossos servidores. Nao recolhemos, armazenamos nem temos acesso a quaisquer dados pessoais que utilize nas nossas ferramentas.',
           'Estamos totalmente em conformidade com o Regulamento Geral de Protecao de Dados (RGPD) da UE e implementamos o Google Consent Mode v2. Os cookies de analytics e publicidade so sao ativados apos o seu consentimento explicito atraves do nosso banner de cookies. Pode gerir as suas preferencias a qualquer momento atraves do link Configuracoes de Cookies no rodape. Utilizamos encriptacao HTTPS para todas as conexoes e seguimos as melhores praticas de seguranca em toda a nossa infraestrutura.',
           'O nosso compromisso com a transparencia significa que explicamos claramente que dados recolhemos (apenas estatisticas de utilizacao anonimas e agregadas para melhorar o nosso servico) e o que nao recolhemos (nenhum dado pessoal da utilizacao das ferramentas). Acreditamos que a confianca se conquista com acoes, nao com palavras, e a nossa arquitetura focada na privacidade demonstra esse compromisso cada vez que utiliza uma das nossas ferramentas.',
+        ],
+      },
+      {
+        id: 'ai-transparency',
+        heading: 'Transparencia sobre Inteligencia Artificial',
+        paragraphs: [
+          'O ToolKit Online esta comprometido com a transparencia relativamente ao uso de inteligencia artificial. Algumas das nossas ferramentas podem incorporar algoritmos baseados em IA para analise de texto, verificacao gramatical ou detecao de textos gerados por IA. Quando uma ferramenta utiliza tecnologia IA, isso e claramente indicado na pagina da ferramenta.',
+          'O conteudo do nosso site, incluindo artigos SEO e descricoes de ferramentas, pode ser redigido com a assistencia de modelos de linguagem IA e posteriormente revisto e editado pela nossa equipa para garantir precisao, qualidade e relevancia. Nao utilizamos IA para tomar decisoes automatizadas que afetem os utilizadores, e nenhum sistema de IA na nossa plataforma perfila ou avalia utilizadores individuais.',
+          'Apoiamos os principios do EU AI Act relativamente a transparencia e divulgacao, e comprometemo-nos a informar claramente os utilizadores sempre que a IA desempenhe um papel na funcionalidade das nossas ferramentas ou na criacao do nosso conteudo.',
+        ],
+      },
+      {
+        id: 'accessibility',
+        heading: 'Declaracao de Acessibilidade',
+        paragraphs: [
+          'O ToolKit Online esta comprometido em garantir a acessibilidade digital para todos os utilizadores, incluindo pessoas com deficiencia. Esforçamo-nos por cumprir as normas WCAG 2.1 Nivel AA em toda a nossa plataforma.',
+          'Os nossos esforcos de acessibilidade incluem: fornecer uma estrutura HTML semantica correta com hierarquia de titulos apropriada; garantir que todos os elementos interativos sao acessiveis por teclado; fornecer alternativas textuais para conteudo nao textual; manter racios de contraste de cor suficientes; suportar a navegacao por leitor de ecra com etiquetas ARIA e landmarks; oferecer um link para saltar para o conteudo para utilizadores de teclado; e garantir que todos os campos de formulario tem etiquetas associadas.',
+          'Revemos e melhoramos continuamente a acessibilidade da nossa plataforma. Se encontrar barreiras de acessibilidade ou tiver sugestoes de melhoria, contacte-nos em info@toolkitonline.vip. Levamos todo o feedback a serio e esforçamo-nos por resolver problemas de acessibilidade prontamente.',
         ],
       },
       {

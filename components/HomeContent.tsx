@@ -106,7 +106,9 @@ export default function HomeContent({ categories, toolsData, locale, common: t }
                   d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
                 />
               </svg>
+              <label htmlFor="tool-search" className="sr-only">{t.searchPlaceholder}</label>
               <input
+                id="tool-search"
                 type="text"
                 value={search}
                 onChange={(e) => setSearch(e.target.value)}

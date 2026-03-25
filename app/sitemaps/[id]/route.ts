@@ -6,6 +6,7 @@ export const dynamic = 'force-dynamic';
 
 const BASE_URL = 'https://toolkitonline.vip';
 const categories = ['finance', 'text', 'health', 'conversion', 'dev', 'math', 'images'] as const;
+const VAT_COUNTRIES = ['spain', 'germany', 'france', 'italy', 'uk', 'netherlands', 'belgium', 'portugal', 'austria', 'sweden'] as const;
 
 function buildUrl(loc: string, priority: number, alternates: Record<string, string>, lastmod: string = '2026-03-20'): string {
   // Always add x-default pointing to English version
@@ -78,6 +79,20 @@ function generateCategorySitemap(category: string): string {
         Object.fromEntries(locales.map(l => [l, `${BASE_URL}/${l}/tools/${tool}`])),
         '2026-03-23'
       ));
+    }
+  }
+
+  // Add VAT calculator country pages for finance category
+  if (category === 'finance') {
+    for (const country of VAT_COUNTRIES) {
+      for (const locale of locales) {
+        urls.push(buildUrl(
+          `${BASE_URL}/${locale}/tools/vat-calculator/${country}`,
+          getToolPriority(locale),
+          Object.fromEntries(locales.map(l => [l, `${BASE_URL}/${l}/tools/vat-calculator/${country}`])),
+          '2026-03-25'
+        ));
+      }
     }
   }
 

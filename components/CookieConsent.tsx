@@ -201,11 +201,11 @@ export default function CookieConsent() {
   return (
     <>
       {/* Backdrop */}
-      <div className="fixed inset-0 z-[60] bg-black/40 backdrop-blur-sm" />
+      <div className="fixed inset-0 z-[60] bg-black/40 backdrop-blur-sm" aria-hidden="true" />
 
       {/* Dialog */}
       <div className="fixed inset-0 z-[70] flex items-end sm:items-center justify-center p-4">
-        <div className="w-full max-w-lg bg-white rounded-2xl shadow-2xl overflow-hidden animate-in slide-in-from-bottom duration-300">
+        <div role="dialog" aria-modal="true" aria-label={t.title} id="cookie-consent-banner" className="w-full max-w-lg bg-white rounded-2xl shadow-2xl overflow-hidden animate-in slide-in-from-bottom duration-300">
           {/* Header */}
           <div className="px-6 pt-6 pb-4">
             <div className="flex items-center gap-3 mb-3">

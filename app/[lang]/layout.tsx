@@ -56,7 +56,7 @@ export default async function LangLayout({
       <HtmlLang />
       <ServiceWorkerRegistration />
       <Header />
-      <main className="max-w-6xl mx-auto px-4 py-8">{children}</main>
+      <main id="main-content" className="max-w-6xl mx-auto px-4 py-8">{children}</main>
       <Footer />
       <BackToTop />
       <ConsentManager />

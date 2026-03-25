@@ -16,6 +16,10 @@ const content: Record<Locale, { title: string; lastUpdated: string; sections: { 
         body: 'The data controller for this website is ToolKit Online, reachable at info@toolkitonline.vip. ToolKit Online is an independent web project operated from the European Union. For any questions or requests regarding your personal data, you can contact us at the email address above.',
       },
       {
+        heading: 'Data Protection Officer (DPO)',
+        body: 'For any questions, concerns, or requests related to data protection and privacy, you can contact our Data Protection Officer at dpo@toolkitonline.vip. The DPO is responsible for overseeing our data protection strategy and ensuring compliance with GDPR and applicable privacy regulations.',
+      },
+      {
         heading: 'Information We Collect',
         body: 'We do not collect personal data such as names, email addresses, or phone numbers. Our tools run entirely in your browser, and the data you enter into our tools is never sent to our servers. Some tools may use your browser\'s local storage (localStorage) to save your preferences and tool settings locally on your device — this data never leaves your device.',
       },
@@ -72,6 +76,10 @@ const content: Record<Locale, { title: string; lastUpdated: string; sections: { 
       {
         heading: 'Titolare del Trattamento',
         body: 'Il titolare del trattamento dei dati per questo sito web e ToolKit Online, raggiungibile all\'indirizzo info@toolkitonline.vip. ToolKit Online e un progetto web indipendente operante dall\'Unione Europea. Per qualsiasi domanda o richiesta riguardante i tuoi dati personali, puoi contattarci all\'indirizzo email sopra indicato.',
+      },
+      {
+        heading: 'Responsabile della Protezione dei Dati (DPO)',
+        body: 'Per qualsiasi domanda, dubbio o richiesta relativa alla protezione dei dati e alla privacy, puoi contattare il nostro Responsabile della Protezione dei Dati all\'indirizzo dpo@toolkitonline.vip. Il DPO e responsabile della supervisione della nostra strategia di protezione dei dati e della conformita al GDPR e alle normative sulla privacy applicabili.',
       },
       {
         heading: 'Informazioni che Raccogliamo',
@@ -132,6 +140,10 @@ const content: Record<Locale, { title: string; lastUpdated: string; sections: { 
         body: 'El responsable del tratamiento de datos de este sitio web es ToolKit Online, contactable en info@toolkitonline.vip. ToolKit Online es un proyecto web independiente operado desde la Union Europea.',
       },
       {
+        heading: 'Delegado de Proteccion de Datos (DPO)',
+        body: 'Para cualquier pregunta, inquietud o solicitud relacionada con la proteccion de datos y la privacidad, puedes contactar a nuestro Delegado de Proteccion de Datos en dpo@toolkitonline.vip. El DPO es responsable de supervisar nuestra estrategia de proteccion de datos y garantizar el cumplimiento del RGPD y las normativas de privacidad aplicables.',
+      },
+      {
         heading: 'Información que Recopilamos',
         body: 'No recopilamos datos personales como nombres, direcciones de correo electrónico o números de teléfono. Nuestras herramientas funcionan completamente en tu navegador y los datos que introduces nunca se envían a nuestros servidores. Algunas herramientas pueden utilizar el almacenamiento local del navegador (localStorage) para guardar tus preferencias y configuraciones de herramientas localmente en tu dispositivo — estos datos nunca salen de tu dispositivo.',
       },
@@ -188,6 +200,10 @@ const content: Record<Locale, { title: string; lastUpdated: string; sections: { 
       {
         heading: 'Responsable du Traitement',
         body: 'Le responsable du traitement des donnees de ce site web est ToolKit Online, joignable a info@toolkitonline.vip. ToolKit Online est un projet web independant opere depuis l\'Union Europeenne.',
+      },
+      {
+        heading: 'Delegue a la Protection des Donnees (DPO)',
+        body: 'Pour toute question, preoccupation ou demande relative a la protection des donnees et a la vie privee, vous pouvez contacter notre Delegue a la Protection des Donnees a dpo@toolkitonline.vip. Le DPO est charge de superviser notre strategie de protection des donnees et de garantir la conformite au RGPD et aux reglementations applicables en matiere de confidentialite.',
       },
       {
         heading: 'Informations que Nous Collectons',
@@ -248,6 +264,10 @@ const content: Record<Locale, { title: string; lastUpdated: string; sections: { 
         body: 'Der Verantwortliche fur die Datenverarbeitung dieser Website ist ToolKit Online, erreichbar unter info@toolkitonline.vip. ToolKit Online ist ein unabhangiges Webprojekt mit Sitz in der Europaischen Union.',
       },
       {
+        heading: 'Datenschutzbeauftragter (DSB)',
+        body: 'Bei Fragen, Bedenken oder Anfragen zum Datenschutz und zur Privatsphare konnen Sie unseren Datenschutzbeauftragten unter dpo@toolkitonline.vip kontaktieren. Der DSB ist fur die Uberwachung unserer Datenschutzstrategie und die Sicherstellung der Einhaltung der DSGVO und der geltenden Datenschutzvorschriften verantwortlich.',
+      },
+      {
         heading: 'Informationen, die wir Sammeln',
         body: 'Wir sammeln keine persönlichen Daten wie Namen, E-Mail-Adressen oder Telefonnummern. Unsere Werkzeuge laufen vollständig in Ihrem Browser und die von Ihnen eingegebenen Daten werden niemals an unsere Server gesendet. Einige Werkzeuge können den lokalen Speicher Ihres Browsers (localStorage) nutzen, um Ihre Einstellungen und Werkzeugkonfigurationen lokal auf Ihrem Gerät zu speichern — diese Daten verlassen niemals Ihr Gerät.',
       },
@@ -304,6 +324,10 @@ const content: Record<Locale, { title: string; lastUpdated: string; sections: { 
       {
         heading: 'Responsavel pelo Tratamento',
         body: 'O responsavel pelo tratamento de dados deste site e ToolKit Online, contactavel em info@toolkitonline.vip. ToolKit Online e um projeto web independente operado a partir da Uniao Europeia.',
+      },
+      {
+        heading: 'Encarregado de Protecao de Dados (DPO)',
+        body: 'Para qualquer pergunta, preocupacao ou solicitacao relacionada a protecao de dados e privacidade, pode contactar o nosso Encarregado de Protecao de Dados em dpo@toolkitonline.vip. O DPO e responsavel por supervisionar a nossa estrategia de protecao de dados e garantir a conformidade com o RGPD e as regulamentacoes de privacidade aplicaveis.',
       },
       {
         heading: 'Informações que Coletamos',

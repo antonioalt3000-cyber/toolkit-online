@@ -189,6 +189,16 @@ export default function Footer() {
                 </Link>
               </li>
               <li>
+                <Link href={`/${lang}/about#accessibility`} className="text-gray-400 hover:text-white transition-colors">
+                  {lang === 'it' ? 'Accessibilita' :
+                   lang === 'es' ? 'Accesibilidad' :
+                   lang === 'fr' ? 'Accessibilite' :
+                   lang === 'de' ? 'Barrierefreiheit' :
+                   lang === 'pt' ? 'Acessibilidade' :
+                   'Accessibility'}
+                </Link>
+              </li>
+              <li>
                 <button
                   onClick={() => window.dispatchEvent(new CustomEvent('open-cookie-settings'))}
                   className="text-gray-400 hover:text-white transition-colors cursor-pointer text-left"
