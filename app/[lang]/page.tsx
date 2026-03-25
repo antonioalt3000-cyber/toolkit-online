@@ -16,7 +16,22 @@ export default async function HomePage({ params }: { params: Promise<{ lang: str
     }
   }
 
+  const organizationSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'Organization',
+    'name': 'ToolKit Online',
+    'url': 'https://toolkitonline.vip',
+    'logo': 'https://toolkitonline.vip/icon.svg',
+    'description': '150+ free browser-based tools for developers, writers, and professionals',
+    'sameAs': ['https://dev.to/toolkitonline'],
+  };
+
   return (
+    <>
+    <script
+      type="application/ld+json"
+      dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationSchema) }}
+    />
     <HomeContent
       categories={categories}
       toolsData={toolsData}
@@ -38,5 +53,6 @@ export default async function HomePage({ params }: { params: Promise<{ lang: str
         blogReadMore: t.blogReadMore,
       }}
     />
+    </>
   );
 }

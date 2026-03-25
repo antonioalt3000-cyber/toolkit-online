@@ -38,11 +38,22 @@
   "hooks": {
     "PostToolUse": [
       {
-        "matcher": "Write",
+        "matcher": "Write|Edit",
         "hooks": [
           {
             "type": "command",
-            "command": "bash -c 'FILE=$(cat | jq -r \".tool_input.file_path // empty\"); EXT=\"${FILE##*.}\"; if [[ \"$EXT\" =~ ^(ts|tsx|js|jsx)$ ]] && [ -f \"$FILE\" ]; then ISSUES=\"\"; if grep -qn \": any\" \"$FILE\" 2>/dev/null; then ISSUES=\"${ISSUES}⚠️ TIPO ANY trovato - usa tipo esplicito\\n\"; fi; if grep -qn \"console\\.log\" \"$FILE\" 2>/dev/null; then ISSUES=\"${ISSUES}⚠️ console.log trovato - rimuovere per produzione\\n\"; fi; if [ -n \"$ISSUES\" ]; then echo -e \"\\n🔍 QUALITY CHECK:\\n$ISSUES\" >&2; fi; fi; exit 0'"
+            "command": "bash -c 'FILE=$(cat | jq -r \".tool_input.file_path // empty\"); EXT=\"${FILE##*.}\"; if [[ \"$EXT\" =~ ^(ts|tsx|js|jsx)$ ]] && [ -f \"$FILE\" ]; then ISSUES=\"\"; if grep -qn \": any\" \"$FILE\" 2>/dev/null; then ISSUES=\"${ISSUES}⚠️ TIPO ANY trovato - usa tipo esplicito\\n\"; fi; if grep -qn \"console\\.log\" \"$FILE\" 2>/dev/null; then ISSUES=\"${ISSUES}⚠️ console.log trovato - rimuovere per produzione\\n\"; fi; if grep -Pn \"dangerouslySetInnerHTML.*\\$\\{\" \"$FILE\" 2>/dev/null; then ISSUES=\"${ISSUES}🔴 dangerouslySetInnerHTML con variabile utente!\\n\"; fi; if [ -n \"$ISSUES\" ]; then echo -e \"\\n🔍 QUALITY CHECK:\\n$ISSUES\" >&2; fi; fi; exit 0'"
+          }
+        ]
+      }
+    ],
+    "PreToolUse": [
+      {
+        "matcher": "Bash",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash -c 'CMD=$(cat | jq -r \".tool_input.command // empty\"); if echo \"$CMD\" | grep -qE \"git push.*--force|rm -rf /|git reset --hard\"; then echo \"🔴 COMANDO PERICOLOSO BLOCCATO: $CMD\" >&2; echo \"{\\\"decision\\\": \\\"block\\\", \\\"reason\\\": \\\"Comando distruttivo bloccato\\\"}\" ; else echo \"{\\\"decision\\\": \\\"allow\\\"}\" ; fi'"
           }
         ]
       }
@@ -52,7 +63,7 @@
         "hooks": [
           {
             "type": "prompt",
-            "prompt": "Before stopping, verify your work is complete: 1) Did you run 'npm run lint' if you edited .ts/.tsx files? 2) Did you run 'npm run build' if the user asked for deployment? 3) Are there any TypeScript errors, missing translations, or untested edge cases? If any check was skipped, do NOT stop - complete the verification first. Return {\"decision\": \"block\", \"reason\": \"Need to run quality checks\"} if checks were skipped, or {\"decision\": \"allow\"} if everything is verified."
+            "prompt": "Before stopping, verify: 1) Did you run 'npm run lint' if .ts/.tsx files were edited? 2) Did you run 'npm run build' if deployment was requested? 3) Are translations complete for all 6 languages? 4) Did you update portfolio-state.md if significant changes were made? 5) Did you check for any 'any' types or console.log? Return {\"decision\": \"block\", \"reason\": \"Need to complete checks\"} if anything was skipped."
           }
         ]
       }
