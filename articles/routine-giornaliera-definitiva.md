@@ -18,6 +18,17 @@
 ## LUNEDI — Analisi Settimanale (09:00 CET)
 
 ### Cosa fare:
+
+#### Google Analytics (GA4: G-30KL6W6WJY)
+1. Visite totali ultima settimana vs settimana precedente (tutti e 6 i siti)
+2. Top 10 pagine piu visitate
+3. Sorgenti traffico (organic, direct, referral, social)
+4. Nuovi utenti vs ritorno
+5. Bounce rate e tempo medio
+6. Paesi di provenienza
+7. Conversioni (se configurate)
+
+#### Google Search Console
 1. Lancia `/learn` su B0 per analisi GSC automatica
 2. Controlla metriche GSC per ogni sito:
    - toolkitonline.vip (B0)
@@ -28,7 +39,9 @@
    - parseflow.dev (F4)
 3. Confronta con settimana precedente
 4. Identifica: pagine in crescita, CTR basso con impressioni alte, nuove query
-5. Scrivi 3 azioni prioritarie per la settimana
+
+#### Azioni
+5. Scrivi 3 azioni prioritarie per la settimana basate sui dati
 
 ### Output: `memory/weekly-report-[data].md`
 
