@@ -1,6 +1,6 @@
 # SESSION SUMMARY — Sessione 9 (27 marzo 2026)
 > LEGGI QUESTO FILE ALL'INIZIO DI OGNI SESSIONE
-> Aggiornato: 27 marzo 2026, 19:30 CET
+> Aggiornato: 27 marzo 2026, 21:00 CET (fine sessione 9)
 
 ---
 
@@ -103,12 +103,12 @@
 | AdSense fix (Privacy/Terms/About) | ⚠️ PARZIALE | Privacy fixata (commit 6306d0c). Disclaimer page NON creata. Strategia in memory/adsense-strategy.md |
 | IH account CREATO | ✅ FATTO | Nuovo account DvToolsmith via Chrome MCP. Non può ancora postare (serve karma) |
 | Reddit 5 commenti | ❌ BLOCCATO | Tutte le strade falliscono |
-| PA 3 prodotti Payhip | ⬜ Serve login | Password Payhip necessaria |
+| PA 5 prodotti Payhip | ✅ PUBBLICATI | adhd-impulse-spending, adhd-meal-planning, cbt-thought-record, mood-tracker-detailed, coping-skills-toolkit. Totale Payhip: 10 |
 | Self-improvement 6 temi | ⬜ NON COMPLETATO | Solo lint avviato. Da fare in sessione 10 |
 | Regole privacy dati | ✅ MEMORIZZATO | Dati sensibili nascosti dove non obbligatorio |
 | Regola "mai chiedere se continuare" | ✅ MEMORIZZATO | |
 
-**Totale pubblicazioni venerdì: 10** (1 Quora + 5 Pinterest + 1 Dev.to + 1 LinkedIn + 1 IH commento + 1 AdSense re-submit)
+**Totale pubblicazioni venerdì: 15** (1 Quora + 5 Pinterest + 1 Dev.to + 1 LinkedIn + 1 IH commento + 1 AdSense re-submit + 5 Payhip prodotti)
 
 ## NUOVI TASK AGGIUNTI AI PROGRAMMI GIORNALIERI
 | Task | Frequenza | Dettaglio |
@@ -153,15 +153,31 @@
 - `app/[lang]/tools/json-formatter/page.tsx` — Miglioramenti tool
 **AZIONE:** Committare e pushare nella prossima sessione dopo build+lint check
 
-## PROSSIMI STEP (sessione 10)
-1. Routine automatica (i 12 timer partono da soli)
-2. Reddit API: utente deve creare app su reddit.com/prefs/apps
-3. IH cookies: utente deve fare login 1 volta su IH via Playwright
-4. Dashboard HTML: completare e verificare
-5. StackShare B0 (24h passate) → retry
-6. GitHub Awesome Lists PR (se gh CLI installato)
-7. Primo test pubblicazione PA su Payhip (3 prodotti)
-8. Se utente vuole: iniziare LegalDocs (G2-6)
+## PROSSIMI STEP (sessione 10 — Sabato 28/3)
+### Routine automatica 09:00-20:00 (12 timer)
+1. 09:00 — Email + health check 6 siti + analytics + promozione
+2. 10:00 — Engagement check (commenti, follower, auto-risposte)
+3. 11:00 — Self-improvement (6 temi: SEO+UX+Codice+Contenuti+Perf+Conv)
+4. 12:00 — Reminder (cosa manca)
+5. 16:00 — Email urgenze
+6. 19:00 — Report serale completo
+7. 20:00 — Pinterest 5 pin
+
+### Pubblicazioni Sabato (da piano settimanale)
+- Medium: 1 articolo PA (Playwright, automatico)
+- Pinterest: 5 pin (Playwright, automatico)
+- Reddit: 1 post (se sbloccato) — attualmente BLOCCATO
+
+### Task manuali (serve utente)
+1. Ko-fi login → salvare cookies per pubblicare prodotti
+2. Payhip: ri-login per continuare batch (5 restanti: budget, daily-planner, fitness, gratitude, meal-planner)
+3. Reddit: profilo "DevToolsmith" + bio + avatar su reddit.com/settings/profile
+4. `winget install GitHub.cli` per Awesome Lists PR
+
+### Task automatici
+1. StackShare B0 retry (24h passate da B7)
+2. Commit + push se ci sono modifiche
+3. AdSense: iniziare blog post lunghi (800+ parole) per approvazione
 
 ## FILE CHIAVE DA LEGGERE
 - `tasks.json` — Stato strutturato COMPLETO
