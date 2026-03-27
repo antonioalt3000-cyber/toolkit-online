@@ -189,6 +189,11 @@ export default function Footer() {
                 </Link>
               </li>
               <li>
+                <Link href={`/${lang}/disclaimer`} className="text-gray-400 hover:text-white transition-colors">
+                  {t.footerDisclaimer}
+                </Link>
+              </li>
+              <li>
                 <Link href={`/${lang}/about#accessibility`} className="text-gray-400 hover:text-white transition-colors">
                   {lang === 'it' ? 'Accessibilita' :
                    lang === 'es' ? 'Accesibilidad' :
@@ -221,6 +226,9 @@ export default function Footer() {
             </Link>
             <Link href={`/${lang}/terms`} className="hover:text-gray-300 transition-colors">
               {t.footerTerms}
+            </Link>
+            <Link href={`/${lang}/disclaimer`} className="hover:text-gray-300 transition-colors">
+              {t.footerDisclaimer}
             </Link>
           </div>
         </div>

@@ -39,6 +39,7 @@ type CommonTranslation = {
   footerAbout: string;
   footerPrivacy: string;
   footerTerms: string;
+  footerDisclaimer: string;
   footerContact: string;
   footerResources: string;
   footerSitemap: string;
@@ -95,6 +96,7 @@ export const common: Record<Locale, CommonTranslation> = {
     footerAbout: 'About',
     footerPrivacy: 'Privacy Policy',
     footerTerms: 'Terms of Service',
+    footerDisclaimer: 'Disclaimer',
     footerContact: 'Contact',
     footerResources: 'Resources',
     footerSitemap: 'Sitemap',
@@ -149,6 +151,7 @@ export const common: Record<Locale, CommonTranslation> = {
     footerAbout: 'Chi siamo',
     footerPrivacy: 'Informativa sulla Privacy',
     footerTerms: 'Termini di Servizio',
+    footerDisclaimer: 'Disclaimer',
     footerContact: 'Contatti',
     footerResources: 'Risorse',
     footerSitemap: 'Mappa del sito',
@@ -203,6 +206,7 @@ export const common: Record<Locale, CommonTranslation> = {
     footerAbout: 'Acerca de',
     footerPrivacy: 'Política de Privacidad',
     footerTerms: 'Términos de Servicio',
+    footerDisclaimer: 'Aviso Legal',
     footerContact: 'Contacto',
     footerResources: 'Recursos',
     footerSitemap: 'Mapa del sitio',
@@ -257,6 +261,7 @@ export const common: Record<Locale, CommonTranslation> = {
     footerAbout: 'À propos',
     footerPrivacy: 'Politique de Confidentialité',
     footerTerms: 'Conditions d\'Utilisation',
+    footerDisclaimer: 'Avis Legal',
     footerContact: 'Contact',
     footerResources: 'Ressources',
     footerSitemap: 'Plan du site',
@@ -311,6 +316,7 @@ export const common: Record<Locale, CommonTranslation> = {
     footerAbout: 'Über uns',
     footerPrivacy: 'Datenschutzrichtlinie',
     footerTerms: 'Nutzungsbedingungen',
+    footerDisclaimer: 'Haftungsausschluss',
     footerContact: 'Kontakt',
     footerResources: 'Ressourcen',
     footerSitemap: 'Seitenübersicht',
@@ -365,6 +371,7 @@ export const common: Record<Locale, CommonTranslation> = {
     footerAbout: 'Sobre',
     footerPrivacy: 'Política de Privacidade',
     footerTerms: 'Termos de Serviço',
+    footerDisclaimer: 'Aviso Legal',
     footerContact: 'Contato',
     footerResources: 'Recursos',
     footerSitemap: 'Mapa do site',
@@ -560,7 +567,7 @@ export const tools: Record<string, Record<Locale, ToolTranslation>> = {
     pt: { name: 'Conversor de Maiúsculas', description: 'Converta texto entre maiúsculas, minúsculas, title case, camelCase, kebab-case e mais.', metaTitle: 'Conversor de Maiúsculas — Mudar Caixa do Texto Online', metaDescription: 'Conversor gratuito. Converta texto em maiúsculas, minúsculas, title case e mais.' },
   },
   'character-counter': {
-    en: { name: 'Character Counter', description: 'Detailed character analysis: vowels, consonants, digits, spaces, special characters and more.', metaTitle: 'Character Counter Online — Count Characters Free | Character Count Tool', metaDescription: 'Free online character counter to count characters instantly. Get character count with and without spaces, word count, sentence count, vowel and consonant analysis, and letter frequency — all in real time.' },
+    en: { name: 'Character Counter', description: 'Detailed character analysis: vowels, consonants, digits, spaces, special characters and more.', metaTitle: 'Character Counter Online — Count Characters With & Without Spaces Free', metaDescription: 'Free character counter to count characters online instantly. Get character count with spaces, without spaces, word count and letter frequency in real time.' },
     it: { name: 'Contatore Caratteri', description: 'Analisi dettagliata: vocali, consonanti, cifre, spazi, caratteri speciali e altro.', metaTitle: 'Contatore Caratteri Online — Analisi Dettagliata del Testo', metaDescription: 'Contatore caratteri gratuito. Analizza vocali, consonanti, cifre, spazi e frequenza.' },
     es: { name: 'Contador de Caracteres', description: 'Análisis detallado: vocales, consonantes, dígitos, espacios, caracteres especiales y más.', metaTitle: 'Contador de Caracteres — Análisis de Texto Detallado Online', metaDescription: 'Contador de caracteres gratuito. Analiza vocales, consonantes, dígitos, espacios y frecuencia.' },
     fr: { name: 'Compteur de Caractères', description: 'Analyse détaillée : voyelles, consonnes, chiffres, espaces, caractères spéciaux et plus.', metaTitle: 'Compteur de Caractères — Analyse de Texte Détaillée en Ligne', metaDescription: 'Compteur de caractères gratuit. Analysez voyelles, consonnes, chiffres, espaces et fréquence.' },
