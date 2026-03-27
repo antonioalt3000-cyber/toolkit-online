@@ -29,7 +29,7 @@ const content: Record<Locale, { title: string; lastUpdated: string; sections: { 
       },
       {
         heading: 'Cookies and Third-Party Services',
-        body: 'We use cookies only with your explicit consent via our cookie banner. We use Google Tag Manager and Google Analytics (only after consent) to understand how visitors interact with our website. Google Analytics collects anonymous data such as pages visited, time on site, and browser type. We also use Google AdSense (only after consent) to display advertisements. Google AdSense may use cookies to serve ads based on your prior visits. We implement Google Consent Mode v2 to ensure no tracking occurs without your consent. You can manage your preferences at any time via the Cookie Settings link in the footer.',
+        body: 'We use cookies only with your explicit consent via our cookie banner. We use Google Tag Manager and Google Analytics (only after consent) to understand how visitors interact with our website. Google Analytics collects anonymous data such as pages visited, time on site, and browser type. We also use Google AdSense (only after consent) to display advertisements. Google AdSense may use cookies to serve ads based on your prior visits. We implement Google Consent Mode v2 to ensure no tracking occurs without your consent. You can manage your preferences at any time via the Cookie Settings link in the footer. You can also visit Google Ads Settings (https://www.google.com/settings/ads) to opt out of personalized advertising, or visit www.aboutads.info to opt out of third-party advertising cookies.',
       },
       {
         heading: 'Legal Basis for Processing (GDPR)',
