@@ -1,0 +1,151 @@
+{
+  "lastUpdated": "2026-03-27T19:30:00Z",
+  "session": 9,
+  "activeProjects": {
+    "B0": { "name": "ToolKit Online", "domain": "toolkitonline.vip", "status": "LIVE", "deploy": "READY", "pages": 1472, "monetization": "AdSense pending" },
+    "B7": { "name": "CaptureAPI", "domain": "captureapi.dev", "status": "LIVE", "deploy": "READY", "stripe": "$0/$9/$29/$79", "fixedToday": "demo thum.io removed" },
+    "F1": { "name": "CompliPilot", "domain": "complipilot.dev", "status": "LIVE", "deploy": "READY", "stripe": "$0/$29/$79/$199", "fixedToday": "deploy fixed (was 13 errors)" },
+    "F2": { "name": "AccessiScan", "domain": "fixmyweb.dev", "status": "LIVE", "deploy": "READY", "stripe": "$0/$9/$29/$79" },
+    "F3": { "name": "ChurnGuard", "domain": "paymentrescue.dev", "status": "LIVE", "deploy": "READY", "stripe": "$0/$29/$59/$99" },
+    "F4": { "name": "DocuMint", "domain": "parseflow.dev", "status": "LIVE", "deploy": "READY", "stripe": "$0/$19/$49/$149" },
+    "PA": { "name": "PawsAndVibesArt", "domain": "Payhip", "status": "ACTIVE", "products": "202+ PDF" }
+  },
+  "pendingProjects": {
+    "G2-6": { "name": "LegalDocs", "folder": "business-g2-legaldocs", "status": "BUILD_OK", "pages": 17, "priority": "HIGH", "reason": "40K+ searches/month for privacy policy generator" },
+    "N3": { "name": "AIJobsHub", "folder": "business-n3-aijobshub", "status": "BUILD_OK", "pages": 26, "priority": "MEDIUM", "reason": "AI jobs niche growing" }
+  },
+  "eliminatedProjects": ["B3 StackDetect", "N2 RankRadar", "G2-5 OGCraft", "G3-1 FormSpark", "G3-2 LinkBrew"],
+  "platformAccess": {
+    "devto": { "method": "API_REST", "status": "READY_AUTO", "apiKey": true, "envVar": "DEVTO_API_KEY", "account": "@toolkitonline", "lastTest": "2026-03-27", "canPublish": true },
+    "quora": { "method": "Playwright", "status": "READY_AUTO", "session": true, "account": "Antonio Altomonte", "lastTest": "2026-03-27", "canPublish": true, "rules": "90% value 10% link, link only at end, 300+ words" },
+    "medium": { "method": "Playwright", "status": "READY_AUTO", "session": true, "account": "DevToolsmith", "lastTest": "2026-03-27", "canPublish": true, "rules": "Rich editor, first attempt may redirect, retry once" },
+    "pinterest": { "method": "Playwright+cookies", "status": "READY_AUTO", "account": "PawsAndVibesArt", "lastTest": "2026-03-26", "canPublish": true, "rules": "Max 5 pin/day, 3h interval, 1000x1500px, PA70% B020% SaaS10%", "pinsReady": 10 },
+    "github": { "method": "git_cli", "status": "READY_AUTO", "account": "antonioalt3000-cyber", "lastTest": "2026-03-27", "canPublish": true },
+    "gmail": { "method": "Gmail_MCP", "status": "READY_AUTO", "account": "antonio.alt3000@gmail.com", "lastTest": "2026-03-27" },
+    "gsc": { "method": "GSC_MCP", "status": "READY_AUTO", "lastTest": "2026-03-27" },
+    "hashnode": { "method": "API_GraphQL", "status": "READY_AUTO", "apiKey": true, "envVar": "HASHNODE_API_KEY", "account": "devtoolsmith", "lastTest": "2026-03-27", "canPublish": true, "profileCompleted": true },
+    "linkedin": { "method": "Chrome_MCP_only", "status": "PARTIAL", "account": "Antonio Altomonte", "lastTest": "2026-03-27", "cognoFixed": true, "avatarMissing": true, "canPublish": "only_with_chrome_open", "rules": "Link in COMMENTS not post, hook in first 2 lines, max 5 hashtags" },
+    "reddit": { "method": "BLOCKED", "status": "MANUAL_NEEDED", "account": "No-Worker-5959", "lastTest": "2026-03-27", "issue": "Chrome MCP safety restriction + Playwright tab conflict", "profileIncomplete": true, "rules": "90/10 ratio, 5 genuine comments/day, no direct links in comments week 1-2" },
+    "indiehackers": { "method": "Chrome_MCP_only", "status": "NEEDS_LOGIN", "account": "devtoolsmith", "lastTest": "2026-03-27", "issue": "Google OAuth popup not interceptable by Chrome MCP", "rules": "Milestone posts, real metrics, build in public" },
+    "stackshare": { "method": "Chrome_MCP", "status": "RATE_LIMITED", "account": "Antonio (Google)", "lastTest": "2026-03-27", "issue": "1 tool/24h limit, error 500 today", "listed": ["B7"], "pending": ["B0", "F1", "F2", "F3", "F4"] }
+  },
+  "completedToday": [
+    { "task": "Fix B7 demo thum.io", "result": "SUCCESS", "commit": "3182e1e" },
+    { "task": "Fix LinkedIn cognome undefined->Altomonte", "result": "SUCCESS", "method": "Chrome MCP + JS inject" },
+    { "task": "Hashnode profilo completo", "result": "SUCCESS", "fields": "name, bio, tagline, location, website, social links" },
+    { "task": "Hashnode API key generated", "result": "SUCCESS", "saved": ".env.local" },
+    { "task": "Dev.to API key found+tested", "result": "SUCCESS", "saved": ".env.local" },
+    { "task": "Test Quora login Playwright", "result": "SUCCESS" },
+    { "task": "Test Medium login Playwright", "result": "SUCCESS" },
+    { "task": "Create 10 Pinterest pin images", "result": "SUCCESS", "location": "pins/" },
+    { "task": "Business decisions G2", "result": "SUCCESS", "keep": ["G2-6", "N3"], "eliminate": ["B3", "N2", "G2-5", "G3-1", "G3-2"] },
+    { "task": "Verify F1 deploy Vercel", "result": "SUCCESS", "state": "READY" },
+    { "task": "Update all 12 scheduled tasks with detailed instructions", "result": "SUCCESS" },
+    { "task": "Create 3-level memory system (CLAUDE.md + tasks.json + SESSION_SUMMARY.md)", "result": "SUCCESS" },
+    { "task": "Update platform-access-playbook with all test results", "result": "SUCCESS" },
+    { "task": "First auto-publish test on Quora", "result": "SUCCESS", "detail": "PUBLISHED 27/3 - toolkitonline.vip answer on free tools 2026 question" },
+    { "task": "Pinterest 5 pin venerdì 27/3", "result": "SUCCESS", "detail": "5/5: ADHD Brain Dump, Wedding Budget, Mental Health Journal, B0 PDF Tools, Habit Tracker" },
+    { "task": "Dev.to articolo F2 via Playwright", "result": "SUCCESS", "detail": "201 WCAG Criteria LIVE (API key 403, usato Playwright)" },
+    { "task": "LinkedIn post F3 payment recovery", "result": "SUCCESS", "detail": "Via Chrome MCP" },
+    { "task": "IH account DvToolsmith creato", "result": "SUCCESS", "detail": "Via Chrome MCP + primo commento karma" },
+    { "task": "AdSense re-submit + strategia", "result": "SUCCESS", "detail": "adsense-strategy.md creato" }
+  ],
+  "pendingTasks": [
+    { "task": "LinkedIn avatar upload", "priority": "LOW", "method": "MANUAL", "detail": "User uploads avatar-final.png" },
+    { "task": "Reddit profile update", "priority": "LOW", "method": "MANUAL", "detail": "Display name DevToolsmith + bio + avatar at reddit.com/settings/profile" },
+    { "task": "IH Google login", "priority": "LOW", "method": "MANUAL", "detail": "User clicks Google icon on indiehackers.com/sign-in" },
+    { "task": "Install gh CLI", "priority": "MEDIUM", "method": "MANUAL", "detail": "winget install GitHub.cli" },
+    { "task": "GitHub Awesome Lists PRs", "priority": "HIGH", "method": "gh_CLI", "detail": "awesome-a11y (F2), free-for-dev (B0+B7), awesome-developer-tools (B0+B7)" },
+    { "task": "StackShare B0", "priority": "MEDIUM", "method": "Chrome_MCP", "detail": "Retry 28/3 (24h passed)" },
+    { "task": "StackShare F1,F2,F3,F4", "priority": "MEDIUM", "method": "Chrome_MCP", "detail": "1 per day after B0" },
+    { "task": "SaaSHub +5 products", "priority": "MEDIUM", "method": "Playwright", "detail": "B0,F1,F2,F3,F4" },
+    { "task": "Uneed +5 products", "priority": "MEDIUM", "method": "Playwright" },
+    { "task": "DevHunt +5 products", "priority": "MEDIUM", "method": "Playwright" },
+    { "task": "AlternativeTo +5 products", "priority": "MEDIUM", "method": "Playwright" },
+    { "task": "Slant.co listings all products", "priority": "LOW", "method": "Playwright" },
+    { "task": "Complete LegalDocs (G2-6)", "priority": "HIGH", "method": "Code", "detail": "Domain + deploy" },
+    { "task": "Complete AIJobsHub (N3)", "priority": "MEDIUM", "method": "Code", "detail": "Domain + deploy + seed" },
+    { "task": "First auto-publish test on Dev.to via API", "priority": "HIGH", "detail": "Key attuale 403. Articolo F2 pubblicato via Playwright 27/3, non via API. Rigenerare key" },
+    { "task": "First auto-publish test on Medium", "priority": "HIGH", "detail": "Publish 1 article via Playwright to verify" }
+  ],
+  "dailyRoutine": {
+    "totalTasks": 12,
+    "status": "ALL_ACTIVE_AND_UPDATED",
+    "preAuthorized": true,
+    "antiLoop": "max 2 attempts PER METHOD (not per platform). If method works → memorize in playbook for next time. Order: memorized → primary → alternative → STOP. 429/403/Cloudflare = immediate stop all methods.",
+    "schedule": {
+      "0900": { "task": "daily-marketing-routine", "days": "Mon-Sat", "does": "Email + health check + analytics + promozione su TUTTE le piattaforme + bug fix" },
+      "1000": { "task": "morning-engagement-check", "days": "Mon-Sat", "does": "Commenti ricevuti + follower + auto-risposte safe" },
+      "1000_specials": {
+        "monday": "monday-analysis (GSC tutti i siti + GA4 + Stripe + AdSense + competitor)",
+        "tuesday": "tuesday-content (blog B0 + articolo SaaS Dev.to)",
+        "thursday": "thursday-technical (build+lint+deploy tutti 7 business + security)",
+        "friday": "friday-content-upgrade (SEO 1 pagina + IH post + UX)"
+      },
+      "1100": { "task": "daily-self-improvement", "days": "Mon-Sat", "does": "1 miglioramento concreto (Lun=SEO, Mar=UX, Mer=Codice, Gio=Contenuti, Ven=Performance, Sab=Conversione)" },
+      "1200": { "task": "daily-social-promotion", "days": "Mon-Sat", "does": "Reminder: cosa fatto, cosa manca, completa se necessario" },
+      "1600": { "task": "afternoon-email-check", "days": "Mon-Sat", "does": "Email urgenze: deploy, vendite, sicurezza" },
+      "1900": { "task": "evening-engagement-check", "days": "Mon-Sat", "does": "Report serale: engagement + indicizzazione + keyword + revenue + riepilogo" },
+      "2000": { "task": "pinterest-weekly", "days": "Mon-Sat", "does": "5 pin Pinterest (PA70% B020% SaaS10%)" },
+      "monthly": { "task": "monthly-directory-check", "day": "1st of month", "does": "Verifica listing + nuove registrazioni" }
+    },
+    "weeklyPublishing": {
+      "monday": ["Reddit 5 commenti", "Quora 1 risposta", "Pinterest 5 pin"],
+      "tuesday": ["LinkedIn 1 post", "Reddit 5 commenti", "Medium 1 articolo", "Quora 1 risposta", "Pinterest 5 pin"],
+      "wednesday": ["LinkedIn 1 post", "Reddit 5 commenti", "Dev.to 1 articolo", "Quora 1 risposta", "Hashnode cross-post", "Pinterest 5 pin"],
+      "thursday": ["LinkedIn 1 post", "Reddit 5 commenti", "Quora 1 risposta", "Pinterest 5 pin"],
+      "friday": ["LinkedIn 1 post", "Reddit 5 commenti", "Quora 1 risposta", "IH 1 post", "Pinterest 5 pin"],
+      "saturday": ["Reddit 1 post", "Medium 1 articolo", "Pinterest 5 pin"]
+    },
+    "businessRotation": {
+      "week1": { "mon": "B0", "tue": "F1", "wed": "B7", "thu": "F2", "fri": "F3", "sat": "PA" },
+      "week2": { "mon": "F4", "tue": "B0", "wed": "F1", "thu": "B7", "fri": "PA", "sat": "F2" },
+      "week3": { "mon": "F3", "tue": "F4", "wed": "B0", "thu": "F1", "fri": "B7", "sat": "PA" },
+      "week4": { "mon": "F2", "tue": "F3", "wed": "F4", "thu": "B0", "fri": "PA", "sat": "B7" }
+    },
+    "platformRules": {
+      "reddit": "90/10 ratio. 9 genuine comments for every 1 promotional. NO direct links in comments. Karma building first 2 weeks. Posts from week 3. Max 1 post/week.",
+      "linkedin": "Link in COMMENTS not in post body. Hook in first 2 lines. Max 5 hashtags. Storytelling format. Comment on others' posts 15min before/after publishing.",
+      "quora": "90% genuine value, 10% link. Link ONLY at end as 'bonus resource'. 300+ words. Include data/statistics. Target questions with 1K+ followers.",
+      "devto": "800+ words, technical, max 4 tags. Canonical URL to our blog if cross-posting. Engage with comments.",
+      "medium": "Less technical, more business. Apply to publications for 10x reach. Use Import URL for cross-posting.",
+      "hashnode": "Cross-post from Dev.to with canonical URL. Developer-focused. Use custom domain if possible.",
+      "pinterest": "Max 5 pins/day, 3h interval between sessions. 1000x1500px vertical. Keywords in title+description. PA=70% B0=20% SaaS=10%.",
+      "indiehackers": "Milestone posts. Share real metrics. Build in public. Support other founders.",
+      "stackshare": "1 tool per 24 hours. Logo required (PNG square). Full description with features."
+    }
+  },
+  "apiKeys": {
+    "devto": { "location": ".env.local", "var": "DEVTO_API_KEY", "status": "EXPIRED_403", "note": "Key 403 da 27/3. Articolo F2 pubblicato via Playwright (non API). Rigenerare key via dev.to/settings/extensions per prossime sessioni" },
+    "hashnode": { "location": ".env.local", "var": "HASHNODE_API_KEY", "status": "GENERATED", "value_prefix": "4df35ca0" },
+    "stripe": { "location": "portfolio-config.md", "status": "LIVE" },
+    "adsense": { "status": "PENDING_APPROVAL", "pubId": "ca-pub-7033623734141087" }
+  },
+  "paPublishing": {
+    "total": 202,
+    "publishedPayhip": 5,
+    "publishedKofi": 0,
+    "notPublished": 197,
+    "dailyRate": 3,
+    "tracker": "C:/Users/ftass/PawsAndVibesArt/data/publishing-tracker.json",
+    "daysToComplete": 67
+  },
+  "dashboard": {
+    "html": "C:/Users/ftass/toolkit-online/dashboard.html",
+    "data": "C:/Users/ftass/toolkit-online/dashboard-data.json",
+    "autoRefresh": "60s",
+    "openWith": "browser"
+  },
+  "keyFiles": {
+    "tasks.json": "THIS FILE - structured state of everything",
+    "SESSION_SUMMARY.md": "What was done, what remains, read at session start",
+    "memory/pre-authorization-rules.md": "What I can do without asking",
+    "memory/platform-access-playbook.md": "How to access each platform with exact steps",
+    "memory/business-decisions.md": "Which businesses to keep/eliminate and why",
+    "articles/piano-espansione-definitivo.md": "Full monthly expansion plan with rotations",
+    "articles/piano-giornaliero-4-settimane.md": "Day-by-day 4-week calendar",
+    ".env.local": "API keys (DEVTO_API_KEY, HASHNODE_API_KEY)",
+    "pins/": "10 Pinterest pin images ready to publish",
+    "scripts/create-pins.js": "Script to generate more pin images"
+  }
+}

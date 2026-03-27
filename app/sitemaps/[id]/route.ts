@@ -50,7 +50,7 @@ function generateStaticSitemap(): string {
   }
 
   // Static pages
-  for (const page of ['about', 'contact', 'faq', 'privacy', 'terms']) {
+  for (const page of ['about', 'contact', 'faq', 'privacy', 'terms', 'affiliate-disclosure']) {
     for (const locale of locales) {
       urls.push(buildUrl(`${BASE_URL}/${locale}/${page}`, 0.3,
         Object.fromEntries(locales.map(l => [l, `${BASE_URL}/${l}/${page}`])), '2026-03-01'));

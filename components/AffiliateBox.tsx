@@ -15,37 +15,54 @@ interface AffiliateItem {
   url: string;
 }
 
-type CategoryKey = 'finance' | 'security' | 'text' | 'health' | 'image' | 'math';
+type CategoryKey = 'finance' | 'security' | 'text' | 'health' | 'image' | 'math' | 'conversion' | 'developer';
 
 const categorySlugs: Record<CategoryKey, string[]> = {
   finance: [
     'vat-calculator', 'percentage-calculator', 'loan-calculator', 'salary-calculator',
     'tip-calculator', 'discount-calculator', 'electricity-calculator', 'invoice-generator',
-    'mortgage-calculator', 'currency-converter', 'fuel-cost-calculator', 'profit-margin-calculator',
-    'sales-tax-calculator', 'mortgage-amortization', 'compound-interest-calculator',
-    'investment-calculator', 'roi-calculator', 'paycheck-calculator', 'inflation-calculator',
+    'invoice-calculator', 'mortgage-calculator', 'currency-converter', 'fuel-cost-calculator',
+    'profit-margin-calculator', 'sales-tax-calculator', 'mortgage-amortization',
+    'compound-interest-calculator', 'investment-calculator', 'roi-calculator',
+    'paycheck-calculator', 'inflation-calculator', 'retirement-calculator', 'debt-payoff-calculator',
   ],
   security: [
-    'password-generator', 'hash-generator', 'json-formatter', 'regex-tester', 'hex-converter',
-    'base64-converter', 'csv-to-json', 'binary-converter', 'url-encoder',
-    'cron-expression-generator', 'ip-lookup', 'screen-resolution', 'pixel-ruler',
+    'password-generator', 'hash-generator', 'ip-lookup',
   ],
   text: [
     'word-counter', 'lorem-ipsum-generator', 'text-case-converter', 'character-counter',
     'text-to-slug', 'markdown-preview', 'html-encoder', 'text-diff', 'character-map',
+    'text-to-speech', 'grammar-checker', 'resume-builder', 'ai-text-detector',
+    'text-repeater', 'emoji-picker', 'word-frequency-counter', 'line-counter',
+    'note-taking', 'flashcard-maker', 'font-identifier', 'typing-speed-test',
   ],
   health: [
     'bmi-calculator', 'calorie-calculator', 'body-fat-calculator', 'ideal-weight-calculator',
-    'water-intake-calculator', 'pregnancy-calculator', 'sleep-calculator',
+    'water-intake-calculator', 'pregnancy-calculator', 'sleep-calculator', 'pace-calculator',
+    'breathing-exercise', 'noise-generator',
   ],
   image: [
-    'image-compressor', 'color-picker', 'color-converter', 'qr-code-generator',
+    'image-compressor', 'image-resizer', 'photo-editor', 'pixel-ruler',
+    'meme-generator', 'pixel-art-maker', 'background-remover',
+    'color-picker', 'color-converter', 'color-palette-generator', 'gradient-generator',
   ],
   math: [
     'age-calculator', 'speed-calculator', 'date-calculator', 'random-number-generator',
     'aspect-ratio-calculator', 'grade-calculator', 'countdown-timer', 'stopwatch',
     'scientific-calculator', 'percentage-change-calculator', 'fraction-calculator',
-    'pace-calculator', 'typing-speed-test', 'gpa-calculator',
+    'gpa-calculator', 'pomodoro-timer', 'habit-tracker', 'standard-deviation-calculator',
+    'matrix-calculator', 'probability-calculator', 'chart-maker',
+  ],
+  conversion: [
+    'unit-converter', 'base64-converter', 'time-zone-converter', 'cooking-converter',
+    'csv-to-json', 'url-encoder', 'jpg-to-pdf', 'pdf-to-jpg', 'word-to-pdf',
+    'number-to-words', 'temperature-converter', 'pdf-merge', 'pdf-compress', 'image-to-text',
+  ],
+  developer: [
+    'json-formatter', 'qr-code-generator', 'barcode-generator', 'screen-resolution',
+    'screen-recorder', 'regex-tester', 'hex-converter', 'binary-converter',
+    'binary-translator', 'cron-expression-generator', 'timestamp-converter',
+    'internet-speed-test', 'keyboard-tester', 'mic-test', 'webcam-test',
   ],
 };
 
@@ -253,6 +270,34 @@ const affiliates: Record<CategoryKey, AffiliateItem[]> = {
       },
       url: 'https://affiliate.placeholder.com/fitness',
     },
+    {
+      emoji: '🥗',
+      headline: {
+        en: 'Track nutrition and calories with MyFitnessPal',
+        it: 'Monitora nutrizione e calorie con MyFitnessPal',
+        es: 'Registra nutrición y calorías con MyFitnessPal',
+        fr: 'Suivez nutrition et calories avec MyFitnessPal',
+        de: 'Ernährung und Kalorien tracken mit MyFitnessPal',
+        pt: 'Acompanhe nutrição e calorias com MyFitnessPal',
+      },
+      description: {
+        en: 'The world\'s largest food database with over 14 million foods. Track meals, exercise, and reach your health goals.',
+        it: 'Il più grande database alimentare al mondo con oltre 14 milioni di alimenti. Monitora pasti, esercizio e raggiungi i tuoi obiettivi di salute.',
+        es: 'La mayor base de datos de alimentos del mundo con más de 14 millones de alimentos. Registra comidas, ejercicio y alcanza tus metas de salud.',
+        fr: 'La plus grande base de données alimentaires au monde avec plus de 14 millions d\'aliments. Suivez repas, exercice et atteignez vos objectifs santé.',
+        de: 'Die weltweit größte Lebensmitteldatenbank mit über 14 Millionen Lebensmitteln. Mahlzeiten, Sport und Gesundheitsziele tracken.',
+        pt: 'O maior banco de dados de alimentos do mundo com mais de 14 milhões de alimentos. Acompanhe refeições, exercícios e alcance seus objetivos de saúde.',
+      },
+      cta: {
+        en: 'Try MyFitnessPal',
+        it: 'Prova MyFitnessPal',
+        es: 'Prueba MyFitnessPal',
+        fr: 'Essayer MyFitnessPal',
+        de: 'MyFitnessPal Testen',
+        pt: 'Experimente MyFitnessPal',
+      },
+      url: 'https://affiliate.placeholder.com/myfitnesspal',
+    },
   ],
   image: [
     {
@@ -284,7 +329,124 @@ const affiliates: Record<CategoryKey, AffiliateItem[]> = {
       url: 'https://affiliate.placeholder.com/canva',
     },
   ],
-  math: [],
+  math: [
+    {
+      emoji: '🧮',
+      headline: {
+        en: 'Advanced computation with Wolfram Alpha Pro',
+        it: 'Calcoli avanzati con Wolfram Alpha Pro',
+        es: 'Computación avanzada con Wolfram Alpha Pro',
+        fr: 'Calculs avancés avec Wolfram Alpha Pro',
+        de: 'Erweiterte Berechnungen mit Wolfram Alpha Pro',
+        pt: 'Computação avançada com Wolfram Alpha Pro',
+      },
+      description: {
+        en: 'Access powerful computational tools for math, science, and data analysis. Step-by-step solutions included.',
+        it: 'Accedi a potenti strumenti di calcolo per matematica, scienze e analisi dati. Soluzioni passo-passo incluse.',
+        es: 'Accede a potentes herramientas de cálculo para matemáticas, ciencias y análisis de datos. Soluciones paso a paso incluidas.',
+        fr: 'Accédez à des outils de calcul puissants pour les maths, les sciences et l\'analyse de données. Solutions étape par étape incluses.',
+        de: 'Zugriff auf leistungsstarke Berechnungstools für Mathematik, Wissenschaft und Datenanalyse. Schritt-für-Schritt-Lösungen inklusive.',
+        pt: 'Acesse ferramentas computacionais poderosas para matemática, ciências e análise de dados. Soluções passo a passo incluídas.',
+      },
+      cta: {
+        en: 'Try Wolfram Alpha Pro',
+        it: 'Prova Wolfram Alpha Pro',
+        es: 'Prueba Wolfram Alpha Pro',
+        fr: 'Essayer Wolfram Alpha Pro',
+        de: 'Wolfram Alpha Pro Testen',
+        pt: 'Experimente Wolfram Alpha Pro',
+      },
+      url: 'https://affiliate.placeholder.com/wolfram',
+    },
+    {
+      emoji: '📊',
+      headline: {
+        en: 'Professional graphing with Desmos',
+        it: 'Grafici professionali con Desmos',
+        es: 'Gráficos profesionales con Desmos',
+        fr: 'Graphiques professionnels avec Desmos',
+        de: 'Professionelle Grafiken mit Desmos',
+        pt: 'Gráficos profissionais com Desmos',
+      },
+      description: {
+        en: 'Beautiful, interactive math visualizations. Graph functions, plot data, and explore math concepts effortlessly.',
+        it: 'Visualizzazioni matematiche interattive e belle. Crea grafici di funzioni, traccia dati ed esplora concetti matematici facilmente.',
+        es: 'Visualizaciones matemáticas interactivas y hermosas. Grafica funciones, traza datos y explora conceptos matemáticos fácilmente.',
+        fr: 'Visualisations mathématiques interactives et élégantes. Tracez des fonctions, des données et explorez les concepts mathématiques facilement.',
+        de: 'Wunderschöne, interaktive Mathe-Visualisierungen. Funktionen zeichnen, Daten plotten und Mathe-Konzepte mühelos erkunden.',
+        pt: 'Visualizações matemáticas interativas e bonitas. Plote funções, trace dados e explore conceitos matemáticos facilmente.',
+      },
+      cta: {
+        en: 'Try Desmos',
+        it: 'Prova Desmos',
+        es: 'Prueba Desmos',
+        fr: 'Essayer Desmos',
+        de: 'Desmos Testen',
+        pt: 'Experimente Desmos',
+      },
+      url: 'https://affiliate.placeholder.com/desmos',
+    },
+  ],
+  conversion: [
+    {
+      emoji: '📄',
+      headline: {
+        en: 'Work smarter with PDF tools by Adobe',
+        it: 'Lavora in modo intelligente con gli strumenti PDF di Adobe',
+        es: 'Trabaja de forma inteligente con las herramientas PDF de Adobe',
+        fr: 'Travaillez plus intelligemment avec les outils PDF d\'Adobe',
+        de: 'Arbeiten Sie smarter mit Adobe PDF-Tools',
+        pt: 'Trabalhe de forma inteligente com ferramentas PDF da Adobe',
+      },
+      description: {
+        en: 'Convert, edit, sign, and share PDFs from anywhere. The industry standard for document management.',
+        it: 'Converti, modifica, firma e condividi PDF ovunque. Lo standard del settore per la gestione documenti.',
+        es: 'Convierte, edita, firma y comparte PDF desde cualquier lugar. El estándar de la industria.',
+        fr: 'Convertissez, modifiez, signez et partagez des PDF partout. Le standard de l\'industrie.',
+        de: 'Konvertieren, bearbeiten, signieren und teilen Sie PDFs von überall. Der Branchenstandard.',
+        pt: 'Converta, edite, assine e compartilhe PDFs de qualquer lugar. O padrão da indústria.',
+      },
+      cta: {
+        en: 'Try Adobe Acrobat',
+        it: 'Prova Adobe Acrobat',
+        es: 'Prueba Adobe Acrobat',
+        fr: 'Essayer Adobe Acrobat',
+        de: 'Adobe Acrobat Testen',
+        pt: 'Experimente Adobe Acrobat',
+      },
+      url: 'https://affiliate.placeholder.com/adobe-acrobat',
+    },
+  ],
+  developer: [
+    {
+      emoji: '🚀',
+      headline: {
+        en: 'Deploy your projects instantly with Hostinger',
+        it: 'Pubblica i tuoi progetti istantaneamente con Hostinger',
+        es: 'Despliega tus proyectos al instante con Hostinger',
+        fr: 'Déployez vos projets instantanément avec Hostinger',
+        de: 'Stellen Sie Ihre Projekte sofort mit Hostinger bereit',
+        pt: 'Implante seus projetos instantaneamente com Hostinger',
+      },
+      description: {
+        en: 'Fast, secure hosting with free SSL, domain, and 24/7 support. Starting at just $2.99/mo.',
+        it: 'Hosting veloce e sicuro con SSL gratuito, dominio e supporto 24/7. Da soli 2,99$/mese.',
+        es: 'Hosting rápido y seguro con SSL gratis, dominio y soporte 24/7. Desde solo $2.99/mes.',
+        fr: 'Hébergement rapide et sécurisé avec SSL gratuit, domaine et support 24/7. À partir de 2,99$/mois.',
+        de: 'Schnelles, sicheres Hosting mit kostenlosem SSL, Domain und 24/7-Support. Ab nur 2,99$/Monat.',
+        pt: 'Hospedagem rápida e segura com SSL grátis, domínio e suporte 24/7. A partir de apenas $2,99/mês.',
+      },
+      cta: {
+        en: 'Get Hostinger',
+        it: 'Ottieni Hostinger',
+        es: 'Obtener Hostinger',
+        fr: 'Obtenir Hostinger',
+        de: 'Hostinger Holen',
+        pt: 'Obter Hostinger',
+      },
+      url: 'https://affiliate.placeholder.com/hostinger',
+    },
+  ],
 };
 
 const disclosureText: Record<Locale, string> = {
@@ -322,8 +484,9 @@ export default function AffiliateBox({ toolSlug }: AffiliateBoxProps) {
   const items = affiliates[category];
   if (!items || items.length === 0) return null;
 
-  // Pick the first (most relevant) affiliate for this category
-  const item = items[0];
+  // Pick affiliate based on toolSlug hash for consistent per-tool rotation
+  const hash = toolSlug.split('').reduce((acc, char) => acc + char.charCodeAt(0), 0);
+  const item = items[hash % items.length];
 
   return (
     <div className="relative w-full max-w-2xl mx-auto my-6">

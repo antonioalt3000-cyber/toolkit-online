@@ -5,6 +5,7 @@ import RelatedTools from './RelatedTools';
 import PopularTools from './PopularTools';
 import FeedbackWidget from './FeedbackWidget';
 import AdPlaceholder from './AdPlaceholder';
+import AffiliateBox from './AffiliateBox';
 import EmbedTool from './EmbedTool';
 import ShareTool from './ShareTool';
 
@@ -203,6 +204,9 @@ export default function ToolPageWrapper({ toolSlug, children, faqItems }: ToolPa
       <div className="mt-6 flex items-center justify-between flex-wrap gap-3">
         <ShareTool toolSlug={toolSlug} />
       </div>
+
+      {/* Contextual affiliate suggestion */}
+      <AffiliateBox toolSlug={toolSlug} />
 
       {/* Ad: rectangle after tool / before SEO article */}
       <AdPlaceholder

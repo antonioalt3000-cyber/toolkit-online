@@ -1,0 +1,85 @@
+{
+  "lastUpdated": "2026-03-27T19:30:00Z",
+  "alerts": [],
+  "businesses": [
+    {"id":"B0","name":"ToolKit Online","domain":"toolkitonline.vip","deploy":"READY","stripe":"AdSense pending","gsc":{"clicks":8,"impressions":13,"ctr":"61.5%","position":"4.7"},"notes":"143 tools, 900 pages"},
+    {"id":"B7","name":"CaptureAPI","domain":"captureapi.dev","deploy":"READY","stripe":"$0/$9/$29/$79","gsc":{"clicks":0,"impressions":0,"ctr":"0%","position":"-"},"notes":"Demo fixed 27/3"},
+    {"id":"F1","name":"CompliPilot","domain":"complipilot.dev","deploy":"READY","stripe":"$0/$29/$79/$199","gsc":{"clicks":0,"impressions":0,"ctr":"0%","position":"-"},"notes":"Deploy fixed 27/3"},
+    {"id":"F2","name":"AccessiScan","domain":"fixmyweb.dev","deploy":"READY","stripe":"$0/$9/$29/$79","gsc":{"clicks":0,"impressions":0,"ctr":"0%","position":"-"},"notes":"201 WCAG checks"},
+    {"id":"F3","name":"ChurnGuard","domain":"paymentrescue.dev","deploy":"READY","stripe":"$0/$29/$59/$99","gsc":{"clicks":0,"impressions":0,"ctr":"0%","position":"-"},"notes":"GSC monitoring started 24/3"},
+    {"id":"F4","name":"DocuMint","domain":"parseflow.dev","deploy":"READY","stripe":"$0/$19/$49/$149","gsc":{"clicks":0,"impressions":0,"ctr":"0%","position":"-"},"notes":"GSC monitoring started 24/3"},
+    {"id":"PA","name":"PawsAndVibesArt","domain":"Payhip","deploy":"ACTIVE","stripe":"-","gsc":{"clicks":0,"impressions":0,"ctr":"-","position":"-"},"notes":"202 PDF, 5 published"}
+  ],
+  "routine": [
+    {"id":"daily-marketing-routine","time":"09:00","days":"Mon-Sat","status":"pending","lastRun":"2026-03-27T09:02:04Z","desc":"Email+Health+Analytics+Promozione+PA products"},
+    {"id":"morning-engagement-check","time":"10:00","days":"Mon-Sat","status":"pending","lastRun":"2026-03-27T10:06:16Z","desc":"Commenti+Follower+Auto-risposte"},
+    {"id":"monday-analysis","time":"10:00","days":"Mon","status":"pending","lastRun":null,"desc":"GSC 6 siti+GA4+Stripe+AdSense"},
+    {"id":"tuesday-content","time":"10:00","days":"Tue","status":"pending","lastRun":null,"desc":"Blog B0+Articolo Dev.to"},
+    {"id":"thursday-technical","time":"10:00","days":"Thu","status":"done","lastRun":"2026-03-27T10:03:44Z","desc":"Build+Lint+Deploy tutti 7 business"},
+    {"id":"friday-content-upgrade","time":"10:00","days":"Fri","status":"done","lastRun":"2026-03-27T10:03:44Z","desc":"SEO+IH post+UX"},
+    {"id":"daily-self-improvement","time":"11:00","days":"Mon-Sat","status":"pending","lastRun":null,"desc":"6 temi: SEO+UX+Codice+Contenuti+Perf+Conversione"},
+    {"id":"daily-social-promotion","time":"12:00","days":"Mon-Sat","status":"pending","lastRun":"2026-03-27T12:10:05Z","desc":"Reminder cosa manca"},
+    {"id":"afternoon-email-check","time":"16:00","days":"Mon-Sat","status":"pending","lastRun":null,"desc":"Email urgenze"},
+    {"id":"evening-engagement-check","time":"19:00","days":"Mon-Sat","status":"pending","lastRun":"2026-03-26T19:02:33Z","desc":"Report serale completo"},
+    {"id":"pinterest-daily","time":"20:00","days":"Mon-Sat","status":"pending","lastRun":null,"desc":"5 pin PA70%+B020%+SaaS10%"},
+    {"id":"monthly-directory-check","time":"10:00","days":"1st/month","status":"pending","lastRun":null,"desc":"Verifica listing directory"}
+  ],
+  "platforms": [
+    {"name":"Dev.to","method":"Playwright editor","status":"auto","todayPubs":1,"weekPubs":2,"account":"@toolkitonline"},
+    {"name":"Quora","method":"Playwright","status":"auto","todayPubs":1,"weekPubs":1,"account":"Antonio Altomonte"},
+    {"name":"Medium","method":"Playwright","status":"auto","todayPubs":0,"weekPubs":0,"account":"DevToolsmith"},
+    {"name":"Pinterest","method":"Playwright+cookies","status":"auto","todayPubs":5,"weekPubs":8,"account":"PawsAndVibesArt"},
+    {"name":"Hashnode","method":"API GraphQL","status":"auto","todayPubs":0,"weekPubs":0,"account":"devtoolsmith"},
+    {"name":"LinkedIn","method":"Chrome MCP","status":"auto","todayPubs":1,"weekPubs":1,"account":"Antonio Altomonte"},
+    {"name":"Reddit","method":"Chrome MCP","status":"blocked","todayPubs":0,"weekPubs":0,"account":"No-Worker-5959"},
+    {"name":"Indie Hackers","method":"Chrome MCP","status":"auto","todayPubs":1,"weekPubs":1,"account":"DvToolsmith"},
+    {"name":"StackShare","method":"Chrome MCP","status":"limited","todayPubs":0,"weekPubs":0,"account":"Antonio"}
+  ],
+  "paProducts": {
+    "total": 202,
+    "publishedPayhip": 5,
+    "publishedKofi": 0,
+    "publishedGumroad": 0,
+    "notPublished": 197,
+    "recentPublished": [
+      {"name":"Easter Activity Pack Kids","platform":"Payhip","date":"2026-03-26"},
+      {"name":"Easter Egg Hunt Kit","platform":"Payhip","date":"2026-03-26"},
+      {"name":"Easter Party Printables","platform":"Payhip","date":"2026-03-26"},
+      {"name":"Spring Bucket List","platform":"Payhip","date":"2026-03-26"},
+      {"name":"Spring Cleaning Bundle","platform":"Payhip","date":"2026-03-26"}
+    ]
+  },
+  "calendar": {
+    "currentWeek": 1,
+    "days": {
+      "mon":{"business":"B0","platforms":["Reddit 5comm","Quora 1risp","Pinterest 5pin"]},
+      "tue":{"business":"F1","platforms":["LinkedIn 1post","Reddit 5comm","Medium 1art","Quora 1risp","Pinterest 5pin"]},
+      "wed":{"business":"B7","platforms":["LinkedIn 1post","Reddit 5comm","Dev.to 1art","Quora 1risp","Hashnode cross","Pinterest 5pin"]},
+      "thu":{"business":"F2","platforms":["LinkedIn 1post","Reddit 5comm","Quora 1risp","Pinterest 5pin"]},
+      "fri":{"business":"F3","platforms":["LinkedIn 1post","Reddit 5comm","Quora 1risp","IH 1post","Pinterest 5pin"]},
+      "sat":{"business":"PA","platforms":["Reddit 1post","Medium 1art","Pinterest 5pin"]}
+    }
+  },
+  "activityLog": [
+    {"time":"2026-03-27T19:30:00Z","action":"Memoria condivisa creata (shared-memory/)","platform":"System","result":"success"},
+    {"time":"2026-03-27T19:15:00Z","action":"Privacy Policy aggiornata con link opt-out Google Ads","platform":"GitHub","result":"success"},
+    {"time":"2026-03-27T19:00:00Z","action":"AdSense re-submit + strategia completa creata","platform":"AdSense","result":"success"},
+    {"time":"2026-03-27T18:45:00Z","action":"IH primo commento karma building","platform":"Indie Hackers","result":"success"},
+    {"time":"2026-03-27T18:30:00Z","action":"IH account DvToolsmith creato via Chrome MCP","platform":"Indie Hackers","result":"success"},
+    {"time":"2026-03-27T18:15:00Z","action":"LinkedIn post F3 payment recovery pubblicato","platform":"LinkedIn","result":"success"},
+    {"time":"2026-03-27T18:00:00Z","action":"Dev.to articolo F2 AccessiScan 201 WCAG pubblicato","platform":"Dev.to","result":"success"},
+    {"time":"2026-03-27T17:30:00Z","action":"5 Pinterest pin pubblicati (4 PA + 1 B0)","platform":"Pinterest","result":"success"},
+    {"time":"2026-03-27T17:00:00Z","action":"Quora risposta pubblicata (B0 free tools 2026)","platform":"Quora","result":"success"},
+    {"time":"2026-03-27T16:30:00Z","action":"Regole commenti aggiornate (criteri per piattaforma)","platform":"System","result":"success"},
+    {"time":"2026-03-27T15:00:00Z","action":"Timer aggiornati con 6 temi/giorno","platform":"System","result":"success"},
+    {"time":"2026-03-27T14:30:00Z","action":"PA publishing-tracker.json creato","platform":"System","result":"success"},
+    {"time":"2026-03-27T13:50:00Z","action":"Hashnode API key generata","platform":"Hashnode","result":"success"},
+    {"time":"2026-03-27T13:30:00Z","action":"LinkedIn cognome fixato Altomonte","platform":"LinkedIn","result":"success"},
+    {"time":"2026-03-27T12:00:00Z","action":"Dev.to API key testata","platform":"Dev.to","result":"success"},
+    {"time":"2026-03-27T11:30:00Z","action":"Quora+Medium login testati","platform":"Quora/Medium","result":"success"},
+    {"time":"2026-03-27T10:30:00Z","action":"F1 deploy verificato READY","platform":"Vercel","result":"success"},
+    {"time":"2026-03-27T10:00:00Z","action":"B7 demo thum.io rimossa","platform":"GitHub","result":"success"},
+    {"time":"2026-03-27T09:00:00Z","action":"10 Pinterest pin creati","platform":"Pinterest","result":"success"},
+    {"time":"2026-03-27T08:00:00Z","action":"Sessione 9 iniziata","platform":"System","result":"success"}
+  ]
+}

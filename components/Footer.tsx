@@ -12,6 +12,33 @@ const cookieSettingsLabels: Record<string, string> = {
   pt: 'Configuracoes de Cookies',
 };
 
+const disclaimerLabels: Record<string, string> = {
+  en: 'Disclaimer',
+  it: 'Disclaimer',
+  es: 'Aviso Legal',
+  fr: 'Avertissement',
+  de: 'Haftungsausschluss',
+  pt: 'Aviso Legal',
+};
+
+const affiliateDisclosureLabels: Record<string, string> = {
+  en: 'Affiliate Disclosure',
+  it: 'Affiliazione',
+  es: 'Afiliados',
+  fr: 'Affiliation',
+  de: 'Affiliate',
+  pt: 'Afiliados',
+};
+
+const accessibilityLabels: Record<string, string> = {
+  en: 'Accessibility',
+  it: 'Accessibilita',
+  es: 'Accesibilidad',
+  fr: 'Accessibilite',
+  de: 'Barrierefreiheit',
+  pt: 'Acessibilidade',
+};
+
 const allToolsLabels: Record<string, string> = {
   en: 'All Tools by Category',
   it: 'Tutti gli strumenti per categoria',
@@ -195,12 +222,7 @@ export default function Footer() {
               </li>
               <li>
                 <Link href={`/${lang}/about#accessibility`} className="text-gray-400 hover:text-white transition-colors">
-                  {lang === 'it' ? 'Accessibilita' :
-                   lang === 'es' ? 'Accesibilidad' :
-                   lang === 'fr' ? 'Accessibilite' :
-                   lang === 'de' ? 'Barrierefreiheit' :
-                   lang === 'pt' ? 'Acessibilidade' :
-                   'Accessibility'}
+                  {accessibilityLabels[lang] || accessibilityLabels.en}
                 </Link>
               </li>
               <li>

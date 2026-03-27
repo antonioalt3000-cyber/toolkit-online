@@ -1,0 +1,559 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DevToolsmith Portfolio Dashboard</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--bg:#0a0a0b;--card:#18181b;--card2:#1e1e22;--border:#27272a;--text:#e4e4e7;--muted:#a1a1aa;--green:#22c55e;--yellow:#eab308;--red:#ef4444;--blue:#3b82f6;--purple:#a855f7;--cyan:#06b6d4;--orange:#f97316}
+body{background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;padding:16px;line-height:1.5}
+h1{font-size:1.6rem;font-weight:700}
+h2{font-size:1.1rem;font-weight:600;cursor:pointer;padding:12px 16px;background:var(--card);border:1px solid var(--border);border-radius:8px;margin-bottom:0;display:flex;align-items:center;justify-content:space-between;user-select:none;transition:background .15s}
+h2:hover{background:var(--card2)}
+h2 .arrow{transition:transform .2s;font-size:.8rem;color:var(--muted)}
+h2.open .arrow{transform:rotate(90deg)}
+.section{margin-bottom:12px}
+.section-body{padding:16px;background:var(--card);border:1px solid var(--border);border-top:none;border-radius:0 0 8px 8px;display:none}
+.section-body.open{display:block}
+.header{text-align:center;padding:20px;margin-bottom:16px;background:linear-gradient(135deg,#1a1a2e,#16213e);border-radius:12px;border:1px solid var(--border)}
+.header .sub{color:var(--muted);font-size:.85rem;margin-top:4px}
+.badge{display:inline-block;padding:2px 8px;border-radius:4px;font-size:.7rem;font-weight:600;text-transform:uppercase}
+.badge-green{background:rgba(34,197,94,.15);color:var(--green)}
+.badge-yellow{background:rgba(234,179,8,.15);color:var(--yellow)}
+.badge-red{background:rgba(239,68,68,.15);color:var(--red)}
+.badge-blue{background:rgba(59,130,246,.15);color:var(--blue)}
+.badge-purple{background:rgba(168,85,247,.15);color:var(--purple)}
+.badge-cyan{background:rgba(6,182,212,.15);color:var(--cyan)}
+.badge-orange{background:rgba(249,115,22,.15);color:var(--orange)}
+.grid{display:grid;gap:12px}
+.grid-2{grid-template-columns:repeat(auto-fill,minmax(320px,1fr))}
+.grid-3{grid-template-columns:repeat(auto-fill,minmax(280px,1fr))}
+.grid-4{grid-template-columns:repeat(auto-fill,minmax(220px,1fr))}
+.bcard{background:var(--card2);border:1px solid var(--border);border-radius:8px;padding:14px;transition:border-color .2s}
+.bcard:hover{border-color:#3f3f46}
+.bcard .top{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px}
+.bcard .name{font-weight:600;font-size:.95rem}
+.bcard .domain{color:var(--cyan);font-size:.8rem;text-decoration:none}
+.bcard .domain:hover{text-decoration:underline}
+.bcard .meta{display:flex;flex-wrap:wrap;gap:6px;margin:8px 0}
+.bcard .notes{color:var(--muted);font-size:.78rem;margin-top:6px}
+.bcard .gsc{margin-top:8px;display:grid;grid-template-columns:repeat(4,1fr);gap:4px;font-size:.72rem;text-align:center}
+.bcard .gsc div{background:var(--card);padding:4px;border-radius:4px}
+.bcard .gsc .label{color:var(--muted)}
+.bcard .gsc .val{font-weight:600;color:var(--text)}
+table{width:100%;border-collapse:collapse;font-size:.82rem}
+th{text-align:left;padding:8px 10px;background:var(--card2);color:var(--muted);font-weight:600;font-size:.72rem;text-transform:uppercase;letter-spacing:.5px;border-bottom:1px solid var(--border)}
+td{padding:7px 10px;border-bottom:1px solid var(--border)}
+tr:hover td{background:rgba(255,255,255,.02)}
+.alert-banner{background:rgba(234,179,8,.08);border:1px solid rgba(234,179,8,.3);border-radius:8px;padding:12px 16px;margin-bottom:16px}
+.alert-banner .alert-item{display:flex;align-items:center;gap:8px;font-size:.85rem;padding:4px 0}
+.alert-banner .alert-icon{display:inline-flex;align-items:center;justify-content:center;width:18px;height:18px;border-radius:50%;font-size:.7rem;font-weight:700;flex-shrink:0}
+.alert-banner .alert-icon.yellow{background:var(--yellow);color:#000}
+.alert-banner .alert-icon.red{background:var(--red);color:#fff}
+.progress-bar{height:20px;background:var(--card2);border-radius:10px;overflow:hidden;margin:8px 0}
+.progress-bar .fill{height:100%;background:linear-gradient(90deg,var(--green),var(--cyan));border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:.7rem;font-weight:600;min-width:30px;color:#000}
+.cal-grid{display:grid;grid-template-columns:repeat(6,1fr);gap:8px}
+.cal-day{background:var(--card2);border:1px solid var(--border);border-radius:8px;padding:10px;font-size:.78rem}
+.cal-day.today{border-color:var(--cyan);box-shadow:0 0 8px rgba(6,182,212,.2)}
+.cal-day .day-name{font-weight:700;margin-bottom:6px;font-size:.85rem;color:var(--cyan)}
+.cal-day .biz{font-weight:600;margin-bottom:4px}
+.cal-day .plat{color:var(--muted);font-size:.72rem;line-height:1.6}
+.log-scroll{max-height:400px;overflow-y:auto}
+.log-entry{display:flex;gap:10px;padding:6px 0;border-bottom:1px solid rgba(39,39,42,.5);font-size:.8rem}
+.log-entry .time{color:var(--muted);white-space:nowrap;font-size:.72rem;min-width:50px}
+.log-entry .platform{font-weight:600;min-width:80px;font-size:.72rem}
+.log-entry .action{flex:1}
+.log-entry .result{font-size:.72rem}
+.stat-row{display:flex;gap:12px;flex-wrap:wrap;margin:8px 0}
+.stat-box{background:var(--card2);border:1px solid var(--border);border-radius:8px;padding:10px 14px;flex:1;min-width:100px;text-align:center}
+.stat-box .val{font-size:1.3rem;font-weight:700}
+.stat-box .label{font-size:.7rem;color:var(--muted);margin-top:2px}
+.check{color:var(--green)}
+.cross{color:var(--red)}
+.pending{color:var(--yellow)}
+code{background:var(--card2);padding:2px 6px;border-radius:4px;font-size:.8rem}
+@media(max-width:768px){.grid-2,.grid-3,.grid-4{grid-template-columns:1fr}.cal-grid{grid-template-columns:repeat(3,1fr)}}
+</style>
+</head>
+<body>
+
+<div class="header">
+  <h1>DevToolsmith Portfolio Dashboard</h1>
+  <div class="sub">Last update: 27 March 2026, 19:30 CET &mdash; Session 9</div>
+</div>
+
+<div class="alert-banner" id="alerts"></div>
+
+<div class="section">
+  <h2 class="open" onclick="toggle(this)">Active Business (7) <span class="arrow">&#9654;</span></h2>
+  <div class="section-body open" id="businessCards"></div>
+</div>
+
+<div class="section">
+  <h2 onclick="toggle(this)">Pending Business (2) <span class="arrow">&#9654;</span></h2>
+  <div class="section-body" id="pendingCards"></div>
+</div>
+
+<div class="section">
+  <h2 class="open" onclick="toggle(this)">Daily Routine (12 tasks) <span class="arrow">&#9654;</span></h2>
+  <div class="section-body open" id="routineTable"></div>
+</div>
+
+<div class="section">
+  <h2 class="open" onclick="toggle(this)">Platform Publishing (9 platforms) <span class="arrow">&#9654;</span></h2>
+  <div class="section-body open" id="platformTable"></div>
+</div>
+
+<div class="section">
+  <h2 onclick="toggle(this)">AdSense Status <span class="arrow">&#9654;</span></h2>
+  <div class="section-body" id="adsenseSection"></div>
+</div>
+
+<div class="section">
+  <h2 onclick="toggle(this)">PA Products (PawsAndVibesArt) <span class="arrow">&#9654;</span></h2>
+  <div class="section-body" id="paSection"></div>
+</div>
+
+<div class="section">
+  <h2 class="open" onclick="toggle(this)">Content Calendar (Week 1) <span class="arrow">&#9654;</span></h2>
+  <div class="section-body open" id="calendarSection"></div>
+</div>
+
+<div class="section">
+  <h2 class="open" onclick="toggle(this)">Pending Tasks <span class="arrow">&#9654;</span></h2>
+  <div class="section-body open" id="tasksSection"></div>
+</div>
+
+<div class="section">
+  <h2 onclick="toggle(this)">Directory Submissions <span class="arrow">&#9654;</span></h2>
+  <div class="section-body" id="directorySection"></div>
+</div>
+
+<div class="section">
+  <h2 onclick="toggle(this)">Platform Profiles (14) <span class="arrow">&#9654;</span></h2>
+  <div class="section-body" id="profilesSection"></div>
+</div>
+
+<div class="section">
+  <h2 class="open" onclick="toggle(this)">Today's Publications (10) <span class="arrow">&#9654;</span></h2>
+  <div class="section-body open" id="todayPubs"></div>
+</div>
+
+<div class="section">
+  <h2 onclick="toggle(this)">Activity Log (last 20) <span class="arrow">&#9654;</span></h2>
+  <div class="section-body" id="activityLog"></div>
+</div>
+
+<script>
+// ==================== ALL DATA EMBEDDED INLINE ====================
+var DATA = {
+  lastUpdated: "27 March 2026, 19:30 CET",
+  session: 9,
+  alerts: [
+    {text: "AdSense: Re-submitted 27/3 - pending approval. Blog needs 10+ articles (600+ words each).", level: "yellow"},
+    {text: "Dev.to API key expired (403). Regenerate via Playwright on dev.to/settings/extensions.", level: "red"},
+    {text: "Reddit automation BLOCKED - all methods fail. Manual intervention needed.", level: "red"},
+    {text: "IH Google OAuth not interceptable by Chrome MCP - needs manual login.", level: "yellow"}
+  ],
+  businesses: [
+    {id:"B0",name:"ToolKit Online",domain:"toolkitonline.vip",deploy:"READY",stripe:"AdSense pending",gsc:{clicks:8,impressions:13,ctr:"61.5%",position:"4.7"},notes:"143 tools, 900 pages. text-repeater IT pos 7, fuel-cost IT pos 10.9"},
+    {id:"B7",name:"CaptureAPI",domain:"captureapi.dev",deploy:"READY",stripe:"$0/$9/$29/$79",gsc:{clicks:0,impressions:0,ctr:"0%",position:"-"},notes:"Demo fixed 27/3. Screenshot API."},
+    {id:"F1",name:"CompliPilot",domain:"complipilot.dev",deploy:"READY",stripe:"$0/$29/$79/$199",gsc:{clicks:0,impressions:0,ctr:"0%",position:"-"},notes:"GDPR compliance. 200+ checks. Deploy fixed 27/3 (was 13 errors)."},
+    {id:"F2",name:"AccessiScan",domain:"fixmyweb.dev",deploy:"READY",stripe:"$0/$9/$29/$79",gsc:{clicks:0,impressions:0,ctr:"0%",position:"-"},notes:"201 WCAG criteria. Web accessibility testing."},
+    {id:"F3",name:"ChurnGuard",domain:"paymentrescue.dev",deploy:"READY",stripe:"$0/$29/$59/$99",gsc:{clicks:0,impressions:0,ctr:"0%",position:"-"},notes:"Payment recovery. GSC monitoring started 24/3."},
+    {id:"F4",name:"DocuMint",domain:"parseflow.dev",deploy:"READY",stripe:"$0/$19/$49/$149",gsc:{clicks:0,impressions:0,ctr:"0%",position:"-"},notes:"Document processing. GSC monitoring started 24/3."},
+    {id:"PA",name:"PawsAndVibesArt",domain:"Payhip",deploy:"ACTIVE",stripe:"-",gsc:{clicks:"-",impressions:"-",ctr:"-",position:"-"},notes:"202 PDF products. 5 published on Payhip. Digital printables."}
+  ],
+  pending: [
+    {id:"G2-6",name:"LegalDocs",status:"BUILD_OK",pages:17,priority:"HIGH",reason:"40K+ searches/month for privacy policy generator. Needs domain + deploy."},
+    {id:"N3",name:"AIJobsHub",status:"BUILD_OK",pages:26,priority:"MEDIUM",reason:"AI jobs niche growing. Needs domain + deploy + seed data."}
+  ],
+  routine: [
+    {time:"09:00",id:"daily-marketing-routine",days:"Mon-Sat",status:"done",desc:"Email + Health check 7 sites + Analytics + Promotion all platforms + PA products"},
+    {time:"10:00",id:"morning-engagement-check",days:"Mon-Sat",status:"done",desc:"Comments + Followers + Auto-replies with safety checklist"},
+    {time:"10:00",id:"monday-analysis",days:"Mon",status:"pending",desc:"GSC 6 sites + GA4 + Stripe + AdSense + Competitor analysis"},
+    {time:"10:00",id:"tuesday-content",days:"Tue",status:"pending",desc:"Blog B0 + Dev.to article with 7-week business rotation"},
+    {time:"10:00",id:"thursday-technical",days:"Thu",status:"done",desc:"Build + Lint + Deploy + Uptime + Security ALL 7 business"},
+    {time:"10:00",id:"friday-content-upgrade",days:"Fri",status:"done",desc:"SEO 1 page + IH post + UX improvements"},
+    {time:"11:00",id:"daily-self-improvement",days:"Mon-Sat",status:"pending",desc:"Mon=SEO, Tue=UX, Wed=Code, Thu=Content, Fri=Perf, Sat=Conversion"},
+    {time:"12:00",id:"daily-social-promotion",days:"Mon-Sat",status:"done",desc:"Reminder: what done, what missing, complete if needed"},
+    {time:"16:00",id:"afternoon-email-check",days:"Mon-Sat",status:"pending",desc:"Email urgencies: deploy, sales, security"},
+    {time:"19:00",id:"evening-engagement-check",days:"Mon-Sat",status:"pending",desc:"Evening report: engagement + indexing + keywords + revenue"},
+    {time:"20:00",id:"pinterest-daily",days:"Mon-Sat",status:"pending",desc:"5 pins/day (PA 70% + B0 20% + SaaS 10%)"},
+    {time:"1st",id:"monthly-directory-check",days:"Monthly",status:"pending",desc:"Verify listings + new registrations"}
+  ],
+  platforms: [
+    {name:"Dev.to",method:"API REST",auto:true,todayPubs:1,weekPubs:2,account:"@toolkitonline",status:"auto",note:"API key expired 403 - regenerate"},
+    {name:"Quora",method:"Playwright",auto:true,todayPubs:1,weekPubs:1,account:"Antonio Altomonte",status:"auto",note:"Tested 27/3"},
+    {name:"Medium",method:"Playwright",auto:true,todayPubs:0,weekPubs:0,account:"DevToolsmith",status:"auto",note:"Tested 27/3"},
+    {name:"Pinterest",method:"Playwright+cookies",auto:true,todayPubs:5,weekPubs:8,account:"PawsAndVibesArt",status:"auto",note:"10 pins ready"},
+    {name:"Hashnode",method:"API GraphQL",auto:true,todayPubs:0,weekPubs:0,account:"devtoolsmith",status:"auto",note:"Key generated"},
+    {name:"LinkedIn",method:"Chrome MCP",auto:false,todayPubs:1,weekPubs:1,account:"Antonio Altomonte",status:"partial",note:"Needs Chrome open"},
+    {name:"Reddit",method:"BLOCKED",auto:false,todayPubs:0,weekPubs:0,account:"No-Worker-5959",status:"blocked",note:"All methods fail"},
+    {name:"Indie Hackers",method:"Chrome MCP",auto:false,todayPubs:1,weekPubs:1,account:"DvToolsmith",status:"partial",note:"Google OAuth issue"},
+    {name:"StackShare",method:"Chrome MCP",auto:false,todayPubs:0,weekPubs:0,account:"Antonio",status:"limited",note:"1 tool/24h, retry 28/3"}
+  ],
+  adsense: {
+    status: "Re-submitted 27/3",
+    pubId: "ca-pub-7033623734141087",
+    checklist: [
+      {item:"Privacy Policy page",done:true},
+      {item:"Terms of Service page",done:true},
+      {item:"About page",done:true},
+      {item:"Contact page",done:true},
+      {item:"Disclaimer page",done:true},
+      {item:"ads.txt file",done:true},
+      {item:"Blog 10+ articles (600+ words)",done:false},
+      {item:"Tool descriptions 600+ words",done:false},
+      {item:"Privacy opt-out link for Google Ads",done:true}
+    ]
+  },
+  pa: {
+    total:202, payhip:5, kofi:0, gumroad:0, notPublished:197,
+    dailyRate:3, daysToComplete:67,
+    categories:{planner:55,general:68,family:14,adhd:10,home:10,wedding:10,other:35},
+    recent:[
+      {name:"Easter Activity Pack Kids",platform:"Payhip",date:"26/3"},
+      {name:"Easter Egg Hunt Kit",platform:"Payhip",date:"26/3"},
+      {name:"Easter Party Printables",platform:"Payhip",date:"26/3"},
+      {name:"Spring Bucket List",platform:"Payhip",date:"26/3"},
+      {name:"Spring Cleaning Bundle",platform:"Payhip",date:"26/3"}
+    ]
+  },
+  calendar: {
+    days: [
+      {name:"Mon",biz:"B0",platforms:["Reddit 5 comm","Quora 1 risp","Pinterest 5 pin"]},
+      {name:"Tue",biz:"F1",platforms:["LinkedIn 1 post","Reddit 5 comm","Medium 1 art","Quora 1 risp","Pinterest 5 pin"]},
+      {name:"Wed",biz:"B7",platforms:["LinkedIn 1 post","Reddit 5 comm","Dev.to 1 art","Quora 1 risp","Hashnode cross","Pinterest 5 pin"]},
+      {name:"Thu",biz:"F2",platforms:["LinkedIn 1 post","Reddit 5 comm","Quora 1 risp","Pinterest 5 pin"]},
+      {name:"Fri",biz:"F3",platforms:["LinkedIn 1 post","Reddit 5 comm","Quora 1 risp","IH 1 post","Pinterest 5 pin"]},
+      {name:"Sat",biz:"PA",platforms:["Reddit 1 post","Medium 1 art","Pinterest 5 pin"]}
+    ]
+  },
+  pendingTasks: [
+    {task:"GitHub Awesome Lists PRs",priority:"HIGH",method:"gh CLI",detail:"awesome-a11y (F2), free-for-dev (B0+B7), awesome-developer-tools (B0+B7)"},
+    {task:"Complete LegalDocs (G2-6)",priority:"HIGH",method:"Code",detail:"Domain + deploy. 40K+ searches/month."},
+    {task:"First auto-publish test on Medium",priority:"HIGH",method:"Playwright",detail:"Publish 1 article via Playwright to verify"},
+    {task:"StackShare B0",priority:"MEDIUM",method:"Chrome MCP",detail:"Retry 28/3 (24h passed)"},
+    {task:"StackShare F1,F2,F3,F4",priority:"MEDIUM",method:"Chrome MCP",detail:"1 per day after B0"},
+    {task:"SaaSHub +5 products",priority:"MEDIUM",method:"Playwright",detail:"B0,F1,F2,F3,F4"},
+    {task:"Install gh CLI",priority:"MEDIUM",method:"MANUAL",detail:"winget install GitHub.cli"},
+    {task:"Complete AIJobsHub (N3)",priority:"MEDIUM",method:"Code",detail:"Domain + deploy + seed"},
+    {task:"Uneed +5 products",priority:"MEDIUM",method:"Playwright",detail:"B0,F1,F2,F3,F4"},
+    {task:"DevHunt +5 products",priority:"MEDIUM",method:"Playwright",detail:"B0,F1,F2,F3,F4"},
+    {task:"AlternativeTo +5 products",priority:"MEDIUM",method:"Playwright",detail:"B0,F1,F2,F3,F4"},
+    {task:"LinkedIn avatar upload",priority:"LOW",method:"MANUAL",detail:"User uploads avatar-final.png"},
+    {task:"Reddit profile update",priority:"LOW",method:"MANUAL",detail:"Display name DevToolsmith + bio + avatar"},
+    {task:"IH Google login",priority:"LOW",method:"MANUAL",detail:"User clicks Google icon on indiehackers.com/sign-in"},
+    {task:"Slant.co listings",priority:"LOW",method:"Playwright",detail:"All products as alternatives"}
+  ],
+  directories: [
+    {name:"SourceForge",submitted:6,total:6,products:"B0, B7, F1, F2, F3, F4",status:"submitted"},
+    {name:"FutureTools",submitted:5,total:5,products:"B0, B7, F1, F2, F4",status:"submitted"},
+    {name:"SaaSHub",submitted:1,total:6,products:"B7",status:"partial"},
+    {name:"StackShare",submitted:1,total:6,products:"B7 (confirmed live)",status:"partial"},
+    {name:"Uneed",submitted:1,total:6,products:"B7",status:"partial"},
+    {name:"LaunchingNext",submitted:1,total:6,products:"B7",status:"partial"},
+    {name:"DevHunt",submitted:1,total:6,products:"B0",status:"partial"},
+    {name:"AlternativeTo",submitted:1,total:6,products:"B0",status:"partial"}
+  ],
+  profiles: [
+    {platform:"GitHub",username:"antonioalt3000-cyber",avatar:true,bio:true,status:"complete"},
+    {platform:"Dev.to",username:"DevToolsmith",avatar:true,bio:true,status:"complete"},
+    {platform:"Product Hunt",username:"DevToolsmith",avatar:true,bio:true,status:"complete"},
+    {platform:"Indie Hackers",username:"DvToolsmith",avatar:true,bio:true,status:"complete"},
+    {platform:"StackShare",username:"Antonio",avatar:true,bio:true,status:"complete"},
+    {platform:"Peerlist",username:"devtoolsmith",avatar:true,bio:true,status:"complete"},
+    {platform:"Quora",username:"Antonio Altomonte",avatar:true,bio:true,status:"complete"},
+    {platform:"LinkedIn",username:"Antonio Altomonte",avatar:false,bio:true,status:"partial"},
+    {platform:"Medium",username:"DevToolsmith",avatar:true,bio:true,status:"complete"},
+    {platform:"Reddit",username:"No-Worker-5959",avatar:false,bio:false,status:"incomplete"},
+    {platform:"Hashnode",username:"Antonio",avatar:true,bio:false,status:"partial"},
+    {platform:"RapidAPI",username:"Antonio",avatar:true,bio:false,status:"partial"},
+    {platform:"Pinterest",username:"PawsAndVibesArt",avatar:true,bio:true,status:"complete"},
+    {platform:"Behance",username:"-",avatar:false,bio:false,status:"failed"}
+  ],
+  todayPubs: [
+    {num:1,platform:"Quora",business:"B0",content:"Answer: 'Best free tools for developers 2026' with link to toolkitonline.vip",status:"LIVE"},
+    {num:2,platform:"Pinterest",business:"PA",content:"Pin: ADHD Brain Dump Planner",status:"LIVE"},
+    {num:3,platform:"Pinterest",business:"PA",content:"Pin: Wedding Budget Tracker",status:"LIVE"},
+    {num:4,platform:"Pinterest",business:"PA",content:"Pin: Mental Health Journal",status:"LIVE"},
+    {num:5,platform:"Pinterest",business:"B0",content:"Pin: Top 10 Free PDF Tools",status:"LIVE"},
+    {num:6,platform:"Pinterest",business:"PA",content:"Pin: 30-Day Habit Tracker",status:"LIVE"},
+    {num:7,platform:"Dev.to",business:"F2",content:"Article: 'How I Built an Accessibility Scanner That Checks 201 WCAG Criteria'",status:"LIVE"},
+    {num:8,platform:"LinkedIn",business:"F3",content:"Post: Payment recovery (ChurnGuard) with 5 hashtags",status:"LIVE"},
+    {num:9,platform:"Indie Hackers",business:"-",content:"Account DvToolsmith created + first karma building comment",status:"LIVE"},
+    {num:10,platform:"AdSense",business:"B0",content:"Re-submitted approval request + strategy created",status:"DONE"}
+  ],
+  activityLog: [
+    {time:"19:30",action:"Shared memory system created (shared-memory/)",platform:"System",result:"success"},
+    {time:"19:15",action:"Privacy Policy updated with Google Ads opt-out link",platform:"GitHub",result:"success"},
+    {time:"19:00",action:"AdSense re-submit + complete strategy created",platform:"AdSense",result:"success"},
+    {time:"18:45",action:"IH first comment karma building",platform:"Indie Hackers",result:"success"},
+    {time:"18:30",action:"IH account DvToolsmith created via Chrome MCP",platform:"Indie Hackers",result:"success"},
+    {time:"18:15",action:"LinkedIn post F3 payment recovery published",platform:"LinkedIn",result:"success"},
+    {time:"18:00",action:"Dev.to article F2 AccessiScan 201 WCAG published",platform:"Dev.to",result:"success"},
+    {time:"17:30",action:"5 Pinterest pins published (4 PA + 1 B0)",platform:"Pinterest",result:"success"},
+    {time:"17:00",action:"Quora answer published (B0 free tools 2026)",platform:"Quora",result:"success"},
+    {time:"16:30",action:"Comment rules updated (per-platform criteria)",platform:"System",result:"success"},
+    {time:"15:00",action:"Timers updated with 6 themes/day",platform:"System",result:"success"},
+    {time:"14:30",action:"PA publishing-tracker.json created",platform:"System",result:"success"},
+    {time:"13:50",action:"Hashnode API key generated",platform:"Hashnode",result:"success"},
+    {time:"13:30",action:"LinkedIn surname fixed to Altomonte",platform:"LinkedIn",result:"success"},
+    {time:"12:00",action:"Dev.to API key tested",platform:"Dev.to",result:"success"},
+    {time:"11:30",action:"Quora + Medium login tested",platform:"Quora/Medium",result:"success"},
+    {time:"10:30",action:"F1 deploy verified READY",platform:"Vercel",result:"success"},
+    {time:"10:00",action:"B7 demo thum.io removed",platform:"GitHub",result:"success"},
+    {time:"09:00",action:"10 Pinterest pin images created",platform:"Pinterest",result:"success"},
+    {time:"08:00",action:"Session 9 started",platform:"System",result:"success"}
+  ]
+};
+
+// ==================== RENDERING FUNCTIONS ====================
+
+function toggle(el) {
+  el.classList.toggle('open');
+  var body = el.nextElementSibling;
+  body.classList.toggle('open');
+}
+
+function badge(text, color) {
+  return '<span class="badge badge-' + color + '">' + text + '</span>';
+}
+
+function renderAlerts() {
+  var el = document.getElementById('alerts');
+  if (!DATA.alerts.length) { el.style.display = 'none'; return; }
+  var html = '';
+  for (var i = 0; i < DATA.alerts.length; i++) {
+    var a = DATA.alerts[i];
+    html += '<div class="alert-item"><span class="alert-icon ' + a.level + '">!</span> ' + a.text + '</div>';
+  }
+  el.innerHTML = html;
+}
+
+function renderBusinessCards() {
+  var el = document.getElementById('businessCards');
+  var html = '<div class="grid grid-3">';
+  for (var i = 0; i < DATA.businesses.length; i++) {
+    var b = DATA.businesses[i];
+    var deployBadge = (b.deploy === 'READY' || b.deploy === 'ACTIVE') ? badge(b.deploy, 'green') : badge(b.deploy, 'red');
+    var stripeBadge = b.stripe === 'AdSense pending' ? badge('AdSense pending', 'yellow') : b.stripe === '-' ? badge('N/A', 'purple') : badge(b.stripe, 'blue');
+    var domainLink = b.domain === 'Payhip' ? '<span class="domain">' + b.domain + '</span>' : '<a href="https://' + b.domain + '" target="_blank" class="domain">' + b.domain + '</a>';
+    html += '<div class="bcard">';
+    html += '<div class="top"><span class="name">' + b.id + ' &mdash; ' + b.name + '</span>' + deployBadge + '</div>';
+    html += domainLink;
+    html += '<div class="meta">' + stripeBadge + '</div>';
+    html += '<div class="gsc">';
+    html += '<div><div class="label">Clicks</div><div class="val">' + b.gsc.clicks + '</div></div>';
+    html += '<div><div class="label">Impr</div><div class="val">' + b.gsc.impressions + '</div></div>';
+    html += '<div><div class="label">CTR</div><div class="val">' + b.gsc.ctr + '</div></div>';
+    html += '<div><div class="label">Pos</div><div class="val">' + b.gsc.position + '</div></div>';
+    html += '</div>';
+    html += '<div class="notes">' + b.notes + '</div>';
+    html += '</div>';
+  }
+  html += '</div>';
+  el.innerHTML = html;
+}
+
+function renderPendingCards() {
+  var el = document.getElementById('pendingCards');
+  var html = '<div class="grid grid-2">';
+  for (var i = 0; i < DATA.pending.length; i++) {
+    var p = DATA.pending[i];
+    var prBadge = p.priority === 'HIGH' ? badge(p.priority, 'red') : badge(p.priority, 'yellow');
+    html += '<div class="bcard">';
+    html += '<div class="top"><span class="name">' + p.id + ' &mdash; ' + p.name + '</span>' + prBadge + '</div>';
+    html += '<div class="meta">' + badge(p.status, 'blue') + ' ' + badge(p.pages + ' pages', 'cyan') + '</div>';
+    html += '<div class="notes">' + p.reason + '</div>';
+    html += '</div>';
+  }
+  html += '</div>';
+  el.innerHTML = html;
+}
+
+function renderRoutine() {
+  var el = document.getElementById('routineTable');
+  var html = '<table><thead><tr><th>Time</th><th>Task</th><th>Days</th><th>Status</th><th>Description</th></tr></thead><tbody>';
+  for (var i = 0; i < DATA.routine.length; i++) {
+    var r = DATA.routine[i];
+    var st = r.status === 'done' ? '<span class="check">DONE</span>' : '<span class="pending">PENDING</span>';
+    html += '<tr><td><strong>' + r.time + '</strong></td><td>' + r.id + '</td><td>' + r.days + '</td><td>' + st + '</td><td>' + r.desc + '</td></tr>';
+  }
+  html += '</tbody></table>';
+  el.innerHTML = html;
+}
+
+function renderPlatforms() {
+  var el = document.getElementById('platformTable');
+  var html = '<table><thead><tr><th>Platform</th><th>Method</th><th>Auto</th><th>Today</th><th>Week</th><th>Account</th><th>Note</th></tr></thead><tbody>';
+  for (var i = 0; i < DATA.platforms.length; i++) {
+    var p = DATA.platforms[i];
+    var autoBadge;
+    if (p.status === 'auto') autoBadge = badge('AUTO', 'green');
+    else if (p.status === 'partial') autoBadge = badge('PARTIAL', 'yellow');
+    else if (p.status === 'blocked') autoBadge = badge('BLOCKED', 'red');
+    else autoBadge = badge(p.status.toUpperCase(), 'orange');
+    html += '<tr><td><strong>' + p.name + '</strong></td><td>' + p.method + '</td><td>' + autoBadge + '</td><td>' + p.todayPubs + '</td><td>' + p.weekPubs + '</td><td>' + p.account + '</td><td style="color:var(--muted);font-size:.75rem">' + p.note + '</td></tr>';
+  }
+  html += '</tbody></table>';
+  el.innerHTML = html;
+}
+
+function renderAdSense() {
+  var el = document.getElementById('adsenseSection');
+  var done = 0;
+  for (var i = 0; i < DATA.adsense.checklist.length; i++) { if (DATA.adsense.checklist[i].done) done++; }
+  var total = DATA.adsense.checklist.length;
+  var html = '<div class="stat-row">';
+  html += '<div class="stat-box"><div class="val" style="color:var(--yellow)">' + DATA.adsense.status + '</div><div class="label">Status</div></div>';
+  html += '<div class="stat-box"><div class="val">' + done + '/' + total + '</div><div class="label">Checklist</div></div>';
+  html += '<div class="stat-box"><div class="val" style="font-size:.8rem">' + DATA.adsense.pubId + '</div><div class="label">Pub ID</div></div>';
+  html += '</div>';
+  html += '<table><thead><tr><th>Item</th><th>Status</th></tr></thead><tbody>';
+  for (var i = 0; i < DATA.adsense.checklist.length; i++) {
+    var c = DATA.adsense.checklist[i];
+    html += '<tr><td>' + c.item + '</td><td>' + (c.done ? '<span class="check">DONE</span>' : '<span class="cross">MISSING</span>') + '</td></tr>';
+  }
+  html += '</tbody></table>';
+  html += '<div style="margin-top:10px;color:var(--muted);font-size:.8rem">Strategy file: memory/adsense-strategy.md</div>';
+  el.innerHTML = html;
+}
+
+function renderPA() {
+  var el = document.getElementById('paSection');
+  var pct = ((DATA.pa.payhip + DATA.pa.kofi) / DATA.pa.total * 100).toFixed(1);
+  var html = '<div class="stat-row">';
+  html += '<div class="stat-box"><div class="val">' + DATA.pa.total + '</div><div class="label">Total PDF</div></div>';
+  html += '<div class="stat-box"><div class="val" style="color:var(--green)">' + DATA.pa.payhip + '</div><div class="label">Payhip</div></div>';
+  html += '<div class="stat-box"><div class="val">' + DATA.pa.kofi + '</div><div class="label">Ko-fi</div></div>';
+  html += '<div class="stat-box"><div class="val" style="color:var(--red)">' + DATA.pa.notPublished + '</div><div class="label">Not Published</div></div>';
+  html += '<div class="stat-box"><div class="val">' + DATA.pa.dailyRate + '/day</div><div class="label">Rate</div></div>';
+  html += '<div class="stat-box"><div class="val">~' + DATA.pa.daysToComplete + 'd</div><div class="label">ETA</div></div>';
+  html += '</div>';
+  html += '<div class="progress-bar"><div class="fill" style="width:' + Math.max(pct, 3) + '%">' + pct + '%</div></div>';
+  html += '<div style="margin-top:12px"><strong style="font-size:.85rem">Recent Publications:</strong></div>';
+  html += '<table><thead><tr><th>Product</th><th>Platform</th><th>Date</th></tr></thead><tbody>';
+  for (var i = 0; i < DATA.pa.recent.length; i++) {
+    var r = DATA.pa.recent[i];
+    html += '<tr><td>' + r.name + '</td><td>' + r.platform + '</td><td>' + r.date + '</td></tr>';
+  }
+  html += '</tbody></table>';
+  el.innerHTML = html;
+}
+
+function renderCalendar() {
+  var el = document.getElementById('calendarSection');
+  var dayMap = {0:'Sun',1:'Mon',2:'Tue',3:'Wed',4:'Thu',5:'Fri',6:'Sat'};
+  var todayName = dayMap[new Date().getDay()];
+  var html = '<div class="cal-grid">';
+  for (var i = 0; i < DATA.calendar.days.length; i++) {
+    var d = DATA.calendar.days[i];
+    var isToday = d.name === todayName;
+    html += '<div class="cal-day' + (isToday ? ' today' : '') + '">';
+    html += '<div class="day-name">' + d.name + (isToday ? ' (TODAY)' : '') + '</div>';
+    html += '<div class="biz">' + d.biz + '</div>';
+    html += '<div class="plat">' + d.platforms.join('<br>') + '</div>';
+    html += '</div>';
+  }
+  html += '</div>';
+  el.innerHTML = html;
+}
+
+function renderTasks() {
+  var el = document.getElementById('tasksSection');
+  var html = '<table><thead><tr><th>Task</th><th>Priority</th><th>Method</th><th>Detail</th></tr></thead><tbody>';
+  for (var i = 0; i < DATA.pendingTasks.length; i++) {
+    var t = DATA.pendingTasks[i];
+    var prBadge;
+    if (t.priority === 'HIGH') prBadge = badge(t.priority, 'red');
+    else if (t.priority === 'MEDIUM') prBadge = badge(t.priority, 'yellow');
+    else prBadge = badge(t.priority, 'blue');
+    html += '<tr><td><strong>' + t.task + '</strong></td><td>' + prBadge + '</td><td>' + t.method + '</td><td style="color:var(--muted);font-size:.75rem">' + t.detail + '</td></tr>';
+  }
+  html += '</tbody></table>';
+  html += '<div style="margin-top:12px;padding:10px;background:var(--card2);border-radius:6px;font-size:.8rem">';
+  html += '<strong>Manual tasks (user needed):</strong><br>';
+  html += '1. LinkedIn: upload avatar-final.png<br>';
+  html += '2. Reddit: reddit.com/settings/profile &rarr; DevToolsmith + bio + avatar<br>';
+  html += '3. IH: indiehackers.com/sign-in &rarr; click Google icon<br>';
+  html += '4. Terminal: <code>winget install GitHub.cli</code>';
+  html += '</div>';
+  el.innerHTML = html;
+}
+
+function renderDirectories() {
+  var el = document.getElementById('directorySection');
+  var html = '<table><thead><tr><th>Directory</th><th>Submitted</th><th>Products</th><th>Status</th></tr></thead><tbody>';
+  for (var i = 0; i < DATA.directories.length; i++) {
+    var d = DATA.directories[i];
+    var st = d.submitted === d.total ? badge('COMPLETE', 'green') : badge(d.submitted + '/' + d.total, 'yellow');
+    html += '<tr><td><strong>' + d.name + '</strong></td><td>' + d.submitted + '/' + d.total + '</td><td style="color:var(--muted);font-size:.75rem">' + d.products + '</td><td>' + st + '</td></tr>';
+  }
+  html += '</tbody></table>';
+  el.innerHTML = html;
+}
+
+function renderProfiles() {
+  var el = document.getElementById('profilesSection');
+  var html = '<table><thead><tr><th>Platform</th><th>Username</th><th>Avatar</th><th>Bio</th><th>Status</th></tr></thead><tbody>';
+  var completeCount = 0;
+  for (var i = 0; i < DATA.profiles.length; i++) {
+    var p = DATA.profiles[i];
+    if (p.status === 'complete') completeCount++;
+    var av = p.avatar ? '<span class="check">Yes</span>' : '<span class="cross">No</span>';
+    var bi = p.bio ? '<span class="check">Yes</span>' : '<span class="cross">No</span>';
+    var st;
+    if (p.status === 'complete') st = badge('COMPLETE', 'green');
+    else if (p.status === 'partial') st = badge('PARTIAL', 'yellow');
+    else if (p.status === 'failed') st = badge('FAILED', 'red');
+    else st = badge('INCOMPLETE', 'red');
+    html += '<tr><td><strong>' + p.platform + '</strong></td><td>' + p.username + '</td><td>' + av + '</td><td>' + bi + '</td><td>' + st + '</td></tr>';
+  }
+  html += '</tbody></table>';
+  html += '<div style="margin-top:8px;font-size:.8rem;color:var(--muted)">' + completeCount + '/' + DATA.profiles.length + ' profiles complete</div>';
+  el.innerHTML = html;
+}
+
+function renderTodayPubs() {
+  var el = document.getElementById('todayPubs');
+  var html = '<table><thead><tr><th>#</th><th>Platform</th><th>Business</th><th>Content</th><th>Status</th></tr></thead><tbody>';
+  for (var i = 0; i < DATA.todayPubs.length; i++) {
+    var p = DATA.todayPubs[i];
+    html += '<tr><td>' + p.num + '</td><td><strong>' + p.platform + '</strong></td><td>' + p.business + '</td><td>' + p.content + '</td><td>' + badge(p.status, 'green') + '</td></tr>';
+  }
+  html += '</tbody></table>';
+  el.innerHTML = html;
+}
+
+function renderActivityLog() {
+  var el = document.getElementById('activityLog');
+  var html = '<div class="log-scroll">';
+  for (var i = 0; i < DATA.activityLog.length; i++) {
+    var e = DATA.activityLog[i];
+    var resultBadge = e.result === 'success' ? badge('OK', 'green') : badge('FAIL', 'red');
+    html += '<div class="log-entry"><span class="time">' + e.time + '</span><span class="platform">' + e.platform + '</span><span class="action">' + e.action + '</span><span class="result">' + resultBadge + '</span></div>';
+  }
+  html += '</div>';
+  el.innerHTML = html;
+}
+
+// ==================== INIT ====================
+renderAlerts();
+renderBusinessCards();
+renderPendingCards();
+renderRoutine();
+renderPlatforms();
+renderAdSense();
+renderPA();
+renderCalendar();
+renderTasks();
+renderDirectories();
+renderProfiles();
+renderTodayPubs();
+renderActivityLog();
+</script>
+</body>
+</html>
