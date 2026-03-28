@@ -160,7 +160,7 @@ export default function ToolPageWrapper({ toolSlug, children, faqItems }: ToolPa
   } : null;
 
   return (
-    <div>
+    <div className="bg-white text-gray-900 rounded-xl p-4 sm:p-6">
       {webAppSchema && (
         <script
           type="application/ld+json"
