@@ -1,0 +1,1126 @@
+- generic [ref=e2]:
+  - heading "0 notificaciones" [level=2] [ref=e3]
+  - generic [ref=e4]:
+    - generic [ref=e5]:
+      - button [ref=e6] [cursor=pointer]:
+        - generic [ref=e8]: Ir al contenido principal
+      - button [ref=e9] [cursor=pointer]:
+        - img [ref=e11]
+      - generic [ref=e15]:
+        - img [ref=e16]
+        - generic [ref=e18]:
+          - paragraph [ref=e19]: LinkedIn respeta tu privacidad
+          - generic [ref=e20]:
+            - paragraph [ref=e21]:
+              - text: LinkedIn y terceros utilizan cookies imprescindibles y opcionales para ofrecer, proteger, analizar y mejorar nuestros servicios, y para mostrarte publicidad relevante (incluidos
+              - strong [ref=e22]: anuncios profesionales y de empleo
+              - text: ) dentro y fuera de LinkedIn. Consulta más información en nuestra
+              - link "Política de cookies" [ref=e23] [cursor=pointer]:
+                - /url: https://www.linkedin.com/legal/cookie-policy/
+              - text: .
+            - paragraph [ref=e24]:
+              - text: Selecciona Aceptar para consentir o Rechazar para denegar las cookies no imprescindibles para este uso. Puedes actualizar tus preferencias en cualquier momento en tus
+              - link "ajustes" [ref=e25] [cursor=pointer]:
+                - /url: https://www.linkedin.com/settings/member-cookies/
+              - text: .
+          - generic [ref=e26]:
+            - button "Aceptar" [ref=e27] [cursor=pointer]:
+              - generic [ref=e29]: Aceptar
+            - button "Rechazar" [ref=e30] [cursor=pointer]:
+              - generic [ref=e32]: Rechazar
+    - generic [ref=e33]:
+      - banner [ref=e35]:
+        - generic [ref=e38]:
+          - button "LinkedIn" [ref=e39] [cursor=pointer]:
+            - img "LinkedIn" [ref=e40]
+          - search [ref=e43]:
+            - generic [ref=e44]:
+              - img [ref=e46]
+              - textbox "Buscar" [ref=e48]
+          - generic [ref=e50]:
+            - navigation [ref=e53]:
+              - list [ref=e54]:
+                - listitem [ref=e55]:
+                  - button "Inicio, 1 nueva notificación" [ref=e56] [cursor=pointer]:
+                    - img [ref=e58]
+                    - generic [ref=e60]: Inicio
+                - listitem [ref=e61]:
+                  - link "Mi red, 0 nuevas notificaciones" [ref=e62] [cursor=pointer]:
+                    - /url: https://www.linkedin.com/mynetwork
+                    - img [ref=e64]
+                    - generic [ref=e66]: Mi red
+                - listitem [ref=e67]:
+                  - button "Empleos, 0 nuevas notificaciones" [ref=e68] [cursor=pointer]:
+                    - img [ref=e70]
+                    - generic [ref=e72]: Empleos
+                - listitem [ref=e73]:
+                  - link "Mensajes, 0 notificaciones nuevas" [ref=e74] [cursor=pointer]:
+                    - /url: https://www.linkedin.com/messaging/
+                    - img [ref=e76]
+                    - generic [ref=e78]: Mensajes
+                - listitem [ref=e79]:
+                  - link "Notificaciones, 5 notificaciones nuevas" [ref=e80] [cursor=pointer]:
+                    - /url: https://www.linkedin.com/notifications/
+                    - generic [ref=e81]:
+                      - img [ref=e82]
+                      - generic [ref=e84]: "5"
+                    - generic [ref=e85]: Notificaciones
+                - listitem [ref=e86]:
+                  - button "Yo" [ref=e87] [cursor=pointer]:
+                    - figure [ref=e89]
+                    - generic [ref=e90]:
+                      - text: Yo
+                      - img [ref=e91]
+            - generic [ref=e94]:
+              - navigation [ref=e95]:
+                - list [ref=e96]:
+                  - listitem [ref=e97]:
+                    - button "Para negocios" [ref=e98] [cursor=pointer]:
+                      - img [ref=e100]
+                      - generic [ref=e102]:
+                        - text: Para negocios
+                        - img [ref=e103]
+              - link "Probar Premium por 0 €" [ref=e107] [cursor=pointer]:
+                - /url: https://www.linkedin.com/feed/
+                - paragraph [ref=e109]:
+                  - link "Probar Premium por 0 €" [ref=e110]:
+                    - /url: https://www.linkedin.com/feed/
+      - main [ref=e111]:
+        - main [ref=e113]:
+          - generic [ref=e115]:
+            - generic [ref=e119]:
+              - generic [ref=e123]:
+                - link [ref=e124] [cursor=pointer]:
+                  - /url: https://www.linkedin.com/in/antonio-altomonte-0a36413ba/
+                  - generic [ref=e125]:
+                    - figure [ref=e127]:
+                      - img [ref=e128]
+                    - figure [ref=e134]:
+                      - img "Antonio Altomonte" [ref=e135]
+                - generic [ref=e136]:
+                  - link "Antonio Altomonte Desarrollador Independiente en DevToolsmith Santa Cruz de Tenerife, Canarias" [ref=e137] [cursor=pointer]:
+                    - /url: https://www.linkedin.com/in/antonio-altomonte-0a36413ba/
+                    - generic [ref=e138]:
+                      - paragraph [ref=e141]: Antonio Altomonte
+                      - paragraph [ref=e143]: Desarrollador Independiente en DevToolsmith
+                      - paragraph [ref=e144]: Santa Cruz de Tenerife, Canarias
+                  - link "DevToolsmith" [ref=e145] [cursor=pointer]:
+                    - /url: https://www.linkedin.com/in/antonio-altomonte-0a36413ba/
+                    - generic [ref=e146]:
+                      - figure [ref=e147]:
+                        - img [ref=e148]
+                      - paragraph [ref=e154]: DevToolsmith
+              - link "Accede a información y herramientas exclusivas Probar Premium por 0 €" [ref=e159] [cursor=pointer]:
+                - /url: https://www.linkedin.com/premium/products/?upsellOrderOrigin=Tracking%3Av1%3Apremium_homepage_identity_upsell%3ANav%3AIn-Product&referenceId=Ins7oZJURbedIzDxxiCEOQ%3D%3D&isSS=true
+                - generic [ref=e160]:
+                  - paragraph [ref=e161]: Accede a información y herramientas exclusivas
+                  - generic [ref=e163]:
+                    - img [ref=e164]
+                    - paragraph [ref=e168]: Probar Premium por 0 €
+              - menu [ref=e171]:
+                - link "Impresiones de la publicación (65)" [ref=e173] [cursor=pointer]:
+                  - /url: https://www.linkedin.com/analytics/creator/content/
+                  - generic "Impresiones de la publicación (65)" [ref=e174]:
+                    - paragraph [ref=e176]: Impresiones de la publicación
+                    - paragraph [ref=e177]: "65"
+                - link "Contactos 0 Amplía tu red" [ref=e179] [cursor=pointer]:
+                  - /url: https://www.linkedin.com/mynetwork/
+                  - generic "Contactos 0 Amplía tu red" [ref=e180]:
+                    - generic [ref=e181]:
+                      - paragraph [ref=e182]: Contactos
+                      - paragraph [ref=e183]: Amplía tu red
+                    - paragraph [ref=e184]: "0"
+              - menu [ref=e187]:
+                - link "Elementos guardados" [ref=e188] [cursor=pointer]:
+                  - /url: https://www.linkedin.com/my-items/saved-posts/
+                  - generic [ref=e189]:
+                    - img [ref=e190]
+                    - paragraph [ref=e192]: Elementos guardados
+                - link "Grupos" [ref=e193] [cursor=pointer]:
+                  - /url: https://www.linkedin.com/groups/
+                  - generic [ref=e194]:
+                    - img [ref=e195]
+                    - paragraph [ref=e201]: Grupos
+                - link "Newsletters" [ref=e202] [cursor=pointer]:
+                  - /url: https://www.linkedin.com/mynetwork/network-manager/newsletters/
+                  - generic [ref=e203]:
+                    - img [ref=e204]
+                    - paragraph [ref=e206]: Newsletters
+                - link "Eventos" [ref=e207] [cursor=pointer]:
+                  - /url: https://www.linkedin.com/events/
+                  - generic [ref=e208]:
+                    - img [ref=e209]
+                    - paragraph [ref=e211]: Eventos
+            - list [ref=e213]:
+              - generic [ref=e216]:
+                - generic [ref=e217]:
+                  - generic [ref=e218]:
+                    - paragraph [ref=e219]: Ponte en marcha en LinkedIn
+                    - button "Descartar" [ref=e220] [cursor=pointer]:
+                      - img [ref=e222]
+                  - generic [ref=e224]:
+                    - progressbar "0 porcentaje completado" [ref=e226]
+                    - paragraph [ref=e227]: 0/3 completado
+                - generic [ref=e230]:
+                  - generic [ref=e231]:
+                    - list [ref=e233]:
+                      - listitem [ref=e234]:
+                        - generic [ref=e237]:
+                          - figure [ref=e238]
+                          - generic [ref=e239]:
+                            - paragraph [ref=e240]: Añade tu experiencia laboral y tus aptitudes para mostrar tus puntos fuertes a los técnicos de selección.
+                            - link "Actualizar perfil" [ref=e241] [cursor=pointer]:
+                              - /url: https://www.linkedin.com/feed/?legoTrackingToken=0QfmlWqldVomNMsSBA9z0Kc3RBsCZzkTsCfn9xk6NBkDsCfmhLjmNBkDsCejAVejAZp6lQsSlRsmlirnlK9AVfilh9kQZgfnB2sClAsAZQpmtAqnsCpmNFpCZOs5ZBt65As7lvcDpAon1EoSVRomMZp4BQpmtAqnsCc3RKrSBQqndLk7hBpShFtOoMbz0Zpn9LoRdOpOoZsC5gr6lisCsCfmhLjmNBkD9D9z0ZrCZFt6BPrR1MtmZOpOoQfmhBt7dBtn5BkCRRjD1RrT9D9DdKrSBQoS4Zp4BMtmZOpOpejQBkildfk3RVgD9Bp79L9ChBpmpvsClyrmlJnTtBrzRAinhKpmRDpncCqT9LtThBrD9RrTBAr6BRozRAinhLr7cCt6NRompBp3RAinhRrTBxr2oOtChxs6xzrDlxr3RBrm5epmtxs2pEt7tLsCsZp4BMs64CcjwOcz8Pfmh9rCZFsT9BtyoPc3oOcPkRcjsNfmh9tioQcmpAoPcNc3oMczkJcmhBe2QTczcQbj4NcmkJdz0Tdz8Qe3cZp4BQu6lQrCZz&showCareersModal=updateProfile
+                              - generic [ref=e243]: Actualizar perfil
+                      - listitem [ref=e244]:
+                        - generic [ref=e247]:
+                          - figure [ref=e248]
+                          - generic [ref=e249]:
+                            - paragraph [ref=e250]: Sigue a empresas en las que te gustaría trabajar para captar la atención de los técnicos de selección.
+                            - link "Seguir" [ref=e251] [cursor=pointer]:
+                              - /url: https://www.linkedin.com/mynetwork/discover-hub/?useCase=LAUNCHPAD_FOLLOW_COMPANY_RECOMMENDATION&legoTrackingToken=3gZpnFFkTBxr71PqmgCc2UMfmlOrSdjtOoZsC5gr6litOoZp6Zdr6litOoVejAVejRApnhPpnlNpl9JtmUCjAZ9l4BjjR0Zuk9OpmhOjThBpShFtOpPpmtxs5ZTrSNIrSpvcDpAon1EoSVRomMZp4BQpmtAqnsCcjRKrSBQqndLk7hBpShFtOoMbz0Zpn9LoRdOpOoZsC5gr6lisCsCfmhLjmNBkD9D9z0ZrCZFt6BPrR1MtmZOpOoQfmhBt7dBtn5BkCRRjD1RrT9D9DdKrSBQoS4Zp4BMtmZOpOpejQBkildfk3RVgD9Bp79L9ChBpmpvsClyrmlJnTtBrzRAinhKpmRDpncCqT9LtThBrD9RrTBAr6BRozRAinhLr7cCt6NRompBp3RAinhRrTBxr2oOtChxs6xzrDlxr3RBrm5epmtxs2pEt7tLsCsZp4BMs64CcjwOcz8Pfmh9rCZFsT9BtyoPc3oOcPkRcjsNfmh9tioQcmpAoPcNc3oMczkJcmhBe2QTczcQbj4NcmkJdz0Tdz8Qe3cZp4BQu6lQrCZz
+                              - generic [ref=e253]: Seguir
+                      - listitem [ref=e254]:
+                        - generic [ref=e257]:
+                          - figure [ref=e258]
+                          - generic [ref=e259]:
+                            - paragraph [ref=e260]: Conecta con compañeros de clase, de trabajo y otras personas que conoces.
+                            - link "Encontrar a personas que conoces" [ref=e261] [cursor=pointer]:
+                              - /url: https://www.linkedin.com/feed/?legoTrackingToken=3gZpnFFkTBxr71PqmgCc2UMfmlOrSdjtOoZsC5gr6litOoZp6Zdr6litOoVejAVejRApnhPpnlNpl9JtmUCjAZ9l4BjjR0Zuk9OpmhOjThBpShFtOpPrCZFt6dBrCVLoRZAp65vcDpAon1EoSVRomMZp4BQpmtAqnsCczRKrSBQqndLk7hBpShFtOoMbz0Zpn9LoRdOpOoZsC5gr6lisCsCfmhLjmNBkD9D9z0ZrCZFt6BPrR1MtmZOpOoQfmhBt7dBtn5BkCRRjD1RrT9D9DdKrSBQoS4Zp4BMtmZOpOpejQBkildfk3RVgD9Bp79L9ChBpmpvsClyrmlJnTtBrzRAinhKpmRDpncCqT9LtThBrD9RrTBAr6BRozRAinhLr7cCt6NRompBp3RAinhRrTBxr2oOtChxs6xzrDlxr3RBrm5epmtxs2pEt7tLsCsZp4BMs64CcjwOcz8Pfmh9rCZFsT9BtyoPc3oOcPkRcjsNfmh9tioQcmpAoPcNc3oMczkJcmhBe2QTczcQbj4NcmkJdz0Tdz8Qe3cZp4BQu6lQrCZz&showCareersModal=addConnections
+                              - generic [ref=e263]: Encontrar a personas que conoces
+                    - button "Siguiente" [ref=e264] [cursor=pointer]:
+                      - img [ref=e266]
+                  - list [ref=e269]:
+                    - listitem [ref=e270]:
+                      - button "Página 1" [ref=e271] [cursor=pointer]
+                    - listitem [ref=e272]:
+                      - button "Página 2" [ref=e273] [cursor=pointer]
+                    - listitem [ref=e274]:
+                      - button "Página 3" [ref=e275] [cursor=pointer]
+              - generic [ref=e277]:
+                - generic [ref=e278]:
+                  - link [ref=e279] [cursor=pointer]:
+                    - /url: https://www.linkedin.com/in/antonio-altomonte-0a36413ba/
+                    - figure [ref=e280]
+                  - button "Crear publicación" [ref=e282] [cursor=pointer]:
+                    - generic "Crear publicación" [ref=e283]:
+                      - generic [ref=e285]:
+                        - paragraph [ref=e286]: Crear publicación
+                        - generic:
+                          - paragraph
+                - generic [ref=e287]:
+                  - button "Vídeo" [ref=e288] [cursor=pointer]:
+                    - generic [ref=e289]:
+                      - img [ref=e290]
+                      - paragraph [ref=e292]: Vídeo
+                  - button "Foto" [ref=e293] [cursor=pointer]:
+                    - generic [ref=e294]:
+                      - img [ref=e295]
+                      - paragraph [ref=e297]: Foto
+                  - link "Escribir artículo" [ref=e298] [cursor=pointer]:
+                    - /url: /article/new/
+                    - generic [ref=e299]:
+                      - img [ref=e300]
+                      - paragraph [ref=e302]: Escribir artículo
+              - 'button "Seleccionar vista del feed: Primero los más relevantes" [ref=e304] [cursor=pointer]':
+                - generic [ref=e305]:
+                  - paragraph [ref=e306]:
+                    - text: "Seleccionar vista del feed:"
+                    - strong [ref=e307]: Primero los más relevantes
+                  - img [ref=e308]
+              - listitem [ref=e313]:
+                - generic [ref=e315]:
+                  - heading "Publicación en el feed" [level=2]:
+                    - generic [ref=e316]: Publicación en el feed
+                  - generic [ref=e317]:
+                    - paragraph [ref=e321]: Te recomendamos
+                    - link "Touhajleb Sidi Aly Entrepreneure | Directrice-Fondatrice chez ETOP SARL | Aménagement paysager & Environnement Los profesionales con aptitudes de Personal eventual también siguen a estas personas Seguir a Touhajleb Sidi Aly" [ref=e322] [cursor=pointer]:
+                      - /url: https://www.linkedin.com/in/touhajleb-sidi-aly-289772164/
+                      - listitem [ref=e323]:
+                        - generic [ref=e324]:
+                          - figure [ref=e325]:
+                            - img "Ver perfil" [ref=e326]
+                          - generic [ref=e327]:
+                            - paragraph [ref=e330]:
+                              - text: Touhajleb Sidi Aly
+                              - img [ref=e332]
+                            - paragraph [ref=e335]: Entrepreneure | Directrice-Fondatrice chez ETOP SARL | Aménagement paysager & Environnement
+                            - generic [ref=e336]:
+                              - img [ref=e337]
+                              - paragraph [ref=e340]: Los profesionales con aptitudes de Personal eventual también siguen a estas personas
+                        - button "Seguir a Touhajleb Sidi Aly" [ref=e342]:
+                          - generic [ref=e343]:
+                            - img [ref=e344]
+                            - generic [ref=e347]: Seguir
+                    - link "Marcelo Vázquez (Aka. S4vitar) Hack4u CEO & Founder / Pentester / YouTuber / Streamer Popular en LinkedIn Seguir a Marcelo Vázquez (Aka. S4vitar)" [ref=e348] [cursor=pointer]:
+                      - /url: https://www.linkedin.com/in/s4vitar/
+                      - listitem [ref=e349]:
+                        - generic [ref=e350]:
+                          - figure [ref=e351]:
+                            - img "Ver perfil" [ref=e352]
+                          - generic [ref=e353]:
+                            - paragraph [ref=e356]:
+                              - text: Marcelo Vázquez (Aka. S4vitar)
+                              - img [ref=e358]
+                            - paragraph [ref=e361]: Hack4u CEO & Founder / Pentester / YouTuber / Streamer
+                            - generic [ref=e362]:
+                              - img [ref=e363]
+                              - paragraph [ref=e366]: Popular en LinkedIn
+                        - button "Seguir a Marcelo Vázquez (Aka. S4vitar)" [ref=e368]:
+                          - generic [ref=e369]:
+                            - img [ref=e370]
+                            - generic [ref=e373]: Seguir
+                    - link "Miguel Ángel Durán García Programación JavaScript y Desarrollo Web. Reconocido Google Developer Expert, Microsoft MVP y GitHub Star. ⭐ Vibe Coding Cleanup Specialist Los profesionales del sector de Desarrollo de software también siguen a estas personas Seguir a Miguel Ángel Durán García" [ref=e374] [cursor=pointer]:
+                      - /url: https://www.linkedin.com/in/midudev/
+                      - listitem [ref=e375]:
+                        - generic [ref=e376]:
+                          - figure [ref=e377]:
+                            - img "Ver perfil" [ref=e378]
+                          - generic [ref=e379]:
+                            - paragraph [ref=e382]:
+                              - text: Miguel Ángel Durán García
+                              - img [ref=e384]
+                            - paragraph [ref=e387]: Programación JavaScript y Desarrollo Web. Reconocido Google Developer Expert, Microsoft MVP y GitHub Star. ⭐ Vibe Coding Cleanup Specialist
+                            - generic [ref=e388]:
+                              - img [ref=e389]
+                              - paragraph [ref=e392]: Los profesionales del sector de Desarrollo de software también siguen a estas personas
+                        - button "Seguir a Miguel Ángel Durán García" [ref=e394]:
+                          - generic [ref=e395]:
+                            - img [ref=e396]
+                            - generic [ref=e399]: Seguir
+                    - link "Mostrar más" [ref=e400] [cursor=pointer]:
+                      - /url: /mynetwork/discover-hub/
+                      - generic [ref=e401]:
+                        - img [ref=e402]
+                        - generic [ref=e404]: Mostrar más
+              - listitem [ref=e408]:
+                - generic [ref=e410]:
+                  - heading "Publicación en el feed" [level=2]:
+                    - generic [ref=e411]: Publicación en el feed
+                  - generic [ref=e412]:
+                    - paragraph [ref=e415]: Sugerencias
+                    - button "Abrir el menú de controles para la publicación de Pablo Arcas Roldan" [ref=e416] [cursor=pointer]:
+                      - img [ref=e418]
+                    - button "Ocultar la publicación de Pablo Arcas Roldan" [ref=e420] [cursor=pointer]:
+                      - img [ref=e422]
+                  - generic [ref=e424]:
+                    - link [ref=e425] [cursor=pointer]:
+                      - /url: https://www.linkedin.com/in/p-arcas/
+                      - figure [ref=e426]:
+                        - img "Ver perfil de Pablo Arcas Roldan" [ref=e427]
+                    - 'link "Pablo Arcas Roldan perfil Verificado 3er y demás Frontend Developer | Angular | TypeScript | JavaScript | Fintech Web Applications | Accessibility | Java | Spring Boot 2 días • Visibilidad: global" [ref=e428] [cursor=pointer]':
+                      - /url: https://www.linkedin.com/in/p-arcas/
+                      - generic [ref=e429]:
+                        - generic "Pablo Arcas Roldan perfil Verificado 3er y demás" [ref=e430]:
+                          - paragraph [ref=e433]: Pablo Arcas Roldan
+                          - paragraph [ref=e435]:
+                            - img [ref=e437]
+                            - text: • 3er+
+                        - paragraph [ref=e440]: Frontend Developer | Angular | TypeScript | JavaScript | Fintech Web Applications | Accessibility | Java | Spring Boot
+                        - paragraph [ref=e442]:
+                          - text: 2 días •
+                          - 'img "Visibilidad: global" [ref=e443]'
+                    - button "Seguir a Pablo Arcas Roldan" [ref=e448] [cursor=pointer]:
+                      - generic [ref=e449]:
+                        - img [ref=e450]
+                        - generic [ref=e453]: Seguir
+                  - paragraph [ref=e454]:
+                    - generic [ref=e455]:
+                      - text: Después de 1 y medio año trabajando como Frontend Developer, me di cuenta de algo...
+                      - text: Tenía apuntes de Angular por todas partes, notas sueltas, documentación, ejemplos… Y repasar se volvía caótico.
+                      - text: Así que decidí hacer algo 👇
+                      - text: "Partí de una plantilla de Notion que encontré hace tiempo y junto a todos mis apuntes la rehíce completamente:"
+                      - text: → Reorganicé toda la estructura
+                      - text: → Actualicé conceptos clave y añadí nuevos
+                      - text: → Añadí ejemplos, cheatsheets y notas propias
+                      - text: → La adapté a cómo realmente se usa Angular en el día a día
+                      - text: Ahora es una herramienta que uso constantemente para estudiar y trabajar.
+                      - text: ¿Qué incluye?
+                      - text: 🗂️ Estructura clara de Angular (módulos, componentes, servicios)
+                      - text: 🔄 Lifecycle hooks explicados de forma simple
+                      - text: 🚀 Conceptos clave como Signals y Zoneless
+                      - text: ⚡ Espacio para snippets y ejemplos reales
+                      - text: 🧠 Organización pensada para repasar rápido
+                      - text: Pensada para devs que quieren aprender Angular de forma estructurada.
+                      - text: Si estás aprendiendo Angular, te dejo el link en comentarios 👇
+                      - text: Tengo pensado seguir actualizándola, así que cualquier sugerencia es bienvenida 🙃
+                      - link "#Angular" [ref=e457] [cursor=pointer]:
+                        - /url: https://www.linkedin.com/search/results/all/?keywords=%23angular&origin=HASH_TAG_FROM_FEED
+                        - strong [ref=e459]: "#Angular"
+                      - link "#FrontendDevelopment" [ref=e460] [cursor=pointer]:
+                        - /url: https://www.linkedin.com/search/results/all/?keywords=%23frontenddevelopment&origin=HASH_TAG_FROM_FEED
+                        - strong [ref=e462]: "#FrontendDevelopment"
+                      - link "#SoftwareEngineering" [ref=e463] [cursor=pointer]:
+                        - /url: https://www.linkedin.com/search/results/all/?keywords=%23softwareengineering&origin=HASH_TAG_FROM_FEED
+                        - strong [ref=e465]: "#SoftwareEngineering"
+                      - link "#LearnInPublic" [ref=e466] [cursor=pointer]:
+                        - /url: https://www.linkedin.com/search/results/all/?keywords=%23learninpublic&origin=HASH_TAG_FROM_FEED
+                        - strong [ref=e468]: "#LearnInPublic"
+                      - link "#Notion" [ref=e469] [cursor=pointer]:
+                        - /url: https://www.linkedin.com/search/results/all/?keywords=%23notion&origin=HASH_TAG_FROM_FEED
+                        - strong [ref=e471]: "#Notion"
+                      - button:
+                        - generic [ref=e473] [cursor=pointer]: … más
+                  - generic [ref=e474]:
+                    - link "36 reacciones" [ref=e475] [cursor=pointer]:
+                      - /url: https://www.linkedin.com/feed/
+                      - generic [ref=e476]:
+                        - img [ref=e477]
+                        - img [ref=e483]
+                        - img [ref=e489]
+                        - paragraph [ref=e504]:
+                          - generic [ref=e505]: 36 reacciones
+                          - text: "36"
+                    - generic [ref=e506]:
+                      - button "11 comentarios" [ref=e507] [cursor=pointer]:
+                        - paragraph [ref=e508]:
+                          - generic [ref=e509]: 11 comentarios
+                          - generic [ref=e510]: 11 comentarios
+                      - paragraph [ref=e511]: •
+                      - link "1 vez compartido" [ref=e512] [cursor=pointer]:
+                        - /url: https://www.linkedin.com/feed/
+                        - paragraph [ref=e513]:
+                          - generic [ref=e514]: 1 vez compartido
+                          - generic [ref=e515]: 1 vez compartido
+                  - generic [ref=e516]:
+                    - generic [ref=e518]:
+                      - 'button "Estado del botón de reacción: ninguna reacción" [ref=e521] [cursor=pointer]':
+                        - generic [ref=e522]:
+                          - img [ref=e523]
+                          - generic [ref=e525]: Recomendar
+                      - button "Abrir el menú de reacciones":
+                        - img [ref=e527] [cursor=pointer]
+                    - button "Comentar" [ref=e529] [cursor=pointer]:
+                      - generic [ref=e530]:
+                        - img [ref=e531]
+                        - generic [ref=e534]: Comentar
+                    - button "Compartir" [ref=e535] [cursor=pointer]:
+                      - generic [ref=e536]:
+                        - img [ref=e537]
+                        - generic [ref=e540]: Compartir
+                    - link "Enviar" [ref=e541] [cursor=pointer]:
+                      - /url: https://www.linkedin.com/feed/
+                      - generic [ref=e542]:
+                        - img [ref=e543]
+                        - generic [ref=e546]: Enviar
+              - listitem [ref=e550]:
+                - generic [ref=e552]:
+                  - heading "Publicación en el feed" [level=2]:
+                    - generic [ref=e553]: Publicación en el feed
+                  - generic [ref=e554]:
+                    - paragraph [ref=e557]: Sugerencias
+                    - button "Abrir el menú de controles para la publicación de Hans Castro Jiménez" [ref=e558] [cursor=pointer]:
+                      - img [ref=e560]
+                    - button "Ocultar la publicación de Hans Castro Jiménez" [ref=e562] [cursor=pointer]:
+                      - img [ref=e564]
+                  - generic [ref=e566]:
+                    - link [ref=e567] [cursor=pointer]:
+                      - /url: https://www.linkedin.com/in/hanscastrojimenez/
+                      - figure [ref=e568]:
+                        - img "Ver perfil de Hans Castro Jiménez" [ref=e569]
+                    - 'link "Hans Castro Jiménez perfil Verificado 3er y demás Socio y CTO de Testualia.com | El Software para Gestionar Evaluaciones de Conocimiento 3 días • Visibilidad: global" [ref=e570] [cursor=pointer]':
+                      - /url: https://www.linkedin.com/in/hanscastrojimenez/
+                      - generic [ref=e571]:
+                        - generic "Hans Castro Jiménez perfil Verificado 3er y demás" [ref=e572]:
+                          - paragraph [ref=e575]: Hans Castro Jiménez
+                          - paragraph [ref=e577]:
+                            - img [ref=e579]
+                            - text: • 3er+
+                        - paragraph [ref=e582]: Socio y CTO de Testualia.com | El Software para Gestionar Evaluaciones de Conocimiento
+                        - paragraph [ref=e584]:
+                          - text: 3 días •
+                          - 'img "Visibilidad: global" [ref=e585]'
+                    - button "Seguir a Hans Castro Jiménez" [ref=e590] [cursor=pointer]:
+                      - generic [ref=e591]:
+                        - img [ref=e592]
+                        - generic [ref=e595]: Seguir
+                  - paragraph [ref=e596]:
+                    - generic [ref=e597]:
+                      - text: "¿La productividad IA nos está quemando el cerebro? 🫠 Ayer dejé 4 features desarrollándose con sistemas de workflows orquestando agentes. Y me dio pena, y me puse a hablar con un amigo reflexionando sobre el tema. Antes, podíamos estar varios días programando algo que ya estaba en nuestra cabeza. Ahora todo son prisas. Porque te montas en una hora un markdown bien detallado, lo ejecutas con un workflow de agentes, y te one-shotean la característica respetando todos los criterios técnicos que has definido y pasando tests. 𝗣𝗲𝗿𝗼 𝗮𝗾𝘂𝗶́ 𝗲𝘀𝘁𝗮́ 𝗹𝗮 𝘁𝗿𝗮𝗺𝗽𝗮: Cuando terminas esa hora de intensidad cognitiva, vas a definir la siguiente tarea al detalle; investigando el codebase y definiendo archivo por archivo lo que ha de crear para no dejar cabos sueltos ni decisiones a la IA. Y otra hora, y otra hora... y en ningún momento paras a picar código en automático como hacías antes. Las jornadas de trabajo se han vuelto agotadoras para quien sabe usar la IA de verdad, no tirando prompts al claude y mirando el móvil. La productividad la hemos multiplicado, pero los nostálgicos pre-IA vamos a echar mucho de menos la forma de trabajar de antaño."
+                      - button:
+                        - generic [ref=e599] [cursor=pointer]: … más
+                  - link [ref=e601] [cursor=pointer]:
+                    - /url: https://www.linkedin.com/feed/
+                    - figure [ref=e602]:
+                      - img "Ver imagen" [ref=e603]
+                  - generic [ref=e604]:
+                    - link "54 reacciones" [ref=e605] [cursor=pointer]:
+                      - /url: https://www.linkedin.com/feed/
+                      - generic [ref=e606]:
+                        - img [ref=e607]
+                        - img [ref=e613]
+                        - img [ref=e624]
+                        - paragraph [ref=e631]:
+                          - generic [ref=e632]: 54 reacciones
+                          - text: "54"
+                    - button "9 comentarios" [ref=e634] [cursor=pointer]:
+                      - paragraph [ref=e635]:
+                        - generic [ref=e636]: 9 comentarios
+                        - generic [ref=e637]: 9 comentarios
+                  - generic [ref=e638]:
+                    - generic [ref=e640]:
+                      - 'button "Estado del botón de reacción: ninguna reacción" [ref=e643] [cursor=pointer]':
+                        - generic [ref=e644]:
+                          - img [ref=e645]
+                          - generic [ref=e647]: Recomendar
+                      - button "Abrir el menú de reacciones":
+                        - img [ref=e649] [cursor=pointer]
+                    - button "Comentar" [ref=e651] [cursor=pointer]:
+                      - generic [ref=e652]:
+                        - img [ref=e653]
+                        - generic [ref=e656]: Comentar
+                    - button "Compartir" [ref=e657] [cursor=pointer]:
+                      - generic [ref=e658]:
+                        - img [ref=e659]
+                        - generic [ref=e662]: Compartir
+                    - link "Enviar" [ref=e663] [cursor=pointer]:
+                      - /url: https://www.linkedin.com/feed/
+                      - generic [ref=e664]:
+                        - img [ref=e665]
+                        - generic [ref=e668]: Enviar
+              - listitem [ref=e793]:
+                - generic [ref=e795]:
+                  - heading "Publicación en el feed" [level=2]:
+                    - generic [ref=e796]: Publicación en el feed
+                  - generic [ref=e797]:
+                    - paragraph [ref=e800]: Sugerencias
+                    - button "Abrir el menú de controles para la publicación de Miguel Hernández Jaso" [ref=e801] [cursor=pointer]:
+                      - img [ref=e803]
+                    - button "Ocultar la publicación de Miguel Hernández Jaso" [ref=e805] [cursor=pointer]:
+                      - img [ref=e807]
+                  - generic [ref=e809]:
+                    - link [ref=e810] [cursor=pointer]:
+                      - /url: https://www.linkedin.com/in/miguelhernandezjaso/es/
+                      - figure [ref=e811]:
+                        - img "Ver perfil de Miguel Hernández Jaso" [ref=e812]
+                    - 'link "Miguel Hernández Jaso perfil Premium 3er y demás Staff engineer en Eventbrite 2 días • Visibilidad: global" [ref=e813] [cursor=pointer]':
+                      - /url: https://www.linkedin.com/in/miguelhernandezjaso/es/
+                      - generic [ref=e814]:
+                        - generic "Miguel Hernández Jaso perfil Premium 3er y demás" [ref=e815]:
+                          - paragraph [ref=e818]: Miguel Hernández Jaso
+                          - paragraph [ref=e820]:
+                            - img [ref=e822]
+                            - text: • 3er+
+                        - paragraph [ref=e825]: Staff engineer en Eventbrite
+                        - paragraph [ref=e827]:
+                          - text: 2 días •
+                          - 'img "Visibilidad: global" [ref=e828]'
+                    - button "Seguir a Miguel Hernández Jaso" [ref=e833] [cursor=pointer]:
+                      - generic [ref=e834]:
+                        - img [ref=e835]
+                        - generic [ref=e838]: Seguir
+                  - paragraph [ref=e839]:
+                    - generic [ref=e840]:
+                      - text: "Lo voy a comentar yo en voz alta porque alguien tiene que hacerlo. Sin acritud, no voy a mencionar a nadie en particular. Esos diagramas hechos con IA que subís algunos/as dándolo lecciones de cómo llevar equipos, empresas, etc tienen un montón de erratas en las partes escritas, y no menciono ya los dibujos en sí, que son bonitos de lejos pero también contienen trazos extraños o borrosos cuando los ves de cerca. Al menos leed lo que publicáis. Porque publicar algo que no solo no habéis hecho con vuestras propias habilidades y que además está defectuoso os deja en mal lugar: o sois mediocres porque no lo revisáis o lo sois porque aun viendo que está mal lo subís igualmente. Todos podemos cometer errores, pero no dejéis que una máquina cometa errores que hacéis pasar por vuestros."
+                      - button:
+                        - generic [ref=e842] [cursor=pointer]: … más
+                  - generic [ref=e843]:
+                    - link "109 reacciones" [ref=e844] [cursor=pointer]:
+                      - /url: https://www.linkedin.com/feed/
+                      - generic [ref=e845]:
+                        - img [ref=e846]
+                        - img [ref=e852]
+                        - img [ref=e866]
+                        - paragraph [ref=e873]:
+                          - generic [ref=e874]: 109 reacciones
+                          - text: "109"
+                    - generic [ref=e875]:
+                      - button "13 comentarios" [ref=e876] [cursor=pointer]:
+                        - paragraph [ref=e877]:
+                          - generic [ref=e878]: 13 comentarios
+                          - generic [ref=e879]: 13 comentarios
+                      - paragraph [ref=e880]: •
+                      - link "2 veces compartido" [ref=e881] [cursor=pointer]:
+                        - /url: https://www.linkedin.com/feed/
+                        - paragraph [ref=e882]:
+                          - generic [ref=e883]: 2 veces compartido
+                          - generic [ref=e884]: 2 veces compartido
+                  - generic [ref=e885]:
+                    - generic [ref=e887]:
+                      - 'button "Estado del botón de reacción: ninguna reacción" [ref=e890] [cursor=pointer]':
+                        - generic [ref=e891]:
+                          - img [ref=e892]
+                          - generic [ref=e894]: Recomendar
+                      - button "Abrir el menú de reacciones":
+                        - img [ref=e896] [cursor=pointer]
+                    - button "Comentar" [ref=e898] [cursor=pointer]:
+                      - generic [ref=e899]:
+                        - img [ref=e900]
+                        - generic [ref=e903]: Comentar
+                    - button "Compartir" [ref=e904] [cursor=pointer]:
+                      - generic [ref=e905]:
+                        - img [ref=e906]
+                        - generic [ref=e909]: Compartir
+                    - link "Enviar" [ref=e910] [cursor=pointer]:
+                      - /url: https://www.linkedin.com/feed/
+                      - generic [ref=e911]:
+                        - img [ref=e912]
+                        - generic [ref=e915]: Enviar
+              - listitem [ref=e919]:
+                - generic [ref=e921]:
+                  - heading "Publicación en el feed" [level=2]:
+                    - generic [ref=e922]: Publicación en el feed
+                  - generic [ref=e923]:
+                    - paragraph [ref=e926]: Sugerencias
+                    - button "Abrir el menú de controles para la publicación de Enrique Gómez Navarro" [ref=e927] [cursor=pointer]:
+                      - img [ref=e929]
+                    - button "Ocultar la publicación de Enrique Gómez Navarro" [ref=e931] [cursor=pointer]:
+                      - img [ref=e933]
+                  - generic [ref=e935]:
+                    - link [ref=e936] [cursor=pointer]:
+                      - /url: https://www.linkedin.com/in/egdev/
+                      - figure [ref=e937]:
+                        - img "Ver perfil de Enrique Gómez Navarro" [ref=e938]
+                    - 'link "Enrique Gómez Navarro perfil Verificado 3er y demás Senior Frontend Software Engineer 💻 Javascript | React | Next.js 12 h • Editado • Visibilidad: global" [ref=e939] [cursor=pointer]':
+                      - /url: https://www.linkedin.com/in/egdev/
+                      - generic [ref=e940]:
+                        - generic "Enrique Gómez Navarro perfil Verificado 3er y demás" [ref=e941]:
+                          - paragraph [ref=e944]: Enrique Gómez Navarro
+                          - paragraph [ref=e946]:
+                            - img [ref=e948]
+                            - text: • 3er+
+                        - paragraph [ref=e951]: Senior Frontend Software Engineer 💻 Javascript | React | Next.js
+                        - paragraph [ref=e953]:
+                          - text: 12 h • Editado •
+                          - 'img "Visibilidad: global" [ref=e954]'
+                    - button "Seguir a Enrique Gómez Navarro" [ref=e959] [cursor=pointer]:
+                      - generic [ref=e960]:
+                        - img [ref=e961]
+                        - generic [ref=e964]: Seguir
+                  - paragraph [ref=e965]:
+                    - generic [ref=e966]:
+                      - text: ⚠️ Te unes al reto? ⚠️
+                      - text: ¿crees que puedes ponerte en los zapatos de tu rol opuesto?
+                      - text: 👨‍💻 En la imagen vas a ver los típicos estereotipos (¡a veces reales!) de conversaciones entre frontend y backend.
+                      - text: "💬 La idea es simple: Escribe una frase habitual en comentarios que tu (como frontend o backend) digas a diario. Después, intenta responderla como si fueras del otro rol. También vale entre otros roles....por ej: diseño, PM, TL o QA."
+                      - text: "🎯 Ejemplo:"
+                      - text: "🧠 Backend dice: “Pero la API devuelve 200, ¿no?”"
+                      - text: "💥 Frontend podría pensar: “Sí, pero devuelve un array vacío sin title, id, ni image, bro.”"
+                      - text: 👀 ¿Cuánto entiendes los problemas del otro lado?
+                      - text: 🧩 Deja tu frase y su contraparte en los comentarios.
+                      - text: Si tienes compañeros de equipo, menciona a uno para que se sume al reto
+                      - text: ⚠️ Por favor, mantengamos el respeto en los comentarios ⚠️
+                      - text: Te leo!👇
+                      - link "#DevEmpathy" [ref=e968] [cursor=pointer]:
+                        - /url: https://www.linkedin.com/search/results/all/?keywords=%23devempathy&origin=HASH_TAG_FROM_FEED
+                        - strong [ref=e970]: "#DevEmpathy"
+                      - link "#FrontendVsBackend" [ref=e971] [cursor=pointer]:
+                        - /url: https://www.linkedin.com/search/results/all/?keywords=%23frontendvsbackend&origin=HASH_TAG_FROM_FEED
+                        - strong [ref=e973]: "#FrontendVsBackend"
+                      - link "#Programación" [ref=e974] [cursor=pointer]:
+                        - /url: https://www.linkedin.com/search/results/all/?keywords=%23programaci%C3%B3n&origin=HASH_TAG_FROM_FEED
+                        - strong [ref=e976]: "#Programación"
+                      - link "#EquiposTech" [ref=e977] [cursor=pointer]:
+                        - /url: https://www.linkedin.com/search/results/all/?keywords=%23equipostech&origin=HASH_TAG_FROM_FEED
+                        - strong [ref=e979]: "#EquiposTech"
+                      - link "#Desarrolladores" [ref=e980] [cursor=pointer]:
+                        - /url: https://www.linkedin.com/search/results/all/?keywords=%23desarrolladores&origin=HASH_TAG_FROM_FEED
+                        - strong [ref=e982]: "#Desarrolladores"
+                      - link "#HumorDev" [ref=e983] [cursor=pointer]:
+                        - /url: https://www.linkedin.com/search/results/all/?keywords=%23humordev&origin=HASH_TAG_FROM_FEED
+                        - strong [ref=e985]: "#HumorDev"
+                      - link "#DevLife" [ref=e986] [cursor=pointer]:
+                        - /url: https://www.linkedin.com/search/results/all/?keywords=%23devlife&origin=HASH_TAG_FROM_FEED
+                        - strong [ref=e988]: "#DevLife"
+                      - button:
+                        - generic [ref=e990] [cursor=pointer]: … más
+                  - link [ref=e992] [cursor=pointer]:
+                    - /url: https://www.linkedin.com/feed/
+                    - figure [ref=e993]:
+                      - img "Ver imagen" [ref=e994]
+                  - generic [ref=e995]:
+                    - link "23 reacciones" [ref=e996] [cursor=pointer]:
+                      - /url: https://www.linkedin.com/feed/
+                      - generic [ref=e997]:
+                        - img [ref=e998]
+                        - img [ref=e1004]
+                        - img [ref=e1010]
+                        - paragraph [ref=e1017]:
+                          - generic [ref=e1018]: 23 reacciones
+                          - text: "23"
+                    - generic [ref=e1019]:
+                      - button "4 comentarios" [ref=e1020] [cursor=pointer]:
+                        - paragraph [ref=e1021]:
+                          - generic [ref=e1022]: 4 comentarios
+                          - generic [ref=e1023]: 4 comentarios
+                      - paragraph [ref=e1024]: •
+                      - link "3 veces compartido" [ref=e1025] [cursor=pointer]:
+                        - /url: https://www.linkedin.com/feed/
+                        - paragraph [ref=e1026]:
+                          - generic [ref=e1027]: 3 veces compartido
+                          - generic [ref=e1028]: 3 veces compartido
+                  - generic [ref=e1029]:
+                    - generic [ref=e1031]:
+                      - 'button "Estado del botón de reacción: ninguna reacción" [ref=e1034] [cursor=pointer]':
+                        - generic [ref=e1035]:
+                          - img [ref=e1036]
+                          - generic [ref=e1038]: Recomendar
+                      - button "Abrir el menú de reacciones":
+                        - img [ref=e1040] [cursor=pointer]
+                    - button "Comentar" [ref=e1042] [cursor=pointer]:
+                      - generic [ref=e1043]:
+                        - img [ref=e1044]
+                        - generic [ref=e1047]: Comentar
+                    - button "Compartir" [ref=e1048] [cursor=pointer]:
+                      - generic [ref=e1049]:
+                        - img [ref=e1050]
+                        - generic [ref=e1053]: Compartir
+                    - link "Enviar" [ref=e1054] [cursor=pointer]:
+                      - /url: https://www.linkedin.com/feed/
+                      - generic [ref=e1055]:
+                        - img [ref=e1056]
+                        - generic [ref=e1059]: Enviar
+              - listitem [ref=e1063]:
+                - generic [ref=e1065]:
+                  - heading "Publicación en el feed" [level=2]:
+                    - generic [ref=e1066]: Publicación en el feed
+                  - generic [ref=e1067]:
+                    - paragraph [ref=e1070]: Sugerencias
+                    - button "Abrir el menú de controles para la publicación de Diego Gowezniansky" [ref=e1071] [cursor=pointer]:
+                      - img [ref=e1073]
+                    - button "Ocultar la publicación de Diego Gowezniansky" [ref=e1075] [cursor=pointer]:
+                      - img [ref=e1077]
+                  - generic [ref=e1079]:
+                    - link [ref=e1080] [cursor=pointer]:
+                      - /url: https://www.linkedin.com/in/gowesoft/
+                      - figure [ref=e1081]:
+                        - img "Ver perfil de Diego Gowezniansky" [ref=e1082]
+                    - 'link "Diego Gowezniansky perfil Premium 3er y demás Senior Frontend Developer | Angular, React, TypeScript, HTML/CSS, Material 2 días • Visibilidad: global" [ref=e1083] [cursor=pointer]':
+                      - /url: https://www.linkedin.com/in/gowesoft/
+                      - generic [ref=e1084]:
+                        - generic "Diego Gowezniansky perfil Premium 3er y demás" [ref=e1085]:
+                          - paragraph [ref=e1088]: Diego Gowezniansky
+                          - paragraph [ref=e1090]:
+                            - img [ref=e1092]
+                            - text: • 3er+
+                        - paragraph [ref=e1095]: Senior Frontend Developer | Angular, React, TypeScript, HTML/CSS, Material
+                        - paragraph [ref=e1097]:
+                          - text: 2 días •
+                          - 'img "Visibilidad: global" [ref=e1098]'
+                    - button "Seguir a Diego Gowezniansky" [ref=e1103] [cursor=pointer]:
+                      - generic [ref=e1104]:
+                        - img [ref=e1105]
+                        - generic [ref=e1108]: Seguir
+                  - paragraph [ref=e1109]:
+                    - generic [ref=e1110]:
+                      - text: "Te mandan un \"desafío técnico\" de 8 horas. Sin pagar. Sin feedback. Sin garantía de nada. Y si no lo hacés, \"no estás comprometido con el proceso\". Esto pasa todos los días en la industria tech y lo normalizamos tanto que ya casi no lo cuestionamos. Pensalo un segundo: Ninguna otra profesión hace esto. No le pedís a un abogado que prepare un caso completo gratis \"para ver cómo trabaja\". No le pedís a un arquitecto que diseñe un plano real como parte de la entrevista. Pero a un developer le pedimos que construya una aplicación funcional, con tests, con documentación, con buenas prácticas. En su tiempo libre. Gratis. Para una empresa que todavía no le ofreció nada. Y si el developer pregunta si hay compensación, de repente \"no encaja con la cultura\". Lo peor no es el tiempo que lleva. Lo peor es lo que dice sobre cómo esa empresa ve a sus developers. Como recursos intercambiables que tienen que demostrar su valor antes de merecer respeto básico. Los mejores developers que conozco dejaron de hacer take-home challenges hace años. No porque sean arrogantes. Porque aprendieron que el proceso de selección de una empresa te dice exactamente cómo te van a tratar adentro. Y tuvieron razón. ¿Hasta dónde llega el proceso de una empresa antes de que digas que no?"
+                      - button:
+                        - generic [ref=e1112] [cursor=pointer]: … más
+                  - generic [ref=e1113]:
+                    - link "424 reacciones" [ref=e1114] [cursor=pointer]:
+                      - /url: https://www.linkedin.com/feed/
+                      - generic [ref=e1115]:
+                        - img [ref=e1116]
+                        - img [ref=e1122]
+                        - img [ref=e1136]
+                        - paragraph [ref=e1143]:
+                          - generic [ref=e1144]: 424 reacciones
+                          - text: "424"
+                    - generic [ref=e1145]:
+                      - button "129 comentarios" [ref=e1146] [cursor=pointer]:
+                        - paragraph [ref=e1147]:
+                          - generic [ref=e1148]: 129 comentarios
+                          - generic [ref=e1149]: 129 comentarios
+                      - paragraph [ref=e1150]: •
+                      - link "25 veces compartido" [ref=e1151] [cursor=pointer]:
+                        - /url: https://www.linkedin.com/feed/
+                        - paragraph [ref=e1152]:
+                          - generic [ref=e1153]: 25 veces compartido
+                          - generic [ref=e1154]: 25 veces compartido
+                  - generic [ref=e1155]:
+                    - generic [ref=e1157]:
+                      - 'button "Estado del botón de reacción: ninguna reacción" [ref=e1160] [cursor=pointer]':
+                        - generic [ref=e1161]:
+                          - img [ref=e1162]
+                          - generic [ref=e1164]: Recomendar
+                      - button "Abrir el menú de reacciones":
+                        - img [ref=e1166] [cursor=pointer]
+                    - button "Comentar" [ref=e1168] [cursor=pointer]:
+                      - generic [ref=e1169]:
+                        - img [ref=e1170]
+                        - generic [ref=e1173]: Comentar
+                    - button "Compartir" [ref=e1174] [cursor=pointer]:
+                      - generic [ref=e1175]:
+                        - img [ref=e1176]
+                        - generic [ref=e1179]: Compartir
+                    - link "Enviar" [ref=e1180] [cursor=pointer]:
+                      - /url: https://www.linkedin.com/feed/
+                      - generic [ref=e1181]:
+                        - img [ref=e1182]
+                        - generic [ref=e1185]: Enviar
+              - listitem [ref=e1189]:
+                - generic [ref=e1191]:
+                  - heading "Publicación en el feed" [level=2]:
+                    - generic [ref=e1192]: Publicación en el feed
+                  - generic [ref=e1193]:
+                    - paragraph [ref=e1196]: Sugerencias
+                    - button "Abrir el menú de controles para la publicación de Miguel Ángel Durán García" [ref=e1197] [cursor=pointer]:
+                      - img [ref=e1199]
+                    - button "Ocultar la publicación de Miguel Ángel Durán García" [ref=e1201] [cursor=pointer]:
+                      - img [ref=e1203]
+                  - generic [ref=e1205]:
+                    - link [ref=e1206] [cursor=pointer]:
+                      - /url: https://www.linkedin.com/in/midudev/
+                      - figure [ref=e1207]:
+                        - img "Ver perfil de Miguel Ángel Durán García" [ref=e1208]
+                    - 'link "Miguel Ángel Durán García perfil Executive Top Voice 3er y demás Programación JavaScript y Desarrollo Web. Reconocido Google Developer Expert, Microsoft MVP y GitHub Star. ⭐ Vibe Coding Cleanup Specialist Ir a mi sitio web 2 días • Visibilidad: global" [ref=e1209] [cursor=pointer]':
+                      - /url: https://www.linkedin.com/in/midudev/
+                      - generic [ref=e1210]:
+                        - generic "Miguel Ángel Durán García perfil Executive Top Voice 3er y demás" [ref=e1211]:
+                          - paragraph [ref=e1214]: Miguel Ángel Durán García
+                          - paragraph [ref=e1216]:
+                            - img [ref=e1218]
+                            - text: • 3er+
+                        - paragraph [ref=e1221]: Programación JavaScript y Desarrollo Web. Reconocido Google Developer Expert, Microsoft MVP y GitHub Star. ⭐ Vibe Coding Cleanup Specialist
+                        - link "Ir a mi sitio web" [ref=e1223]:
+                          - /url: https://www.linkedin.com/safety/go/?url=https%3A%2F%2Ftwitch%2Etv%2Fmidudev&urlhash=RJo2&mt=POv7ZpDbJEek574aYyzvrXhm96lZG1SDNWi6-rjbfhVXHhb7477DiVED_sgZnamZbSMS51kECeOj5ZS6tUSS8uw7pRemDz0Viw_o7uyA1g&isSdui=true
+                          - paragraph [ref=e1224]: Ir a mi sitio web
+                        - paragraph [ref=e1226]:
+                          - text: 2 días •
+                          - 'img "Visibilidad: global" [ref=e1227]'
+                    - button "Seguir a Miguel Ángel Durán García" [ref=e1232] [cursor=pointer]:
+                      - generic [ref=e1233]:
+                        - img [ref=e1234]
+                        - generic [ref=e1237]: Seguir
+                  - paragraph [ref=e1238]:
+                    - generic [ref=e1239]:
+                      - text: ¡Microsoft acaba de lanzar algo espectacular!
+                      - text: Se llama VibeVoice y es un modelo Open Source que genera voz en tiempo real con latencia bajísima.
+                      - text: En nueve idiomas distintos, incluido español.
+                      - text: "Permite conversaciones largas con múltiples voces:"
+                      - link "https://lnkd.in/eg3QvDwb" [ref=e1241] [cursor=pointer]:
+                        - /url: https://www.linkedin.com/safety/go/?url=https%3A%2F%2Flnkd%2Ein%2Feg3QvDwb&urlhash=76jz&mt=9auByRVIFPyInDFiru3T_F69llQliHVUwdLEeQi1qexOH3LhAqgGqh733EWfOrgsnjelqu_a7C4gA0UdmC1ukHsJkNcV9TBu08UI6qJa2wDakPMgeYgH13Jawds&isSdui=true
+                        - strong [ref=e1243]: https://lnkd.in/eg3QvDwb
+                      - button:
+                        - generic [ref=e1245] [cursor=pointer]: … más
+                  - generic [ref=e1247]:
+                    - region "Video Player" [ref=e1249]:
+                      - application [ref=e1251]
+                      - text:             
+                    - button "Reproducir vídeo" [ref=e1254] [cursor=pointer]:
+                      - img [ref=e1256]
+                  - generic [ref=e1258]:
+                    - link "1122 reacciones" [ref=e1259] [cursor=pointer]:
+                      - /url: https://www.linkedin.com/feed/
+                      - generic [ref=e1260]:
+                        - img [ref=e1261]
+                        - img [ref=e1267]
+                        - img [ref=e1275]
+                        - paragraph [ref=e1282]:
+                          - generic [ref=e1283]: 1122 reacciones
+                          - text: "1122"
+                    - generic [ref=e1284]:
+                      - button "15 comentarios" [ref=e1285] [cursor=pointer]:
+                        - paragraph [ref=e1286]:
+                          - generic [ref=e1287]: 15 comentarios
+                          - generic [ref=e1288]: 15 comentarios
+                      - paragraph [ref=e1289]: •
+                      - link "187 veces compartido" [ref=e1290] [cursor=pointer]:
+                        - /url: https://www.linkedin.com/feed/
+                        - paragraph [ref=e1291]:
+                          - generic [ref=e1292]: 187 veces compartido
+                          - generic [ref=e1293]: 187 veces compartido
+                  - generic [ref=e1294]:
+                    - generic [ref=e1296]:
+                      - 'button "Estado del botón de reacción: ninguna reacción" [ref=e1299] [cursor=pointer]':
+                        - generic [ref=e1300]:
+                          - img [ref=e1301]
+                          - generic [ref=e1303]: Recomendar
+                      - button "Abrir el menú de reacciones":
+                        - img [ref=e1305] [cursor=pointer]
+                    - button "Comentar" [ref=e1307] [cursor=pointer]:
+                      - generic [ref=e1308]:
+                        - img [ref=e1309]
+                        - generic [ref=e1312]: Comentar
+                    - button "Compartir" [ref=e1313] [cursor=pointer]:
+                      - generic [ref=e1314]:
+                        - img [ref=e1315]
+                        - generic [ref=e1318]: Compartir
+                    - link "Enviar" [ref=e1319] [cursor=pointer]:
+                      - /url: https://www.linkedin.com/feed/
+                      - generic [ref=e1320]:
+                        - img [ref=e1321]
+                        - generic [ref=e1324]: Enviar
+              - listitem [ref=e1328]:
+                - generic [ref=e1330]:
+                  - heading "Publicación en el feed" [level=2]:
+                    - generic [ref=e1331]: Publicación en el feed
+                  - generic [ref=e1332]:
+                    - paragraph [ref=e1335]: Sugerencias
+                    - button "Abrir el menú de controles para la publicación de Rubén del Campo Gómez" [ref=e1336] [cursor=pointer]:
+                      - img [ref=e1338]
+                    - button "Ocultar la publicación de Rubén del Campo Gómez" [ref=e1340] [cursor=pointer]:
+                      - img [ref=e1342]
+                  - generic [ref=e1344]:
+                    - link [ref=e1345] [cursor=pointer]:
+                      - /url: https://www.linkedin.com/in/rdelcampog/es/
+                      - figure [ref=e1346]:
+                        - img "Ver perfil de Rubén del Campo Gómez" [ref=e1347]
+                    - 'link "Rubén del Campo Gómez perfil Verificado 3er y demás Lead Engineer @ Tinybird 15 h • Visibilidad: global" [ref=e1348] [cursor=pointer]':
+                      - /url: https://www.linkedin.com/in/rdelcampog/es/
+                      - generic [ref=e1349]:
+                        - generic "Rubén del Campo Gómez perfil Verificado 3er y demás" [ref=e1350]:
+                          - paragraph [ref=e1353]: Rubén del Campo Gómez
+                          - paragraph [ref=e1355]:
+                            - img [ref=e1357]
+                            - text: • 3er+
+                        - paragraph [ref=e1360]: Lead Engineer @ Tinybird
+                        - paragraph [ref=e1362]:
+                          - text: 15 h •
+                          - 'img "Visibilidad: global" [ref=e1363]'
+                    - button "Seguir a Rubén del Campo Gómez" [ref=e1368] [cursor=pointer]:
+                      - generic [ref=e1369]:
+                        - img [ref=e1370]
+                        - generic [ref=e1373]: Seguir
+                  - paragraph [ref=e1374]:
+                    - generic [ref=e1375]:
+                      - text: GitHub está a un 0.12% de uptime de tener más 9s que en el último año (89.99% vs 90.11%).
+                      - text: Es desolador ver en que se ha convertido.
+                      - link "https://lnkd.in/ezyFGS7f" [ref=e1377] [cursor=pointer]:
+                        - /url: https://www.linkedin.com/safety/go/?url=https%3A%2F%2Flnkd%2Ein%2FezyFGS7f&urlhash=4kPC&mt=f0rN0QeE7qcyrVRc_kevEvPESDlcLqI6_PiZFnh73uh8UKgxNmGBgsvr1udY-ybhlz8criw8h7tsRS2Z2gS75Llf_1aNTCEf26ltHpTf9w4VDGGwMdqA12yZhn8&isSdui=true
+                        - strong [ref=e1379]: https://lnkd.in/ezyFGS7f
+                      - button:
+                        - generic [ref=e1381] [cursor=pointer]: … más
+                  - link [ref=e1383] [cursor=pointer]:
+                    - /url: https://www.linkedin.com/feed/
+                    - figure [ref=e1384]:
+                      - img "Ver imagen" [ref=e1385]
+                  - generic [ref=e1386]:
+                    - link "17 reacciones" [ref=e1387] [cursor=pointer]:
+                      - /url: https://www.linkedin.com/feed/
+                      - generic [ref=e1388]:
+                        - img [ref=e1389]
+                        - img [ref=e1395]
+                        - img [ref=e1403]
+                        - paragraph [ref=e1410]:
+                          - generic [ref=e1411]: 17 reacciones
+                          - text: "17"
+                    - link "1 vez compartido" [ref=e1413] [cursor=pointer]:
+                      - /url: https://www.linkedin.com/feed/
+                      - paragraph [ref=e1414]:
+                        - generic [ref=e1415]: 1 vez compartido
+                        - generic [ref=e1416]: 1 vez compartido
+                  - generic [ref=e1417]:
+                    - generic [ref=e1419]:
+                      - 'button "Estado del botón de reacción: ninguna reacción" [ref=e1422] [cursor=pointer]':
+                        - generic [ref=e1423]:
+                          - img [ref=e1424]
+                          - generic [ref=e1426]: Recomendar
+                      - button "Abrir el menú de reacciones":
+                        - img [ref=e1428] [cursor=pointer]
+                    - button "Comentar" [ref=e1430] [cursor=pointer]:
+                      - generic [ref=e1431]:
+                        - img [ref=e1432]
+                        - generic [ref=e1435]: Comentar
+                    - button "Compartir" [ref=e1436] [cursor=pointer]:
+                      - generic [ref=e1437]:
+                        - img [ref=e1438]
+                        - generic [ref=e1441]: Compartir
+                    - link "Enviar" [ref=e1442] [cursor=pointer]:
+                      - /url: https://www.linkedin.com/feed/
+                      - generic [ref=e1443]:
+                        - img [ref=e1444]
+                        - generic [ref=e1447]: Enviar
+              - button "Cargar más" [ref=e1449] [cursor=pointer]:
+                - generic [ref=e1451]: Cargar más
+            - generic [ref=e674]:
+              - generic [ref=e677]:
+                - generic [ref=e679]:
+                  - generic [ref=e680]:
+                    - paragraph [ref=e681]: LinkedIn Noticias
+                    - button "Descripción emergente de la información" [ref=e682] [cursor=pointer]:
+                      - img [ref=e684]
+                  - paragraph [ref=e686]: Historias destacadas
+                  - generic [ref=e687]:
+                    - link "¿Miedo a la IA? Esto es lo que debería preocuparte Hace 1 día • 584 lectores" [ref=e689] [cursor=pointer]:
+                      - /url: https://www.linkedin.com/news/story/¿miedo-a-la-ia-esto-es-lo-que-debería-preocuparte-7104364/
+                      - generic [ref=e691]:
+                        - paragraph [ref=e693]: ¿Miedo a la IA? Esto es lo que debería preocuparte
+                        - generic [ref=e694]:
+                          - paragraph [ref=e695]: Hace 1 día
+                          - paragraph [ref=e696]: •
+                          - paragraph [ref=e697]: 584 lectores
+                    - link "Sigue a estos expertos Hace 1 día • 3483 lectores" [ref=e699] [cursor=pointer]:
+                      - /url: https://www.linkedin.com/news/story/sigue-a-estos-expertos-7302410/
+                      - generic [ref=e701]:
+                        - paragraph [ref=e703]: Sigue a estos expertos
+                        - generic [ref=e704]:
+                          - paragraph [ref=e705]: Hace 1 día
+                          - paragraph [ref=e706]: •
+                          - paragraph [ref=e707]: 3483 lectores
+                    - 'link "Renta 2025: las deducciones, a debate Hace 1 día • 1989 lectores" [ref=e709] [cursor=pointer]':
+                      - /url: https://www.linkedin.com/news/story/renta-2025-las-deducciones-a-debate-7121124/
+                      - generic [ref=e711]:
+                        - paragraph [ref=e713]: "Renta 2025: las deducciones, a debate"
+                        - generic [ref=e714]:
+                          - paragraph [ref=e715]: Hace 1 día
+                          - paragraph [ref=e716]: •
+                          - paragraph [ref=e717]: 1989 lectores
+                    - link "El PIB crecerá un 2,3% gracias al plan anticrisis Hace 1 día • 1322 lectores" [ref=e719] [cursor=pointer]:
+                      - /url: https://www.linkedin.com/news/story/el-pib-crecerá-un-23-gracias-al-plan-anticrisis-7839705/
+                      - generic [ref=e721]:
+                        - paragraph [ref=e723]: El PIB crecerá un 2,3% gracias al plan anticrisis
+                        - generic [ref=e724]:
+                          - paragraph [ref=e725]: Hace 1 día
+                          - paragraph [ref=e726]: •
+                          - paragraph [ref=e727]: 1322 lectores
+                    - link "La jornada de 35 horas para los funcionarios llegará en abril Hace 1 día • 493 lectores" [ref=e729] [cursor=pointer]:
+                      - /url: https://www.linkedin.com/news/story/la-jornada-de-35-horas-para-los-funcionarios-llegará-en-abril-7838305/
+                      - generic [ref=e731]:
+                        - paragraph [ref=e733]: La jornada de 35 horas para los funcionarios llegará en abril
+                        - generic [ref=e734]:
+                          - paragraph [ref=e735]: Hace 1 día
+                          - paragraph [ref=e736]: •
+                          - paragraph [ref=e737]: 493 lectores
+                    - button "Mostrar más" [ref=e738] [cursor=pointer]:
+                      - generic [ref=e739]:
+                        - img [ref=e740]
+                        - generic [ref=e742]: Mostrar más
+                - generic [ref=e744]:
+                  - paragraph [ref=e745]: Juegos de hoy
+                  - 'link "Zip: un juego para darle al coco ¡Resuélvelo en 60 segundos o menos!" [ref=e746] [cursor=pointer]':
+                    - /url: /games/zip/
+                    - generic [ref=e747]:
+                      - figure [ref=e748]
+                      - generic [ref=e749]:
+                        - paragraph [ref=e750]: "Zip: un juego para darle al coco"
+                        - paragraph [ref=e751]: ¡Resuélvelo en 60 segundos o menos!
+                      - img [ref=e752]
+              - generic [ref=e755]:
+                - iframe [ref=e758]:
+                  - link "Advertise on LinkedIn" [ref=f23e3] [cursor=pointer]:
+                    - /url: https://www.linkedin.com/jobs/?trk=li_FA_global_careers_jobsgtm_jsFA_v1&mcid=6899045044465016833
+                    - img "Advertise on LinkedIn" [ref=f23e4]
+                - generic [ref=e759]:
+                  - generic [ref=e760]:
+                    - link "Acerca de" [ref=e761] [cursor=pointer]:
+                      - /url: https://about.linkedin.com/
+                      - paragraph [ref=e762]: Acerca de
+                    - link "Accesibilidad" [ref=e763] [cursor=pointer]:
+                      - /url: https://www.linkedin.com/accessibility/
+                      - paragraph [ref=e764]: Accesibilidad
+                    - link "Centro de ayuda" [ref=e765] [cursor=pointer]:
+                      - /url: https://www.linkedin.com/help/linkedin/
+                      - paragraph [ref=e766]: Centro de ayuda
+                    - button "Privacidad y condiciones" [ref=e767] [cursor=pointer]:
+                      - generic [ref=e768]:
+                        - paragraph [ref=e769]: Privacidad y condiciones
+                        - img [ref=e770]
+                    - link "Opciones de publicidad" [ref=e772] [cursor=pointer]:
+                      - /url: https://www.linkedin.com/help/linkedin/answer/62931/
+                      - paragraph [ref=e773]: Opciones de publicidad
+                    - link "Publicidad" [ref=e774] [cursor=pointer]:
+                      - /url: https://www.linkedin.com/ad/start/?trk=n_nav_ads_rr
+                      - paragraph [ref=e775]: Publicidad
+                    - button "Servicios empresariales" [ref=e776] [cursor=pointer]:
+                      - generic [ref=e777]:
+                        - paragraph [ref=e778]: Servicios empresariales
+                        - img [ref=e779]
+                    - link "Descargar la aplicación de LinkedIn" [ref=e781] [cursor=pointer]:
+                      - /url: https://www.linkedin.com/mobile/
+                      - paragraph [ref=e782]: Descargar la aplicación de LinkedIn
+                    - link "Más" [ref=e783] [cursor=pointer]:
+                      - /url: https://www.linkedin.com/feed/
+                      - paragraph [ref=e784]: Más
+                  - generic [ref=e785]:
+                    - img [ref=e786]
+                    - paragraph [ref=e788]: LinkedIn Corporation © 2026
+  - generic:
+    - generic:
+      - generic:
+        - generic:
+          - complementary
+          - complementary "Asistente de IA que te ayuda con tu desarrollo profesional, empleos, etc."
+  - iframe [ref=e789]:
+    - generic [active] [ref=f20e1]:
+      - generic:
+        - region "Mensaje del sistema":
+          - heading "0 notificaciones en total" [level=2] [ref=f20e3]
+          - alert
+      - region [ref=f20e4]
+      - generic [ref=f20e7]:
+        - img [ref=f20e9]
+        - generic [ref=f20e11]:
+          - heading "LinkedIn respeta tu privacidad" [level=1] [ref=f20e12]
+          - generic [ref=f20e13]:
+            - paragraph [ref=f20e14]:
+              - text: LinkedIn y terceros utilizan cookies imprescindibles y opcionales para ofrecer, proteger, analizar y mejorar nuestros servicios, y para mostrarte publicidad relevante (incluidos anuncios profesionales y de empleo) dentro y fuera de LinkedIn. Consulta más información en nuestra
+              - link "Política de cookies" [ref=f20e15] [cursor=pointer]:
+                - /url: https://www.linkedin.com/legal/cookie-policy
+              - text: .
+            - paragraph [ref=f20e16]:
+              - text: Selecciona Aceptar para consentir o Rechazar para denegar las cookies no imprescindibles para este uso. Puedes actualizar tus preferencias en cualquier momento en tus
+              - link "ajustes" [ref=f20e17] [cursor=pointer]:
+                - /url: https://www.linkedin.com/settings/member-cookies
+              - text: .
+          - generic [ref=f20e18]:
+            - button "Aceptar" [ref=f20e19] [cursor=pointer]:
+              - generic [ref=f20e20]: Aceptar
+            - button "Rechazar" [ref=f20e21] [cursor=pointer]:
+              - generic [ref=f20e22]: Rechazar
+      - generic [ref=f20e23]:
+        - generic [ref=f20e25]:
+          - button "Pasar a la búsqueda" [ref=f20e26] [cursor=pointer]:
+            - generic [ref=f20e27]: Pasar a la búsqueda
+          - button "Pasar al contenido principal" [ref=f20e28] [cursor=pointer]:
+            - generic [ref=f20e29]: Pasar al contenido principal
+          - button "Atajos de teclado" [ref=f20e30] [cursor=pointer]:
+            - generic [ref=f20e31]: Atajos de teclado
+          - button "Cerrar menú de saltar" [ref=f20e32] [cursor=pointer]:
+            - img [ref=f20e33]
+            - generic [ref=f20e35]: Cerrar menú de saltar
+        - banner "Navegación global" [ref=f20e36]:
+          - generic [ref=f20e37]:
+            - link "LinkedIn" [ref=f20e38] [cursor=pointer]:
+              - /url: https://www.linkedin.com/feed/?nis=true
+              - img "LinkedIn" [ref=f20e41]:
+                - img [ref=f20e42]
+            - button "Haz clic para empezar una búsqueda" [ref=f20e46] [cursor=pointer]:
+              - img [ref=f20e48]
+            - navigation "Navegación principal" [ref=f20e50]:
+              - list [ref=f20e51]:
+                - listitem [ref=f20e52]:
+                  - link "Inicio" [ref=f20e53] [cursor=pointer]:
+                    - /url: https://www.linkedin.com/feed/
+                    - img [ref=f20e57]
+                    - generic "Inicio" [ref=f20e59]
+                - listitem [ref=f20e60]:
+                  - link "Mi red" [ref=f20e61] [cursor=pointer]:
+                    - /url: https://www.linkedin.com/mynetwork/?
+                    - img [ref=f20e65]
+                    - generic "Mi red" [ref=f20e67]
+                - listitem [ref=f20e68]:
+                  - link "Empleos" [ref=f20e69] [cursor=pointer]:
+                    - /url: https://www.linkedin.com/jobs/?
+                    - img [ref=f20e73]
+                    - generic "Empleos" [ref=f20e75]
+                - listitem [ref=f20e76]:
+                  - link "Mensajes" [ref=f20e77] [cursor=pointer]:
+                    - /url: https://www.linkedin.com/messaging/?
+                    - img [ref=f20e81]
+                    - generic "Mensajes" [ref=f20e83]
+                - listitem [ref=f20e84]:
+                  - link "5 notificaciones nuevas Notificaciones" [ref=f20e85] [cursor=pointer]:
+                    - /url: https://www.linkedin.com/notifications/?
+                    - generic [ref=f20e86]:
+                      - generic [ref=f20e87]:
+                        - generic [ref=f20e88]: "5"
+                        - generic [ref=f20e89]: 5 notificaciones nuevas
+                      - img [ref=f20e93]
+                    - generic "Notificaciones" [ref=f20e95]
+                - listitem [ref=f20e96]:
+                  - button "Antonio Altomonte Yo" [ref=f20e98] [cursor=pointer]:
+                    - img "Antonio Altomonte" [ref=f20e99]
+                    - generic [ref=f20e100]:
+                      - text: Yo
+                      - img [ref=f20e101]
+                - listitem [ref=f20e123]:
+                  - button "Para negocios" [ref=f20e125] [cursor=pointer]:
+                    - img [ref=f20e129]
+                    - generic "Para negocios" [ref=f20e131]:
+                      - text: Para negocios
+                      - img [ref=f20e132]
+                - listitem [ref=f20e134]:
+                  - link "Probar Premium por 0 €" [ref=f20e136] [cursor=pointer]:
+                    - /url: javascript:void(0)
+                    - generic [ref=f20e138]: Probar Premium por 0 €
