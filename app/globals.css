@@ -1,9 +1,9 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
-  color-scheme: light only;
+  --background: #09090b;
+  --foreground: #fafafa;
+  color-scheme: dark;
 }
 
 @theme inline {
@@ -14,10 +14,10 @@
 }
 
 html, body {
-  background: #ffffff !important;
-  color: #171717 !important;
-  font-family: Arial, Helvetica, sans-serif;
-  color-scheme: light only;
+  background: #09090b;
+  color: #fafafa;
+  font-family: var(--font-geist-sans), Arial, Helvetica, sans-serif;
+  color-scheme: dark;
 }
 
 /* Force readable text on all form elements regardless of device dark mode */
