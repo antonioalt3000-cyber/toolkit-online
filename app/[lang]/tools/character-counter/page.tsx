@@ -145,7 +145,7 @@ export default function CharacterCounter() {
 
   const seoContent: Record<Locale, { title: string; paragraphs: string[]; faq: { q: string; a: string }[] }> = {
     en: {
-      title: 'Free Online Character Counter — Count Characters Instantly',
+      title: 'Free Character Counter Online — Count Characters, Letters & Spaces Instantly',
       paragraphs: [
         'Need to count characters in your text quickly and accurately? Our free online character counter provides a complete character count in real time as you type or paste your content. Whether you are checking a tweet against the 280-character limit, writing a meta description under 160 characters, or ensuring your essay meets a minimum character requirement, this character counter tool gives you the exact numbers you need — instantly and for free.',
         'Unlike a basic character count tool, our character counter goes much deeper. It breaks your text down into total characters, characters without spaces, words, sentences, vowels, consonants, digits, special characters, and the most frequently used letter. This detailed text analysis is essential for writers, bloggers, students, SEO professionals, social media managers, and anyone who works with text on a daily basis. You can also use the built-in character limit presets for Twitter (280), SMS (160), meta descriptions (160), and title tags (60) to see at a glance whether your text fits within platform requirements.',

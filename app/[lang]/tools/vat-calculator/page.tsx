@@ -31,7 +31,7 @@ const vatLabels: Record<string, Record<string, string>> = {
 
 const seoContent: Record<Locale, { title: string; paragraphs: string[]; faq: { q: string; a: string }[] }> = {
   en: {
-    title: 'VAT Calculator — Add and Remove VAT from Any Price Online',
+    title: 'Free VAT Calculator Online — Add or Remove VAT Instantly (UK, EU & Global Rates)',
     paragraphs: [
       'Need to <strong>add VAT</strong> to a net price or <strong>remove VAT</strong> from a gross amount? This free VAT calculator handles both operations instantly. Value Added Tax (VAT) is a consumption tax collected at every stage of the supply chain, and getting the numbers right is essential for invoicing, bookkeeping, and tax compliance. Whether you are a freelancer pricing your services, a business owner preparing quotes, or a consumer checking a receipt, our calculator for VAT gives you accurate results in one click — no spreadsheets, no manual maths, no sign-up required.',
       '<strong>How to Add VAT onto a Price.</strong> Adding VAT to a net (excluding VAT) amount is straightforward. Use the formula: <em>Gross = Net x (1 + VAT rate)</em>. For example, to add 20% VAT to a net price of 500: VAT = 500 x 0.20 = 100, so the total with VAT is 600. If you need to add 5% VAT instead — say for a 5% VAT calculator scenario — the sum is 500 x 1.05 = 525. With this add VAT calculator, simply enter the amount, pick the rate, press "Add VAT" and the tool does the rest. It works for any rate: 4%, 5%, 7%, 10%, 13%, 19%, 20%, 21%, 22%, 23%, or 25%.',

@@ -1,6 +1,17 @@
 # ToolKit Online — Project Context
 > **Info condivise portfolio:** vedi `C:/Users/ftass/portfolio-config.md` per account, API keys, monetizzazione, e convenzioni globali.
 
+## ⚠️ Session Management (da Insights analisi)
+- **Prima di iniziare**: leggere SEMPRE i file memoria e handoff per non ripetere lavoro già fatto
+- **Max 6 agenti paralleli** — oltre si perde il controllo e la sessione finisce senza completare
+- **Prima di fine sessione**: SEMPRE commit + build check + aggiornare memoria
+- **Task troppo grandi**: spezzare in milestone committabili, non lanciare tutto insieme
+- **Mai suggerire setup già completati**: controllare memoria prima di proporre azioni
+
+## ⚠️ Content Guidelines
+- **MAI includere dettagli monetizzazione** (revenue, income, strategie prezzi) in contenuti pubblici (blog, Reddit, Dev.to) se non richiesto esplicitamente
+- **boss2 è DIVERSO da boss** — sempre confermare scope prima di lavorare
+
 ## ⚡ AZIONE AUTOMATICA AD OGNI SESSIONE
 All'inizio di ogni sessione, DEVI:
 1. Salutare l'utente e ricordargli di lanciare `/learn` per il ciclo di analisi automatico
