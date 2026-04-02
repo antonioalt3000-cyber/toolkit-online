@@ -8,7 +8,7 @@ const BASE_URL = 'https://toolkitonline.vip';
 const categories = ['finance', 'text', 'health', 'conversion', 'dev', 'math', 'images'] as const;
 const VAT_COUNTRIES = ['spain', 'germany', 'france', 'italy', 'uk', 'netherlands', 'belgium', 'portugal', 'austria', 'sweden'] as const;
 
-function buildUrl(loc: string, priority: number, alternates: Record<string, string>, lastmod: string = '2026-03-20'): string {
+function buildUrl(loc: string, priority: number, alternates: Record<string, string>, lastmod: string = new Date().toISOString().split('T')[0]): string {
   // Always add x-default pointing to English version
   const xDefault = alternates['en'] ? `<xhtml:link rel="alternate" hreflang="x-default" href="${alternates['en']}" />` : '';
   const hreflangs = Object.entries(alternates)
@@ -30,14 +30,14 @@ function generateStaticSitemap(): string {
   for (const locale of locales) {
     const priority = (locale === 'it' || locale === 'en') ? 1.0 : 0.5;
     urls.push(buildUrl(`${BASE_URL}/${locale}`, priority,
-      Object.fromEntries(locales.map(l => [l, `${BASE_URL}/${l}`])), '2026-03-23'));
+      Object.fromEntries(locales.map(l => [l, `${BASE_URL}/${l}`])), new Date().toISOString().split('T')[0]));
   }
 
   // Tools listing — prioritize IT and EN
   for (const locale of locales) {
     const priority = (locale === 'it' || locale === 'en') ? 0.9 : 0.4;
     urls.push(buildUrl(`${BASE_URL}/${locale}/tools`, priority,
-      Object.fromEntries(locales.map(l => [l, `${BASE_URL}/${l}/tools`])), '2026-03-23'));
+      Object.fromEntries(locales.map(l => [l, `${BASE_URL}/${l}/tools`])), new Date().toISOString().split('T')[0]));
   }
 
   // Category hubs — prioritize IT and EN
@@ -45,7 +45,7 @@ function generateStaticSitemap(): string {
     for (const locale of locales) {
       const priority = (locale === 'it' || locale === 'en') ? 0.9 : 0.4;
       urls.push(buildUrl(`${BASE_URL}/${locale}/tools/category/${cat}`, priority,
-        Object.fromEntries(locales.map(l => [l, `${BASE_URL}/${l}/tools/category/${cat}`])), '2026-03-23'));
+        Object.fromEntries(locales.map(l => [l, `${BASE_URL}/${l}/tools/category/${cat}`])), new Date().toISOString().split('T')[0]));
     }
   }
 
@@ -53,7 +53,7 @@ function generateStaticSitemap(): string {
   for (const page of ['about', 'contact', 'faq', 'privacy', 'terms', 'affiliate-disclosure']) {
     for (const locale of locales) {
       urls.push(buildUrl(`${BASE_URL}/${locale}/${page}`, 0.3,
-        Object.fromEntries(locales.map(l => [l, `${BASE_URL}/${l}/${page}`])), '2026-03-01'));
+        Object.fromEntries(locales.map(l => [l, `${BASE_URL}/${l}/${page}`])), new Date().toISOString().split('T')[0]));
     }
   }
 
@@ -77,7 +77,7 @@ function generateCategorySitemap(category: string): string {
         `${BASE_URL}/${locale}/tools/${tool}`,
         getToolPriority(locale),
         Object.fromEntries(locales.map(l => [l, `${BASE_URL}/${l}/tools/${tool}`])),
-        '2026-03-23'
+        new Date().toISOString().split('T')[0]
       ));
     }
   }
@@ -90,7 +90,7 @@ function generateCategorySitemap(category: string): string {
           `${BASE_URL}/${locale}/tools/vat-calculator/${country}`,
           getToolPriority(locale),
           Object.fromEntries(locales.map(l => [l, `${BASE_URL}/${l}/tools/vat-calculator/${country}`])),
-          '2026-03-25'
+          new Date().toISOString().split('T')[0]
         ));
       }
     }

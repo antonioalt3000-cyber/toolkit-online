@@ -7,6 +7,6 @@ const SITEMAP_IDS = ['static', 'finance', 'text', 'health', 'conversion', 'dev',
 export default function sitemap(): MetadataRoute.Sitemap {
   return SITEMAP_IDS.map((id) => ({
     url: `${BASE_URL}/sitemaps/${id}`,
-    lastModified: '2026-03-23',
+    lastModified: new Date().toISOString().split('T')[0],
   }));
 }
