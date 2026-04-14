@@ -144,21 +144,29 @@ async function main() {
 
   console.log('─'.repeat(60));
 
+  const prevStatus = process.env.PREV_STATUS || '';
+
   if (down.length > 0) {
-    console.log(`\n⚠️  ${down.length} SITE(S) DOWN — sending alert to ${OWNER.email}`);
-
-    await sendAndLog({
-      to:          [{ email: OWNER.email, name: OWNER.name }],
-      subject:     `🔴 DOWN: ${down.map(r => r.name).join(', ')} — DevToolsmith`,
-      htmlContent: buildAlertHtml(down, up, timestamp),
-    });
-
-    // Exit 1 so GitHub Actions marks the job as failed (visible in UI)
-    process.exit(1);
+    if (prevStatus === 'down') {
+      // Already notified on a previous run — skip duplicate alert & email
+      console.log(`\n⚠️  ${down.length} SITE(S) STILL DOWN (already notified) — skipping duplicate alert`);
+      // Exit 0: workflow stays green, no repeated GitHub failure emails
+      process.exit(0);
+    } else {
+      // First detection of this outage — send alert
+      console.log(`\n🔴 NEW DOWNTIME: ${down.length} SITE(S) DOWN — sending alert to ${OWNER.email}`);
+      await sendAndLog({
+        to:          [{ email: OWNER.email, name: OWNER.name }],
+        subject:     `🔴 DOWN: ${down.map(r => r.name).join(', ')} — DevToolsmith`,
+        htmlContent: buildAlertHtml(down, up, timestamp),
+      });
+      // Exit 1 only on NEW downtime — one GitHub failure email per outage event
+      process.exit(1);
+    }
 
   } else {
     // Check if this is a recovery run (PREV_STATUS env var = 'down')
-    if (process.env.PREV_STATUS === 'down') {
+    if (prevStatus === 'down') {
       console.log('\n🟢 All sites recovered — sending recovery notification');
       await sendAndLog({
         to:          [{ email: OWNER.email, name: OWNER.name }],

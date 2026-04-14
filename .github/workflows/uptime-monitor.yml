@@ -12,6 +12,7 @@ on:
 
 permissions:
   contents: read
+  actions: write   # Required to update/create the PREV_STATUS repository variable
 
 jobs:
   check:
