@@ -1,0 +1,179 @@
+name: Daily Automation
+
+# Runs every day at 09:00 UTC (10:00 Madrid / CET, 11:00 CEST).
+# Jobs run in parallel where possible, then the daily report aggregates results.
+# Works 100% with PC off — runs on GitHub's infrastructure.
+
+on:
+  schedule:
+    - cron: '0 9 * * *'    # 09:00 UTC daily
+  workflow_dispatch:         # Manual trigger for testing
+    inputs:
+      dry_run:
+        description: 'Dry run (print without actually sending/posting)'
+        required: false
+        default: 'false'
+        type: choice
+        options: ['true', 'false']
+
+permissions:
+  contents: write   # Needed to commit updated prospects.json
+
+jobs:
+  # ─── Job 1: Publish to Dev.to ───────────────────────────────────────────────
+  publish-devto:
+    name: Publish to Dev.to
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    outputs:
+      status: ${{ steps.run.outputs.status }}
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Publish article
+        id: run
+        env:
+          DEVTO_API_KEY: ${{ secrets.DEVTO_API_KEY }}
+          DEVTO_DRY_RUN: ${{ github.event.inputs.dry_run || 'false' }}
+        run: |
+          node scripts/automation/publish-devto.js && echo "status=success" >> $GITHUB_OUTPUT || echo "status=failed" >> $GITHUB_OUTPUT
+
+  # ─── Job 2: Publish to Hashnode ─────────────────────────────────────────────
+  publish-hashnode:
+    name: Publish to Hashnode
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    outputs:
+      status: ${{ steps.run.outputs.status }}
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Publish article
+        id: run
+        env:
+          HASHNODE_API_KEY: ${{ secrets.HASHNODE_API_KEY }}
+          HASHNODE_PUB_ID:  ${{ secrets.HASHNODE_PUB_ID }}
+          HASHNODE_DRY_RUN: ${{ github.event.inputs.dry_run || 'false' }}
+        run: |
+          node scripts/automation/publish-hashnode.js && echo "status=success" >> $GITHUB_OUTPUT || echo "status=failed" >> $GITHUB_OUTPUT
+
+  # ─── Job 3: Post to Bluesky ─────────────────────────────────────────────────
+  bluesky-post:
+    name: Post to Bluesky
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    outputs:
+      status: ${{ steps.run.outputs.status }}
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Post to Bluesky
+        id: run
+        env:
+          BLUESKY_IDENTIFIER: ${{ secrets.BLUESKY_IDENTIFIER }}
+          BLUESKY_PASSWORD:   ${{ secrets.BLUESKY_PASSWORD }}
+          BLUESKY_DRY_RUN:    ${{ github.event.inputs.dry_run || 'false' }}
+        run: |
+          node scripts/automation/bluesky-post.js && echo "status=success" >> $GITHUB_OUTPUT || echo "status=failed" >> $GITHUB_OUTPUT
+
+  # ─── Job 4: Send B2B outreach email ─────────────────────────────────────────
+  outreach:
+    name: B2B Outreach
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    outputs:
+      status: ${{ steps.run.outputs.status }}
+      target: ${{ steps.run.outputs.target }}
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          # Need full history for the commit step
+          fetch-depth: 1
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Send outreach email
+        id: run
+        env:
+          BREVO_API_KEY:     ${{ secrets.BREVO_API_KEY }}
+          OUTREACH_DRY_RUN:  ${{ github.event.inputs.dry_run || 'false' }}
+        run: |
+          if node scripts/automation/outreach-agent.js; then
+            echo "status=success" >> $GITHUB_OUTPUT
+          else
+            echo "status=failed" >> $GITHUB_OUTPUT
+          fi
+          # Extract contacted company for report using jq (pre-installed on ubuntu-latest)
+          TODAY=$(date +%Y-%m-%d)
+          TARGET=$(jq -r --arg d "$TODAY" \
+            '.prospects[] | select(.contacted_date == $d) | .company + " <" + .email + ">"' \
+            scripts/automation/prospects.json 2>/dev/null | head -1)
+          echo "target=${TARGET:-none}" >> $GITHUB_OUTPUT
+
+      - name: Commit updated prospects
+        if: >
+          steps.run.outputs.status == 'success' &&
+          github.event.inputs.dry_run != 'true'
+        run: |
+          git config user.name  "DevToolsmith Bot"
+          git config user.email "hello@captureapi.dev"
+          git add scripts/automation/prospects.json
+          git diff --staged --quiet || git commit -m "update outreach log"
+          git push
+
+  # ─── Job 5: Daily report (runs after all jobs, even if some failed) ──────────
+  daily-report:
+    name: Daily Report Email
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    needs: [publish-devto, publish-hashnode, bluesky-post, outreach]
+    if: always()   # Always run even if upstream jobs failed
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Send daily report
+        env:
+          BREVO_API_KEY:    ${{ secrets.BREVO_API_KEY }}
+          # Pass job results as env vars for the report
+          DEVTO_STATUS:     ${{ needs.publish-devto.outputs.status    || needs.publish-devto.result }}
+          HASHNODE_STATUS:  ${{ needs.publish-hashnode.outputs.status  || needs.publish-hashnode.result }}
+          BLUESKY_STATUS:   ${{ needs.bluesky-post.outputs.status      || needs.bluesky-post.result }}
+          OUTREACH_STATUS:  ${{ needs.outreach.outputs.status          || needs.outreach.result }}
+          OUTREACH_TARGET:  ${{ needs.outreach.outputs.target }}
+          GITHUB_SERVER_URL: ${{ github.server_url }}
+          GITHUB_REPOSITORY: ${{ github.repository }}
+          GITHUB_RUN_ID:     ${{ github.run_id }}
+        run: node scripts/automation/daily-report.js
