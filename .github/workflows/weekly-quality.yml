@@ -1,0 +1,67 @@
+name: Weekly Quality Check
+
+# Runs every Sunday at 06:00 UTC (07:00 Madrid).
+# Validates the toolkit-online codebase: lint + build.
+# Sends a quality report email via Brevo.
+
+on:
+  schedule:
+    - cron: '0 6 * * 0'   # 06:00 UTC every Sunday
+  workflow_dispatch:        # Manual trigger
+
+permissions:
+  contents: read
+
+jobs:
+  quality-check:
+    name: Lint + Build
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run ESLint
+        id: lint
+        run: |
+          npm run lint 2>&1 | tee lint-output.txt
+          echo "exit_code=${PIPESTATUS[0]}" >> $GITHUB_OUTPUT
+        continue-on-error: true
+
+      - name: Run build
+        id: build
+        run: |
+          npm run build 2>&1 | tee build-output.txt
+          echo "exit_code=${PIPESTATUS[0]}" >> $GITHUB_OUTPUT
+        continue-on-error: true
+
+      - name: Send quality report email
+        env:
+          BREVO_API_KEY: ${{ secrets.BREVO_API_KEY }}
+          OWNER_EMAIL:   antonio.alt3000@gmail.com
+          LINT_EXIT:     ${{ steps.lint.outputs.exit_code }}
+          BUILD_EXIT:    ${{ steps.build.outputs.exit_code }}
+          RUN_URL:       ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+        run: |
+          export LINT_LINES=$(cat lint-output.txt   2>/dev/null | head -50 | sed 's/\x1b\[[0-9;]*m//g')
+          export BUILD_LINES=$(cat build-output.txt 2>/dev/null | tail -30 | sed 's/\x1b\[[0-9;]*m//g')
+          node scripts/automation/send-quality-report.js
+
+      # Fail the workflow if lint or build failed (makes it visible in GitHub UI)
+      - name: Assert quality gate
+        run: |
+          if [ "${{ steps.lint.outputs.exit_code }}" != "0" ] || [ "${{ steps.build.outputs.exit_code }}" != "0" ]; then
+            echo "❌ Quality gate FAILED — see lint-output.txt and build-output.txt"
+            exit 1
+          fi
+          echo "✅ All quality checks passed"
