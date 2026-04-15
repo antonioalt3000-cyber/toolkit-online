@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import { notFound } from 'next/navigation';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import BackToTop from '@/components/BackToTop';
@@ -15,7 +16,10 @@ export function generateStaticParams() {
 
 export async function generateMetadata({ params }: { params: Promise<{ lang: string }> }): Promise<Metadata> {
   const { lang } = await params;
-  const locale = (lang as Locale) || 'en';
+  if (!locales.includes(lang as Locale)) {
+    notFound();
+  }
+  const locale = lang as Locale;
   const t = common[locale];
   return {
     title: { default: t.siteMetaTitle, template: `%s | ${t.siteTitle}` },

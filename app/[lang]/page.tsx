@@ -1,8 +1,12 @@
-import { common, tools, type Locale, getToolsByCategory } from '@/lib/translations';
+import { notFound } from 'next/navigation';
+import { common, tools, locales, type Locale, getToolsByCategory } from '@/lib/translations';
 import HomeContent from '@/components/HomeContent';
 
 export default async function HomePage({ params }: { params: Promise<{ lang: string }> }) {
   const { lang } = await params;
+  if (!locales.includes(lang as Locale)) {
+    notFound();
+  }
   const locale = lang as Locale;
   const t = common[locale];
   const categories = getToolsByCategory();
