@@ -39,6 +39,7 @@ jobs:
       # On success AND not "still down" state: update PREV_STATUS variable to 'up'
       - name: Update status variable (up)
         if: success() && env.SITES_STILL_DOWN != 'true'
+        continue-on-error: true
         uses: actions/github-script@v7
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
@@ -63,6 +64,7 @@ jobs:
       # On failure: update PREV_STATUS variable to 'down'
       - name: Update status variable (down)
         if: failure()
+        continue-on-error: true
         uses: actions/github-script@v7
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
