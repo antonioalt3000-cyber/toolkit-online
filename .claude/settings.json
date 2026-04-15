@@ -56,6 +56,15 @@
             "command": "bash -c 'CMD=$(cat | jq -r \".tool_input.command // empty\"); if echo \"$CMD\" | grep -qE \"git push.*--force|rm -rf /|git reset --hard\"; then echo \"🔴 COMANDO PERICOLOSO BLOCCATO: $CMD\" >&2; echo \"{\\\"decision\\\": \\\"block\\\", \\\"reason\\\": \\\"Comando distruttivo bloccato\\\"}\" ; else echo \"{\\\"decision\\\": \\\"allow\\\"}\" ; fi'"
           }
         ]
+      },
+      {
+        "matcher": "Bash|Write|Edit|Agent",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "echo '{\"hookSpecificOutput\":{\"hookEventName\":\"PreToolUse\",\"additionalContext\":\"VERIFICA OBBLIGATORIA PRIMA DI AGIRE: 1) I file/risorse che servono ESISTONO GIA? Controlla con ls/find PRIMA di creare. 2) Stai usando i dati CORRETTI e AGGIORNATI? Verifica le date dei file. 3) Hai consultato la MEMORIA e le sessioni precedenti? 4) Questo e il MIGLIORE strumento per questa azione? 5) Hai PIANIFICATO prima di eseguire?\"}}'"
+          }
+        ]
       }
     ],
     "Stop": [
@@ -63,7 +72,7 @@
         "hooks": [
           {
             "type": "prompt",
-            "prompt": "Before stopping, verify: 1) Did you run 'npm run lint' if .ts/.tsx files were edited? 2) Did you run 'npm run build' if deployment was requested? 3) Are translations complete for all 6 languages? 4) Did you update portfolio-state.md if significant changes were made? 5) Did you check for any 'any' types or console.log? Return {\"decision\": \"block\", \"reason\": \"Need to complete checks\"} if anything was skipped."
+            "prompt": "Quick check (only if .ts/.tsx files were edited): 1) Was 'npm run lint' run? 2) Was 'npm run build' run if deployment requested? For config/md changes these checks are NOT required. Do NOT block — just remind if applicable."
           }
         ]
       }

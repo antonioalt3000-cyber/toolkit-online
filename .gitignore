@@ -45,3 +45,5 @@ next-env.d.ts
 # Claude Code local settings
 .claude/settings.local.json
 .claude/worktrees/
+ANTHROPIC_API_KEY=
+.env.agent

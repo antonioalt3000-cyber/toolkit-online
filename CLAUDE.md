@@ -8,6 +8,23 @@
 - **Task troppo grandi**: spezzare in milestone committabili, non lanciare tutto insieme
 - **Mai suggerire setup già completati**: controllare memoria prima di proporre azioni
 
+## ⚠️ ACCESSO PIATTAFORME — REGOLA ASSOLUTA
+- **SEMPRE leggere `shared-memory/platform-access-methods.md`** PRIMA di accedere a qualsiasi piattaforma
+- **SEMPRE aggiornare** quel file DOPO ogni tentativo (successo/fallimento)
+- **MAI riprovare** un metodo marcato ❌ — è spreco di tempo
+- **4 tool browser**: Playwright → Chrome DevTools → Chrome MCP → Firecrawl
+- **Ordine**: API diretta → Playwright → Chrome DevTools → marcare 🔒 manuale
+- **Max 2 tentativi per metodo**, poi passare al successivo
+
+## ⚠️ AUTO-MIGLIORAMENTO CONTINUO — Regola permanente
+- **LEGGERE `shared-memory/auto-improvement-system.md` ad OGNI sessione e task**
+- **DOPO ogni azione**: misurare risultato, confrontare con precedente, migliorare
+- **MAI ripetere lo stesso errore** — se qualcosa non funziona, documentare e cambiare approccio
+- **Se qualcosa funziona bene** → analizzare PERCHÉ e replicare il pattern
+- **Se qualcosa non funziona** → analizzare PERCHÉ e cambiare strategia
+- **Ogni task deve finire con**: cosa ho imparato? cosa miglioro per la prossima volta?
+- **Qualità SEMPRE crescente**: ogni blog migliore del precedente, ogni email migliore della precedente
+
 ## ⚠️ Content Guidelines
 - **MAI includere dettagli monetizzazione** (revenue, income, strategie prezzi) in contenuti pubblici (blog, Reddit, Dev.to) se non richiesto esplicitamente
 - **boss2 è DIVERSO da boss** — sempre confermare scope prima di lavorare
@@ -43,7 +60,7 @@ Portfolio di micro-tool gratuiti per generare traffico SEO e monetizzare con Goo
 - `app/api/google-verification/route.ts` — verifica Google Search Console
 - `public/` — assets statici, ads.txt, manifest.json
 
-## Tool attuali (114 tool = 684 pagine)
+## Tool attuali (189 tool = 1134 pagine)
 ### Finance (22)
 vat-calculator, percentage-calculator, loan-calculator, salary-calculator, tip-calculator, discount-calculator, electricity-calculator, invoice-generator, invoice-calculator, mortgage-calculator, currency-converter, fuel-cost-calculator, compound-interest-calculator, investment-calculator, paycheck-calculator, profit-margin-calculator, sales-tax-calculator, roi-calculator, mortgage-amortization, inflation-calculator, retirement-calculator, debt-payoff-calculator
 
@@ -153,8 +170,8 @@ image-compressor, image-resizer, photo-editor, pixel-ruler, meme-generator, pixe
 - `/publish-article [topic]` — Pubblica articolo su Dev.to
 - `/quality-check` — Scansione qualità codice: lint, build, any types, console.log, traduzioni
 
-## Stato attuale (Marzo 2026)
-- **143 tool** = 858 pagine + 42 pagine hub categoria = **900 pagine**
+## Stato attuale (Aprile 2026)
+- **189 tool** = 1134 pagine + 42 pagine hub categoria = **1176 pagine**
 - **GA4**: G-30KL6W6WJY — collegato a Search Console ✅
 - **AdSense**: in attesa approvazione
 - **PWA**: Service Worker attivo
