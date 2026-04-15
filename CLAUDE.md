@@ -10,7 +10,6 @@
 
 ## ⚠️ Content Guidelines
 - **MAI includere dettagli monetizzazione** (revenue, income, strategie prezzi) in contenuti pubblici (blog, Reddit, Dev.to) se non richiesto esplicitamente
-- **boss2 è DIVERSO da boss** — sempre confermare scope prima di lavorare
 
 ## ⚡ AZIONE AUTOMATICA AD OGNI SESSIONE
 All'inizio di ogni sessione, DEVI:
@@ -43,27 +42,8 @@ Portfolio di micro-tool gratuiti per generare traffico SEO e monetizzare con Goo
 - `app/api/google-verification/route.ts` — verifica Google Search Console
 - `public/` — assets statici, ads.txt, manifest.json
 
-## Tool attuali (114 tool = 684 pagine)
-### Finance (22)
-vat-calculator, percentage-calculator, loan-calculator, salary-calculator, tip-calculator, discount-calculator, electricity-calculator, invoice-generator, invoice-calculator, mortgage-calculator, currency-converter, fuel-cost-calculator, compound-interest-calculator, investment-calculator, paycheck-calculator, profit-margin-calculator, sales-tax-calculator, roi-calculator, mortgage-amortization, inflation-calculator, retirement-calculator, debt-payoff-calculator
-
-### Text (21)
-word-counter, lorem-ipsum-generator, text-case-converter, character-counter, text-to-slug, markdown-preview, html-encoder, text-diff, typing-speed-test, character-map, text-to-speech, grammar-checker, resume-builder, ai-text-detector, text-repeater, emoji-picker, word-frequency-counter, line-counter, note-taking, flashcard-maker, font-identifier
-
-### Health (10)
-bmi-calculator, calorie-calculator, body-fat-calculator, ideal-weight-calculator, water-intake-calculator, sleep-calculator, pregnancy-calculator, pace-calculator, breathing-exercise, noise-generator
-
-### Conversion (14)
-unit-converter, base64-converter, time-zone-converter, cooking-converter, csv-to-json, url-encoder, jpg-to-pdf, pdf-to-jpg, word-to-pdf, number-to-words, temperature-converter, pdf-merge, pdf-compress, image-to-text
-
-### Developer (22)
-json-formatter, color-picker, password-generator, qr-code-generator, barcode-generator, screen-resolution, screen-recorder, regex-tester, hex-converter, hash-generator, binary-converter, binary-translator, color-converter, ip-lookup, cron-expression-generator, timestamp-converter, color-palette-generator, internet-speed-test, keyboard-tester, mic-test, webcam-test, gradient-generator
-
-### Math (18)
-age-calculator, speed-calculator, date-calculator, random-number-generator, aspect-ratio-calculator, grade-calculator, countdown-timer, fraction-calculator, gpa-calculator, scientific-calculator, stopwatch, percentage-change-calculator, pomodoro-timer, habit-tracker, standard-deviation-calculator, matrix-calculator, probability-calculator, chart-maker
-
-### Images (7)
-image-compressor, image-resizer, photo-editor, pixel-ruler, meme-generator, pixel-art-maker, background-remover
+## Tool attuali → vedi `lib/translations.ts`
+> `toolList` e `getToolsByCategory()` sono la fonte di verità. Non duplicare qui.
 
 ## Convenzioni
 - Ogni tool è un file `page.tsx` con 'use client'
@@ -153,10 +133,5 @@ image-compressor, image-resizer, photo-editor, pixel-ruler, meme-generator, pixe
 - `/publish-article [topic]` — Pubblica articolo su Dev.to
 - `/quality-check` — Scansione qualità codice: lint, build, any types, console.log, traduzioni
 
-## Stato attuale (Marzo 2026)
-- **143 tool** = 858 pagine + 42 pagine hub categoria = **900 pagine**
-- **GA4**: G-30KL6W6WJY — collegato a Search Console ✅
-- **AdSense**: in attesa approvazione
-- **PWA**: Service Worker attivo
-- **text-repeater IT**: posizione 7 (prima pagina Google!)
-- **fuel-cost-calculator IT**: posizione 10.9 (quasi prima pagina)
+## Stato attuale → vedi `~/portfolio-state.md`
+> Dati aggiornati, metriche GSC, task aperti sono in portfolio-state.md. Non duplicare qui.
