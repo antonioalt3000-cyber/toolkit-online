@@ -150,6 +150,10 @@ async function main() {
     if (prevStatus === 'down') {
       // Already notified on a previous run — skip duplicate alert & email
       console.log(`\n⚠️  ${down.length} SITE(S) STILL DOWN (already notified) — skipping duplicate alert`);
+      // Signal to the workflow NOT to reset PREV_STATUS to 'up'
+      if (process.env.GITHUB_ENV) {
+        require('fs').appendFileSync(process.env.GITHUB_ENV, 'SITES_STILL_DOWN=true\n');
+      }
       // Exit 0: workflow stays green, no repeated GitHub failure emails
       process.exit(0);
     } else {
