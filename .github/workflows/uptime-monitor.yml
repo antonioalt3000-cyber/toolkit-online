@@ -2,8 +2,9 @@ name: Uptime Monitor
 
 # Runs every 5 minutes, 24/7, with PC off.
 # Checks all 5 DevToolsmith sites and sends a Brevo alert email if any are down.
-# Costs: ~8,640 runs/month × ~15s each ≈ 2,160 min/month (within 2,000 free tier on public repos;
-#        use a private repo with GitHub Team/Pro for private repos).
+# State (prev status) is persisted in scripts/automation/.prev-status and only
+# committed when it changes (so the repo gets at most a couple of commits per
+# outage/recovery cycle, not one every 5 minutes).
 
 on:
   schedule:
@@ -11,8 +12,11 @@ on:
   workflow_dispatch:          # Allow manual trigger from GitHub UI
 
 permissions:
-  contents: read
-  actions: write   # Required to update/create the PREV_STATUS repository variable
+  contents: write   # Required to commit the .prev-status file on state change
+
+concurrency:
+  group: uptime-monitor
+  cancel-in-progress: false
 
 jobs:
   check:
@@ -27,60 +31,61 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '20'
+          node-version: '24'
+
+      - name: Read previous status
+        id: prev
+        run: |
+          STATUS=""
+          if [ -f scripts/automation/.prev-status ]; then
+            STATUS=$(tr -d '[:space:]' < scripts/automation/.prev-status)
+          fi
+          echo "status=$STATUS" >> "$GITHUB_OUTPUT"
+          echo "Previous status: '$STATUS'"
 
       - name: Run uptime check
+        id: check
         env:
           BREVO_API_KEY: ${{ secrets.BREVO_API_KEY }}
-          # Set to 'down' to test recovery email flow
-          PREV_STATUS: ${{ vars.PREV_STATUS || '' }}
+          PREV_STATUS: ${{ steps.prev.outputs.status }}
         run: node scripts/automation/uptime-check.js
 
-      # On success AND not "still down" state: update PREV_STATUS variable to 'up'
-      - name: Update status variable (up)
-        if: success() && env.SITES_STILL_DOWN != 'true'
-        continue-on-error: true
-        uses: actions/github-script@v7
-        with:
-          github-token: ${{ secrets.GITHUB_TOKEN }}
-          script: |
-            try {
-              await github.rest.actions.updateRepoVariable({
-                owner: context.repo.owner,
-                repo:  context.repo.repo,
-                name:  'PREV_STATUS',
-                value: 'up',
-              });
-            } catch (e) {
-              // Variable may not exist yet — create it
-              await github.rest.actions.createRepoVariable({
-                owner: context.repo.owner,
-                repo:  context.repo.repo,
-                name:  'PREV_STATUS',
-                value: 'up',
-              });
-            }
+      - name: Persist new status (commit only on change)
+        if: always()
+        env:
+          JOB_STEP_STATUS: ${{ steps.check.outcome }}
+          PREV_STATUS: ${{ steps.prev.outputs.status }}
+        run: |
+          # NEW_STATUS:
+          #   'up'   -> uptime-check exited 0 AND SITES_STILL_DOWN is not true
+          #   'down' -> uptime-check exited 1 (new outage) OR SITES_STILL_DOWN=true
+          if [ "$JOB_STEP_STATUS" = "success" ] && [ "$SITES_STILL_DOWN" != "true" ]; then
+            NEW_STATUS="up"
+          else
+            NEW_STATUS="down"
+          fi
 
-      # On failure: update PREV_STATUS variable to 'down'
-      - name: Update status variable (down)
-        if: failure()
-        continue-on-error: true
-        uses: actions/github-script@v7
-        with:
-          github-token: ${{ secrets.GITHUB_TOKEN }}
-          script: |
-            try {
-              await github.rest.actions.updateRepoVariable({
-                owner: context.repo.owner,
-                repo:  context.repo.repo,
-                name:  'PREV_STATUS',
-                value: 'down',
-              });
-            } catch (e) {
-              await github.rest.actions.createRepoVariable({
-                owner: context.repo.owner,
-                repo:  context.repo.repo,
-                name:  'PREV_STATUS',
-                value: 'down',
-              });
-            }
+          echo "Computed new status: $NEW_STATUS (was: '$PREV_STATUS')"
+
+          if [ "$NEW_STATUS" = "$PREV_STATUS" ]; then
+            echo "Status unchanged — nothing to commit."
+            exit 0
+          fi
+
+          mkdir -p scripts/automation
+          printf '%s\n' "$NEW_STATUS" > scripts/automation/.prev-status
+
+          git config user.name  "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add scripts/automation/.prev-status
+          git commit -m "chore(uptime): status -> $NEW_STATUS [skip ci]"
+
+          # Retry push up to 3 times in case of concurrent run conflict.
+          for i in 1 2 3; do
+            if git push; then
+              exit 0
+            fi
+            echo "Push attempt $i failed, pulling and retrying..."
+            git pull --rebase origin "$(git rev-parse --abbrev-ref HEAD)" || true
+          done
+          echo "::warning::Failed to push .prev-status after 3 attempts"
