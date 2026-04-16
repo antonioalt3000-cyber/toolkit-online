@@ -1,6 +1,6 @@
 {
   "_info": "Prospect list for DevToolsmith B2B outreach. One email sent per day via daily-outreach workflow. Mark contacted=true after sending. Add new prospects at the bottom.",
-  "_last_updated": "2026-04-15",
+  "_last_updated": "2026-04-16",
   "_do_not_contact": "See memory/no-contact-list.md for bounced/unsubscribed emails.",
   "prospects": [
     {
@@ -21,8 +21,8 @@
       "email": "tech@cognigy.com",
       "tool": "F1",
       "angle": "EU AI Act compliance for conversational AI",
-      "contacted": false,
-      "contacted_date": null,
+      "contacted": true,
+      "contacted_date": "2026-04-16",
       "notes": "German conversational AI, GDPR-sensitive data"
     },
     {
