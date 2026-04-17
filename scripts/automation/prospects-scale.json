@@ -22,35 +22,45 @@
       "saas": "F2",
       "company": "June Karlove",
       "firstName": "team",
-      "source": "CONTACTS_REGISTRY verified LT"
+      "source": "CONTACTS_REGISTRY verified LT",
+      "contacted_date": "2026-04-17",
+      "contacted_saas": "F2"
     },
     {
       "email": "contact@aiopsgroup.com",
       "saas": "F2",
       "company": "AIOPS Group",
       "firstName": "team",
-      "source": "CONTACTS_REGISTRY verified BG"
+      "source": "CONTACTS_REGISTRY verified BG",
+      "contacted_date": "2026-04-17",
+      "contacted_saas": "F2"
     },
     {
       "email": "szantaikaroly@akadalymentesweb.hu",
       "saas": "F2",
       "company": "AkadalymentesWeb",
       "firstName": "Karoly",
-      "source": "CONTACTS_REGISTRY verified HU"
+      "source": "CONTACTS_REGISTRY verified HU",
+      "contacted_date": "2026-04-17",
+      "contacted_saas": "F2"
     },
     {
       "email": "contact@accesibilitateweb.ro",
       "saas": "F2",
       "company": "AccesibilitateWeb",
       "firstName": "team",
-      "source": "CONTACTS_REGISTRY verified RO"
+      "source": "CONTACTS_REGISTRY verified RO",
+      "contacted_date": "2026-04-17",
+      "contacted_saas": "F2"
     },
     {
       "email": "info@screenshotapi.net",
       "saas": "B7",
       "company": "ScreenshotAPI.net",
       "firstName": "team",
-      "source": "CONTACTS_REGISTRY verified US"
+      "source": "CONTACTS_REGISTRY verified US",
+      "contacted_date": "2026-04-17",
+      "contacted_saas": "B7"
     },
     {
       "email": "hey@screenshotone.com",
