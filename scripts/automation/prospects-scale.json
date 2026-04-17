@@ -1,0 +1,189 @@
+{
+  "_meta": {
+    "description": "Uncontacted B2B prospects for outreach-scale.yml daily 5/day sends",
+    "format": "email (unique key), saas (F1/F2/F3/F4/B7), company, firstName (optional), source (where found)",
+    "rules": "NEVER add prices; regex check auto-blocks; dedup guard in brevo.js prevents same email+subject within 5 min",
+    "seed_date": "2026-04-17"
+  },
+  "prospects": [
+    {
+      "email": "kontakt@inklud.no",
+      "saas": "F2",
+      "company": "Inklud",
+      "firstName": "team",
+      "source": "CONTACTS_REGISTRY verified NO a11y",
+      "__contacted_date_note": "already contacted 17/4 in main batch — remove if already in email-sent-log",
+      "contacted_date": "2026-04-17",
+      "contacted_saas": "F2",
+      "__note": "already contacted 17/4 main batch"
+    },
+    {
+      "email": "letstalk@junekarlove.com",
+      "saas": "F2",
+      "company": "June Karlove",
+      "firstName": "team",
+      "source": "CONTACTS_REGISTRY verified LT"
+    },
+    {
+      "email": "contact@aiopsgroup.com",
+      "saas": "F2",
+      "company": "AIOPS Group",
+      "firstName": "team",
+      "source": "CONTACTS_REGISTRY verified BG"
+    },
+    {
+      "email": "szantaikaroly@akadalymentesweb.hu",
+      "saas": "F2",
+      "company": "AkadalymentesWeb",
+      "firstName": "Karoly",
+      "source": "CONTACTS_REGISTRY verified HU"
+    },
+    {
+      "email": "contact@accesibilitateweb.ro",
+      "saas": "F2",
+      "company": "AccesibilitateWeb",
+      "firstName": "team",
+      "source": "CONTACTS_REGISTRY verified RO"
+    },
+    {
+      "email": "info@screenshotapi.net",
+      "saas": "B7",
+      "company": "ScreenshotAPI.net",
+      "firstName": "team",
+      "source": "CONTACTS_REGISTRY verified US"
+    },
+    {
+      "email": "hey@screenshotone.com",
+      "saas": "B7",
+      "company": "ScreenshotOne",
+      "firstName": "team",
+      "source": "CONTACTS_REGISTRY verified UA"
+    },
+    {
+      "email": "info@dataforseo.com",
+      "saas": "B7",
+      "company": "DataForSEO",
+      "firstName": "team",
+      "source": "CONTACTS_REGISTRY verified EE"
+    },
+    {
+      "email": "support@outscraper.com",
+      "saas": "B7",
+      "company": "Outscraper",
+      "firstName": "team",
+      "source": "CONTACTS_REGISTRY verified US"
+    },
+    {
+      "email": "partnerships@chargebee.com",
+      "saas": "F3",
+      "company": "Chargebee",
+      "firstName": "team",
+      "source": "Web search April 2026"
+    },
+    {
+      "email": "partnerships@2checkout.com",
+      "saas": "F3",
+      "company": "2Checkout",
+      "firstName": "team",
+      "source": "Web search - subscription billing"
+    },
+    {
+      "email": "hello@fastspring.com",
+      "saas": "F3",
+      "company": "FastSpring",
+      "firstName": "team",
+      "source": "SaaS billing platform"
+    },
+    {
+      "email": "support@rebill.to",
+      "saas": "F3",
+      "company": "Rebill",
+      "firstName": "team",
+      "source": "LatAm payments"
+    },
+    {
+      "email": "team@upscribe.com",
+      "saas": "F3",
+      "company": "Upscribe",
+      "firstName": "team",
+      "source": "Shopify subscription tool"
+    },
+    {
+      "email": "partnerships@docparser.com",
+      "saas": "F4",
+      "company": "Docparser",
+      "firstName": "team",
+      "source": "PDF extraction peer"
+    },
+    {
+      "email": "support@taggun.io",
+      "saas": "F4",
+      "company": "Taggun",
+      "firstName": "team",
+      "source": "Receipt OCR API"
+    },
+    {
+      "email": "hello@cloudmersive.com",
+      "saas": "F4",
+      "company": "Cloudmersive",
+      "firstName": "team",
+      "source": "Document APIs"
+    },
+    {
+      "email": "api@docshifter.com",
+      "saas": "F4",
+      "company": "DocShifter",
+      "firstName": "team",
+      "source": "Document transformation"
+    },
+    {
+      "email": "partnerships@browserstack.com",
+      "saas": "B7",
+      "company": "BrowserStack",
+      "firstName": "team",
+      "source": "Testing infra (peer)"
+    },
+    {
+      "email": "partnerships@saucelabs.com",
+      "saas": "B7",
+      "company": "Sauce Labs",
+      "firstName": "team",
+      "source": "Cross-browser testing"
+    },
+    {
+      "email": "hello@percy.io",
+      "saas": "B7",
+      "company": "Percy",
+      "firstName": "team",
+      "source": "Visual regression (BrowserStack)"
+    },
+    {
+      "email": "partnerships@luminance.com",
+      "saas": "F1",
+      "company": "Luminance",
+      "firstName": "team",
+      "source": "Legal AI peer"
+    },
+    {
+      "email": "hello@onetrust.com",
+      "saas": "F1",
+      "company": "OneTrust",
+      "firstName": "team",
+      "source": "GDPR compliance platform"
+    },
+    {
+      "email": "partnerships@osano.com",
+      "saas": "F1",
+      "company": "Osano",
+      "firstName": "team",
+      "source": "Privacy compliance"
+    },
+    {
+      "email": "hello@ethyca.com",
+      "saas": "F1",
+      "company": "Ethyca",
+      "firstName": "team",
+      "source": "Privacy engineering"
+    }
+  ]
+}
