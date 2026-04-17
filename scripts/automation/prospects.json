@@ -1,6 +1,6 @@
 {
   "_info": "Prospect list for DevToolsmith B2B outreach. One email sent per day via daily-outreach workflow. Mark contacted=true after sending. Add new prospects at the bottom.",
-  "_last_updated": "2026-04-16",
+  "_last_updated": "2026-04-17",
   "_do_not_contact": "See memory/no-contact-list.md for bounced/unsubscribed emails.",
   "prospects": [
     {
@@ -32,8 +32,8 @@
       "email": "engineering@wayve.ai",
       "tool": "F1",
       "angle": "NIS2 + EU AI Act for autonomous driving AI",
-      "contacted": false,
-      "contacted_date": null,
+      "contacted": true,
+      "contacted_date": "2026-04-17",
       "notes": "UK autonomous driving AI, high-risk AI system under EU AI Act"
     },
     {
