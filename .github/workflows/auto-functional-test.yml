@@ -1,0 +1,107 @@
+name: Auto-Functional Test (5 SaaS smoke tests)
+
+# Daily smoke test of critical endpoints across 5 SaaS + B0
+# Detects production regressions early
+
+on:
+  schedule:
+    - cron: '0 4 * * *'   # Daily 04:00 UTC
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  issues: write
+
+jobs:
+  smoke-tests:
+    name: Smoke tests 5 SaaS
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: F1 CompliPilot — homepage
+        run: |
+          code=$(curl -sL -o /dev/null -w "%{http_code}" --max-time 15 "https://complipilot.dev")
+          [ "$code" = "200" ] || { echo "::error::F1 home $code"; exit 1; }
+          echo "✓ F1 homepage 200"
+
+      - name: F2 FixMyWeb — homepage + scan endpoint
+        run: |
+          code=$(curl -sL -o /dev/null -w "%{http_code}" --max-time 15 "https://fixmyweb.dev")
+          [ "$code" = "200" ] || { echo "::error::F2 home $code"; exit 1; }
+          # scan endpoint should return 405 (method not allowed for GET) or 401 (needs auth) — NOT 500
+          scan_code=$(curl -s -o /dev/null -w "%{http_code}" --max-time 15 "https://fixmyweb.dev/api/scan")
+          [ "$scan_code" != "500" ] && [ "$scan_code" != "000" ] || { echo "::error::F2 scan endpoint $scan_code"; exit 1; }
+          echo "✓ F2 homepage 200, scan endpoint $scan_code"
+
+      - name: F3 ChurnGuard — homepage + webhook
+        run: |
+          code=$(curl -sL -o /dev/null -w "%{http_code}" --max-time 15 "https://paymentrescue.dev")
+          [ "$code" = "200" ] || { echo "::error::F3 home $code"; exit 1; }
+          # Stripe webhook must return 400 on POST without signature (not 200 or 500)
+          hook_code=$(curl -s -o /dev/null -w "%{http_code}" -X POST --max-time 15 "https://paymentrescue.dev/api/webhooks/stripe" -H "content-type: application/json" -d '{}')
+          [ "$hook_code" = "400" ] || echo "::warning::F3 webhook expected 400 got $hook_code"
+          echo "✓ F3 homepage 200, webhook $hook_code"
+
+      - name: F4 ParseFlow — homepage + extract endpoint
+        run: |
+          code=$(curl -sL -o /dev/null -w "%{http_code}" --max-time 15 "https://parseflow.dev")
+          [ "$code" = "200" ] || { echo "::error::F4 home $code"; exit 1; }
+          # /api/v1/extract should return 401 (no API key) not 500
+          ext_code=$(curl -s -o /dev/null -w "%{http_code}" -X POST --max-time 15 "https://parseflow.dev/api/v1/extract" -H "content-type: application/json" -d '{}')
+          [ "$ext_code" = "401" ] || echo "::warning::F4 extract expected 401 got $ext_code"
+          echo "✓ F4 homepage 200, extract $ext_code"
+
+      - name: B7 CaptureAPI — homepage + screenshot endpoint
+        run: |
+          code=$(curl -sL -o /dev/null -w "%{http_code}" --max-time 15 "https://captureapi.dev")
+          [ "$code" = "200" ] || { echo "::error::B7 home $code"; exit 1; }
+          # /api/screenshot should redirect 308 to /api/v1/screenshot
+          redir_code=$(curl -s -o /dev/null -w "%{http_code}" --max-time 15 "https://captureapi.dev/api/screenshot")
+          [ "$redir_code" = "308" ] || echo "::warning::B7 redirect expected 308 got $redir_code"
+          # /api/v1/screenshot should return 401 without key
+          ss_code=$(curl -sL -o /dev/null -w "%{http_code}" --max-time 15 "https://captureapi.dev/api/v1/screenshot")
+          [ "$ss_code" = "401" ] || echo "::warning::B7 screenshot expected 401 got $ss_code"
+          echo "✓ B7 homepage 200, redirect $redir_code, screenshot $ss_code"
+
+      - name: B0 ToolKit Online — homepage + pricing
+        run: |
+          code=$(curl -sL -o /dev/null -w "%{http_code}" --max-time 15 "https://toolkitonline.vip")
+          [ "$code" = "200" ] || { echo "::error::B0 home $code"; exit 1; }
+          # /pricing may legitimately not exist (B0 is free) — 404 is OK, 500 is NOT
+          price_code=$(curl -sL -o /dev/null -w "%{http_code}" --max-time 15 "https://toolkitonline.vip/pricing")
+          [ "$price_code" != "500" ] || { echo "::error::B0 pricing 500"; exit 1; }
+          echo "✓ B0 homepage 200, pricing $price_code"
+
+      - name: www.* redirect sanity check (post-sess29 fix)
+        run: |
+          for d in complipilot.dev fixmyweb.dev paymentrescue.dev parseflow.dev captureapi.dev; do
+            code=$(curl -sL -o /dev/null -w "%{http_code}" --max-time 10 "https://www.$d")
+            if [ "$code" != "200" ] && [ "$code" != "301" ] && [ "$code" != "308" ]; then
+              echo "::warning::www.$d returned $code (expected 200/301/308)"
+            else
+              echo "✓ www.$d $code"
+            fi
+          done
+
+  notify:
+    name: Send report
+    needs: smoke-tests
+    if: always()
+    runs-on: ubuntu-latest
+    steps:
+      - name: Email result
+        env:
+          BREVO_API_KEY: ${{ secrets.BREVO_API_KEY }}
+          STATUS: ${{ needs.smoke-tests.result }}
+        run: |
+          if [ -z "$BREVO_API_KEY" ]; then exit 0; fi
+          SUBJ="Auto Functional Test: $STATUS"
+          curl -s -X POST "https://api.brevo.com/v3/smtp/email" \
+            -H "accept: application/json" \
+            -H "api-key: $BREVO_API_KEY" \
+            -H "content-type: application/json" \
+            -d "{\"sender\":{\"name\":\"DevToolsmith Tests\",\"email\":\"hello@captureapi.dev\"},\"to\":[{\"email\":\"antonio.alt3000@gmail.com\"}],\"subject\":\"$SUBJ\",\"htmlContent\":\"<p>Daily functional test status: <strong>$STATUS</strong></p><p>Run logs: <a href=\\\"${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}\\\">GitHub Actions</a></p>\"}" || true

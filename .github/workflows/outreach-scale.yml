@@ -1,0 +1,74 @@
+name: Outreach Scale (5 email/day, rate-limited)
+
+# Daily outreach with regex price guard + dedup (via brevo.js helper)
+# Reads prospects-scale.json, sends N configured emails per day
+# Zero-cost: GitHub Actions + Brevo free tier 300/day
+
+on:
+  schedule:
+    - cron: '0 11 * * 1-5'   # Weekdays 11:00 UTC (= 12:00/13:00 CEST)
+  workflow_dispatch:
+    inputs:
+      limit:
+        description: 'Number of emails to send (default 5)'
+        required: false
+        default: '5'
+        type: string
+      dry_run:
+        description: 'Print without sending'
+        required: false
+        default: 'false'
+        type: choice
+        options: ['true', 'false']
+
+permissions:
+  contents: write
+
+jobs:
+  outreach:
+    name: Send daily outreach batch
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Run outreach script
+        id: run
+        env:
+          BREVO_API_KEY:     ${{ secrets.BREVO_API_KEY }}
+          OUTREACH_DRY_RUN:  ${{ github.event.inputs.dry_run || 'false' }}
+          OUTREACH_LIMIT:    ${{ github.event.inputs.limit || '5' }}
+        run: |
+          node scripts/automation/outreach-scale.js
+          echo "status=success" >> $GITHUB_OUTPUT
+
+      - name: Commit updated logs
+        if: steps.run.outcome == 'success' && github.event.inputs.dry_run != 'true'
+        run: |
+          git config user.name  "DevToolsmith Bot"
+          git config user.email "hello@captureapi.dev"
+          git add scripts/automation/prospects-scale.json scripts/automation/outreach-scale-log.json 2>/dev/null || true
+          git diff --staged --quiet || git commit -m "outreach scale daily log"
+          git pull --rebase origin master || true
+          git push || echo "::warning::Push failed"
+
+      - name: Send failure alert
+        if: failure()
+        env:
+          BREVO_API_KEY: ${{ secrets.BREVO_API_KEY }}
+        run: |
+          if [ -z "$BREVO_API_KEY" ]; then exit 0; fi
+          curl -s -X POST "https://api.brevo.com/v3/smtp/email" \
+            -H "accept: application/json" \
+            -H "api-key: $BREVO_API_KEY" \
+            -H "content-type: application/json" \
+            -d '{"sender":{"name":"DevToolsmith Alert","email":"hello@captureapi.dev"},"to":[{"email":"antonio.alt3000@gmail.com"}],"subject":"⚠️ Outreach Scale failed","htmlContent":"<p>See <a href=\"${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}\">GitHub Actions</a></p>"}' || true
