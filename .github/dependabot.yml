@@ -1,0 +1,24 @@
+version: 2
+updates:
+  - package-ecosystem: "npm"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+      day: "monday"
+      time: "07:00"
+      timezone: "Europe/Madrid"
+    open-pull-requests-limit: 5
+    groups:
+      eslint:
+        patterns:
+          - "eslint*"
+          - "@typescript-eslint*"
+      nextjs:
+        patterns:
+          - "next"
+          - "react"
+          - "react-dom"
+    ignore:
+      # eslint pinned manually — do not auto-update
+      - dependency-name: "eslint"
+        update-types: ["version-update:semver-minor", "version-update:semver-patch"]

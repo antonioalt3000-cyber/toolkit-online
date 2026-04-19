@@ -2,6 +2,7 @@ name: Weekly Quality Check
 
 # Runs every Sunday at 06:00 UTC (07:00 Madrid).
 # Validates the toolkit-online codebase: lint + build.
+# Auto-fixes ESLint issues and commits them before the quality gate.
 # Sends a quality report email via Brevo.
 
 on:
@@ -10,17 +11,19 @@ on:
   workflow_dispatch:        # Manual trigger
 
 permissions:
-  contents: read
+  contents: write
 
 jobs:
   quality-check:
     name: Lint + Build
     runs-on: ubuntu-latest
-    timeout-minutes: 15
+    timeout-minutes: 20
 
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
@@ -30,6 +33,21 @@ jobs:
 
       - name: Install dependencies
         run: npm ci
+
+      - name: ESLint auto-fix
+        id: autofix
+        run: |
+          npm run lint -- --fix 2>/dev/null || true
+          if ! git diff --quiet; then
+            git config user.name  "github-actions[bot]"
+            git config user.email "github-actions[bot]@users.noreply.github.com"
+            git add -A
+            git commit -m "fix: auto-fix eslint warnings (weekly quality check)"
+            git push
+            echo "fixed=true" >> $GITHUB_OUTPUT
+          else
+            echo "fixed=false" >> $GITHUB_OUTPUT
+          fi
 
       - name: Run ESLint
         id: lint
