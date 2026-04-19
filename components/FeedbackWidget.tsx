@@ -22,10 +22,12 @@ export default function FeedbackWidget({ toolSlug }: { toolSlug: string }) {
   const [loaded, setLoaded] = useState(false);
 
   useEffect(() => {
+    let savedVote: 'up' | 'down' | null = null;
     try {
       const saved = localStorage.getItem(storageKey);
-      if (saved === 'up' || saved === 'down') setVote(saved);
+      if (saved === 'up' || saved === 'down') savedVote = saved;
     } catch {}
+    setVote(savedVote);
     setLoaded(true);
   }, [storageKey]);
 
