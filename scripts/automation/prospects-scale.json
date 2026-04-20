@@ -67,35 +67,45 @@
       "saas": "B7",
       "company": "ScreenshotOne",
       "firstName": "team",
-      "source": "CONTACTS_REGISTRY verified UA"
+      "source": "CONTACTS_REGISTRY verified UA",
+      "contacted_date": "2026-04-20",
+      "contacted_saas": "B7"
     },
     {
       "email": "info@dataforseo.com",
       "saas": "B7",
       "company": "DataForSEO",
       "firstName": "team",
-      "source": "CONTACTS_REGISTRY verified EE"
+      "source": "CONTACTS_REGISTRY verified EE",
+      "contacted_date": "2026-04-20",
+      "contacted_saas": "B7"
     },
     {
       "email": "support@outscraper.com",
       "saas": "B7",
       "company": "Outscraper",
       "firstName": "team",
-      "source": "CONTACTS_REGISTRY verified US"
+      "source": "CONTACTS_REGISTRY verified US",
+      "contacted_date": "2026-04-20",
+      "contacted_saas": "B7"
     },
     {
       "email": "partnerships@chargebee.com",
       "saas": "F3",
       "company": "Chargebee",
       "firstName": "team",
-      "source": "Web search April 2026"
+      "source": "Web search April 2026",
+      "contacted_date": "2026-04-20",
+      "contacted_saas": "F3"
     },
     {
       "email": "partnerships@2checkout.com",
       "saas": "F3",
       "company": "2Checkout",
       "firstName": "team",
-      "source": "Web search - subscription billing"
+      "source": "Web search - subscription billing",
+      "contacted_date": "2026-04-20",
+      "contacted_saas": "F3"
     },
     {
       "email": "hello@fastspring.com",

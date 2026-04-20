@@ -30,6 +30,37 @@
           "httpCode": 201
         }
       ]
+    },
+    {
+      "date": "2026-04-20",
+      "count": 5,
+      "results": [
+        {
+          "email": "hey@screenshotone.com",
+          "status": "sent",
+          "httpCode": 201
+        },
+        {
+          "email": "info@dataforseo.com",
+          "status": "sent",
+          "httpCode": 201
+        },
+        {
+          "email": "support@outscraper.com",
+          "status": "sent",
+          "httpCode": 201
+        },
+        {
+          "email": "partnerships@chargebee.com",
+          "status": "sent",
+          "httpCode": 201
+        },
+        {
+          "email": "partnerships@2checkout.com",
+          "status": "sent",
+          "httpCode": 201
+        }
+      ]
     }
   ]
 }
