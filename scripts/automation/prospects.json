@@ -1,6 +1,6 @@
 {
   "_info": "Prospect list for DevToolsmith B2B outreach. One email sent per day via daily-outreach workflow. Mark contacted=true after sending. Add new prospects at the bottom.",
-  "_last_updated": "2026-04-19",
+  "_last_updated": "2026-04-20",
   "_do_not_contact": "See memory/no-contact-list.md for bounced/unsubscribed emails.",
   "prospects": [
     {
@@ -65,8 +65,8 @@
       "email": "devteam@hotjar.com",
       "tool": "F2",
       "angle": "EAA compliance scan before June 2025 deadline",
-      "contacted": false,
-      "contacted_date": null,
+      "contacted": true,
+      "contacted_date": "2026-04-20",
       "notes": "Analytics platform with EU customer base"
     },
     {
