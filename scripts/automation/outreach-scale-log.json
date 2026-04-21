@@ -61,6 +61,37 @@
           "httpCode": 201
         }
       ]
+    },
+    {
+      "date": "2026-04-21",
+      "count": 5,
+      "results": [
+        {
+          "email": "hello@fastspring.com",
+          "status": "sent",
+          "httpCode": 201
+        },
+        {
+          "email": "support@rebill.to",
+          "status": "sent",
+          "httpCode": 201
+        },
+        {
+          "email": "team@upscribe.com",
+          "status": "sent",
+          "httpCode": 201
+        },
+        {
+          "email": "partnerships@docparser.com",
+          "status": "sent",
+          "httpCode": 201
+        },
+        {
+          "email": "support@taggun.io",
+          "status": "sent",
+          "httpCode": 201
+        }
+      ]
     }
   ]
 }

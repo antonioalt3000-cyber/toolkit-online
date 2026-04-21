@@ -112,35 +112,45 @@
       "saas": "F3",
       "company": "FastSpring",
       "firstName": "team",
-      "source": "SaaS billing platform"
+      "source": "SaaS billing platform",
+      "contacted_date": "2026-04-21",
+      "contacted_saas": "F3"
     },
     {
       "email": "support@rebill.to",
       "saas": "F3",
       "company": "Rebill",
       "firstName": "team",
-      "source": "LatAm payments"
+      "source": "LatAm payments",
+      "contacted_date": "2026-04-21",
+      "contacted_saas": "F3"
     },
     {
       "email": "team@upscribe.com",
       "saas": "F3",
       "company": "Upscribe",
       "firstName": "team",
-      "source": "Shopify subscription tool"
+      "source": "Shopify subscription tool",
+      "contacted_date": "2026-04-21",
+      "contacted_saas": "F3"
     },
     {
       "email": "partnerships@docparser.com",
       "saas": "F4",
       "company": "Docparser",
       "firstName": "team",
-      "source": "PDF extraction peer"
+      "source": "PDF extraction peer",
+      "contacted_date": "2026-04-21",
+      "contacted_saas": "F4"
     },
     {
       "email": "support@taggun.io",
       "saas": "F4",
       "company": "Taggun",
       "firstName": "team",
-      "source": "Receipt OCR API"
+      "source": "Receipt OCR API",
+      "contacted_date": "2026-04-21",
+      "contacted_saas": "F4"
     },
     {
       "email": "hello@cloudmersive.com",
