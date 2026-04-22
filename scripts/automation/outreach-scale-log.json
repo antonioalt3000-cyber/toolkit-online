@@ -92,6 +92,37 @@
           "httpCode": 201
         }
       ]
+    },
+    {
+      "date": "2026-04-22",
+      "count": 5,
+      "results": [
+        {
+          "email": "hello@cloudmersive.com",
+          "status": "sent",
+          "httpCode": 201
+        },
+        {
+          "email": "api@docshifter.com",
+          "status": "sent",
+          "httpCode": 201
+        },
+        {
+          "email": "partnerships@browserstack.com",
+          "status": "sent",
+          "httpCode": 201
+        },
+        {
+          "email": "partnerships@saucelabs.com",
+          "status": "sent",
+          "httpCode": 201
+        },
+        {
+          "email": "hello@percy.io",
+          "status": "sent",
+          "httpCode": 201
+        }
+      ]
     }
   ]
 }

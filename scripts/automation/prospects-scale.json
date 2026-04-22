@@ -157,35 +157,45 @@
       "saas": "F4",
       "company": "Cloudmersive",
       "firstName": "team",
-      "source": "Document APIs"
+      "source": "Document APIs",
+      "contacted_date": "2026-04-22",
+      "contacted_saas": "F4"
     },
     {
       "email": "api@docshifter.com",
       "saas": "F4",
       "company": "DocShifter",
       "firstName": "team",
-      "source": "Document transformation"
+      "source": "Document transformation",
+      "contacted_date": "2026-04-22",
+      "contacted_saas": "F4"
     },
     {
       "email": "partnerships@browserstack.com",
       "saas": "B7",
       "company": "BrowserStack",
       "firstName": "team",
-      "source": "Testing infra (peer)"
+      "source": "Testing infra (peer)",
+      "contacted_date": "2026-04-22",
+      "contacted_saas": "B7"
     },
     {
       "email": "partnerships@saucelabs.com",
       "saas": "B7",
       "company": "Sauce Labs",
       "firstName": "team",
-      "source": "Cross-browser testing"
+      "source": "Cross-browser testing",
+      "contacted_date": "2026-04-22",
+      "contacted_saas": "B7"
     },
     {
       "email": "hello@percy.io",
       "saas": "B7",
       "company": "Percy",
       "firstName": "team",
-      "source": "Visual regression (BrowserStack)"
+      "source": "Visual regression (BrowserStack)",
+      "contacted_date": "2026-04-22",
+      "contacted_saas": "B7"
     },
     {
       "email": "partnerships@luminance.com",
