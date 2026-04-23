@@ -123,6 +123,32 @@
           "httpCode": 201
         }
       ]
+    },
+    {
+      "date": "2026-04-23",
+      "count": 4,
+      "results": [
+        {
+          "email": "partnerships@luminance.com",
+          "status": "sent",
+          "httpCode": 201
+        },
+        {
+          "email": "hello@onetrust.com",
+          "status": "sent",
+          "httpCode": 201
+        },
+        {
+          "email": "partnerships@osano.com",
+          "status": "sent",
+          "httpCode": 201
+        },
+        {
+          "email": "hello@ethyca.com",
+          "status": "sent",
+          "httpCode": 201
+        }
+      ]
     }
   ]
 }

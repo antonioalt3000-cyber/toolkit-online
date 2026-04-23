@@ -202,28 +202,36 @@
       "saas": "F1",
       "company": "Luminance",
       "firstName": "team",
-      "source": "Legal AI peer"
+      "source": "Legal AI peer",
+      "contacted_date": "2026-04-23",
+      "contacted_saas": "F1"
     },
     {
       "email": "hello@onetrust.com",
       "saas": "F1",
       "company": "OneTrust",
       "firstName": "team",
-      "source": "GDPR compliance platform"
+      "source": "GDPR compliance platform",
+      "contacted_date": "2026-04-23",
+      "contacted_saas": "F1"
     },
     {
       "email": "partnerships@osano.com",
       "saas": "F1",
       "company": "Osano",
       "firstName": "team",
-      "source": "Privacy compliance"
+      "source": "Privacy compliance",
+      "contacted_date": "2026-04-23",
+      "contacted_saas": "F1"
     },
     {
       "email": "hello@ethyca.com",
       "saas": "F1",
       "company": "Ethyca",
       "firstName": "team",
-      "source": "Privacy engineering"
+      "source": "Privacy engineering",
+      "contacted_date": "2026-04-23",
+      "contacted_saas": "F1"
     }
   ]
 }
