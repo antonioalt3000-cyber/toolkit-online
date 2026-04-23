@@ -87,6 +87,25 @@ jobs:
             fi
           done
 
+      - name: Performance check — response time all 5 SaaS (warn >3s, error >8s)
+        run: |
+          declare -a ENTRIES=("F1:https://complipilot.dev" "F2:https://fixmyweb.dev" "F3:https://paymentrescue.dev" "F4:https://parseflow.dev" "B7:https://captureapi.dev")
+          fail=0
+          for entry in "${ENTRIES[@]}"; do
+            name="${entry%%:*}"
+            url="${entry#*:}"
+            t=$(curl -sL -o /dev/null -w "%{time_total}" --max-time 15 "$url")
+            if awk "BEGIN { exit ($t > 8.0) ? 0 : 1 }"; then
+              echo "::error::$name response time ${t}s (>8s threshold)"
+              fail=1
+            elif awk "BEGIN { exit ($t > 3.0) ? 0 : 1 }"; then
+              echo "::warning::$name response time ${t}s (>3s — degraded)"
+            else
+              echo "✓ $name ${t}s"
+            fi
+          done
+          [ "$fail" = "0" ] || exit 1
+
   notify:
     name: Send report
     needs: smoke-tests

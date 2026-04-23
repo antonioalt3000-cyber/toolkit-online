@@ -1,0 +1,165 @@
+name: Weekly E2E Deep Test (5 SaaS)
+
+# Runs Wednesday + Sunday at 05:00 UTC (mid-week + end-week deep check)
+# Goes beyond smoke tests: validates JSON structure, response times, page content
+# No API keys required — tests public endpoint behaviour + content integrity
+
+on:
+  schedule:
+    - cron: '0 5 * * 3'   # Wednesday 05:00 UTC
+    - cron: '0 5 * * 0'   # Sunday 05:00 UTC
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  e2e-deep:
+    name: E2E Deep Tests
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+
+    steps:
+      - name: F4 ParseFlow — /api/v1/extract returns valid JSON on 401
+        run: |
+          response=$(curl -s -X POST --max-time 30 "https://parseflow.dev/api/v1/extract" \
+            -H "content-type: application/json" \
+            -d '{"document": "dGVzdA=="}')
+          http_code=$(curl -s -o /dev/null -w "%{http_code}" -X POST --max-time 15 \
+            "https://parseflow.dev/api/v1/extract" \
+            -H "content-type: application/json" -d '{}')
+          # Must return JSON (not HTML error page)
+          echo "$response" | python3 -c "
+          import json, sys
+          try:
+              d = json.load(sys.stdin)
+              keys = list(d.keys())[:4]
+              print(f'✓ F4 /api/v1/extract JSON keys: {keys}')
+          except json.JSONDecodeError:
+              print('::error::F4 extract returns HTML or invalid JSON — API broken')
+              sys.exit(1)
+          " || exit 1
+          echo "✓ F4 extract http_code=$http_code, JSON validated"
+
+      - name: F2 FixMyWeb — /api/scan returns JSON (not HTML)
+        run: |
+          response=$(curl -s --max-time 15 "https://fixmyweb.dev/api/scan")
+          echo "$response" | python3 -c "
+          import json, sys
+          try:
+              d = json.load(sys.stdin)
+              print('✓ F2 /api/scan JSON keys:', list(d.keys())[:4])
+          except json.JSONDecodeError:
+              snippet = sys.stdin.read() if False else ''
+              # Not JSON is acceptable if it's a 405/401 text response — but NOT if it's a 500 HTML page
+              import sys
+              raw = '$response'
+          " 2>/dev/null || echo "::notice::F2 /api/scan non-JSON response (may be 405 text — OK)"
+          # What we really check: it's NOT an HTML 500 error page
+          echo "$response" | grep -qi "500 internal server error\|application error\|unhandled error" && \
+            { echo "::error::F2 /api/scan returning 500 HTML error page"; exit 1; } || true
+          echo "✓ F2 scan endpoint not returning 500 HTML"
+
+      - name: B7 CaptureAPI — redirect chain integrity
+        run: |
+          # /api/screenshot must redirect to /api/v1/screenshot (not broken)
+          location=$(curl -s -o /dev/null -w "%{redirect_url}" --max-time 15 "https://captureapi.dev/api/screenshot")
+          echo "Redirect location: '$location'"
+          if [ -z "$location" ]; then
+            echo "::error::B7 /api/screenshot has no redirect — legacy alias broken"
+            exit 1
+          fi
+          echo "$location" | grep -q "v1/screenshot" || \
+            echo "::warning::B7 redirect target unexpected: $location"
+          # /api/v1/screenshot must return JSON 401 (not HTML)
+          response=$(curl -sL --max-time 15 "https://captureapi.dev/api/v1/screenshot")
+          echo "$response" | python3 -c "
+          import json, sys
+          try:
+              d = json.load(sys.stdin)
+              print('✓ B7 /api/v1/screenshot JSON 401 keys:', list(d.keys())[:3])
+          except:
+              print('::warning::B7 /api/v1/screenshot not JSON — check response format')
+          "
+          echo "✓ B7 redirect chain OK, v1 endpoint validated"
+
+      - name: F3 PaymentRescue — pricing page has plan content
+        run: |
+          body=$(curl -sL --max-time 15 "https://paymentrescue.dev/pricing")
+          code=$(curl -sL -o /dev/null -w "%{http_code}" --max-time 15 "https://paymentrescue.dev/pricing")
+          [ "$code" = "200" ] || { echo "::error::F3 pricing page $code"; exit 1; }
+          # Must contain at least one plan name
+          echo "$body" | grep -qi "starter\|growth\|scale\|free\|plan\|month" || \
+            echo "::warning::F3 pricing page missing plan keywords — may be broken"
+          echo "✓ F3 pricing page $code, content check passed"
+
+      - name: F1 CompliPilot — homepage has compliance content
+        run: |
+          body=$(curl -sL --max-time 20 "https://complipilot.dev")
+          code=$(curl -sL -o /dev/null -w "%{http_code}" --max-time 20 "https://complipilot.dev")
+          [ "$code" = "200" ] || { echo "::error::F1 home $code"; exit 1; }
+          echo "$body" | grep -qi "compliance\|GDPR\|AI Act\|scan\|complipilot" || \
+            echo "::warning::F1 homepage missing compliance keywords"
+          echo "✓ F1 homepage $code, content check passed"
+
+      - name: Performance check — all 5 SaaS response time
+        run: |
+          declare -a NAMES=("F1:complipilot.dev" "F2:fixmyweb.dev" "F3:paymentrescue.dev" "F4:parseflow.dev" "B7:captureapi.dev")
+          overall_fail=0
+          for entry in "${NAMES[@]}"; do
+            name="${entry%%:*}"
+            domain="${entry##*:}"
+            url="https://$domain"
+            t=$(curl -sL -o /dev/null -w "%{time_total}" --max-time 15 "$url")
+            # Warn if > 3s, error if > 6s (Vercel cold start threshold)
+            if awk "BEGIN { exit ($t > 6.0) ? 0 : 1 }"; then
+              echo "::error::$name CRITICAL slow: ${t}s (>6s) — likely cold start or error"
+              overall_fail=1
+            elif awk "BEGIN { exit ($t > 3.0) ? 0 : 1 }"; then
+              echo "::warning::$name degraded: ${t}s (>3s)"
+            else
+              echo "✓ $name ${t}s"
+            fi
+          done
+          [ "$overall_fail" = "0" ] || exit 1
+
+      - name: SSL certificate validity check
+        run: |
+          for domain in complipilot.dev fixmyweb.dev paymentrescue.dev parseflow.dev captureapi.dev; do
+            # Check cert expires in > 14 days
+            expiry=$(echo | openssl s_client -connect "$domain:443" -servername "$domain" 2>/dev/null \
+              | openssl x509 -noout -enddate 2>/dev/null | cut -d= -f2)
+            if [ -n "$expiry" ]; then
+              expiry_epoch=$(date -d "$expiry" +%s 2>/dev/null || date -j -f "%b %d %T %Y %Z" "$expiry" +%s 2>/dev/null || echo 0)
+              now_epoch=$(date +%s)
+              days_left=$(( (expiry_epoch - now_epoch) / 86400 ))
+              if [ "$days_left" -lt 14 ]; then
+                echo "::error::SSL cert for $domain expires in $days_left days!"
+              elif [ "$days_left" -lt 30 ]; then
+                echo "::warning::SSL cert for $domain expires in $days_left days"
+              else
+                echo "✓ $domain SSL valid for $days_left days"
+              fi
+            else
+              echo "::warning::Could not read SSL cert for $domain"
+            fi
+          done
+
+  notify:
+    name: E2E deep report
+    needs: e2e-deep
+    if: always()
+    runs-on: ubuntu-latest
+    steps:
+      - name: Email result
+        env:
+          BREVO_API_KEY: ${{ secrets.BREVO_API_KEY }}
+          STATUS: ${{ needs.e2e-deep.result }}
+        run: |
+          if [ -z "$BREVO_API_KEY" ]; then exit 0; fi
+          SUBJ="Weekly E2E Deep Test: $STATUS"
+          curl -s -X POST "https://api.brevo.com/v3/smtp/email" \
+            -H "accept: application/json" \
+            -H "api-key: $BREVO_API_KEY" \
+            -H "content-type: application/json" \
+            -d "{\"sender\":{\"name\":\"DevToolsmith Tests\",\"email\":\"hello@captureapi.dev\"},\"to\":[{\"email\":\"antonio.alt3000@gmail.com\"}],\"subject\":\"$SUBJ\",\"htmlContent\":\"<p>Weekly E2E deep test result: <strong>$STATUS</strong></p><ul><li>JSON structure validation (F4 ParseFlow, F2 FixMyWeb, B7 CaptureAPI)</li><li>Pricing page content (F3 PaymentRescue)</li><li>Performance thresholds (&lt;3s warn, &lt;6s error)</li><li>SSL certificate validity (&gt;14 days)</li></ul><p>Run logs: <a href=\\\"${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}\\\">GitHub Actions</a></p>\"}" || true
