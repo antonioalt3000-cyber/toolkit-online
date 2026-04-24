@@ -1,0 +1,42 @@
+# Claude Code Ignore — toolkit-online project
+# Updated: 2026-04-24
+
+# ==== Standard Next.js build ====
+.next/
+out/
+node_modules/
+coverage/
+*.tsbuildinfo
+
+# ==== Dev artifacts ====
+.turbo/
+.vercel/
+.env*.local
+dist/
+build/
+
+# ==== Assets statici (non editabili da Claude tipicamente) ====
+public/*.png
+public/*.jpg
+public/*.gif
+public/*.webp
+public/*.pdf
+public/*.ico
+
+# ==== Worktree altre (non la corrente) ====
+.claude/worktrees/
+!.claude/worktrees/loving-lumiere-167f59/
+
+# ==== Test snapshots ====
+**/__snapshots__/
+**/*.snap
+
+# ==== Logs ====
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# ==== OS ====
+.DS_Store
+Thumbs.db
