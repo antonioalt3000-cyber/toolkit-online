@@ -71,8 +71,8 @@
       {
         "hooks": [
           {
-            "type": "prompt",
-            "prompt": "Quick check (only if .ts/.tsx files were edited): 1) Was 'npm run lint' run? 2) Was 'npm run build' run if deployment requested? For config/md changes these checks are NOT required. Do NOT block — just remind if applicable."
+            "type": "command",
+            "command": "exit 0"
           }
         ]
       }

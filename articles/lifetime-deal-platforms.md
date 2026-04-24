@@ -1,11 +1,18 @@
 # Lifetime Deal & Launch Platforms — Lista Completa (Marzo 2026)
 
+> ⚠️ **PRICING OUTDATED (17/4/2026)** — i prezzi sotto sono OLD.
+> Nuovi prezzi LTD 17/4 (compliance DealMirror):
+> - AccessiScan/CaptureAPI/ParseFlow: $45 (era $29)
+> - CompliPilot/ChurnGuard: $69 (era $49/$39)
+> Per canali LTD esterni (AppSumo/SaaSMantra/ecc): opening 2x DM, floor +$5 sopra DM.
+> Vedi `feedback-never-undercut-dealmirror.md` per dettaglio.
+
 > Piattaforme GRATUITE dove listare i 5 prodotti del portfolio:
-> 1. **AccessiScan** (fixmyweb.dev) — $29 lifetime
-> 2. **CaptureAPI** (captureapi.dev) — $29 lifetime
-> 3. **CompliPilot** (complipilot.dev) — $49 lifetime
-> 4. **DocuMint** (parseflow.dev) — $29 lifetime
-> 5. **ChurnGuard** (paymentrescue.dev) — $39 lifetime
+> 1. **AccessiScan** (fixmyweb.dev) — ~~$29~~ **$45** lifetime
+> 2. **CaptureAPI** (captureapi.dev) — ~~$29~~ **$45** lifetime
+> 3. **CompliPilot** (complipilot.dev) — ~~$49~~ **$69** lifetime
+> 4. **DocuMint** (parseflow.dev) — ~~$29~~ **$45** lifetime
+> 5. **ChurnGuard** (paymentrescue.dev) — ~~$39~~ **$69** lifetime ⚠️ $39 era violazione DM $49
 
 ---
 

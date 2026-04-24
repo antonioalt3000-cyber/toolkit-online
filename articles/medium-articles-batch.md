@@ -1,5 +1,9 @@
 # Medium Articles — Batch per 48h Sales Push
 
+> ⚠️ **DRAFT OUTDATED (17/4/2026)** — contiene link Stripe e prezzi LTD OLD ($29/$39/$49) archiviati per compliance DealMirror.
+> NON PUBBLICARE senza aggiornare prezzi a $45/$69 + link Stripe NEW.
+> Vedi `lifetime-deals.md` e `feedback-never-undercut-dealmirror.md`.
+
 ---
 
 ## ARTICOLO 1 — F2 AccessiScan (Medium)

@@ -47,3 +47,25 @@ next-env.d.ts
 .claude/worktrees/
 ANTHROPIC_API_KEY=
 .env.agent
+
+# Auto-generated temp files (CDP automation, screenshots)
+pins/
+contra-snapshot.txt
+.playwright-mcp/
+scripts/screenshots/
+scripts/dealmirror-screenshots/
+scripts/agent-logs/
+scripts/agent-state/
+scripts/agent-prompts/
+scripts/queue/
+saashub-complete-f2-f3.js
+saashub-complete-f3-features.js
+saashub-extract-v2.js
+saashub-extract-v3.js
+saashub-extract-v4.js
+saashub-extract-verify-links.js
+saashub-f2-complete.js
+saashub-fill-features.js
+saashub-final-check.js
+saashub-verify-inspect.js
+saashub-verify-submit.js

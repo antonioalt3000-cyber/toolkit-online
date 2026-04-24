@@ -1,5 +1,9 @@
 # Social Media Posts — Ready to Publish (48h batch)
 
+> ⚠️ **DRAFT OUTDATED (17/4/2026)** — contiene link Stripe e prezzi LTD OLD ($29/$39/$49) che sono stati archiviati per compliance DealMirror.
+> NON PUBBLICARE senza aggiornare prezzi a $45/$69 + link Stripe NEW.
+> Vedi `lifetime-deals.md` per payment link correnti e `feedback-never-undercut-dealmirror.md` per regole pricing.
+
 Generated: 2026-03-28
 
 ---
