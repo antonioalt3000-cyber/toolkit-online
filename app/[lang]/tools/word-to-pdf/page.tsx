@@ -175,7 +175,7 @@ export default function WordToPdf() {
           const style = window.getComputedStyle(el);
 
           // Handle headings
-          let oldSize = fontSizePt;
+          const oldSize = fontSizePt;
           let setStyle: 'normal' | 'bold' | 'italic' | 'bolditalic' = 'normal';
 
           if (tag === 'h1') { doc.setFontSize(fontSizePt * 2); setStyle = 'bold'; }

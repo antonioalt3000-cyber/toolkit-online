@@ -211,7 +211,7 @@ export default function InternetSpeedTest() {
     setHistory(newHistory);
     saveHistory(newHistory);
     setTesting(false);
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+   
   }, [lang, readConnectionInfo]);
 
   const clearHistoryHandler = () => {

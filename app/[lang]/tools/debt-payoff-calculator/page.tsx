@@ -66,7 +66,7 @@ export default function DebtPayoffCalculator() {
       while (balance > 0.01 && month < maxMonths) {
         month++;
         const interestCharge = balance * monthlyRate;
-        let payment = Math.min(monthlyPay, balance + interestCharge);
+        const payment = Math.min(monthlyPay, balance + interestCharge);
         const principalPart = payment - interestCharge;
 
         if (principalPart <= 0) return null;

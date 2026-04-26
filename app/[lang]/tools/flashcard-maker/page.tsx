@@ -141,7 +141,7 @@ export default function FlashcardMaker() {
 
   const startStudy = (shuffle: boolean) => {
     if (cards.length === 0) return;
-    let ordered = [...cards];
+    const ordered = [...cards];
     if (shuffle) {
       for (let i = ordered.length - 1; i > 0; i--) {
         const j = Math.floor(Math.random() * (i + 1));
