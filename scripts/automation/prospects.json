@@ -1,6 +1,6 @@
 {
   "_info": "Prospect list for DevToolsmith B2B outreach. One email sent per day via daily-outreach workflow. Mark contacted=true after sending. Add new prospects at the bottom.",
-  "_last_updated": "2026-04-26",
+  "_last_updated": "2026-04-27",
   "_do_not_contact": "See memory/no-contact-list.md for bounced/unsubscribed emails.",
   "prospects": [
     {
@@ -131,8 +131,8 @@
       "email": "hello@lemonsqueezy.com",
       "tool": "F3",
       "angle": "Create ChurnGuard store + webhook integration",
-      "contacted": false,
-      "contacted_date": null,
+      "contacted": true,
+      "contacted_date": "2026-04-27",
       "notes": "URGENT: They invited us! From handoff doc - 13/4 email"
     },
     {
