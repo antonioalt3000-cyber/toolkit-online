@@ -1,6 +1,6 @@
 {
   "_info": "Prospect list for DevToolsmith B2B outreach. One email sent per day via daily-outreach workflow. Mark contacted=true after sending. Add new prospects at the bottom.",
-  "_last_updated": "2026-04-27",
+  "_last_updated": "2026-04-28",
   "_do_not_contact": "See memory/no-contact-list.md for bounced/unsubscribed emails.",
   "prospects": [
     {
@@ -142,8 +142,8 @@
       "email": "hello@baremetrics.com",
       "tool": "F3",
       "angle": "Failed payment recovery as complement to MRR analytics",
-      "contacted": false,
-      "contacted_date": null,
+      "contacted": true,
+      "contacted_date": "2026-04-28",
       "notes": "SaaS metrics tool, natural audience for ChurnGuard"
     },
     {
