@@ -1,6 +1,6 @@
 {
   "_info": "Prospect list for DevToolsmith B2B outreach. One email sent per day via daily-outreach workflow. Mark contacted=true after sending. Add new prospects at the bottom.",
-  "_last_updated": "2026-04-28",
+  "_last_updated": "2026-04-29",
   "_do_not_contact": "See memory/no-contact-list.md for bounced/unsubscribed emails.",
   "prospects": [
     {
@@ -153,8 +153,8 @@
       "email": "hello@chartmogul.com",
       "tool": "F3",
       "angle": "Dunning automation to reduce involuntary churn tracked in dashboard",
-      "contacted": false,
-      "contacted_date": null,
+      "contacted": true,
+      "contacted_date": "2026-04-29",
       "notes": "SaaS analytics, users track churn and want to reduce it"
     },
     {
