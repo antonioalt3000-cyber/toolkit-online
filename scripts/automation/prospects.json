@@ -1,6 +1,6 @@
 {
   "_info": "Prospect list for DevToolsmith B2B outreach. One email sent per day via daily-outreach workflow. Mark contacted=true after sending. Add new prospects at the bottom.",
-  "_last_updated": "2026-04-29",
+  "_last_updated": "2026-04-30",
   "_do_not_contact": "See memory/no-contact-list.md for bounced/unsubscribed emails.",
   "prospects": [
     {
@@ -164,8 +164,8 @@
       "email": "hello@profitwell.com",
       "tool": "F3",
       "angle": "Recover the failed payments ProfitWell already tracks",
-      "contacted": false,
-      "contacted_date": null,
+      "contacted": true,
+      "contacted_date": "2026-04-30",
       "notes": "Paddle-owned analytics, strong audience fit"
     },
     {
