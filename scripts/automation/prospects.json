@@ -1,6 +1,6 @@
 {
   "_info": "Prospect list for DevToolsmith B2B outreach. One email sent per day via daily-outreach workflow. Mark contacted=true after sending. Add new prospects at the bottom.",
-  "_last_updated": "2026-04-30",
+  "_last_updated": "2026-05-01",
   "_do_not_contact": "See memory/no-contact-list.md for bounced/unsubscribed emails.",
   "prospects": [
     {
@@ -175,8 +175,8 @@
       "email": "partnerships@klippa.com",
       "tool": "F4",
       "angle": "Document parsing API comparison / partnership",
-      "contacted": false,
-      "contacted_date": null,
+      "contacted": true,
+      "contacted_date": "2026-05-01",
       "notes": "Competitor, but partnership/reseller angle possible"
     },
     {
