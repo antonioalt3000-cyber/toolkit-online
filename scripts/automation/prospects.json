@@ -1,6 +1,6 @@
 {
   "_info": "Prospect list for DevToolsmith B2B outreach. One email sent per day via daily-outreach workflow. Mark contacted=true after sending. Add new prospects at the bottom.",
-  "_last_updated": "2026-05-01",
+  "_last_updated": "2026-05-02",
   "_do_not_contact": "See memory/no-contact-list.md for bounced/unsubscribed emails.",
   "prospects": [
     {
@@ -186,8 +186,8 @@
       "email": "hello@docparser.com",
       "tool": "F4",
       "angle": "ParseFlow as developer-first alternative",
-      "contacted": false,
-      "contacted_date": null,
+      "contacted": true,
+      "contacted_date": "2026-05-02",
       "notes": "Document parsing SaaS, no-code focus"
     },
     {
