@@ -31,7 +31,8 @@ on:
   push:
     # Validate every change to the monitoring code itself by running it
     # immediately on push (fast feedback when we tweak a test plan).
-    branches: [master]
+    # NOTE: branches filter intentionally permissive while the system is
+    # being validated. Tighten back to [master] once it is proven stable.
     paths:
       - ".github/workflows/watchtower-e2e.yml"
       - "e2e/watchtower/**"
