@@ -1,6 +1,6 @@
 {
   "_info": "Prospect list for DevToolsmith B2B outreach. One email sent per day via daily-outreach workflow. Mark contacted=true after sending. Add new prospects at the bottom.",
-  "_last_updated": "2026-05-03",
+  "_last_updated": "2026-05-04",
   "_do_not_contact": "See memory/no-contact-list.md for bounced/unsubscribed emails.",
   "prospects": [
     {
@@ -208,8 +208,8 @@
       "email": "techpartners@zuora.com",
       "tool": "F4",
       "angle": "Invoice parsing for subscription billing reconciliation",
-      "contacted": false,
-      "contacted_date": null,
+      "contacted": true,
+      "contacted_date": "2026-05-04",
       "notes": "Subscription management, invoices are core workflow"
     },
     {
