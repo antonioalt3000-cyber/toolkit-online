@@ -6,7 +6,10 @@
     "dev": "next dev",
     "build": "NODE_OPTIONS='--max-old-space-size=4096' next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "watchtower": "tsx e2e/watchtower/run.ts",
+    "watchtower:one": "tsx e2e/watchtower/run.ts --only",
+    "watchtower:dry": "tsx e2e/watchtower/run.ts --skip-email"
   },
   "dependencies": {
     "canvas": "^3.2.1",
@@ -27,6 +30,7 @@
     "eslint-config-next": "16.1.6",
     "playwright": "^1.58.2",
     "tailwindcss": "^4",
+    "tsx": "^4.20.0",
     "typescript": "^5"
   }
 }

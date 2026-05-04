@@ -54,6 +54,7 @@ contra-snapshot.txt
 .playwright-mcp/
 scripts/screenshots/
 scripts/dealmirror-screenshots/
+watchtower-artifacts/
 scripts/agent-logs/
 scripts/agent-state/
 scripts/agent-prompts/
