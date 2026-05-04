@@ -36,6 +36,8 @@ on:
     paths:
       - ".github/workflows/watchtower-e2e.yml"
       - "e2e/watchtower/**"
+      - "package.json"
+      - "package-lock.json"
 
 permissions:
   contents: read
