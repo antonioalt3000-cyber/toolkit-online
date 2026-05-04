@@ -28,6 +28,13 @@ on:
         description: "Skip Brevo email send (debug)."
         required: false
         default: "false"
+  push:
+    # Validate every change to the monitoring code itself by running it
+    # immediately on push (fast feedback when we tweak a test plan).
+    branches: [master]
+    paths:
+      - ".github/workflows/watchtower-e2e.yml"
+      - "e2e/watchtower/**"
 
 permissions:
   contents: read
