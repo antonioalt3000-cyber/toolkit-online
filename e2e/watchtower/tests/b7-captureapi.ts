@@ -92,13 +92,9 @@ export const B7_PAGES: PageTest[] = [
     name: "/api/v1/health",
     url: `${BASE}/api/v1/health`,
     severity: "P0",
+    mode: "fetch",
+    expectBodyContains: ["ok"],
     timeoutMs: 15_000,
-    interaction: async (page) => {
-      const body = (await page.textContent("body")) ?? "";
-      if (!/"status"\s*:\s*"ok"/.test(body) && !/"ok"/.test(body)) {
-        throw new Error(`/api/v1/health did not return ok. Body: ${body.slice(0, 200)}`);
-      }
-    },
   },
   {
     name: "/signin",
@@ -189,6 +185,6 @@ export const B7_PAGES: PageTest[] = [
   { name: "/privacy", url: `${BASE}/privacy`, severity: "P2" },
   { name: "/terms", url: `${BASE}/terms`, severity: "P2" },
   { name: "/dpa", url: `${BASE}/dpa`, severity: "P2" },
-  { name: "/sitemap.xml", url: `${BASE}/sitemap.xml`, severity: "P2" },
-  { name: "/robots.txt", url: `${BASE}/robots.txt`, severity: "P2" },
+  { name: "/sitemap.xml", url: `${BASE}/sitemap.xml`, severity: "P2", mode: "fetch", expectBodyContains: ["<urlset", "<url>"] },
+  { name: "/robots.txt", url: `${BASE}/robots.txt`, severity: "P2", mode: "fetch", expectBodyContains: ["User-agent"] },
 ];

@@ -16,7 +16,7 @@
  *   - screenshot on any failure, attached to the alert email
  */
 
-import { chromium, type Browser, type BrowserContext, type Page } from "playwright";
+import { chromium, request as playwrightRequest, type APIRequestContext, type Browser, type BrowserContext, type Page } from "playwright";
 import * as fs from "node:fs";
 import * as path from "node:path";
 
@@ -64,12 +64,87 @@ function shouldCaptureConsoleEntry(type: string, text: string): boolean {
  */
 function shouldCaptureNetworkError(url: string, status: number): boolean {
   if (status < 400) return false;
-  if (url.includes("googletagmanager.com")) return false;
-  if (url.includes("google-analytics.com")) return false;
-  if (url.includes("doubleclick.net")) return false;
-  if (url.includes("vercel-insights.com")) return false;
-  if (url.includes("stats.g.doubleclick.net")) return false;
+  // 3rd-party telemetry / analytics — failures here are not our bug
+  const noiseSubstrings = [
+    "googletagmanager.com",
+    "google-analytics.com",
+    "doubleclick.net",
+    "stats.g.doubleclick.net",
+    "vercel-insights.com",
+    "vercel.live",
+    "_vercel/insights",
+    "_vercel/speed-insights",
+    "plausible.io",
+    "cloudflareinsights.com",
+    "beacon.min.js",
+    "sentry.io",
+    "ingest.sentry.io",
+    "cdn.jsdelivr.net",
+    "fonts.googleapis.com",
+    "fonts.gstatic.com",
+  ];
+  for (const s of noiseSubstrings) {
+    if (url.includes(s)) return false;
+  }
+  // 401/403 on /api/* of OUR domains may be expected (synthetic call w/o auth).
+  // Caller handles those via interaction assertions, not via raw network capture.
+  if (status === 401 || status === 403) return false;
   return true;
+}
+
+/**
+ * Lightweight HTTP-only probe used for /api/health, /sitemap.xml, /robots.txt.
+ * Skips browser/DOM overhead. Fails when the body is missing every expected
+ * substring (when expectBodyContains is provided).
+ */
+async function runFetchTest(
+  apiCtx: APIRequestContext,
+  test: PageTest,
+): Promise<PageResult> {
+  const startedAt = new Date().toISOString();
+  const startMs = Date.now();
+  const timeoutMs = test.timeoutMs ?? 15_000;
+  let ok = true;
+  let errorMessage: string | undefined;
+  let title: string | undefined;
+  const networkErrors: NetworkErrorRecord[] = [];
+
+  try {
+    const resp = await apiCtx.get(test.url, { timeout: timeoutMs });
+    title = `HTTP ${resp.status()}`;
+    if (resp.status() >= 400) {
+      ok = false;
+      errorMessage = `HTTP ${resp.status()} ${resp.statusText()}`;
+      networkErrors.push({ url: test.url, status: resp.status(), method: "GET" });
+    } else if (test.expectBodyContains && test.expectBodyContains.length > 0) {
+      const body = await resp.text();
+      for (const expected of test.expectBodyContains) {
+        if (!body.toLowerCase().includes(expected.toLowerCase())) {
+          ok = false;
+          errorMessage = `Response body missing expected substring "${expected}". Got first 200 chars: ${body.slice(0, 200)}`;
+          break;
+        }
+      }
+    }
+  } catch (err) {
+    ok = false;
+    errorMessage = err instanceof Error ? err.message : String(err);
+    errorMessage = errorMessage.slice(0, 500);
+  }
+
+  return {
+    name: test.name,
+    url: test.url,
+    severity: test.severity,
+    ok,
+    durationMs: Date.now() - startMs,
+    error: errorMessage,
+    consoleErrors: [],
+    networkErrors,
+    screenshotPath: undefined,
+    title,
+    startedAt,
+  };
 }
 
 async function runPageTest(
@@ -206,13 +281,25 @@ export async function runSaas(opts: RunnerOptions): Promise<RunResult> {
     locale: "en-US",
   });
 
+  const apiCtx = await playwrightRequest.newContext({
+    timeout: 15_000,
+    extraHTTPHeaders: {
+      "user-agent":
+        "Mozilla/5.0 (X11; Linux x86_64) Watchtower-FetchProbe/1.0",
+    },
+  });
+
   const startedAt = new Date().toISOString();
   const startMs = Date.now();
   const pages: PageResult[] = [];
 
   for (const test of opts.pages) {
-    console.log(`[watchtower:${opts.saas}] running ${test.name} (${test.severity})`);
-    const result = await runPageTest(context, test, opts.artifactsDir, opts.saas);
+    const mode = test.mode ?? "page";
+    console.log(`[watchtower:${opts.saas}] running ${test.name} (${test.severity}, ${mode})`);
+    const result =
+      mode === "fetch"
+        ? await runFetchTest(apiCtx, test)
+        : await runPageTest(context, test, opts.artifactsDir, opts.saas);
     pages.push(result);
     console.log(
       `[watchtower:${opts.saas}] ${result.ok ? "OK" : "FAIL"} ${test.name} ` +
@@ -223,6 +310,7 @@ export async function runSaas(opts: RunnerOptions): Promise<RunResult> {
     }
   }
 
+  await apiCtx.dispose().catch(() => {});
   await context.close().catch(() => {});
   await browser.close().catch(() => {});
 

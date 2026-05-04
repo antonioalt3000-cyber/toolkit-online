@@ -174,6 +174,11 @@ async function main(): Promise<void> {
   }
 
   printSummary(runs);
+  writeStepSummary(runs);
+}
+
+function statusEmoji(s: RunResult["status"]): string {
+  return s === "red" ? "🔴" : s === "yellow" ? "🟠" : "🟢";
 }
 
 function printSummary(runs: RunResult[]): void {
@@ -186,6 +191,77 @@ function printSummary(runs: RunResult[]): void {
   }
   const overall = runs.every((r) => r.status === "green") ? "green" : "yellow/red";
   console.log(`\n  Overall: ${overall}`);
+}
+
+/**
+ * Write a Markdown report into $GITHUB_STEP_SUMMARY so the run page on
+ * GitHub Actions has a publicly-visible breakdown of every SaaS + every
+ * failing page. This makes results readable WITHOUT downloading artifacts
+ * (which would require a GitHub token).
+ */
+function writeStepSummary(runs: RunResult[]): void {
+  const file = process.env["GITHUB_STEP_SUMMARY"];
+  if (!file) return;
+  const lines: string[] = [];
+  const overall = runs.every((r) => r.status === "green") ? "green" : "yellow/red";
+  lines.push(`# Watchtower E2E — overall ${statusEmoji(runs.every((r) => r.status === "green") ? "green" : runs.some((r) => r.status === "red") ? "red" : "yellow")} ${overall.toUpperCase()}`);
+  lines.push("");
+  lines.push(`Run started: \`${runs[0]?.startedAt ?? "n/a"}\``);
+  lines.push("");
+  lines.push("| SaaS | Status | Pages | Failed | Duration | Manual session? |");
+  lines.push("|------|--------|-------|--------|----------|-----------------|");
+  for (const r of runs) {
+    const failed = r.pages.filter((p) => !p.ok).length;
+    lines.push(
+      `| **${r.saas}** | ${statusEmoji(r.status)} ${r.status} | ${r.pages.length} | ${failed} | ${(r.totalDurationMs / 1000).toFixed(1)}s | ${r.requiresManualSession ? "⚠️ YES" : "no"} |`,
+    );
+  }
+  lines.push("");
+
+  for (const r of runs) {
+    const failed = r.pages.filter((p) => !p.ok);
+    if (failed.length === 0) continue;
+    lines.push(`## ${statusEmoji(r.status)} ${r.saas} — ${failed.length} failure(s)`);
+    if (r.requiresManualSession && r.manualReason) {
+      lines.push("");
+      lines.push(`> ⚠️ **Manual session required:** ${r.manualReason}`);
+    }
+    lines.push("");
+    for (const p of failed) {
+      lines.push(`### ${p.severity} · ${p.name}`);
+      lines.push(`- URL: \`${p.url}\``);
+      if (p.error) lines.push(`- Error: ${p.error}`);
+      if (p.consoleErrors.length > 0) {
+        lines.push(`- Console errors (${p.consoleErrors.length}):`);
+        for (const c of p.consoleErrors.slice(0, 5)) {
+          lines.push(`  - \`[${c.type}]\` ${c.text.replace(/`/g, "'").slice(0, 250)}`);
+        }
+      }
+      if (p.networkErrors.length > 0) {
+        lines.push(`- Network 4xx/5xx (${p.networkErrors.length}):`);
+        for (const n of p.networkErrors.slice(0, 5)) {
+          lines.push(`  - \`${n.status}\` ${n.method} ${n.url}`);
+        }
+      }
+      if (p.screenshotPath) {
+        lines.push(`- Screenshot: \`${p.screenshotPath}\` (uploaded as artifact)`);
+      }
+      lines.push("");
+    }
+  }
+
+  // Detail of green SaaS — show coverage so user sees what was actually checked
+  lines.push("## Coverage detail (green SaaS)");
+  for (const r of runs.filter((x) => x.status === "green")) {
+    lines.push(`- ${statusEmoji(r.status)} **${r.saas}** — ${r.pages.length} pages, all OK`);
+  }
+
+  try {
+    fs.appendFileSync(file, lines.join("\n") + "\n");
+    console.log(`[watchtower] step summary written to ${file}`);
+  } catch (err) {
+    console.warn(`[watchtower] could not write step summary: ${String(err)}`);
+  }
 }
 
 main().catch((err) => {

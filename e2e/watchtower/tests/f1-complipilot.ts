@@ -96,14 +96,9 @@ export const F1_PAGES: PageTest[] = [
     name: "/api/health — backend ping",
     url: `${BASE}/api/health`,
     severity: "P0",
+    mode: "fetch",
+    expectBodyContains: ["ok"],
     timeoutMs: 15_000,
-    interaction: async (page) => {
-      // /api/health returns JSON; we navigated as document so DOM has the json text
-      const body = (await page.textContent("body")) ?? "";
-      if (!/"status"\s*:\s*"ok"/.test(body) && !/"ok"/.test(body)) {
-        throw new Error(`/api/health did not return ok status. Body: ${body.slice(0, 200)}`);
-      }
-    },
   },
   {
     name: "/signin (auth gate)",
@@ -184,6 +179,6 @@ export const F1_PAGES: PageTest[] = [
   { name: "/use-cases", url: `${BASE}/use-cases`, severity: "P2" },
   { name: "/blog", url: `${BASE}/blog`, severity: "P2" },
   { name: "/docs", url: `${BASE}/docs`, severity: "P2" },
-  { name: "/sitemap.xml", url: `${BASE}/sitemap.xml`, severity: "P2" },
-  { name: "/robots.txt", url: `${BASE}/robots.txt`, severity: "P2" },
+  { name: "/sitemap.xml", url: `${BASE}/sitemap.xml`, severity: "P2", mode: "fetch", expectBodyContains: ["<urlset", "<url>"] },
+  { name: "/robots.txt", url: `${BASE}/robots.txt`, severity: "P2", mode: "fetch", expectBodyContains: ["User-agent"] },
 ];

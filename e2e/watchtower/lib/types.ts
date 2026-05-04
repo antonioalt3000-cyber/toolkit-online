@@ -26,6 +26,19 @@ export interface PageTest {
   interaction?: (page: Page) => Promise<void>;
   /** Hard timeout for the entire test, default 30s. */
   timeoutMs?: number;
+  /**
+   * "page" (default) — full browser navigation with DOM, useful for HTML pages
+   *                    where we want console/exception capture and interaction.
+   * "fetch" — plain HTTP GET via Playwright request API. Use for non-HTML
+   *           endpoints like /api/health (JSON), /sitemap.xml, /robots.txt.
+   *           Skips browser overhead, asserts on response body text.
+   */
+  mode?: "page" | "fetch";
+  /**
+   * Only used when mode === "fetch": substring(s) the response body MUST
+   * contain. Test fails if any expected substring is missing.
+   */
+  expectBodyContains?: string[];
 }
 
 export interface NetworkErrorRecord {
