@@ -151,9 +151,36 @@ function buildAlertHtml(run: RunResult, opts: SendOptions): string {
 </body></html>`;
 }
 
+/**
+ * De-spam guard: a critical failure that persists across hours used to send
+ * 24 emails/day. Now we send AT MOST one alert per ALERT hour. Override via
+ * `WATCHTOWER_ALERT_HOURS_UTC="7,12,18,21"` (default — 4 alerts/day, all CEST
+ * waking hours). Set to `"*"` to keep the legacy hourly behaviour.
+ *
+ * Manual-session failures ALWAYS bypass the gate (those are real bugs that
+ * need eyes-on, not transient false positives).
+ */
+function isAlertHour(date: Date = new Date()): boolean {
+  const raw = process.env["WATCHTOWER_ALERT_HOURS_UTC"] ?? "5,10,16,19";
+  if (raw === "*") return true;
+  const hours = raw
+    .split(",")
+    .map((s) => Number.parseInt(s.trim(), 10))
+    .filter((n) => Number.isInteger(n) && n >= 0 && n <= 23);
+  return hours.length === 0 ? true : hours.includes(date.getUTCHours());
+}
+
 export async function sendBrevoAlert(run: RunResult, opts: SendOptions): Promise<void> {
   if (run.status === "green") {
     console.log(`[watchtower:${run.saas}] status green — no alert email sent.`);
+    return;
+  }
+
+  // Manual-session failures bypass the alert-hour gate (real bug → notify now).
+  if (!run.requiresManualSession && !isAlertHour()) {
+    console.log(
+      `[watchtower:${run.saas}] failure persists but UTC ${new Date().getUTCHours()}h is outside alert window — skipping email (set WATCHTOWER_ALERT_HOURS_UTC="*" to revert).`,
+    );
     return;
   }
 

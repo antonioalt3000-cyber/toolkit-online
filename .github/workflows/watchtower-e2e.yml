@@ -75,6 +75,11 @@ jobs:
           BREVO_API_KEY: ${{ secrets.BREVO_API_KEY }}
           WATCHTOWER_ALERT_EMAIL: ${{ vars.WATCHTOWER_ALERT_EMAIL || 'antonio.alt3000@gmail.com' }}
           WATCHTOWER_DIGEST_HOURS_UTC: ${{ vars.WATCHTOWER_DIGEST_HOURS_UTC || '7,12,18' }}
+          # Throttle critical alerts to these UTC hours so a persistent
+          # auto-recoverable failure doesn't spam 24 emails/day. Manual-session
+          # failures bypass this gate. Default 5/10/16/19 UTC = 07/12/18/21 CEST.
+          # Override via repo var to "*" to revert to legacy hourly mode.
+          WATCHTOWER_ALERT_HOURS_UTC: ${{ vars.WATCHTOWER_ALERT_HOURS_UTC || '5,10,16,19' }}
           GITHUB_SERVER_URL: ${{ github.server_url }}
           GITHUB_REPOSITORY: ${{ github.repository }}
           GITHUB_RUN_ID: ${{ github.run_id }}
