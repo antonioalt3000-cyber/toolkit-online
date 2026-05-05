@@ -39,6 +39,32 @@ export interface PageTest {
    * contain. Test fails if any expected substring is missing.
    */
   expectBodyContains?: string[];
+  /**
+   * Only used when mode === "fetch": HTTP method (default GET).
+   */
+  fetchMethod?: "GET" | "POST" | "HEAD";
+  /**
+   * Only used when mode === "fetch": JSON body to send (POST only).
+   */
+  fetchBody?: unknown;
+  /**
+   * Only used when mode === "fetch": HTTP headers to inject.
+   * Useful for `x-api-key` probes against authenticated endpoints.
+   * Read API key from process.env to keep it out of git.
+   */
+  fetchHeaders?: Record<string, string>;
+  /**
+   * Only used when mode === "fetch": expected HTTP status range
+   * (default 200-399). Use 200 to require exact 200, or [200, 299].
+   */
+  expectStatus?: number | [number, number];
+  /**
+   * Skip the test (with a log line, no failure) if any of these env vars
+   * is unset or empty. Useful for authenticated probes that depend on a
+   * repo secret being configured — when the secret is missing we want
+   * the test to be SKIPPED, not flag a false alert.
+   */
+  skipIfEnvMissing?: string[];
 }
 
 export interface NetworkErrorRecord {

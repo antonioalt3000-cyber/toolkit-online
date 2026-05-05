@@ -75,6 +75,11 @@ jobs:
           BREVO_API_KEY: ${{ secrets.BREVO_API_KEY }}
           WATCHTOWER_ALERT_EMAIL: ${{ vars.WATCHTOWER_ALERT_EMAIL || 'antonio.alt3000@gmail.com' }}
           WATCHTOWER_DIGEST_HOURS_UTC: ${{ vars.WATCHTOWER_DIGEST_HOURS_UTC || '7,12,18' }}
+          # Owner API keys for authenticated paid-endpoint probes.
+          # Tests that depend on these are auto-skipped when the secret is unset.
+          WATCHTOWER_F1_APIKEY: ${{ secrets.WATCHTOWER_F1_APIKEY }}
+          WATCHTOWER_F4_APIKEY: ${{ secrets.WATCHTOWER_F4_APIKEY }}
+          WATCHTOWER_B7_APIKEY: ${{ secrets.WATCHTOWER_B7_APIKEY }}
           GITHUB_SERVER_URL: ${{ github.server_url }}
           GITHUB_REPOSITORY: ${{ github.repository }}
           GITHUB_RUN_ID: ${{ github.run_id }}

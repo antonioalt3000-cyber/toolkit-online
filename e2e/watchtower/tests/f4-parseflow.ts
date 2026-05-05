@@ -63,14 +63,29 @@ export const F4_PAGES: PageTest[] = [
     },
   },
   {
-    name: "/redeem (LTD coupon)",
+    name: "/redeem (LTD coupon) — submit invalid expects error",
     url: `${BASE}/redeem`,
     severity: "P0",
+    timeoutMs: 30_000,
     interaction: async (page) => {
-      const input = page.locator(
-        'input[placeholder*="coupon" i], input[placeholder*="code" i], input[name*="coupon" i], input[name*="code" i]',
-      );
-      if ((await input.count()) === 0) throw new Error("/redeem has no coupon input");
+      const couponInput = page
+        .locator('input[placeholder*="coupon" i], input[placeholder*="code" i], input[name*="coupon" i], input[name*="code" i]')
+        .first();
+      if ((await couponInput.count()) === 0) throw new Error("/redeem has no coupon input");
+      const emailInput = page.locator('input[type="email"], input[name="email"]').first();
+      if (await emailInput.count()) {
+        await emailInput.fill("watchtower-probe@example.com");
+      }
+      await couponInput.fill("WATCHTOWER-INVALID-9999");
+      const submit = page.locator('button[type="submit"], form button').first();
+      if (await submit.count()) {
+        await submit.click();
+        await page.waitForTimeout(4_000);
+        const body = (await page.textContent("body")) ?? "";
+        if (!/invalid|not found|expired|already|error|unrecogn/i.test(body)) {
+          throw new Error("/redeem submit with invalid coupon did not produce error");
+        }
+      }
     },
   },
   {

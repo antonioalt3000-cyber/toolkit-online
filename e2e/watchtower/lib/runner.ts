@@ -110,12 +110,37 @@ async function runFetchTest(
   const networkErrors: NetworkErrorRecord[] = [];
 
   try {
-    const resp = await apiCtx.get(test.url, { timeout: timeoutMs });
+    const method = test.fetchMethod ?? "GET";
+    const requestOpts: Parameters<typeof apiCtx.get>[1] = {
+      timeout: timeoutMs,
+      headers: test.fetchHeaders,
+      ...(test.fetchBody !== undefined ? { data: test.fetchBody } : {}),
+    };
+    const resp =
+      method === "POST"
+        ? await apiCtx.post(test.url, requestOpts)
+        : method === "HEAD"
+          ? await apiCtx.head(test.url, requestOpts)
+          : await apiCtx.get(test.url, requestOpts);
     title = `HTTP ${resp.status()}`;
-    if (resp.status() >= 400) {
+    const status = resp.status();
+
+    // Determine acceptable status range
+    let acceptable = true;
+    if (test.expectStatus !== undefined) {
+      if (Array.isArray(test.expectStatus)) {
+        acceptable = status >= test.expectStatus[0] && status <= test.expectStatus[1];
+      } else {
+        acceptable = status === test.expectStatus;
+      }
+    } else {
+      acceptable = status < 400;
+    }
+
+    if (!acceptable) {
       ok = false;
-      errorMessage = `HTTP ${resp.status()} ${resp.statusText()}`;
-      networkErrors.push({ url: test.url, status: resp.status(), method: "GET" });
+      errorMessage = `HTTP ${status} ${resp.statusText()} (expected ${JSON.stringify(test.expectStatus ?? "<400")})`;
+      networkErrors.push({ url: test.url, status, method });
     } else if (test.expectBodyContains && test.expectBodyContains.length > 0) {
       const body = await resp.text();
       for (const expected of test.expectBodyContains) {
@@ -294,6 +319,29 @@ export async function runSaas(opts: RunnerOptions): Promise<RunResult> {
   const pages: PageResult[] = [];
 
   for (const test of opts.pages) {
+    // Soft-skip: env-gated probes when their required secret isn't configured.
+    if (test.skipIfEnvMissing && test.skipIfEnvMissing.length > 0) {
+      const missing = test.skipIfEnvMissing.filter(
+        (k) => !process.env[k] || process.env[k] === "",
+      );
+      if (missing.length > 0) {
+        console.log(
+          `[watchtower:${opts.saas}] SKIP ${test.name} — missing env: ${missing.join(", ")}`,
+        );
+        pages.push({
+          name: `${test.name} (skipped)`,
+          url: test.url,
+          severity: test.severity,
+          ok: true,
+          durationMs: 0,
+          consoleErrors: [],
+          networkErrors: [],
+          title: `skipped: env ${missing.join(",")} missing`,
+          startedAt: new Date().toISOString(),
+        });
+        continue;
+      }
+    }
     const mode = test.mode ?? "page";
     console.log(`[watchtower:${opts.saas}] running ${test.name} (${test.severity}, ${mode})`);
     const result =

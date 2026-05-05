@@ -80,15 +80,37 @@ export const F1_PAGES: PageTest[] = [
     },
   },
   {
-    name: "/redeem (LTD coupon entry page)",
+    name: "/redeem (LTD coupon entry page) — submit invalid expects error",
     url: `${BASE}/redeem`,
     severity: "P0",
+    timeoutMs: 30_000,
     interaction: async (page) => {
-      // Page must show a coupon input field — this is the key DealMirror flow.
-      const input = page.locator('input[placeholder*="coupon" i], input[placeholder*="code" i], input[name*="coupon" i], input[name*="code" i]');
-      const count = await input.count();
-      if (count === 0) {
+      // 1. Page must show coupon input (smoke check).
+      const couponInput = page.locator('input[placeholder*="coupon" i], input[placeholder*="code" i], input[name*="coupon" i], input[name*="code" i]').first();
+      if ((await couponInput.count()) === 0) {
         throw new Error("/redeem page has no coupon input field — LTD redemption broken");
+      }
+      // 2. End-to-end probe: submit deliberately invalid credentials, expect error.
+      // We DO NOT submit a valid coupon here (would consume a real LTD slot).
+      // Instead we verify the endpoint stack (form → API → response → DOM error)
+      // is alive by submitting fake data and expecting a "not found / invalid" message.
+      const emailInput = page.locator('input[type="email"], input[name="email"]').first();
+      if (await emailInput.count()) {
+        await emailInput.fill("watchtower-probe@example.com");
+      }
+      await couponInput.fill("WATCHTOWER-INVALID-9999");
+      const submit = page.locator('button[type="submit"], form button').first();
+      if (await submit.count()) {
+        await submit.click();
+        await page.waitForTimeout(4_000);
+        const body = (await page.textContent("body")) ?? "";
+        // Backend must respond with a recognisable error message — proves the
+        // chain frontend→API→Redis is wired.
+        if (!/invalid|not found|expired|already|error|unrecogn/i.test(body)) {
+          throw new Error(
+            "/redeem submit with invalid coupon did not produce error message — backend chain may be broken",
+          );
+        }
       }
     },
   },
@@ -99,6 +121,28 @@ export const F1_PAGES: PageTest[] = [
     mode: "fetch",
     expectBodyContains: ["ok"],
     timeoutMs: 15_000,
+  },
+  {
+    // Authenticated probe: confirms the paid scan endpoint actually accepts
+    // the owner API key and the LLM pipeline is alive. This catches:
+    //   - Vercel env var WATCHTOWER_F1_APIKEY missing (returns 401)
+    //   - rate-limit bypass not active (would return 429)
+    //   - upstream LLM/Anthropic timeout (returns 5xx)
+    // The api key is read from process.env to keep it out of git history.
+    name: "/api/scan POST — owner apikey end-to-end",
+    url: `${BASE}/api/scan`,
+    severity: "P0",
+    mode: "fetch",
+    fetchMethod: "POST",
+    fetchHeaders: {
+      "content-type": "application/json",
+      "x-api-key": process.env["WATCHTOWER_F1_APIKEY"] ?? "",
+    },
+    fetchBody: { url: "https://example.com" },
+    expectStatus: [200, 299],
+    expectBodyContains: ["score", "compliance"],
+    timeoutMs: 90_000,
+    skipIfEnvMissing: ["WATCHTOWER_F1_APIKEY"],
   },
   {
     name: "/signin (auth gate)",
