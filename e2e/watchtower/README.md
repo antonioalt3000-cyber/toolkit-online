@@ -111,8 +111,27 @@ Defined in `.github/workflows/watchtower-e2e.yml`.
 - `~/qa-deep-{f1,f2,f3,f4,b7}.js` — original CDP raw scripts (port 9223), still usable manually
 - `~/daily-e2e-2x.sh` — orchestrator for the manual qa-deep scripts
 
+## Repo secrets (optional but recommended)
+
+The following secrets are read by the workflow. When unset, the dependent
+test is automatically **skipped** (no false alert), so configuring them is
+strictly opt-in.
+
+| Secret name | Purpose | Source |
+|-------------|---------|--------|
+| `BREVO_API_KEY` | Send alert + digest emails | already configured |
+| `WATCHTOWER_F1_APIKEY` | Authenticated probe of F1 `/api/scan` (verifies LLM pipeline + apikey rate-bypass) | F1 owner key, e.g. `cp_modbfhllnn77qq` (`~/shared-memory/internal-admin-access.md`) |
+| `WATCHTOWER_F4_APIKEY` | Reserved for future F4 `/api/extract` probe | F4 owner apikey (TBD) |
+| `WATCHTOWER_B7_APIKEY` | Reserved for future B7 `/api/v1/screenshot` probe | B7 owner apikey (TBD) |
+
+To set: GitHub repo → Settings → Secrets and variables → Actions → New
+repository secret.
+
 ## Notes for future expansion
 
-- Adding redeem-coupon test that actually USES an owner coupon (CPL/FMW/PRE/PFL/CAP) requires synthetic accounts with cookie state. See `~/shared-memory/internal-admin-access.md` for accesses. Not yet wired (would require persistent storage state via Playwright `storageState`).
-- Adding `/api/v1/screenshot` synthetic POST with watchtower API key requires creating dedicated API keys per SaaS. See `~/marketing-drafts/W2-monday/watchtower-architecture.md` §Env vars for the design.
 - Auto-recovery (Vercel redeploy on persistent 5xx) intentionally NOT implemented — `requiresManualSession` flag is the user's signal to enter a Claude Code session and debug live.
+- The `/redeem` test submits intentionally invalid credentials and expects an
+  error message — this validates the full form→API→Redis chain WITHOUT
+  consuming a real LTD coupon slot. To add a positive-flow test (real redeem)
+  one would need persistent Playwright `storageState` and a dedicated owner
+  account with refillable coupons.
