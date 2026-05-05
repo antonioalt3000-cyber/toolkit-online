@@ -193,8 +193,10 @@ async function runPageTest(
       waitUntil: "domcontentloaded",
       timeout: timeoutMs,
     });
-    // Give SPA hydration + first paint a moment.
-    await page.waitForTimeout(2_000);
+    // Give SPA hydration + first paint a moment. Empirically 2s was too
+    // tight for some Next.js App Router pages on cold-cache GitHub runners
+    // (F2 /scan returned bodyLen=0 on hot runs from 4 may onwards).
+    await page.waitForTimeout(4_000);
     title = await page.title();
 
     if (test.interaction) {

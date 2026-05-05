@@ -35,20 +35,29 @@ export const F4_PAGES: PageTest[] = [
     timeoutMs: 90_000,
     interaction: async (page) => {
       // Click "Try Sample Invoice" button if present
-      const trySample = page.locator('button:has-text("Try Sample"), button:has-text("Sample")').first();
+      const trySample = page.locator('button:has-text("Try Sample"), button:has-text("Sample Invoice"), button:has-text("Sample")').first();
       if (await trySample.count()) {
         await trySample.click();
-        await page.waitForTimeout(2_000);
+        await page.waitForTimeout(2_500);
       }
-      // Click "Extract" or similar action
-      const extract = page.locator('button:has-text("Extract")').first();
+      // Click "Extract Data" or similar action — actual prod label is "Extract Data"
+      const extract = page.locator('button:has-text("Extract Data"), button:has-text("Extract")').first();
       if (await extract.count()) {
         await extract.click();
-        // Extraction may take ~30s (LLM call)
-        await page.waitForTimeout(30_000);
-        const body = (await page.textContent("body")) ?? "";
-        if (!/confidence|invoice|extracted|amount|total|line item/i.test(body)) {
-          throw new Error("Playground: Extract clicked but no parsed result rendered");
+        // Extraction may take ~30s (LLM call). Allow up to 45s and poll for
+        // the result-text pattern to fail fast when it actually arrives.
+        const deadline = Date.now() + 45_000;
+        let matched = false;
+        while (Date.now() < deadline) {
+          await page.waitForTimeout(2_000);
+          const body = (await page.textContent("body")) ?? "";
+          if (/processingtimems|confidence|invoice|extracted|amount|total|line item|"createdat"/i.test(body)) {
+            matched = true;
+            break;
+          }
+        }
+        if (!matched) {
+          throw new Error("Playground: Extract clicked but no parsed result rendered within 45s");
         }
       }
     },

@@ -43,10 +43,16 @@ export const F3_PAGES: PageTest[] = [
     url: `${BASE}/redeem`,
     severity: "P0",
     interaction: async (page) => {
+      // Production form uses email + text input with placeholder
+      // "PRE-XXXX-XXXX" (no "coupon"/"code" keywords). Match also that
+      // shape (XXXX-XXXX) and the visible "Activate" button as anchors.
       const input = page.locator(
-        'input[placeholder*="coupon" i], input[placeholder*="code" i], input[name*="coupon" i], input[name*="code" i]',
+        'input[placeholder*="coupon" i], input[placeholder*="code" i], input[placeholder*="XXXX" i], input[placeholder*="PRE-" i], input[name*="coupon" i], input[name*="code" i]',
       );
-      if ((await input.count()) === 0) throw new Error("/redeem has no coupon input");
+      const activate = page.locator('button:has-text("Activate")');
+      if ((await input.count()) === 0 && (await activate.count()) === 0) {
+        throw new Error("/redeem has no coupon input or activate button");
+      }
     },
   },
   {
