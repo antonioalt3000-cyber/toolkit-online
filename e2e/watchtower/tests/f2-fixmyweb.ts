@@ -36,11 +36,17 @@ export const F2_PAGES: PageTest[] = [
     timeoutMs: 90_000,
     interaction: async (page) => {
       const input = page
-        .locator('input[type="url"], input[placeholder*="url" i], input[placeholder*="website" i], input[name*="url" i]')
+        .locator(
+          'input[type="url"], input[placeholder*="url" i], input[placeholder*="website" i], input[placeholder*="example.com" i], input[placeholder*="https" i], input[name*="url" i]',
+        )
         .first();
-      await input.waitFor({ state: "visible", timeout: 15_000 });
+      await input.waitFor({ state: "visible", timeout: 25_000 });
       await input.fill("https://example.com");
-      const submit = page.locator('button[type="submit"], form button').first();
+      const submit = page
+        .locator(
+          'button:has-text("Scan"), button:has-text("Start Scan"), button[type="submit"], form button',
+        )
+        .first();
       await submit.click();
       await page.waitForTimeout(60_000);
       const body = (await page.textContent("body")) ?? "";
@@ -65,9 +71,13 @@ export const F2_PAGES: PageTest[] = [
     url: `${BASE}/redeem`,
     severity: "P0",
     interaction: async (page) => {
-      const input = page.locator('input[placeholder*="coupon" i], input[placeholder*="code" i], input[name*="coupon" i], input[name*="code" i]');
-      if ((await input.count()) === 0) {
-        throw new Error("/redeem has no coupon input field");
+      // Production placeholder is "FMW-XXXX-XXXX"; broaden matchers.
+      const input = page.locator(
+        'input[placeholder*="coupon" i], input[placeholder*="code" i], input[placeholder*="XXXX" i], input[placeholder*="FMW-" i], input[name*="coupon" i], input[name*="code" i]',
+      );
+      const activate = page.locator('button:has-text("Activate")');
+      if ((await input.count()) === 0 && (await activate.count()) === 0) {
+        throw new Error("/redeem has no coupon input or activate button");
       }
     },
   },

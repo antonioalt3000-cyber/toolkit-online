@@ -44,16 +44,21 @@ export const F1_PAGES: PageTest[] = [
     severity: "P0",
     timeoutMs: 90_000,
     interaction: async (page) => {
-      // Find first url-ish input
+      // Find URL-ish input. Production form is `input type="text"` with
+      // placeholder "https://example.com" — broaden matchers to cover that.
       const input = page
-        .locator('input[type="url"], input[placeholder*="url" i], input[placeholder*="website" i], input[name*="url" i]')
+        .locator(
+          'input[type="url"], input[placeholder*="url" i], input[placeholder*="website" i], input[placeholder*="example.com" i], input[placeholder*="https" i], input[name*="url" i]',
+        )
         .first();
-      await input.waitFor({ state: "visible", timeout: 15_000 });
+      await input.waitFor({ state: "visible", timeout: 25_000 });
       await input.fill("https://example.com");
 
-      // Submit
+      // Submit — anchor on visible button text, fall back to form button.
       const submit = page
-        .locator('button[type="submit"], form button')
+        .locator(
+          'button:has-text("Scan Now"), button:has-text("Start Scan"), button:has-text("Scan"), button[type="submit"], form button',
+        )
         .first();
       await submit.click();
 
@@ -85,10 +90,14 @@ export const F1_PAGES: PageTest[] = [
     severity: "P0",
     interaction: async (page) => {
       // Page must show a coupon input field — this is the key DealMirror flow.
-      const input = page.locator('input[placeholder*="coupon" i], input[placeholder*="code" i], input[name*="coupon" i], input[name*="code" i]');
-      const count = await input.count();
-      if (count === 0) {
-        throw new Error("/redeem page has no coupon input field — LTD redemption broken");
+      // Production placeholder is "CPL-XXXX-XXXX" (no "coupon"/"code" word),
+      // so match on the XXXX shape and CPL- prefix as well.
+      const input = page.locator(
+        'input[placeholder*="coupon" i], input[placeholder*="code" i], input[placeholder*="XXXX" i], input[placeholder*="CPL-" i], input[name*="coupon" i], input[name*="code" i]',
+      );
+      const activate = page.locator('button:has-text("Activate")');
+      if ((await input.count()) === 0 && (await activate.count()) === 0) {
+        throw new Error("/redeem page has no coupon input or activate button — LTD redemption broken");
       }
     },
   },

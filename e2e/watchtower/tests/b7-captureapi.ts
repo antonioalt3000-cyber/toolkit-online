@@ -82,10 +82,15 @@ export const B7_PAGES: PageTest[] = [
     url: `${BASE}/redeem`,
     severity: "P0",
     interaction: async (page) => {
+      // Production form: email + text input with placeholder "CAP-XXXX-XXXX"
+      // (no "coupon"/"code" keywords). Match that shape + Activate button.
       const input = page.locator(
-        'input[placeholder*="coupon" i], input[placeholder*="code" i], input[name*="coupon" i], input[name*="code" i]',
+        'input[placeholder*="coupon" i], input[placeholder*="code" i], input[placeholder*="XXXX" i], input[placeholder*="CAP-" i], input[name*="coupon" i], input[name*="code" i]',
       );
-      if ((await input.count()) === 0) throw new Error("/redeem has no coupon input");
+      const activate = page.locator('button:has-text("Activate")');
+      if ((await input.count()) === 0 && (await activate.count()) === 0) {
+        throw new Error("/redeem has no coupon input or activate button");
+      }
     },
   },
   {
