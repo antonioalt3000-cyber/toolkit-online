@@ -76,7 +76,7 @@ export const F1_PAGES: PageTest[] = [
     url: `${BASE}/dashboard`,
     severity: "P0",
     interaction: async (page) => {
-      // Without auth this should redirect to /signin OR show a sign-in CTA.
+      // Without auth this should redirect to /login OR show a sign-in CTA.
       // What we DO want to fail: unhandled error / blank page.
       const body = (await page.textContent("body")) ?? "";
       if (body.trim().length < 50) {
@@ -110,13 +110,13 @@ export const F1_PAGES: PageTest[] = [
     timeoutMs: 15_000,
   },
   {
-    name: "/signin (auth gate)",
-    url: `${BASE}/signin`,
+    name: "/login (auth gate)",
+    url: `${BASE}/login`,
     severity: "P0",
     interaction: async (page) => {
       const emailInput = page.locator('input[type="email"], input[name="email"]');
       if ((await emailInput.count()) === 0) {
-        throw new Error("/signin has no email input — auth gate broken");
+        throw new Error("/login has no email input — auth gate broken");
       }
     },
   },

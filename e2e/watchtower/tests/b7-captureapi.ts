@@ -69,12 +69,19 @@ export const B7_PAGES: PageTest[] = [
     },
   },
   {
-    name: "/dashboard",
+    // For unauthenticated users this page IS the auth gate (email-based
+    // magic link form). There is no /signin or /login route — verifying the
+    // email input here covers both "dashboard renders" and "auth gate works".
+    name: "/dashboard (renders + auth gate email input)",
     url: `${BASE}/dashboard`,
     severity: "P0",
     interaction: async (page) => {
       const body = (await page.textContent("body")) ?? "";
       if (body.trim().length < 50) throw new Error("Dashboard renders blank");
+      const emailInput = page.locator('input[type="email"], input[name="email"], #dashboard-email');
+      if ((await emailInput.count()) === 0) {
+        throw new Error("/dashboard missing email input — auth gate broken");
+      }
     },
   },
   {
@@ -100,15 +107,6 @@ export const B7_PAGES: PageTest[] = [
     mode: "fetch",
     expectBodyContains: ["ok"],
     timeoutMs: 15_000,
-  },
-  {
-    name: "/signin",
-    url: `${BASE}/signin`,
-    severity: "P0",
-    interaction: async (page) => {
-      const emailInput = page.locator('input[type="email"], input[name="email"]');
-      if ((await emailInput.count()) === 0) throw new Error("/signin missing email input");
-    },
   },
 
   // -------------------------------------------------------------------------
