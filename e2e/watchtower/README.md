@@ -83,6 +83,29 @@ The runner produces:
 - `watchtower-artifacts/<saas>-result.json` — structured per-SaaS result
 - `watchtower-artifacts/<saas>_<page>_<ts>.png` — screenshot on failure
 
+## Triggering a fresh run on Actions (sandboxed sessions)
+
+A Claude Code session running inside a sandbox with egress restrictions
+(e.g. `host_not_allowed` 403s on the SaaS domains, blocked
+`cdn.playwright.dev`) cannot execute the watchtower locally — every page
+will fail with `ERR_CERT_AUTHORITY_INVALID` from the proxy MITM, not from
+real bugs. Don't trust those local results; use Actions instead.
+
+To trigger a fresh run from such a session:
+
+```bash
+# From a machine with gh + repo write access
+gh workflow run watchtower-e2e.yml --ref master
+gh run watch                                  # follow the run
+gh run view --log                             # full log if needed
+```
+
+Or via UI: https://github.com/antonioalt3000-cyber/toolkit-online/actions/workflows/watchtower-e2e.yml
+→ "Run workflow" → branch `master` → optional `only: F1|F2|F3|F4|B7`.
+
+The hourly schedule (`5 * * * *`) means a fresh run is at most ~60 min
+away even without manual dispatch.
+
 ## CI workflow
 
 Defined in `.github/workflows/watchtower-e2e.yml`.
