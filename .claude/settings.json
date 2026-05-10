@@ -23,7 +23,19 @@
       "Write",
       "Edit",
       "Glob",
-      "Grep"
+      "Grep",
+      "WebFetch(domain:complipilot.dev)",
+      "WebFetch(domain:www.complipilot.dev)",
+      "WebFetch(domain:fixmyweb.dev)",
+      "WebFetch(domain:www.fixmyweb.dev)",
+      "WebFetch(domain:paymentrescue.dev)",
+      "WebFetch(domain:www.paymentrescue.dev)",
+      "WebFetch(domain:parseflow.dev)",
+      "WebFetch(domain:www.parseflow.dev)",
+      "WebFetch(domain:captureapi.dev)",
+      "WebFetch(domain:www.captureapi.dev)",
+      "WebFetch(domain:toolkitonline.vip)",
+      "WebFetch(domain:www.toolkitonline.vip)"
     ],
     "deny": [
       "Bash(rm -rf /)",
