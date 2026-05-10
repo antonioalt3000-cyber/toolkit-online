@@ -83,6 +83,44 @@ The runner produces:
 - `watchtower-artifacts/<saas>-result.json` — structured per-SaaS result
 - `watchtower-artifacts/<saas>_<page>_<ts>.png` — screenshot on failure
 
+## Triggering a fresh run on Actions (sandboxed sessions)
+
+A Claude Code session running inside a sandbox with egress restrictions
+(e.g. `host_not_allowed` 403s on the SaaS domains, blocked
+`cdn.playwright.dev`) cannot execute the watchtower locally — every page
+will fail with `ERR_CERT_AUTHORITY_INVALID` from the proxy MITM, not from
+real bugs. Don't trust those local results; use Actions instead.
+
+To trigger a fresh run from such a session:
+
+```bash
+# From a machine with gh + repo write access
+gh workflow run watchtower-e2e.yml --ref master
+gh run watch                                  # follow the run
+gh run view --log                             # full log if needed
+```
+
+Or via UI: https://github.com/antonioalt3000-cyber/toolkit-online/actions/workflows/watchtower-e2e.yml
+→ "Run workflow" → branch `master` → optional `only: F1|F2|F3|F4|B7`.
+
+The hourly schedule (`5 * * * *`) means a fresh run is at most ~60 min
+away even without manual dispatch.
+
+## Environment variables (CI)
+
+`.github/workflows/watchtower-e2e.yml` consumes the following. Configure in
+GitHub UI → Settings → Secrets and variables → Actions.
+
+| Name | Type | Default | Purpose |
+|------|------|---------|---------|
+| `BREVO_API_KEY` | Secret (required) | — | Brevo HTTP API key for sending alert + digest emails. Without it, runs are silent (still produce JSON + screenshots, just don't notify). |
+| `WATCHTOWER_ALERT_EMAIL` | Var (optional) | `antonio.alt3000@gmail.com` | Recipient for both critical alerts and routine digests. |
+| `WATCHTOWER_DIGEST_HOURS_UTC` | Var (optional) | `7,12,18` | Comma-separated UTC hours when an "all green" run produces a digest email. Set empty to disable digest entirely. Default = 09 / 14 / 20 CEST. |
+| `WATCHTOWER_ALERT_HOURS_UTC` | Var (optional) | `5,10,16,19` | Comma-separated UTC hours when persistent failures produce a critical alert. Manual-session failures bypass this gate (always sent). Set to `*` to revert to legacy hourly mode. |
+
+Local one-off runs only need `BREVO_API_KEY` if you want emails. Use
+`npm run watchtower:dry` to skip email entirely.
+
 ## CI workflow
 
 Defined in `.github/workflows/watchtower-e2e.yml`.

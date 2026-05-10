@@ -91,12 +91,12 @@ export const F4_PAGES: PageTest[] = [
     timeoutMs: 15_000,
   },
   {
-    name: "/signin",
-    url: `${BASE}/signin`,
+    name: "/login",
+    url: `${BASE}/login`,
     severity: "P0",
     interaction: async (page) => {
       const emailInput = page.locator('input[type="email"], input[name="email"]');
-      if ((await emailInput.count()) === 0) throw new Error("/signin missing email input");
+      if ((await emailInput.count()) === 0) throw new Error("/login missing email input");
     },
   },
 
