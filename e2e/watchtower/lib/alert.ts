@@ -29,7 +29,7 @@ import * as path from "node:path";
 
 import type { RunResult } from "./types.js";
 
-/* eslint-disable no-console */
+ 
 
 const BREVO_API_URL = "https://api.brevo.com/v3/smtp/email";
 

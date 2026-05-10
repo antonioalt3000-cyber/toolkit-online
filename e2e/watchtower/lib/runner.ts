@@ -31,7 +31,7 @@ import type {
 
 // Brevity: console.log is intentional here — this is a CI runner,
 // not production app code. The output is captured by GitHub Actions logs.
-/* eslint-disable no-console */
+ 
 
 interface RunnerOptions {
   saas: string;

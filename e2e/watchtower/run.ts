@@ -33,7 +33,7 @@ import { F3_BASE_URL, F3_NAME, F3_PAGES } from "./tests/f3-paymentrescue.js";
 import { F4_BASE_URL, F4_NAME, F4_PAGES } from "./tests/f4-parseflow.js";
 import { B7_BASE_URL, B7_NAME, B7_PAGES } from "./tests/b7-captureapi.js";
 
-/* eslint-disable no-console */
+ 
 
 const ARTIFACTS_DIR = path.resolve(process.cwd(), "watchtower-artifacts");
 
