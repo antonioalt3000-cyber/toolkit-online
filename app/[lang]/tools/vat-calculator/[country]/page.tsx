@@ -616,6 +616,14 @@ export default function VatCalculatorCountry() {
   const toolT = tools['vat-calculator'][lang];
 
   const countryData = countryRates[country];
+
+  const [amount, setAmount] = useState('');
+  const [rate, setRate] = useState(countryData?.rate ?? 0);
+  const [mode, setMode] = useState<'add' | 'remove'>('add');
+  const [copied, setCopied] = useState(false);
+  const [touched, setTouched] = useState(false);
+  const [openFaq, setOpenFaq] = useState<number | null>(null);
+
   if (!countryData) return null;
 
   const localizedName = countryNames[country]?.[lang] || countryData.name;
@@ -625,13 +633,6 @@ export default function VatCalculatorCountry() {
 
   const allRates: number[] = [countryData.rate, countryData.reduced];
   if (countryData.superReduced !== undefined) allRates.push(countryData.superReduced);
-
-  const [amount, setAmount] = useState('');
-  const [rate, setRate] = useState(countryData.rate);
-  const [mode, setMode] = useState<'add' | 'remove'>('add');
-  const [copied, setCopied] = useState(false);
-  const [touched, setTouched] = useState(false);
-  const [openFaq, setOpenFaq] = useState<number | null>(null);
 
   const num = parseFloat(amount) || 0;
   const amountError = touched && amount !== '' && num <= 0;
