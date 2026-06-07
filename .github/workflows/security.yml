@@ -1,0 +1,49 @@
+name: Security Scan
+
+# Secret scanning (gitleaks) + dependency audit on every PR and push to
+# non-master branches. Both are free OSS; gitleaks-action is free for
+# personal accounts (a license is only required for GitHub organizations).
+
+on:
+  pull_request:
+  push:
+    branches-ignore:
+      - master
+
+permissions:
+  contents: read
+
+concurrency:
+  group: security-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  secret-scan:
+    name: Secret scan (gitleaks)
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Run gitleaks
+        uses: gitleaks/gitleaks-action@v2
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+  dependency-audit:
+    name: Dependency audit (informational)
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+      - name: Install dependencies
+        run: npm ci
+      - name: npm audit (high+)
+        run: |
+          npm audit --audit-level=high || \
+            echo "::warning::npm audit found high/critical vulnerabilities — review needed"

@@ -1,0 +1,25 @@
+# Build artifacts & deps
+.next
+out
+build
+node_modules
+coverage
+.vercel
+.playwright-mcp
+
+# Automation outputs
+pins
+watchtower-artifacts
+scripts/agent-logs
+
+# Lockfile & generated assets
+package-lock.json
+public
+*.min.js
+
+# Large generated data files — excluded to avoid massive reformatting churn
+lib/blog.ts
+lib/translations.ts
+dashboard-data.json
+dashboard.html
+tasks.json

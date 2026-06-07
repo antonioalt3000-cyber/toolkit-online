@@ -9,7 +9,14 @@
     "lint": "eslint",
     "watchtower": "tsx e2e/watchtower/run.ts",
     "watchtower:one": "tsx e2e/watchtower/run.ts --only",
-    "watchtower:dry": "tsx e2e/watchtower/run.ts --skip-email"
+    "watchtower:dry": "tsx e2e/watchtower/run.ts --skip-email",
+    "prepare": "husky",
+    "test": "vitest run",
+    "typecheck": "tsc --noEmit",
+    "format": "prettier --write app components lib e2e",
+    "format:check": "prettier --check app components lib e2e",
+    "knip": "knip",
+    "lh:scan": "npx --yes unlighthouse@latest --site https://toolkitonline.vip"
   },
   "dependencies": {
     "canvas": "^3.2.1",
@@ -28,9 +35,25 @@
     "@types/react-dom": "^19",
     "eslint": "9.39.4",
     "eslint-config-next": "16.1.6",
+    "husky": "^9.1.7",
+    "knip": "^6.16.1",
+    "lint-staged": "^17.0.7",
     "playwright": "^1.58.2",
+    "prettier": "^3.8.3",
     "tailwindcss": "^4",
     "tsx": "^4.20.0",
-    "typescript": "^5"
+    "typescript": "^5",
+    "vitest": "^4.1.8"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "prettier": {
+    "singleQuote": true,
+    "semi": true,
+    "printWidth": 100,
+    "tabWidth": 2,
+    "trailingComma": "es5",
+    "arrowParens": "always"
   }
 }
