@@ -1,0 +1,39 @@
+name: SaaS Functional Smoke
+
+# Once a day: verifies a CUSTOMER can actually use each of the 5 SaaS
+# (authenticated core API call + redeem-funnel liveness), not just that the
+# site is up. Sends one Brevo digest to the owner — green if all pass, red with
+# the failing check otherwise. Uptime (every 5 min) is handled separately by
+# uptime-monitor.yml.
+
+on:
+  schedule:
+    - cron: '0 7 * * *'   # 07:00 UTC daily (~08:00/09:00 CET/CEST)
+  workflow_dispatch: {}    # Allow manual trigger from GitHub UI
+
+concurrency:
+  group: saas-smoke
+  cancel-in-progress: false
+
+jobs:
+  smoke:
+    name: Functional smoke (5 SaaS)
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+
+      - name: Run functional smoke
+        env:
+          BREVO_API_KEY:   ${{ secrets.BREVO_API_KEY }}
+          MONITOR_F1_KEY:  ${{ secrets.MONITOR_F1_KEY }}
+          MONITOR_F4_KEY:  ${{ secrets.MONITOR_F4_KEY }}
+          MONITOR_B7_KEY:  ${{ secrets.MONITOR_B7_KEY }}
+        run: node scripts/automation/saas-smoke.js
