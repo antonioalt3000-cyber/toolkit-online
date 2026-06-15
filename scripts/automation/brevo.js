@@ -20,12 +20,18 @@ function dedupKey(to, subject) {
   return crypto.createHash('sha256').update(addr + '|' + (subject || '')).digest('hex').slice(0, 32);
 }
 
+// Pure window check (unit-tested): a prior send at `prevTs` still suppresses a
+// duplicate if it happened less than DEDUP_WINDOW_MS ago.
+function isWithinDedupWindow(prevTs, now = Date.now()) {
+  return Number.isFinite(prevTs) && (now - prevTs) < DEDUP_WINDOW_MS;
+}
+
 function isDuplicate(to, subject) {
   try {
     const file = path.join(DEDUP_DIR, dedupKey(to, subject) + '.lock');
     if (!fs.existsSync(file)) return false;
     const ts = parseInt(fs.readFileSync(file, 'utf-8'), 10);
-    return Number.isFinite(ts) && (Date.now() - ts) < DEDUP_WINDOW_MS;
+    return isWithinDedupWindow(ts);
   } catch (_) { return false; }
 }
 
@@ -119,4 +125,4 @@ async function sendAndLog({ to, subject, htmlContent, sender, replyTo }) {
   }
 }
 
-module.exports = { sendEmail, sendAndLog };
+module.exports = { sendEmail, sendAndLog, dedupKey, isWithinDedupWindow, DEDUP_WINDOW_MS };

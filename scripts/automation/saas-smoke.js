@@ -103,17 +103,29 @@ function buildHtml(results, allGreen, dateLabel) {
   </div>`;
 }
 
-(async () => {
+// ── Pure aggregation (unit-tested) ────────────────────────────────────────────
+// Reduce per-SaaS check results to the green/red verdict + the failing tools.
+// Kept pure so the smoke loop's reactivity is certifiable by tests.
+function summarizeSmoke(results) {
+  const allGreen = results.every((r) => r.ok);
+  const failingTools = results.filter((r) => !r.ok).map((r) => r.tool);
+  return { allGreen, failingTools };
+}
+
+function smokeSubject(allGreen, failingTools, dateLabel) {
+  return allGreen
+    ? `✅ Monitor 5 SaaS — tutti operativi (${dateLabel})`
+    : `🔴 Monitor 5 SaaS — problema: ${failingTools.join(', ')} (${dateLabel})`;
+}
+
+async function main() {
   const results = [];
   for (const site of SITES) results.push(await checkSaaS(site));
-  const allGreen = results.every((r) => r.ok);
+  const { allGreen, failingTools } = summarizeSmoke(results);
 
   const now = new Date();
   const dateLabel = `${String(now.getUTCDate()).padStart(2, '0')}/${String(now.getUTCMonth() + 1).padStart(2, '0')}/${now.getUTCFullYear()} UTC`;
-  const failing = results.filter((r) => !r.ok).map((r) => r.tool).join(', ');
-  const subject = allGreen
-    ? `✅ Monitor 5 SaaS — tutti operativi (${dateLabel})`
-    : `🔴 Monitor 5 SaaS — problema: ${failing} (${dateLabel})`;
+  const subject = smokeSubject(allGreen, failingTools, dateLabel);
 
   results.forEach((r) => {
     console.log(`${r.ok ? 'OK ' : 'FAIL'} ${r.tool} ${r.name}`);
@@ -128,4 +140,11 @@ function buildHtml(results, allGreen, dateLabel) {
   }
 
   process.exit(allGreen ? 0 : 1);
-})();
+}
+
+// Export pure logic for unit tests; only run main() when invoked as a script.
+module.exports = { summarizeSmoke, smokeSubject, buildHtml };
+
+if (require.main === module) {
+  main().catch((e) => { console.error('saas-smoke fatal:', e); process.exit(2); });
+}

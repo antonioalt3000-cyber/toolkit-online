@@ -125,6 +125,22 @@ function buildRecoveryHtml(results, timestamp) {
   </div>`;
 }
 
+// ── Decision logic (pure, unit-tested) ────────────────────────────────────────
+// State machine for the uptime alert loop. Kept pure (no I/O) so the self-healing
+// reactivity can be certified by tests:
+//   down  + prev=down  → 'still-down' (already alerted; stay quiet, exit 0)
+//   down  + prev!=down → 'alert'      (new outage; email + exit 1)
+//   up    + prev=down  → 'recovery'   (email recovery; exit 0)
+//   up    + prev!=down → 'none'       (all good; exit 0)
+function decideUptimeAction(results, prevStatus) {
+  const down = results.filter(r => !r.ok);
+  const up = results.filter(r => r.ok);
+  let action;
+  if (down.length > 0) action = prevStatus === 'down' ? 'still-down' : 'alert';
+  else action = prevStatus === 'down' ? 'recovery' : 'none';
+  return { action, down, up };
+}
+
 // ── Main ──────────────────────────────────────────────────────────────────────
 async function main() {
   const timestamp = new Date().toUTCString();
@@ -132,9 +148,6 @@ async function main() {
   console.log('─'.repeat(60));
 
   const results = await Promise.all(SITES.map(checkSite));
-
-  const down = results.filter(r => !r.ok);
-  const up   = results.filter(r => r.ok);
 
   results.forEach(r => {
     const icon = r.ok ? '✅' : '🔴';
@@ -145,46 +158,44 @@ async function main() {
   console.log('─'.repeat(60));
 
   const prevStatus = process.env.PREV_STATUS || '';
+  const { action, down, up } = decideUptimeAction(results, prevStatus);
 
-  if (down.length > 0) {
-    if (prevStatus === 'down') {
-      // Already notified on a previous run — skip duplicate alert & email
-      console.log(`\n⚠️  ${down.length} SITE(S) STILL DOWN (already notified) — skipping duplicate alert`);
-      // Signal to the workflow NOT to reset PREV_STATUS to 'up'
-      if (process.env.GITHUB_ENV) {
-        require('fs').appendFileSync(process.env.GITHUB_ENV, 'SITES_STILL_DOWN=true\n');
-      }
-      // Exit 0: workflow stays green, no repeated GitHub failure emails
-      process.exit(0);
-    } else {
-      // First detection of this outage — send alert
-      console.log(`\n🔴 NEW DOWNTIME: ${down.length} SITE(S) DOWN — sending alert to ${OWNER.email}`);
-      await sendAndLog({
-        to:          [{ email: OWNER.email, name: OWNER.name }],
-        subject:     `🔴 DOWN: ${down.map(r => r.name).join(', ')} — DevToolsmith`,
-        htmlContent: buildAlertHtml(down, up, timestamp),
-      });
-      // Exit 1 only on NEW downtime — one GitHub failure email per outage event
-      process.exit(1);
+  if (action === 'still-down') {
+    // Already notified on a previous run — skip duplicate alert & email
+    console.log(`\n⚠️  ${down.length} SITE(S) STILL DOWN (already notified) — skipping duplicate alert`);
+    // Signal to the workflow NOT to reset PREV_STATUS to 'up'
+    if (process.env.GITHUB_ENV) {
+      require('fs').appendFileSync(process.env.GITHUB_ENV, 'SITES_STILL_DOWN=true\n');
     }
-
+    process.exit(0); // workflow stays green, no repeated GitHub failure emails
+  } else if (action === 'alert') {
+    console.log(`\n🔴 NEW DOWNTIME: ${down.length} SITE(S) DOWN — sending alert to ${OWNER.email}`);
+    await sendAndLog({
+      to:          [{ email: OWNER.email, name: OWNER.name }],
+      subject:     `🔴 DOWN: ${down.map(r => r.name).join(', ')} — DevToolsmith`,
+      htmlContent: buildAlertHtml(down, up, timestamp),
+    });
+    process.exit(1); // one GitHub failure email per outage event
+  } else if (action === 'recovery') {
+    console.log('\n🟢 All sites recovered — sending recovery notification');
+    await sendAndLog({
+      to:          [{ email: OWNER.email, name: OWNER.name }],
+      subject:     '✅ RECOVERED: All DevToolsmith sites are operational',
+      htmlContent: buildRecoveryHtml(results, timestamp),
+    });
+    process.exit(0);
   } else {
-    // Check if this is a recovery run (PREV_STATUS env var = 'down')
-    if (prevStatus === 'down') {
-      console.log('\n🟢 All sites recovered — sending recovery notification');
-      await sendAndLog({
-        to:          [{ email: OWNER.email, name: OWNER.name }],
-        subject:     '✅ RECOVERED: All DevToolsmith sites are operational',
-        htmlContent: buildRecoveryHtml(results, timestamp),
-      });
-    } else {
-      console.log('\n✅ All sites operational — no action needed');
-    }
+    console.log('\n✅ All sites operational — no action needed');
     process.exit(0);
   }
 }
 
-main().catch(err => {
-  console.error('\n💥 Fatal error in uptime-check:', err.message);
-  process.exit(2);
-});
+// Export pure logic for unit tests; only run main() when invoked as a script.
+module.exports = { decideUptimeAction };
+
+if (require.main === module) {
+  main().catch(err => {
+    console.error('\n💥 Fatal error in uptime-check:', err.message);
+    process.exit(2);
+  });
+}
