@@ -29,36 +29,35 @@ export const F4_PAGES: PageTest[] = [
     },
   },
   {
-    name: "/playground — Try Sample Invoice + Extract → JSON",
+    name: "/playground — Try Sample Invoice → Extraction Result",
     url: `${BASE}/playground`,
     severity: "P0",
     timeoutMs: 90_000,
     interaction: async (page) => {
-      // Click "Try Sample Invoice" button if present
+      // "Try Sample Invoice" runs the sample extraction directly and renders the
+      // "Extraction Result" panel. The "Extract Data" button is only for an
+      // uploaded file and stays DISABLED until a file is dropped — clicking it
+      // (the old behaviour) just timed out. So: click the sample, then poll for the
+      // rendered result. (Verified live 2026-06-17: sample → 97% confidence JSON.)
       const trySample = page.locator('button:has-text("Try Sample"), button:has-text("Sample Invoice"), button:has-text("Sample")').first();
-      if (await trySample.count()) {
-        await trySample.click();
-        await page.waitForTimeout(2_500);
+      if ((await trySample.count()) === 0) {
+        throw new Error("Playground: no 'Try Sample' button found");
       }
-      // Click "Extract Data" or similar action — actual prod label is "Extract Data"
-      const extract = page.locator('button:has-text("Extract Data"), button:has-text("Extract")').first();
-      if (await extract.count()) {
-        await extract.click();
-        // Extraction may take ~30s (LLM call). Allow up to 45s and poll for
-        // the result-text pattern to fail fast when it actually arrives.
-        const deadline = Date.now() + 45_000;
-        let matched = false;
-        while (Date.now() < deadline) {
-          await page.waitForTimeout(2_000);
-          const body = (await page.textContent("body")) ?? "";
-          if (/processingtimems|confidence|invoice|extracted|amount|total|line item|"createdat"/i.test(body)) {
-            matched = true;
-            break;
-          }
+      await trySample.click();
+      // Poll up to ~45s for the rendered extraction result. Markers chosen to be
+      // present ONLY in an actual result, never in the static page chrome.
+      const deadline = Date.now() + 45_000;
+      let matched = false;
+      while (Date.now() < deadline) {
+        await page.waitForTimeout(2_000);
+        const body = (await page.textContent("body")) ?? "";
+        if (/extraction result|"status"\s*:\s*"completed"|processingtimems|invoicenumber|"confidence"\s*:/i.test(body)) {
+          matched = true;
+          break;
         }
-        if (!matched) {
-          throw new Error("Playground: Extract clicked but no parsed result rendered within 45s");
-        }
+      }
+      if (!matched) {
+        throw new Error("Playground: 'Try Sample' clicked but no extraction result rendered within 45s");
       }
     },
   },
@@ -91,12 +90,12 @@ export const F4_PAGES: PageTest[] = [
     timeoutMs: 15_000,
   },
   {
-    name: "/signin",
-    url: `${BASE}/signin`,
+    name: "/login",
+    url: `${BASE}/login`,
     severity: "P0",
     interaction: async (page) => {
       const emailInput = page.locator('input[type="email"], input[name="email"]');
-      if ((await emailInput.count()) === 0) throw new Error("/signin missing email input");
+      if ((await emailInput.count()) === 0) throw new Error("/login missing email input");
     },
   },
 
