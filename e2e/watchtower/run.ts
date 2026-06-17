@@ -104,32 +104,45 @@ async function main(): Promise<void> {
   const runs: RunResult[] = [];
   for (const plan of plans) {
     console.log(`\n=== ${plan.saas} (${plan.pages.length} pages) ===`);
-    try {
-      const result = await runSaas({
-        saas: plan.saas,
-        baseUrl: plan.baseUrl,
-        pages: plan.pages,
-        artifactsDir: ARTIFACTS_DIR,
-      });
-      runs.push(result);
-      const file = path.join(ARTIFACTS_DIR, `${plan.saas}-result.json`);
-      fs.writeFileSync(file, JSON.stringify(result, null, 2));
-      console.log(`[watchtower:${plan.saas}] verdict=${result.status} written → ${file}`);
-    } catch (err) {
-      console.error(`[watchtower:${plan.saas}] FATAL`, err);
-      runs.push({
-        saas: plan.saas,
-        baseUrl: plan.baseUrl,
-        startedAt: new Date().toISOString(),
-        finishedAt: new Date().toISOString(),
-        totalDurationMs: 0,
-        pages: [],
-        status: "red",
-        primaryFailure: undefined,
-        requiresManualSession: true,
-        manualReason: `Fatal runner error: ${err instanceof Error ? err.message : String(err)}`,
-      });
+    // SELF-HEAL (transient guard): a SaaS is run up to twice. Most non-green
+    // verdicts are transient — a cold serverless start, a slow LLM extraction, a
+    // one-off network blip. Re-running once before we alert/repair means the owner
+    // is only ever paged for a problem that PERSISTS across two independent runs.
+    // The retry only happens on a non-green first attempt, so green runs cost the same.
+    let result: RunResult | null = null;
+    for (let attempt = 1; attempt <= 2; attempt += 1) {
+      try {
+        result = await runSaas({
+          saas: plan.saas,
+          baseUrl: plan.baseUrl,
+          pages: plan.pages,
+          artifactsDir: ARTIFACTS_DIR,
+        });
+      } catch (err) {
+        console.error(`[watchtower:${plan.saas}] FATAL (attempt ${attempt})`, err);
+        result = {
+          saas: plan.saas,
+          baseUrl: plan.baseUrl,
+          startedAt: new Date().toISOString(),
+          finishedAt: new Date().toISOString(),
+          totalDurationMs: 0,
+          pages: [],
+          status: "red",
+          primaryFailure: undefined,
+          requiresManualSession: true,
+          manualReason: `Fatal runner error: ${err instanceof Error ? err.message : String(err)}`,
+        };
+      }
+      if (result.status === "green" || attempt === 2) break;
+      console.log(
+        `[watchtower:${plan.saas}] ${result.status} on attempt 1 — self-heal retry (transient guard) before alerting…`,
+      );
     }
+    const finalResult = result as RunResult;
+    runs.push(finalResult);
+    const file = path.join(ARTIFACTS_DIR, `${plan.saas}-result.json`);
+    fs.writeFileSync(file, JSON.stringify(finalResult, null, 2));
+    console.log(`[watchtower:${plan.saas}] verdict=${finalResult.status} written → ${file}`);
   }
 
   // -------------------------------------------------------------------------

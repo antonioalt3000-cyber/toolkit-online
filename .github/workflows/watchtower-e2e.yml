@@ -93,6 +93,20 @@ jobs:
           fi
           npx tsx e2e/watchtower/run.ts $ARGS
 
+      - name: Auto-rollback red SaaS (self-heal fresh-deploy regressions)
+        if: always()
+        env:
+          VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
+          BREVO_API_KEY: ${{ secrets.BREVO_API_KEY }}
+          WATCHTOWER_ALERT_EMAIL: ${{ vars.WATCHTOWER_ALERT_EMAIL || 'antonio.alt3000@gmail.com' }}
+          # Reads watchtower-artifacts/<SaaS>-result.json written by run.ts above.
+          # For a RED SaaS whose current prod deploy is < ROLLBACK_MAX_AGE_HOURS old
+          # (a fresh-deploy regression), reverts prod to the previous good deploy.
+          # Flip AUTO_ROLLBACK to "report" via repo var to disable autonomous rollback.
+          AUTO_ROLLBACK: ${{ vars.AUTO_ROLLBACK || 'execute' }}
+          ROLLBACK_MAX_AGE_HOURS: ${{ vars.ROLLBACK_MAX_AGE_HOURS || '4' }}
+        run: node scripts/automation/auto-rollback.js
+
       - name: Upload artifacts (screenshots + result JSON)
         if: always()
         uses: actions/upload-artifact@v4
