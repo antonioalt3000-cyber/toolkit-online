@@ -1,6 +1,7 @@
 import json
+import os
 
-HASHNODE_API_KEY = '4df35ca0-83d0-48c0-88fc-6be573f848dd'
+HASHNODE_API_KEY = os.environ.get('HASHNODE_API_KEY', '')
 PUBLICATION_ID = '69c5558810e664c5daf05d9f'
 
 title = 'SaaS Dunning Strategy: How to Recover Failed Payments Before They Become Churn'
