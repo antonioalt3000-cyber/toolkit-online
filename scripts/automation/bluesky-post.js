@@ -125,6 +125,34 @@ async function createPost(did, text, token) {
   return JSON.parse(result.body);
 }
 
+// Fetch the text of recent posts so we never repost an identical micro-post. The daily
+// job cycles a fixed content pool with no dedup, so the same skeet would otherwise be
+// re-posted on rotation. Returns an array of recent post texts, or null on failure
+// (fail-open: fall through to posting if the lookup fails).
+function getRecentPostTexts(actor, token, limit = 80) {
+  return new Promise((resolve) => {
+    const req = https.get(
+      {
+        hostname: 'bsky.social',
+        path:     `/xrpc/app.bsky.feed.getAuthorFeed?actor=${encodeURIComponent(actor)}&limit=${limit}`,
+        headers:  { 'Authorization': `Bearer ${token}`, 'User-Agent': 'DevToolsmith-Publisher/1.0' },
+      },
+      (res) => {
+        let d = '';
+        res.on('data', (c) => { d += c; });
+        res.on('end', () => {
+          try {
+            const feed = JSON.parse(d).feed || [];
+            resolve(feed.map((it) => (it.post && it.post.record && it.post.record.text) || ''));
+          } catch { resolve(null); }
+        });
+      }
+    );
+    req.on('error', () => resolve(null));
+    req.setTimeout(15000, () => { req.destroy(); resolve(null); });
+  });
+}
+
 // ── Main ──────────────────────────────────────────────────────────────────────
 async function main() {
   const identifier = process.env.BLUESKY_IDENTIFIER || 'devtoolsmith.bsky.social';
@@ -169,6 +197,13 @@ async function main() {
     console.error(`\n❌ Auth failed: ${err.message}`);
     console.error('   Check BLUESKY_IDENTIFIER and BLUESKY_PASSWORD secrets.');
     process.exit(1);
+  }
+
+  // Idempotency guard: skip if this exact micro-post was already published recently.
+  const recentTexts = await getRecentPostTexts(session.did, session.accessJwt);
+  if (recentTexts && recentTexts.some((t) => (t || '').trim() === post.text.trim())) {
+    console.log('\n⏭️  This exact post was already published recently — skipping to avoid a duplicate.');
+    process.exit(0);
   }
 
   console.log('\nPosting to Bluesky...');

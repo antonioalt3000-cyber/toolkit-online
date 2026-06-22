@@ -78,6 +78,47 @@ function publishPost({ title, body, tags, pubId }) {
   });
 }
 
+// Fetch existing post titles for the publication so we never repost a duplicate.
+// Hashnode (like Dev.to) does not reject duplicate titles — it appends a slug suffix —
+// so the "already/duplicate" error guard below never fires. This explicit check is what
+// actually stops the daily re-duplication. Returns a Set of titles, or null on failure
+// (fail-open: fall through to the post attempt if the lookup fails).
+function getPublishedTitles(pubId) {
+  return new Promise((resolve) => {
+    const apiKey = process.env.HASHNODE_API_KEY;
+    if (!apiKey) return resolve(null);
+    const query = `query { publication(id: "${pubId}") { posts(first: 50) { edges { node { title } } } } }`;
+    const payload = JSON.stringify({ query });
+    const req = https.request(
+      {
+        hostname: 'gql.hashnode.com',
+        path:     '/',
+        method:   'POST',
+        headers: {
+          'Content-Type':   'application/json',
+          'Authorization':  apiKey,
+          'Content-Length': Buffer.byteLength(payload),
+          'User-Agent':     'DevToolsmith-Publisher/1.0',
+        },
+      },
+      (res) => {
+        let d = '';
+        res.on('data', (c) => { d += c; });
+        res.on('end', () => {
+          try {
+            const edges = JSON.parse(d).data.publication.posts.edges;
+            resolve(new Set(edges.map((e) => (e.node.title || '').trim())));
+          } catch { resolve(null); }
+        });
+      }
+    );
+    req.on('error', () => resolve(null));
+    req.setTimeout(20000, () => { req.destroy(); resolve(null); });
+    req.write(payload);
+    req.end();
+  });
+}
+
 // ── Main ──────────────────────────────────────────────────────────────────────
 async function main() {
   const day    = getDayOfYear();
@@ -97,6 +138,14 @@ async function main() {
 
   if (dryRun) {
     console.log('\n[DRY RUN] Would post this article to Hashnode. Set HASHNODE_DRY_RUN=false to publish.');
+    process.exit(0);
+  }
+
+  // Idempotency guard: skip if a post with this title already exists in the publication.
+  // Stops the daily re-duplication. Fail-open if the lookup fails.
+  const existingTitles = await getPublishedTitles(pubId);
+  if (existingTitles && existingTitles.has(art.title.trim())) {
+    console.log(`\n⏭️  "${art.title}" already exists in the publication — skipping to avoid a duplicate.`);
     process.exit(0);
   }
 
