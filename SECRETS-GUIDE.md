@@ -38,7 +38,7 @@ Get it here: https://dev.to/settings/extensions → "DEV Community API Keys" →
 Used by: `daily-automation.yml` → publish-hashnode job.
 
 ```
-4df35ca0-83d0-48c0-88fc-6be573f848dd
+REDACTED_ROTATE_HASHNODE_KEY
 ```
 
 Get/regenerate: https://hashnode.com/settings/developer → "Personal Access Tokens"
@@ -66,7 +66,7 @@ devtoolsmith.bsky.social
 
 Main account password (to create the app password):
 ```
-DevToolsmith2026!
+REDACTED_ROTATE_BLUESKY_PW
 ```
 
 ---

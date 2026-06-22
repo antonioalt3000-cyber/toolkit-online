@@ -1,5 +1,5 @@
 const https = require('https');
-const HASHNODE_API_KEY = '4df35ca0-83d0-48c0-88fc-6be573f848dd';
+const HASHNODE_API_KEY = 'REDACTED_ROTATE_HASHNODE_KEY';
 const PUBLICATION_ID = '69c5558810e664c5daf05d9f';
 
 const articleContent = `The EU AI Act is the world's first comprehensive AI regulation. Since August 2025, general-purpose AI providers must meet transparency, documentation, and copyright compliance obligations. High-risk AI systems face even stricter requirements.

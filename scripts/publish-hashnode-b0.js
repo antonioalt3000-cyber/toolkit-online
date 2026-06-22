@@ -1,5 +1,5 @@
 const https = require('https');
-const KEY = '4df35ca0-83d0-48c0-88fc-6be573f848dd';
+const KEY = 'REDACTED_ROTATE_HASHNODE_KEY';
 const PUB = '69c5558810e664c5daf05d9f';
 
 const content = `Building a portfolio of free online tools is one of the best ways to generate organic traffic. Here's how we built ToolKit Online — 143+ tools generating traffic from Google.

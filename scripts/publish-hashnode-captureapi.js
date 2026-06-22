@@ -1,6 +1,6 @@
 const https = require('https');
 
-const HASHNODE_API_KEY = '4df35ca0-83d0-48c0-88fc-6be573f848dd';
+const HASHNODE_API_KEY = 'REDACTED_ROTATE_HASHNODE_KEY';
 const PUBLICATION_ID = '69c5558810e664c5daf05d9f';
 
 const articleContent = `Manually capturing screenshots of web pages is one of those tasks that seems simple until you need to do it at scale. Whether you're building a website monitoring tool, generating PDF reports, creating visual regression tests, or automating QA workflows, you quickly discover that headless browsers are complex, resource-intensive, and painful to maintain.
