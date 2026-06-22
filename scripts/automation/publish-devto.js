@@ -58,6 +58,39 @@ function postArticle(article) {
   });
 }
 
+// Fetch titles of ALL my Dev.to articles (published + drafts) so we never repost a
+// duplicate. Dev.to allows duplicate titles (it just appends a slug suffix), so the
+// HTTP 422 "already been taken" guard below never fires — this explicit check is what
+// actually stops the daily re-duplication. Returns a Set of titles, or null on failure
+// (fail-open: if we can't check, fall through to the post attempt).
+function getMyArticleTitles() {
+  return new Promise((resolve) => {
+    const apiKey = process.env.DEVTO_API_KEY;
+    if (!apiKey) return resolve(null);
+    const req = https.request(
+      {
+        hostname: 'dev.to',
+        path:     '/api/articles/me/all?per_page=1000',
+        method:   'GET',
+        headers:  { 'api-key': apiKey, 'User-Agent': 'DevToolsmith-Publisher/1.0' },
+      },
+      (res) => {
+        let d = '';
+        res.on('data', (c) => { d += c; });
+        res.on('end', () => {
+          try {
+            const arr = JSON.parse(d);
+            resolve(new Set((Array.isArray(arr) ? arr : []).map((a) => (a.title || '').trim())));
+          } catch { resolve(null); }
+        });
+      }
+    );
+    req.on('error', () => resolve(null));
+    req.setTimeout(20000, () => { req.destroy(); resolve(null); });
+    req.end();
+  });
+}
+
 // ── Main ──────────────────────────────────────────────────────────────────────
 async function main() {
   const day     = getDayOfYear();
@@ -75,6 +108,15 @@ async function main() {
 
   if (dryRun) {
     console.log('\n[DRY RUN] Would post this article to Dev.to. Set DEVTO_DRY_RUN=false to publish.');
+    process.exit(0);
+  }
+
+  // Idempotency guard: skip if this title already exists on the account (published or
+  // draft). Stops the daily re-duplication and won't recreate titles that were
+  // unpublished during the 22-Jun dedup cleanup. Fail-open if the lookup fails.
+  const existingTitles = await getMyArticleTitles();
+  if (existingTitles && existingTitles.has(article.title.trim())) {
+    console.log(`\n⏭️  "${article.title}" already exists on the account — skipping to avoid a duplicate.`);
     process.exit(0);
   }
 
