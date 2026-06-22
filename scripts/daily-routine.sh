@@ -15,11 +15,7 @@ TODAY=$(date +%Y-%m-%d)
 DOW=$(date +%A)  # Monday, Tuesday, etc.
 
 # Credenziali
-HASHNODE_KEY="4df35ca0-83d0-48c0-88fc-6be573f848dd"
-HASHNODE_PUB="69c5558810e664c5daf05d9f"
-DEVTO_KEY="kwXCwx9a9tu5on2RtWWJy1gh"
-BLUESKY_USER="devtoolsmith.bsky.social"
-BLUESKY_PW="DevToolsmith2026!"
+# HASHNODE_KEY/HASHNODE_PUB/DEVTO_KEY/BLUESKY_USER/BLUESKY_PW caricate da .env.agent (gitignored). Spostate 22 giu: erano in chiaro e in git history -> RUOTARE.
 
 # Brevo
 source "C:/Users/ftass/toolkit-online/scripts/.env.agent" 2>/dev/null || true
