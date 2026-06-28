@@ -1,0 +1,63 @@
+name: Perpetual Sentinel
+# Daily synthetic core-action monitor for the 10 SaaS. Runs free on GitHub's
+# servers (no laptop needed). Deep probe (exercises /api/redeem + /api/health,
+# rejects 404 / HTML-shell), self-heals transient failures via Vercel deploy
+# hooks, and only emails when self-heal fails. Writes a green heartbeat to the
+# `sentinel-heartbeat` orphan branch (no Vercel redeploy) + an artifact.
+on:
+  schedule:
+    - cron: '0 5 * * *'   # 05:00 UTC every day
+  workflow_dispatch: {}    # manual / forced trigger (dry-run)
+permissions:
+  contents: write
+concurrency:
+  group: sentinel
+  cancel-in-progress: false
+jobs:
+  sentinel:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - name: Run sentinel
+        id: run
+        continue-on-error: true   # a DEGRADED result must still publish the heartbeat
+        env:
+          BREVO_API_KEY: ${{ secrets.BREVO_API_KEY }}
+          ALERT_EMAIL: ${{ secrets.ALERT_EMAIL }}
+          DEPLOY_HOOK_F1: ${{ secrets.DEPLOY_HOOK_F1 }}
+          DEPLOY_HOOK_F2: ${{ secrets.DEPLOY_HOOK_F2 }}
+          DEPLOY_HOOK_F3: ${{ secrets.DEPLOY_HOOK_F3 }}
+          DEPLOY_HOOK_F4: ${{ secrets.DEPLOY_HOOK_F4 }}
+          DEPLOY_HOOK_B7: ${{ secrets.DEPLOY_HOOK_B7 }}
+          DEPLOY_HOOK_EG: ${{ secrets.DEPLOY_HOOK_EG }}
+          DEPLOY_HOOK_SEO: ${{ secrets.DEPLOY_HOOK_SEO }}
+          DEPLOY_HOOK_HSH: ${{ secrets.DEPLOY_HOOK_HSH }}
+          DEPLOY_HOOK_HKL: ${{ secrets.DEPLOY_HOOK_HKL }}
+          DEPLOY_HOOK_CFG: ${{ secrets.DEPLOY_HOOK_CFG }}
+        run: node scripts/sentinel.mjs
+      - name: Upload heartbeat artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: daily-sentinel-heartbeat
+          path: logs/daily_sentinel_heartbeat.json
+          retention-days: 30
+      - name: Publish heartbeat to orphan branch (no Vercel redeploy)
+        run: |
+          git config user.name "sentinel-bot"
+          git config user.email "sentinel@toolkitonline.vip"
+          git fetch origin sentinel-heartbeat || true
+          git checkout sentinel-heartbeat 2>/dev/null || git checkout --orphan sentinel-heartbeat
+          git reset --hard 2>/dev/null || true
+          mkdir -p logs
+          cp -f logs/daily_sentinel_heartbeat.json logs/daily_sentinel_heartbeat.json 2>/dev/null || true
+          git add -f logs/daily_sentinel_heartbeat.json
+          git commit -m "sentinel heartbeat $(date -u +%FT%TZ)" || echo "no change"
+          git push -f origin sentinel-heartbeat
+      - name: Fail job if degraded after self-heal
+        if: steps.run.outcome == 'failure'
+        run: |
+          echo "::error::Sentinel reported DEGRADED after self-heal — see heartbeat artifact"
+          exit 1

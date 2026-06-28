@@ -70,3 +70,8 @@ saashub-fill-features.js
 saashub-final-check.js
 saashub-verify-inspect.js
 saashub-verify-submit.js
+
+# Perpetual Sentinel local artifacts (heartbeat goes to orphan branch / CI artifact)
+logs/
+audit_screenshots_2026/
+.env.sentinel
