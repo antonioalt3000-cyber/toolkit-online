@@ -6,7 +6,7 @@ name: Perpetual Sentinel
 # `sentinel-heartbeat` orphan branch (no Vercel redeploy) + an artifact.
 on:
   schedule:
-    - cron: '0 5 * * *'   # 05:00 UTC every day
+    - cron: '0 5,16 * * *'   # double-shift: 05:00 (dawn, pre-traffic) + 16:00 (afternoon peak) UTC
   workflow_dispatch: {}    # manual / forced trigger (dry-run)
 permissions:
   contents: write
