@@ -46,8 +46,8 @@ const APPS = [
   { code: "EG", brand: "EmailGuard", domain: "emailguard.dev" },
   { code: "SEO", brand: "SEOScope", domain: "seoscope.dev" },
   { code: "HSH", brand: "HeaderShield", domain: "headershield.dev" },
-  { code: "HKL", brand: "HookLab", domain: "hooklab.dev" },
-  { code: "CFG", brand: "CardForge", domain: "cardforge.dev" },
+  { code: "HKL", brand: "HookLab", domain: "gethooklab.dev" },     // NB: bare hooklab.dev is a THIRD-PARTY (Fly) — our app is gethooklab.dev
+  { code: "CFG", brand: "CardForge", domain: "getcardforge.dev" }, // NB: bare cardforge.dev is third-party (Cloudflare) — our app is getcardforge.dev
 ];
 
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
