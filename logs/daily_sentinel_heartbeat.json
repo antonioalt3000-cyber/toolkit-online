@@ -1,0 +1,136 @@
+{
+  "status": "ALL_SYSTEMS_NOMINAL",
+  "checkedAt": "2026-06-29T09:22:59.737Z",
+  "summary": "10/10 nominal, 4 with warnings",
+  "down": [],
+  "apps": [
+    {
+      "code": "F1",
+      "brand": "CompliPilot",
+      "ok": true,
+      "hard": [],
+      "warnings": [
+        "health:slow(2214ms)"
+      ],
+      "healthStatus": 200,
+      "healthMs": 2214,
+      "redeemStatus": 400,
+      "redeemCt": "application/json",
+      "certDays": 52
+    },
+    {
+      "code": "F2",
+      "brand": "FixMyWeb",
+      "ok": true,
+      "hard": [],
+      "warnings": [
+        "health:slow(2625ms)"
+      ],
+      "healthStatus": 200,
+      "healthMs": 2625,
+      "redeemStatus": 400,
+      "redeemCt": "application/json",
+      "certDays": 52
+    },
+    {
+      "code": "F3",
+      "brand": "PaymentRescue",
+      "ok": true,
+      "hard": [],
+      "warnings": [],
+      "healthStatus": 200,
+      "healthMs": 737,
+      "redeemStatus": 400,
+      "redeemCt": "application/json",
+      "certDays": 51
+    },
+    {
+      "code": "F4",
+      "brand": "ParseFlow",
+      "ok": true,
+      "hard": [],
+      "warnings": [
+        "health:slow(2312ms)"
+      ],
+      "healthStatus": 200,
+      "healthMs": 2312,
+      "redeemStatus": 400,
+      "redeemCt": "application/json",
+      "certDays": 52
+    },
+    {
+      "code": "B7",
+      "brand": "CaptureAPI",
+      "ok": true,
+      "hard": [],
+      "warnings": [
+        "health:slow(2921ms)"
+      ],
+      "healthStatus": 200,
+      "healthMs": 2921,
+      "redeemStatus": 400,
+      "redeemCt": "application/json",
+      "certDays": 50
+    },
+    {
+      "code": "EG",
+      "brand": "EmailGuard",
+      "ok": true,
+      "hard": [],
+      "warnings": [],
+      "healthStatus": 200,
+      "healthMs": 487,
+      "redeemStatus": 400,
+      "redeemCt": "application/json",
+      "certDays": 84
+    },
+    {
+      "code": "SEO",
+      "brand": "SEOScope",
+      "ok": true,
+      "hard": [],
+      "warnings": [],
+      "healthStatus": 200,
+      "healthMs": 627,
+      "redeemStatus": 400,
+      "redeemCt": "application/json",
+      "certDays": 84
+    },
+    {
+      "code": "HSH",
+      "brand": "HeaderShield",
+      "ok": true,
+      "hard": [],
+      "warnings": [],
+      "healthStatus": 200,
+      "healthMs": 575,
+      "redeemStatus": 400,
+      "redeemCt": "application/json",
+      "certDays": 84
+    },
+    {
+      "code": "HKL",
+      "brand": "HookLab",
+      "ok": true,
+      "hard": [],
+      "warnings": [],
+      "healthStatus": 200,
+      "healthMs": 702,
+      "redeemStatus": 400,
+      "redeemCt": "application/json",
+      "certDays": 84
+    },
+    {
+      "code": "CFG",
+      "brand": "CardForge",
+      "ok": true,
+      "hard": [],
+      "warnings": [],
+      "healthStatus": 200,
+      "healthMs": 588,
+      "redeemStatus": 400,
+      "redeemCt": "application/json",
+      "certDays": 84
+    }
+  ]
+}
