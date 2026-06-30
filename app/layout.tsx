@@ -3,6 +3,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import Script from "next/script";
 import JsonLd from "@/components/JsonLd";
 import WebVitals from "@/components/WebVitals";
+import { Partytown } from "@qwik.dev/partytown/react";
 import { websiteSchema } from "@/lib/schema";
 import "./globals.css";
 
@@ -75,9 +76,12 @@ export default function RootLayout({
             __html: `window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('consent','default',{ad_storage:'denied',ad_user_data:'denied',ad_personalization:'denied',analytics_storage:'denied',functionality_storage:'granted',security_storage:'granted',wait_for_update:500});`,
           }}
         />
-        {/* Google Analytics 4 — loads with consent denied, respects Consent Mode v2 */}
+        {/* Partytown: relocate the GA4 library to a web worker (off main thread).
+            Consent Mode + gtag stay on the main thread; calls are forwarded. */}
+        <Partytown forward={["dataLayer.push", "gtag"]} lib="/partytown/" />
+        {/* Google Analytics 4 — runs in the Partytown worker, respects Consent Mode v2 */}
         <script
-          async
+          type="text/partytown"
           src="https://www.googletagmanager.com/gtag/js?id=G-30KL6W6WJY"
         />
         <script

@@ -18,6 +18,8 @@
     "knip": "knip",
     "analyze": "ANALYZE=true NODE_OPTIONS='--max-old-space-size=4096' next build",
     "deps:check": "npm-check-updates",
+    "partytown": "node scripts/copy-partytown.mjs",
+    "prebuild": "node scripts/copy-partytown.mjs",
     "lh:scan": "npx --yes unlighthouse@latest --site https://toolkitonline.vip"
   },
   "dependencies": {
