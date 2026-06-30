@@ -1,0 +1,39 @@
+name: Security Scan (SAST)
+
+# Free, no-secret static analysis (Semgrep OWASP Top 10 + TypeScript rules).
+# Informational by design: continue-on-error so it never blocks merges/deploys.
+# Runs on PRs (non-master), weekly, and on demand. Make it a required check later
+# once the baseline is clean.
+
+on:
+  pull_request:
+  schedule:
+    - cron: "30 4 * * 1" # Mondays 04:30 UTC
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: sast-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  semgrep:
+    name: Semgrep SAST (informational)
+    runs-on: ubuntu-latest
+    continue-on-error: true
+    timeout-minutes: 15
+    container:
+      image: semgrep/semgrep
+    steps:
+      - uses: actions/checkout@v4
+      - name: Semgrep scan
+        run: semgrep scan --config=p/owasp-top-ten --config=p/typescript --config=p/secrets --sarif --output=semgrep.sarif || true
+      - name: Upload SARIF artifact
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: semgrep-sarif
+          path: semgrep.sarif
+          if-no-files-found: ignore
