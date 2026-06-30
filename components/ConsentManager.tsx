@@ -30,6 +30,9 @@ export function setConsent(state: ConsentState) {
 const GTM_ID = 'GTM-WKG7WCXZ';
 const GA_ID = 'G-30KL6W6WJY';
 const ADSENSE_CLIENT = 'ca-pub-7033623734141087';
+// Microsoft Clarity (heatmaps + session replay). Env-gated: inert until the
+// project id is set in Vercel. Treated as analytics — loads only on analytics consent.
+const CLARITY_ID = process.env.NEXT_PUBLIC_CLARITY_ID;
 
 function injectGTM() {
   if (document.getElementById('gtm-script')) return;
@@ -77,6 +80,22 @@ function injectGA4() {
   }
   gtag('js', new Date());
   gtag('config', GA_ID);
+}
+
+function injectClarity() {
+  if (!CLARITY_ID || document.getElementById('clarity-script')) return;
+  const c = window as unknown as { clarity?: { (...args: unknown[]): void; q?: unknown[] } };
+  if (!c.clarity) {
+    const stub = function (...args: unknown[]) {
+      (stub.q = stub.q || []).push(args);
+    } as { (...args: unknown[]): void; q?: unknown[] };
+    c.clarity = stub;
+  }
+  const script = document.createElement('script');
+  script.id = 'clarity-script';
+  script.async = true;
+  script.src = `https://www.clarity.ms/tag/${CLARITY_ID}`;
+  document.head.appendChild(script);
 }
 
 function injectAdSense() {
@@ -136,6 +155,7 @@ export default function ConsentManager() {
     if (consent.analytics) {
       injectGTM();
       injectGA4();
+      injectClarity();
     }
     if (consent.advertising) {
       injectAdSense();
