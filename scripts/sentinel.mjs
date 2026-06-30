@@ -24,30 +24,40 @@
 // (404/HTML-shell) are NOT self-healed — a redeploy can't fix a routing/env bug.
 // Brevo alert fires only if an app is still HARD-down AFTER self-heal.
 
-import { writeFileSync, mkdirSync } from "node:fs";
-import { dirname, resolve } from "node:path";
-import { fileURLToPath } from "node:url";
-import tls from "node:tls";
+import { writeFileSync, mkdirSync } from 'node:fs';
+import { dirname, resolve } from 'node:path';
+import { fileURLToPath } from 'node:url';
+import tls from 'node:tls';
 
 const HERE = dirname(fileURLToPath(import.meta.url));
-const HEARTBEAT = resolve(HERE, "..", "logs", "daily_sentinel_heartbeat.json");
+const HEARTBEAT = resolve(HERE, '..', 'logs', 'daily_sentinel_heartbeat.json');
 const LATENCY_WARN_MS = Number(process.env.LATENCY_WARN_MS || 1500);
 const PROBE_TIMEOUT_MS = 12000;
 const SELF_HEAL_WAIT_MS = Number(process.env.SELF_HEAL_WAIT_MS || 90000);
 const BREVO = process.env.BREVO_API_KEY;
-const ALERT_TO = process.env.ALERT_EMAIL || "antonio.alt3000@gmail.com";
+const ALERT_TO = process.env.ALERT_EMAIL || 'antonio.alt3000@gmail.com';
 
 const APPS = [
-  { code: "F1", brand: "CompliPilot", domain: "complipilot.dev" },
-  { code: "F2", brand: "FixMyWeb", domain: "fixmyweb.dev" },
-  { code: "F3", brand: "PaymentRescue", domain: "paymentrescue.dev" },
-  { code: "F4", brand: "ParseFlow", domain: "parseflow.dev" },
-  { code: "B7", brand: "CaptureAPI", domain: "captureapi.dev" },
-  { code: "EG", brand: "EmailGuard", domain: "emailguard.dev" },
-  { code: "SEO", brand: "SEOScope", domain: "seoscope.dev" },
-  { code: "HSH", brand: "HeaderShield", domain: "headershield.dev" },
-  { code: "HKL", brand: "HookLab", domain: "gethooklab.dev" },     // NB: bare hooklab.dev is a THIRD-PARTY (Fly) — our app is gethooklab.dev
-  { code: "CFG", brand: "CardForge", domain: "getcardforge.dev" }, // NB: bare cardforge.dev is third-party (Cloudflare) — our app is getcardforge.dev
+  { code: 'F1', brand: 'CompliPilot', domain: 'complipilot.dev' },
+  { code: 'F2', brand: 'FixMyWeb', domain: 'fixmyweb.dev' },
+  { code: 'F3', brand: 'PaymentRescue', domain: 'paymentrescue.dev' },
+  { code: 'F4', brand: 'ParseFlow', domain: 'parseflow.dev' },
+  { code: 'B7', brand: 'CaptureAPI', domain: 'captureapi.dev' },
+  // The 5 round-2 SaaS also get a DEEP auth-gate probe (`deep`): a GET to a
+  // premium /api/v1 route with NO key MUST return 401. A 200 there = an auth
+  // bypass (HARD failure). Anything else (403 BotID / 404 / transient) is only a
+  // soft warning. This consolidates the per-repo watchdog coverage into the free
+  // central Sentinel (the private-repo watchdogs are GitHub-Actions-billing-gated).
+  { code: 'EG', brand: 'EmailGuard', domain: 'emailguard.dev', deep: '/api/v1/monitors' },
+  { code: 'SEO', brand: 'SEOScope', domain: 'seoscope.dev', deep: '/api/v1/monitors' },
+  { code: 'HSH', brand: 'HeaderShield', domain: 'headershield.dev', deep: '/api/v1/monitors' },
+  {
+    code: 'HKL',
+    brand: 'HookLab',
+    domain: 'gethooklab.dev',
+    deep: '/api/v1/endpoints/healthprobe/stats',
+  }, // NB: bare hooklab.dev is a THIRD-PARTY (Fly) — our app is gethooklab.dev
+  { code: 'CFG', brand: 'CardForge', domain: 'getcardforge.dev', deep: '/api/v1/cards/history' }, // NB: bare cardforge.dev is third-party (Cloudflare) — our app is getcardforge.dev
 ];
 
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
@@ -55,11 +65,28 @@ const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 async function timedFetch(url, init) {
   const t0 = performance.now();
   try {
-    const res = await fetch(url, { ...init, signal: AbortSignal.timeout(PROBE_TIMEOUT_MS), redirect: "manual" });
+    const res = await fetch(url, {
+      ...init,
+      signal: AbortSignal.timeout(PROBE_TIMEOUT_MS),
+      redirect: 'manual',
+    });
     const body = await res.text();
-    return { ok: true, status: res.status, ct: res.headers.get("content-type") || "", body, ms: Math.round(performance.now() - t0) };
+    return {
+      ok: true,
+      status: res.status,
+      ct: res.headers.get('content-type') || '',
+      body,
+      ms: Math.round(performance.now() - t0),
+    };
   } catch (e) {
-    return { ok: false, status: 0, ct: "", body: "", ms: Math.round(performance.now() - t0), err: e?.name === "TimeoutError" ? "timeout" : (e?.message || "network") };
+    return {
+      ok: false,
+      status: 0,
+      ct: '',
+      body: '',
+      ms: Math.round(performance.now() - t0),
+      err: e?.name === 'TimeoutError' ? 'timeout' : e?.message || 'network',
+    };
   }
 }
 
@@ -67,38 +94,68 @@ function certDaysLeft(host) {
   return new Promise((res) => {
     try {
       const sock = tls.connect({ host, port: 443, servername: host, timeout: 8000 }, () => {
-        const c = sock.getPeerCertificate(); sock.end();
+        const c = sock.getPeerCertificate();
+        sock.end();
         res(c && c.valid_to ? Math.floor((Date.parse(c.valid_to) - Date.now()) / 86400000) : null);
       });
-      sock.on("error", () => res(null));
-      sock.on("timeout", () => { sock.destroy(); res(null); });
-    } catch { res(null); }
+      sock.on('error', () => res(null));
+      sock.on('timeout', () => {
+        sock.destroy();
+        res(null);
+      });
+    } catch {
+      res(null);
+    }
   });
 }
 
-const isHtml = (ct, body) => ct.includes("text/html") || /^\s*<!doctype html/i.test(body);
+const isHtml = (ct, body) => ct.includes('text/html') || /^\s*<!doctype html/i.test(body);
 
 async function probe(app) {
   const base = `https://${app.domain}`;
-  const hard = [];      // structural/transient failures -> DEGRADED
-  const warnings = [];  // soft (slow / cert soon) -> stays NOMINAL
+  const hard = []; // structural/transient failures -> DEGRADED
+  const warnings = []; // soft (slow / cert soon) -> stays NOMINAL
   let transient = false;
 
-  const health = await timedFetch(base + "/api/health", { method: "GET" });
-  if (!health.ok) { hard.push(`health:${health.err}`); transient = true; }
-  else {
-    if (health.status >= 500) { hard.push(`health:HTTP${health.status}`); transient = true; }
-    else if (health.status >= 300 || isHtml(health.ct, health.body)) hard.push(`health:not-json(${health.status},${health.ct.split(";")[0] || "?"})`);
+  const health = await timedFetch(base + '/api/health', { method: 'GET' });
+  if (!health.ok) {
+    hard.push(`health:${health.err}`);
+    transient = true;
+  } else {
+    if (health.status >= 500) {
+      hard.push(`health:HTTP${health.status}`);
+      transient = true;
+    } else if (health.status >= 300 || isHtml(health.ct, health.body))
+      hard.push(`health:not-json(${health.status},${health.ct.split(';')[0] || '?'})`);
     if (health.ms > LATENCY_WARN_MS) warnings.push(`health:slow(${health.ms}ms)`);
   }
 
-  const core = await timedFetch(base + "/api/redeem", { method: "POST", headers: { "content-type": "application/json" }, body: "{}" });
-  if (!core.ok) { hard.push(`redeem:${core.err}`); transient = true; }
-  else if (core.status === 404) hard.push("redeem:DEAD-404");
+  const core = await timedFetch(base + '/api/redeem', {
+    method: 'POST',
+    headers: { 'content-type': 'application/json' },
+    body: '{}',
+  });
+  if (!core.ok) {
+    hard.push(`redeem:${core.err}`);
+    transient = true;
+  } else if (core.status === 404) hard.push('redeem:DEAD-404');
   else if (isHtml(core.ct, core.body)) hard.push(`redeem:DEAD-html-shell(${core.status})`);
-  else if (core.status >= 500) { hard.push(`redeem:HTTP${core.status}`); transient = true; }
-  else if (!(core.status >= 400 && core.status < 500)) hard.push(`redeem:unexpected(${core.status})`);
+  else if (core.status >= 500) {
+    hard.push(`redeem:HTTP${core.status}`);
+    transient = true;
+  } else if (!(core.status >= 400 && core.status < 500))
+    hard.push(`redeem:unexpected(${core.status})`);
   if (core.ok && core.ms > LATENCY_WARN_MS) warnings.push(`redeem:slow(${core.ms}ms)`);
+
+  // DEEP auth-gate probe (round-2 SaaS only): an unauthenticated GET to a premium
+  // /api/v1 route MUST be 401. A 200 = auth bypass (HARD). 403/404/transient =
+  // soft warning (could be BotID / route variant) so a guess never false-pages.
+  if (app.deep) {
+    const dp = await timedFetch(base + app.deep, { method: 'GET' });
+    if (!dp.ok) warnings.push(`deep:${dp.err}`);
+    else if (dp.status === 200) hard.push(`deep:AUTH-BYPASS(${app.deep}→200,expected401)`);
+    else if (dp.status !== 401) warnings.push(`deep:unexpected(${dp.status}@${app.deep})`);
+  }
 
   const certDays = await certDaysLeft(app.domain);
   if (certDays != null) {
@@ -107,33 +164,60 @@ async function probe(app) {
   }
 
   return {
-    code: app.code, brand: app.brand, domain: app.domain,
-    ok: hard.length === 0, transient, hard, warnings,
-    detail: { healthStatus: health.status, healthMs: health.ms, redeemStatus: core.status, redeemCt: (core.ct || "").split(";")[0], certDays },
+    code: app.code,
+    brand: app.brand,
+    domain: app.domain,
+    ok: hard.length === 0,
+    transient,
+    hard,
+    warnings,
+    detail: {
+      healthStatus: health.status,
+      healthMs: health.ms,
+      redeemStatus: core.status,
+      redeemCt: (core.ct || '').split(';')[0],
+      certDays,
+    },
   };
 }
 
 async function selfHeal(app) {
   const hook = process.env[`DEPLOY_HOOK_${app.code}`] || process.env.DEPLOY_HOOK_URL;
-  if (!hook) return { attempted: false, healed: false, note: "no deploy hook configured" };
-  try { await fetch(hook, { method: "POST", signal: AbortSignal.timeout(10000) }); }
-  catch (e) { return { attempted: true, healed: false, note: "hook POST failed: " + (e?.message || "err") }; }
+  if (!hook) return { attempted: false, healed: false, note: 'no deploy hook configured' };
+  try {
+    await fetch(hook, { method: 'POST', signal: AbortSignal.timeout(10000) });
+  } catch (e) {
+    return { attempted: true, healed: false, note: 'hook POST failed: ' + (e?.message || 'err') };
+  }
   await sleep(SELF_HEAL_WAIT_MS);
   const re = await probe(app);
-  return { attempted: true, healed: re.ok, note: re.ok ? "redeploy recovered" : "still down: " + re.hard.join(",") };
+  return {
+    attempted: true,
+    healed: re.ok,
+    note: re.ok ? 'redeploy recovered' : 'still down: ' + re.hard.join(','),
+  };
 }
 
 async function alert(down) {
   if (!BREVO) return;
-  const lines = down.map((a) => `- ${a.brand} (${a.domain}): ${a.hard.join("; ")}${a.heal ? " | self-heal: " + a.heal.note : ""}`).join("\n");
+  const lines = down
+    .map(
+      (a) =>
+        `- ${a.brand} (${a.domain}): ${a.hard.join('; ')}${a.heal ? ' | self-heal: ' + a.heal.note : ''}`
+    )
+    .join('\n');
   try {
-    await fetch("https://api.brevo.com/v3/smtp/email", {
-      method: "POST", headers: { "api-key": BREVO, "content-type": "application/json" },
+    await fetch('https://api.brevo.com/v3/smtp/email', {
+      method: 'POST',
+      headers: { 'api-key': BREVO, 'content-type': 'application/json' },
       body: JSON.stringify({
-        sender: { name: "Perpetual Sentinel", email: "hello@toolkitonline.vip" },
+        sender: { name: 'Perpetual Sentinel', email: 'hello@toolkitonline.vip' },
         to: [{ email: ALERT_TO }],
         subject: `[Sentinel] ${down.length} SaaS DOWN after self-heal`,
-        textContent: "The Perpetual Sentinel could NOT auto-heal these apps:\n\n" + lines + "\n\n(Heartbeat: logs/daily_sentinel_heartbeat.json)",
+        textContent:
+          'The Perpetual Sentinel could NOT auto-heal these apps:\n\n' +
+          lines +
+          '\n\n(Heartbeat: logs/daily_sentinel_heartbeat.json)',
       }),
     });
   } catch {}
@@ -146,25 +230,45 @@ async function alert(down) {
   for (const r of results) {
     if (!r.ok && r.transient) {
       r.heal = await selfHeal(APPS.find((a) => a.code === r.code));
-      if (r.heal.healed) { r.ok = true; r.hard = []; r.warnings.push("(auto-healed via redeploy)"); }
+      if (r.heal.healed) {
+        r.ok = true;
+        r.hard = [];
+        r.warnings.push('(auto-healed via redeploy)');
+      }
     }
   }
 
   const down = results.filter((r) => !r.ok);
   const warned = results.filter((r) => r.ok && r.warnings.length);
-  const status = down.length === 0 ? "ALL_SYSTEMS_NOMINAL" : "DEGRADED";
+  const status = down.length === 0 ? 'ALL_SYSTEMS_NOMINAL' : 'DEGRADED';
   const heartbeat = {
-    status, checkedAt,
-    summary: `${results.length - down.length}/${results.length} nominal` + (warned.length ? `, ${warned.length} with warnings` : ""),
+    status,
+    checkedAt,
+    summary:
+      `${results.length - down.length}/${results.length} nominal` +
+      (warned.length ? `, ${warned.length} with warnings` : ''),
     down: down.map((r) => ({ code: r.code, brand: r.brand, hard: r.hard, heal: r.heal?.note })),
-    apps: results.map((r) => ({ code: r.code, brand: r.brand, ok: r.ok, hard: r.hard, warnings: r.warnings, ...r.detail })),
+    apps: results.map((r) => ({
+      code: r.code,
+      brand: r.brand,
+      ok: r.ok,
+      hard: r.hard,
+      warnings: r.warnings,
+      ...r.detail,
+    })),
   };
   mkdirSync(dirname(HEARTBEAT), { recursive: true });
   writeFileSync(HEARTBEAT, JSON.stringify(heartbeat, null, 2));
 
   console.log(`Sentinel ${status} — ${heartbeat.summary} @ ${checkedAt}`);
-  for (const r of results) console.log(`  ${r.ok ? "✓" : "✗"} ${r.code} ${r.brand}: ${r.ok ? (r.warnings.length ? "nominal (" + r.warnings.join(",") + ")" : "nominal") : "DOWN " + r.hard.join(", ")}`);
+  for (const r of results)
+    console.log(
+      `  ${r.ok ? '✓' : '✗'} ${r.code} ${r.brand}: ${r.ok ? (r.warnings.length ? 'nominal (' + r.warnings.join(',') + ')' : 'nominal') : 'DOWN ' + r.hard.join(', ')}`
+    );
 
-  if (down.length) { await alert(down); process.exit(1); }
+  if (down.length) {
+    await alert(down);
+    process.exit(1);
+  }
   process.exit(0);
 })();

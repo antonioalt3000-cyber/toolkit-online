@@ -7,8 +7,8 @@ name: Weekly Quality Check
 
 on:
   schedule:
-    - cron: '0 6 * * 0'   # 06:00 UTC every Sunday
-  workflow_dispatch:        # Manual trigger
+    - cron: '0 6 * * 0' # 06:00 UTC every Sunday
+  workflow_dispatch: # Manual trigger
 
 permissions:
   contents: write
@@ -32,7 +32,7 @@ jobs:
           cache: 'npm'
 
       - name: Install dependencies
-        run: npm ci
+        run: npm install --no-audit --no-fund
 
       - name: ESLint auto-fix
         id: autofix
@@ -66,10 +66,10 @@ jobs:
       - name: Send quality report email
         env:
           BREVO_API_KEY: ${{ secrets.BREVO_API_KEY }}
-          OWNER_EMAIL:   antonio.alt3000@gmail.com
-          LINT_EXIT:     ${{ steps.lint.outputs.exit_code }}
-          BUILD_EXIT:    ${{ steps.build.outputs.exit_code }}
-          RUN_URL:       ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+          OWNER_EMAIL: antonio.alt3000@gmail.com
+          LINT_EXIT: ${{ steps.lint.outputs.exit_code }}
+          BUILD_EXIT: ${{ steps.build.outputs.exit_code }}
+          RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
         run: |
           export LINT_LINES=$(cat lint-output.txt   2>/dev/null | head -50 | sed 's/\x1b\[[0-9;]*m//g')
           export BUILD_LINES=$(cat build-output.txt 2>/dev/null | tail -30 | sed 's/\x1b\[[0-9;]*m//g')
