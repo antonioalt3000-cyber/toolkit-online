@@ -1,6 +1,9 @@
 import type { Metadata, Viewport } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import Script from "next/script";
+import JsonLd from "@/components/JsonLd";
+import WebVitals from "@/components/WebVitals";
+import { websiteSchema } from "@/lib/schema";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -82,25 +85,8 @@ export default function RootLayout({
             __html: `gtag('js', new Date());gtag('config', 'G-30KL6W6WJY');`,
           }}
         />
-        {/* Google AdSense — loads with consent denied, respects Consent Mode v2 */}
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{
-            __html: JSON.stringify({
-              "@context": "https://schema.org",
-              "@type": "WebSite",
-              name: "ToolKit Online",
-              url: "https://toolkitonline.vip",
-              description: "Free online tools for everyday tasks",
-              potentialAction: {
-                "@type": "SearchAction",
-                target:
-                  "https://toolkitonline.vip/en?q={search_term_string}",
-                "query-input": "required name=search_term_string",
-              },
-            }),
-          }}
-        />
+        {/* WebSite structured data (type-safe builder, see lib/schema.ts) */}
+        <JsonLd data={websiteSchema()} />
       </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased bg-gray-50 min-h-screen`}
@@ -111,6 +97,7 @@ export default function RootLayout({
           crossOrigin="anonymous"
           strategy="afterInteractive"
         />
+        <WebVitals />
         {children}
       </body>
     </html>
