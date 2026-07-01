@@ -2,7 +2,7 @@
 
 // ─── DevToolsmith Functional Smoke Monitor ───────────────────────────────────
 // Sibling of uptime-check.js. Uptime answers "is the site up?"; THIS answers
-// "can a customer actually USE the product?". For each of the 5 SaaS it runs:
+// "can a customer actually USE the product?". For each of the 10 SaaS it runs:
 //   1. Core service via API key  (F1/F4/B7): a lightweight authenticated GET
 //      with a long-lived monitor key must return 200 (proves auth + engine).
 //   2. Redeem-funnel liveness    (all 5): POST /api/redeem with a deliberately
@@ -25,6 +25,17 @@ const CORE = {
   F4: { path: '/api/v1/dashboard', envKey: 'MONITOR_F4_KEY' },
   B7: { path: '/api/v1/usage', envKey: 'MONITOR_B7_KEY' },
 };
+// Secretless core-route liveness for the round-2 SaaS (no monitor key needed):
+// an UNAUTHENTICATED GET to a premium /api/v1 route MUST return 401 — proving the
+// route is alive AND the auth gate holds. 200 there = auth bypass; other = down.
+// Mirrors the central Sentinel's deep-probe so no long-lived key lands in CI.
+const GATE = {
+  EG: '/api/v1/monitors',
+  SEO: '/api/v1/monitors',
+  HSH: '/api/v1/monitors',
+  HKL: '/api/v1/endpoints/healthprobe/stats',
+  CFG: '/api/v1/cards/history',
+};
 const TIMEOUT_MS = 20000;
 
 function request(method, url, { headers = {}, body } = {}) {
@@ -40,18 +51,27 @@ function request(method, url, { headers = {}, body } = {}) {
         port: 443,
         headers: {
           'User-Agent': 'DevToolsmith-SmokeMonitor/1.0',
-          ...(data ? { 'Content-Type': 'application/json', 'Content-Length': Buffer.byteLength(data) } : {}),
+          ...(data
+            ? { 'Content-Type': 'application/json', 'Content-Length': Buffer.byteLength(data) }
+            : {}),
           ...headers,
         },
       },
       (res) => {
         let chunks = '';
-        res.on('data', (c) => { if (chunks.length < 500) chunks += c; });
-        res.on('end', () => resolve({ status: res.statusCode, ms: Date.now() - startMs, body: chunks.slice(0, 300) }));
+        res.on('data', (c) => {
+          if (chunks.length < 500) chunks += c;
+        });
+        res.on('end', () =>
+          resolve({ status: res.statusCode, ms: Date.now() - startMs, body: chunks.slice(0, 300) })
+        );
       }
     );
     req.on('error', (err) => resolve({ status: 0, ms: Date.now() - startMs, error: err.message }));
-    req.setTimeout(TIMEOUT_MS, () => { req.destroy(); resolve({ status: 0, ms: TIMEOUT_MS, error: `Timeout (${TIMEOUT_MS / 1000}s)` }); });
+    req.setTimeout(TIMEOUT_MS, () => {
+      req.destroy();
+      resolve({ status: 0, ms: TIMEOUT_MS, error: `Timeout (${TIMEOUT_MS / 1000}s)` });
+    });
     if (data) req.write(data);
     req.end();
   });
@@ -68,38 +88,62 @@ async function checkSaaS(site) {
       checks.push({ name: 'core', ok: false, detail: `missing env ${core.envKey}` });
     } else {
       const r = await request('GET', site.url + core.path, { headers: { 'x-api-key': key } });
-      checks.push({ name: `core GET ${core.path}`, ok: r.status === 200, detail: `${r.status || r.error} (${r.ms}ms)` });
+      checks.push({
+        name: `core GET ${core.path}`,
+        ok: r.status === 200,
+        detail: `${r.status || r.error} (${r.ms}ms)`,
+      });
     }
   }
 
-  // 2. Redeem-funnel liveness (all 5): invalid coupon must be a clean 400
+  // 1b. Secretless auth-gate liveness (round-2 SaaS): premium route must 401.
+  const gate = GATE[site.tool];
+  if (gate) {
+    const g = await request('GET', site.url + gate);
+    checks.push({
+      name: `auth-gate GET ${gate} (→401)`,
+      ok: g.status === 401,
+      detail: `${g.status || g.error} (${g.ms}ms)`,
+    });
+  }
+
+  // 2. Redeem-funnel liveness (all): invalid coupon must be a clean 400
   const r = await request('POST', site.url + '/api/redeem', {
     body: { email: 'monitor@devtoolsmith.invalid', coupon: 'MONITOR-LIVENESS-0000' },
   });
-  checks.push({ name: 'redeem funnel (invalid→400)', ok: r.status === 400, detail: `${r.status || r.error} (${r.ms}ms)` });
+  checks.push({
+    name: 'redeem funnel (invalid→400)',
+    ok: r.status === 400,
+    detail: `${r.status || r.error} (${r.ms}ms)`,
+  });
 
   const ok = checks.every((c) => c.ok);
   return { name: site.name, tool: site.tool, url: site.url, ok, checks };
 }
 
 function buildHtml(results, allGreen, dateLabel) {
-  const rows = results.map((s) => {
-    const badge = s.ok ? '🟢' : '🔴';
-    const lines = s.checks
-      .map((c) => `<div style="margin-left:14px;font-size:13px;color:${c.ok ? '#15803d' : '#b91c1c'}">${c.ok ? '✓' : '✗'} ${c.name} — ${c.detail}</div>`)
-      .join('');
-    return `<tr><td style="padding:8px 10px;border-bottom:1px solid #eee">
+  const rows = results
+    .map((s) => {
+      const badge = s.ok ? '🟢' : '🔴';
+      const lines = s.checks
+        .map(
+          (c) =>
+            `<div style="margin-left:14px;font-size:13px;color:${c.ok ? '#15803d' : '#b91c1c'}">${c.ok ? '✓' : '✗'} ${c.name} — ${c.detail}</div>`
+        )
+        .join('');
+      return `<tr><td style="padding:8px 10px;border-bottom:1px solid #eee">
       <strong>${badge} ${s.name}</strong> <span style="color:#888;font-size:12px">(${s.tool})</span>
       ${lines}</td></tr>`;
-  }).join('');
+    })
+    .join('');
   const headline = allGreen
-    ? '🟢 Tutti e 5 i SaaS sono operativi'
+    ? `🟢 Tutti e ${results.length} i SaaS sono operativi`
     : `🔴 ${results.filter((r) => !r.ok).length} SaaS con problemi — controlla i dettagli`;
   return `<div style="font-family:system-ui,Arial,sans-serif;max-width:560px">
     <h2 style="margin:0 0 4px">${headline}</h2>
     <p style="color:#666;margin:0 0 16px;font-size:13px">Smoke funzionale giornaliero — ${dateLabel}</p>
     <table style="width:100%;border-collapse:collapse;border:1px solid #eee;border-radius:8px;overflow:hidden">${rows}</table>
-    <p style="color:#999;font-size:11px;margin-top:16px">Verifica: chiamata core autenticata (F1/F4/B7) + liveness del funnel redeem (5/5). Uptime separato gira ogni 5 min. Reagisci solo se questa mail è rossa.</p>
+    <p style="color:#999;font-size:11px;margin-top:16px">Verifica: core autenticato (F1/F4/B7) o auth-gate 401 (EG/SEO/HSH/HKL/CFG) + liveness del funnel redeem (10/10). Uptime separato gira ogni 5 min. Reagisci solo se questa mail è rossa.</p>
   </div>`;
 }
 
@@ -114,8 +158,8 @@ function summarizeSmoke(results) {
 
 function smokeSubject(allGreen, failingTools, dateLabel) {
   return allGreen
-    ? `✅ Monitor 5 SaaS — tutti operativi (${dateLabel})`
-    : `🔴 Monitor 5 SaaS — problema: ${failingTools.join(', ')} (${dateLabel})`;
+    ? `✅ Monitor SaaS — tutti operativi (${dateLabel})`
+    : `🔴 Monitor SaaS — problema: ${failingTools.join(', ')} (${dateLabel})`;
 }
 
 async function main() {
@@ -133,7 +177,12 @@ async function main() {
   });
 
   if (process.env.BREVO_API_KEY) {
-    await sendAndLog({ to: [{ email: OWNER.email, name: OWNER.name }], subject, htmlContent: buildHtml(results, allGreen, dateLabel), sender: OWNER.sender });
+    await sendAndLog({
+      to: [{ email: OWNER.email, name: OWNER.name }],
+      subject,
+      htmlContent: buildHtml(results, allGreen, dateLabel),
+      sender: OWNER.sender,
+    });
     console.log(`Digest sent to ${OWNER.email}: ${subject}`);
   } else {
     console.log('BREVO_API_KEY not set — skipping email (local dry-run).');
@@ -146,5 +195,8 @@ async function main() {
 module.exports = { summarizeSmoke, smokeSubject, buildHtml };
 
 if (require.main === module) {
-  main().catch((e) => { console.error('saas-smoke fatal:', e); process.exit(2); });
+  main().catch((e) => {
+    console.error('saas-smoke fatal:', e);
+    process.exit(2);
+  });
 }

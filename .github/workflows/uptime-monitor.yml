@@ -1,18 +1,18 @@
 name: Uptime Monitor
 
 # Runs every 5 minutes, 24/7, with PC off.
-# Checks all 5 DevToolsmith sites and sends a Brevo alert email if any are down.
+# Checks all 10 DevToolsmith sites and sends a Brevo alert email if any are down.
 # State (prev status) is persisted in scripts/automation/.prev-status and only
 # committed when it changes (so the repo gets at most a couple of commits per
 # outage/recovery cycle, not one every 5 minutes).
 
 on:
   schedule:
-    - cron: '*/5 * * * *'   # Every 5 minutes
-  workflow_dispatch:          # Allow manual trigger from GitHub UI
+    - cron: '*/5 * * * *' # Every 5 minutes
+  workflow_dispatch: # Allow manual trigger from GitHub UI
 
 permissions:
-  contents: write   # Required to commit the .prev-status file on state change
+  contents: write # Required to commit the .prev-status file on state change
 
 concurrency:
   group: uptime-monitor

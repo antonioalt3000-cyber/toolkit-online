@@ -2,12 +2,20 @@ import { describe, it, expect } from 'vitest';
 import smoke from './saas-smoke.js';
 
 const { summarizeSmoke, smokeSubject, buildHtml } = smoke as {
-  summarizeSmoke: (r: Array<{ tool: string; ok: boolean }>) => { allGreen: boolean; failingTools: string[] };
+  summarizeSmoke: (r: Array<{ tool: string; ok: boolean }>) => {
+    allGreen: boolean;
+    failingTools: string[];
+  };
   smokeSubject: (allGreen: boolean, failing: string[], date: string) => string;
   buildHtml: (r: unknown[], allGreen: boolean, date: string) => string;
 };
 
-const res = (tool: string, ok: boolean) => ({ name: tool, tool, ok, checks: [{ name: 'core', ok, detail: ok ? '200' : '500' }] });
+const res = (tool: string, ok: boolean) => ({
+  name: tool,
+  tool,
+  ok,
+  checks: [{ name: 'core', ok, detail: ok ? '200' : '500' }],
+});
 
 describe('summarizeSmoke — daily functional monitor aggregation', () => {
   it('all green', () => {
@@ -35,7 +43,7 @@ describe('smokeSubject — green vs red subject line', () => {
 describe('buildHtml — digest body markers', () => {
   it('green headline when all ok', () => {
     const html = buildHtml([res('F1', true)], true, '12/06/2026 UTC');
-    expect(html).toContain('Tutti e 5 i SaaS sono operativi');
+    expect(html).toMatch(/Tutti e \d+ i SaaS sono operativi/);
     expect(html).toContain('🟢 F1');
   });
   it('red headline + red row when a SaaS fails', () => {
