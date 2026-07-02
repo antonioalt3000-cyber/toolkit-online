@@ -1,0 +1,62 @@
+name: Ouroboros Network Scan
+# Weekly deep self-audit of the 17-property network. Our own SaaS
+# (HeaderShield / SEOScope / CompliPilot / CaptureAPI) scan every domain
+# internally-for-free via God-Mode creator keys. Read-only against the targets.
+# Diffs each result vs last week's baseline (the ouroboros-heartbeat orphan
+# branch) and emails ONE weekly digest — red only on a real regression.
+# Runs free on the public repo's GitHub Actions.
+on:
+  schedule:
+    - cron: '0 6 * * 1' # Mondays 06:00 UTC (post-weekend, start of week)
+  workflow_dispatch: {} # manual / forced trigger
+permissions:
+  contents: write # push the baseline to the orphan branch
+concurrency:
+  group: ouroboros
+  cancel-in-progress: false
+jobs:
+  scan:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - name: Fetch baseline (previous scan) from orphan branch
+        run: git fetch origin ouroboros-heartbeat || true
+      - name: Run Ouroboros
+        id: run
+        continue-on-error: true # a REGRESSION result must still publish the baseline
+        env:
+          BREVO_API_KEY: ${{ secrets.BREVO_API_KEY }}
+          ALERT_EMAIL: ${{ secrets.ALERT_EMAIL }}
+          CREATOR_HSH_KEY: ${{ secrets.CREATOR_HSH_KEY }}
+          CREATOR_SEO_KEY: ${{ secrets.CREATOR_SEO_KEY }}
+          CREATOR_F1_KEY: ${{ secrets.CREATOR_F1_KEY }}
+          CREATOR_B7_KEY: ${{ secrets.CREATOR_B7_KEY }}
+        run: node scripts/ouroboros.mjs
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: network-health
+          path: |
+            logs/network_health.json
+            logs/network_health.html
+          retention-days: 90
+      - name: Publish baseline + dashboard to orphan branch (no Vercel redeploy)
+        run: |
+          git config user.name "ouroboros-bot"
+          git config user.email "ouroboros@toolkitonline.vip"
+          git fetch origin ouroboros-heartbeat || true
+          git checkout ouroboros-heartbeat 2>/dev/null || git checkout --orphan ouroboros-heartbeat
+          git reset --hard 2>/dev/null || true
+          mkdir -p logs
+          git add -f logs/network_health.json logs/network_health.html
+          git commit -m "ouroboros scan $(date -u +%FT%TZ)" || echo "no change"
+          git push -f origin ouroboros-heartbeat
+      - name: Fail job if regression
+        if: steps.run.outcome == 'failure'
+        run: |
+          echo "::error::Ouroboros detected a network quality regression — see the network-health artifact"
+          exit 1

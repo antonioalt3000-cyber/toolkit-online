@@ -1,40 +1,62 @@
 'use strict';
 
 // ─── DevToolsmith Uptime Monitor ─────────────────────────────────────────────
-// Checks all 5 SaaS sites. Sends Brevo alert email if any are DOWN.
+// Checks all 17 network properties (10 SaaS + 7 empire domains) from the
+// Ouroboros registry. Sends a Brevo alert email if any are DOWN.
 // Runs every 5 minutes via GitHub Actions. Zero npm dependencies.
 
-const https  = require('https');
-const { SITES, OWNER } = require('./config');
-const { sendAndLog }   = require('./brevo');
+const https = require('https');
+const { OWNER } = require('./config');
+const { NETWORK } = require('./network');
+const { sendAndLog } = require('./brevo');
 
 // ── HTTP check with timeout ───────────────────────────────────────────────────
 function checkSite(site) {
   return new Promise((resolve) => {
     const startMs = Date.now();
-    const parsed  = new URL(site.url);
+    const parsed = new URL(site.url);
 
     const req = https.get(
       {
         hostname: parsed.hostname,
-        path:     parsed.pathname || '/',
-        port:     443,
-        headers:  { 'User-Agent': 'DevToolsmith-UptimeMonitor/1.0' },
+        path: parsed.pathname || '/',
+        port: 443,
+        headers: { 'User-Agent': 'DevToolsmith-UptimeMonitor/1.0' },
       },
       (res) => {
         const ms = Date.now() - startMs;
         res.resume(); // consume body so connection closes
-        resolve({ name: site.name, url: site.url, status: res.statusCode, ms, ok: res.statusCode < 400 });
+        resolve({
+          name: site.name,
+          url: site.url,
+          status: res.statusCode,
+          ms,
+          ok: res.statusCode < 400,
+        });
       }
     );
 
     req.on('error', (err) => {
-      resolve({ name: site.name, url: site.url, status: 0, ms: Date.now() - startMs, ok: false, error: err.message });
+      resolve({
+        name: site.name,
+        url: site.url,
+        status: 0,
+        ms: Date.now() - startMs,
+        ok: false,
+        error: err.message,
+      });
     });
 
     req.setTimeout(12000, () => {
       req.destroy();
-      resolve({ name: site.name, url: site.url, status: 0, ms: 12000, ok: false, error: 'Timeout (12s)' });
+      resolve({
+        name: site.name,
+        url: site.url,
+        status: 0,
+        ms: 12000,
+        ok: false,
+        error: 'Timeout (12s)',
+      });
     });
   });
 }
@@ -71,17 +93,21 @@ function buildAlertHtml(down, up, timestamp) {
             <th style="padding:10px 14px;text-align:left">Details</th>
           </tr>
         </thead>
-        <tbody>${down.map(r => row(r, '#dc2626')).join('')}</tbody>
+        <tbody>${down.map((r) => row(r, '#dc2626')).join('')}</tbody>
       </table>
 
-      ${up.length > 0 ? `
+      ${
+        up.length > 0
+          ? `
       <p style="margin:20px 0 8px;font-size:14px;color:#374151">
         <strong>✅ Operational sites:</strong>
       </p>
       <table width="100%" cellpadding="0" cellspacing="0"
              style="border-collapse:collapse;font-size:14px;border:1px solid #bbf7d0">
-        <tbody>${up.map(r => row(r, '#16a34a')).join('')}</tbody>
-      </table>` : ''}
+        <tbody>${up.map((r) => row(r, '#16a34a')).join('')}</tbody>
+      </table>`
+          : ''
+      }
 
       <p style="margin:24px 0 0;font-size:12px;color:#9ca3af">
         DevToolsmith Uptime Monitor · GitHub Actions ·
@@ -94,13 +120,17 @@ function buildAlertHtml(down, up, timestamp) {
 
 // ── Build recovery email (all OK after being down) ────────────────────────────
 function buildRecoveryHtml(results, timestamp) {
-  const rows = results.map(r => `
+  const rows = results
+    .map(
+      (r) => `
     <tr>
       <td style="padding:10px 14px;color:#16a34a;font-weight:bold">${r.name}</td>
       <td style="padding:10px 14px"><a href="${r.url}" style="color:#3b82f6">${r.url}</a></td>
       <td style="padding:10px 14px;font-family:monospace">${r.status}</td>
       <td style="padding:10px 14px;font-family:monospace">${r.ms}ms</td>
-    </tr>`).join('');
+    </tr>`
+    )
+    .join('');
 
   return `
   <div style="font-family:system-ui,sans-serif;max-width:700px;margin:0 auto">
@@ -133,8 +163,8 @@ function buildRecoveryHtml(results, timestamp) {
 //   up    + prev=down  → 'recovery'   (email recovery; exit 0)
 //   up    + prev!=down → 'none'       (all good; exit 0)
 function decideUptimeAction(results, prevStatus) {
-  const down = results.filter(r => !r.ok);
-  const up = results.filter(r => r.ok);
+  const down = results.filter((r) => !r.ok);
+  const up = results.filter((r) => r.ok);
   let action;
   if (down.length > 0) action = prevStatus === 'down' ? 'still-down' : 'alert';
   else action = prevStatus === 'down' ? 'recovery' : 'none';
@@ -147,9 +177,9 @@ async function main() {
   console.log(`\n[${timestamp}] DevToolsmith Uptime Check`);
   console.log('─'.repeat(60));
 
-  const results = await Promise.all(SITES.map(checkSite));
+  const results = await Promise.all(NETWORK.map(checkSite));
 
-  results.forEach(r => {
+  results.forEach((r) => {
     const icon = r.ok ? '✅' : '🔴';
     const info = r.error ? ` — ${r.error}` : '';
     console.log(`  ${icon}  ${r.name.padEnd(14)} HTTP ${r.status || 'ERR'} · ${r.ms}ms${info}`);
@@ -162,7 +192,9 @@ async function main() {
 
   if (action === 'still-down') {
     // Already notified on a previous run — skip duplicate alert & email
-    console.log(`\n⚠️  ${down.length} SITE(S) STILL DOWN (already notified) — skipping duplicate alert`);
+    console.log(
+      `\n⚠️  ${down.length} SITE(S) STILL DOWN (already notified) — skipping duplicate alert`
+    );
     // Signal to the workflow NOT to reset PREV_STATUS to 'up'
     if (process.env.GITHUB_ENV) {
       require('fs').appendFileSync(process.env.GITHUB_ENV, 'SITES_STILL_DOWN=true\n');
@@ -171,16 +203,16 @@ async function main() {
   } else if (action === 'alert') {
     console.log(`\n🔴 NEW DOWNTIME: ${down.length} SITE(S) DOWN — sending alert to ${OWNER.email}`);
     await sendAndLog({
-      to:          [{ email: OWNER.email, name: OWNER.name }],
-      subject:     `🔴 DOWN: ${down.map(r => r.name).join(', ')} — DevToolsmith`,
+      to: [{ email: OWNER.email, name: OWNER.name }],
+      subject: `🔴 DOWN: ${down.map((r) => r.name).join(', ')} — DevToolsmith`,
       htmlContent: buildAlertHtml(down, up, timestamp),
     });
     process.exit(1); // one GitHub failure email per outage event
   } else if (action === 'recovery') {
     console.log('\n🟢 All sites recovered — sending recovery notification');
     await sendAndLog({
-      to:          [{ email: OWNER.email, name: OWNER.name }],
-      subject:     '✅ RECOVERED: All DevToolsmith sites are operational',
+      to: [{ email: OWNER.email, name: OWNER.name }],
+      subject: '✅ RECOVERED: All DevToolsmith sites are operational',
       htmlContent: buildRecoveryHtml(results, timestamp),
     });
     process.exit(0);
@@ -194,7 +226,7 @@ async function main() {
 module.exports = { decideUptimeAction };
 
 if (require.main === module) {
-  main().catch(err => {
+  main().catch((err) => {
     console.error('\n💥 Fatal error in uptime-check:', err.message);
     process.exit(2);
   });
