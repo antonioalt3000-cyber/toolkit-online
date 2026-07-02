@@ -1,6 +1,6 @@
 name: Watchtower E2E
 
-# Real customer-journey monitoring for the 5 SaaS portfolio.
+# Real customer-journey monitoring for the 10 SaaS portfolio.
 # Replaces the legacy auto-functional-test.yml that only did HTTP-status checks.
 #
 # Schedule: every hour at :00. Runs on GitHub-hosted Linux runner with
@@ -21,7 +21,7 @@ on:
   workflow_dispatch:
     inputs:
       only:
-        description: 'Run only one SaaS (e.g. F1, F2, F3, F4, B7). Empty = all.'
+        description: 'Run only one SaaS (e.g. F1, F2, F3, F4, B7, EG, SEO, HSH, HKL, CFG). Empty = all.'
         required: false
         default: ''
       skip_email:
@@ -50,7 +50,7 @@ concurrency:
 
 jobs:
   run:
-    name: Run E2E across 5 SaaS
+    name: Run E2E across 10 SaaS
     runs-on: ubuntu-latest
     timeout-minutes: 30
 
