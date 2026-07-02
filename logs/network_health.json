@@ -1,0 +1,745 @@
+{
+  "status": "NOMINAL",
+  "scannedAt": "2026-07-02T19:50:06.567Z",
+  "summary": "48/48 scans ok — baseline seeded (first run, no alert)",
+  "regressions": [],
+  "grid": [
+    {
+      "code": "F1",
+      "name": "CompliPilot",
+      "domain": "complipilot.dev",
+      "group": "saas",
+      "scanners": {
+        "HSH": {
+          "scanner": "HSH",
+          "ok": true,
+          "score": 73,
+          "grade": "B",
+          "findings": [
+            "hdr:Content-Security-Policy",
+            "hdr:Strict-Transport-Security",
+            "hdr:X-Frame-Options",
+            "hdr:X-Content-Type-Options",
+            "hdr:Referrer-Policy",
+            "hdr:Permissions-Policy",
+            "hdr:Cross-Origin-Opener-Policy",
+            "hdr:Cross-Origin-Resource-Policy",
+            "hdr:Server / X-Powered-By"
+          ],
+          "ms": 1403
+        },
+        "B7": {
+          "scanner": "B7",
+          "ok": true,
+          "score": null,
+          "grade": null,
+          "findings": [],
+          "size": 79930,
+          "ms": 8112
+        }
+      }
+    },
+    {
+      "code": "F2",
+      "name": "AccessiScan",
+      "domain": "fixmyweb.dev",
+      "group": "saas",
+      "scanners": {
+        "HSH": {
+          "scanner": "HSH",
+          "ok": true,
+          "score": 73,
+          "grade": "B",
+          "findings": [
+            "hdr:Content-Security-Policy",
+            "hdr:Strict-Transport-Security",
+            "hdr:X-Frame-Options",
+            "hdr:X-Content-Type-Options",
+            "hdr:Referrer-Policy",
+            "hdr:Permissions-Policy",
+            "hdr:Cross-Origin-Opener-Policy",
+            "hdr:Cross-Origin-Resource-Policy",
+            "hdr:Server / X-Powered-By"
+          ],
+          "ms": 1001
+        },
+        "B7": {
+          "scanner": "B7",
+          "ok": true,
+          "score": null,
+          "grade": null,
+          "findings": [],
+          "size": 79898,
+          "ms": 8805
+        }
+      }
+    },
+    {
+      "code": "F3",
+      "name": "ChurnGuard",
+      "domain": "paymentrescue.dev",
+      "group": "saas",
+      "scanners": {
+        "HSH": {
+          "scanner": "HSH",
+          "ok": true,
+          "score": 73,
+          "grade": "B",
+          "findings": [
+            "hdr:Content-Security-Policy",
+            "hdr:Strict-Transport-Security",
+            "hdr:X-Frame-Options",
+            "hdr:X-Content-Type-Options",
+            "hdr:Referrer-Policy",
+            "hdr:Permissions-Policy",
+            "hdr:Cross-Origin-Opener-Policy",
+            "hdr:Cross-Origin-Resource-Policy",
+            "hdr:Server / X-Powered-By"
+          ],
+          "ms": 1119
+        },
+        "B7": {
+          "scanner": "B7",
+          "ok": true,
+          "score": null,
+          "grade": null,
+          "findings": [],
+          "size": 81899,
+          "ms": 7618
+        }
+      }
+    },
+    {
+      "code": "F4",
+      "name": "ParseFlow",
+      "domain": "parseflow.dev",
+      "group": "saas",
+      "scanners": {
+        "HSH": {
+          "scanner": "HSH",
+          "ok": true,
+          "score": 73,
+          "grade": "B",
+          "findings": [
+            "hdr:Content-Security-Policy",
+            "hdr:Strict-Transport-Security",
+            "hdr:X-Frame-Options",
+            "hdr:X-Content-Type-Options",
+            "hdr:Referrer-Policy",
+            "hdr:Permissions-Policy",
+            "hdr:Cross-Origin-Opener-Policy",
+            "hdr:Cross-Origin-Resource-Policy",
+            "hdr:Server / X-Powered-By"
+          ],
+          "ms": 1017
+        },
+        "B7": {
+          "scanner": "B7",
+          "ok": true,
+          "score": null,
+          "grade": null,
+          "findings": [],
+          "size": 59591,
+          "ms": 7700
+        }
+      }
+    },
+    {
+      "code": "B7",
+      "name": "CaptureAPI",
+      "domain": "captureapi.dev",
+      "group": "saas",
+      "scanners": {
+        "HSH": {
+          "scanner": "HSH",
+          "ok": true,
+          "score": 73,
+          "grade": "B",
+          "findings": [
+            "hdr:Content-Security-Policy",
+            "hdr:Strict-Transport-Security",
+            "hdr:X-Frame-Options",
+            "hdr:X-Content-Type-Options",
+            "hdr:Referrer-Policy",
+            "hdr:Permissions-Policy",
+            "hdr:Cross-Origin-Opener-Policy",
+            "hdr:Cross-Origin-Resource-Policy",
+            "hdr:Server / X-Powered-By"
+          ],
+          "ms": 1044
+        },
+        "B7": {
+          "scanner": "B7",
+          "ok": true,
+          "score": null,
+          "grade": null,
+          "findings": [],
+          "size": 66764,
+          "ms": 7544
+        }
+      }
+    },
+    {
+      "code": "EG",
+      "name": "EmailGuard",
+      "domain": "emailguard.dev",
+      "group": "saas",
+      "scanners": {
+        "HSH": {
+          "scanner": "HSH",
+          "ok": true,
+          "score": 95,
+          "grade": "A+",
+          "findings": [
+            "hdr:Content-Security-Policy",
+            "hdr:Strict-Transport-Security",
+            "hdr:X-Frame-Options",
+            "hdr:X-Content-Type-Options",
+            "hdr:Referrer-Policy",
+            "hdr:Permissions-Policy",
+            "hdr:Cross-Origin-Opener-Policy",
+            "hdr:Cross-Origin-Resource-Policy",
+            "hdr:Server / X-Powered-By"
+          ],
+          "ms": 1370
+        },
+        "B7": {
+          "scanner": "B7",
+          "ok": true,
+          "score": null,
+          "grade": null,
+          "findings": [],
+          "size": 59413,
+          "ms": 6681
+        }
+      }
+    },
+    {
+      "code": "SEO",
+      "name": "SEOScope",
+      "domain": "seoscope.dev",
+      "group": "saas",
+      "scanners": {
+        "HSH": {
+          "scanner": "HSH",
+          "ok": true,
+          "score": 95,
+          "grade": "A+",
+          "findings": [
+            "hdr:Content-Security-Policy",
+            "hdr:Strict-Transport-Security",
+            "hdr:X-Frame-Options",
+            "hdr:X-Content-Type-Options",
+            "hdr:Referrer-Policy",
+            "hdr:Permissions-Policy",
+            "hdr:Cross-Origin-Opener-Policy",
+            "hdr:Cross-Origin-Resource-Policy",
+            "hdr:Server / X-Powered-By"
+          ],
+          "ms": 1048
+        },
+        "B7": {
+          "scanner": "B7",
+          "ok": true,
+          "score": null,
+          "grade": null,
+          "findings": [],
+          "size": 64874,
+          "ms": 6102
+        }
+      }
+    },
+    {
+      "code": "HSH",
+      "name": "HeaderShield",
+      "domain": "headershield.dev",
+      "group": "saas",
+      "scanners": {
+        "HSH": {
+          "scanner": "HSH",
+          "ok": true,
+          "score": 95,
+          "grade": "A+",
+          "findings": [
+            "hdr:Content-Security-Policy",
+            "hdr:Strict-Transport-Security",
+            "hdr:X-Frame-Options",
+            "hdr:X-Content-Type-Options",
+            "hdr:Referrer-Policy",
+            "hdr:Permissions-Policy",
+            "hdr:Cross-Origin-Opener-Policy",
+            "hdr:Cross-Origin-Resource-Policy",
+            "hdr:Server / X-Powered-By"
+          ],
+          "ms": 1158
+        },
+        "B7": {
+          "scanner": "B7",
+          "ok": true,
+          "score": null,
+          "grade": null,
+          "findings": [],
+          "size": 67764,
+          "ms": 6512
+        }
+      }
+    },
+    {
+      "code": "HKL",
+      "name": "HookLab",
+      "domain": "gethooklab.dev",
+      "group": "saas",
+      "scanners": {
+        "HSH": {
+          "scanner": "HSH",
+          "ok": true,
+          "score": 95,
+          "grade": "A+",
+          "findings": [
+            "hdr:Content-Security-Policy",
+            "hdr:Strict-Transport-Security",
+            "hdr:X-Frame-Options",
+            "hdr:X-Content-Type-Options",
+            "hdr:Referrer-Policy",
+            "hdr:Permissions-Policy",
+            "hdr:Cross-Origin-Opener-Policy",
+            "hdr:Cross-Origin-Resource-Policy",
+            "hdr:Server / X-Powered-By"
+          ],
+          "ms": 1046
+        },
+        "B7": {
+          "scanner": "B7",
+          "ok": true,
+          "score": null,
+          "grade": null,
+          "findings": [],
+          "size": 71176,
+          "ms": 6418
+        }
+      }
+    },
+    {
+      "code": "CFG",
+      "name": "CardForge",
+      "domain": "getcardforge.dev",
+      "group": "saas",
+      "scanners": {
+        "HSH": {
+          "scanner": "HSH",
+          "ok": true,
+          "score": 95,
+          "grade": "A+",
+          "findings": [
+            "hdr:Content-Security-Policy",
+            "hdr:Strict-Transport-Security",
+            "hdr:X-Frame-Options",
+            "hdr:X-Content-Type-Options",
+            "hdr:Referrer-Policy",
+            "hdr:Permissions-Policy",
+            "hdr:Cross-Origin-Opener-Policy",
+            "hdr:Cross-Origin-Resource-Policy",
+            "hdr:Server / X-Powered-By"
+          ],
+          "ms": 1065
+        },
+        "B7": {
+          "scanner": "B7",
+          "ok": true,
+          "score": null,
+          "grade": null,
+          "findings": [],
+          "size": 68139,
+          "ms": 7671
+        }
+      }
+    },
+    {
+      "code": "SOLAR",
+      "name": "SolarFlow",
+      "domain": "solarflow.site",
+      "group": "adsense",
+      "scanners": {
+        "HSH": {
+          "scanner": "HSH",
+          "ok": true,
+          "score": 70,
+          "grade": "B",
+          "findings": [
+            "hdr:Content-Security-Policy",
+            "hdr:Strict-Transport-Security",
+            "hdr:X-Frame-Options",
+            "hdr:X-Content-Type-Options",
+            "hdr:Referrer-Policy",
+            "hdr:Permissions-Policy",
+            "hdr:Cross-Origin-Opener-Policy",
+            "hdr:Cross-Origin-Resource-Policy",
+            "hdr:Server / X-Powered-By"
+          ],
+          "ms": 1062
+        },
+        "SEO": {
+          "scanner": "SEO",
+          "ok": true,
+          "score": 88,
+          "grade": null,
+          "findings": [],
+          "ms": 1434
+        },
+        "F1": {
+          "scanner": "F1",
+          "ok": true,
+          "score": 72,
+          "grade": null,
+          "findings": [
+            "gdpr:Potential cookie wall detected (forced consent)",
+            "gdpr:Pre-checked consent boxes detected",
+            "gdpr:Financial services without required disclaimers"
+          ],
+          "ms": 866
+        },
+        "B7": {
+          "scanner": "B7",
+          "ok": true,
+          "score": null,
+          "grade": null,
+          "findings": [],
+          "size": 94388,
+          "ms": 8731
+        }
+      }
+    },
+    {
+      "code": "AISTACK",
+      "name": "AIStackPicker",
+      "domain": "aistackpicker.xyz",
+      "group": "adsense",
+      "scanners": {
+        "HSH": {
+          "scanner": "HSH",
+          "ok": true,
+          "score": 70,
+          "grade": "B",
+          "findings": [
+            "hdr:Content-Security-Policy",
+            "hdr:Strict-Transport-Security",
+            "hdr:X-Frame-Options",
+            "hdr:X-Content-Type-Options",
+            "hdr:Referrer-Policy",
+            "hdr:Permissions-Policy",
+            "hdr:Cross-Origin-Opener-Policy",
+            "hdr:Cross-Origin-Resource-Policy",
+            "hdr:Server / X-Powered-By"
+          ],
+          "ms": 900
+        },
+        "SEO": {
+          "scanner": "SEO",
+          "ok": true,
+          "score": 84,
+          "grade": null,
+          "findings": [],
+          "ms": 1186
+        },
+        "F1": {
+          "scanner": "F1",
+          "ok": true,
+          "score": 63,
+          "grade": null,
+          "findings": [
+            "gdpr:AI usage detected but not disclosed",
+            "gdpr:No human oversight mechanism mentioned",
+            "gdpr:Potential cookie wall detected (forced consent)",
+            "gdpr:Pre-checked consent boxes detected"
+          ],
+          "ms": 520
+        },
+        "B7": {
+          "scanner": "B7",
+          "ok": true,
+          "score": null,
+          "grade": null,
+          "findings": [],
+          "size": 136738,
+          "ms": 8645
+        }
+      }
+    },
+    {
+      "code": "EXPAT",
+      "name": "ExpatFinance",
+      "domain": "expatfinance.info",
+      "group": "adsense",
+      "scanners": {
+        "HSH": {
+          "scanner": "HSH",
+          "ok": true,
+          "score": 70,
+          "grade": "B",
+          "findings": [
+            "hdr:Content-Security-Policy",
+            "hdr:Strict-Transport-Security",
+            "hdr:X-Frame-Options",
+            "hdr:X-Content-Type-Options",
+            "hdr:Referrer-Policy",
+            "hdr:Permissions-Policy",
+            "hdr:Cross-Origin-Opener-Policy",
+            "hdr:Cross-Origin-Resource-Policy",
+            "hdr:Server / X-Powered-By"
+          ],
+          "ms": 894
+        },
+        "SEO": {
+          "scanner": "SEO",
+          "ok": true,
+          "score": 81,
+          "grade": null,
+          "findings": [],
+          "ms": 2256
+        },
+        "F1": {
+          "scanner": "F1",
+          "ok": true,
+          "score": 68,
+          "grade": null,
+          "findings": [
+            "gdpr:No automated individual decision-making disclosure",
+            "gdpr:Potential cookie wall detected (forced consent)",
+            "gdpr:Pre-checked consent boxes detected",
+            "gdpr:Financial services without required disclaimers"
+          ],
+          "ms": 556
+        },
+        "B7": {
+          "scanner": "B7",
+          "ok": true,
+          "score": null,
+          "grade": null,
+          "findings": [],
+          "size": 93860,
+          "ms": 7183
+        }
+      }
+    },
+    {
+      "code": "NICHIN",
+      "name": "NichInsurance",
+      "domain": "nichinsurance.info",
+      "group": "adsense",
+      "scanners": {
+        "HSH": {
+          "scanner": "HSH",
+          "ok": true,
+          "score": 70,
+          "grade": "B",
+          "findings": [
+            "hdr:Content-Security-Policy",
+            "hdr:Strict-Transport-Security",
+            "hdr:X-Frame-Options",
+            "hdr:X-Content-Type-Options",
+            "hdr:Referrer-Policy",
+            "hdr:Permissions-Policy",
+            "hdr:Cross-Origin-Opener-Policy",
+            "hdr:Cross-Origin-Resource-Policy",
+            "hdr:Server / X-Powered-By"
+          ],
+          "ms": 914
+        },
+        "SEO": {
+          "scanner": "SEO",
+          "ok": true,
+          "score": 86,
+          "grade": null,
+          "findings": [],
+          "ms": 1122
+        },
+        "F1": {
+          "scanner": "F1",
+          "ok": true,
+          "score": 73,
+          "grade": null,
+          "findings": [
+            "gdpr:No automated individual decision-making disclosure",
+            "gdpr:Potential cookie wall detected (forced consent)",
+            "gdpr:Pre-checked consent boxes detected"
+          ],
+          "ms": 883
+        },
+        "B7": {
+          "scanner": "B7",
+          "ok": true,
+          "score": null,
+          "grade": null,
+          "findings": [],
+          "size": 112999,
+          "ms": 8142
+        }
+      }
+    },
+    {
+      "code": "BCB",
+      "name": "BorderCollieBase",
+      "domain": "bordercolliebase.xyz",
+      "group": "adsense",
+      "scanners": {
+        "HSH": {
+          "scanner": "HSH",
+          "ok": true,
+          "score": 70,
+          "grade": "B",
+          "findings": [
+            "hdr:Content-Security-Policy",
+            "hdr:Strict-Transport-Security",
+            "hdr:X-Frame-Options",
+            "hdr:X-Content-Type-Options",
+            "hdr:Referrer-Policy",
+            "hdr:Permissions-Policy",
+            "hdr:Cross-Origin-Opener-Policy",
+            "hdr:Cross-Origin-Resource-Policy",
+            "hdr:Server / X-Powered-By"
+          ],
+          "ms": 801
+        },
+        "SEO": {
+          "scanner": "SEO",
+          "ok": true,
+          "score": 83,
+          "grade": null,
+          "findings": [],
+          "ms": 1759
+        },
+        "F1": {
+          "scanner": "F1",
+          "ok": true,
+          "score": 74,
+          "grade": null,
+          "findings": [
+            "gdpr:Potential cookie wall detected (forced consent)",
+            "gdpr:Pre-checked consent boxes detected"
+          ],
+          "ms": 3446
+        },
+        "B7": {
+          "scanner": "B7",
+          "ok": true,
+          "score": null,
+          "grade": null,
+          "findings": [],
+          "size": 106428,
+          "ms": 7270
+        }
+      }
+    },
+    {
+      "code": "ITRIP",
+      "name": "InstantTrip",
+      "domain": "instanttrip.online",
+      "group": "affiliate",
+      "scanners": {
+        "HSH": {
+          "scanner": "HSH",
+          "ok": true,
+          "score": 60,
+          "grade": "C",
+          "findings": [
+            "hdr:Content-Security-Policy",
+            "hdr:Strict-Transport-Security",
+            "hdr:X-Frame-Options",
+            "hdr:X-Content-Type-Options",
+            "hdr:Referrer-Policy",
+            "hdr:Permissions-Policy",
+            "hdr:Cross-Origin-Opener-Policy",
+            "hdr:Cross-Origin-Resource-Policy",
+            "hdr:Server / X-Powered-By"
+          ],
+          "ms": 907
+        },
+        "SEO": {
+          "scanner": "SEO",
+          "ok": true,
+          "score": 91,
+          "grade": null,
+          "findings": [
+            "seo:img-dimensions"
+          ],
+          "ms": 1696
+        },
+        "F1": {
+          "scanner": "F1",
+          "ok": true,
+          "score": 77,
+          "grade": null,
+          "findings": [
+            "gdpr:Potential dark patterns in consent UI"
+          ],
+          "ms": 1470
+        },
+        "B7": {
+          "scanner": "B7",
+          "ok": true,
+          "score": null,
+          "grade": null,
+          "findings": [],
+          "size": 83840,
+          "ms": 12956
+        }
+      }
+    },
+    {
+      "code": "TOPRK",
+      "name": "TopRanked",
+      "domain": "topranked.info",
+      "group": "affiliate",
+      "scanners": {
+        "HSH": {
+          "scanner": "HSH",
+          "ok": true,
+          "score": 54,
+          "grade": "D",
+          "findings": [
+            "hdr:Content-Security-Policy",
+            "hdr:Strict-Transport-Security",
+            "hdr:X-Frame-Options",
+            "hdr:X-Content-Type-Options",
+            "hdr:Referrer-Policy",
+            "hdr:Permissions-Policy",
+            "hdr:Cross-Origin-Opener-Policy",
+            "hdr:Cross-Origin-Resource-Policy",
+            "hdr:Server / X-Powered-By"
+          ],
+          "ms": 1019
+        },
+        "SEO": {
+          "scanner": "SEO",
+          "ok": true,
+          "score": 97,
+          "grade": null,
+          "findings": [],
+          "ms": 1219
+        },
+        "F1": {
+          "scanner": "F1",
+          "ok": true,
+          "score": 72,
+          "grade": null,
+          "findings": [
+            "gdpr:No cookie consent mechanism detected",
+            "gdpr:Third-party tracking without consent mechanism",
+            "gdpr:AI chatbot detected but no disclosure",
+            "gdpr:Potential cookie wall detected (forced consent)"
+          ],
+          "ms": 882
+        },
+        "B7": {
+          "scanner": "B7",
+          "ok": true,
+          "score": null,
+          "grade": null,
+          "findings": [],
+          "size": 75226,
+          "ms": 7030
+        }
+      }
+    }
+  ]
+}
