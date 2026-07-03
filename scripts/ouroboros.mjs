@@ -20,7 +20,7 @@
 
 import { writeFileSync, mkdirSync, readFileSync } from 'node:fs';
 import { dirname, resolve } from 'node:path';
-import { fileURLToPath } from 'node:url';
+import { fileURLToPath, pathToFileURL } from 'node:url';
 import { execSync } from 'node:child_process';
 import { createRequire } from 'node:module';
 
@@ -213,9 +213,12 @@ function loadBaseline() {
 }
 
 // ── Regression decision (pure): current vs baseline for one (domain,scanner) ──
-// Alert-worthy = a score drop >= threshold, a snapshot that flipped ok→fail, or
-// a brand-new security-header / GDPR-critical finding that wasn't there before.
-// SEO finding churn is intentionally NOT alerted (noisy); only its score drop is.
+// Alert-worthy = a score drop >= threshold, OR a brand-new finding that wasn't
+// in the baseline (a security header lost, a new GDPR-critical, or a snapshot
+// that started failing). regressionFor is only called on ok results, so a
+// broken snapshot surfaces as the `snapshot:failed` finding — hence snapshot is
+// folded into the new-findings check, not a separate ok→fail flip. SEO finding
+// churn is intentionally NOT alerted (noisy); only its score drop is.
 function regressionFor(cur, base, kind) {
   if (!base) return null; // new target/scanner — no baseline to regress from
   const reasons = [];
@@ -227,8 +230,7 @@ function regressionFor(cur, base, kind) {
       delta: cur.score - base.score,
     });
   }
-  if (kind === 'snapshot' && base.ok && !cur.ok) reasons.push({ type: 'snapshot-broke' });
-  if (kind === 'headers' || kind === 'gdpr') {
+  if (kind === 'headers' || kind === 'gdpr' || kind === 'snapshot') {
     const prev = new Set(base.findings || []);
     const fresh = (cur.findings || []).filter((f) => !prev.has(f));
     if (fresh.length) reasons.push({ type: 'new-findings', findings: fresh });
@@ -306,7 +308,7 @@ const fmtReason = (r) =>
         : r.type;
 
 // ── Main ──────────────────────────────────────────────────────────────────────
-(async () => {
+async function main() {
   const scannedAt = new Date().toISOString();
   const baseline = loadBaseline();
 
@@ -398,7 +400,17 @@ const fmtReason = (r) =>
     });
   }
   process.exit(0);
-})().catch((err) => {
-  console.error('💥 Ouroboros fatal:', err?.message || err);
-  process.exit(2);
-});
+}
+
+// Pure decision logic exported for unit tests (vitest). The scan side-effects
+// (network calls, file writes, process.exit) run ONLY when invoked as the CLI —
+// importing the module for tests must not trigger a live scan.
+export { regressionFor, NORMALIZE, numOrNull };
+
+const isMain = process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href;
+if (isMain) {
+  main().catch((err) => {
+    console.error('💥 Ouroboros fatal:', err?.message || err);
+    process.exit(2);
+  });
+}
