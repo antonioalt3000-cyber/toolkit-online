@@ -65,6 +65,17 @@ const SCANNERS = {
     kind: 'snapshot',
     label: 'Visual snapshot (change-detection)',
   },
+  F2: {
+    code: 'F2',
+    brand: 'FixMyWeb',
+    base: 'https://fixmyweb.dev',
+    method: 'POST',
+    path: '/api/scan',
+    bodyParam: 'url',
+    keyEnv: 'CREATOR_F2_KEY', // ask_live_* key bypasses BotID (a valid API key skips the bot gate)
+    kind: 'a11y',
+    label: 'WCAG 2.2 accessibility audit',
+  },
 };
 
 // Applicability matrix — honest scoping, not "all 10 on all 17".
@@ -73,7 +84,7 @@ const SCANNERS = {
 //   Content/affiliate  → the FULL quality audit: these live on organic ranking
 //                        and load AdSense/GA, so SEO + GDPR-consent genuinely apply.
 const SAAS_SCANNERS = ['HSH', 'B7'];
-const CONTENT_SCANNERS = ['HSH', 'SEO', 'F1', 'B7'];
+const CONTENT_SCANNERS = ['HSH', 'SEO', 'F1', 'B7', 'F2'];
 
 // The 10 SaaS, derived from the trusted SITES list (URLs never duplicated).
 const SAAS = SITES.map((s) => ({

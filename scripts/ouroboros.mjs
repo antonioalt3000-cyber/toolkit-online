@@ -100,6 +100,15 @@ const NORMALIZE = {
       : [];
     return { score: numOrNull(j?.overallScore ?? j?.score), grade: null, findings };
   },
+  a11y(j) {
+    // Only serious/critical WCAG issues become findings (moderate/minor are noise).
+    const findings = Array.isArray(j?.issues)
+      ? j.issues
+          .filter((i) => i?.severity === 'critical' || i?.severity === 'serious')
+          .map((i) => `a11y:${i.wcagCriterion || i.title || 'issue'}`)
+      : [];
+    return { score: numOrNull(j?.score), grade: null, findings };
+  },
   snapshot(j) {
     const ok = j?.success === true || (j?.data && typeof j.data.size !== 'undefined');
     return {
