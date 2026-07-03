@@ -1,4 +1,5 @@
 {
+  "remoteControlAtStartup": true,
   "permissions": {
     "allow": [
       "Bash(npx next build *)",
