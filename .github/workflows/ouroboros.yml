@@ -35,6 +35,7 @@ jobs:
           CREATOR_SEO_KEY: ${{ secrets.CREATOR_SEO_KEY }}
           CREATOR_F1_KEY: ${{ secrets.CREATOR_F1_KEY }}
           CREATOR_B7_KEY: ${{ secrets.CREATOR_B7_KEY }}
+          CREATOR_F2_KEY: ${{ secrets.CREATOR_F2_KEY }}
         run: node scripts/ouroboros.mjs
       - name: Upload artifact
         uses: actions/upload-artifact@v4

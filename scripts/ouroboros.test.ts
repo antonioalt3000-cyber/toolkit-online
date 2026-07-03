@@ -120,6 +120,19 @@ describe('NORMALIZE — SaaS payload → {score, grade, findings}', () => {
     expect(n.findings).toEqual(['gdpr:No cookie consent']);
   });
 
+  it('a11y: score + only serious/critical WCAG issues', () => {
+    const n = NORMALIZE.a11y({
+      score: 90,
+      issues: [
+        { wcagCriterion: '1.1.1', severity: 'critical' },
+        { wcagCriterion: '1.3.1', severity: 'moderate' },
+        { wcagCriterion: '2.4.4', severity: 'serious' },
+      ],
+    });
+    expect(n.score).toBe(90);
+    expect(n.findings).toEqual(['a11y:1.1.1', 'a11y:2.4.4']);
+  });
+
   it('snapshot: success→no findings, failure→snapshot:failed', () => {
     expect(NORMALIZE.snapshot({ success: true, data: { size: 1024 } }).findings).toEqual([]);
     expect(NORMALIZE.snapshot({ success: false }).findings).toEqual(['snapshot:failed']);
