@@ -29,7 +29,17 @@ jobs:
           node-version: '20'
           cache: 'npm'
       - name: Install dependencies
-        run: npm ci
+        # `npm ci` is strict and fast when the lockfile is in sync, and it stays
+        # the primary path so a healthy lockfile is verified deterministically.
+        # But package-lock.json is regenerated on Windows dev machines, where npm
+        # prunes linux-only optional deps (@emnapi/*, transitive via sharp's
+        # wasm32 fallback) it cannot resolve for the host platform. When such a
+        # pruned lockfile lands, `npm ci` fails the strict sync check on the linux
+        # runner ("Missing: @emnapi/runtime@1.11.1 from lock file"), which made
+        # this job flaky. Fall back to `npm install`, which reconciles the tree
+        # for linux. See memory "Lockfile drift"; mirrors 44c3388 (security /
+        # weekly-quality / watchtower-e2e).
+        run: npm ci --no-audit --no-fund || npm install --no-audit --no-fund
       # Lint is informational for now: the repo has a known legacy baseline of
       # React 19 react-hooks errors. Typecheck/test/build are the hard gates.
       # Flip continue-on-error to false once the legacy lint debt is cleared.

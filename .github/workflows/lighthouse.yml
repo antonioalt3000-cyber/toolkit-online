@@ -28,7 +28,11 @@ jobs:
           cache: npm
 
       - name: Install dependencies
-        run: npm ci
+        # Tolerant install: a Windows-generated lockfile prunes linux-only
+        # optional deps (@emnapi/*), so strict `npm ci` intermittently fails the
+        # sync check on the linux runner. Fall back to `npm install`. See memory
+        # "Lockfile drift"; mirrors ci.yml and 44c3388.
+        run: npm ci --no-audit --no-fund || npm install --no-audit --no-fund
 
       - name: Build
         run: npm run build
