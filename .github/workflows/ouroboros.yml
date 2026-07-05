@@ -19,8 +19,8 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 20
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v6
         with:
           node-version: 20
       - name: Fetch baseline (previous scan) from orphan branch
@@ -38,7 +38,7 @@ jobs:
           CREATOR_F2_KEY: ${{ secrets.CREATOR_F2_KEY }}
         run: node scripts/ouroboros.mjs
       - name: Upload artifact
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: network-health
           path: |
