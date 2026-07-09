@@ -28,7 +28,10 @@ jobs:
           cache: npm
 
       - name: Install dependencies
-        run: npm ci
+        # npm install (not ci): the Windows-generated lockfile prunes linux-only
+        # optional deps (@emnapi/*), so `npm ci` strict-sync fails on the linux
+        # runner. install reconciles it deterministically enough for this probe.
+        run: npm install --prefer-offline --no-audit --no-fund
 
       - name: Build
         run: npm run build
