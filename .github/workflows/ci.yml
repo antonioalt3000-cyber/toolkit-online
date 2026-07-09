@@ -29,7 +29,10 @@ jobs:
           node-version: '20'
           cache: 'npm'
       - name: Install dependencies
-        run: npm ci
+        # npm install (not ci): the Windows-generated lockfile prunes linux-only
+        # optional deps (@emnapi/*), so `npm ci` strict-sync fails on the linux
+        # runner. install reconciles it deterministically enough for this gate.
+        run: npm install --prefer-offline --no-audit --no-fund
       # Lint is informational for now: the repo has a known legacy baseline of
       # React 19 react-hooks errors. Typecheck/test/build are the hard gates.
       # Flip continue-on-error to false once the legacy lint debt is cleared.
