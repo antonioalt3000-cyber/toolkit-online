@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 /**
- * auto-rollback.js — self-healing for the 5 SaaS portfolio.
+ * auto-rollback.js — self-healing for the 10 SaaS portfolio.
  *
  * Runs as a step in the Watchtower E2E workflow AFTER run.ts has written
  * watchtower-artifacts/<SaaS>-result.json. For every SaaS whose verdict is "red",

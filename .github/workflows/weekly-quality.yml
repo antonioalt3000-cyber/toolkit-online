@@ -64,6 +64,9 @@ jobs:
         continue-on-error: true
 
       - name: Send quality report email
+        # Never let a Brevo delivery failure (e.g. 401 on a rotated key) skip the
+        # quality gate below — the gate is the actual signal, the email is a courtesy.
+        continue-on-error: true
         env:
           BREVO_API_KEY: ${{ secrets.BREVO_API_KEY }}
           OWNER_EMAIL: antonio.alt3000@gmail.com
