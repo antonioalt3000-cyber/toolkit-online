@@ -28,6 +28,14 @@ on:
         description: 'Skip Brevo email send (debug).'
         required: false
         default: 'false'
+  # Post-deploy smoke: fire this from a Vercel Deploy Hook / cross-repo dispatch
+  # right after a production deploy goes READY, so a broken deploy is caught in
+  # seconds instead of waiting up to the ~1-2h scheduled cadence. Payload:
+  #   { "event_type": "saas-deployed", "client_payload": { "only": "F1" } }
+  # Wiring the Vercel → GitHub dispatch (webhook + PAT) is a founder step; the
+  # workflow side is ready. Empty client_payload.only = run all SaaS.
+  repository_dispatch:
+    types: [saas-deployed]
   push:
     # Validate every change to the monitoring code itself by running it
     # immediately on push (fast feedback when we tweak a test plan).
@@ -88,8 +96,11 @@ jobs:
           GITHUB_RUN_ID: ${{ github.run_id }}
         run: |
           ARGS=""
-          if [ -n "${{ inputs.only }}" ]; then
-            ARGS="$ARGS --only ${{ inputs.only }}"
+          # `only` can come from a manual dispatch input or a repository_dispatch
+          # (post-deploy) client_payload; take whichever is set.
+          ONLY_SAAS="${{ inputs.only || github.event.client_payload.only }}"
+          if [ -n "$ONLY_SAAS" ]; then
+            ARGS="$ARGS --only $ONLY_SAAS"
           fi
           if [ "${{ inputs.skip_email }}" = "true" ]; then
             ARGS="$ARGS --skip-email"
