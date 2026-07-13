@@ -1,14 +1,16 @@
 name: Uptime Monitor
 
-# Runs every 5 minutes, 24/7, with PC off.
-# Checks all 10 DevToolsmith sites and sends a Brevo alert email if any are down.
-# State (prev status) is persisted in scripts/automation/.prev-status and only
-# committed when it changes (so the repo gets at most a couple of commits per
-# outage/recovery cycle, not one every 5 minutes).
+# Scheduled every 5 minutes, but GitHub Actions throttles scheduled workflows on
+# busy repos: the REAL observed cadence is ~1-2h (measured 10 Jul 2026, gaps of
+# 57-138 min between runs). Treat outage detection as "within ~1-2h", not 5 min.
+# For sub-minute detection, move the ping to an external cron (e.g. UptimeRobot
+# free tier) or Vercel Cron. Checks all 10 DevToolsmith sites and sends a Brevo
+# alert email if any are down. State (prev status) is persisted in
+# scripts/automation/.prev-status and only committed when it changes.
 
 on:
   schedule:
-    - cron: '*/5 * * * *' # Every 5 minutes
+    - cron: '*/5 * * * *' # requested every 5 min; effective cadence ~1-2h (GH throttling)
   workflow_dispatch: # Allow manual trigger from GitHub UI
 
 permissions:
