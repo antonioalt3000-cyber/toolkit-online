@@ -1,56 +1,53 @@
-import type { Metadata, Viewport } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
-import Script from "next/script";
-import JsonLd from "@/components/JsonLd";
-import WebVitals from "@/components/WebVitals";
-import { Partytown } from "@qwik.dev/partytown/react";
-import { websiteSchema } from "@/lib/schema";
-import "./globals.css";
+import type { Metadata, Viewport } from 'next';
+import { Geist, Geist_Mono } from 'next/font/google';
+import JsonLd from '@/components/JsonLd';
+import WebVitals from '@/components/WebVitals';
+import { Partytown } from '@qwik.dev/partytown/react';
+import { websiteSchema } from '@/lib/schema';
+import './globals.css';
 
 const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
+  variable: '--font-geist-sans',
+  subsets: ['latin'],
 });
 
 const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
+  variable: '--font-geist-mono',
+  subsets: ['latin'],
 });
 
 export const viewport: Viewport = {
-  width: "device-width",
+  width: 'device-width',
   initialScale: 1,
-  themeColor: "#2563eb",
+  themeColor: '#2563eb',
 };
 
 export const metadata: Metadata = {
   title: {
-    default: "ToolKit Online — Free Online Tools",
-    template: "%s | ToolKit Online",
+    default: 'ToolKit Online — Free Online Tools',
+    template: '%s | ToolKit Online',
   },
   description:
-    "Free online tools for everyday tasks. Calculators, converters, text tools and more. Available in 6 languages.",
-  metadataBase: new URL(
-    process.env.NEXT_PUBLIC_SITE_URL || "https://toolkitonline.vip"
-  ),
+    'Free online tools for everyday tasks. Calculators, converters, text tools and more. Available in 6 languages.',
+  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || 'https://toolkitonline.vip'),
   icons: {
-    icon: "/favicon.svg",
-    shortcut: "/favicon.svg",
-    apple: "/favicon.svg",
+    icon: '/favicon.svg',
+    shortcut: '/favicon.svg',
+    apple: '/favicon.svg',
   },
-  manifest: "/manifest.json",
+  manifest: '/manifest.json',
   openGraph: {
-    type: "website",
-    siteName: "ToolKit Online",
-    title: "ToolKit Online — Free Online Tools",
+    type: 'website',
+    siteName: 'ToolKit Online',
+    title: 'ToolKit Online — Free Online Tools',
     description:
-      "Free online tools for everyday tasks. Calculators, converters, text tools and more.",
+      'Free online tools for everyday tasks. Calculators, converters, text tools and more.',
   },
   twitter: {
-    card: "summary_large_image",
-    title: "ToolKit Online — Free Online Tools",
+    card: 'summary_large_image',
+    title: 'ToolKit Online — Free Online Tools',
     description:
-      "Free online tools for everyday tasks. Calculators, converters, text tools and more.",
+      'Free online tools for everyday tasks. Calculators, converters, text tools and more.',
   },
   robots: {
     index: true,
@@ -78,8 +75,13 @@ export default function RootLayout({
         />
         {/* Partytown: relocate the GA4 library to a web worker (off main thread).
             Consent Mode + gtag stay on the main thread; calls are forwarded. */}
-        <Partytown forward={["dataLayer.push", "gtag"]} lib="/partytown/" />
-        {/* Google Analytics 4 — runs in the Partytown worker, respects Consent Mode v2 */}
+        <Partytown forward={['dataLayer.push', 'gtag']} lib="/partytown/" />
+        {/* Google Analytics 4 — runs in the Partytown worker, respects Consent Mode v2.
+            no-sync-scripts does not apply: the browser never executes a script of an
+            unknown type, so this tag neither blocks parsing nor fetches on the main
+            thread — Partytown's loader picks it up and runs it in the worker. It must
+            stay a raw <script> with this exact type; next/script would not match. */}
+        {/* eslint-disable-next-line @next/next/no-sync-scripts */}
         <script
           type="text/partytown"
           src="https://www.googletagmanager.com/gtag/js?id=G-30KL6W6WJY"
@@ -95,12 +97,8 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased bg-gray-50 min-h-screen`}
       >
-        {/* Google AdSense */}
-        <Script
-          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7033623734141087"
-          crossOrigin="anonymous"
-          strategy="afterInteractive"
-        />
+        {/* Google AdSense is injected by ConsentManager only after the user grants
+            advertising consent. Loading it here unconditionally would bypass that gate. */}
         <WebVitals />
         {children}
       </body>
