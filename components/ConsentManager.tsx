@@ -27,8 +27,10 @@ export function setConsent(state: ConsentState) {
   window.dispatchEvent(new CustomEvent('consent-updated', { detail: state }));
 }
 
+// GA4 is loaded once in the root layout (app/layout.tsx) via Partytown, gated by
+// Consent Mode v2. Do not inject it here too: the dedup guard cannot see the
+// root layout's script (it has no id), so a second copy double-counts pageviews.
 const GTM_ID = 'GTM-WKG7WCXZ';
-const GA_ID = 'G-30KL6W6WJY';
 const ADSENSE_CLIENT = 'ca-pub-7033623734141087';
 // Microsoft Clarity (heatmaps + session replay). Env-gated: inert until the
 // project id is set in Vercel. Treated as analytics — loads only on analytics consent.
@@ -37,7 +39,8 @@ const CLARITY_ID = process.env.NEXT_PUBLIC_CLARITY_ID;
 function injectGTM() {
   if (document.getElementById('gtm-script')) return;
   // dataLayer init
-  (window as unknown as Record<string, unknown>).dataLayer = (window as unknown as Record<string, unknown>).dataLayer || [];
+  (window as unknown as Record<string, unknown>).dataLayer =
+    (window as unknown as Record<string, unknown>).dataLayer || [];
   ((window as unknown as Record<string, unknown>).dataLayer as unknown[]).push({
     'gtm.start': new Date().getTime(),
     event: 'gtm.js',
@@ -63,23 +66,6 @@ function injectGTM() {
     noscript.appendChild(iframe);
     document.body.insertBefore(noscript, document.body.firstChild);
   }
-}
-
-function injectGA4() {
-  if (document.getElementById('ga4-script')) return;
-  const script = document.createElement('script');
-  script.id = 'ga4-script';
-  script.async = true;
-  script.src = `https://www.googletagmanager.com/gtag/js?id=${GA_ID}`;
-  document.head.appendChild(script);
-  // Initialize gtag
-  const w = window as unknown as Record<string, unknown>;
-  w.dataLayer = w.dataLayer || [];
-  function gtag(...args: unknown[]) {
-    (w.dataLayer as unknown[]).push(args);
-  }
-  gtag('js', new Date());
-  gtag('config', GA_ID);
 }
 
 function injectClarity() {
@@ -154,7 +140,6 @@ export default function ConsentManager() {
     updateConsentMode(consent);
     if (consent.analytics) {
       injectGTM();
-      injectGA4();
       injectClarity();
     }
     if (consent.advertising) {
