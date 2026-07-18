@@ -1954,8 +1954,9 @@ export const toolList = Object.keys(tools);
 // it from UNBUILT_TOOLS. (Regression guard: lib/translations.test.ts asserts every
 // emitted slug has a page dir — this is what silently regressed and re-shipped 11 404s.)
 const UNBUILT_TOOLS = new Set<string>([
-  '401k-calculator', 'hsa-calculator', 'capital-gains-calculator',
-  'social-security-calculator', 'estate-tax-calculator',
+  // Empty: every registered tool now has a page.tsx. Add a slug here if its
+  // metadata ever ships before its page, to keep it out of listings/sitemap
+  // (and thus off Google) until the page is built.
 ]);
 
 export function getToolsByCategory(): Record<string, string[]> {
