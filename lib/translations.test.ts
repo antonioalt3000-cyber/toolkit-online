@@ -1,4 +1,6 @@
 import { describe, it, expect } from 'vitest';
+import { existsSync } from 'node:fs';
+import { join } from 'node:path';
 import { tools, toolList, locales, getToolsByCategory } from '@/lib/translations';
 
 // These tests guard the most common bug class in this project:
@@ -34,6 +36,12 @@ describe('getToolsByCategory', () => {
     const known = new Set(toolList);
     const orphans = categorized.filter((s) => !known.has(s));
     expect(orphans).toEqual([]);
+  });
+
+  it('every categorized slug has a built page directory (no phantom 404s)', () => {
+    const toolsDir = join(process.cwd(), 'app', '[lang]', 'tools');
+    const phantom = categorized.filter((s) => !existsSync(join(toolsDir, s)));
+    expect(phantom).toEqual([]);
   });
 
   it('lists no slug in more than one category', () => {

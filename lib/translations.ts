@@ -1948,8 +1948,20 @@ export const tools: Record<string, Record<Locale, ToolTranslation>> = {
 
 export const toolList = Object.keys(tools);
 
+// Slugs with complete 6-lang metadata in `tools` but no page.tsx yet — filtered
+// out of every listing / sitemap / internal link so nothing points at a 404 until
+// the tool is built. To ship one: add app/[lang]/tools/<slug>/page.tsx, then remove
+// it from UNBUILT_TOOLS. (Regression guard: lib/translations.test.ts asserts every
+// emitted slug has a page dir — this is what silently regressed and re-shipped 11 404s.)
+const UNBUILT_TOOLS = new Set<string>([
+  '401k-calculator', 'hsa-calculator', 'net-worth-calculator', 'capital-gains-calculator',
+  'social-security-calculator', 'emergency-fund-calculator', 'fire-number-calculator',
+  'estate-tax-calculator', 'self-employment-tax-calculator', 'insurance-deductible-calculator',
+  'gap-insurance-calculator',
+]);
+
 export function getToolsByCategory(): Record<string, string[]> {
-  return {
+  const raw: Record<string, string[]> = {
     finance: ['vat-calculator', 'percentage-calculator', 'loan-calculator', 'salary-calculator', 'tip-calculator', 'discount-calculator', 'electricity-calculator', 'invoice-generator', 'invoice-calculator', 'mortgage-calculator', 'currency-converter', 'fuel-cost-calculator', 'compound-interest-calculator', 'investment-calculator', 'paycheck-calculator', 'profit-margin-calculator', 'sales-tax-calculator', 'roi-calculator', 'mortgage-amortization', 'inflation-calculator', 'retirement-calculator', 'debt-payoff-calculator', 'unit-price-calculator', 'payroll-calculator', 'simple-interest-calculator', 'auto-loan-calculator', 'tax-bracket-calculator', 'savings-goal-calculator', 'tip-splitting-calculator', 'life-insurance-calculator', 'car-insurance-calculator', 'home-insurance-calculator', 'health-insurance-calculator', 'disability-insurance-calculator', 'renters-insurance-calculator', 'pet-insurance-calculator', 'travel-insurance-calculator', 'umbrella-insurance-calculator', 'business-insurance-calculator', 'flood-insurance-calculator', 'motorcycle-insurance-calculator', 'boat-insurance-calculator', 'dental-insurance-calculator', 'vision-insurance-calculator', 'long-term-care-insurance-calculator', 'critical-illness-insurance-calculator', 'wedding-insurance-calculator', 'jewelry-insurance-calculator', 'gap-insurance-calculator', 'fire-number-calculator', 'net-worth-calculator', 'emergency-fund-calculator', 'capital-gains-calculator', 'self-employment-tax-calculator', 'estate-tax-calculator', 'social-security-calculator', 'insurance-deductible-calculator', 'hsa-calculator', '401k-calculator'],
     text: ['word-counter', 'lorem-ipsum-generator', 'text-case-converter', 'character-counter', 'text-to-slug', 'markdown-preview', 'html-encoder', 'text-diff', 'typing-speed-test', 'character-map', 'text-to-speech', 'grammar-checker', 'resume-builder', 'ai-text-detector', 'text-repeater', 'emoji-picker', 'word-frequency-counter', 'line-counter', 'note-taking', 'flashcard-maker', 'font-identifier', 'reading-time-calculator'],
     health: ['bmi-calculator', 'calorie-calculator', 'body-fat-calculator', 'ideal-weight-calculator', 'water-intake-calculator', 'sleep-calculator', 'pregnancy-calculator', 'pace-calculator', 'breathing-exercise', 'noise-generator', 'blood-pressure-tracker', 'tdee-calculator', 'macro-calculator', 'ovulation-calculator', 'blood-alcohol-calculator', 'bra-size-calculator', 'heart-rate-zone-calculator'],
@@ -1959,4 +1971,9 @@ export function getToolsByCategory(): Record<string, string[]> {
     images: ['image-compressor', 'image-resizer', 'photo-editor', 'pixel-ruler', 'meme-generator', 'pixel-art-maker', 'background-remover', 'svg-to-png', 'whiteboard', 'placeholder-image-generator', 'photo-collage-maker'],
     energy: ['solar-panel-roi-calculator', 'solar-savings-calculator', 'ev-vs-gas-calculator', 'carbon-footprint-calculator', 'heat-pump-calculator', 'solar-battery-calculator', 'wind-turbine-calculator', 'ev-charging-cost-calculator', 'ev-range-calculator', 'ev-savings-calculator', 'electric-bike-savings-calculator', 'home-energy-audit-calculator', 'insulation-roi-calculator', 'led-savings-calculator', 'smart-thermostat-calculator'],
   };
+  // Hide not-yet-built slugs from every consumer (sitemap, llms.txt, category
+  // pages, homepage) so we never emit a link/sitemap entry to a 404.
+  return Object.fromEntries(
+    Object.entries(raw).map(([cat, slugs]) => [cat, slugs.filter((s) => !UNBUILT_TOOLS.has(s))]),
+  );
 }
