@@ -1954,10 +1954,8 @@ export const toolList = Object.keys(tools);
 // it from UNBUILT_TOOLS. (Regression guard: lib/translations.test.ts asserts every
 // emitted slug has a page dir — this is what silently regressed and re-shipped 11 404s.)
 const UNBUILT_TOOLS = new Set<string>([
-  '401k-calculator', 'hsa-calculator', 'net-worth-calculator', 'capital-gains-calculator',
-  'social-security-calculator', 'emergency-fund-calculator', 'fire-number-calculator',
-  'estate-tax-calculator', 'self-employment-tax-calculator', 'insurance-deductible-calculator',
-  'gap-insurance-calculator',
+  '401k-calculator', 'hsa-calculator', 'capital-gains-calculator',
+  'social-security-calculator', 'estate-tax-calculator',
 ]);
 
 export function getToolsByCategory(): Record<string, string[]> {
