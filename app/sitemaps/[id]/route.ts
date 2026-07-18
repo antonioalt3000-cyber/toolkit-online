@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server';
-import { locales, getToolsByCategory } from '@/lib/translations';
+import { getToolsByCategory } from '@/lib/translations';
+import { INDEXABLE_LOCALES } from '@/lib/seo';
 import { blogSlugs } from '@/lib/blog';
 
 export const dynamic = 'force-dynamic';
@@ -55,26 +56,26 @@ function generateStaticSitemap(): string {
   const urls: string[] = [];
 
   // Home pages — prioritize IT and EN
-  for (const locale of locales) {
+  for (const locale of INDEXABLE_LOCALES) {
     const priority = locale === 'it' || locale === 'en' ? 1.0 : 0.5;
     urls.push(
       buildUrl(
         `${BASE_URL}/${locale}`,
         priority,
-        Object.fromEntries(locales.map((l) => [l, `${BASE_URL}/${l}`])),
+        Object.fromEntries(INDEXABLE_LOCALES.map((l) => [l, `${BASE_URL}/${l}`])),
         new Date().toISOString().split('T')[0]
       )
     );
   }
 
   // Tools listing — prioritize IT and EN
-  for (const locale of locales) {
+  for (const locale of INDEXABLE_LOCALES) {
     const priority = locale === 'it' || locale === 'en' ? 0.9 : 0.4;
     urls.push(
       buildUrl(
         `${BASE_URL}/${locale}/tools`,
         priority,
-        Object.fromEntries(locales.map((l) => [l, `${BASE_URL}/${l}/tools`])),
+        Object.fromEntries(INDEXABLE_LOCALES.map((l) => [l, `${BASE_URL}/${l}/tools`])),
         new Date().toISOString().split('T')[0]
       )
     );
@@ -82,13 +83,15 @@ function generateStaticSitemap(): string {
 
   // Category hubs — prioritize IT and EN
   for (const cat of categories) {
-    for (const locale of locales) {
+    for (const locale of INDEXABLE_LOCALES) {
       const priority = locale === 'it' || locale === 'en' ? 0.9 : 0.4;
       urls.push(
         buildUrl(
           `${BASE_URL}/${locale}/tools/category/${cat}`,
           priority,
-          Object.fromEntries(locales.map((l) => [l, `${BASE_URL}/${l}/tools/category/${cat}`])),
+          Object.fromEntries(
+            INDEXABLE_LOCALES.map((l) => [l, `${BASE_URL}/${l}/tools/category/${cat}`])
+          ),
           new Date().toISOString().split('T')[0]
         )
       );
@@ -97,12 +100,12 @@ function generateStaticSitemap(): string {
 
   // Static pages
   for (const page of ['about', 'contact', 'faq', 'privacy', 'terms', 'affiliate-disclosure']) {
-    for (const locale of locales) {
+    for (const locale of INDEXABLE_LOCALES) {
       urls.push(
         buildUrl(
           `${BASE_URL}/${locale}/${page}`,
           0.3,
-          Object.fromEntries(locales.map((l) => [l, `${BASE_URL}/${l}/${page}`])),
+          Object.fromEntries(INDEXABLE_LOCALES.map((l) => [l, `${BASE_URL}/${l}/${page}`])),
           new Date().toISOString().split('T')[0]
         )
       );
@@ -124,12 +127,12 @@ function generateCategorySitemap(category: string): string {
   const urls: string[] = [];
 
   for (const tool of tools) {
-    for (const locale of locales) {
+    for (const locale of INDEXABLE_LOCALES) {
       urls.push(
         buildUrl(
           `${BASE_URL}/${locale}/tools/${tool}`,
           getToolPriority(locale),
-          Object.fromEntries(locales.map((l) => [l, `${BASE_URL}/${l}/tools/${tool}`])),
+          Object.fromEntries(INDEXABLE_LOCALES.map((l) => [l, `${BASE_URL}/${l}/tools/${tool}`])),
           new Date().toISOString().split('T')[0]
         )
       );
@@ -139,13 +142,13 @@ function generateCategorySitemap(category: string): string {
   // Add VAT calculator country pages for finance category
   if (category === 'finance') {
     for (const country of VAT_COUNTRIES) {
-      for (const locale of locales) {
+      for (const locale of INDEXABLE_LOCALES) {
         urls.push(
           buildUrl(
             `${BASE_URL}/${locale}/tools/vat-calculator/${country}`,
             getToolPriority(locale),
             Object.fromEntries(
-              locales.map((l) => [l, `${BASE_URL}/${l}/tools/vat-calculator/${country}`])
+              INDEXABLE_LOCALES.map((l) => [l, `${BASE_URL}/${l}/tools/vat-calculator/${country}`])
             ),
             new Date().toISOString().split('T')[0]
           )
@@ -160,23 +163,23 @@ function generateCategorySitemap(category: string): string {
 function generateBlogSitemap(): string {
   const urls: string[] = [];
 
-  for (const locale of locales) {
+  for (const locale of INDEXABLE_LOCALES) {
     urls.push(
       buildUrl(
         `${BASE_URL}/${locale}/blog`,
         0.8,
-        Object.fromEntries(locales.map((l) => [l, `${BASE_URL}/${l}/blog`]))
+        Object.fromEntries(INDEXABLE_LOCALES.map((l) => [l, `${BASE_URL}/${l}/blog`]))
       )
     );
   }
 
   for (const slug of blogSlugs) {
-    for (const locale of locales) {
+    for (const locale of INDEXABLE_LOCALES) {
       urls.push(
         buildUrl(
           `${BASE_URL}/${locale}/blog/${slug}`,
           0.7,
-          Object.fromEntries(locales.map((l) => [l, `${BASE_URL}/${l}/blog/${slug}`]))
+          Object.fromEntries(INDEXABLE_LOCALES.map((l) => [l, `${BASE_URL}/${l}/blog/${slug}`]))
         )
       );
     }

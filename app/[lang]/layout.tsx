@@ -8,7 +8,7 @@ import ConsentManager from '@/components/ConsentManager';
 import { locales, common, type Locale } from '@/lib/translations';
 import HtmlLang from '@/components/HtmlLang';
 import ServiceWorkerRegistration from '@/components/ServiceWorkerRegistration';
-import { BASE_URL } from '@/lib/seo';
+import { BASE_URL, INDEXABLE_LOCALES, robotsFor } from '@/lib/seo';
 
 export function generateStaticParams() {
   return locales.map((lang) => ({ lang }));
@@ -16,7 +16,11 @@ export function generateStaticParams() {
 
 export const dynamicParams = false;
 
-export async function generateMetadata({ params }: { params: Promise<{ lang: string }> }): Promise<Metadata> {
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ lang: string }>;
+}): Promise<Metadata> {
   const { lang } = await params;
   if (!locales.includes(lang as Locale)) {
     notFound();
@@ -26,10 +30,11 @@ export async function generateMetadata({ params }: { params: Promise<{ lang: str
   return {
     title: { default: t.siteMetaTitle, template: `%s | ${t.siteTitle}` },
     description: t.siteDescription,
+    robots: robotsFor(locale),
     alternates: {
       canonical: `${BASE_URL}/${locale}`,
       languages: {
-        ...Object.fromEntries(locales.map((l) => [l, `${BASE_URL}/${l}`])),
+        ...Object.fromEntries(INDEXABLE_LOCALES.map((l) => [l, `${BASE_URL}/${l}`])),
         'x-default': `${BASE_URL}/en`,
       },
     },
@@ -62,7 +67,9 @@ export default async function LangLayout({
       <HtmlLang />
       <ServiceWorkerRegistration />
       <Header />
-      <main id="main-content" className="max-w-6xl mx-auto px-4 py-8">{children}</main>
+      <main id="main-content" className="max-w-6xl mx-auto px-4 py-8">
+        {children}
+      </main>
       <Footer />
       <BackToTop />
       <ConsentManager />
