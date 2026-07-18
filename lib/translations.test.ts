@@ -44,6 +44,19 @@ describe('getToolsByCategory', () => {
     expect(phantom).toEqual([]);
   });
 
+  it('every tool ships BOTH page.tsx and layout.tsx (layout carries SEO metadata)', () => {
+    // Guards the 2026-07-18 regression: 11 tools shipped page.tsx without the
+    // sibling layout.tsx, so they fell back to the root layout's generic title
+    // (duplicate <title>, no canonical, wrong hreflang, no JSON-LD).
+    const toolsDir = join(process.cwd(), 'app', '[lang]', 'tools');
+    const missingPage = categorized.filter((s) => !existsSync(join(toolsDir, s, 'page.tsx')));
+    const missingLayout = categorized.filter((s) => !existsSync(join(toolsDir, s, 'layout.tsx')));
+    expect({ missingPage, missingLayout }).toEqual({
+      missingPage: [],
+      missingLayout: [],
+    });
+  });
+
   it('lists no slug in more than one category', () => {
     const seen = new Set<string>();
     const dups: string[] = [];
@@ -52,5 +65,23 @@ describe('getToolsByCategory', () => {
       seen.add(s);
     }
     expect(dups).toEqual([]);
+  });
+});
+
+describe('metaTitle hygiene', () => {
+  it('no metaTitle embeds the brand suffix (the title template adds it once)', () => {
+    // Guards the 2026-07-18 double-suffix regression: 325 metaTitles already
+    // ended with "| ToolKit Online" while the root layout template appends
+    // "%s | ToolKit Online", rendering "... | ToolKit Online | ToolKit Online".
+    const offenders: string[] = [];
+    for (const slug of toolList) {
+      for (const l of locales) {
+        const t = tools[slug]?.[l];
+        if (t?.metaTitle && /\|\s*ToolKit Online\s*$/i.test(t.metaTitle)) {
+          offenders.push(`${slug}/${l}`);
+        }
+      }
+    }
+    expect(offenders).toEqual([]);
   });
 });
