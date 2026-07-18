@@ -6,8 +6,8 @@ name: Perpetual Sentinel
 # `sentinel-heartbeat` orphan branch (no Vercel redeploy) + an artifact.
 on:
   schedule:
-    - cron: '0 5,16 * * *'   # double-shift: 05:00 (dawn, pre-traffic) + 16:00 (afternoon peak) UTC
-  workflow_dispatch: {}    # manual / forced trigger (dry-run)
+    - cron: '0 5,16 * * *' # double-shift: 05:00 (dawn, pre-traffic) + 16:00 (afternoon peak) UTC
+  workflow_dispatch: {} # manual / forced trigger (dry-run)
 permissions:
   contents: write
 concurrency:
@@ -23,7 +23,7 @@ jobs:
           node-version: 20
       - name: Run sentinel
         id: run
-        continue-on-error: true   # a DEGRADED result must still publish the heartbeat
+        continue-on-error: true # a DEGRADED result must still publish the heartbeat
         env:
           BREVO_API_KEY: ${{ secrets.BREVO_API_KEY }}
           ALERT_EMAIL: ${{ secrets.ALERT_EMAIL }}
@@ -48,11 +48,15 @@ jobs:
         run: |
           git config user.name "sentinel-bot"
           git config user.email "sentinel@toolkitonline.vip"
+          # Preserve the freshly written heartbeat OUTSIDE the work tree: the branch
+          # switch below (checkout <orphan> + reset --hard) overwrites/discards it,
+          # which froze the heartbeat at 2026-06-29 despite green runs.
+          cp -f logs/daily_sentinel_heartbeat.json "$RUNNER_TEMP/daily_sentinel_heartbeat.json"
           git fetch origin sentinel-heartbeat || true
           git checkout sentinel-heartbeat 2>/dev/null || git checkout --orphan sentinel-heartbeat
           git reset --hard 2>/dev/null || true
           mkdir -p logs
-          cp -f logs/daily_sentinel_heartbeat.json logs/daily_sentinel_heartbeat.json 2>/dev/null || true
+          cp -f "$RUNNER_TEMP/daily_sentinel_heartbeat.json" logs/daily_sentinel_heartbeat.json
           git add -f logs/daily_sentinel_heartbeat.json
           git commit -m "sentinel heartbeat $(date -u +%FT%TZ)" || echo "no change"
           git push -f origin sentinel-heartbeat

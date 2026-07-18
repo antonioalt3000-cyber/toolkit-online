@@ -1,0 +1,48 @@
+name: Watchdog Canary (dead-man switch)
+# Independent meta-monitor. Closes two blind spots that email-only monitoring
+# could never see itself:
+#   G2 — verifies the OTHER monitors are still running (reads their public
+#        heartbeat branches; stale heartbeat = a monitor stopped).
+#   G7 — checks the single Brevo key's health, so a dead key can't silently
+#        disable all email alerting.
+# Both escalate via a GitHub Issue (built-in GITHUB_TOKEN) — a channel that is
+# INDEPENDENT of Brevo. Free on the public repo's Actions.
+on:
+  schedule:
+    - cron: '15 */6 * * *' # every 6h, offset :15 to dodge the top-of-hour rush
+  workflow_dispatch: {}
+permissions:
+  contents: read
+  issues: write # open/update alert issues (independent of Brevo)
+concurrency:
+  group: canary
+  cancel-in-progress: false
+jobs:
+  canary:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v6
+        with:
+          node-version: 20
+      - name: Heartbeat dead-man check (G2)
+        id: heartbeat
+        continue-on-error: true # let the Brevo check run even if a heartbeat is stale
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_REPOSITORY: ${{ github.repository }}
+        run: node scripts/automation/canary-check.js
+      - name: Brevo key health check (G7)
+        id: brevo
+        continue-on-error: true
+        env:
+          BREVO_API_KEY: ${{ secrets.BREVO_API_KEY }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_REPOSITORY: ${{ github.repository }}
+        run: node scripts/automation/brevo-health.js
+      - name: Surface failure in the Actions UI
+        if: steps.heartbeat.outcome == 'failure' || steps.brevo.outcome == 'failure'
+        run: |
+          echo "::error::Canary detected a stale heartbeat or unhealthy Brevo key — see the auto-opened GitHub Issue"
+          exit 1

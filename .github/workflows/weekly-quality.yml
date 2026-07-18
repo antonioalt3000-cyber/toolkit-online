@@ -32,7 +32,9 @@ jobs:
           cache: 'npm'
 
       - name: Install dependencies
-        run: npm install --no-audit --no-fund
+        # npm ci (non npm install): installa ESATTAMENTE dal lockfile, deterministico.
+        # Evita il drift che aveva introdotto eslint-plugin-react-hooks@7 (nuove regole -> CI rossa).
+        run: npm ci --no-audit --no-fund
 
       - name: ESLint auto-fix
         id: autofix

@@ -49,10 +49,17 @@ jobs:
         run: |
           git config user.name "ouroboros-bot"
           git config user.email "ouroboros@toolkitonline.vip"
+          # Preserve fresh scan output OUTSIDE the work tree before the branch switch
+          # (checkout <orphan> + reset --hard overwrites/discards it, freezing the
+          # baseline at 2026-07-02 despite green runs — also broke week-over-week diff).
+          cp -f logs/network_health.json "$RUNNER_TEMP/network_health.json"
+          cp -f logs/network_health.html "$RUNNER_TEMP/network_health.html"
           git fetch origin ouroboros-heartbeat || true
           git checkout ouroboros-heartbeat 2>/dev/null || git checkout --orphan ouroboros-heartbeat
           git reset --hard 2>/dev/null || true
           mkdir -p logs
+          cp -f "$RUNNER_TEMP/network_health.json" logs/network_health.json
+          cp -f "$RUNNER_TEMP/network_health.html" logs/network_health.html
           git add -f logs/network_health.json logs/network_health.html
           git commit -m "ouroboros scan $(date -u +%FT%TZ)" || echo "no change"
           git push -f origin ouroboros-heartbeat
