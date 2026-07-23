@@ -1,6 +1,6 @@
 {
   "status": "ALL_SYSTEMS_NOMINAL",
-  "checkedAt": "2026-07-22T17:08:36.348Z",
+  "checkedAt": "2026-07-23T07:27:47.406Z",
   "summary": "10/10 nominal, 6 with warnings",
   "down": [],
   "apps": [
@@ -10,11 +10,11 @@
       "ok": true,
       "hard": [],
       "warnings": [
-        "health:slow(2525ms)",
+        "health:slow(2235ms)",
         "ssl:expires-in-28d"
       ],
       "healthStatus": 200,
-      "healthMs": 2525,
+      "healthMs": 2235,
       "redeemStatus": 400,
       "redeemCt": "application/json",
       "certDays": 28
@@ -25,13 +25,13 @@
       "ok": true,
       "hard": [],
       "warnings": [
-        "ssl:expires-in-28d"
+        "health:slow(3210ms)"
       ],
       "healthStatus": 200,
-      "healthMs": 683,
+      "healthMs": 3210,
       "redeemStatus": 400,
       "redeemCt": "application/json",
-      "certDays": 28
+      "certDays": 89
     },
     {
       "code": "F3",
@@ -42,7 +42,7 @@
         "ssl:expires-in-28d"
       ],
       "healthStatus": 200,
-      "healthMs": 630,
+      "healthMs": 528,
       "redeemStatus": 400,
       "redeemCt": "application/json",
       "certDays": 28
@@ -53,26 +53,27 @@
       "ok": true,
       "hard": [],
       "warnings": [
-        "health:slow(3066ms)",
-        "ssl:expires-in-28d"
+        "health:slow(2217ms)"
       ],
       "healthStatus": 200,
-      "healthMs": 3066,
+      "healthMs": 2217,
       "redeemStatus": 400,
       "redeemCt": "application/json",
-      "certDays": 28
+      "certDays": 89
     },
     {
       "code": "B7",
       "brand": "CaptureAPI",
       "ok": true,
       "hard": [],
-      "warnings": [],
+      "warnings": [
+        "health:slow(2721ms)"
+      ],
       "healthStatus": 200,
-      "healthMs": 768,
+      "healthMs": 2721,
       "redeemStatus": 400,
       "redeemCt": "application/json",
-      "certDays": 88
+      "certDays": 87
     },
     {
       "code": "EG",
@@ -81,7 +82,7 @@
       "hard": [],
       "warnings": [],
       "healthStatus": 200,
-      "healthMs": 700,
+      "healthMs": 956,
       "redeemStatus": 400,
       "redeemCt": "application/json",
       "certDays": 60
@@ -92,10 +93,10 @@
       "ok": true,
       "hard": [],
       "warnings": [
-        "health:slow(2380ms)"
+        "health:slow(2437ms)"
       ],
       "healthStatus": 200,
-      "healthMs": 2380,
+      "healthMs": 2437,
       "redeemStatus": 400,
       "redeemCt": "application/json",
       "certDays": 60
@@ -105,11 +106,9 @@
       "brand": "HeaderShield",
       "ok": true,
       "hard": [],
-      "warnings": [
-        "health:slow(2611ms)"
-      ],
+      "warnings": [],
       "healthStatus": 200,
-      "healthMs": 2611,
+      "healthMs": 1456,
       "redeemStatus": 400,
       "redeemCt": "application/json",
       "certDays": 60
@@ -121,7 +120,7 @@
       "hard": [],
       "warnings": [],
       "healthStatus": 200,
-      "healthMs": 729,
+      "healthMs": 1029,
       "redeemStatus": 400,
       "redeemCt": "application/json",
       "certDays": 60
@@ -133,7 +132,7 @@
       "hard": [],
       "warnings": [],
       "healthStatus": 200,
-      "healthMs": 806,
+      "healthMs": 927,
       "redeemStatus": 400,
       "redeemCt": "application/json",
       "certDays": 60
