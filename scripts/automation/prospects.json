@@ -1,6 +1,6 @@
 {
   "_info": "Prospect list for DevToolsmith B2B outreach. One email sent per day via daily-outreach workflow. Mark contacted=true after sending. Add new prospects at the bottom.",
-  "_last_updated": "2026-05-05",
+  "_last_updated": "2026-07-24",
   "_do_not_contact": "See memory/no-contact-list.md for bounced/unsubscribed emails.",
   "prospects": [
     {
@@ -230,8 +230,8 @@
       "email": "platform@zapier.com",
       "tool": "B7",
       "angle": "CaptureAPI integration in Zapier marketplace",
-      "contacted": false,
-      "contacted_date": null,
+      "contacted": true,
+      "contacted_date": "2026-07-24",
       "notes": "High distribution value, 1 integration = thousands of users"
     },
     {
