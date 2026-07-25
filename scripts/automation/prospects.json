@@ -1,6 +1,6 @@
 {
   "_info": "Prospect list for DevToolsmith B2B outreach. One email sent per day via daily-outreach workflow. Mark contacted=true after sending. Add new prospects at the bottom.",
-  "_last_updated": "2026-07-24",
+  "_last_updated": "2026-07-25",
   "_do_not_contact": "See memory/no-contact-list.md for bounced/unsubscribed emails.",
   "prospects": [
     {
@@ -241,8 +241,8 @@
       "email": "partnerships@make.com",
       "tool": "B7",
       "angle": "Screenshot + PDF capture module for Make workflows",
-      "contacted": false,
-      "contacted_date": null,
+      "contacted": true,
+      "contacted_date": "2026-07-25",
       "notes": "Automation platform, integrations reach big developer base"
     },
     {
