@@ -1,6 +1,6 @@
 {
   "_info": "Prospect list for DevToolsmith B2B outreach. One email sent per day via daily-outreach workflow. Mark contacted=true after sending. Add new prospects at the bottom.",
-  "_last_updated": "2026-07-25",
+  "_last_updated": "2026-07-26",
   "_do_not_contact": "See memory/no-contact-list.md for bounced/unsubscribed emails.",
   "prospects": [
     {
@@ -252,8 +252,8 @@
       "email": "community@n8n.io",
       "tool": "B7",
       "angle": "Open-source node for CaptureAPI in n8n workflows",
-      "contacted": false,
-      "contacted_date": null,
+      "contacted": true,
+      "contacted_date": "2026-07-26",
       "notes": "Open-source automation, developer-first audience"
     },
     {
