@@ -1,6 +1,6 @@
 {
   "_info": "Prospect list for DevToolsmith B2B outreach. One email sent per day via daily-outreach workflow. Mark contacted=true after sending. Add new prospects at the bottom.",
-  "_last_updated": "2026-07-26",
+  "_last_updated": "2026-07-27",
   "_do_not_contact": "See memory/no-contact-list.md for bounced/unsubscribed emails.",
   "prospects": [
     {
@@ -263,8 +263,8 @@
       "email": "team@pipedream.com",
       "tool": "B7",
       "angle": "CaptureAPI action component for developer workflows",
-      "contacted": false,
-      "contacted_date": null,
+      "contacted": true,
+      "contacted_date": "2026-07-27",
       "notes": "Developer automation platform"
     },
     {
