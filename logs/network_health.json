@@ -1,7 +1,7 @@
 {
   "status": "NOMINAL",
-  "scannedAt": "2026-07-20T08:34:57.072Z",
-  "summary": "55/55 scans ok, 0 regression(s) vs baseline",
+  "scannedAt": "2026-07-27T09:23:54.127Z",
+  "summary": "44/55 scans ok, 0 regression(s) vs baseline",
   "regressions": [],
   "grid": [
     {
@@ -26,7 +26,7 @@
             "hdr:Cross-Origin-Resource-Policy",
             "hdr:Server / X-Powered-By"
           ],
-          "ms": 2668
+          "ms": 1450
         },
         "B7": {
           "scanner": "B7",
@@ -34,8 +34,8 @@
           "score": null,
           "grade": null,
           "findings": [],
-          "size": 79897,
-          "ms": 9557
+          "size": 74647,
+          "ms": 7168
         }
       }
     },
@@ -61,7 +61,7 @@
             "hdr:Cross-Origin-Resource-Policy",
             "hdr:Server / X-Powered-By"
           ],
-          "ms": 1161
+          "ms": 942
         },
         "B7": {
           "scanner": "B7",
@@ -69,8 +69,8 @@
           "score": null,
           "grade": null,
           "findings": [],
-          "size": 79898,
-          "ms": 8968
+          "size": 78753,
+          "ms": 5278
         }
       }
     },
@@ -96,7 +96,7 @@
             "hdr:Cross-Origin-Resource-Policy",
             "hdr:Server / X-Powered-By"
           ],
-          "ms": 895
+          "ms": 1081
         },
         "B7": {
           "scanner": "B7",
@@ -104,8 +104,8 @@
           "score": null,
           "grade": null,
           "findings": [],
-          "size": 81899,
-          "ms": 7968
+          "size": 80370,
+          "ms": 5060
         }
       }
     },
@@ -131,7 +131,7 @@
             "hdr:Cross-Origin-Resource-Policy",
             "hdr:Server / X-Powered-By"
           ],
-          "ms": 841
+          "ms": 1030
         },
         "B7": {
           "scanner": "B7",
@@ -139,8 +139,8 @@
           "score": null,
           "grade": null,
           "findings": [],
-          "size": 59591,
-          "ms": 7480
+          "size": 59198,
+          "ms": 5019
         }
       }
     },
@@ -166,7 +166,7 @@
             "hdr:Cross-Origin-Resource-Policy",
             "hdr:Server / X-Powered-By"
           ],
-          "ms": 1028
+          "ms": 846
         },
         "B7": {
           "scanner": "B7",
@@ -174,8 +174,8 @@
           "score": null,
           "grade": null,
           "findings": [],
-          "size": 66764,
-          "ms": 9041
+          "size": 64756,
+          "ms": 5950
         }
       }
     },
@@ -201,7 +201,7 @@
             "hdr:Cross-Origin-Resource-Policy",
             "hdr:Server / X-Powered-By"
           ],
-          "ms": 1294
+          "ms": 1064
         },
         "B7": {
           "scanner": "B7",
@@ -209,8 +209,8 @@
           "score": null,
           "grade": null,
           "findings": [],
-          "size": 64206,
-          "ms": 7282
+          "size": 63800,
+          "ms": 12625
         }
       }
     },
@@ -236,16 +236,16 @@
             "hdr:Cross-Origin-Resource-Policy",
             "hdr:Server / X-Powered-By"
           ],
-          "ms": 3105
+          "ms": 1308
         },
         "B7": {
           "scanner": "B7",
-          "ok": true,
+          "ok": false,
           "score": null,
           "grade": null,
           "findings": [],
-          "size": 71798,
-          "ms": 8084
+          "err": "timeout",
+          "ms": 20001
         }
       }
     },
@@ -271,16 +271,16 @@
             "hdr:Cross-Origin-Resource-Policy",
             "hdr:Server / X-Powered-By"
           ],
-          "ms": 2940
+          "ms": 1397
         },
         "B7": {
           "scanner": "B7",
-          "ok": true,
+          "ok": false,
           "score": null,
           "grade": null,
           "findings": [],
-          "size": 67801,
-          "ms": 7993
+          "err": "timeout",
+          "ms": 20001
         }
       }
     },
@@ -306,16 +306,16 @@
             "hdr:Cross-Origin-Resource-Policy",
             "hdr:Server / X-Powered-By"
           ],
-          "ms": 956
+          "ms": 1170
         },
         "B7": {
           "scanner": "B7",
-          "ok": true,
+          "ok": false,
           "score": null,
           "grade": null,
           "findings": [],
-          "size": 78014,
-          "ms": 7143
+          "err": "timeout",
+          "ms": 20001
         }
       }
     },
@@ -341,16 +341,16 @@
             "hdr:Cross-Origin-Resource-Policy",
             "hdr:Server / X-Powered-By"
           ],
-          "ms": 969
+          "ms": 1182
         },
         "B7": {
           "scanner": "B7",
-          "ok": true,
+          "ok": false,
           "score": null,
           "grade": null,
           "findings": [],
-          "size": 71876,
-          "ms": 6701
+          "err": "timeout",
+          "ms": 20000
         }
       }
     },
@@ -376,7 +376,7 @@
             "hdr:Cross-Origin-Resource-Policy",
             "hdr:Server / X-Powered-By"
           ],
-          "ms": 868
+          "ms": 859
         },
         "SEO": {
           "scanner": "SEO",
@@ -384,7 +384,7 @@
           "score": 91,
           "grade": null,
           "findings": [],
-          "ms": 3909
+          "ms": 2305
         },
         "F1": {
           "scanner": "F1",
@@ -396,21 +396,21 @@
             "gdpr:Pre-checked consent boxes detected",
             "gdpr:Financial services without required disclaimers"
           ],
-          "ms": 1406
+          "ms": 2580
         },
         "B7": {
           "scanner": "B7",
-          "ok": true,
+          "ok": false,
           "score": null,
           "grade": null,
           "findings": [],
-          "size": 92184,
-          "ms": 9160
+          "err": "timeout",
+          "ms": 20000
         },
         "F2": {
           "scanner": "F2",
           "ok": true,
-          "score": 90,
+          "score": 91,
           "grade": null,
           "findings": [
             "a11y:3.3.2",
@@ -422,7 +422,7 @@
             "a11y:2.5.3",
             "a11y:4.1.2"
           ],
-          "ms": 1156
+          "ms": 1045
         }
       }
     },
@@ -448,7 +448,7 @@
             "hdr:Cross-Origin-Resource-Policy",
             "hdr:Server / X-Powered-By"
           ],
-          "ms": 1053
+          "ms": 895
         },
         "SEO": {
           "scanner": "SEO",
@@ -456,7 +456,7 @@
           "score": 86,
           "grade": null,
           "findings": [],
-          "ms": 1234
+          "ms": 1652
         },
         "F1": {
           "scanner": "F1",
@@ -469,16 +469,16 @@
             "gdpr:Potential cookie wall detected (forced consent)",
             "gdpr:Pre-checked consent boxes detected"
           ],
-          "ms": 1108
+          "ms": 2135
         },
         "B7": {
           "scanner": "B7",
-          "ok": true,
+          "ok": false,
           "score": null,
           "grade": null,
           "findings": [],
-          "size": 127903,
-          "ms": 9590
+          "err": "timeout",
+          "ms": 20000
         },
         "F2": {
           "scanner": "F2",
@@ -489,12 +489,13 @@
             "a11y:3.3.2",
             "a11y:3.3.2",
             "a11y:1.1.1",
+            "a11y:1.1.1",
             "a11y:3.3.1",
             "a11y:2.2.2",
             "a11y:2.5.3",
             "a11y:4.1.2"
           ],
-          "ms": 705
+          "ms": 1187
         }
       }
     },
@@ -520,7 +521,7 @@
             "hdr:Cross-Origin-Resource-Policy",
             "hdr:Server / X-Powered-By"
           ],
-          "ms": 1013
+          "ms": 880
         },
         "SEO": {
           "scanner": "SEO",
@@ -528,7 +529,7 @@
           "score": 84,
           "grade": null,
           "findings": [],
-          "ms": 1350
+          "ms": 2117
         },
         "F1": {
           "scanner": "F1",
@@ -540,16 +541,16 @@
             "gdpr:Pre-checked consent boxes detected",
             "gdpr:Financial services without required disclaimers"
           ],
-          "ms": 701
+          "ms": 1787
         },
         "B7": {
           "scanner": "B7",
-          "ok": true,
+          "ok": false,
           "score": null,
           "grade": null,
           "findings": [],
-          "size": 93783,
-          "ms": 7495
+          "err": "timeout",
+          "ms": 20000
         },
         "F2": {
           "scanner": "F2",
@@ -560,12 +561,13 @@
             "a11y:3.3.2",
             "a11y:3.3.2",
             "a11y:1.1.1",
+            "a11y:1.1.1",
             "a11y:3.3.1",
             "a11y:2.2.2",
             "a11y:2.5.3",
             "a11y:4.1.2"
           ],
-          "ms": 888
+          "ms": 355
         }
       }
     },
@@ -591,7 +593,7 @@
             "hdr:Cross-Origin-Resource-Policy",
             "hdr:Server / X-Powered-By"
           ],
-          "ms": 908
+          "ms": 1070
         },
         "SEO": {
           "scanner": "SEO",
@@ -599,7 +601,7 @@
           "score": 89,
           "grade": null,
           "findings": [],
-          "ms": 1451
+          "ms": 1273
         },
         "F1": {
           "scanner": "F1",
@@ -611,21 +613,21 @@
             "gdpr:Potential cookie wall detected (forced consent)",
             "gdpr:Pre-checked consent boxes detected"
           ],
-          "ms": 1020
+          "ms": 2487
         },
         "B7": {
           "scanner": "B7",
-          "ok": true,
+          "ok": false,
           "score": null,
           "grade": null,
           "findings": [],
-          "size": 106170,
-          "ms": 8970
+          "err": "timeout",
+          "ms": 20000
         },
         "F2": {
           "scanner": "F2",
           "ok": true,
-          "score": 91,
+          "score": 92,
           "grade": null,
           "findings": [
             "a11y:3.3.2",
@@ -635,7 +637,7 @@
             "a11y:2.5.3",
             "a11y:4.1.2"
           ],
-          "ms": 865
+          "ms": 964
         }
       }
     },
@@ -661,7 +663,7 @@
             "hdr:Cross-Origin-Resource-Policy",
             "hdr:Server / X-Powered-By"
           ],
-          "ms": 819
+          "ms": 961
         },
         "SEO": {
           "scanner": "SEO",
@@ -669,7 +671,7 @@
           "score": 86,
           "grade": null,
           "findings": [],
-          "ms": 1287
+          "ms": 1264
         },
         "F1": {
           "scanner": "F1",
@@ -680,16 +682,16 @@
             "gdpr:Potential cookie wall detected (forced consent)",
             "gdpr:Pre-checked consent boxes detected"
           ],
-          "ms": 897
+          "ms": 2449
         },
         "B7": {
           "scanner": "B7",
-          "ok": true,
+          "ok": false,
           "score": null,
           "grade": null,
           "findings": [],
-          "size": 105499,
-          "ms": 7824
+          "err": "timeout",
+          "ms": 20001
         },
         "F2": {
           "scanner": "F2",
@@ -704,7 +706,7 @@
             "a11y:2.5.3",
             "a11y:4.1.2"
           ],
-          "ms": 871
+          "ms": 573
         }
       }
     },
@@ -730,7 +732,7 @@
             "hdr:Cross-Origin-Resource-Policy",
             "hdr:Server / X-Powered-By"
           ],
-          "ms": 863
+          "ms": 783
         },
         "SEO": {
           "scanner": "SEO",
@@ -740,7 +742,7 @@
           "findings": [
             "seo:img-dimensions"
           ],
-          "ms": 1699
+          "ms": 1257
         },
         "F1": {
           "scanner": "F1",
@@ -750,16 +752,16 @@
           "findings": [
             "gdpr:Potential dark patterns in consent UI"
           ],
-          "ms": 1226
+          "ms": 699
         },
         "B7": {
           "scanner": "B7",
-          "ok": true,
+          "ok": false,
           "score": null,
           "grade": null,
           "findings": [],
-          "size": 84016,
-          "ms": 12261
+          "err": "timeout",
+          "ms": 20000
         },
         "F2": {
           "scanner": "F2",
@@ -770,11 +772,12 @@
             "a11y:3.3.2",
             "a11y:3.3.2",
             "a11y:3.3.2",
+            "a11y:1.1.1",
             "a11y:3.3.1",
             "a11y:2.2.2",
             "a11y:4.1.2"
           ],
-          "ms": 343
+          "ms": 356
         }
       }
     },
@@ -800,7 +803,7 @@
             "hdr:Cross-Origin-Resource-Policy",
             "hdr:Server / X-Powered-By"
           ],
-          "ms": 899
+          "ms": 810
         },
         "SEO": {
           "scanner": "SEO",
@@ -808,7 +811,7 @@
           "score": 97,
           "grade": null,
           "findings": [],
-          "ms": 1034
+          "ms": 1033
         },
         "F1": {
           "scanner": "F1",
@@ -821,16 +824,16 @@
             "gdpr:AI chatbot detected but no disclosure",
             "gdpr:Potential cookie wall detected (forced consent)"
           ],
-          "ms": 356
+          "ms": 593
         },
         "B7": {
           "scanner": "B7",
-          "ok": true,
+          "ok": false,
           "score": null,
           "grade": null,
           "findings": [],
-          "size": 84722,
-          "ms": 7909
+          "err": "timeout",
+          "ms": 20000
         },
         "F2": {
           "scanner": "F2",
@@ -844,7 +847,7 @@
             "a11y:3.3.1",
             "a11y:2.2.2"
           ],
-          "ms": 465
+          "ms": 312
         }
       }
     }
