@@ -17,7 +17,12 @@ name: Watchtower E2E
 on:
   schedule:
     # Every hour at minute 5 (offset from other hourly workflows for runner availability)
-    - cron: '5 * * * *'
+    # REDUCED 30 lug 2026 (was '5 * * * *' = hourly). This job installs a headless
+    # Chromium and drives real customer journeys, so it is the most expensive run in
+    # the portfolio: ~720 runs/month at hourly. GitHub Actions was blocked for billing
+    # on 30 lug. Four checks a day is proportionate to a portfolio with 57 organic
+    # clicks in 90 days; workflow_dispatch covers ad-hoc runs.
+    - cron: '5 */6 * * *'
   workflow_dispatch:
     inputs:
       only:

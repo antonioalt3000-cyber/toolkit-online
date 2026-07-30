@@ -10,7 +10,11 @@ name: Uptime Monitor
 
 on:
   schedule:
-    - cron: '*/5 * * * *' # requested every 5 min; effective cadence ~1-2h (GH throttling)
+    # CHANGED 30 lug 2026 (was '*/5 * * * *'). The comment above already documented that
+    # GitHub throttles this to a real cadence of ~1-2h, so */5 never bought the detection
+    # latency it claimed while billing unpredictably. */30 states the honest intent.
+    # For genuine sub-minute uptime, use an external free monitor, not paid Actions minutes.
+    - cron: '*/30 * * * *'
   workflow_dispatch: # Allow manual trigger from GitHub UI
 
 permissions:
