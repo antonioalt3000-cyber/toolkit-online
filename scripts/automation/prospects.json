@@ -1,6 +1,6 @@
 {
   "_info": "Prospect list for DevToolsmith B2B outreach. One email sent per day via daily-outreach workflow. Mark contacted=true after sending. Add new prospects at the bottom.",
-  "_last_updated": "2026-07-31",
+  "_last_updated": "2026-08-01",
   "_do_not_contact": "See memory/no-contact-list.md for bounced/unsubscribed emails.",
   "prospects": [
     {
@@ -318,8 +318,8 @@
       "email": "partnerships@freshworks.com",
       "tool": "F1",
       "angle": "GDPR compliance scanning for customer data in helpdesk",
-      "contacted": false,
-      "contacted_date": null,
+      "contacted": true,
+      "contacted_date": "2026-08-01",
       "notes": "Freshworks suite processes a lot of personal data"
     },
     {
