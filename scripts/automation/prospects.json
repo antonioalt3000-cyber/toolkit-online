@@ -1,6 +1,6 @@
 {
   "_info": "Prospect list for DevToolsmith B2B outreach. One email sent per day via daily-outreach workflow. Mark contacted=true after sending. Add new prospects at the bottom.",
-  "_last_updated": "2026-08-01",
+  "_last_updated": "2026-08-02",
   "_do_not_contact": "See memory/no-contact-list.md for bounced/unsubscribed emails.",
   "prospects": [
     {
@@ -329,8 +329,8 @@
       "email": "developers@intercom.com",
       "tool": "F1",
       "angle": "GDPR compliance for customer messaging platform",
-      "contacted": false,
-      "contacted_date": null,
+      "contacted": true,
+      "contacted_date": "2026-08-02",
       "notes": "Customer communications, heavy GDPR obligations"
     },
     {
