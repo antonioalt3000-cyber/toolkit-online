@@ -1,6 +1,6 @@
 {
   "_info": "Prospect list for DevToolsmith B2B outreach. One email sent per day via daily-outreach workflow. Mark contacted=true after sending. Add new prospects at the bottom.",
-  "_last_updated": "2026-08-03",
+  "_last_updated": "2026-08-04",
   "_do_not_contact": "See memory/no-contact-list.md for bounced/unsubscribed emails.",
   "prospects": [
     {
@@ -351,8 +351,8 @@
       "email": "hello@ahrefs.com",
       "tool": "F2",
       "angle": "WCAG compliance as part of technical SEO audit",
-      "contacted": false,
-      "contacted_date": null,
+      "contacted": true,
+      "contacted_date": "2026-08-04",
       "notes": "SEO platform, accessibility = technical SEO angle"
     },
     {
