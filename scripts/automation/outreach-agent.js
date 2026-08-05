@@ -8,17 +8,94 @@
 // Required env vars:  BREVO_API_KEY
 // Optional env var:   OUTREACH_DRY_RUN=true
 
-const fs   = require('fs');
+const fs = require('fs');
 const path = require('path');
 const { sendAndLog } = require('./brevo');
 
 const PROSPECTS_FILE = path.join(__dirname, 'prospects.json');
 
+// ── Hard block list (safety net) ──────────────────────────────────────────────
+// Domains that must never receive outreach regardless of what prospects.json says.
+// Competitors first (feedback-no-outreach-to-competitors.md), then companies above
+// our prospect-size ceiling (feedback-prospect-size-limit.md).
+// Curating `blocked` on the record is the primary gate; this catches the case where
+// someone appends a prospect and forgets.
+const BLOCKED_DOMAINS = new Set([
+  // SEO tools → SEOScope
+  'semrush.com',
+  'ahrefs.com',
+  'moz.com',
+  'nightwatch.io',
+  'sistrix.com',
+  'seranking.com',
+  // Document parsing → ParseFlow
+  'docsumo.com',
+  'nanonets.com',
+  'veryfi.com',
+  'affinda.com',
+  'parsio.io',
+  'reducto.ai',
+  'procys.com',
+  'zuva.ai',
+  'dost.io',
+  'docparser.com',
+  'rossum.ai',
+  'klippa.com',
+  // Screenshot / PDF / page monitoring → CaptureAPI
+  'stillio.com',
+  'changetower.com',
+  'pagescreen.io',
+  'webchangedetector.com',
+  'visualping.io',
+  'craftmypdf.com',
+  'pdfshift.io',
+  'api2pdf.com',
+  'urlbox.io',
+  'screenshotapi.net',
+  'apiflash.com',
+  'browserless.io',
+  'apilayer.com',
+  // Social/OG image generation → CardForge
+  'bannerbear.com',
+  'orshot.com',
+  'placid.app',
+  'htmlcsstoimage.com',
+  // Email verification → EmailGuard
+  'zerobounce.net',
+  'neverbounce.com',
+  'hunter.io',
+  'emailable.com',
+  // Accessibility → FixMyWeb
+  'accessibe.com',
+  'userway.org',
+  'deque.com',
+  'silktide.com',
+  'audioeye.com',
+  'aiopsgroup.com',
+  // Dunning / subscription billing → PaymentRescue
+  'recurly.com',
+  'churnbuster.io',
+  'gravy.co',
+  'baremetrics.com',
+  // Above prospect-size ceiling
+  'stripe.com',
+  'vercel.com',
+  'netlify.com',
+  'zapier.com',
+  'notion.so',
+  'shopify.com',
+  'atlassian.com',
+  'hubspot.com',
+  'zoho.com',
+  'xero.com',
+  'browserstack.com',
+]);
+
 // ── Email templates per tool ──────────────────────────────────────────────────
 const TEMPLATES = {
   F1: (prospect) => ({
     subject: `Quick question about compliance at ${prospect.company}`,
-    sender:  { name: 'CompliPilot', email: 'hello@complipilot.dev' },
+    sender: { name: 'CompliPilot', email: 'hello@complipilot.dev' },
     html: `
 <div style="font-family:system-ui,sans-serif;max-width:600px;line-height:1.6;color:#1f2937">
   <p>Hi ${prospect.contact === 'Team' || prospect.contact === 'Founders' || prospect.contact === 'Engineering' ? 'team' : prospect.contact},</p>
@@ -26,7 +103,7 @@ const TEMPLATES = {
   <p>I'm Antonio from <a href="https://complipilot.dev" style="color:#3b82f6">CompliPilot</a> —
   an automated compliance scanner for GDPR, HIPAA, CCPA, NIS2, and the EU AI Act.</p>
 
-  <p>I noticed ${prospect.company} ${prospect.angle.toLowerCase().includes('ai') ? 'works with AI systems that fall under the EU AI Act\'s requirements' : 'processes user data that\'s subject to EU privacy regulations'}.
+  <p>I noticed ${prospect.company} ${prospect.angle.toLowerCase().includes('ai') ? "works with AI systems that fall under the EU AI Act's requirements" : "processes user data that's subject to EU privacy regulations"}.
   We built CompliPilot specifically for engineering teams who need compliance insight
   without hiring a full-time DPO.</p>
 
@@ -55,20 +132,22 @@ const TEMPLATES = {
 
   F2: (prospect) => ({
     subject: `Accessibility compliance question for ${prospect.company}`,
-    sender:  { name: 'AccessiScan', email: 'hello@fixmyweb.dev' },
+    sender: { name: 'FixMyWeb', email: 'hello@fixmyweb.dev' },
     html: `
 <div style="font-family:system-ui,sans-serif;max-width:600px;line-height:1.6;color:#1f2937">
   <p>Hi ${prospect.contact === 'Team' || prospect.contact === 'Founders' || prospect.contact === 'Dev Team' || prospect.contact === 'Developer Relations' ? 'team' : prospect.contact},</p>
 
-  <p>I'm Antonio from <a href="https://fixmyweb.dev" style="color:#3b82f6">AccessiScan</a> —
+  <p>I'm Antonio from <a href="https://fixmyweb.dev" style="color:#3b82f6">FixMyWeb</a> —
   a WCAG 2.2 accessibility scanner that runs 201 automated checks and generates
   a scored compliance report in under 60 seconds.</p>
 
-  <p>The European Accessibility Act took full effect in June 2025,
-  meaning EU-facing digital products face fines up to €600,000 for non-compliance.
-  Most development teams don't have a clear view of where they stand.</p>
+  <p>The European Accessibility Act (Directive (EU) 2019/882) has applied since
+  28 June 2025. All 27 member states have transposed it, each with its own
+  enforcement body and penalty regime, and the first private enforcement actions
+  were filed in France in November 2025. Most development teams don't have a
+  clear view of where they stand.</p>
 
-  <p><strong>AccessiScan covers:</strong></p>
+  <p><strong>FixMyWeb covers:</strong></p>
   <ul>
     <li>All WCAG 2.2 success criteria (Levels A, AA, AAA)</li>
     <li>Colour contrast, keyboard navigation, ARIA usage, form labels</li>
@@ -94,19 +173,19 @@ const TEMPLATES = {
 
   F3: (prospect) => ({
     subject: `Recovering failed payments for ${prospect.company} subscribers`,
-    sender:  { name: 'ChurnGuard', email: 'hello@paymentrescue.dev' },
+    sender: { name: 'PaymentRescue', email: 'hello@paymentrescue.dev' },
     html: `
 <div style="font-family:system-ui,sans-serif;max-width:600px;line-height:1.6;color:#1f2937">
   <p>Hi ${prospect.contact === 'Team' || prospect.contact === 'Partnerships' || prospect.contact === 'Tech Partnerships' || prospect.contact === 'Platform Partnerships' ? 'team' : prospect.contact},</p>
 
-  <p>I'm Antonio from <a href="https://paymentrescue.dev" style="color:#3b82f6">ChurnGuard</a> —
+  <p>I'm Antonio from <a href="https://paymentrescue.dev" style="color:#3b82f6">PaymentRescue</a> —
   an automated payment recovery and dunning management system for subscription businesses.</p>
 
   <p>Industry data puts involuntary churn (failed payments) at 30–40% of all subscription
   cancellations. For a $100K MRR business, that's roughly $3,500–$4,000 disappearing
   every month from cards that expired or got blocked — not because the customer wanted to leave.</p>
 
-  <p><strong>ChurnGuard handles the full recovery loop:</strong></p>
+  <p><strong>PaymentRescue handles the full recovery loop:</strong></p>
   <ul>
     <li>Intelligent retry scheduling (Day 0 → 3 → 7 → 15)</li>
     <li>Automated email sequences with payment update links</li>
@@ -130,7 +209,7 @@ const TEMPLATES = {
 
   F4: (prospect) => ({
     subject: `AI document extraction API for ${prospect.company}`,
-    sender:  { name: 'ParseFlow', email: 'hello@parseflow.dev' },
+    sender: { name: 'ParseFlow', email: 'hello@parseflow.dev' },
     html: `
 <div style="font-family:system-ui,sans-serif;max-width:600px;line-height:1.6;color:#1f2937">
   <p>Hi ${prospect.contact === 'Team' || prospect.contact === 'Partnerships' || prospect.contact === 'App Marketplace' || prospect.contact === 'Platform Team' || prospect.contact === 'Developer Platform' ? 'team' : prospect.contact},</p>
@@ -167,7 +246,7 @@ const TEMPLATES = {
 
   B7: (prospect) => ({
     subject: `Screenshot & PDF API for ${prospect.company} workflows`,
-    sender:  { name: 'CaptureAPI', email: 'hello@captureapi.dev' },
+    sender: { name: 'CaptureAPI', email: 'hello@captureapi.dev' },
     html: `
 <div style="font-family:system-ui,sans-serif;max-width:600px;line-height:1.6;color:#1f2937">
   <p>Hi ${prospect.contact === 'Team' || prospect.contact === 'Partnerships' || prospect.contact === 'Developer Relations' || prospect.contact === 'Platform Partnerships' || prospect.contact === 'API Team' || prospect.contact === 'App Marketplace' || prospect.contact === 'Marketplace' || prospect.contact === 'Platform' || prospect.contact === 'Community' ? 'team' : prospect.contact},</p>
@@ -221,12 +300,46 @@ async function main() {
   const data = JSON.parse(fs.readFileSync(PROSPECTS_FILE, 'utf8'));
   const prospects = data.prospects;
 
-  // Find next uncontacted prospect
-  const next = prospects.find(p => !p.contacted);
+  // Find next uncontacted prospect.
+  //
+  // Two independent gates, because until 2026-08-05 there were none and the agent
+  // emailed Semrush (3 Aug) and Ahrefs (4 Aug) — both direct SEOScope competitors —
+  // straight out of the queue. `_do_not_contact` existed but was only a comment
+  // string that no code ever read.
+  //
+  //  1. `blocked` on the record: curated, with a reason, per prospects.json.
+  //  2. BLOCKED_DOMAINS below: a safety net, so a competitor added to the queue
+  //     later is refused even if whoever added it forgot to set `blocked`.
+  const isBlocked = (p) => {
+    if (p.blocked) return p.blocked_reason || 'blocked';
+    const domain = String(p.email || '')
+      .split('@')[1]
+      ?.toLowerCase();
+    if (domain && BLOCKED_DOMAINS.has(domain)) return `dominio in BLOCKED_DOMAINS (${domain})`;
+    return null;
+  };
+
+  const skipped = prospects.filter((p) => !p.contacted && isBlocked(p));
+  if (skipped.length) {
+    console.log(
+      `  Skipped     : ${skipped.length} destinatari bloccati (competitor / prospect-size)`
+    );
+  }
+
+  const next = prospects.find((p) => !p.contacted && !isBlocked(p));
 
   if (!next) {
-    console.log('\n✅ All prospects have been contacted. Add new prospects to prospects.json.');
+    console.log(
+      '\n✅ All contactable prospects have been contacted. Add new prospects to prospects.json.'
+    );
     process.exit(0);
+  }
+
+  // Last-line check: never send to a blocked recipient, whatever the selection did.
+  const blockReason = isBlocked(next);
+  if (blockReason) {
+    console.error(`\n❌ Refusing to contact ${next.company} <${next.email}> — ${blockReason}`);
+    process.exit(1);
   }
 
   // Build email from template
@@ -257,11 +370,11 @@ async function main() {
   // Send email
   console.log('\nSending outreach email...');
   const success = await sendAndLog({
-    to:          [{ email: next.email, name: next.company }],
-    subject:     email.subject,
+    to: [{ email: next.email, name: next.company }],
+    subject: email.subject,
     htmlContent: email.html,
-    sender:      email.sender,
-    replyTo:     email.sender.email,
+    sender: email.sender,
+    replyTo: email.sender.email,
   });
 
   if (!success) {
@@ -270,20 +383,20 @@ async function main() {
   }
 
   // Mark prospect as contacted
-  next.contacted      = true;
+  next.contacted = true;
   next.contacted_date = new Date().toISOString().split('T')[0];
-  data._last_updated  = new Date().toISOString().split('T')[0];
+  data._last_updated = new Date().toISOString().split('T')[0];
 
   fs.writeFileSync(PROSPECTS_FILE, JSON.stringify(data, null, 2) + '\n', 'utf8');
 
-  const remaining = prospects.filter(p => !p.contacted).length;
+  const remaining = prospects.filter((p) => !p.contacted && !isBlocked(p)).length;
   console.log(`\n✅ Email sent and prospect marked as contacted`);
-  console.log(`   Remaining uncontacted: ${remaining} of ${prospects.length}`);
+  console.log(`   Remaining contactable: ${remaining} of ${prospects.length}`);
 
   process.exit(0);
 }
 
-main().catch(err => {
+main().catch((err) => {
   console.error('\n💥 Fatal error:', err.message);
   process.exit(2);
 });

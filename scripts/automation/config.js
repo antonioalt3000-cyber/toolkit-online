@@ -13,17 +13,17 @@ const SITES = [
     tagline: 'AI-powered EU/GDPR/HIPAA compliance scanner',
   },
   {
-    name: 'AccessiScan',
+    name: 'FixMyWeb',
     url: 'https://fixmyweb.dev',
     tool: 'F2',
-    sender: { name: 'AccessiScan', email: 'hello@fixmyweb.dev' },
+    sender: { name: 'FixMyWeb', email: 'hello@fixmyweb.dev' },
     tagline: '201-check WCAG 2.2 accessibility scanner',
   },
   {
-    name: 'ChurnGuard',
+    name: 'PaymentRescue',
     url: 'https://paymentrescue.dev',
     tool: 'F3',
-    sender: { name: 'ChurnGuard', email: 'hello@paymentrescue.dev' },
+    sender: { name: 'PaymentRescue', email: 'hello@paymentrescue.dev' },
     tagline: 'Automated failed-payment recovery & dunning management',
   },
   {

@@ -18,7 +18,7 @@ const BLUESKY_POSTS = [
   },
   {
     tool: 'F1',
-    text: 'NIS2 applies to 160,000+ EU companies. If you handle digital infrastructure, energy, health, or finance — you\'re probably covered. Free NIS2 compliance check: complipilot.dev',
+    text: "NIS2 applies to 160,000+ EU companies. If you handle digital infrastructure, energy, health, or finance — you're probably covered. Free NIS2 compliance check: complipilot.dev",
   },
   {
     tool: 'F1',
@@ -26,16 +26,16 @@ const BLUESKY_POSTS = [
   },
   {
     tool: 'F1',
-    text: 'CCPA gives California residents rights to know, delete, and opt-out of data sales. Your privacy policy probably doesn\'t cover half of it. Free CCPA scan: complipilot.dev',
+    text: "CCPA gives California residents rights to know, delete, and opt-out of data sales. Your privacy policy probably doesn't cover half of it. Free CCPA scan: complipilot.dev",
   },
-  // AccessiScan (F2)
+  // FixMyWeb (F2)
   {
     tool: 'F2',
     text: 'The European Accessibility Act takes full effect June 2025. Non-compliant websites face fines up to €600,000. WCAG 2.2 scanner covering 201 checks: fixmyweb.dev',
   },
   {
     tool: 'F2',
-    text: '71% of users with disabilities leave inaccessible websites immediately. That\'s a massive chunk of your audience gone. Check your accessibility score in 60 seconds: fixmyweb.dev',
+    text: "71% of users with disabilities leave inaccessible websites immediately. That's a massive chunk of your audience gone. Check your accessibility score in 60 seconds: fixmyweb.dev",
   },
   {
     tool: 'F2',
@@ -43,16 +43,16 @@ const BLUESKY_POSTS = [
   },
   {
     tool: 'F2',
-    text: 'Keyboard navigation: if your site can\'t be used without a mouse, 2.5M+ US users with motor disabilities can\'t use it. Free WCAG 2.2 audit: fixmyweb.dev',
+    text: "Keyboard navigation: if your site can't be used without a mouse, 2.5M+ US users with motor disabilities can't use it. Free WCAG 2.2 audit: fixmyweb.dev",
   },
   {
     tool: 'F2',
     text: 'Missing alt text. Empty form labels. Auto-playing media. These accessibility basics fail on 98% of websites. Scan yours for free across 201 WCAG 2.2 checks: fixmyweb.dev',
   },
-  // ChurnGuard (F3)
+  // PaymentRescue (F3)
   {
     tool: 'F3',
-    text: 'For every $100K MRR, roughly $4,000/month disappears from failed payments. That\'s $48K/year left on the table. Automated payment recovery: paymentrescue.dev',
+    text: "For every $100K MRR, roughly $4,000/month disappears from failed payments. That's $48K/year left on the table. Automated payment recovery: paymentrescue.dev",
   },
   {
     tool: 'F3',
@@ -118,9 +118,9 @@ const BLUESKY_POSTS = [
 const ARTICLES = [
   // ── F1 CompliPilot ────────────────────────────────────────────────────────
   {
-    tool:  'F1',
+    tool: 'F1',
     title: 'GDPR Audit Automation: 5 Compliance Checks You Are Probably Missing',
-    tags:  ['webdev', 'security', 'privacy', 'tutorial'],
+    tags: ['webdev', 'security', 'privacy', 'tutorial'],
     body: `
 GDPR has been enforceable since 2018, yet enforcement actions keep increasing year after year. The problem isn't that developers don't care — it's that most compliance checks happen once, at launch, and then get forgotten. Here are five critical GDPR requirements that slip through the cracks on most SaaS products.
 
@@ -190,9 +190,9 @@ The goal isn't perfect compliance overnight. It's knowing exactly where your gap
   },
 
   {
-    tool:  'F1',
+    tool: 'F1',
     title: 'NIS2 Directive 2025: What Software Companies Need to Do Now',
-    tags:  ['webdev', 'security', 'devops', 'tutorial'],
+    tags: ['webdev', 'security', 'devops', 'tutorial'],
     body: `
 NIS2 (Network and Information Security Directive 2) came into EU law in October 2024. Unlike GDPR, which targets data protection, NIS2 targets **operational resilience and cybersecurity**. It expands coverage to over 160,000 entities across 18 sectors — and software companies are directly in scope.
 
@@ -267,11 +267,11 @@ NIS2 enforcement is active. Don't wait for an incident to find out you weren't c
 `.trim(),
   },
 
-  // ── F2 AccessiScan ────────────────────────────────────────────────────────
+  // ── F2 FixMyWeb ────────────────────────────────────────────────────────
   {
-    tool:  'F2',
+    tool: 'F2',
     title: 'Color Contrast Failures: The Number One Accessibility Issue and How to Fix It',
-    tags:  ['accessibility', 'css', 'webdev', 'beginners'],
+    tags: ['accessibility', 'css', 'webdev', 'beginners'],
     body: `
 Color contrast failures are the single most common accessibility issue on the web. The WebAIM Million study found them on 83.6% of home pages tested. Yet they're also one of the easiest issues to fix — once you understand the rules.
 
@@ -354,16 +354,16 @@ Disabled controls are exempt from contrast requirements — but only if they're 
 
 ## Automating Detection
 
-Checking contrast manually across every combination of text and background in your app is impractical. Automated tools like [AccessiScan](https://fixmyweb.dev) scan your entire page across 201 WCAG 2.2 checks — including contrast — and generate a prioritised report with specific failing elements identified.
+Checking contrast manually across every combination of text and background in your app is impractical. Automated tools like [FixMyWeb](https://fixmyweb.dev) scan your entire page across 201 WCAG 2.2 checks — including contrast — and generate a prioritised report with specific failing elements identified.
 
 Start with Level AA compliance. The changes are usually small CSS tweaks with an outsized impact on usability for everyone, not just users with visual impairments.
 `.trim(),
   },
 
   {
-    tool:  'F2',
+    tool: 'F2',
     title: 'Keyboard Navigation Testing: A Developer Complete Guide to WCAG Operability',
-    tags:  ['accessibility', 'webdev', 'javascript', 'tutorial'],
+    tags: ['accessibility', 'webdev', 'javascript', 'tutorial'],
     body: `
 Keyboard accessibility is one of the most important — and most neglected — aspects of web accessibility. An estimated 2.5 million Americans have motor disabilities that prevent mouse use. If your site can't be operated entirely by keyboard, you're excluding them completely.
 
@@ -509,15 +509,15 @@ Users navigating by keyboard should be able to skip repetitive navigation. A ski
 
 ## Automated Testing Coverage
 
-Automated scanners can catch about 40% of keyboard accessibility issues — primarily missing tabindex, incorrect roles, and missing focus styles. Tools like [AccessiScan](https://fixmyweb.dev) provide a starting point with 201 automated checks, but the Tab-through test above is still essential for catching interaction patterns that automation misses.
+Automated scanners can catch about 40% of keyboard accessibility issues — primarily missing tabindex, incorrect roles, and missing focus styles. Tools like [FixMyWeb](https://fixmyweb.dev) provide a starting point with 201 automated checks, but the Tab-through test above is still essential for catching interaction patterns that automation misses.
 `.trim(),
   },
 
-  // ── F3 ChurnGuard ─────────────────────────────────────────────────────────
+  // ── F3 PaymentRescue ─────────────────────────────────────────────────────────
   {
-    tool:  'F3',
+    tool: 'F3',
     title: 'The SaaS Revenue Leak: How Failed Payments Are Silently Killing Your MRR',
-    tags:  ['business', 'saas', 'javascript', 'webdev'],
+    tags: ['business', 'saas', 'javascript', 'webdev'],
     body: `
 Every SaaS founder knows about voluntary churn — customers who cancel because they're not seeing value. But there's a second, quieter type of churn that often goes untracked: **involuntary churn** from failed payments.
 
@@ -631,16 +631,16 @@ Track these metrics to optimise your dunning process:
 - **Time to recovery**: median days from failure to successful payment
 - **Email-to-update CTR**: click-through on payment update links
 
-A well-implemented dunning system typically achieves 15-25% recovery rate. Tools like [ChurnGuard](https://paymentrescue.dev) automate the entire process — retry scheduling, email sequences, recovery tracking — with zero code integration required.
+A well-implemented dunning system typically achieves 15-25% recovery rate. Tools like [PaymentRescue](https://paymentrescue.dev) automate the entire process — retry scheduling, email sequences, recovery tracking — with zero code integration required.
 
 Don't let payment failures become silent cancellations. The revenue is there; you just need to ask for it at the right time.
 `.trim(),
   },
 
   {
-    tool:  'F3',
+    tool: 'F3',
     title: 'Building Retention Playbooks: Proven Strategies to Reduce SaaS Churn',
-    tags:  ['business', 'saas', 'productivity', 'webdev'],
+    tags: ['business', 'saas', 'productivity', 'webdev'],
     body: `
 Churn reduction is not a single tactic — it's a system. The best SaaS companies treat each at-risk customer segment differently, with specific playbooks tailored to why they're likely to churn. Here's how to build them.
 
@@ -738,7 +738,7 @@ async function checkEngagementHealth() {
 }
 \`\`\`
 
-[ChurnGuard](https://paymentrescue.dev) includes four pre-built retention playbooks (New Customer, High-Value, Long-Term, Repeat Failure) with customisable email templates, trigger conditions, and a recovery dashboard showing revenue saved per playbook. The automation runs in the background while you focus on building product.
+[PaymentRescue](https://paymentrescue.dev) includes four pre-built retention playbooks (New Customer, High-Value, Long-Term, Repeat Failure) with customisable email templates, trigger conditions, and a recovery dashboard showing revenue saved per playbook. The automation runs in the background while you focus on building product.
 
 The best churn reduction strategy is the one that runs automatically, 24/7, without requiring a dedicated CSM for every account.
 `.trim(),
@@ -746,9 +746,9 @@ The best churn reduction strategy is the one that runs automatically, 24/7, with
 
   // ── F4 ParseFlow ──────────────────────────────────────────────────────────
   {
-    tool:  'F4',
+    tool: 'F4',
     title: 'Structured Data Extraction from PDFs: Regex vs Template Matching vs AI',
-    tags:  ['ai', 'javascript', 'tutorial', 'productivity'],
+    tags: ['ai', 'javascript', 'tutorial', 'productivity'],
     body: `
 Invoice processing is one of those problems that looks simple until you actually try to build it. Reading data from a PDF invoice should be straightforward — but the moment you encounter 50 different vendor layouts, foreign languages, scanned images, and multi-page documents, your initial approach falls apart. Here's an honest comparison of the three main approaches.
 
@@ -856,9 +856,9 @@ For most accounts payable automation projects:
   },
 
   {
-    tool:  'F4',
+    tool: 'F4',
     title: 'Building an Automated Invoice Processing Pipeline with Node.js',
-    tags:  ['javascript', 'tutorial', 'webdev', 'node'],
+    tags: ['javascript', 'tutorial', 'webdev', 'node'],
     body: `
 Accounts payable teams spend an average of 3.7 minutes manually processing each invoice. At 200 invoices per month, that's 12+ hours of data entry. Here's how to build an automated pipeline that brings this to under 10 seconds per document.
 
@@ -1054,9 +1054,9 @@ The full pipeline handles PDF, Word, and Excel with the same code path — no sp
 
   // ── B7 CaptureAPI ─────────────────────────────────────────────────────────
   {
-    tool:  'B7',
+    tool: 'B7',
     title: 'Screenshot APIs vs Headless Chrome: Benchmarks, Costs, and Decision Framework',
-    tags:  ['javascript', 'tutorial', 'webdev', 'node'],
+    tags: ['javascript', 'tutorial', 'webdev', 'node'],
     body: `
 Every developer who needs to automate screenshots eventually asks: should I run Puppeteer/Playwright myself, or use a screenshot API? I've done this comparison across multiple projects. Here's the honest breakdown.
 
@@ -1191,9 +1191,9 @@ APIs win on cold start performance by a significant margin because they run pre-
   },
 
   {
-    tool:  'B7',
+    tool: 'B7',
     title: 'Visual Regression Testing with Screenshot APIs: Catch UI Bugs Before Users Do',
-    tags:  ['testing', 'javascript', 'webdev', 'devops'],
+    tags: ['testing', 'javascript', 'webdev', 'devops'],
     body: `
 Unit tests check logic. Integration tests check API contracts. But neither catches the CSS regression that moves your checkout button off-screen in Safari, or the z-index bug that hides your navigation on mobile. Visual regression testing fills this gap — and with a screenshot API, it's surprisingly easy to set up.
 
@@ -1365,9 +1365,9 @@ jobs:
 // ── Rotation helpers ──────────────────────────────────────────────────────────
 
 function getDayOfYear() {
-  const now   = new Date();
+  const now = new Date();
   const start = new Date(now.getFullYear(), 0, 0);
-  const diff  = now - start;
+  const diff = now - start;
   const oneDay = 1000 * 60 * 60 * 24;
   return Math.floor(diff / oneDay);
 }
@@ -1404,4 +1404,10 @@ function getAllBlueskyPosts() {
   return BLUESKY_POSTS;
 }
 
-module.exports = { getTodayArticle, getTodayBlueskyPost, getAllArticles, getAllBlueskyPosts, getDayOfYear };
+module.exports = {
+  getTodayArticle,
+  getTodayBlueskyPost,
+  getAllArticles,
+  getAllBlueskyPosts,
+  getDayOfYear,
+};

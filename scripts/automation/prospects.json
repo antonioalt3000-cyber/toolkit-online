@@ -1,7 +1,7 @@
 {
   "_info": "Prospect list for DevToolsmith B2B outreach. One email sent per day via daily-outreach workflow. Mark contacted=true after sending. Add new prospects at the bottom.",
-  "_last_updated": "2026-08-04",
-  "_do_not_contact": "See memory/no-contact-list.md for bounced/unsubscribed emails.",
+  "_last_updated": "2026-08-05",
+  "_do_not_contact": "I record con \"blocked\": true NON vengono mai contattati. Il campo e letto da outreach-agent.js. Vedi anche memory/feedback-no-outreach-to-competitors.md e memory/feedback-prospect-size-limit.md.",
   "prospects": [
     {
       "id": "p001",
@@ -119,7 +119,7 @@
       "contact": "Partnerships",
       "email": "partnerships@paddle.com",
       "tool": "F3",
-      "angle": "Add ChurnGuard recovery layer to Paddle billing events",
+      "angle": "Add PaymentRescue recovery layer to Paddle billing events",
       "contacted": true,
       "contacted_date": "2026-04-26",
       "notes": "Already on email log (support), try partnerships angle"
@@ -130,7 +130,7 @@
       "contact": "Issac Abraham",
       "email": "hello@lemonsqueezy.com",
       "tool": "F3",
-      "angle": "Create ChurnGuard store + webhook integration",
+      "angle": "Create PaymentRescue store + webhook integration",
       "contacted": true,
       "contacted_date": "2026-04-27",
       "notes": "URGENT: They invited us! From handoff doc - 13/4 email"
@@ -144,7 +144,7 @@
       "angle": "Failed payment recovery as complement to MRR analytics",
       "contacted": true,
       "contacted_date": "2026-04-28",
-      "notes": "SaaS metrics tool, natural audience for ChurnGuard"
+      "notes": "SaaS metrics tool, natural audience for PaymentRescue"
     },
     {
       "id": "p014",
@@ -364,7 +364,10 @@
       "angle": "Accessibility scanning to complement Moz Pro site crawl",
       "contacted": false,
       "contacted_date": null,
-      "notes": "Established SEO tool with large customer base"
+      "notes": "Established SEO tool with large customer base",
+      "blocked": true,
+      "blocked_reason": "competitor: SEO rank/audit tool = competitor diretto di SEOScope",
+      "blocked_on": "2026-08-05"
     },
     {
       "id": "p034",
@@ -375,7 +378,10 @@
       "angle": "Smart retry logic layer on top of Stripe billing webhooks",
       "contacted": false,
       "contacted_date": null,
-      "notes": "Primary payment processor, integration would be high value"
+      "notes": "Primary payment processor, integration would be high value",
+      "blocked": true,
+      "blocked_reason": "prospect_size: Vietato da feedback-prospect-size-limit.md (tech giant)",
+      "blocked_on": "2026-08-05"
     },
     {
       "id": "p035",
@@ -386,7 +392,10 @@
       "angle": "Intelligent dunning to complement Recurly billing",
       "contacted": false,
       "contacted_date": null,
-      "notes": "Subscription billing platform, direct ChurnGuard integration target"
+      "notes": "Subscription billing platform, direct PaymentRescue integration target",
+      "blocked": true,
+      "blocked_reason": "competitor: Subscription billing con dunning integrato = competitor diretto di PaymentRescue (ticket gia chiuso da loro per nostra non-risposta, apr 2026)",
+      "blocked_on": "2026-08-05"
     },
     {
       "id": "p036",
@@ -397,7 +406,10 @@
       "angle": "Invoice parsing API for Zoho Books and Zoho Invoice users",
       "contacted": false,
       "contacted_date": null,
-      "notes": "Large SMB base, strong invoice workflow"
+      "notes": "Large SMB base, strong invoice workflow",
+      "blocked": true,
+      "blocked_reason": "prospect_size: Vietato da feedback-prospect-size-limit.md (tech giant)",
+      "blocked_on": "2026-08-05"
     },
     {
       "id": "p037",
@@ -419,7 +431,10 @@
       "angle": "ParseFlow as Xero-connected app for invoice automation",
       "contacted": false,
       "contacted_date": null,
-      "notes": "Large accountant user base globally"
+      "notes": "Large accountant user base globally",
+      "blocked": true,
+      "blocked_reason": "prospect_size: Vietato da feedback-prospect-size-limit.md (tech giant)",
+      "blocked_on": "2026-08-05"
     },
     {
       "id": "p039",
@@ -441,7 +456,10 @@
       "angle": "Screenshot API for cross-browser visual testing pipeline",
       "contacted": false,
       "contacted_date": null,
-      "notes": "Browser testing platform, screenshots are core workflow"
+      "notes": "Browser testing platform, screenshots are core workflow",
+      "blocked": true,
+      "blocked_reason": "prospect_size: Vietato da feedback-prospect-size-limit.md (tech giant)",
+      "blocked_on": "2026-08-05"
     },
     {
       "id": "p061",
@@ -680,7 +698,7 @@
       "contact": "Aurelio",
       "email": "support@wp-umbrella.com",
       "tool": "F3",
-      "angle": "With €40K/month in Stripe fees and 67% YoY growth, even a 2% failed payment rate means thousands in monthly MRR left unrecovered — ChurnGuard fixes this automatically.",
+      "angle": "With €40K/month in Stripe fees and 67% YoY growth, even a 2% failed payment rate means thousands in monthly MRR left unrecovered — PaymentRescue fixes this automatically.",
       "contacted": false,
       "contacted_date": null,
       "notes": "https://wp-umbrella.com/legal-notice/ — Aurelio Volle CEO, bootstrapped, $110K MRR, Stripe confirmed"
@@ -724,7 +742,7 @@
       "contact": "Nevo",
       "email": "nevo@postiz.com",
       "tool": "F3",
-      "angle": "Postiz uses Stripe for subscriptions at $18K-$45K MRR — failed payments erode that MRR silently, and ChurnGuard recovers 30-50% of those payments automatically.",
+      "angle": "Postiz uses Stripe for subscriptions at $18K-$45K MRR — failed payments erode that MRR silently, and PaymentRescue recovers 30-50% of those payments automatically.",
       "contacted": false,
       "contacted_date": null,
       "notes": "https://postiz.com/pricing — Nevo David, bootstrapped open-source, Stripe Custom UI confirmed"
@@ -735,10 +753,13 @@
       "contact": "Jon",
       "email": "info@bannerbear.com",
       "tool": "F3",
-      "angle": "Bannerbear's API subscription model at $50K MRR uses Stripe Billing — failed payments from developer customers who forget card updates are a silent churn vector ChurnGuard eliminates.",
+      "angle": "Bannerbear's API subscription model at $50K MRR uses Stripe Billing — failed payments from developer customers who forget card updates are a silent churn vector PaymentRescue eliminates.",
       "contacted": false,
       "contacted_date": null,
-      "notes": "https://www.bannerbear.com/pricing — Jon Yongfook, bootstrapped, $50K MRR, Stripe Climate Partner"
+      "notes": "https://www.bannerbear.com/pricing — Jon Yongfook, bootstrapped, $50K MRR, Stripe Climate Partner",
+      "blocked": true,
+      "blocked_reason": "competitor: Generazione immagini/social card via API = competitor diretto di CardForge",
+      "blocked_on": "2026-08-05"
     },
     {
       "id": "p088",
@@ -746,7 +767,7 @@
       "contact": "Rashid",
       "email": "contact@angelmatch.io",
       "tool": "F3",
-      "angle": "Angel Match's subscription database paid through Stripe means any failed payment interrupts a founder's fundraising workflow — ChurnGuard recovers that revenue with automated sequences.",
+      "angle": "Angel Match's subscription database paid through Stripe means any failed payment interrupts a founder's fundraising workflow — PaymentRescue recovers that revenue with automated sequences.",
       "contacted": false,
       "contacted_date": null,
       "notes": "https://angelmatch.io/pricing — Rashid Khasanov, Stripe confirmed in pricing FAQ, $37K MRR"
@@ -757,7 +778,7 @@
       "contact": "Michael",
       "email": "support@propertydata.co.uk",
       "tool": "F3",
-      "angle": "PropertyData's £128K/month subscription SaaS for UK property investors means failed card payments are a silent drain — ChurnGuard's dunning sequences recover that revenue automatically.",
+      "angle": "PropertyData's £128K/month subscription SaaS for UK property investors means failed card payments are a silent drain — PaymentRescue's dunning sequences recover that revenue automatically.",
       "contacted": false,
       "contacted_date": null,
       "notes": "https://propertydata.co.uk/contact — Michael Dent, bootstrapped solo founder, $1.54M ARR"
@@ -779,7 +800,7 @@
       "contact": "Rob",
       "email": "rob@superx.so",
       "tool": "F3",
-      "angle": "SuperX hit $23K MRR in 6 months with 650 paying subscribers at $39/mo on Stripe — even a 3% failed payment rate means $690/month left on the table that ChurnGuard recaptures.",
+      "angle": "SuperX hit $23K MRR in 6 months with 650 paying subscribers at $39/mo on Stripe — even a 3% failed payment rate means $690/month left on the table that PaymentRescue recaptures.",
       "contacted": false,
       "contacted_date": null,
       "notes": "https://superx.so/pricing — Rob Hallam, bootstrapped, $23K MRR, Stripe confirmed"
@@ -790,7 +811,7 @@
       "contact": "Sunny",
       "email": "contact@youdontneedacrm.com",
       "tool": "F3",
-      "angle": "noCRM's 11,000 active salespeople paying on subscription means failed payments quietly churn paying accounts — ChurnGuard's automated sequences recover those customers before they cancel.",
+      "angle": "noCRM's 11,000 active salespeople paying on subscription means failed payments quietly churn paying accounts — PaymentRescue's automated sequences recover those customers before they cancel.",
       "contacted": false,
       "contacted_date": null,
       "notes": "https://www.nocrm.io/about — Sunny Paris & Güven Urganci, bootstrapped, $2.64M ARR"
@@ -801,7 +822,7 @@
       "contact": "Adriaan",
       "email": "hi@simpleanalytics.com",
       "tool": "F3",
-      "angle": "Simple Analytics' privacy-first analytics SaaS charges Stripe subscriptions — failed payments from EU customers with strict banking regulations are a real revenue leak ChurnGuard fixes.",
+      "angle": "Simple Analytics' privacy-first analytics SaaS charges Stripe subscriptions — failed payments from EU customers with strict banking regulations are a real revenue leak PaymentRescue fixes.",
       "contacted": false,
       "contacted_date": null,
       "notes": "https://www.simpleanalytics.com — Adriaan van Rossum, bootstrapped, $380K ARR, Stripe confirmed"
@@ -812,7 +833,7 @@
       "contact": "Osman",
       "email": "hello@userguiding.com",
       "tool": "F3",
-      "angle": "UserGuiding's $200K MRR user onboarding SaaS has hundreds of B2B subscribers — failed payments from small startup clients are a silent churn driver ChurnGuard eliminates.",
+      "angle": "UserGuiding's $200K MRR user onboarding SaaS has hundreds of B2B subscribers — failed payments from small startup clients are a silent churn driver PaymentRescue eliminates.",
       "contacted": false,
       "contacted_date": null,
       "notes": "https://userguiding.com/pricing — Osman Koç, $200K MRR, Turkey-based"
@@ -859,7 +880,10 @@
       "angle": "Dost automates invoice and delivery note management for SMBs — ParseFlow's PDF-to-JSON API could replace their manual OCR pipeline for supplier documents, speeding up AP processing without ML training overhead.",
       "contacted": false,
       "contacted_date": null,
-      "notes": "https://www.dost.io | documents: invoices, delivery notes, supplier documents"
+      "notes": "https://www.dost.io | documents: invoices, delivery notes, supplier documents",
+      "blocked": true,
+      "blocked_reason": "competitor: Estrazione dati da fatture/documenti = competitor diretto di ParseFlow",
+      "blocked_on": "2026-08-05"
     },
     {
       "id": "p099",
@@ -870,7 +894,10 @@
       "angle": "Parsio parses emails and PDFs for e-commerce data extraction — ParseFlow's structured JSON output from complex PDFs could complement their email parser for document-heavy workflows.",
       "contacted": false,
       "contacted_date": null,
-      "notes": "https://parsio.io | documents: emails, PDFs, invoices, receipts"
+      "notes": "https://parsio.io | documents: emails, PDFs, invoices, receipts",
+      "blocked": true,
+      "blocked_reason": "competitor: Parsing documenti = competitor diretto di ParseFlow",
+      "blocked_on": "2026-08-05"
     },
     {
       "id": "p100",
@@ -903,7 +930,10 @@
       "angle": "Veryfi offers OCR APIs for receipts and invoices — ParseFlow's Word/Excel extraction capability alongside PDF would extend their document coverage without requiring new ML model training.",
       "contacted": false,
       "contacted_date": null,
-      "notes": "https://www.veryfi.com/about/ | co-founder: Ernest Semerda | documents: receipts, invoices"
+      "notes": "https://www.veryfi.com/about/ | co-founder: Ernest Semerda | documents: receipts, invoices",
+      "blocked": true,
+      "blocked_reason": "competitor: OCR/parsing ricevute e fatture = competitor diretto di ParseFlow",
+      "blocked_on": "2026-08-05"
     },
     {
       "id": "p103",
@@ -914,7 +944,10 @@
       "angle": "Affinda extracts structured data from resumes, invoices, and insurance documents — ParseFlow's zero-ML extraction could handle edge-case document formats that Affinda's models struggle with.",
       "contacted": false,
       "contacted_date": null,
-      "notes": "https://www.affinda.com/contact | co-founders: Tim Toner, Ben Toner | documents: CVs, invoices, insurance"
+      "notes": "https://www.affinda.com/contact | co-founders: Tim Toner, Ben Toner | documents: CVs, invoices, insurance",
+      "blocked": true,
+      "blocked_reason": "competitor: Document parsing API = competitor diretto di ParseFlow",
+      "blocked_on": "2026-08-05"
     },
     {
       "id": "p104",
@@ -925,7 +958,10 @@
       "angle": "Docsumo automates AP/invoice processing for enterprises — ParseFlow's structured extraction from complex multi-page PDFs could reduce manual review rate for invoices with non-standard layouts.",
       "contacted": false,
       "contacted_date": null,
-      "notes": "https://www.docsumo.com/contact | CEO: Rushabh Sheth | documents: invoices, bank statements"
+      "notes": "https://www.docsumo.com/contact | CEO: Rushabh Sheth | documents: invoices, bank statements",
+      "blocked": true,
+      "blocked_reason": "competitor: Document parsing = competitor diretto di ParseFlow (gia contattato 6 volte in apr 2026, mai risposto)",
+      "blocked_on": "2026-08-05"
     },
     {
       "id": "p105",
@@ -936,7 +972,10 @@
       "angle": "Nanonets processes invoices, POs, and contracts for Fortune 500 clients — ParseFlow's Word and Excel extraction could expand document type coverage for customers submitting mixed-format files.",
       "contacted": false,
       "contacted_date": null,
-      "notes": "https://nanonets.com/about | CEO: Sarthak Jain | documents: invoices, purchase orders"
+      "notes": "https://nanonets.com/about | CEO: Sarthak Jain | documents: invoices, purchase orders",
+      "blocked": true,
+      "blocked_reason": "competitor: OCR/document AI = competitor diretto di ParseFlow",
+      "blocked_on": "2026-08-05"
     },
     {
       "id": "p106",
@@ -947,7 +986,10 @@
       "angle": "Reducto provides document AI for enterprise finance and insurance — ParseFlow's fast no-ML pipeline could serve as a lightweight fallback when deep extraction is overkill for simple structured PDFs.",
       "contacted": false,
       "contacted_date": null,
-      "notes": "https://reducto.ai | documents: financial docs, contracts, claims"
+      "notes": "https://reducto.ai | documents: financial docs, contracts, claims",
+      "blocked": true,
+      "blocked_reason": "competitor: Document ingestion API = competitor diretto di ParseFlow",
+      "blocked_on": "2026-08-05"
     },
     {
       "id": "p107",
@@ -958,7 +1000,10 @@
       "angle": "Procys extracts data from invoices, purchase orders, and ID cards for AP automation — ParseFlow's structured JSON output could serve as their extraction layer for Word and Excel-format documents.",
       "contacted": false,
       "contacted_date": null,
-      "notes": "https://procys.com/contact | documents: invoices, POs, passports | Netherlands"
+      "notes": "https://procys.com/contact | documents: invoices, POs, passports | Netherlands",
+      "blocked": true,
+      "blocked_reason": "competitor: Invoice processing = competitor diretto di ParseFlow",
+      "blocked_on": "2026-08-05"
     },
     {
       "id": "p108",
@@ -991,7 +1036,10 @@
       "angle": "Zuva extracts contract data for legal teams at 3x speed — ParseFlow's no-ML extraction of structured fields from complex contract PDFs could complement Zuva's AI for standardized clause types.",
       "contacted": false,
       "contacted_date": null,
-      "notes": "https://zuva.ai/contact/ | CEO: Noah Waisberg | documents: legal contracts, agreements"
+      "notes": "https://zuva.ai/contact/ | CEO: Noah Waisberg | documents: legal contracts, agreements",
+      "blocked": true,
+      "blocked_reason": "competitor: Document/contract extraction = competitor diretto di ParseFlow",
+      "blocked_on": "2026-08-05"
     },
     {
       "id": "p111",
@@ -1013,7 +1061,10 @@
       "angle": "Stillio currently self-manages automated screenshot capture at scale — CaptureAPI's unified screenshot+PDF API could replace their custom stack with simpler, cheaper infrastructure.",
       "contacted": false,
       "contacted_date": null,
-      "notes": "https://www.stillio.com/about-us | screenshot archiving SaaS, founder Stevijn de Jong, Netherlands"
+      "notes": "https://www.stillio.com/about-us | screenshot archiving SaaS, founder Stevijn de Jong, Netherlands",
+      "blocked": true,
+      "blocked_reason": "competitor: Screenshot schedulati di siti = competitor diretto di CaptureAPI",
+      "blocked_on": "2026-08-05"
     },
     {
       "id": "p113",
@@ -1024,7 +1075,10 @@
       "angle": "ChangeTower archives full visual snapshots of pages for compliance monitoring — CaptureAPI's screenshot endpoint could replace their in-house rendering and reduce infrastructure overhead.",
       "contacted": false,
       "contacted_date": null,
-      "notes": "https://changetower.com | website change detection with screenshot archiving, 2-10 employees"
+      "notes": "https://changetower.com | website change detection with screenshot archiving, 2-10 employees",
+      "blocked": true,
+      "blocked_reason": "competitor: Website change monitoring con screenshot = competitor diretto di CaptureAPI",
+      "blocked_on": "2026-08-05"
     },
     {
       "id": "p114",
@@ -1035,7 +1089,10 @@
       "angle": "Pagescreen monitors competitor and client pages with automated screenshots — CaptureAPI could replace their screenshot infrastructure with a reliable API that handles rendering and CDN in one call.",
       "contacted": false,
       "contacted_date": null,
-      "notes": "https://pagescreen.io/about-us | website monitoring, Sofia Bulgaria"
+      "notes": "https://pagescreen.io/about-us | website monitoring, Sofia Bulgaria",
+      "blocked": true,
+      "blocked_reason": "competitor: Screenshot e monitoring siti = competitor diretto di CaptureAPI",
+      "blocked_on": "2026-08-05"
     },
     {
       "id": "p115",
@@ -1046,7 +1103,10 @@
       "angle": "WebChangeDetector takes before/after screenshots to detect WordPress site changes — CaptureAPI's screenshot API would replace their Puppeteer-based rendering with a managed, scalable solution.",
       "contacted": false,
       "contacted_date": null,
-      "notes": "https://www.webchangedetector.com/about-us/ | screenshot change detection, founder Mike Miler, Bavaria Germany"
+      "notes": "https://www.webchangedetector.com/about-us/ | screenshot change detection, founder Mike Miler, Bavaria Germany",
+      "blocked": true,
+      "blocked_reason": "competitor: Website change detector con screenshot = competitor diretto di CaptureAPI",
+      "blocked_on": "2026-08-05"
     },
     {
       "id": "p116",
@@ -1057,7 +1117,10 @@
       "angle": "CraftMyPDF generates PDFs from templates via API — CaptureAPI's unified PDF+screenshot endpoint could complement their offering or replace their HTML-to-PDF rendering layer at 10x lower cost.",
       "contacted": false,
       "contacted_date": null,
-      "notes": "https://craftmypdf.com/about-us/ | PDF generation API, $15K MRR, founder Jacky Tan"
+      "notes": "https://craftmypdf.com/about-us/ | PDF generation API, $15K MRR, founder Jacky Tan",
+      "blocked": true,
+      "blocked_reason": "competitor: Generazione PDF da HTML = competitor diretto di CaptureAPI (fondatore Jacky gia in contatto apr 2026)",
+      "blocked_on": "2026-08-05"
     },
     {
       "id": "p117",
@@ -1068,7 +1131,10 @@
       "angle": "PDFShift converts HTML to PDF via API but lacks screenshot generation — CaptureAPI's 3-in-1 endpoint could be an upgrade path for customers needing visual captures alongside PDFs.",
       "contacted": false,
       "contacted_date": null,
-      "notes": "https://pdfshift.io | HTML-to-PDF API, $9K MRR, founder Cyril Nicodème, bootstrapped"
+      "notes": "https://pdfshift.io | HTML-to-PDF API, $9K MRR, founder Cyril Nicodème, bootstrapped",
+      "blocked": true,
+      "blocked_reason": "competitor: HTML-to-PDF API = competitor diretto di CaptureAPI",
+      "blocked_on": "2026-08-05"
     },
     {
       "id": "p118",
@@ -1079,7 +1145,10 @@
       "angle": "Api2Pdf handles PDF generation serverlessly but requires customers to self-manage screenshot workflows — CaptureAPI's unified API saves their users from combining multiple services.",
       "contacted": false,
       "contacted_date": null,
-      "notes": "https://www.api2pdf.com | PDF generation REST API, $10K/month, co-founders Zack Schwartz & Kunal Johar"
+      "notes": "https://www.api2pdf.com | PDF generation REST API, $10K/month, co-founders Zack Schwartz & Kunal Johar",
+      "blocked": true,
+      "blocked_reason": "competitor: PDF generation API = competitor diretto di CaptureAPI",
+      "blocked_on": "2026-08-05"
     },
     {
       "id": "p119",
@@ -1090,7 +1159,10 @@
       "angle": "Orshot automates image and PDF generation from templates — CaptureAPI's screenshot API could power their URL-to-image capture use cases without Orshot needing to maintain Puppeteer infrastructure.",
       "contacted": false,
       "contacted_date": null,
-      "notes": "https://orshot.com/founders-note | founder Rishi Mohan, Berlin"
+      "notes": "https://orshot.com/founders-note | founder Rishi Mohan, Berlin",
+      "blocked": true,
+      "blocked_reason": "competitor: Generazione OG image = competitor diretto di CardForge",
+      "blocked_on": "2026-08-05"
     },
     {
       "id": "p120",
@@ -1101,7 +1173,10 @@
       "angle": "Nightwatch tracks SEO rankings visually but relies on self-managed screenshot rendering for SERP snapshots — CaptureAPI could replace their Puppeteer/headless setup with a reliable, scalable API.",
       "contacted": false,
       "contacted_date": null,
-      "notes": "https://nightwatch.io/contact/ | SEO monitoring tool, founder Aljaz Fajmut, Slovenia. Bootstrapped."
+      "notes": "https://nightwatch.io/contact/ | SEO monitoring tool, founder Aljaz Fajmut, Slovenia. Bootstrapped.",
+      "blocked": true,
+      "blocked_reason": "competitor: SEO rank tracking = competitor diretto di SEOScope",
+      "blocked_on": "2026-08-05"
     },
     {
       "id": "p121",
@@ -1134,7 +1209,10 @@
       "angle": "Visualping detects website changes by comparing screenshots — CaptureAPI's screenshot API could provide a more reliable and cost-effective capture layer than their current rendering pipeline.",
       "contacted": false,
       "contacted_date": null,
-      "notes": "https://visualping.io/contact | #1 website change detection, 2M+ users, founder Serge Salager, Vancouver"
+      "notes": "https://visualping.io/contact | #1 website change detection, 2M+ users, founder Serge Salager, Vancouver",
+      "blocked": true,
+      "blocked_reason": "competitor: Website change monitoring = competitor diretto di CaptureAPI",
+      "blocked_on": "2026-08-05"
     },
     {
       "id": "p124",

@@ -9,22 +9,23 @@ const fs = require('fs');
 const path = require('path');
 const { sendEmail } = require('./brevo');
 
-const PROSPECTS_FILE  = path.join(__dirname, 'prospects-scale.json');
-const LOG_FILE        = path.join(__dirname, 'outreach-scale-log.json');
-const SENT_LOG_FILE   = path.join(__dirname, '..', '..', 'sent-log-scale.json');  // Outside scripts/
+const PROSPECTS_FILE = path.join(__dirname, 'prospects-scale.json');
+const LOG_FILE = path.join(__dirname, 'outreach-scale-log.json');
+const SENT_LOG_FILE = path.join(__dirname, '..', '..', 'sent-log-scale.json'); // Outside scripts/
 
 const DRY_RUN = process.env.OUTREACH_DRY_RUN === 'true';
-const LIMIT   = Math.max(1, Math.min(20, parseInt(process.env.OUTREACH_LIMIT || '5', 10)));
+const LIMIT = Math.max(1, Math.min(20, parseInt(process.env.OUTREACH_LIMIT || '5', 10)));
 
 // Price regex — BLOCKS email if any of these match
-const PRICE_REGEX = /\$\s?\d|\€\s?\d|£\s?\d|LTD from \$|\d+%\s*off|\d+\s*USD|\d+\s*EUR|lifetime\s+from|forever\s+only/i;
+const PRICE_REGEX =
+  /\$\s?\d|\€\s?\d|£\s?\d|LTD from \$|\d+%\s*off|\d+\s*USD|\d+\s*EUR|lifetime\s+from|forever\s+only/i;
 
 // ── SaaS-specific email templates (rule-based, no LLM) ───────────────────────
 const TEMPLATES = {
   F1: {
-    from:    { name: 'Antonio / DevToolsmith', email: 'hello@complipilot.dev' },
+    from: { name: 'Antonio / DevToolsmith', email: 'hello@complipilot.dev' },
     subject: (p) => `EU AI Act compliance check for ${p.company}`,
-    body:    (p) => `Hi ${p.firstName || 'team'},
+    body: (p) => `Hi ${p.firstName || 'team'},
 
 Quick note - EU AI Act enforcement deadline is August 2, 2026. Many teams using LLMs, AI features, or automated decision systems will need compliance documentation soon.
 
@@ -39,9 +40,9 @@ Antonio / DevToolsmith
 https://complipilot.dev`,
   },
   F2: {
-    from:    { name: 'Antonio / DevToolsmith', email: 'hello@fixmyweb.dev' },
+    from: { name: 'Antonio / DevToolsmith', email: 'hello@fixmyweb.dev' },
     subject: (p) => `EAA accessibility check for ${p.company}`,
-    body:    (p) => `Hi ${p.firstName || 'team'},
+    body: (p) => `Hi ${p.firstName || 'team'},
 
 European Accessibility Act is enforceable across EU since June 2025. Fines vary by country and can be material.
 
@@ -56,13 +57,13 @@ Antonio / DevToolsmith
 https://fixmyweb.dev`,
   },
   F3: {
-    from:    { name: 'Antonio / DevToolsmith', email: 'hello@paymentrescue.dev' },
+    from: { name: 'Antonio / DevToolsmith', email: 'hello@paymentrescue.dev' },
     subject: (p) => `Failed payment recovery for ${p.company}`,
-    body:    (p) => `Hi ${p.firstName || 'team'},
+    body: (p) => `Hi ${p.firstName || 'team'},
 
 Many subscription businesses lose a meaningful share of MRR to involuntary churn (card expired, fraud decline, insufficient funds). Smart dunning can recover a large portion automatically.
 
-Built ChurnGuard (https://paymentrescue.dev) - Stripe-native payment recovery. 4 retention playbooks, HMAC webhook API, recovery dashboard.
+Built PaymentRescue (https://paymentrescue.dev) - Stripe-native payment recovery. 4 retention playbooks, HMAC webhook API, recovery dashboard.
 
 Free tier (ROI calculator + small scale). Useful if ${p.company} runs subscriptions.
 
@@ -71,9 +72,9 @@ Antonio / DevToolsmith
 https://paymentrescue.dev`,
   },
   F4: {
-    from:    { name: 'Antonio / DevToolsmith', email: 'hello@parseflow.dev' },
+    from: { name: 'Antonio / DevToolsmith', email: 'hello@parseflow.dev' },
     subject: (p) => `PDF data extraction for ${p.company}`,
-    body:    (p) => `Hi ${p.firstName || 'team'},
+    body: (p) => `Hi ${p.firstName || 'team'},
 
 If ${p.company} handles invoices, receipts, or bank statements, automated extraction saves hours.
 
@@ -86,9 +87,9 @@ Antonio / DevToolsmith
 https://parseflow.dev`,
   },
   B7: {
-    from:    { name: 'Antonio / DevToolsmith', email: 'hello@captureapi.dev' },
+    from: { name: 'Antonio / DevToolsmith', email: 'hello@captureapi.dev' },
     subject: (p) => `Screenshot API for ${p.company}`,
-    body:    (p) => `Hi ${p.firstName || 'team'},
+    body: (p) => `Hi ${p.firstName || 'team'},
 
 If ${p.company} ever needs programmatic screenshots, OG images, or HTML-to-PDF, running headless Chrome at scale is a pain.
 
@@ -103,8 +104,11 @@ https://captureapi.dev`,
 };
 
 function loadJson(file, fallback) {
-  try { return JSON.parse(fs.readFileSync(file, 'utf-8')); }
-  catch (_) { return fallback; }
+  try {
+    return JSON.parse(fs.readFileSync(file, 'utf-8'));
+  } catch (_) {
+    return fallback;
+  }
 }
 
 function saveJson(file, data) {
@@ -113,7 +117,7 @@ function saveJson(file, data) {
 
 async function main() {
   const prospects = loadJson(PROSPECTS_FILE, { prospects: [] });
-  const log       = loadJson(LOG_FILE, { runs: [] });
+  const log = loadJson(LOG_FILE, { runs: [] });
 
   if (!Array.isArray(prospects.prospects)) {
     console.error('No prospects.json array found');
@@ -121,7 +125,7 @@ async function main() {
   }
 
   // Select next N uncontacted prospects
-  const uncontacted = prospects.prospects.filter(p => !p.contacted_date && !p.bounced);
+  const uncontacted = prospects.prospects.filter((p) => !p.contacted_date && !p.bounced);
   const batch = uncontacted.slice(0, LIMIT);
 
   console.log(`Total prospects: ${prospects.prospects.length}`);
@@ -145,7 +149,7 @@ async function main() {
     }
 
     const subject = tpl.subject(p);
-    const body    = tpl.body(p);
+    const body = tpl.body(p);
 
     // SAFETY: regex price guard — BLOCK if match
     if (PRICE_REGEX.test(subject) || PRICE_REGEX.test(body)) {
@@ -188,7 +192,7 @@ async function main() {
     }
 
     // Rate limit: 10s between sends (self-imposed anti-spam)
-    await new Promise(r => setTimeout(r, 10000));
+    await new Promise((r) => setTimeout(r, 10000));
   }
 
   // Persist
@@ -199,8 +203,11 @@ async function main() {
   log.runs.push({ date: today, count: runResults.length, results: runResults });
   saveJson(LOG_FILE, log);
 
-  const ok = runResults.filter(r => r.status === 'sent').length;
+  const ok = runResults.filter((r) => r.status === 'sent').length;
   console.log(`\n=== Summary: ${ok}/${runResults.length} sent ===`);
 }
 
-main().catch(e => { console.error('Fatal:', e); process.exit(1); });
+main().catch((e) => {
+  console.error('Fatal:', e);
+  process.exit(1);
+});
