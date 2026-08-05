@@ -6,7 +6,7 @@ name: Outreach Scale (5 email/day, rate-limited)
 
 on:
   schedule:
-    - cron: '0 11 * * 1-5'   # Weekdays 11:00 UTC (= 12:00/13:00 CEST)
+    - cron: '0 11 * * 1-5' # Weekdays 11:00 UTC (= 12:00/13:00 CEST)
   workflow_dispatch:
     inputs:
       limit:
@@ -25,8 +25,22 @@ permissions:
   contents: write
 
 jobs:
+  # ⛔ DISABILITATO il 2026-08-05, insieme al job outreach di daily-automation.yml.
+  #
+  #    Oggi è inerte per caso, non per progetto: gira ogni giorno feriale e trova
+  #    "Uncontacted: 0" solo perché tutti e 25 i record di prospects-scale.json
+  #    hanno già `contacted_date: 2026-04-17`. Basta aggiungere un prospect senza
+  #    quel campo e riparte a 5 email/giorno, senza che nessuno lo colleghi.
+  #
+  # 🔴 La lista esistente contiene COMPETITOR DIRETTI, che non vanno contattati:
+  #      - AIOPS Group (contact@aiopsgroup.com) — vende accessibilità digitale = FixMyWeb
+  #      - ScreenshotAPI.net (info@screenshotapi.net) — screenshot API = CaptureAPI
+  #    Violerebbe feedback-no-outreach-to-competitors.md, regola nata proprio da AIOPS.
+  #
+  #    PRIMA DI RIATTIVARE: ripulire la lista dai competitor e validare gli indirizzi.
   outreach:
     name: Send daily outreach batch
+    if: false
     runs-on: ubuntu-latest
     timeout-minutes: 10
 
@@ -44,9 +58,9 @@ jobs:
       - name: Run outreach script
         id: run
         env:
-          BREVO_API_KEY:     ${{ secrets.BREVO_API_KEY }}
-          OUTREACH_DRY_RUN:  ${{ github.event.inputs.dry_run || 'false' }}
-          OUTREACH_LIMIT:    ${{ github.event.inputs.limit || '5' }}
+          BREVO_API_KEY: ${{ secrets.BREVO_API_KEY }}
+          OUTREACH_DRY_RUN: ${{ github.event.inputs.dry_run || 'false' }}
+          OUTREACH_LIMIT: ${{ github.event.inputs.limit || '5' }}
         run: |
           node scripts/automation/outreach-scale.js
           echo "status=success" >> $GITHUB_OUTPUT
