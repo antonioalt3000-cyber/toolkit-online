@@ -112,10 +112,18 @@ jobs:
   #    `outreach: skipped`, quindi la disattivazione è visibile nel report.
   #
   #    PER RIATTIVARLO IN SICUREZZA: togliere `if: false` SOLO dopo aver validato
-  #    i 72 indirizzi residui in prospects.json — EmailGuard (emailguard.dev) è
-  #    nostro e fa esattamente questo, a costo zero. Aggiungere anche una
-  #    no-contact list vera: oggi `_do_not_contact` è solo una stringa di commento,
-  #    il codice non la legge mai (outreach-agent.js:225 filtra solo su `contacted`).
+  #    i destinatari residui in prospects.json.
+  #
+  #    ⚠️ CORREZIONE 2026-08-05: una versione precedente di questo commento diceva che
+  #    EmailGuard "fa esattamente questo". NON è vero, misurato sui 6 indirizzi che
+  #    sono realmente rimbalzati: ne avrebbe intercettati solo 2 (api@notion.so →
+  #    dominio senza MX; hello@ahrefs.com → risky/role-based). Su platform@zapier.com,
+  #    partnerships@make.com, apps@webflow.com e partnerships@freshworks.com risponde
+  #    "deliverable" score 85, perché verifica il DOMINIO, non l'esistenza della casella.
+  #    È un pre-filtro utile, non una garanzia: l'unica prova di recapito resta l'invio.
+  #
+  #    La no-contact list invece esiste ed è applicata dal commit 8c5fe8a
+  #    (outreach-agent.js: `blocked` sul record + BLOCKED_DOMAINS + check finale).
   #    Vedi memory/outreach-agent-automatico-04aug-2026.md
   outreach:
     name: B2B Outreach
