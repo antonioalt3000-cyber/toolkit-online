@@ -1,7 +1,7 @@
 {
   "status": "ALL_SYSTEMS_NOMINAL",
-  "checkedAt": "2026-08-16T05:20:29.129Z",
-  "summary": "10/10 nominal, 1 with warnings",
+  "checkedAt": "2026-08-16T16:15:40.519Z",
+  "summary": "10/10 nominal, 4 with warnings",
   "down": [],
   "apps": [
     {
@@ -11,7 +11,7 @@
       "hard": [],
       "warnings": [],
       "healthStatus": 200,
-      "healthMs": 535,
+      "healthMs": 595,
       "redeemStatus": 400,
       "redeemCt": "application/json",
       "certDays": 65
@@ -21,12 +21,14 @@
       "brand": "FixMyWeb",
       "ok": true,
       "hard": [],
-      "warnings": [],
+      "warnings": [
+        "health:slow(2460ms)"
+      ],
       "healthStatus": 200,
-      "healthMs": 995,
+      "healthMs": 2460,
       "redeemStatus": 400,
       "redeemCt": "application/json",
-      "certDays": 65
+      "certDays": 64
     },
     {
       "code": "F3",
@@ -35,7 +37,7 @@
       "hard": [],
       "warnings": [],
       "healthStatus": 200,
-      "healthMs": 300,
+      "healthMs": 424,
       "redeemStatus": 400,
       "redeemCt": "application/json",
       "certDays": 65
@@ -47,7 +49,7 @@
       "hard": [],
       "warnings": [],
       "healthStatus": 200,
-      "healthMs": 695,
+      "healthMs": 618,
       "redeemStatus": 400,
       "redeemCt": "application/json",
       "certDays": 65
@@ -59,7 +61,7 @@
       "hard": [],
       "warnings": [],
       "healthStatus": 200,
-      "healthMs": 522,
+      "healthMs": 390,
       "redeemStatus": 400,
       "redeemCt": "application/json",
       "certDays": 63
@@ -69,24 +71,28 @@
       "brand": "EmailGuard",
       "ok": true,
       "hard": [],
-      "warnings": [],
+      "warnings": [
+        "health:slow(1518ms)"
+      ],
       "healthStatus": 200,
-      "healthMs": 389,
+      "healthMs": 1518,
       "redeemStatus": 400,
       "redeemCt": "application/json",
-      "certDays": 36
+      "certDays": 35
     },
     {
       "code": "SEO",
       "brand": "SEOScope",
       "ok": true,
       "hard": [],
-      "warnings": [],
+      "warnings": [
+        "health:slow(2315ms)"
+      ],
       "healthStatus": 200,
-      "healthMs": 1447,
+      "healthMs": 2315,
       "redeemStatus": 400,
       "redeemCt": "application/json",
-      "certDays": 36
+      "certDays": 35
     },
     {
       "code": "HSH",
@@ -94,13 +100,13 @@
       "ok": true,
       "hard": [],
       "warnings": [
-        "health:slow(1535ms)"
+        "health:slow(2169ms)"
       ],
       "healthStatus": 200,
-      "healthMs": 1535,
+      "healthMs": 2169,
       "redeemStatus": 400,
       "redeemCt": "application/json",
-      "certDays": 36
+      "certDays": 35
     },
     {
       "code": "HKL",
@@ -109,10 +115,10 @@
       "hard": [],
       "warnings": [],
       "healthStatus": 200,
-      "healthMs": 529,
+      "healthMs": 822,
       "redeemStatus": 400,
       "redeemCt": "application/json",
-      "certDays": 36
+      "certDays": 35
     },
     {
       "code": "CFG",
@@ -121,10 +127,10 @@
       "hard": [],
       "warnings": [],
       "healthStatus": 200,
-      "healthMs": 592,
+      "healthMs": 845,
       "redeemStatus": 400,
       "redeemCt": "application/json",
-      "certDays": 36
+      "certDays": 35
     }
   ]
 }
