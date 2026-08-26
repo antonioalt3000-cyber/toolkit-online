@@ -1,7 +1,7 @@
 {
   "status": "ALL_SYSTEMS_NOMINAL",
-  "checkedAt": "2026-08-25T16:27:02.754Z",
-  "summary": "10/10 nominal, 9 with warnings",
+  "checkedAt": "2026-08-26T05:26:14.165Z",
+  "summary": "10/10 nominal, 2 with warnings",
   "down": [],
   "apps": [
     {
@@ -9,25 +9,21 @@
       "brand": "CompliPilot",
       "ok": true,
       "hard": [],
-      "warnings": [
-        "health:slow(2234ms)"
-      ],
+      "warnings": [],
       "healthStatus": 200,
-      "healthMs": 2234,
+      "healthMs": 732,
       "redeemStatus": 400,
       "redeemCt": "application/json",
-      "certDays": 56
+      "certDays": 55
     },
     {
       "code": "F2",
       "brand": "FixMyWeb",
       "ok": true,
       "hard": [],
-      "warnings": [
-        "health:slow(3416ms)"
-      ],
+      "warnings": [],
       "healthStatus": 200,
-      "healthMs": 3416,
+      "healthMs": 1153,
       "redeemStatus": 400,
       "redeemCt": "application/json",
       "certDays": 55
@@ -37,28 +33,24 @@
       "brand": "PaymentRescue",
       "ok": true,
       "hard": [],
-      "warnings": [
-        "health:slow(1598ms)"
-      ],
+      "warnings": [],
       "healthStatus": 200,
-      "healthMs": 1598,
+      "healthMs": 792,
       "redeemStatus": 400,
       "redeemCt": "application/json",
-      "certDays": 56
+      "certDays": 55
     },
     {
       "code": "F4",
       "brand": "ParseFlow",
       "ok": true,
       "hard": [],
-      "warnings": [
-        "health:slow(2363ms)"
-      ],
+      "warnings": [],
       "healthStatus": 200,
-      "healthMs": 2363,
+      "healthMs": 738,
       "redeemStatus": 400,
       "redeemCt": "application/json",
-      "certDays": 56
+      "certDays": 55
     },
     {
       "code": "B7",
@@ -66,13 +58,13 @@
       "ok": true,
       "hard": [],
       "warnings": [
-        "health:slow(2356ms)"
+        "health:slow(2121ms)"
       ],
       "healthStatus": 200,
-      "healthMs": 2356,
+      "healthMs": 2121,
       "redeemStatus": 400,
       "redeemCt": "application/json",
-      "certDays": 54
+      "certDays": 53
     },
     {
       "code": "EG",
@@ -83,7 +75,7 @@
         "ssl:expires-in-26d"
       ],
       "healthStatus": 200,
-      "healthMs": 640,
+      "healthMs": 410,
       "redeemStatus": 400,
       "redeemCt": "application/json",
       "certDays": 26
@@ -93,43 +85,36 @@
       "brand": "SEOScope",
       "ok": true,
       "hard": [],
-      "warnings": [
-        "health:slow(1674ms)",
-        "ssl:expires-in-26d"
-      ],
+      "warnings": [],
       "healthStatus": 200,
-      "healthMs": 1674,
+      "healthMs": 587,
       "redeemStatus": 400,
       "redeemCt": "application/json",
-      "certDays": 26
+      "certDays": 89
     },
     {
       "code": "HSH",
       "brand": "HeaderShield",
       "ok": true,
       "hard": [],
-      "warnings": [
-        "health:slow(2547ms)"
-      ],
+      "warnings": [],
       "healthStatus": 200,
-      "healthMs": 2547,
+      "healthMs": 631,
       "redeemStatus": 400,
       "redeemCt": "application/json",
-      "certDays": 89
+      "certDays": 88
     },
     {
       "code": "HKL",
       "brand": "HookLab",
       "ok": true,
       "hard": [],
-      "warnings": [
-        "ssl:expires-in-26d"
-      ],
+      "warnings": [],
       "healthStatus": 200,
-      "healthMs": 698,
+      "healthMs": 697,
       "redeemStatus": 400,
       "redeemCt": "application/json",
-      "certDays": 26
+      "certDays": 89
     },
     {
       "code": "CFG",
@@ -138,7 +123,7 @@
       "hard": [],
       "warnings": [],
       "healthStatus": 200,
-      "healthMs": 957,
+      "healthMs": 649,
       "redeemStatus": 400,
       "redeemCt": "application/json",
       "certDays": 88
