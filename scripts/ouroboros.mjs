@@ -389,7 +389,7 @@ async function main() {
         to: [{ email: ALERT_TO, name: OWNER.name }],
         subject: `🔴 Ouroboros — ${regressions.length} network regression(s)`,
         htmlContent: buildHtml(report),
-        sender: { name: 'Ouroboros', email: 'hello@toolkitonline.vip' },
+        sender: { name: 'Ouroboros', email: 'hello@captureapi.dev' },
       });
     }
     process.exit(1); // one GitHub red badge per regressing week
@@ -405,7 +405,7 @@ async function main() {
       to: [{ email: ALERT_TO, name: OWNER.name }],
       subject: `🟢 Ouroboros — network nominal (${grid.length} properties)`,
       htmlContent: buildHtml(report),
-      sender: { name: 'Ouroboros', email: 'hello@toolkitonline.vip' },
+      sender: { name: 'Ouroboros', email: 'hello@captureapi.dev' },
     });
   }
   process.exit(0);

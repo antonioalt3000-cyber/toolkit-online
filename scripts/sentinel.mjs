@@ -211,7 +211,7 @@ async function alert(down) {
       method: 'POST',
       headers: { 'api-key': BREVO, 'content-type': 'application/json' },
       body: JSON.stringify({
-        sender: { name: 'Perpetual Sentinel', email: 'hello@toolkitonline.vip' },
+        sender: { name: 'Perpetual Sentinel', email: 'hello@captureapi.dev' },
         to: [{ email: ALERT_TO }],
         subject: `[Sentinel] ${down.length} SaaS DOWN after self-heal`,
         textContent:
