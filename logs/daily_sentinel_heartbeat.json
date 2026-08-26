@@ -1,7 +1,7 @@
 {
   "status": "ALL_SYSTEMS_NOMINAL",
-  "checkedAt": "2026-08-26T05:26:14.165Z",
-  "summary": "10/10 nominal, 2 with warnings",
+  "checkedAt": "2026-08-26T16:42:19.298Z",
+  "summary": "10/10 nominal, 3 with warnings",
   "down": [],
   "apps": [
     {
@@ -11,7 +11,7 @@
       "hard": [],
       "warnings": [],
       "healthStatus": 200,
-      "healthMs": 732,
+      "healthMs": 264,
       "redeemStatus": 400,
       "redeemCt": "application/json",
       "certDays": 55
@@ -23,10 +23,10 @@
       "hard": [],
       "warnings": [],
       "healthStatus": 200,
-      "healthMs": 1153,
+      "healthMs": 632,
       "redeemStatus": 400,
       "redeemCt": "application/json",
-      "certDays": 55
+      "certDays": 54
     },
     {
       "code": "F3",
@@ -35,7 +35,7 @@
       "hard": [],
       "warnings": [],
       "healthStatus": 200,
-      "healthMs": 792,
+      "healthMs": 419,
       "redeemStatus": 400,
       "redeemCt": "application/json",
       "certDays": 55
@@ -47,7 +47,7 @@
       "hard": [],
       "warnings": [],
       "healthStatus": 200,
-      "healthMs": 738,
+      "healthMs": 352,
       "redeemStatus": 400,
       "redeemCt": "application/json",
       "certDays": 55
@@ -57,11 +57,9 @@
       "brand": "CaptureAPI",
       "ok": true,
       "hard": [],
-      "warnings": [
-        "health:slow(2121ms)"
-      ],
+      "warnings": [],
       "healthStatus": 200,
-      "healthMs": 2121,
+      "healthMs": 308,
       "redeemStatus": 400,
       "redeemCt": "application/json",
       "certDays": 53
@@ -71,23 +69,23 @@
       "brand": "EmailGuard",
       "ok": true,
       "hard": [],
-      "warnings": [
-        "ssl:expires-in-26d"
-      ],
+      "warnings": [],
       "healthStatus": 200,
-      "healthMs": 410,
+      "healthMs": 386,
       "redeemStatus": 400,
       "redeemCt": "application/json",
-      "certDays": 26
+      "certDays": 89
     },
     {
       "code": "SEO",
       "brand": "SEOScope",
       "ok": true,
       "hard": [],
-      "warnings": [],
+      "warnings": [
+        "health:slow(2409ms)"
+      ],
       "healthStatus": 200,
-      "healthMs": 587,
+      "healthMs": 2409,
       "redeemStatus": 400,
       "redeemCt": "application/json",
       "certDays": 89
@@ -97,24 +95,28 @@
       "brand": "HeaderShield",
       "ok": true,
       "hard": [],
-      "warnings": [],
+      "warnings": [
+        "ssl:expires-in-25d"
+      ],
       "healthStatus": 200,
-      "healthMs": 631,
+      "healthMs": 421,
       "redeemStatus": 400,
       "redeemCt": "application/json",
-      "certDays": 88
+      "certDays": 25
     },
     {
       "code": "HKL",
       "brand": "HookLab",
       "ok": true,
       "hard": [],
-      "warnings": [],
+      "warnings": [
+        "ssl:expires-in-25d"
+      ],
       "healthStatus": 200,
-      "healthMs": 697,
+      "healthMs": 830,
       "redeemStatus": 400,
       "redeemCt": "application/json",
-      "certDays": 89
+      "certDays": 25
     },
     {
       "code": "CFG",
@@ -123,10 +125,10 @@
       "hard": [],
       "warnings": [],
       "healthStatus": 200,
-      "healthMs": 649,
+      "healthMs": 453,
       "redeemStatus": 400,
       "redeemCt": "application/json",
-      "certDays": 88
+      "certDays": 87
     }
   ]
 }
