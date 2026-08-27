@@ -1,7 +1,7 @@
 {
   "status": "ALL_SYSTEMS_NOMINAL",
-  "checkedAt": "2026-08-26T16:42:19.298Z",
-  "summary": "10/10 nominal, 3 with warnings",
+  "checkedAt": "2026-08-27T16:01:21.021Z",
+  "summary": "10/10 nominal, 5 with warnings",
   "down": [],
   "apps": [
     {
@@ -9,24 +9,28 @@
       "brand": "CompliPilot",
       "ok": true,
       "hard": [],
-      "warnings": [],
+      "warnings": [
+        "health:slow(2202ms)"
+      ],
       "healthStatus": 200,
-      "healthMs": 264,
+      "healthMs": 2202,
       "redeemStatus": 400,
       "redeemCt": "application/json",
-      "certDays": 55
+      "certDays": 54
     },
     {
       "code": "F2",
       "brand": "FixMyWeb",
       "ok": true,
       "hard": [],
-      "warnings": [],
+      "warnings": [
+        "health:slow(2918ms)"
+      ],
       "healthStatus": 200,
-      "healthMs": 632,
+      "healthMs": 2918,
       "redeemStatus": 400,
       "redeemCt": "application/json",
-      "certDays": 54
+      "certDays": 53
     },
     {
       "code": "F3",
@@ -35,34 +39,38 @@
       "hard": [],
       "warnings": [],
       "healthStatus": 200,
-      "healthMs": 419,
+      "healthMs": 555,
       "redeemStatus": 400,
       "redeemCt": "application/json",
-      "certDays": 55
+      "certDays": 54
     },
     {
       "code": "F4",
       "brand": "ParseFlow",
       "ok": true,
       "hard": [],
-      "warnings": [],
+      "warnings": [
+        "health:slow(2632ms)"
+      ],
       "healthStatus": 200,
-      "healthMs": 352,
+      "healthMs": 2632,
       "redeemStatus": 400,
       "redeemCt": "application/json",
-      "certDays": 55
+      "certDays": 54
     },
     {
       "code": "B7",
       "brand": "CaptureAPI",
       "ok": true,
       "hard": [],
-      "warnings": [],
+      "warnings": [
+        "health:slow(2530ms)"
+      ],
       "healthStatus": 200,
-      "healthMs": 308,
+      "healthMs": 2530,
       "redeemStatus": 400,
       "redeemCt": "application/json",
-      "certDays": 53
+      "certDays": 52
     },
     {
       "code": "EG",
@@ -71,10 +79,10 @@
       "hard": [],
       "warnings": [],
       "healthStatus": 200,
-      "healthMs": 386,
+      "healthMs": 632,
       "redeemStatus": 400,
       "redeemCt": "application/json",
-      "certDays": 89
+      "certDays": 88
     },
     {
       "code": "SEO",
@@ -82,41 +90,38 @@
       "ok": true,
       "hard": [],
       "warnings": [
-        "health:slow(2409ms)"
+        "health:slow(1635ms)",
+        "redeem:slow(1592ms)"
       ],
       "healthStatus": 200,
-      "healthMs": 2409,
+      "healthMs": 1635,
       "redeemStatus": 400,
       "redeemCt": "application/json",
-      "certDays": 89
+      "certDays": 88
     },
     {
       "code": "HSH",
       "brand": "HeaderShield",
       "ok": true,
       "hard": [],
-      "warnings": [
-        "ssl:expires-in-25d"
-      ],
+      "warnings": [],
       "healthStatus": 200,
-      "healthMs": 421,
+      "healthMs": 793,
       "redeemStatus": 400,
       "redeemCt": "application/json",
-      "certDays": 25
+      "certDays": 87
     },
     {
       "code": "HKL",
       "brand": "HookLab",
       "ok": true,
       "hard": [],
-      "warnings": [
-        "ssl:expires-in-25d"
-      ],
+      "warnings": [],
       "healthStatus": 200,
-      "healthMs": 830,
+      "healthMs": 763,
       "redeemStatus": 400,
       "redeemCt": "application/json",
-      "certDays": 25
+      "certDays": 88
     },
     {
       "code": "CFG",
@@ -125,10 +130,10 @@
       "hard": [],
       "warnings": [],
       "healthStatus": 200,
-      "healthMs": 453,
+      "healthMs": 751,
       "redeemStatus": 400,
       "redeemCt": "application/json",
-      "certDays": 87
+      "certDays": 86
     }
   ]
 }
