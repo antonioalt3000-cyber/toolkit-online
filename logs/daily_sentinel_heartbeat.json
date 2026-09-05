@@ -1,7 +1,7 @@
 {
   "status": "ALL_SYSTEMS_NOMINAL",
-  "checkedAt": "2026-09-05T08:43:32.594Z",
-  "summary": "10/10 nominal, 2 with warnings",
+  "checkedAt": "2026-09-05T17:50:01.497Z",
+  "summary": "10/10 nominal, 8 with warnings",
   "down": [],
   "apps": [
     {
@@ -9,9 +9,11 @@
       "brand": "CompliPilot",
       "ok": true,
       "hard": [],
-      "warnings": [],
+      "warnings": [
+        "health:slow(2425ms)"
+      ],
       "healthStatus": 200,
-      "healthMs": 891,
+      "healthMs": 2425,
       "redeemStatus": 400,
       "redeemCt": "application/json",
       "certDays": 45
@@ -22,13 +24,13 @@
       "ok": true,
       "hard": [],
       "warnings": [
-        "health:slow(2923ms)"
+        "health:slow(2645ms)"
       ],
       "healthStatus": 200,
-      "healthMs": 2923,
+      "healthMs": 2645,
       "redeemStatus": 400,
       "redeemCt": "application/json",
-      "certDays": 45
+      "certDays": 44
     },
     {
       "code": "F3",
@@ -37,7 +39,7 @@
       "hard": [],
       "warnings": [],
       "healthStatus": 200,
-      "healthMs": 832,
+      "healthMs": 962,
       "redeemStatus": 400,
       "redeemCt": "application/json",
       "certDays": 45
@@ -48,10 +50,10 @@
       "ok": true,
       "hard": [],
       "warnings": [
-        "health:slow(2101ms)"
+        "health:slow(2417ms)"
       ],
       "healthStatus": 200,
-      "healthMs": 2101,
+      "healthMs": 2417,
       "redeemStatus": 400,
       "redeemCt": "application/json",
       "certDays": 45
@@ -61,9 +63,11 @@
       "brand": "CaptureAPI",
       "ok": true,
       "hard": [],
-      "warnings": [],
+      "warnings": [
+        "health:slow(2452ms)"
+      ],
       "healthStatus": 200,
-      "healthMs": 872,
+      "healthMs": 2452,
       "redeemStatus": 400,
       "redeemCt": "application/json",
       "certDays": 43
@@ -73,9 +77,11 @@
       "brand": "EmailGuard",
       "ok": true,
       "hard": [],
-      "warnings": [],
+      "warnings": [
+        "redeem:slow(1647ms)"
+      ],
       "healthStatus": 200,
-      "healthMs": 746,
+      "healthMs": 950,
       "redeemStatus": 400,
       "redeemCt": "application/json",
       "certDays": 79
@@ -85,9 +91,11 @@
       "brand": "SEOScope",
       "ok": true,
       "hard": [],
-      "warnings": [],
+      "warnings": [
+        "health:slow(2288ms)"
+      ],
       "healthStatus": 200,
-      "healthMs": 845,
+      "healthMs": 2288,
       "redeemStatus": 400,
       "redeemCt": "application/json",
       "certDays": 79
@@ -97,9 +105,11 @@
       "brand": "HeaderShield",
       "ok": true,
       "hard": [],
-      "warnings": [],
+      "warnings": [
+        "health:slow(2321ms)"
+      ],
       "healthStatus": 200,
-      "healthMs": 948,
+      "healthMs": 2321,
       "redeemStatus": 400,
       "redeemCt": "application/json",
       "certDays": 78
@@ -109,9 +119,11 @@
       "brand": "HookLab",
       "ok": true,
       "hard": [],
-      "warnings": [],
+      "warnings": [
+        "health:slow(2555ms)"
+      ],
       "healthStatus": 200,
-      "healthMs": 895,
+      "healthMs": 2555,
       "redeemStatus": 400,
       "redeemCt": "application/json",
       "certDays": 79
@@ -123,7 +135,7 @@
       "hard": [],
       "warnings": [],
       "healthStatus": 200,
-      "healthMs": 944,
+      "healthMs": 961,
       "redeemStatus": 400,
       "redeemCt": "application/json",
       "certDays": 77
