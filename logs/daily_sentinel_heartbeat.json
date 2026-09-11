@@ -1,7 +1,7 @@
 {
   "status": "ALL_SYSTEMS_NOMINAL",
-  "checkedAt": "2026-09-11T09:17:00.381Z",
-  "summary": "10/10 nominal, 3 with warnings",
+  "checkedAt": "2026-09-11T18:54:12.286Z",
+  "summary": "10/10 nominal, 4 with warnings",
   "down": [],
   "apps": [
     {
@@ -10,10 +10,10 @@
       "ok": true,
       "hard": [],
       "warnings": [
-        "health:slow(2209ms)"
+        "health:slow(2303ms)"
       ],
       "healthStatus": 200,
-      "healthMs": 2209,
+      "healthMs": 2303,
       "redeemStatus": 400,
       "redeemCt": "application/json",
       "certDays": 39
@@ -25,10 +25,10 @@
       "hard": [],
       "warnings": [],
       "healthStatus": 200,
-      "healthMs": 1149,
+      "healthMs": 1237,
       "redeemStatus": 400,
       "redeemCt": "application/json",
-      "certDays": 39
+      "certDays": 38
     },
     {
       "code": "F3",
@@ -37,7 +37,7 @@
       "hard": [],
       "warnings": [],
       "healthStatus": 200,
-      "healthMs": 510,
+      "healthMs": 404,
       "redeemStatus": 400,
       "redeemCt": "application/json",
       "certDays": 39
@@ -47,9 +47,11 @@
       "brand": "ParseFlow",
       "ok": true,
       "hard": [],
-      "warnings": [],
+      "warnings": [
+        "health:slow(2298ms)"
+      ],
       "healthStatus": 200,
-      "healthMs": 618,
+      "healthMs": 2298,
       "redeemStatus": 400,
       "redeemCt": "application/json",
       "certDays": 39
@@ -60,10 +62,10 @@
       "ok": true,
       "hard": [],
       "warnings": [
-        "health:slow(2389ms)"
+        "health:slow(2339ms)"
       ],
       "healthStatus": 200,
-      "healthMs": 2389,
+      "healthMs": 2339,
       "redeemStatus": 400,
       "redeemCt": "application/json",
       "certDays": 37
@@ -75,7 +77,7 @@
       "hard": [],
       "warnings": [],
       "healthStatus": 200,
-      "healthMs": 639,
+      "healthMs": 660,
       "redeemStatus": 400,
       "redeemCt": "application/json",
       "certDays": 73
@@ -87,7 +89,7 @@
       "hard": [],
       "warnings": [],
       "healthStatus": 200,
-      "healthMs": 619,
+      "healthMs": 702,
       "redeemStatus": 400,
       "redeemCt": "application/json",
       "certDays": 73
@@ -98,13 +100,13 @@
       "ok": true,
       "hard": [],
       "warnings": [
-        "health:slow(2438ms)"
+        "health:slow(2479ms)"
       ],
       "healthStatus": 200,
-      "healthMs": 2438,
+      "healthMs": 2479,
       "redeemStatus": 400,
       "redeemCt": "application/json",
-      "certDays": 72
+      "certDays": 71
     },
     {
       "code": "HKL",
@@ -113,7 +115,7 @@
       "hard": [],
       "warnings": [],
       "healthStatus": 200,
-      "healthMs": 510,
+      "healthMs": 601,
       "redeemStatus": 400,
       "redeemCt": "application/json",
       "certDays": 73
@@ -125,7 +127,7 @@
       "hard": [],
       "warnings": [],
       "healthStatus": 200,
-      "healthMs": 593,
+      "healthMs": 532,
       "redeemStatus": 400,
       "redeemCt": "application/json",
       "certDays": 71
