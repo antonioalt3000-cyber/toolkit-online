@@ -1,446 +1,8 @@
 {
-  "status": "REGRESSION",
-  "scannedAt": "2026-09-07T10:54:02.388Z",
-  "summary": "55/55 scans ok, 24 regression(s) vs baseline",
-  "regressions": [
-    {
-      "domain": "complipilot.dev",
-      "scanner": "HeaderShield",
-      "reasons": [
-        {
-          "type": "new-findings",
-          "findings": [
-            "hdr:Content-Security-Policy",
-            "hdr:Strict-Transport-Security",
-            "hdr:X-Frame-Options",
-            "hdr:X-Content-Type-Options",
-            "hdr:Referrer-Policy",
-            "hdr:Permissions-Policy",
-            "hdr:Cross-Origin-Opener-Policy",
-            "hdr:Cross-Origin-Resource-Policy",
-            "hdr:Server / X-Powered-By"
-          ]
-        }
-      ]
-    },
-    {
-      "domain": "fixmyweb.dev",
-      "scanner": "HeaderShield",
-      "reasons": [
-        {
-          "type": "new-findings",
-          "findings": [
-            "hdr:Content-Security-Policy",
-            "hdr:Strict-Transport-Security",
-            "hdr:X-Frame-Options",
-            "hdr:X-Content-Type-Options",
-            "hdr:Referrer-Policy",
-            "hdr:Permissions-Policy",
-            "hdr:Cross-Origin-Opener-Policy",
-            "hdr:Cross-Origin-Resource-Policy",
-            "hdr:Server / X-Powered-By"
-          ]
-        }
-      ]
-    },
-    {
-      "domain": "paymentrescue.dev",
-      "scanner": "HeaderShield",
-      "reasons": [
-        {
-          "type": "new-findings",
-          "findings": [
-            "hdr:Content-Security-Policy",
-            "hdr:Strict-Transport-Security",
-            "hdr:X-Frame-Options",
-            "hdr:X-Content-Type-Options",
-            "hdr:Referrer-Policy",
-            "hdr:Permissions-Policy",
-            "hdr:Cross-Origin-Opener-Policy",
-            "hdr:Cross-Origin-Resource-Policy",
-            "hdr:Server / X-Powered-By"
-          ]
-        }
-      ]
-    },
-    {
-      "domain": "parseflow.dev",
-      "scanner": "HeaderShield",
-      "reasons": [
-        {
-          "type": "new-findings",
-          "findings": [
-            "hdr:Content-Security-Policy",
-            "hdr:Strict-Transport-Security",
-            "hdr:X-Frame-Options",
-            "hdr:X-Content-Type-Options",
-            "hdr:Referrer-Policy",
-            "hdr:Permissions-Policy",
-            "hdr:Cross-Origin-Opener-Policy",
-            "hdr:Cross-Origin-Resource-Policy",
-            "hdr:Server / X-Powered-By"
-          ]
-        }
-      ]
-    },
-    {
-      "domain": "captureapi.dev",
-      "scanner": "HeaderShield",
-      "reasons": [
-        {
-          "type": "new-findings",
-          "findings": [
-            "hdr:Content-Security-Policy",
-            "hdr:Strict-Transport-Security",
-            "hdr:X-Frame-Options",
-            "hdr:X-Content-Type-Options",
-            "hdr:Referrer-Policy",
-            "hdr:Permissions-Policy",
-            "hdr:Cross-Origin-Opener-Policy",
-            "hdr:Cross-Origin-Resource-Policy",
-            "hdr:Server / X-Powered-By"
-          ]
-        }
-      ]
-    },
-    {
-      "domain": "emailguard.dev",
-      "scanner": "HeaderShield",
-      "reasons": [
-        {
-          "type": "new-findings",
-          "findings": [
-            "hdr:Content-Security-Policy",
-            "hdr:Strict-Transport-Security",
-            "hdr:X-Frame-Options",
-            "hdr:X-Content-Type-Options",
-            "hdr:Referrer-Policy",
-            "hdr:Permissions-Policy",
-            "hdr:Cross-Origin-Opener-Policy",
-            "hdr:Cross-Origin-Resource-Policy",
-            "hdr:Server / X-Powered-By"
-          ]
-        }
-      ]
-    },
-    {
-      "domain": "seoscope.dev",
-      "scanner": "HeaderShield",
-      "reasons": [
-        {
-          "type": "new-findings",
-          "findings": [
-            "hdr:Content-Security-Policy",
-            "hdr:Strict-Transport-Security",
-            "hdr:X-Frame-Options",
-            "hdr:X-Content-Type-Options",
-            "hdr:Referrer-Policy",
-            "hdr:Permissions-Policy",
-            "hdr:Cross-Origin-Opener-Policy",
-            "hdr:Cross-Origin-Resource-Policy",
-            "hdr:Server / X-Powered-By"
-          ]
-        }
-      ]
-    },
-    {
-      "domain": "headershield.dev",
-      "scanner": "HeaderShield",
-      "reasons": [
-        {
-          "type": "new-findings",
-          "findings": [
-            "hdr:Content-Security-Policy",
-            "hdr:Strict-Transport-Security",
-            "hdr:X-Frame-Options",
-            "hdr:X-Content-Type-Options",
-            "hdr:Referrer-Policy",
-            "hdr:Permissions-Policy",
-            "hdr:Cross-Origin-Opener-Policy",
-            "hdr:Cross-Origin-Resource-Policy",
-            "hdr:Server / X-Powered-By"
-          ]
-        }
-      ]
-    },
-    {
-      "domain": "gethooklab.dev",
-      "scanner": "HeaderShield",
-      "reasons": [
-        {
-          "type": "new-findings",
-          "findings": [
-            "hdr:Content-Security-Policy",
-            "hdr:Strict-Transport-Security",
-            "hdr:X-Frame-Options",
-            "hdr:X-Content-Type-Options",
-            "hdr:Referrer-Policy",
-            "hdr:Permissions-Policy",
-            "hdr:Cross-Origin-Opener-Policy",
-            "hdr:Cross-Origin-Resource-Policy",
-            "hdr:Server / X-Powered-By"
-          ]
-        }
-      ]
-    },
-    {
-      "domain": "getcardforge.dev",
-      "scanner": "HeaderShield",
-      "reasons": [
-        {
-          "type": "new-findings",
-          "findings": [
-            "hdr:Content-Security-Policy",
-            "hdr:Strict-Transport-Security",
-            "hdr:X-Frame-Options",
-            "hdr:X-Content-Type-Options",
-            "hdr:Referrer-Policy",
-            "hdr:Permissions-Policy",
-            "hdr:Cross-Origin-Opener-Policy",
-            "hdr:Cross-Origin-Resource-Policy",
-            "hdr:Server / X-Powered-By"
-          ]
-        }
-      ]
-    },
-    {
-      "domain": "solarflow.site",
-      "scanner": "HeaderShield",
-      "reasons": [
-        {
-          "type": "new-findings",
-          "findings": [
-            "hdr:Content-Security-Policy",
-            "hdr:Strict-Transport-Security",
-            "hdr:X-Frame-Options",
-            "hdr:X-Content-Type-Options",
-            "hdr:Referrer-Policy",
-            "hdr:Permissions-Policy",
-            "hdr:Cross-Origin-Opener-Policy",
-            "hdr:Cross-Origin-Resource-Policy",
-            "hdr:Server / X-Powered-By"
-          ]
-        }
-      ]
-    },
-    {
-      "domain": "aistackpicker.xyz",
-      "scanner": "HeaderShield",
-      "reasons": [
-        {
-          "type": "new-findings",
-          "findings": [
-            "hdr:Content-Security-Policy",
-            "hdr:Strict-Transport-Security",
-            "hdr:X-Frame-Options",
-            "hdr:X-Content-Type-Options",
-            "hdr:Referrer-Policy",
-            "hdr:Permissions-Policy",
-            "hdr:Cross-Origin-Opener-Policy",
-            "hdr:Cross-Origin-Resource-Policy",
-            "hdr:Server / X-Powered-By"
-          ]
-        }
-      ]
-    },
-    {
-      "domain": "expatfinance.info",
-      "scanner": "HeaderShield",
-      "reasons": [
-        {
-          "type": "new-findings",
-          "findings": [
-            "hdr:Content-Security-Policy",
-            "hdr:Strict-Transport-Security",
-            "hdr:X-Frame-Options",
-            "hdr:X-Content-Type-Options",
-            "hdr:Referrer-Policy",
-            "hdr:Permissions-Policy",
-            "hdr:Cross-Origin-Opener-Policy",
-            "hdr:Cross-Origin-Resource-Policy",
-            "hdr:Server / X-Powered-By"
-          ]
-        }
-      ]
-    },
-    {
-      "domain": "nichinsurance.info",
-      "scanner": "HeaderShield",
-      "reasons": [
-        {
-          "type": "new-findings",
-          "findings": [
-            "hdr:Content-Security-Policy",
-            "hdr:Strict-Transport-Security",
-            "hdr:X-Frame-Options",
-            "hdr:X-Content-Type-Options",
-            "hdr:Referrer-Policy",
-            "hdr:Permissions-Policy",
-            "hdr:Cross-Origin-Opener-Policy",
-            "hdr:Cross-Origin-Resource-Policy",
-            "hdr:Server / X-Powered-By"
-          ]
-        }
-      ]
-    },
-    {
-      "domain": "bordercolliebase.xyz",
-      "scanner": "HeaderShield",
-      "reasons": [
-        {
-          "type": "new-findings",
-          "findings": [
-            "hdr:Content-Security-Policy",
-            "hdr:Strict-Transport-Security",
-            "hdr:X-Frame-Options",
-            "hdr:X-Content-Type-Options",
-            "hdr:Referrer-Policy",
-            "hdr:Permissions-Policy",
-            "hdr:Cross-Origin-Opener-Policy",
-            "hdr:Cross-Origin-Resource-Policy",
-            "hdr:Server / X-Powered-By"
-          ]
-        }
-      ]
-    },
-    {
-      "domain": "instanttrip.online",
-      "scanner": "HeaderShield",
-      "reasons": [
-        {
-          "type": "new-findings",
-          "findings": [
-            "hdr:Content-Security-Policy",
-            "hdr:Strict-Transport-Security",
-            "hdr:X-Frame-Options",
-            "hdr:X-Content-Type-Options",
-            "hdr:Referrer-Policy",
-            "hdr:Permissions-Policy",
-            "hdr:Cross-Origin-Opener-Policy",
-            "hdr:Cross-Origin-Resource-Policy",
-            "hdr:Server / X-Powered-By"
-          ]
-        }
-      ]
-    },
-    {
-      "domain": "topranked.info",
-      "scanner": "HeaderShield",
-      "reasons": [
-        {
-          "type": "new-findings",
-          "findings": [
-            "hdr:Content-Security-Policy",
-            "hdr:Strict-Transport-Security",
-            "hdr:X-Frame-Options",
-            "hdr:X-Content-Type-Options",
-            "hdr:Referrer-Policy",
-            "hdr:Permissions-Policy",
-            "hdr:Cross-Origin-Opener-Policy",
-            "hdr:Cross-Origin-Resource-Policy",
-            "hdr:Server / X-Powered-By"
-          ]
-        }
-      ]
-    },
-    {
-      "domain": "solarflow.site",
-      "scanner": "CompliPilot",
-      "reasons": [
-        {
-          "type": "new-findings",
-          "findings": [
-            "gdpr:Potential cookie wall detected (forced consent)",
-            "gdpr:Pre-checked consent boxes detected",
-            "gdpr:Financial services without required disclaimers"
-          ]
-        }
-      ]
-    },
-    {
-      "domain": "aistackpicker.xyz",
-      "scanner": "CompliPilot",
-      "reasons": [
-        {
-          "type": "new-findings",
-          "findings": [
-            "gdpr:AI usage detected but not disclosed",
-            "gdpr:No human oversight mechanism mentioned",
-            "gdpr:Potential cookie wall detected (forced consent)",
-            "gdpr:Pre-checked consent boxes detected"
-          ]
-        }
-      ]
-    },
-    {
-      "domain": "expatfinance.info",
-      "scanner": "CompliPilot",
-      "reasons": [
-        {
-          "type": "new-findings",
-          "findings": [
-            "gdpr:Potential cookie wall detected (forced consent)",
-            "gdpr:Pre-checked consent boxes detected",
-            "gdpr:Financial services without required disclaimers"
-          ]
-        }
-      ]
-    },
-    {
-      "domain": "nichinsurance.info",
-      "scanner": "CompliPilot",
-      "reasons": [
-        {
-          "type": "new-findings",
-          "findings": [
-            "gdpr:No automated individual decision-making disclosure",
-            "gdpr:Potential cookie wall detected (forced consent)",
-            "gdpr:Pre-checked consent boxes detected"
-          ]
-        }
-      ]
-    },
-    {
-      "domain": "bordercolliebase.xyz",
-      "scanner": "CompliPilot",
-      "reasons": [
-        {
-          "type": "new-findings",
-          "findings": [
-            "gdpr:Potential cookie wall detected (forced consent)",
-            "gdpr:Pre-checked consent boxes detected"
-          ]
-        }
-      ]
-    },
-    {
-      "domain": "instanttrip.online",
-      "scanner": "CompliPilot",
-      "reasons": [
-        {
-          "type": "new-findings",
-          "findings": [
-            "gdpr:Potential dark patterns in consent UI"
-          ]
-        }
-      ]
-    },
-    {
-      "domain": "topranked.info",
-      "scanner": "CompliPilot",
-      "reasons": [
-        {
-          "type": "new-findings",
-          "findings": [
-            "gdpr:No cookie consent mechanism detected",
-            "gdpr:Third-party tracking without consent mechanism",
-            "gdpr:AI chatbot detected but no disclosure",
-            "gdpr:Potential cookie wall detected (forced consent)"
-          ]
-        }
-      ]
-    }
-  ],
+  "status": "NOMINAL",
+  "scannedAt": "2026-09-14T11:06:33.239Z",
+  "summary": "55/55 scans ok, 0 regression(s) vs baseline",
+  "regressions": [],
   "grid": [
     {
       "code": "F1",
@@ -464,7 +26,7 @@
             "hdr:Cross-Origin-Resource-Policy",
             "hdr:Server / X-Powered-By"
           ],
-          "ms": 3342
+          "ms": 2120
         },
         "B7": {
           "scanner": "B7",
@@ -473,7 +35,7 @@
           "grade": null,
           "findings": [],
           "size": 77308,
-          "ms": 6471
+          "ms": 6670
         }
       }
     },
@@ -499,7 +61,7 @@
             "hdr:Cross-Origin-Resource-Policy",
             "hdr:Server / X-Powered-By"
           ],
-          "ms": 1025
+          "ms": 926
         },
         "B7": {
           "scanner": "B7",
@@ -508,7 +70,7 @@
           "grade": null,
           "findings": [],
           "size": 73453,
-          "ms": 3424
+          "ms": 3137
         }
       }
     },
@@ -534,7 +96,7 @@
             "hdr:Cross-Origin-Resource-Policy",
             "hdr:Server / X-Powered-By"
           ],
-          "ms": 1145
+          "ms": 925
         },
         "B7": {
           "scanner": "B7",
@@ -543,7 +105,7 @@
           "grade": null,
           "findings": [],
           "size": 71766,
-          "ms": 3756
+          "ms": 3443
         }
       }
     },
@@ -569,7 +131,7 @@
             "hdr:Cross-Origin-Resource-Policy",
             "hdr:Server / X-Powered-By"
           ],
-          "ms": 1077
+          "ms": 965
         },
         "B7": {
           "scanner": "B7",
@@ -578,7 +140,7 @@
           "grade": null,
           "findings": [],
           "size": 54621,
-          "ms": 3197
+          "ms": 3350
         }
       }
     },
@@ -604,7 +166,7 @@
             "hdr:Cross-Origin-Resource-Policy",
             "hdr:Server / X-Powered-By"
           ],
-          "ms": 885
+          "ms": 825
         },
         "B7": {
           "scanner": "B7",
@@ -613,7 +175,7 @@
           "grade": null,
           "findings": [],
           "size": 64756,
-          "ms": 3374
+          "ms": 2942
         }
       }
     },
@@ -639,7 +201,7 @@
             "hdr:Cross-Origin-Resource-Policy",
             "hdr:Server / X-Powered-By"
           ],
-          "ms": 1574
+          "ms": 1188
         },
         "B7": {
           "scanner": "B7",
@@ -647,8 +209,8 @@
           "score": null,
           "grade": null,
           "findings": [],
-          "size": 62035,
-          "ms": 9134
+          "size": 62017,
+          "ms": 8704
         }
       }
     },
@@ -674,7 +236,7 @@
             "hdr:Cross-Origin-Resource-Policy",
             "hdr:Server / X-Powered-By"
           ],
-          "ms": 3033
+          "ms": 1188
         },
         "B7": {
           "scanner": "B7",
@@ -682,8 +244,8 @@
           "score": null,
           "grade": null,
           "findings": [],
-          "size": 69630,
-          "ms": 9961
+          "size": 69683,
+          "ms": 6770
         }
       }
     },
@@ -709,7 +271,7 @@
             "hdr:Cross-Origin-Resource-Policy",
             "hdr:Server / X-Powered-By"
           ],
-          "ms": 2862
+          "ms": 1943
         },
         "B7": {
           "scanner": "B7",
@@ -717,8 +279,8 @@
           "score": null,
           "grade": null,
           "findings": [],
-          "size": 71625,
-          "ms": 7642
+          "size": 71588,
+          "ms": 6608
         }
       }
     },
@@ -744,7 +306,7 @@
             "hdr:Cross-Origin-Resource-Policy",
             "hdr:Server / X-Powered-By"
           ],
-          "ms": 1335
+          "ms": 1124
         },
         "B7": {
           "scanner": "B7",
@@ -752,8 +314,8 @@
           "score": null,
           "grade": null,
           "findings": [],
-          "size": 74078,
-          "ms": 4583
+          "size": 74057,
+          "ms": 5376
         }
       }
     },
@@ -779,7 +341,7 @@
             "hdr:Cross-Origin-Resource-Policy",
             "hdr:Server / X-Powered-By"
           ],
-          "ms": 1437
+          "ms": 1087
         },
         "B7": {
           "scanner": "B7",
@@ -787,8 +349,8 @@
           "score": null,
           "grade": null,
           "findings": [],
-          "size": 69285,
-          "ms": 10211
+          "size": 69315,
+          "ms": 10152
         }
       }
     },
@@ -814,7 +376,7 @@
             "hdr:Cross-Origin-Resource-Policy",
             "hdr:Server / X-Powered-By"
           ],
-          "ms": 1045
+          "ms": 902
         },
         "SEO": {
           "scanner": "SEO",
@@ -822,7 +384,7 @@
           "score": 91,
           "grade": null,
           "findings": [],
-          "ms": 4380
+          "ms": 2332
         },
         "F1": {
           "scanner": "F1",
@@ -834,7 +396,7 @@
             "gdpr:Pre-checked consent boxes detected",
             "gdpr:Financial services without required disclaimers"
           ],
-          "ms": 1374
+          "ms": 2577
         },
         "B7": {
           "scanner": "B7",
@@ -842,8 +404,8 @@
           "score": null,
           "grade": null,
           "findings": [],
-          "size": 93233,
-          "ms": 9940
+          "size": 94060,
+          "ms": 8993
         },
         "F2": {
           "scanner": "F2",
@@ -860,7 +422,7 @@
             "a11y:2.5.3",
             "a11y:4.1.2"
           ],
-          "ms": 1364
+          "ms": 988
         }
       }
     },
@@ -886,7 +448,7 @@
             "hdr:Cross-Origin-Resource-Policy",
             "hdr:Server / X-Powered-By"
           ],
-          "ms": 951
+          "ms": 837
         },
         "SEO": {
           "scanner": "SEO",
@@ -894,7 +456,7 @@
           "score": 86,
           "grade": null,
           "findings": [],
-          "ms": 1371
+          "ms": 1457
         },
         "F1": {
           "scanner": "F1",
@@ -907,7 +469,7 @@
             "gdpr:Potential cookie wall detected (forced consent)",
             "gdpr:Pre-checked consent boxes detected"
           ],
-          "ms": 2039
+          "ms": 1058
         },
         "B7": {
           "scanner": "B7",
@@ -915,8 +477,8 @@
           "score": null,
           "grade": null,
           "findings": [],
-          "size": 131019,
-          "ms": 12292
+          "size": 130923,
+          "ms": 12864
         },
         "F2": {
           "scanner": "F2",
@@ -933,7 +495,7 @@
             "a11y:2.5.3",
             "a11y:4.1.2"
           ],
-          "ms": 454
+          "ms": 1315
         }
       }
     },
@@ -959,7 +521,7 @@
             "hdr:Cross-Origin-Resource-Policy",
             "hdr:Server / X-Powered-By"
           ],
-          "ms": 869
+          "ms": 969
         },
         "SEO": {
           "scanner": "SEO",
@@ -967,7 +529,7 @@
           "score": 84,
           "grade": null,
           "findings": [],
-          "ms": 2182
+          "ms": 1677
         },
         "F1": {
           "scanner": "F1",
@@ -979,7 +541,7 @@
             "gdpr:Pre-checked consent boxes detected",
             "gdpr:Financial services without required disclaimers"
           ],
-          "ms": 896
+          "ms": 1909
         },
         "B7": {
           "scanner": "B7",
@@ -987,8 +549,8 @@
           "score": null,
           "grade": null,
           "findings": [],
-          "size": 92945,
-          "ms": 9845
+          "size": 92649,
+          "ms": 9995
         },
         "F2": {
           "scanner": "F2",
@@ -1005,7 +567,7 @@
             "a11y:2.5.3",
             "a11y:4.1.2"
           ],
-          "ms": 411
+          "ms": 694
         }
       }
     },
@@ -1031,7 +593,7 @@
             "hdr:Cross-Origin-Resource-Policy",
             "hdr:Server / X-Powered-By"
           ],
-          "ms": 898
+          "ms": 834
         },
         "SEO": {
           "scanner": "SEO",
@@ -1039,7 +601,7 @@
           "score": 89,
           "grade": null,
           "findings": [],
-          "ms": 1417
+          "ms": 1419
         },
         "F1": {
           "scanner": "F1",
@@ -1051,7 +613,7 @@
             "gdpr:Potential cookie wall detected (forced consent)",
             "gdpr:Pre-checked consent boxes detected"
           ],
-          "ms": 962
+          "ms": 2168
         },
         "B7": {
           "scanner": "B7",
@@ -1059,8 +621,8 @@
           "score": null,
           "grade": null,
           "findings": [],
-          "size": 81599,
-          "ms": 10976
+          "size": 81675,
+          "ms": 10480
         },
         "F2": {
           "scanner": "F2",
@@ -1075,7 +637,7 @@
             "a11y:2.5.3",
             "a11y:4.1.2"
           ],
-          "ms": 1305
+          "ms": 425
         }
       }
     },
@@ -1101,7 +663,7 @@
             "hdr:Cross-Origin-Resource-Policy",
             "hdr:Server / X-Powered-By"
           ],
-          "ms": 927
+          "ms": 924
         },
         "SEO": {
           "scanner": "SEO",
@@ -1109,7 +671,7 @@
           "score": 86,
           "grade": null,
           "findings": [],
-          "ms": 1396
+          "ms": 1506
         },
         "F1": {
           "scanner": "F1",
@@ -1120,7 +682,7 @@
             "gdpr:Potential cookie wall detected (forced consent)",
             "gdpr:Pre-checked consent boxes detected"
           ],
-          "ms": 840
+          "ms": 2382
         },
         "B7": {
           "scanner": "B7",
@@ -1128,8 +690,8 @@
           "score": null,
           "grade": null,
           "findings": [],
-          "size": 95374,
-          "ms": 11507
+          "size": 95425,
+          "ms": 10236
         },
         "F2": {
           "scanner": "F2",
@@ -1144,7 +706,7 @@
             "a11y:2.5.3",
             "a11y:4.1.2"
           ],
-          "ms": 1421
+          "ms": 1045
         }
       }
     },
@@ -1170,7 +732,7 @@
             "hdr:Cross-Origin-Resource-Policy",
             "hdr:Server / X-Powered-By"
           ],
-          "ms": 780
+          "ms": 791
         },
         "SEO": {
           "scanner": "SEO",
@@ -1180,7 +742,7 @@
           "findings": [
             "seo:img-dimensions"
           ],
-          "ms": 1292
+          "ms": 1574
         },
         "F1": {
           "scanner": "F1",
@@ -1190,7 +752,7 @@
           "findings": [
             "gdpr:Potential dark patterns in consent UI"
           ],
-          "ms": 778
+          "ms": 699
         },
         "B7": {
           "scanner": "B7",
@@ -1198,8 +760,8 @@
           "score": null,
           "grade": null,
           "findings": [],
-          "size": 72612,
-          "ms": 7219
+          "size": 70681,
+          "ms": 7167
         },
         "F2": {
           "scanner": "F2",
@@ -1215,7 +777,7 @@
             "a11y:2.2.2",
             "a11y:4.1.2"
           ],
-          "ms": 306
+          "ms": 321
         }
       }
     },
@@ -1241,7 +803,7 @@
             "hdr:Cross-Origin-Resource-Policy",
             "hdr:Server / X-Powered-By"
           ],
-          "ms": 879
+          "ms": 744
         },
         "SEO": {
           "scanner": "SEO",
@@ -1251,7 +813,7 @@
           "findings": [
             "seo:img-alt"
           ],
-          "ms": 1208
+          "ms": 1120
         },
         "F1": {
           "scanner": "F1",
@@ -1264,7 +826,7 @@
             "gdpr:AI chatbot detected but no disclosure",
             "gdpr:Potential cookie wall detected (forced consent)"
           ],
-          "ms": 791
+          "ms": 660
         },
         "B7": {
           "scanner": "B7",
@@ -1272,8 +834,8 @@
           "score": null,
           "grade": null,
           "findings": [],
-          "size": 76301,
-          "ms": 5767
+          "size": 76282,
+          "ms": 5667
         },
         "F2": {
           "scanner": "F2",
@@ -1287,7 +849,7 @@
             "a11y:3.3.1",
             "a11y:2.2.2"
           ],
-          "ms": 403
+          "ms": 538
         }
       }
     }
