@@ -1,6 +1,6 @@
 {
   "status": "ALL_SYSTEMS_NOMINAL",
-  "checkedAt": "2026-09-18T09:18:55.006Z",
+  "checkedAt": "2026-09-18T18:45:56.556Z",
   "summary": "10/10 nominal, 5 with warnings",
   "down": [],
   "apps": [
@@ -10,10 +10,10 @@
       "ok": true,
       "hard": [],
       "warnings": [
-        "health:slow(3210ms)"
+        "health:slow(2204ms)"
       ],
       "healthStatus": 200,
-      "healthMs": 3210,
+      "healthMs": 2204,
       "redeemStatus": 400,
       "redeemCt": "application/json",
       "certDays": 32
@@ -24,13 +24,13 @@
       "ok": true,
       "hard": [],
       "warnings": [
-        "health:slow(3197ms)"
+        "health:slow(2735ms)"
       ],
       "healthStatus": 200,
-      "healthMs": 3197,
+      "healthMs": 2735,
       "redeemStatus": 400,
       "redeemCt": "application/json",
-      "certDays": 32
+      "certDays": 31
     },
     {
       "code": "F3",
@@ -39,7 +39,7 @@
       "hard": [],
       "warnings": [],
       "healthStatus": 200,
-      "healthMs": 419,
+      "healthMs": 625,
       "redeemStatus": 400,
       "redeemCt": "application/json",
       "certDays": 32
@@ -50,10 +50,10 @@
       "ok": true,
       "hard": [],
       "warnings": [
-        "health:slow(2593ms)"
+        "health:slow(2269ms)"
       ],
       "healthStatus": 200,
-      "healthMs": 2593,
+      "healthMs": 2269,
       "redeemStatus": 400,
       "redeemCt": "application/json",
       "certDays": 32
@@ -64,10 +64,10 @@
       "ok": true,
       "hard": [],
       "warnings": [
-        "health:slow(2710ms)"
+        "health:slow(2378ms)"
       ],
       "healthStatus": 200,
-      "healthMs": 2710,
+      "healthMs": 2378,
       "redeemStatus": 400,
       "redeemCt": "application/json",
       "certDays": 30
@@ -79,7 +79,7 @@
       "hard": [],
       "warnings": [],
       "healthStatus": 200,
-      "healthMs": 470,
+      "healthMs": 756,
       "redeemStatus": 400,
       "redeemCt": "application/json",
       "certDays": 66
@@ -91,7 +91,7 @@
       "hard": [],
       "warnings": [],
       "healthStatus": 200,
-      "healthMs": 557,
+      "healthMs": 682,
       "redeemStatus": 400,
       "redeemCt": "application/json",
       "certDays": 66
@@ -101,9 +101,11 @@
       "brand": "HeaderShield",
       "ok": true,
       "hard": [],
-      "warnings": [],
+      "warnings": [
+        "health:slow(1754ms)"
+      ],
       "healthStatus": 200,
-      "healthMs": 648,
+      "healthMs": 1754,
       "redeemStatus": 400,
       "redeemCt": "application/json",
       "certDays": 65
@@ -115,7 +117,7 @@
       "hard": [],
       "warnings": [],
       "healthStatus": 200,
-      "healthMs": 598,
+      "healthMs": 760,
       "redeemStatus": 400,
       "redeemCt": "application/json",
       "certDays": 66
@@ -125,11 +127,9 @@
       "brand": "CardForge",
       "ok": true,
       "hard": [],
-      "warnings": [
-        "health:slow(1809ms)"
-      ],
+      "warnings": [],
       "healthStatus": 200,
-      "healthMs": 1809,
+      "healthMs": 676,
       "redeemStatus": 400,
       "redeemCt": "application/json",
       "certDays": 64
