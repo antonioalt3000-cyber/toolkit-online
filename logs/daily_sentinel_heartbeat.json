@@ -1,6 +1,6 @@
 {
   "status": "DEGRADED",
-  "checkedAt": "2026-09-20T18:24:55.342Z",
+  "checkedAt": "2026-09-21T10:19:39.222Z",
   "summary": "5/10 nominal",
   "down": [
     {
@@ -23,6 +23,7 @@
       "code": "F3",
       "brand": "PaymentRescue",
       "hard": [
+        "health:HTTP503",
         "redeem:HTTP500"
       ],
       "heal": "no deploy hook configured"
@@ -53,13 +54,14 @@
         "redeem:HTTP500"
       ],
       "warnings": [
-        "health:slow(2065ms)"
+        "health:slow(2219ms)",
+        "ssl:expires-in-29d"
       ],
       "healthStatus": 200,
-      "healthMs": 2065,
+      "healthMs": 2219,
       "redeemStatus": 500,
       "redeemCt": "application/json",
-      "certDays": 30
+      "certDays": 29
     },
     {
       "code": "F2",
@@ -69,11 +71,11 @@
         "redeem:HTTP500"
       ],
       "warnings": [
-        "health:slow(2788ms)",
+        "health:slow(3302ms)",
         "ssl:expires-in-29d"
       ],
       "healthStatus": 200,
-      "healthMs": 2788,
+      "healthMs": 3302,
       "redeemStatus": 500,
       "redeemCt": "application/json",
       "certDays": 29
@@ -83,14 +85,17 @@
       "brand": "PaymentRescue",
       "ok": false,
       "hard": [
+        "health:HTTP503",
         "redeem:HTTP500"
       ],
-      "warnings": [],
-      "healthStatus": 200,
-      "healthMs": 429,
+      "warnings": [
+        "ssl:expires-in-29d"
+      ],
+      "healthStatus": 503,
+      "healthMs": 511,
       "redeemStatus": 500,
       "redeemCt": "application/json",
-      "certDays": 30
+      "certDays": 29
     },
     {
       "code": "F4",
@@ -100,13 +105,14 @@
         "health:HTTP503"
       ],
       "warnings": [
-        "health:slow(1971ms)"
+        "health:slow(2166ms)",
+        "ssl:expires-in-29d"
       ],
       "healthStatus": 503,
-      "healthMs": 1971,
+      "healthMs": 2166,
       "redeemStatus": 400,
       "redeemCt": "application/json",
-      "certDays": 30
+      "certDays": 29
     },
     {
       "code": "B7",
@@ -116,14 +122,14 @@
         "redeem:HTTP500"
       ],
       "warnings": [
-        "health:slow(2117ms)",
-        "ssl:expires-in-28d"
+        "health:slow(2405ms)",
+        "ssl:expires-in-27d"
       ],
       "healthStatus": 200,
-      "healthMs": 2117,
+      "healthMs": 2405,
       "redeemStatus": 500,
       "redeemCt": "application/json",
-      "certDays": 28
+      "certDays": 27
     },
     {
       "code": "EG",
@@ -132,10 +138,10 @@
       "hard": [],
       "warnings": [],
       "healthStatus": 200,
-      "healthMs": 463,
+      "healthMs": 840,
       "redeemStatus": 400,
       "redeemCt": "application/json",
-      "certDays": 64
+      "certDays": 63
     },
     {
       "code": "SEO",
@@ -144,10 +150,10 @@
       "hard": [],
       "warnings": [],
       "healthStatus": 200,
-      "healthMs": 500,
+      "healthMs": 583,
       "redeemStatus": 400,
       "redeemCt": "application/json",
-      "certDays": 64
+      "certDays": 63
     },
     {
       "code": "HSH",
@@ -156,10 +162,10 @@
       "hard": [],
       "warnings": [],
       "healthStatus": 200,
-      "healthMs": 577,
+      "healthMs": 931,
       "redeemStatus": 400,
       "redeemCt": "application/json",
-      "certDays": 63
+      "certDays": 62
     },
     {
       "code": "HKL",
@@ -168,10 +174,10 @@
       "hard": [],
       "warnings": [],
       "healthStatus": 200,
-      "healthMs": 554,
+      "healthMs": 630,
       "redeemStatus": 400,
       "redeemCt": "application/json",
-      "certDays": 64
+      "certDays": 63
     },
     {
       "code": "CFG",
@@ -180,10 +186,10 @@
       "hard": [],
       "warnings": [],
       "healthStatus": 200,
-      "healthMs": 452,
+      "healthMs": 585,
       "redeemStatus": 400,
       "redeemCt": "application/json",
-      "certDays": 62
+      "certDays": 61
     }
   ]
 }
