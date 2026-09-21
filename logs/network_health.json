@@ -1,7 +1,7 @@
 {
   "status": "NOMINAL",
-  "scannedAt": "2026-09-14T11:06:33.239Z",
-  "summary": "55/55 scans ok, 0 regression(s) vs baseline",
+  "scannedAt": "2026-09-21T11:16:51.087Z",
+  "summary": "8/55 scans ok, 0 regression(s) vs baseline",
   "regressions": [],
   "grid": [
     {
@@ -12,30 +12,21 @@
       "scanners": {
         "HSH": {
           "scanner": "HSH",
-          "ok": true,
-          "score": 83,
-          "grade": "B",
-          "findings": [
-            "hdr:Content-Security-Policy",
-            "hdr:Strict-Transport-Security",
-            "hdr:X-Frame-Options",
-            "hdr:X-Content-Type-Options",
-            "hdr:Referrer-Policy",
-            "hdr:Permissions-Policy",
-            "hdr:Cross-Origin-Opener-Policy",
-            "hdr:Cross-Origin-Resource-Policy",
-            "hdr:Server / X-Powered-By"
-          ],
-          "ms": 2120
-        },
-        "B7": {
-          "scanner": "B7",
-          "ok": true,
+          "ok": false,
           "score": null,
           "grade": null,
           "findings": [],
-          "size": 77308,
-          "ms": 6670
+          "err": "HTTP503",
+          "ms": 821
+        },
+        "B7": {
+          "scanner": "B7",
+          "ok": false,
+          "score": null,
+          "grade": null,
+          "findings": [],
+          "err": "HTTP500",
+          "ms": 1690
         }
       }
     },
@@ -47,30 +38,21 @@
       "scanners": {
         "HSH": {
           "scanner": "HSH",
-          "ok": true,
-          "score": 83,
-          "grade": "B",
-          "findings": [
-            "hdr:Content-Security-Policy",
-            "hdr:Strict-Transport-Security",
-            "hdr:X-Frame-Options",
-            "hdr:X-Content-Type-Options",
-            "hdr:Referrer-Policy",
-            "hdr:Permissions-Policy",
-            "hdr:Cross-Origin-Opener-Policy",
-            "hdr:Cross-Origin-Resource-Policy",
-            "hdr:Server / X-Powered-By"
-          ],
-          "ms": 926
-        },
-        "B7": {
-          "scanner": "B7",
-          "ok": true,
+          "ok": false,
           "score": null,
           "grade": null,
           "findings": [],
-          "size": 73453,
-          "ms": 3137
+          "err": "HTTP503",
+          "ms": 542
+        },
+        "B7": {
+          "scanner": "B7",
+          "ok": false,
+          "score": null,
+          "grade": null,
+          "findings": [],
+          "err": "HTTP500",
+          "ms": 379
         }
       }
     },
@@ -82,30 +64,21 @@
       "scanners": {
         "HSH": {
           "scanner": "HSH",
-          "ok": true,
-          "score": 83,
-          "grade": "B",
-          "findings": [
-            "hdr:Content-Security-Policy",
-            "hdr:Strict-Transport-Security",
-            "hdr:X-Frame-Options",
-            "hdr:X-Content-Type-Options",
-            "hdr:Referrer-Policy",
-            "hdr:Permissions-Policy",
-            "hdr:Cross-Origin-Opener-Policy",
-            "hdr:Cross-Origin-Resource-Policy",
-            "hdr:Server / X-Powered-By"
-          ],
-          "ms": 925
-        },
-        "B7": {
-          "scanner": "B7",
-          "ok": true,
+          "ok": false,
           "score": null,
           "grade": null,
           "findings": [],
-          "size": 71766,
-          "ms": 3443
+          "err": "HTTP503",
+          "ms": 239
+        },
+        "B7": {
+          "scanner": "B7",
+          "ok": false,
+          "score": null,
+          "grade": null,
+          "findings": [],
+          "err": "HTTP500",
+          "ms": 236
         }
       }
     },
@@ -117,21 +90,12 @@
       "scanners": {
         "HSH": {
           "scanner": "HSH",
-          "ok": true,
-          "score": 83,
-          "grade": "B",
-          "findings": [
-            "hdr:Content-Security-Policy",
-            "hdr:Strict-Transport-Security",
-            "hdr:X-Frame-Options",
-            "hdr:X-Content-Type-Options",
-            "hdr:Referrer-Policy",
-            "hdr:Permissions-Policy",
-            "hdr:Cross-Origin-Opener-Policy",
-            "hdr:Cross-Origin-Resource-Policy",
-            "hdr:Server / X-Powered-By"
-          ],
-          "ms": 965
+          "ok": false,
+          "score": null,
+          "grade": null,
+          "findings": [],
+          "err": "HTTP503",
+          "ms": 348
         },
         "B7": {
           "scanner": "B7",
@@ -140,7 +104,7 @@
           "grade": null,
           "findings": [],
           "size": 54621,
-          "ms": 3350
+          "ms": 6015
         }
       }
     },
@@ -152,30 +116,21 @@
       "scanners": {
         "HSH": {
           "scanner": "HSH",
-          "ok": true,
-          "score": 83,
-          "grade": "B",
-          "findings": [
-            "hdr:Content-Security-Policy",
-            "hdr:Strict-Transport-Security",
-            "hdr:X-Frame-Options",
-            "hdr:X-Content-Type-Options",
-            "hdr:Referrer-Policy",
-            "hdr:Permissions-Policy",
-            "hdr:Cross-Origin-Opener-Policy",
-            "hdr:Cross-Origin-Resource-Policy",
-            "hdr:Server / X-Powered-By"
-          ],
-          "ms": 825
-        },
-        "B7": {
-          "scanner": "B7",
-          "ok": true,
+          "ok": false,
           "score": null,
           "grade": null,
           "findings": [],
-          "size": 64756,
-          "ms": 2942
+          "err": "HTTP503",
+          "ms": 276
+        },
+        "B7": {
+          "scanner": "B7",
+          "ok": false,
+          "score": null,
+          "grade": null,
+          "findings": [],
+          "err": "HTTP500",
+          "ms": 373
         }
       }
     },
@@ -187,21 +142,12 @@
       "scanners": {
         "HSH": {
           "scanner": "HSH",
-          "ok": true,
-          "score": 95,
-          "grade": "A+",
-          "findings": [
-            "hdr:Content-Security-Policy",
-            "hdr:Strict-Transport-Security",
-            "hdr:X-Frame-Options",
-            "hdr:X-Content-Type-Options",
-            "hdr:Referrer-Policy",
-            "hdr:Permissions-Policy",
-            "hdr:Cross-Origin-Opener-Policy",
-            "hdr:Cross-Origin-Resource-Policy",
-            "hdr:Server / X-Powered-By"
-          ],
-          "ms": 1188
+          "ok": false,
+          "score": null,
+          "grade": null,
+          "findings": [],
+          "err": "HTTP503",
+          "ms": 329
         },
         "B7": {
           "scanner": "B7",
@@ -209,8 +155,8 @@
           "score": null,
           "grade": null,
           "findings": [],
-          "size": 62017,
-          "ms": 8704
+          "size": 62069,
+          "ms": 6880
         }
       }
     },
@@ -222,21 +168,12 @@
       "scanners": {
         "HSH": {
           "scanner": "HSH",
-          "ok": true,
-          "score": 95,
-          "grade": "A+",
-          "findings": [
-            "hdr:Content-Security-Policy",
-            "hdr:Strict-Transport-Security",
-            "hdr:X-Frame-Options",
-            "hdr:X-Content-Type-Options",
-            "hdr:Referrer-Policy",
-            "hdr:Permissions-Policy",
-            "hdr:Cross-Origin-Opener-Policy",
-            "hdr:Cross-Origin-Resource-Policy",
-            "hdr:Server / X-Powered-By"
-          ],
-          "ms": 1188
+          "ok": false,
+          "score": null,
+          "grade": null,
+          "findings": [],
+          "err": "HTTP503",
+          "ms": 246
         },
         "B7": {
           "scanner": "B7",
@@ -244,8 +181,8 @@
           "score": null,
           "grade": null,
           "findings": [],
-          "size": 69683,
-          "ms": 6770
+          "size": 68718,
+          "ms": 9161
         }
       }
     },
@@ -257,30 +194,21 @@
       "scanners": {
         "HSH": {
           "scanner": "HSH",
-          "ok": true,
-          "score": 95,
-          "grade": "A+",
-          "findings": [
-            "hdr:Content-Security-Policy",
-            "hdr:Strict-Transport-Security",
-            "hdr:X-Frame-Options",
-            "hdr:X-Content-Type-Options",
-            "hdr:Referrer-Policy",
-            "hdr:Permissions-Policy",
-            "hdr:Cross-Origin-Opener-Policy",
-            "hdr:Cross-Origin-Resource-Policy",
-            "hdr:Server / X-Powered-By"
-          ],
-          "ms": 1943
-        },
-        "B7": {
-          "scanner": "B7",
-          "ok": true,
+          "ok": false,
           "score": null,
           "grade": null,
           "findings": [],
-          "size": 71588,
-          "ms": 6608
+          "err": "HTTP503",
+          "ms": 330
+        },
+        "B7": {
+          "scanner": "B7",
+          "ok": false,
+          "score": null,
+          "grade": null,
+          "findings": [],
+          "err": "HTTP500",
+          "ms": 265
         }
       }
     },
@@ -292,21 +220,12 @@
       "scanners": {
         "HSH": {
           "scanner": "HSH",
-          "ok": true,
-          "score": 95,
-          "grade": "A+",
-          "findings": [
-            "hdr:Content-Security-Policy",
-            "hdr:Strict-Transport-Security",
-            "hdr:X-Frame-Options",
-            "hdr:X-Content-Type-Options",
-            "hdr:Referrer-Policy",
-            "hdr:Permissions-Policy",
-            "hdr:Cross-Origin-Opener-Policy",
-            "hdr:Cross-Origin-Resource-Policy",
-            "hdr:Server / X-Powered-By"
-          ],
-          "ms": 1124
+          "ok": false,
+          "score": null,
+          "grade": null,
+          "findings": [],
+          "err": "HTTP503",
+          "ms": 234
         },
         "B7": {
           "scanner": "B7",
@@ -314,8 +233,8 @@
           "score": null,
           "grade": null,
           "findings": [],
-          "size": 74057,
-          "ms": 5376
+          "size": 74055,
+          "ms": 4907
         }
       }
     },
@@ -327,30 +246,21 @@
       "scanners": {
         "HSH": {
           "scanner": "HSH",
-          "ok": true,
-          "score": 95,
-          "grade": "A+",
-          "findings": [
-            "hdr:Content-Security-Policy",
-            "hdr:Strict-Transport-Security",
-            "hdr:X-Frame-Options",
-            "hdr:X-Content-Type-Options",
-            "hdr:Referrer-Policy",
-            "hdr:Permissions-Policy",
-            "hdr:Cross-Origin-Opener-Policy",
-            "hdr:Cross-Origin-Resource-Policy",
-            "hdr:Server / X-Powered-By"
-          ],
-          "ms": 1087
-        },
-        "B7": {
-          "scanner": "B7",
-          "ok": true,
+          "ok": false,
           "score": null,
           "grade": null,
           "findings": [],
-          "size": 69315,
-          "ms": 10152
+          "err": "HTTP503",
+          "ms": 345
+        },
+        "B7": {
+          "scanner": "B7",
+          "ok": false,
+          "score": null,
+          "grade": null,
+          "findings": [],
+          "err": "HTTP500",
+          "ms": 334
         }
       }
     },
@@ -362,67 +272,48 @@
       "scanners": {
         "HSH": {
           "scanner": "HSH",
-          "ok": true,
-          "score": 70,
-          "grade": "B",
-          "findings": [
-            "hdr:Content-Security-Policy",
-            "hdr:Strict-Transport-Security",
-            "hdr:X-Frame-Options",
-            "hdr:X-Content-Type-Options",
-            "hdr:Referrer-Policy",
-            "hdr:Permissions-Policy",
-            "hdr:Cross-Origin-Opener-Policy",
-            "hdr:Cross-Origin-Resource-Policy",
-            "hdr:Server / X-Powered-By"
-          ],
-          "ms": 902
-        },
-        "SEO": {
-          "scanner": "SEO",
-          "ok": true,
-          "score": 91,
-          "grade": null,
-          "findings": [],
-          "ms": 2332
-        },
-        "F1": {
-          "scanner": "F1",
-          "ok": true,
-          "score": 68,
-          "grade": null,
-          "findings": [
-            "gdpr:Potential cookie wall detected (forced consent)",
-            "gdpr:Pre-checked consent boxes detected",
-            "gdpr:Financial services without required disclaimers"
-          ],
-          "ms": 2577
-        },
-        "B7": {
-          "scanner": "B7",
-          "ok": true,
+          "ok": false,
           "score": null,
           "grade": null,
           "findings": [],
-          "size": 94060,
-          "ms": 8993
+          "err": "HTTP503",
+          "ms": 329
+        },
+        "SEO": {
+          "scanner": "SEO",
+          "ok": false,
+          "score": null,
+          "grade": null,
+          "findings": [],
+          "err": "HTTP503",
+          "ms": 981
+        },
+        "F1": {
+          "scanner": "F1",
+          "ok": false,
+          "score": null,
+          "grade": null,
+          "findings": [],
+          "err": "HTTP500",
+          "ms": 624
+        },
+        "B7": {
+          "scanner": "B7",
+          "ok": false,
+          "score": null,
+          "grade": null,
+          "findings": [],
+          "err": "HTTP500",
+          "ms": 233
         },
         "F2": {
           "scanner": "F2",
-          "ok": true,
-          "score": 91,
+          "ok": false,
+          "score": null,
           "grade": null,
-          "findings": [
-            "a11y:3.3.2",
-            "a11y:3.3.2",
-            "a11y:3.3.2",
-            "a11y:1.1.1",
-            "a11y:3.3.1",
-            "a11y:2.2.2",
-            "a11y:2.5.3",
-            "a11y:4.1.2"
-          ],
-          "ms": 988
+          "findings": [],
+          "err": "HTTP500",
+          "ms": 1507
         }
       }
     },
@@ -434,42 +325,30 @@
       "scanners": {
         "HSH": {
           "scanner": "HSH",
-          "ok": true,
-          "score": 70,
-          "grade": "B",
-          "findings": [
-            "hdr:Content-Security-Policy",
-            "hdr:Strict-Transport-Security",
-            "hdr:X-Frame-Options",
-            "hdr:X-Content-Type-Options",
-            "hdr:Referrer-Policy",
-            "hdr:Permissions-Policy",
-            "hdr:Cross-Origin-Opener-Policy",
-            "hdr:Cross-Origin-Resource-Policy",
-            "hdr:Server / X-Powered-By"
-          ],
-          "ms": 837
+          "ok": false,
+          "score": null,
+          "grade": null,
+          "findings": [],
+          "err": "HTTP503",
+          "ms": 339
         },
         "SEO": {
           "scanner": "SEO",
-          "ok": true,
-          "score": 86,
+          "ok": false,
+          "score": null,
           "grade": null,
           "findings": [],
-          "ms": 1457
+          "err": "HTTP503",
+          "ms": 583
         },
         "F1": {
           "scanner": "F1",
-          "ok": true,
-          "score": 47,
+          "ok": false,
+          "score": null,
           "grade": null,
-          "findings": [
-            "gdpr:AI usage detected but not disclosed",
-            "gdpr:No human oversight mechanism mentioned",
-            "gdpr:Potential cookie wall detected (forced consent)",
-            "gdpr:Pre-checked consent boxes detected"
-          ],
-          "ms": 1058
+          "findings": [],
+          "err": "HTTP500",
+          "ms": 387
         },
         "B7": {
           "scanner": "B7",
@@ -477,25 +356,17 @@
           "score": null,
           "grade": null,
           "findings": [],
-          "size": 130923,
-          "ms": 12864
+          "size": 131372,
+          "ms": 13684
         },
         "F2": {
           "scanner": "F2",
-          "ok": true,
-          "score": 91,
+          "ok": false,
+          "score": null,
           "grade": null,
-          "findings": [
-            "a11y:3.3.2",
-            "a11y:3.3.2",
-            "a11y:1.1.1",
-            "a11y:1.1.1",
-            "a11y:3.3.1",
-            "a11y:2.2.2",
-            "a11y:2.5.3",
-            "a11y:4.1.2"
-          ],
-          "ms": 1315
+          "findings": [],
+          "err": "HTTP500",
+          "ms": 437
         }
       }
     },
@@ -507,41 +378,30 @@
       "scanners": {
         "HSH": {
           "scanner": "HSH",
-          "ok": true,
-          "score": 70,
-          "grade": "B",
-          "findings": [
-            "hdr:Content-Security-Policy",
-            "hdr:Strict-Transport-Security",
-            "hdr:X-Frame-Options",
-            "hdr:X-Content-Type-Options",
-            "hdr:Referrer-Policy",
-            "hdr:Permissions-Policy",
-            "hdr:Cross-Origin-Opener-Policy",
-            "hdr:Cross-Origin-Resource-Policy",
-            "hdr:Server / X-Powered-By"
-          ],
-          "ms": 969
+          "ok": false,
+          "score": null,
+          "grade": null,
+          "findings": [],
+          "err": "HTTP503",
+          "ms": 235
         },
         "SEO": {
           "scanner": "SEO",
-          "ok": true,
-          "score": 84,
+          "ok": false,
+          "score": null,
           "grade": null,
           "findings": [],
-          "ms": 1677
+          "err": "HTTP503",
+          "ms": 244
         },
         "F1": {
           "scanner": "F1",
-          "ok": true,
-          "score": 65,
+          "ok": false,
+          "score": null,
           "grade": null,
-          "findings": [
-            "gdpr:Potential cookie wall detected (forced consent)",
-            "gdpr:Pre-checked consent boxes detected",
-            "gdpr:Financial services without required disclaimers"
-          ],
-          "ms": 1909
+          "findings": [],
+          "err": "HTTP500",
+          "ms": 243
         },
         "B7": {
           "scanner": "B7",
@@ -549,25 +409,17 @@
           "score": null,
           "grade": null,
           "findings": [],
-          "size": 92649,
-          "ms": 9995
+          "size": 92812,
+          "ms": 12652
         },
         "F2": {
           "scanner": "F2",
-          "ok": true,
-          "score": 90,
+          "ok": false,
+          "score": null,
           "grade": null,
-          "findings": [
-            "a11y:3.3.2",
-            "a11y:3.3.2",
-            "a11y:1.1.1",
-            "a11y:1.1.1",
-            "a11y:3.3.1",
-            "a11y:2.2.2",
-            "a11y:2.5.3",
-            "a11y:4.1.2"
-          ],
-          "ms": 694
+          "findings": [],
+          "err": "HTTP500",
+          "ms": 245
         }
       }
     },
@@ -579,41 +431,30 @@
       "scanners": {
         "HSH": {
           "scanner": "HSH",
-          "ok": true,
-          "score": 70,
-          "grade": "B",
-          "findings": [
-            "hdr:Content-Security-Policy",
-            "hdr:Strict-Transport-Security",
-            "hdr:X-Frame-Options",
-            "hdr:X-Content-Type-Options",
-            "hdr:Referrer-Policy",
-            "hdr:Permissions-Policy",
-            "hdr:Cross-Origin-Opener-Policy",
-            "hdr:Cross-Origin-Resource-Policy",
-            "hdr:Server / X-Powered-By"
-          ],
-          "ms": 834
+          "ok": false,
+          "score": null,
+          "grade": null,
+          "findings": [],
+          "err": "HTTP503",
+          "ms": 230
         },
         "SEO": {
           "scanner": "SEO",
-          "ok": true,
-          "score": 89,
+          "ok": false,
+          "score": null,
           "grade": null,
           "findings": [],
-          "ms": 1419
+          "err": "HTTP503",
+          "ms": 229
         },
         "F1": {
           "scanner": "F1",
-          "ok": true,
-          "score": 63,
+          "ok": false,
+          "score": null,
           "grade": null,
-          "findings": [
-            "gdpr:No automated individual decision-making disclosure",
-            "gdpr:Potential cookie wall detected (forced consent)",
-            "gdpr:Pre-checked consent boxes detected"
-          ],
-          "ms": 2168
+          "findings": [],
+          "err": "HTTP500",
+          "ms": 216
         },
         "B7": {
           "scanner": "B7",
@@ -621,23 +462,17 @@
           "score": null,
           "grade": null,
           "findings": [],
-          "size": 81675,
-          "ms": 10480
+          "size": 81518,
+          "ms": 10386
         },
         "F2": {
           "scanner": "F2",
-          "ok": true,
-          "score": 92,
+          "ok": false,
+          "score": null,
           "grade": null,
-          "findings": [
-            "a11y:3.3.2",
-            "a11y:1.1.1",
-            "a11y:3.3.1",
-            "a11y:2.2.2",
-            "a11y:2.5.3",
-            "a11y:4.1.2"
-          ],
-          "ms": 425
+          "findings": [],
+          "err": "HTTP500",
+          "ms": 252
         }
       }
     },
@@ -649,64 +484,48 @@
       "scanners": {
         "HSH": {
           "scanner": "HSH",
-          "ok": true,
-          "score": 70,
-          "grade": "B",
-          "findings": [
-            "hdr:Content-Security-Policy",
-            "hdr:Strict-Transport-Security",
-            "hdr:X-Frame-Options",
-            "hdr:X-Content-Type-Options",
-            "hdr:Referrer-Policy",
-            "hdr:Permissions-Policy",
-            "hdr:Cross-Origin-Opener-Policy",
-            "hdr:Cross-Origin-Resource-Policy",
-            "hdr:Server / X-Powered-By"
-          ],
-          "ms": 924
-        },
-        "SEO": {
-          "scanner": "SEO",
-          "ok": true,
-          "score": 86,
-          "grade": null,
-          "findings": [],
-          "ms": 1506
-        },
-        "F1": {
-          "scanner": "F1",
-          "ok": true,
-          "score": 66,
-          "grade": null,
-          "findings": [
-            "gdpr:Potential cookie wall detected (forced consent)",
-            "gdpr:Pre-checked consent boxes detected"
-          ],
-          "ms": 2382
-        },
-        "B7": {
-          "scanner": "B7",
-          "ok": true,
+          "ok": false,
           "score": null,
           "grade": null,
           "findings": [],
-          "size": 95425,
-          "ms": 10236
+          "err": "HTTP503",
+          "ms": 342
+        },
+        "SEO": {
+          "scanner": "SEO",
+          "ok": false,
+          "score": null,
+          "grade": null,
+          "findings": [],
+          "err": "HTTP503",
+          "ms": 241
+        },
+        "F1": {
+          "scanner": "F1",
+          "ok": false,
+          "score": null,
+          "grade": null,
+          "findings": [],
+          "err": "HTTP500",
+          "ms": 226
+        },
+        "B7": {
+          "scanner": "B7",
+          "ok": false,
+          "score": null,
+          "grade": null,
+          "findings": [],
+          "err": "HTTP500",
+          "ms": 524
         },
         "F2": {
           "scanner": "F2",
-          "ok": true,
-          "score": 91,
+          "ok": false,
+          "score": null,
           "grade": null,
-          "findings": [
-            "a11y:3.3.2",
-            "a11y:1.1.1",
-            "a11y:3.3.1",
-            "a11y:2.2.2",
-            "a11y:2.5.3",
-            "a11y:4.1.2"
-          ],
-          "ms": 1045
+          "findings": [],
+          "err": "HTTP500",
+          "ms": 244
         }
       }
     },
@@ -718,41 +537,30 @@
       "scanners": {
         "HSH": {
           "scanner": "HSH",
-          "ok": true,
-          "score": 60,
-          "grade": "C",
-          "findings": [
-            "hdr:Content-Security-Policy",
-            "hdr:Strict-Transport-Security",
-            "hdr:X-Frame-Options",
-            "hdr:X-Content-Type-Options",
-            "hdr:Referrer-Policy",
-            "hdr:Permissions-Policy",
-            "hdr:Cross-Origin-Opener-Policy",
-            "hdr:Cross-Origin-Resource-Policy",
-            "hdr:Server / X-Powered-By"
-          ],
-          "ms": 791
+          "ok": false,
+          "score": null,
+          "grade": null,
+          "findings": [],
+          "err": "HTTP503",
+          "ms": 326
         },
         "SEO": {
           "scanner": "SEO",
-          "ok": true,
-          "score": 94,
+          "ok": false,
+          "score": null,
           "grade": null,
-          "findings": [
-            "seo:img-dimensions"
-          ],
-          "ms": 1574
+          "findings": [],
+          "err": "HTTP503",
+          "ms": 359
         },
         "F1": {
           "scanner": "F1",
-          "ok": true,
-          "score": 70,
+          "ok": false,
+          "score": null,
           "grade": null,
-          "findings": [
-            "gdpr:Potential dark patterns in consent UI"
-          ],
-          "ms": 699
+          "findings": [],
+          "err": "HTTP500",
+          "ms": 243
         },
         "B7": {
           "scanner": "B7",
@@ -760,24 +568,17 @@
           "score": null,
           "grade": null,
           "findings": [],
-          "size": 70681,
-          "ms": 7167
+          "size": 75537,
+          "ms": 4912
         },
         "F2": {
           "scanner": "F2",
-          "ok": true,
-          "score": 92,
+          "ok": false,
+          "score": null,
           "grade": null,
-          "findings": [
-            "a11y:3.3.2",
-            "a11y:3.3.2",
-            "a11y:3.3.2",
-            "a11y:1.1.1",
-            "a11y:3.3.1",
-            "a11y:2.2.2",
-            "a11y:4.1.2"
-          ],
-          "ms": 321
+          "findings": [],
+          "err": "HTTP500",
+          "ms": 262
         }
       }
     },
@@ -789,67 +590,48 @@
       "scanners": {
         "HSH": {
           "scanner": "HSH",
-          "ok": true,
-          "score": 54,
-          "grade": "D",
-          "findings": [
-            "hdr:Content-Security-Policy",
-            "hdr:Strict-Transport-Security",
-            "hdr:X-Frame-Options",
-            "hdr:X-Content-Type-Options",
-            "hdr:Referrer-Policy",
-            "hdr:Permissions-Policy",
-            "hdr:Cross-Origin-Opener-Policy",
-            "hdr:Cross-Origin-Resource-Policy",
-            "hdr:Server / X-Powered-By"
-          ],
-          "ms": 744
-        },
-        "SEO": {
-          "scanner": "SEO",
-          "ok": true,
-          "score": 95,
-          "grade": null,
-          "findings": [
-            "seo:img-alt"
-          ],
-          "ms": 1120
-        },
-        "F1": {
-          "scanner": "F1",
-          "ok": true,
-          "score": 68,
-          "grade": null,
-          "findings": [
-            "gdpr:No cookie consent mechanism detected",
-            "gdpr:Third-party tracking without consent mechanism",
-            "gdpr:AI chatbot detected but no disclosure",
-            "gdpr:Potential cookie wall detected (forced consent)"
-          ],
-          "ms": 660
-        },
-        "B7": {
-          "scanner": "B7",
-          "ok": true,
+          "ok": false,
           "score": null,
           "grade": null,
           "findings": [],
-          "size": 76282,
-          "ms": 5667
+          "err": "HTTP503",
+          "ms": 390
+        },
+        "SEO": {
+          "scanner": "SEO",
+          "ok": false,
+          "score": null,
+          "grade": null,
+          "findings": [],
+          "err": "HTTP503",
+          "ms": 332
+        },
+        "F1": {
+          "scanner": "F1",
+          "ok": false,
+          "score": null,
+          "grade": null,
+          "findings": [],
+          "err": "HTTP500",
+          "ms": 224
+        },
+        "B7": {
+          "scanner": "B7",
+          "ok": false,
+          "score": null,
+          "grade": null,
+          "findings": [],
+          "err": "HTTP500",
+          "ms": 360
         },
         "F2": {
           "scanner": "F2",
-          "ok": true,
-          "score": 91,
+          "ok": false,
+          "score": null,
           "grade": null,
-          "findings": [
-            "a11y:3.3.2",
-            "a11y:1.1.1",
-            "a11y:1.1.1",
-            "a11y:3.3.1",
-            "a11y:2.2.2"
-          ],
-          "ms": 538
+          "findings": [],
+          "err": "HTTP500",
+          "ms": 274
         }
       }
     }
