@@ -1,6 +1,6 @@
 {
   "status": "NOMINAL",
-  "scannedAt": "2026-09-21T11:16:51.087Z",
+  "scannedAt": "2026-09-28T12:11:59.912Z",
   "summary": "8/55 scans ok, 0 regression(s) vs baseline",
   "regressions": [],
   "grid": [
@@ -17,7 +17,7 @@
           "grade": null,
           "findings": [],
           "err": "HTTP503",
-          "ms": 821
+          "ms": 1355
         },
         "B7": {
           "scanner": "B7",
@@ -26,7 +26,7 @@
           "grade": null,
           "findings": [],
           "err": "HTTP500",
-          "ms": 1690
+          "ms": 2325
         }
       }
     },
@@ -43,7 +43,7 @@
           "grade": null,
           "findings": [],
           "err": "HTTP503",
-          "ms": 542
+          "ms": 592
         },
         "B7": {
           "scanner": "B7",
@@ -52,7 +52,7 @@
           "grade": null,
           "findings": [],
           "err": "HTTP500",
-          "ms": 379
+          "ms": 351
         }
       }
     },
@@ -69,7 +69,7 @@
           "grade": null,
           "findings": [],
           "err": "HTTP503",
-          "ms": 239
+          "ms": 390
         },
         "B7": {
           "scanner": "B7",
@@ -78,7 +78,7 @@
           "grade": null,
           "findings": [],
           "err": "HTTP500",
-          "ms": 236
+          "ms": 222
         }
       }
     },
@@ -95,7 +95,7 @@
           "grade": null,
           "findings": [],
           "err": "HTTP503",
-          "ms": 348
+          "ms": 233
         },
         "B7": {
           "scanner": "B7",
@@ -104,7 +104,7 @@
           "grade": null,
           "findings": [],
           "size": 54621,
-          "ms": 6015
+          "ms": 5944
         }
       }
     },
@@ -121,16 +121,16 @@
           "grade": null,
           "findings": [],
           "err": "HTTP503",
-          "ms": 276
+          "ms": 347
         },
         "B7": {
           "scanner": "B7",
-          "ok": false,
+          "ok": true,
           "score": null,
           "grade": null,
           "findings": [],
-          "err": "HTTP500",
-          "ms": 373
+          "size": 64756,
+          "ms": 3204
         }
       }
     },
@@ -147,16 +147,16 @@
           "grade": null,
           "findings": [],
           "err": "HTTP503",
-          "ms": 329
+          "ms": 319
         },
         "B7": {
           "scanner": "B7",
-          "ok": true,
+          "ok": false,
           "score": null,
           "grade": null,
           "findings": [],
-          "size": 62069,
-          "ms": 6880
+          "err": "HTTP500",
+          "ms": 211
         }
       }
     },
@@ -173,16 +173,16 @@
           "grade": null,
           "findings": [],
           "err": "HTTP503",
-          "ms": 246
+          "ms": 323
         },
         "B7": {
           "scanner": "B7",
-          "ok": true,
+          "ok": false,
           "score": null,
           "grade": null,
           "findings": [],
-          "size": 68718,
-          "ms": 9161
+          "err": "HTTP500",
+          "ms": 206
         }
       }
     },
@@ -199,16 +199,16 @@
           "grade": null,
           "findings": [],
           "err": "HTTP503",
-          "ms": 330
+          "ms": 324
         },
         "B7": {
           "scanner": "B7",
-          "ok": false,
+          "ok": true,
           "score": null,
           "grade": null,
           "findings": [],
-          "err": "HTTP500",
-          "ms": 265
+          "size": 71589,
+          "ms": 6592
         }
       }
     },
@@ -225,7 +225,7 @@
           "grade": null,
           "findings": [],
           "err": "HTTP503",
-          "ms": 234
+          "ms": 222
         },
         "B7": {
           "scanner": "B7",
@@ -233,8 +233,8 @@
           "score": null,
           "grade": null,
           "findings": [],
-          "size": 74055,
-          "ms": 4907
+          "size": 74042,
+          "ms": 4747
         }
       }
     },
@@ -251,16 +251,16 @@
           "grade": null,
           "findings": [],
           "err": "HTTP503",
-          "ms": 345
+          "ms": 318
         },
         "B7": {
           "scanner": "B7",
-          "ok": false,
+          "ok": true,
           "score": null,
           "grade": null,
           "findings": [],
-          "err": "HTTP500",
-          "ms": 334
+          "size": 69313,
+          "ms": 10275
         }
       }
     },
@@ -277,7 +277,7 @@
           "grade": null,
           "findings": [],
           "err": "HTTP503",
-          "ms": 329
+          "ms": 219
         },
         "SEO": {
           "scanner": "SEO",
@@ -286,7 +286,7 @@
           "grade": null,
           "findings": [],
           "err": "HTTP503",
-          "ms": 981
+          "ms": 607
         },
         "F1": {
           "scanner": "F1",
@@ -295,16 +295,16 @@
           "grade": null,
           "findings": [],
           "err": "HTTP500",
-          "ms": 624
+          "ms": 546
         },
         "B7": {
           "scanner": "B7",
-          "ok": false,
+          "ok": true,
           "score": null,
           "grade": null,
           "findings": [],
-          "err": "HTTP500",
-          "ms": 233
+          "size": 92746,
+          "ms": 9878
         },
         "F2": {
           "scanner": "F2",
@@ -313,7 +313,7 @@
           "grade": null,
           "findings": [],
           "err": "HTTP500",
-          "ms": 1507
+          "ms": 659
         }
       }
     },
@@ -330,7 +330,7 @@
           "grade": null,
           "findings": [],
           "err": "HTTP503",
-          "ms": 339
+          "ms": 324
         },
         "SEO": {
           "scanner": "SEO",
@@ -339,7 +339,7 @@
           "grade": null,
           "findings": [],
           "err": "HTTP503",
-          "ms": 583
+          "ms": 436
         },
         "F1": {
           "scanner": "F1",
@@ -348,16 +348,16 @@
           "grade": null,
           "findings": [],
           "err": "HTTP500",
-          "ms": 387
+          "ms": 361
         },
         "B7": {
           "scanner": "B7",
-          "ok": true,
+          "ok": false,
           "score": null,
           "grade": null,
           "findings": [],
-          "size": 131372,
-          "ms": 13684
+          "err": "HTTP500",
+          "ms": 225
         },
         "F2": {
           "scanner": "F2",
@@ -366,7 +366,7 @@
           "grade": null,
           "findings": [],
           "err": "HTTP500",
-          "ms": 437
+          "ms": 348
         }
       }
     },
@@ -383,7 +383,7 @@
           "grade": null,
           "findings": [],
           "err": "HTTP503",
-          "ms": 235
+          "ms": 226
         },
         "SEO": {
           "scanner": "SEO",
@@ -392,7 +392,7 @@
           "grade": null,
           "findings": [],
           "err": "HTTP503",
-          "ms": 244
+          "ms": 231
         },
         "F1": {
           "scanner": "F1",
@@ -401,16 +401,16 @@
           "grade": null,
           "findings": [],
           "err": "HTTP500",
-          "ms": 243
+          "ms": 206
         },
         "B7": {
           "scanner": "B7",
-          "ok": true,
+          "ok": false,
           "score": null,
           "grade": null,
           "findings": [],
-          "size": 92812,
-          "ms": 12652
+          "err": "HTTP500",
+          "ms": 268
         },
         "F2": {
           "scanner": "F2",
@@ -419,7 +419,7 @@
           "grade": null,
           "findings": [],
           "err": "HTTP500",
-          "ms": 245
+          "ms": 237
         }
       }
     },
@@ -436,7 +436,7 @@
           "grade": null,
           "findings": [],
           "err": "HTTP503",
-          "ms": 230
+          "ms": 328
         },
         "SEO": {
           "scanner": "SEO",
@@ -445,7 +445,7 @@
           "grade": null,
           "findings": [],
           "err": "HTTP503",
-          "ms": 229
+          "ms": 232
         },
         "F1": {
           "scanner": "F1",
@@ -454,7 +454,7 @@
           "grade": null,
           "findings": [],
           "err": "HTTP500",
-          "ms": 216
+          "ms": 214
         },
         "B7": {
           "scanner": "B7",
@@ -462,8 +462,8 @@
           "score": null,
           "grade": null,
           "findings": [],
-          "size": 81518,
-          "ms": 10386
+          "size": 81393,
+          "ms": 8806
         },
         "F2": {
           "scanner": "F2",
@@ -472,7 +472,7 @@
           "grade": null,
           "findings": [],
           "err": "HTTP500",
-          "ms": 252
+          "ms": 347
         }
       }
     },
@@ -489,7 +489,7 @@
           "grade": null,
           "findings": [],
           "err": "HTTP503",
-          "ms": 342
+          "ms": 318
         },
         "SEO": {
           "scanner": "SEO",
@@ -498,7 +498,7 @@
           "grade": null,
           "findings": [],
           "err": "HTTP503",
-          "ms": 241
+          "ms": 324
         },
         "F1": {
           "scanner": "F1",
@@ -507,7 +507,7 @@
           "grade": null,
           "findings": [],
           "err": "HTTP500",
-          "ms": 226
+          "ms": 199
         },
         "B7": {
           "scanner": "B7",
@@ -516,7 +516,7 @@
           "grade": null,
           "findings": [],
           "err": "HTTP500",
-          "ms": 524
+          "ms": 278
         },
         "F2": {
           "scanner": "F2",
@@ -525,7 +525,7 @@
           "grade": null,
           "findings": [],
           "err": "HTTP500",
-          "ms": 244
+          "ms": 220
         }
       }
     },
@@ -542,7 +542,7 @@
           "grade": null,
           "findings": [],
           "err": "HTTP503",
-          "ms": 326
+          "ms": 318
         },
         "SEO": {
           "scanner": "SEO",
@@ -551,7 +551,7 @@
           "grade": null,
           "findings": [],
           "err": "HTTP503",
-          "ms": 359
+          "ms": 233
         },
         "F1": {
           "scanner": "F1",
@@ -560,7 +560,7 @@
           "grade": null,
           "findings": [],
           "err": "HTTP500",
-          "ms": 243
+          "ms": 198
         },
         "B7": {
           "scanner": "B7",
@@ -568,8 +568,8 @@
           "score": null,
           "grade": null,
           "findings": [],
-          "size": 75537,
-          "ms": 4912
+          "size": 74625,
+          "ms": 4895
         },
         "F2": {
           "scanner": "F2",
@@ -578,7 +578,7 @@
           "grade": null,
           "findings": [],
           "err": "HTTP500",
-          "ms": 262
+          "ms": 216
         }
       }
     },
@@ -595,7 +595,7 @@
           "grade": null,
           "findings": [],
           "err": "HTTP503",
-          "ms": 390
+          "ms": 222
         },
         "SEO": {
           "scanner": "SEO",
@@ -604,7 +604,7 @@
           "grade": null,
           "findings": [],
           "err": "HTTP503",
-          "ms": 332
+          "ms": 233
         },
         "F1": {
           "scanner": "F1",
@@ -613,7 +613,7 @@
           "grade": null,
           "findings": [],
           "err": "HTTP500",
-          "ms": 224
+          "ms": 205
         },
         "B7": {
           "scanner": "B7",
@@ -622,7 +622,7 @@
           "grade": null,
           "findings": [],
           "err": "HTTP500",
-          "ms": 360
+          "ms": 340
         },
         "F2": {
           "scanner": "F2",
@@ -631,7 +631,7 @@
           "grade": null,
           "findings": [],
           "err": "HTTP500",
-          "ms": 274
+          "ms": 236
         }
       }
     }
