@@ -1,7 +1,7 @@
 {
   "status": "ALL_SYSTEMS_NOMINAL",
-  "checkedAt": "2026-10-03T18:55:14.800Z",
-  "summary": "10/10 nominal",
+  "checkedAt": "2026-10-04T10:49:45.051Z",
+  "summary": "10/10 nominal, 2 with warnings",
   "down": [],
   "apps": [
     {
@@ -11,7 +11,7 @@
       "hard": [],
       "warnings": [],
       "healthStatus": 200,
-      "healthMs": 681,
+      "healthMs": 638,
       "redeemStatus": 400,
       "redeemCt": "application/json",
       "certDays": 79
@@ -23,10 +23,10 @@
       "hard": [],
       "warnings": [],
       "healthStatus": 200,
-      "healthMs": 1141,
+      "healthMs": 1319,
       "redeemStatus": 400,
       "redeemCt": "application/json",
-      "certDays": 78
+      "certDays": 77
     },
     {
       "code": "F3",
@@ -35,7 +35,7 @@
       "hard": [],
       "warnings": [],
       "healthStatus": 200,
-      "healthMs": 383,
+      "healthMs": 463,
       "redeemStatus": 400,
       "redeemCt": "application/json",
       "certDays": 78
@@ -45,9 +45,11 @@
       "brand": "ParseFlow",
       "ok": true,
       "hard": [],
-      "warnings": [],
+      "warnings": [
+        "health:slow(2325ms)"
+      ],
       "healthStatus": 200,
-      "healthMs": 813,
+      "healthMs": 2325,
       "redeemStatus": 400,
       "redeemCt": "application/json",
       "certDays": 78
@@ -57,9 +59,11 @@
       "brand": "CaptureAPI",
       "ok": true,
       "hard": [],
-      "warnings": [],
+      "warnings": [
+        "health:slow(2235ms)"
+      ],
       "healthStatus": 200,
-      "healthMs": 615,
+      "healthMs": 2235,
       "redeemStatus": 400,
       "redeemCt": "application/json",
       "certDays": 77
@@ -71,10 +75,10 @@
       "hard": [],
       "warnings": [],
       "healthStatus": 200,
-      "healthMs": 556,
+      "healthMs": 684,
       "redeemStatus": 400,
       "redeemCt": "application/json",
-      "certDays": 51
+      "certDays": 50
     },
     {
       "code": "SEO",
@@ -83,10 +87,10 @@
       "hard": [],
       "warnings": [],
       "healthStatus": 200,
-      "healthMs": 589,
+      "healthMs": 583,
       "redeemStatus": 400,
       "redeemCt": "application/json",
-      "certDays": 51
+      "certDays": 50
     },
     {
       "code": "HSH",
@@ -95,7 +99,7 @@
       "hard": [],
       "warnings": [],
       "healthStatus": 200,
-      "healthMs": 640,
+      "healthMs": 570,
       "redeemStatus": 400,
       "redeemCt": "application/json",
       "certDays": 49
@@ -107,10 +111,10 @@
       "hard": [],
       "warnings": [],
       "healthStatus": 200,
-      "healthMs": 608,
+      "healthMs": 708,
       "redeemStatus": 400,
       "redeemCt": "application/json",
-      "certDays": 51
+      "certDays": 50
     },
     {
       "code": "CFG",
@@ -119,10 +123,10 @@
       "hard": [],
       "warnings": [],
       "healthStatus": 200,
-      "healthMs": 622,
+      "healthMs": 617,
       "redeemStatus": 400,
       "redeemCt": "application/json",
-      "certDays": 49
+      "certDays": 48
     }
   ]
 }
