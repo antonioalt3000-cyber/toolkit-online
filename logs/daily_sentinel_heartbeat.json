@@ -1,7 +1,7 @@
 {
   "status": "ALL_SYSTEMS_NOMINAL",
-  "checkedAt": "2026-10-24T18:28:42.350Z",
-  "summary": "10/10 nominal, 6 with warnings",
+  "checkedAt": "2026-10-25T09:30:38.702Z",
+  "summary": "10/10 nominal, 7 with warnings",
   "down": [],
   "apps": [
     {
@@ -10,10 +10,10 @@
       "ok": true,
       "hard": [],
       "warnings": [
-        "health:slow(2146ms)"
+        "health:slow(2150ms)"
       ],
       "healthStatus": 200,
-      "healthMs": 2146,
+      "healthMs": 2150,
       "redeemStatus": 400,
       "redeemCt": "application/json",
       "certDays": 58
@@ -24,10 +24,10 @@
       "ok": true,
       "hard": [],
       "warnings": [
-        "health:slow(2342ms)"
+        "health:slow(2651ms)"
       ],
       "healthStatus": 200,
-      "healthMs": 2342,
+      "healthMs": 2651,
       "redeemStatus": 400,
       "redeemCt": "application/json",
       "certDays": 57
@@ -39,7 +39,7 @@
       "hard": [],
       "warnings": [],
       "healthStatus": 200,
-      "healthMs": 336,
+      "healthMs": 704,
       "redeemStatus": 400,
       "redeemCt": "application/json",
       "certDays": 57
@@ -50,10 +50,10 @@
       "ok": true,
       "hard": [],
       "warnings": [
-        "health:slow(2162ms)"
+        "health:slow(2256ms)"
       ],
       "healthStatus": 200,
-      "healthMs": 2162,
+      "healthMs": 2256,
       "redeemStatus": 400,
       "redeemCt": "application/json",
       "certDays": 57
@@ -64,10 +64,10 @@
       "ok": true,
       "hard": [],
       "warnings": [
-        "health:slow(2025ms)"
+        "health:slow(2315ms)"
       ],
       "healthStatus": 200,
-      "healthMs": 2025,
+      "healthMs": 2315,
       "redeemStatus": 400,
       "redeemCt": "application/json",
       "certDays": 56
@@ -77,64 +77,66 @@
       "brand": "EmailGuard",
       "ok": true,
       "hard": [],
-      "warnings": [],
+      "warnings": [
+        "ssl:expires-in-29d"
+      ],
       "healthStatus": 200,
-      "healthMs": 327,
+      "healthMs": 698,
       "redeemStatus": 400,
       "redeemCt": "application/json",
-      "certDays": 30
+      "certDays": 29
     },
     {
       "code": "SEO",
       "brand": "SEOScope",
       "ok": true,
       "hard": [],
-      "warnings": [],
+      "warnings": [
+        "ssl:expires-in-29d"
+      ],
       "healthStatus": 200,
-      "healthMs": 423,
+      "healthMs": 1214,
       "redeemStatus": 400,
       "redeemCt": "application/json",
-      "certDays": 30
+      "certDays": 29
     },
     {
       "code": "HSH",
       "brand": "HeaderShield",
       "ok": true,
       "hard": [],
-      "warnings": [
-        "ssl:expires-in-29d"
-      ],
+      "warnings": [],
       "healthStatus": 200,
-      "healthMs": 501,
+      "healthMs": 566,
       "redeemStatus": 400,
       "redeemCt": "application/json",
-      "certDays": 29
+      "certDays": 89
     },
     {
       "code": "HKL",
       "brand": "HookLab",
       "ok": true,
       "hard": [],
-      "warnings": [],
+      "warnings": [
+        "ssl:expires-in-29d"
+      ],
       "healthStatus": 200,
-      "healthMs": 445,
+      "healthMs": 685,
       "redeemStatus": 400,
       "redeemCt": "application/json",
-      "certDays": 30
+      "certDays": 29
     },
     {
       "code": "CFG",
       "brand": "CardForge",
       "ok": true,
       "hard": [],
-      "warnings": [
-        "ssl:expires-in-28d"
-      ],
+      "warnings": [],
       "healthStatus": 200,
-      "healthMs": 579,
+      "healthMs": 589,
       "redeemStatus": 400,
       "redeemCt": "application/json",
-      "certDays": 28
+      "certDays": 89
     }
   ]
 }
