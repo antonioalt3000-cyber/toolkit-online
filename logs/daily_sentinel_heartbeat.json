@@ -1,7 +1,7 @@
 {
   "status": "ALL_SYSTEMS_NOMINAL",
-  "checkedAt": "2026-10-26T10:40:22.144Z",
-  "summary": "10/10 nominal, 4 with warnings",
+  "checkedAt": "2026-10-26T20:49:05.806Z",
+  "summary": "10/10 nominal, 5 with warnings",
   "down": [],
   "apps": [
     {
@@ -11,22 +11,24 @@
       "hard": [],
       "warnings": [],
       "healthStatus": 200,
-      "healthMs": 253,
+      "healthMs": 699,
       "redeemStatus": 400,
       "redeemCt": "application/json",
-      "certDays": 57
+      "certDays": 56
     },
     {
       "code": "F2",
       "brand": "FixMyWeb",
       "ok": true,
       "hard": [],
-      "warnings": [],
+      "warnings": [
+        "health:slow(3386ms)"
+      ],
       "healthStatus": 200,
-      "healthMs": 753,
+      "healthMs": 3386,
       "redeemStatus": 400,
       "redeemCt": "application/json",
-      "certDays": 56
+      "certDays": 55
     },
     {
       "code": "F3",
@@ -35,22 +37,24 @@
       "hard": [],
       "warnings": [],
       "healthStatus": 200,
-      "healthMs": 626,
+      "healthMs": 636,
       "redeemStatus": 400,
       "redeemCt": "application/json",
-      "certDays": 56
+      "certDays": 55
     },
     {
       "code": "F4",
       "brand": "ParseFlow",
       "ok": true,
       "hard": [],
-      "warnings": [],
+      "warnings": [
+        "health:slow(2364ms)"
+      ],
       "healthStatus": 200,
-      "healthMs": 306,
+      "healthMs": 2364,
       "redeemStatus": 400,
       "redeemCt": "application/json",
-      "certDays": 56
+      "certDays": 55
     },
     {
       "code": "B7",
@@ -59,10 +63,10 @@
       "hard": [],
       "warnings": [],
       "healthStatus": 200,
-      "healthMs": 313,
+      "healthMs": 586,
       "redeemStatus": 400,
       "redeemCt": "application/json",
-      "certDays": 55
+      "certDays": 54
     },
     {
       "code": "EG",
@@ -73,7 +77,7 @@
         "ssl:expires-in-28d"
       ],
       "healthStatus": 200,
-      "healthMs": 338,
+      "healthMs": 589,
       "redeemStatus": 400,
       "redeemCt": "application/json",
       "certDays": 28
@@ -87,7 +91,7 @@
         "ssl:expires-in-28d"
       ],
       "healthStatus": 200,
-      "healthMs": 324,
+      "healthMs": 639,
       "redeemStatus": 400,
       "redeemCt": "application/json",
       "certDays": 28
@@ -97,14 +101,12 @@
       "brand": "HeaderShield",
       "ok": true,
       "hard": [],
-      "warnings": [
-        "ssl:expires-in-27d"
-      ],
+      "warnings": [],
       "healthStatus": 200,
-      "healthMs": 359,
+      "healthMs": 741,
       "redeemStatus": 400,
       "redeemCt": "application/json",
-      "certDays": 27
+      "certDays": 88
     },
     {
       "code": "HKL",
@@ -115,7 +117,7 @@
         "ssl:expires-in-28d"
       ],
       "healthStatus": 200,
-      "healthMs": 431,
+      "healthMs": 794,
       "redeemStatus": 400,
       "redeemCt": "application/json",
       "certDays": 28
@@ -127,7 +129,7 @@
       "hard": [],
       "warnings": [],
       "healthStatus": 200,
-      "healthMs": 393,
+      "healthMs": 659,
       "redeemStatus": 400,
       "redeemCt": "application/json",
       "certDays": 88
