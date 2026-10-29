@@ -1,7 +1,7 @@
 {
   "status": "ALL_SYSTEMS_NOMINAL",
-  "checkedAt": "2026-10-29T11:12:41.055Z",
-  "summary": "10/10 nominal, 3 with warnings",
+  "checkedAt": "2026-10-29T20:45:37.087Z",
+  "summary": "10/10 nominal, 6 with warnings",
   "down": [],
   "apps": [
     {
@@ -10,22 +10,24 @@
       "ok": true,
       "hard": [],
       "warnings": [
-        "health:slow(2335ms)"
+        "health:slow(2231ms)"
       ],
       "healthStatus": 200,
-      "healthMs": 2335,
+      "healthMs": 2231,
       "redeemStatus": 400,
       "redeemCt": "application/json",
-      "certDays": 54
+      "certDays": 53
     },
     {
       "code": "F2",
       "brand": "FixMyWeb",
       "ok": true,
       "hard": [],
-      "warnings": [],
+      "warnings": [
+        "health:slow(2763ms)"
+      ],
       "healthStatus": 200,
-      "healthMs": 849,
+      "healthMs": 2763,
       "redeemStatus": 400,
       "redeemCt": "application/json",
       "certDays": 52
@@ -35,12 +37,14 @@
       "brand": "PaymentRescue",
       "ok": true,
       "hard": [],
-      "warnings": [],
+      "warnings": [
+        "health:slow(1571ms)"
+      ],
       "healthStatus": 200,
-      "healthMs": 489,
+      "healthMs": 1571,
       "redeemStatus": 400,
       "redeemCt": "application/json",
-      "certDays": 53
+      "certDays": 52
     },
     {
       "code": "F4",
@@ -48,13 +52,14 @@
       "ok": true,
       "hard": [],
       "warnings": [
-        "redeem:slow(1691ms)"
+        "health:slow(2315ms)",
+        "redeem:slow(1622ms)"
       ],
       "healthStatus": 200,
-      "healthMs": 417,
+      "healthMs": 2315,
       "redeemStatus": 400,
       "redeemCt": "application/json",
-      "certDays": 53
+      "certDays": 52
     },
     {
       "code": "B7",
@@ -62,13 +67,13 @@
       "ok": true,
       "hard": [],
       "warnings": [
-        "health:slow(2668ms)"
+        "health:slow(2888ms)"
       ],
       "healthStatus": 200,
-      "healthMs": 2668,
+      "healthMs": 2888,
       "redeemStatus": 400,
       "redeemCt": "application/json",
-      "certDays": 52
+      "certDays": 51
     },
     {
       "code": "EG",
@@ -77,22 +82,24 @@
       "hard": [],
       "warnings": [],
       "healthStatus": 200,
-      "healthMs": 516,
+      "healthMs": 677,
       "redeemStatus": 400,
       "redeemCt": "application/json",
-      "certDays": 88
+      "certDays": 87
     },
     {
       "code": "SEO",
       "brand": "SEOScope",
       "ok": true,
       "hard": [],
-      "warnings": [],
+      "warnings": [
+        "ssl:expires-in-25d"
+      ],
       "healthStatus": 200,
-      "healthMs": 546,
+      "healthMs": 992,
       "redeemStatus": 400,
       "redeemCt": "application/json",
-      "certDays": 88
+      "certDays": 25
     },
     {
       "code": "HSH",
@@ -101,7 +108,7 @@
       "hard": [],
       "warnings": [],
       "healthStatus": 200,
-      "healthMs": 658,
+      "healthMs": 586,
       "redeemStatus": 400,
       "redeemCt": "application/json",
       "certDays": 85
@@ -113,7 +120,7 @@
       "hard": [],
       "warnings": [],
       "healthStatus": 200,
-      "healthMs": 705,
+      "healthMs": 831,
       "redeemStatus": 400,
       "redeemCt": "application/json",
       "certDays": 87
@@ -125,7 +132,7 @@
       "hard": [],
       "warnings": [],
       "healthStatus": 200,
-      "healthMs": 748,
+      "healthMs": 768,
       "redeemStatus": 400,
       "redeemCt": "application/json",
       "certDays": 85
