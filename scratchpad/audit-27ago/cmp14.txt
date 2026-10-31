@@ -1,0 +1,15 @@
+complipilot	fix/qa-eurlex-auth-17may	1	0	1	0	 [DIVERSO:src/app/api/cron/eurlex/route.ts]
+complipilot	resilience/fase1-security	3	0	3	0	 [DIVERSO:src/app/api/admin/coupon-stats/route.ts] [DIVERSO:src/app/api/health/route.ts] [DIVERSO:src/lib/rate-limit.ts]
+accessiscan	audit/zerotrust-2026-05-01	2	0	2	0	 [DIVERSO:src/app/api/scan/route.ts] [DIVERSO:src/lib/api-keys.ts]
+accessiscan	fix/qa-health-brand-17may	1	0	1	0	 [DIVERSO:src/app/api/health/route.ts]
+churnguard	chore/qa-hardening	2	1	1	0	 [DIVERSO:app/api/webhooks/recovery-event/route.ts]
+churnguard	fix/qa-health-brand-17may	1	0	1	0	 [DIVERSO:app/api/health/route.ts]
+churnguard	fix-watchdog-host	1	0	1	0	 [DIVERSO:.github/workflows/watchdog.yml]
+documint	claude/crazy-lederberg-9e2aa6	4	0	4	0	 [DIVERSO:app/playground/page.tsx] [DIVERSO:lib/extractor.test.ts] [DIVERSO:lib/extractor.ts] [DIVERSO:lib/types.ts]
+capture-api	chore/qa-hardening	1	1	0	0	
+emailguard	chore/qa-hardening	1	0	1	0	 [DIVERSO:src/app/global-error.tsx]
+seoscope	chore/qa-hardening	1	0	1	0	 [DIVERSO:src/app/global-error.tsx]
+headershield	chore/qa-hardening	1	0	1	0	 [DIVERSO:src/app/global-error.tsx]
+hooklab	chore/qa-hardening	1	0	1	0	 [DIVERSO:src/app/global-error.tsx]
+cardforge	chore/qa-hardening	1	0	1	0	 [DIVERSO:src/app/global-error.tsx]
+FINE

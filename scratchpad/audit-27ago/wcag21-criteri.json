@@ -1,0 +1,314 @@
+{
+ "1.1.1": {
+  "nome": "Non-text Content",
+  "livello": "A"
+ },
+ "1.2.1": {
+  "nome": "Audio-only and Video-only (Prerecorded)",
+  "livello": "A"
+ },
+ "1.2.2": {
+  "nome": "Captions (Prerecorded)",
+  "livello": "A"
+ },
+ "1.2.3": {
+  "nome": "Audio Description or Media Alternative (Prerecorded)",
+  "livello": "A"
+ },
+ "1.2.4": {
+  "nome": "Captions (Live)",
+  "livello": "AA"
+ },
+ "1.2.5": {
+  "nome": "Audio Description (Prerecorded)",
+  "livello": "AA"
+ },
+ "1.2.6": {
+  "nome": "Sign Language (Prerecorded)",
+  "livello": "AAA"
+ },
+ "1.2.7": {
+  "nome": "Extended Audio Description (Prerecorded)",
+  "livello": "AAA"
+ },
+ "1.2.8": {
+  "nome": "Media Alternative (Prerecorded)",
+  "livello": "AAA"
+ },
+ "1.2.9": {
+  "nome": "Audio-only (Live)",
+  "livello": "AAA"
+ },
+ "1.3.1": {
+  "nome": "Info and Relationships",
+  "livello": "A"
+ },
+ "1.3.2": {
+  "nome": "Meaningful Sequence",
+  "livello": "A"
+ },
+ "1.3.3": {
+  "nome": "Sensory Characteristics",
+  "livello": "A"
+ },
+ "1.3.4": {
+  "nome": "Orientation",
+  "livello": "AA"
+ },
+ "1.3.5": {
+  "nome": "Identify Input Purpose",
+  "livello": "AA"
+ },
+ "1.3.6": {
+  "nome": "Identify Purpose",
+  "livello": "AAA"
+ },
+ "1.4.1": {
+  "nome": "Use of Color",
+  "livello": "A"
+ },
+ "1.4.2": {
+  "nome": "Audio Control",
+  "livello": "A"
+ },
+ "1.4.3": {
+  "nome": "Contrast (Minimum)",
+  "livello": "AA"
+ },
+ "1.4.4": {
+  "nome": "Resize Text",
+  "livello": "AA"
+ },
+ "1.4.5": {
+  "nome": "Images of Text",
+  "livello": "AA"
+ },
+ "1.4.6": {
+  "nome": "Contrast (Enhanced)",
+  "livello": "AAA"
+ },
+ "1.4.7": {
+  "nome": "Low or No Background Audio",
+  "livello": "AAA"
+ },
+ "1.4.8": {
+  "nome": "Visual Presentation",
+  "livello": "AAA"
+ },
+ "1.4.9": {
+  "nome": "Images of Text (No Exception)",
+  "livello": "AAA"
+ },
+ "1.4.10": {
+  "nome": "Reflow",
+  "livello": "AA"
+ },
+ "1.4.11": {
+  "nome": "Non-text Contrast",
+  "livello": "AA"
+ },
+ "1.4.12": {
+  "nome": "Text Spacing",
+  "livello": "AA"
+ },
+ "1.4.13": {
+  "nome": "Content on Hover or Focus",
+  "livello": "AA"
+ },
+ "2.1.1": {
+  "nome": "Keyboard",
+  "livello": "A"
+ },
+ "2.1.2": {
+  "nome": "No Keyboard Trap",
+  "livello": "A"
+ },
+ "2.1.3": {
+  "nome": "Keyboard (No Exception)",
+  "livello": "AAA"
+ },
+ "2.1.4": {
+  "nome": "Character Key Shortcuts",
+  "livello": "A"
+ },
+ "2.2.1": {
+  "nome": "Timing Adjustable",
+  "livello": "A"
+ },
+ "2.2.2": {
+  "nome": "Pause, Stop, Hide",
+  "livello": "A"
+ },
+ "2.2.3": {
+  "nome": "No Timing",
+  "livello": "AAA"
+ },
+ "2.2.4": {
+  "nome": "Interruptions",
+  "livello": "AAA"
+ },
+ "2.2.5": {
+  "nome": "Re-authenticating",
+  "livello": "AAA"
+ },
+ "2.2.6": {
+  "nome": "Timeouts",
+  "livello": "AAA"
+ },
+ "2.3.1": {
+  "nome": "Three Flashes or Below Threshold",
+  "livello": "A"
+ },
+ "2.3.2": {
+  "nome": "Three Flashes",
+  "livello": "AAA"
+ },
+ "2.3.3": {
+  "nome": "Animation from Interactions",
+  "livello": "AAA"
+ },
+ "2.4.1": {
+  "nome": "Bypass Blocks",
+  "livello": "A"
+ },
+ "2.4.2": {
+  "nome": "Page Titled",
+  "livello": "A"
+ },
+ "2.4.3": {
+  "nome": "Focus Order",
+  "livello": "A"
+ },
+ "2.4.4": {
+  "nome": "Link Purpose (In Context)",
+  "livello": "A"
+ },
+ "2.4.5": {
+  "nome": "Multiple Ways",
+  "livello": "AA"
+ },
+ "2.4.6": {
+  "nome": "Headings and Labels",
+  "livello": "AA"
+ },
+ "2.4.7": {
+  "nome": "Focus Visible",
+  "livello": "AA"
+ },
+ "2.4.8": {
+  "nome": "Location",
+  "livello": "AAA"
+ },
+ "2.4.9": {
+  "nome": "Link Purpose (Link Only)",
+  "livello": "AAA"
+ },
+ "2.4.10": {
+  "nome": "Section Headings",
+  "livello": "AAA"
+ },
+ "2.5.1": {
+  "nome": "Pointer Gestures",
+  "livello": "A"
+ },
+ "2.5.2": {
+  "nome": "Pointer Cancellation",
+  "livello": "A"
+ },
+ "2.5.3": {
+  "nome": "Label in Name",
+  "livello": "A"
+ },
+ "2.5.4": {
+  "nome": "Motion Actuation",
+  "livello": "A"
+ },
+ "2.5.5": {
+  "nome": "Target Size",
+  "livello": "AAA"
+ },
+ "2.5.6": {
+  "nome": "Concurrent Input Mechanisms",
+  "livello": "AAA"
+ },
+ "3.1.1": {
+  "nome": "Language of Page",
+  "livello": "A"
+ },
+ "3.1.2": {
+  "nome": "Language of Parts",
+  "livello": "AA"
+ },
+ "3.1.3": {
+  "nome": "Unusual Words",
+  "livello": "AAA"
+ },
+ "3.1.4": {
+  "nome": "Abbreviations",
+  "livello": "AAA"
+ },
+ "3.1.5": {
+  "nome": "Reading Level",
+  "livello": "AAA"
+ },
+ "3.1.6": {
+  "nome": "Pronunciation",
+  "livello": "AAA"
+ },
+ "3.2.1": {
+  "nome": "On Focus",
+  "livello": "A"
+ },
+ "3.2.2": {
+  "nome": "On Input",
+  "livello": "A"
+ },
+ "3.2.3": {
+  "nome": "Consistent Navigation",
+  "livello": "AA"
+ },
+ "3.2.4": {
+  "nome": "Consistent Identification",
+  "livello": "AA"
+ },
+ "3.2.5": {
+  "nome": "Change on Request",
+  "livello": "AAA"
+ },
+ "3.3.1": {
+  "nome": "Error Identification",
+  "livello": "A"
+ },
+ "3.3.2": {
+  "nome": "Labels or Instructions",
+  "livello": "A"
+ },
+ "3.3.3": {
+  "nome": "Error Suggestion",
+  "livello": "AA"
+ },
+ "3.3.4": {
+  "nome": "Error Prevention (Legal, Financial, Data)",
+  "livello": "AA"
+ },
+ "3.3.5": {
+  "nome": "Help",
+  "livello": "AAA"
+ },
+ "3.3.6": {
+  "nome": "Error Prevention (All)",
+  "livello": "AAA"
+ },
+ "4.1.1": {
+  "nome": "Parsing",
+  "livello": "A"
+ },
+ "4.1.2": {
+  "nome": "Name, Role, Value",
+  "livello": "A"
+ },
+ "4.1.3": {
+  "nome": "Status Messages",
+  "livello": "AA"
+ }
+}

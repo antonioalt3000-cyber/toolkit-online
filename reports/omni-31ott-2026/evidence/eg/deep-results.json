@@ -1,0 +1,50 @@
+{
+  "slug": "eg",
+  "dom": "emailguard.dev",
+  "email": "antonio.alt3000+qa31ott-eg@gmail.com",
+  "code": "QAOCT-042C-0D74-1C68-552D",
+  "results": [
+    {
+      "day": 1,
+      "what": "coniato un coupon interno via /api/admin/generate-coupons",
+      "pass": true,
+      "detail": "QAOCT-042C-0D74-1C68-552D"
+    },
+    {
+      "day": 1,
+      "what": "il riscatto parte e la POST /api/redeem risponde 2xx",
+      "pass": true,
+      "detail": "HTTP 200"
+    },
+    {
+      "day": 3,
+      "what": "la feature core risponde: una verifica email con punteggio",
+      "pass": true,
+      "detail": "{\"email\":\"postmaster@gmail.com\",\"valid\":true,\"score\":70,\"status\":\"risky\",\"checks\":{\"syntax\":true,\"mx\":true,\"spf\":true,\"dmarc\":true,\"disposable\":false,\"role\":true,\"free\":true,\"catch"
+    },
+    {
+      "day": 7,
+      "what": "il cron review-requests accetta il proprio segreto",
+      "pass": true,
+      "detail": "HTTP 200"
+    },
+    {
+      "day": 30,
+      "what": "il cron cleanup accetta il proprio segreto",
+      "pass": true,
+      "detail": "HTTP 200"
+    },
+    {
+      "day": 7,
+      "what": "il cron rifiuta un segreto sbagliato",
+      "pass": false,
+      "detail": "HTTP 200"
+    },
+    {
+      "day": 30,
+      "what": "nessun errore di console nel viaggio autenticato",
+      "pass": true,
+      "detail": ""
+    }
+  ]
+}

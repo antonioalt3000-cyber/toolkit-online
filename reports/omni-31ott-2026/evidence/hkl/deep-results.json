@@ -1,0 +1,56 @@
+{
+  "slug": "hkl",
+  "dom": "gethooklab.dev",
+  "email": "antonio.alt3000+qa31ott-hkl@gmail.com",
+  "code": "QAOCT-10F2-8669-EE3F-C9A1",
+  "results": [
+    {
+      "day": 1,
+      "what": "coniato un coupon interno via /api/admin/generate-coupons",
+      "pass": true,
+      "detail": "QAOCT-10F2-8669-EE3F-C9A1"
+    },
+    {
+      "day": 1,
+      "what": "il riscatto parte e la POST /api/redeem risponde 2xx",
+      "pass": true,
+      "detail": "HTTP 200"
+    },
+    {
+      "day": 1,
+      "what": "la pagina consegna la chiave API",
+      "pass": true,
+      "detail": "hkl_82becb…"
+    },
+    {
+      "day": 3,
+      "what": "la feature core risponde: la lista degli endpoint webhook",
+      "pass": true,
+      "detail": "{\"count\":0,\"endpoints\":[]}"
+    },
+    {
+      "day": 7,
+      "what": "il cron review-requests accetta il proprio segreto",
+      "pass": true,
+      "detail": "HTTP 404"
+    },
+    {
+      "day": 30,
+      "what": "il cron cleanup accetta il proprio segreto",
+      "pass": true,
+      "detail": "HTTP 404"
+    },
+    {
+      "day": 7,
+      "what": "il cron rifiuta un segreto sbagliato",
+      "pass": true,
+      "detail": "HTTP 404"
+    },
+    {
+      "day": 30,
+      "what": "nessun errore di console nel viaggio autenticato",
+      "pass": true,
+      "detail": ""
+    }
+  ]
+}

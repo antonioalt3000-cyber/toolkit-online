@@ -1,0 +1,50 @@
+{
+  "slug": "b7",
+  "dom": "captureapi.dev",
+  "email": "antonio.alt3000+qa31ott-b7@gmail.com",
+  "code": "QAOCT-75DF-BEA9",
+  "results": [
+    {
+      "day": 1,
+      "what": "coniato un coupon interno via /api/admin/generate-coupons",
+      "pass": true,
+      "detail": "QAOCT-75DF-BEA9"
+    },
+    {
+      "day": 1,
+      "what": "il riscatto parte e la POST /api/redeem risponde 2xx",
+      "pass": true,
+      "detail": "HTTP 200"
+    },
+    {
+      "day": 3,
+      "what": "la feature core risponde: uno screenshot PNG vero",
+      "pass": true,
+      "detail": "52880 byte, firma 89504e47"
+    },
+    {
+      "day": 7,
+      "what": "il cron review-requests accetta il proprio segreto",
+      "pass": true,
+      "detail": "HTTP 200"
+    },
+    {
+      "day": 30,
+      "what": "il cron cleanup accetta il proprio segreto",
+      "pass": true,
+      "detail": "HTTP 404"
+    },
+    {
+      "day": 7,
+      "what": "il cron rifiuta un segreto sbagliato",
+      "pass": true,
+      "detail": "HTTP 401"
+    },
+    {
+      "day": 30,
+      "what": "nessun errore di console nel viaggio autenticato",
+      "pass": true,
+      "detail": ""
+    }
+  ]
+}

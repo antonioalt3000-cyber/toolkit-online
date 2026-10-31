@@ -1,0 +1,43 @@
+%PDF-1.4
+1 0 obj
+<< /Type /Catalog /Pages 2 0 R >>
+endobj
+2 0 obj
+<< /Type /Pages /Kids [3 0 R] /Count 1 >>
+endobj
+3 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 595 842] /Resources << /Font << /F1 5 0 R >> >> /Contents 4 0 R >>
+endobj
+4 0 obj
+<< /Length 346 >>
+stream
+BT
+/F1 9 Tf
+1 0 0 1 20 780 Tm (THE OLD MILL) Tj
+1 0 0 1 20 766 Tm (Table 4  Server: Ana) Tj
+1 0 0 1 20 752 Tm (Pasta 12.00) Tj
+1 0 0 1 20 738 Tm (Wine 8.00) Tj
+1 0 0 1 20 724 Tm (Subtotal 20.00) Tj
+1 0 0 1 20 710 Tm (Tip 3.00) Tj
+1 0 0 1 20 696 Tm (Total 23.00) Tj
+1 0 0 1 20 682 Tm (MASTERCARD ****7788) Tj
+1 0 0 1 20 668 Tm (AUTH 004512) Tj
+ET
+endstream
+endobj
+5 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Courier >>
+endobj
+xref
+0 6
+0000000000 65535 f 
+0000000009 00000 n 
+0000000058 00000 n 
+0000000115 00000 n 
+0000000241 00000 n 
+0000000637 00000 n 
+trailer
+<< /Size 6 /Root 1 0 R >>
+startxref
+705
+%%EOF

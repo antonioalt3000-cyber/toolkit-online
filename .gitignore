@@ -96,3 +96,9 @@ scratchpad/qa-infra/test-guard.cjs
 
 # node_modules annidati (harness QA)
 node_modules/
+
+# output grezzo degli scanner: rigenerabile con reports/omni-31ott-2026/run-scans.sh
+reports/**/scans/
+
+# screenshot di evidenza: restano su disco, come nei round precedenti
+reports/**/evidence/**/*.png

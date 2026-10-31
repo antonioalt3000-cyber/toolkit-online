@@ -1,0 +1,45 @@
+{
+  "slug": "seo",
+  "dom": "seoscope.dev",
+  "name": "SEOScope",
+  "auth": "apikey",
+  "email": "antonio.alt3000+qa31ott-seo@gmail.com",
+  "results": [
+    {
+      "day": 1,
+      "what": "home rende senza errori di console",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "day": 1,
+      "what": "home senza risposte >=400",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "day": 1,
+      "what": "nessuno scorrimento orizzontale a 1366px",
+      "pass": true,
+      "detail": "scrollWidth 1356 vs clientWidth 1356 | div.aurora-layer"
+    },
+    {
+      "day": 1,
+      "what": "/redeem espone un campo email",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "day": 1,
+      "what": "/redeem senza errori di console",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "day": 2,
+      "what": "nessuno scorrimento orizzontale a 375px",
+      "pass": true,
+      "detail": "scrollWidth 375 vs clientWidth 375 | div.aurora-layer"
+    }
+  ]
+}

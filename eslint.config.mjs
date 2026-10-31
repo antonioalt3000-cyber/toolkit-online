@@ -24,9 +24,10 @@ const eslintConfig = defineConfig([
     'build/**',
     'next-env.d.ts',
     'scripts/**',
-    // The QA harness is standalone Node tooling, not part of the app: the
-    // Next/jsx-a11y rules here do not apply to it.
+    // The QA harness and the QA reports' drivers are standalone Node tooling,
+    // not part of the app: the Next/jsx-a11y rules here do not apply to them.
     'scratchpad/**',
+    'reports/**',
   ]),
   // react-hooks/set-state-in-effect is a new React 19 rule that flags setState
   // inside useEffect. The codebase uses this valid pattern extensively (localStorage

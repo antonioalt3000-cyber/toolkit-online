@@ -1,0 +1,32 @@
+{
+  "slug": "f2",
+  "dom": "fixmyweb.dev",
+  "email": "antonio.alt3000+qa31ott-f2@gmail.com",
+  "code": "QAOCT-7CF9-E9A8",
+  "results": [
+    {
+      "day": 1,
+      "what": "coniato un coupon interno via /api/admin/generate-coupons",
+      "pass": true,
+      "detail": "QAOCT-7CF9-E9A8"
+    },
+    {
+      "day": 1,
+      "what": "il riscatto parte e la POST /api/redeem risponde 2xx",
+      "pass": false,
+      "detail": "HTTP 409"
+    },
+    {
+      "day": 3,
+      "what": "la feature core risponde: uno scan WCAG con un punteggio",
+      "pass": false,
+      "detail": "nessuna chiave API dal riscatto"
+    },
+    {
+      "day": 30,
+      "what": "nessun errore di console nel viaggio autenticato",
+      "pass": false,
+      "detail": "[network] Failed to load resource: the server responded with a status of 409 () https://fixmyweb.dev/api/redeem"
+    }
+  ]
+}

@@ -1,0 +1,32 @@
+{
+  "slug": "f4",
+  "dom": "parseflow.dev",
+  "email": "antonio.alt3000+qa31ott-f4@gmail.com",
+  "code": "QAOCT-1734-98E5",
+  "results": [
+    {
+      "day": 1,
+      "what": "coniato un coupon interno via /api/admin/generate-coupons",
+      "pass": true,
+      "detail": "QAOCT-1734-98E5"
+    },
+    {
+      "day": 1,
+      "what": "il riscatto parte e la POST /api/redeem risponde 2xx",
+      "pass": true,
+      "detail": "HTTP 200"
+    },
+    {
+      "day": 3,
+      "what": "la feature core risponde: la dashboard estrazioni",
+      "pass": true,
+      "detail": "{\"usage\":{\"documentsProcessed\":0,\"documentsLimit\":100000,\"plan\":\"enterprise\",\"periodStart\":\"2026-10-01T00:00:00.000Z\",\"periodEnd\":\"2026-10-31T00:00:00.000Z\"},\"apiKeys\":[{\"id\":\"1ea4"
+    },
+    {
+      "day": 30,
+      "what": "nessun errore di console nel viaggio autenticato",
+      "pass": true,
+      "detail": ""
+    }
+  ]
+}

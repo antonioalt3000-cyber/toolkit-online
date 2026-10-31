@@ -1,0 +1,49 @@
+=== complipilot / fix/qa-eurlex-auth-17may  (+1 commit)
+   2026-05-16  security: cron eurlex auth fail-closed when CRON_SECRET missing
+   file toccati: 1 -> src/app/api/cron/eurlex/route.ts
+=== complipilot / resilience/fase1-security  (+1 commit)
+   2026-04-23  security: phase 1 hardening
+   file toccati: 3 -> src/app/api/admin/coupon-stats/route.ts, src/app/api/health/route.ts, src/lib/rate-limit.ts
+=== accessiscan / audit/zerotrust-2026-05-01  (+1 commit)
+   2026-05-01  add api key validation
+   file toccati: 2 -> src/app/api/scan/route.ts, src/lib/api-keys.ts
+=== accessiscan / fix/qa-health-brand-17may  (+1 commit)
+   2026-05-16  feat: add brand field to health endpoint for public consistency
+   file toccati: 1 -> src/app/api/health/route.ts
+=== churnguard / chore/qa-hardening  (+1 commit)
+   2026-06-25  harden webhook ssrf guard
+   file toccati: 2 -> app/api/webhooks/recovery-event/route.ts, lib/ssrf.ts
+=== churnguard / fix/qa-health-brand-17may  (+1 commit)
+   2026-05-16  feat: add brand field to health endpoint for public consistency
+   file toccati: 1 -> app/api/health/route.ts
+=== churnguard / fix-watchdog-host  (+1 commit)
+   2026-05-05  fix watchdog use canonical www host and avoid follow-redirect
+   file toccati: 1 -> .github/workflows/watchdog.yml
+=== documint / claude/crazy-lederberg-9e2aa6  (+1 commit)
+   2026-05-31  add contract/id_document/bank_statement extractors; standardize invo
+   file toccati: 4 -> app/playground/page.tsx, lib/extractor.test.ts, lib/extractor.ts, lib/types.ts
+=== capture-api / chore/qa-hardening  (+1 commit)
+   2026-06-25  add not-found page
+   file toccati: 1 -> src/app/not-found.tsx
+=== emailguard / chore/qa-hardening  (+1 commit)
+   2026-06-25  add global-error boundary
+   file toccati: 1 -> src/app/global-error.tsx
+=== seoscope / chore/qa-hardening  (+1 commit)
+   2026-06-25  add global-error boundary
+   file toccati: 1 -> src/app/global-error.tsx
+=== headershield / chore/qa-hardening  (+1 commit)
+   2026-06-25  add global-error boundary
+   file toccati: 1 -> src/app/global-error.tsx
+=== hooklab / chore/qa-hardening  (+1 commit)
+   2026-06-25  add global-error boundary
+   file toccati: 1 -> src/app/global-error.tsx
+=== hooklab / wt/n4-cert  (+4 commit)
+   2026-08-11  fix: unify error envelope, wrap all API routes, document error contr
+   2026-08-11  test: pin the datastore invariants a mocked suite cannot see
+   2026-08-11  fix: a non-object JSON body is a client error, not a server error
+   2026-08-11  docs: certification record for this product
+   file toccati: 60 -> .env.example, .github/workflows/ci.yml, CERTIFICATION.md, SPEC.md, package-lock.json, package.json ...
+=== cardforge / chore/qa-hardening  (+1 commit)
+   2026-06-25  add global-error boundary
+   file toccati: 1 -> src/app/global-error.tsx
+FINE

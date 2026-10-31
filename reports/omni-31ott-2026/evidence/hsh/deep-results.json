@@ -1,0 +1,56 @@
+{
+  "slug": "hsh",
+  "dom": "headershield.dev",
+  "email": "antonio.alt3000+qa31ott-hsh@gmail.com",
+  "code": "QAOCT-466F-549B-C2D4-A70E",
+  "results": [
+    {
+      "day": 1,
+      "what": "coniato un coupon interno via /api/admin/generate-coupons",
+      "pass": true,
+      "detail": "QAOCT-466F-549B-C2D4-A70E"
+    },
+    {
+      "day": 1,
+      "what": "il riscatto parte e la POST /api/redeem risponde 2xx",
+      "pass": true,
+      "detail": "HTTP 200"
+    },
+    {
+      "day": 1,
+      "what": "la pagina consegna la chiave API",
+      "pass": true,
+      "detail": "hsh_64ac9e…"
+    },
+    {
+      "day": 3,
+      "what": "la feature core risponde: uno scan header con voto",
+      "pass": true,
+      "detail": "{\"url\":\"https://example.com\",\"fetchedStatus\":200,\"score\":0,\"grade\":\"F\",\"findings\":[{\"header\":\"Content-Security-Policy\",\"status\":\"fail\",\"points\":0,\"maxPoints\":25,\"advice\":\"No CSP. W"
+    },
+    {
+      "day": 7,
+      "what": "il cron review-requests accetta il proprio segreto",
+      "pass": true,
+      "detail": "HTTP 404"
+    },
+    {
+      "day": 30,
+      "what": "il cron cleanup accetta il proprio segreto",
+      "pass": true,
+      "detail": "HTTP 404"
+    },
+    {
+      "day": 7,
+      "what": "il cron rifiuta un segreto sbagliato",
+      "pass": true,
+      "detail": "HTTP 404"
+    },
+    {
+      "day": 30,
+      "what": "nessun errore di console nel viaggio autenticato",
+      "pass": true,
+      "detail": ""
+    }
+  ]
+}

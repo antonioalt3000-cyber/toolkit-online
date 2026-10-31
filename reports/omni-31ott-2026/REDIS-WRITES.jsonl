@@ -1,0 +1,24 @@
+{"ts":"2026-10-31T00:50:43.832Z","repo":"cfg","key":"cfg:coupons:valid|used -> QAOCT-1B4C-D18B-C2EB-1C8C","nota":"coniato 31ott per journey"}
+{"ts":"2026-10-31T00:57:07.585Z","repo":"cfg","key":"coupons:used -> QAOCTB-05B3-8D44-82CF-6B9D","nota":"coniato e riscattato nel journey 31 ott"}
+{"ts":"2026-10-31T00:57:56.636Z","repo":"cfg","key":"coupons:used -> QAOCTB-E2E9-9BEF-82B1-7BA1","nota":"coniato e riscattato nel journey 31 ott"}
+{"ts":"2026-10-31T00:58:42.544Z","repo":"cfg","key":"coupons:used -> QAOCTB-F4EE-5644-6B7D-4BC6","nota":"coniato e riscattato nel journey 31 ott"}
+{"ts":"2026-10-31T01:03:51.965Z","repo":"f1","key":"coupons:used -> QAOCT-EF0A-BACF","nota":"coniato e riscattato nel journey 31 ott"}
+{"ts":"2026-10-31T01:04:24.095Z","repo":"f2","key":"coupons:used -> QAOCT-89D3-A1C5","nota":"coniato e riscattato nel journey 31 ott"}
+{"ts":"2026-10-31T01:04:56.128Z","repo":"f3","key":"coupons:used -> QAOCT-F5D2-FFA4","nota":"coniato e riscattato nel journey 31 ott"}
+{"ts":"2026-10-31T01:05:29.173Z","repo":"f4","key":"coupons:used -> QAOCT-BC1A-E0A8","nota":"coniato e riscattato nel journey 31 ott"}
+{"ts":"2026-10-31T01:06:01.217Z","repo":"b7","key":"coupons:used -> QAOCT-2CA4-AA4F","nota":"coniato e riscattato nel journey 31 ott"}
+{"ts":"2026-10-31T01:06:33.409Z","repo":"eg","key":"coupons:used -> QAOCT-5E98-80ED-5850-6E4B","nota":"coniato e riscattato nel journey 31 ott"}
+{"ts":"2026-10-31T01:09:33.328Z","repo":"f3","key":"pre:user/session/coupon -> QAVER-D581-3703 + antonio.alt3000+qa31ott-f3b@gmail.com","nota":"verifica API redeem 31 ott"}
+{"ts":"2026-10-31T01:09:51.664Z","repo":"f3","key":"coupons:used -> QAOCT-B6B9-B6EA","nota":"coniato e riscattato nel journey 31 ott"}
+{"ts":"2026-10-31T01:12:25.892Z","repo":"f3","key":"coupons:used -> QAOCT-E571-5DF1","nota":"coniato e riscattato nel journey 31 ott"}
+{"ts":"2026-10-31T01:13:04.108Z","repo":"f1","key":"coupons:used -> QAOCT-4EA9-3F2C","nota":"coniato e riscattato nel journey 31 ott"}
+{"ts":"2026-10-31T01:13:35.262Z","repo":"f2","key":"coupons:used -> QAOCT-7CF9-E9A8","nota":"coniato e riscattato nel journey 31 ott"}
+{"ts":"2026-10-31T01:14:06.388Z","repo":"f4","key":"coupons:used -> QAOCT-1734-98E5","nota":"coniato e riscattato nel journey 31 ott"}
+{"ts":"2026-10-31T01:14:37.657Z","repo":"b7","key":"coupons:used -> QAOCT-75DF-BEA9","nota":"coniato e riscattato nel journey 31 ott"}
+{"ts":"2026-10-31T01:15:09.141Z","repo":"cfg","key":"coupons:used -> QAOCTB-4E31-6AF6-4B08-723F","nota":"coniato e riscattato nel journey 31 ott"}
+{"ts":"2026-10-31T01:15:12.716Z","repo":"f2","key":"coupons:used -> QAREST-FA4B-FF05 + antonio.alt3000+qarest-f2@gmail.com","nota":"verifica restituzione coupon su 409"}
+{"ts":"2026-10-31T01:15:40.954Z","repo":"eg","key":"coupons:used -> QAOCT-042C-0D74-1C68-552D","nota":"coniato e riscattato nel journey 31 ott"}
+{"ts":"2026-10-31T01:16:12.671Z","repo":"hsh","key":"coupons:used -> QAOCT-466F-549B-C2D4-A70E","nota":"coniato e riscattato nel journey 31 ott"}
+{"ts":"2026-10-31T01:16:45.440Z","repo":"hkl","key":"coupons:used -> QAOCT-10F2-8669-EE3F-C9A1","nota":"coniato e riscattato nel journey 31 ott"}
+{"ts":"2026-10-31T01:17:18.313Z","repo":"seo","key":"coupons:used -> QAOCT-CD67-C816-7F2D-A6DC","nota":"coniato e riscattato nel journey 31 ott"}
+{"ts":"2026-10-31T01:18:39.489Z","repo":"f1","key":"coupons:used -> QAOCT-E106-61AF","nota":"coniato e riscattato nel journey 31 ott"}

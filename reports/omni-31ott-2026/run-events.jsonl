@@ -1,0 +1,92 @@
+{"ts":"2026-10-31T00:22:35.596Z","repo":"f1","phase":"M0-realign","esito":"ok","prova":"master 00c502c, albero pulito"}
+{"ts":"2026-10-31T00:22:35.690Z","repo":"f2","phase":"M0-realign","esito":"ok","prova":"master, albero pulito"}
+{"ts":"2026-10-31T00:22:35.779Z","repo":"f3","phase":"M0-realign","esito":"ok","prova":"master, albero pulito"}
+{"ts":"2026-10-31T00:22:35.866Z","repo":"f4","phase":"M0-realign","esito":"ok","prova":"master, albero pulito"}
+{"ts":"2026-10-31T00:22:35.954Z","repo":"b7","phase":"M0-realign","esito":"ok","prova":"master, albero pulito"}
+{"ts":"2026-10-31T00:22:36.049Z","repo":"cfg","phase":"M0-realign","esito":"ok","prova":"master, albero pulito"}
+{"ts":"2026-10-31T00:22:36.137Z","repo":"eg","phase":"M0-realign","esito":"ok","prova":"master, albero pulito"}
+{"ts":"2026-10-31T00:22:36.222Z","repo":"hsh","phase":"M0-realign","esito":"ok","prova":"master, albero pulito"}
+{"ts":"2026-10-31T00:22:36.313Z","repo":"hkl","phase":"M0-realign","esito":"ok","prova":"master, albero pulito"}
+{"ts":"2026-10-31T00:22:36.403Z","repo":"seo","phase":"M0-realign","esito":"ok","prova":"master, albero pulito"}
+{"ts":"2026-10-31T00:40:36.605Z","repo":"f1","phase":"M3-fix","esito":"ok","prova":"dompurify 3.4.17 (CVSS 9.2, client-side)"}
+{"ts":"2026-10-31T00:40:36.694Z","repo":"f1","phase":"M3-gate","esito":"ok","prova":"lint 0, tsc, 944 test, build"}
+{"ts":"2026-10-31T00:40:36.780Z","repo":"f1","phase":"M3-pr","esito":"ok","prova":"complipilot#71"}
+{"ts":"2026-10-31T00:40:36.875Z","repo":"f4","phase":"M3-fix","esito":"wip","prova":"contrasto /redeem 3.62->5.28, HelpCenter hover 2.47->5.36, guard CTA"}
+{"ts":"2026-10-31T00:40:36.961Z","repo":"eg","phase":"M3-fix","esito":"wip","prova":"righe DNS non mostrate se non interrogate + guard"}
+{"ts":"2026-10-31T00:43:15.117Z","repo":"eg","phase":"M3-fix","esito":"ok","prova":"righe DNS gated + guard non vacuo"}
+{"ts":"2026-10-31T00:43:15.295Z","repo":"eg","phase":"M3-gate","esito":"ok","prova":"lint 0, tsc, 573 test, build"}
+{"ts":"2026-10-31T00:43:15.435Z","repo":"eg","phase":"M3-pr","esito":"ok","prova":"emailguard#53"}
+{"ts":"2026-10-31T00:46:27.096Z","repo":"f1","phase":"M3-deploy","esito":"ok","prova":"deploy Ready + complipilot.dev 200 non autenticato"}
+{"ts":"2026-10-31T00:46:27.197Z","repo":"eg","phase":"M3-pr","esito":"ok","prova":"emailguard#53 mergiata"}
+{"ts":"2026-10-31T00:46:27.300Z","repo":"f2","phase":"M3-fix","esito":"ok","prova":"dompurify+undici+postcss"}
+{"ts":"2026-10-31T00:46:27.404Z","repo":"f2","phase":"M3-gate","esito":"ok","prova":"lint 0, tsc, 661 test, build"}
+{"ts":"2026-10-31T00:46:27.509Z","repo":"f2","phase":"M3-pr","esito":"ok","prova":"accessiscan#82"}
+{"ts":"2026-10-31T00:54:18.587Z","repo":"f2","phase":"M3-pr","esito":"ok","prova":"accessiscan#82-mergiata"}
+{"ts":"2026-10-31T00:54:18.680Z","repo":"f3","phase":"M3-fix","esito":"ok","prova":"auth/me-200-anonimo+dompurify"}
+{"ts":"2026-10-31T00:54:18.770Z","repo":"f3","phase":"M3-gate","esito":"ok","prova":"lint0-tsc-672test-build"}
+{"ts":"2026-10-31T00:54:18.862Z","repo":"f3","phase":"M3-pr","esito":"ok","prova":"churnguard#79-mergiata"}
+{"ts":"2026-10-31T00:54:18.955Z","repo":"f4","phase":"M3-fix","esito":"ok","prova":"contrasto-CTA+HelpCenter+dompurify"}
+{"ts":"2026-10-31T00:54:19.048Z","repo":"f4","phase":"M3-gate","esito":"ok","prova":"lint0-tsc-676test-build"}
+{"ts":"2026-10-31T00:54:19.139Z","repo":"f4","phase":"M3-pr","esito":"wip","prova":"documint#81"}
+{"ts":"2026-10-31T00:54:19.228Z","repo":"b7","phase":"M3-fix","esito":"ok","prova":"dompurify+ip-address"}
+{"ts":"2026-10-31T00:54:19.321Z","repo":"b7","phase":"M3-gate","esito":"ok","prova":"lint0-tsc-922test-build"}
+{"ts":"2026-10-31T00:54:19.412Z","repo":"b7","phase":"M3-pr","esito":"wip","prova":"capture-api#108"}
+{"ts":"2026-10-31T00:54:19.503Z","repo":"seo","phase":"M3-fix","esito":"ok","prova":"undici-7.30.1"}
+{"ts":"2026-10-31T00:54:19.597Z","repo":"seo","phase":"M3-gate","esito":"ok","prova":"lint0-tsc-801test-build"}
+{"ts":"2026-10-31T00:54:19.688Z","repo":"seo","phase":"M3-pr","esito":"wip","prova":"seoscope#60"}
+{"ts":"2026-10-31T00:54:19.780Z","repo":"cfg","phase":"M4-journey","esito":"ok","prova":"6/6-PASS-sonda-validata"}
+{"ts":"2026-10-31T01:04:03.115Z","repo":"f4","phase":"M3-pr","esito":"ok","prova":"documint#81-mergiata"}
+{"ts":"2026-10-31T01:04:03.208Z","repo":"b7","phase":"M3-pr","esito":"ok","prova":"capture-api#108-mergiata"}
+{"ts":"2026-10-31T01:04:03.298Z","repo":"seo","phase":"M3-pr","esito":"ok","prova":"seoscope#60-mergiata"}
+{"ts":"2026-10-31T01:04:03.390Z","repo":"f3","phase":"M3-deploy","esito":"ok","prova":"auth/me-200-verificato-in-produzione"}
+{"ts":"2026-10-31T01:04:03.480Z","repo":"cfg","phase":"M4-journey","esito":"ok","prova":"6/7-coupon+riscatto+PNG-reale"}
+{"ts":"2026-10-31T01:04:03.572Z","repo":"f2","phase":"M3-fix","esito":"ok","prova":"auth/me-anonimo-come-F3-trovato-dal-browser"}
+{"ts":"2026-10-31T01:04:12.269Z","repo":"f1","phase":"M2-scan","esito":"ok","prova":"osv-scanner+gitleaks+catene-dipendenza"}
+{"ts":"2026-10-31T01:04:12.360Z","repo":"f2","phase":"M2-scan","esito":"ok","prova":"osv-scanner+gitleaks+catene-dipendenza"}
+{"ts":"2026-10-31T01:04:12.452Z","repo":"f3","phase":"M2-scan","esito":"ok","prova":"osv-scanner+gitleaks+catene-dipendenza"}
+{"ts":"2026-10-31T01:04:12.546Z","repo":"f4","phase":"M2-scan","esito":"ok","prova":"osv-scanner+gitleaks+catene-dipendenza"}
+{"ts":"2026-10-31T01:04:12.639Z","repo":"b7","phase":"M2-scan","esito":"ok","prova":"osv-scanner+gitleaks+catene-dipendenza"}
+{"ts":"2026-10-31T01:04:12.731Z","repo":"cfg","phase":"M2-scan","esito":"ok","prova":"osv-scanner+gitleaks+catene-dipendenza"}
+{"ts":"2026-10-31T01:04:12.826Z","repo":"eg","phase":"M2-scan","esito":"ok","prova":"osv-scanner+gitleaks+catene-dipendenza"}
+{"ts":"2026-10-31T01:04:12.918Z","repo":"hsh","phase":"M2-scan","esito":"ok","prova":"osv-scanner+gitleaks+catene-dipendenza"}
+{"ts":"2026-10-31T01:04:13.011Z","repo":"hkl","phase":"M2-scan","esito":"ok","prova":"osv-scanner+gitleaks+catene-dipendenza"}
+{"ts":"2026-10-31T01:04:13.103Z","repo":"seo","phase":"M2-scan","esito":"ok","prova":"osv-scanner+gitleaks+catene-dipendenza"}
+{"ts":"2026-10-31T01:13:32.119Z","repo":"f2","phase":"M3-pr","esito":"ok","prova":"accessiscan#83-mergiata"}
+{"ts":"2026-10-31T01:13:32.210Z","repo":"f4","phase":"M3-deploy","esito":"ok","prova":"cyan-700/800-servito-in-produzione"}
+{"ts":"2026-10-31T01:13:32.299Z","repo":"f3","phase":"M4-journey","esito":"ok","prova":"7/7-coupon-riscatto-dashboard-cron"}
+{"ts":"2026-10-31T01:18:23.249Z","repo":"f1","phase":"M4-journey","esito":"warn","prova":"6/7-scan-reale-overallScore-72-oracolo-mio-sbagliato"}
+{"ts":"2026-10-31T01:18:23.340Z","repo":"f2","phase":"M4-journey","esito":"ok","prova":"409-corretto+riscatto-verificato-su-email-nuova"}
+{"ts":"2026-10-31T01:18:23.430Z","repo":"f4","phase":"M4-journey","esito":"ok","prova":"4/4"}
+{"ts":"2026-10-31T01:18:23.524Z","repo":"b7","phase":"M4-journey","esito":"ok","prova":"7/7"}
+{"ts":"2026-10-31T01:18:23.615Z","repo":"eg","phase":"M4-journey","esito":"warn","prova":"6/7-unico-rosso-soft-404"}
+{"ts":"2026-10-31T01:18:23.705Z","repo":"hsh","phase":"M4-journey","esito":"ok","prova":"8/8"}
+{"ts":"2026-10-31T01:18:23.798Z","repo":"hkl","phase":"M4-journey","esito":"ok","prova":"8/8"}
+{"ts":"2026-10-31T01:18:23.886Z","repo":"seo","phase":"M4-journey","esito":"ok","prova":"8/8"}
+{"ts":"2026-10-31T01:18:23.973Z","repo":"cfg","phase":"M4-journey","esito":"warn","prova":"6/7-unico-rosso-soft-404"}
+{"ts":"2026-10-31T01:18:24.062Z","repo":"f2","phase":"M3-deploy","esito":"ok","prova":"auth/me-mergiata-07b4082"}
+{"ts":"2026-10-31T01:18:24.154Z","repo":"b7","phase":"M3-deploy","esito":"ok","prova":"deploy-ready-dominio-200"}
+{"ts":"2026-10-31T01:18:24.247Z","repo":"seo","phase":"M3-deploy","esito":"ok","prova":"deploy-ready-dominio-200"}
+{"ts":"2026-10-31T01:18:24.338Z","repo":"eg","phase":"M3-deploy","esito":"ok","prova":"deploy-ready-dominio-200"}
+{"ts":"2026-10-31T01:18:36.679Z","repo":"cfg","phase":"M3-fix","esito":"skip","prova":"nessuna modifica necessaria: i finding osv erano solo dev-only e il giro cliente e' passato"}
+{"ts":"2026-10-31T01:18:36.769Z","repo":"cfg","phase":"M3-gate","esito":"skip","prova":"nessuna modifica necessaria: i finding osv erano solo dev-only e il giro cliente e' passato"}
+{"ts":"2026-10-31T01:18:36.857Z","repo":"cfg","phase":"M3-pr","esito":"skip","prova":"nessuna modifica necessaria: i finding osv erano solo dev-only e il giro cliente e' passato"}
+{"ts":"2026-10-31T01:18:36.946Z","repo":"cfg","phase":"M3-deploy","esito":"skip","prova":"nessuna modifica necessaria: i finding osv erano solo dev-only e il giro cliente e' passato"}
+{"ts":"2026-10-31T01:18:37.038Z","repo":"hsh","phase":"M3-fix","esito":"skip","prova":"nessuna modifica necessaria: i finding osv erano solo dev-only e il giro cliente e' passato"}
+{"ts":"2026-10-31T01:18:37.130Z","repo":"hsh","phase":"M3-gate","esito":"skip","prova":"nessuna modifica necessaria: i finding osv erano solo dev-only e il giro cliente e' passato"}
+{"ts":"2026-10-31T01:18:37.218Z","repo":"hsh","phase":"M3-pr","esito":"skip","prova":"nessuna modifica necessaria: i finding osv erano solo dev-only e il giro cliente e' passato"}
+{"ts":"2026-10-31T01:18:37.305Z","repo":"hsh","phase":"M3-deploy","esito":"skip","prova":"nessuna modifica necessaria: i finding osv erano solo dev-only e il giro cliente e' passato"}
+{"ts":"2026-10-31T01:18:37.396Z","repo":"hkl","phase":"M3-fix","esito":"skip","prova":"nessuna modifica necessaria: i finding osv erano solo dev-only e il giro cliente e' passato"}
+{"ts":"2026-10-31T01:18:37.504Z","repo":"hkl","phase":"M3-gate","esito":"skip","prova":"nessuna modifica necessaria: i finding osv erano solo dev-only e il giro cliente e' passato"}
+{"ts":"2026-10-31T01:18:37.598Z","repo":"hkl","phase":"M3-pr","esito":"skip","prova":"nessuna modifica necessaria: i finding osv erano solo dev-only e il giro cliente e' passato"}
+{"ts":"2026-10-31T01:18:37.688Z","repo":"hkl","phase":"M3-deploy","esito":"skip","prova":"nessuna modifica necessaria: i finding osv erano solo dev-only e il giro cliente e' passato"}
+{"ts":"2026-10-31T01:18:37.780Z","repo":"f1","phase":"M4-teardown","esito":"warn","prova":"chiavi registrate in REDIS-WRITES.jsonl, non cancellate (token Upstash non scrivibile) - account QA del fondatore, come i round precedenti"}
+{"ts":"2026-10-31T01:18:37.872Z","repo":"f2","phase":"M4-teardown","esito":"warn","prova":"chiavi registrate in REDIS-WRITES.jsonl, non cancellate (token Upstash non scrivibile) - account QA del fondatore, come i round precedenti"}
+{"ts":"2026-10-31T01:18:37.959Z","repo":"f3","phase":"M4-teardown","esito":"warn","prova":"chiavi registrate in REDIS-WRITES.jsonl, non cancellate (token Upstash non scrivibile) - account QA del fondatore, come i round precedenti"}
+{"ts":"2026-10-31T01:18:38.046Z","repo":"f4","phase":"M4-teardown","esito":"warn","prova":"chiavi registrate in REDIS-WRITES.jsonl, non cancellate (token Upstash non scrivibile) - account QA del fondatore, come i round precedenti"}
+{"ts":"2026-10-31T01:18:38.137Z","repo":"b7","phase":"M4-teardown","esito":"warn","prova":"chiavi registrate in REDIS-WRITES.jsonl, non cancellate (token Upstash non scrivibile) - account QA del fondatore, come i round precedenti"}
+{"ts":"2026-10-31T01:18:38.228Z","repo":"cfg","phase":"M4-teardown","esito":"warn","prova":"chiavi registrate in REDIS-WRITES.jsonl, non cancellate (token Upstash non scrivibile) - account QA del fondatore, come i round precedenti"}
+{"ts":"2026-10-31T01:18:38.319Z","repo":"eg","phase":"M4-teardown","esito":"warn","prova":"chiavi registrate in REDIS-WRITES.jsonl, non cancellate (token Upstash non scrivibile) - account QA del fondatore, come i round precedenti"}
+{"ts":"2026-10-31T01:18:38.409Z","repo":"hsh","phase":"M4-teardown","esito":"warn","prova":"chiavi registrate in REDIS-WRITES.jsonl, non cancellate (token Upstash non scrivibile) - account QA del fondatore, come i round precedenti"}
+{"ts":"2026-10-31T01:18:38.506Z","repo":"hkl","phase":"M4-teardown","esito":"warn","prova":"chiavi registrate in REDIS-WRITES.jsonl, non cancellate (token Upstash non scrivibile) - account QA del fondatore, come i round precedenti"}
+{"ts":"2026-10-31T01:18:38.598Z","repo":"seo","phase":"M4-teardown","esito":"warn","prova":"chiavi registrate in REDIS-WRITES.jsonl, non cancellate (token Upstash non scrivibile) - account QA del fondatore, come i round precedenti"}
+{"ts":"2026-10-31T01:19:22.172Z","repo":"f1","phase":"M4-journey","esito":"ok","prova":"7/7 dopo correzione oracolo: scan AI Act overallScore 72"}

@@ -1,0 +1,49 @@
+%PDF-1.4
+1 0 obj
+<< /Type /Catalog /Pages 2 0 R >>
+endobj
+2 0 obj
+<< /Type /Pages /Kids [3 0 R] /Count 1 >>
+endobj
+3 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 595 842] /Resources << /Font << /F1 5 0 R >> >> /Contents 4 0 R >>
+endobj
+4 0 obj
+<< /Length 931 >>
+stream
+BT
+/F1 10 Tf
+1 0 0 1 40 780 Tm (ACME NORDIC AB) Tj
+1 0 0 1 40 764 Tm (Invoice No   : INV-2026-0913) Tj
+1 0 0 1 40 748 Tm (Invoice Date : 2026-08-27) Tj
+1 0 0 1 40 732 Tm (Bill To      : Contoso Ltd, Dublin, Ireland) Tj
+1 0 0 1 40 716 Tm () Tj
+1 0 0 1 40 700 Tm (Description                        Qty      Unit        Amount) Tj
+1 0 0 1 40 684 Tm (Consulting retainer, August         1     14000.00     14000.00) Tj
+1 0 0 1 40 668 Tm (On-site workshop \(2 days\)           2      1750.00      3500.00) Tj
+1 0 0 1 40 652 Tm (Travel recharge                     1       500.00       500.00) Tj
+1 0 0 1 40 636 Tm () Tj
+1 0 0 1 40 620 Tm (Subtotal \(excl. tax\) .............. 18000.00 SEK) Tj
+1 0 0 1 40 604 Tm (VAT at the standard rate 25% ......  4500.00 SEK) Tj
+1 0 0 1 40 588 Tm (Total Due, payable on receipt: .... 22500.00 SEK) Tj
+1 0 0 1 40 572 Tm () Tj
+1 0 0 1 40 556 Tm (Amounts quoted in SEK. Payment within 30 days.) Tj
+ET
+endstream
+endobj
+5 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Courier >>
+endobj
+xref
+0 6
+0000000000 65535 f 
+0000000009 00000 n 
+0000000058 00000 n 
+0000000115 00000 n 
+0000000241 00000 n 
+0000001222 00000 n 
+trailer
+<< /Size 6 /Root 1 0 R >>
+startxref
+1290
+%%EOF
