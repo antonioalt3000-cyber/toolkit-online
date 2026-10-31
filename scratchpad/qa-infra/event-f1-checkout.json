@@ -1,0 +1,15 @@
+{
+  "id": "evt_qa_f1_checkout_1",
+  "object": "event",
+  "type": "checkout.session.completed",
+  "data": {
+    "object": {
+      "id": "cs_test_qa_f1_1",
+      "object": "checkout.session",
+      "customer_email": "qa-f1-test+1791944009807@example.com",
+      "customer": "cus_qa_fake",
+      "subscription": "sub_qa_fake_1",
+      "metadata": {}
+    }
+  }
+}

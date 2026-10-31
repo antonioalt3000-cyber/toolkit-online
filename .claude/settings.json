@@ -26,12 +26,7 @@
       "Glob",
       "Grep"
     ],
-    "deny": [
-      "Bash(rm -rf /)",
-      "Bash(git push --force *)",
-      "Edit(.env*)",
-      "Edit(package-lock.json)"
-    ]
+    "deny": ["Bash(rm -rf /)", "Bash(git push --force *)", "Edit(.env*)", "Edit(package-lock.json)"]
   },
   "env": {
     "NEXT_PUBLIC_SITE_URL": "https://toolkitonline.vip"
@@ -78,5 +73,11 @@
         ]
       }
     ]
+  },
+  "enabledPlugins": {
+    "supabase@claude-plugins-official": true,
+    "claude-code-setup@claude-plugins-official": true,
+    "huggingface-skills@claude-plugins-official": true,
+    "skill-creator@claude-plugins-official": true
   }
 }

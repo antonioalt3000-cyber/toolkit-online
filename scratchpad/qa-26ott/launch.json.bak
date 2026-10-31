@@ -1,0 +1,177 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "gestorsuite",
+      "runtimeExecutable": "cmd",
+      "runtimeArgs": [
+        "/c",
+        "cd /d C:\\Users\\ftass\\business-canary-suite && npm run dev -w @canary/suite"
+      ],
+      "port": 3021
+    },
+    {
+      "name": "compliance-site",
+      "runtimeExecutable": "cmd",
+      "runtimeArgs": [
+        "/c",
+        "cd /d C:\\Users\\ftass\\business-compliance-site && npm run dev -- -p 3025"
+      ],
+      "port": 3025
+    },
+    {
+      "name": "realestate-demo",
+      "runtimeExecutable": "cmd",
+      "runtimeArgs": [
+        "/c",
+        "cd /d C:\\Users\\ftass\\realestate-ai-agents && npm run start"
+      ],
+      "port": 3111
+    },
+    {
+      "name": "realestate-dev",
+      "runtimeExecutable": "cmd",
+      "runtimeArgs": [
+        "/c",
+        "cd /d C:\\Users\\ftass\\realestate-ai-agents && npx next dev -p 3112"
+      ],
+      "port": 3112
+    },
+    {
+      "name": "topranked-preview",
+      "runtimeExecutable": "cmd",
+      "runtimeArgs": [
+        "/c",
+        "cd /d C:\\Users\\ftass\\topranked && npm run preview -- --port 4321"
+      ],
+      "port": 4321
+    },
+    {
+      "name": "hooklab",
+      "runtimeExecutable": "cmd",
+      "runtimeArgs": [
+        "/c",
+        "cd /d C:\\Users\\ftass\\business-new-hooklab && npm run dev -- -p 3007"
+      ],
+      "port": 3007
+    },
+    {
+      "name": "seoscope",
+      "runtimeExecutable": "cmd",
+      "runtimeArgs": [
+        "/c",
+        "cd /d C:\\Users\\ftass\\business-new-seoscope && npm run dev -- -p 3001"
+      ],
+      "port": 3001
+    },
+    {
+      "name": "headershield",
+      "runtimeExecutable": "cmd",
+      "runtimeArgs": [
+        "/c",
+        "cd /d C:\\Users\\ftass\\business-new-headershield && npm run dev -- -p 3002"
+      ],
+      "port": 3002
+    },
+    {
+      "name": "cardforge",
+      "runtimeExecutable": "cmd",
+      "runtimeArgs": [
+        "/c",
+        "cd /d C:\\Users\\ftass\\business-new-cardforge && npm run dev -- -p 3003"
+      ],
+      "port": 3003
+    },
+    {
+      "name": "nexus",
+      "runtimeExecutable": "cmd",
+      "runtimeArgs": [
+        "/c",
+        "cd /d C:\\Users\\ftass\\business-nexus-store && npm run dev -- -p 3021"
+      ],
+      "port": 3021
+    },
+    {
+      "name": "toldos-adeje",
+      "runtimeExecutable": "cmd",
+      "runtimeArgs": [
+        "/c",
+        "cd /d C:\\Users\\ftass\\business-toldos-tenerife && npm run dev -- -p 3009"
+      ],
+      "port": 3009
+    },
+    {
+      "name": "emailguard",
+      "runtimeExecutable": "cmd",
+      "runtimeArgs": [
+        "/c",
+        "cd /d C:\\Users\\ftass\\business-new-emailguard && npm run dev"
+      ],
+      "port": 3000
+    },
+    {
+      "name": "Next.js Dev Server",
+      "runtimeExecutable": "node",
+      "runtimeArgs": [
+        "C:/Program Files/nodejs/node_modules/npm/bin/npm-cli.js",
+        "run",
+        "dev"
+      ],
+      "port": 3000
+    },
+    {
+      "name": "Next.js Production Build",
+      "runtimeExecutable": "npm",
+      "runtimeArgs": [
+        "run",
+        "build"
+      ],
+      "port": 3000
+    },
+    {
+      "name": "Next.js Start (Production)",
+      "runtimeExecutable": "npm",
+      "runtimeArgs": [
+        "run",
+        "start"
+      ],
+      "port": 3000
+    },
+    {
+      "name": "hsh-lab",
+      "runtimeExecutable": "cmd",
+      "runtimeArgs": [
+        "/c",
+        "cd /d C:\\Users\\ftass\\business-new-headershield && npm run start -- -p 3110"
+      ],
+      "port": 3110
+    },
+    {
+      "name": "instanttrip",
+      "runtimeExecutable": "cmd",
+      "runtimeArgs": [
+        "/c",
+        "cd /d C:\\Users\\ftass\\instanttrip && npx next dev -p 3050"
+      ],
+      "port": 3050
+    },
+    {
+      "name": "complipilot",
+      "runtimeExecutable": "cmd",
+      "runtimeArgs": [
+        "/c",
+        "cd /d C:\\Users\\ftass\\business-fast1-complipilot && npm run dev -- -p 3041"
+      ],
+      "port": 3041
+    },
+    {
+      "name": "uptimewatch",
+      "runtimeExecutable": "cmd",
+      "runtimeArgs": [
+        "/c",
+        "cd /d C:\\Users\\ftass\\business-new-uptimewatch && npm run dev -- -p 3131"
+      ],
+      "port": 3131
+    }
+  ]
+}

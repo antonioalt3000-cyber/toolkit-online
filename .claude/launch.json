@@ -2,6 +2,102 @@
   "version": "0.0.1",
   "configurations": [
     {
+      "name": "gestorsuite",
+      "runtimeExecutable": "cmd",
+      "runtimeArgs": [
+        "/c",
+        "cd /d C:\\Users\\ftass\\business-canary-suite && npm run dev -w @canary/suite"
+      ],
+      "port": 3021
+    },
+    {
+      "name": "compliance-site",
+      "runtimeExecutable": "cmd",
+      "runtimeArgs": [
+        "/c",
+        "cd /d C:\\Users\\ftass\\business-compliance-site && npm run dev -- -p 3025"
+      ],
+      "port": 3025
+    },
+    {
+      "name": "realestate-demo",
+      "runtimeExecutable": "cmd",
+      "runtimeArgs": ["/c", "cd /d C:\\Users\\ftass\\realestate-ai-agents && npm run start"],
+      "port": 3111
+    },
+    {
+      "name": "realestate-dev",
+      "runtimeExecutable": "cmd",
+      "runtimeArgs": ["/c", "cd /d C:\\Users\\ftass\\realestate-ai-agents && npx next dev -p 3112"],
+      "port": 3112
+    },
+    {
+      "name": "topranked-preview",
+      "runtimeExecutable": "cmd",
+      "runtimeArgs": ["/c", "cd /d C:\\Users\\ftass\\topranked && npm run preview -- --port 4321"],
+      "port": 4321
+    },
+    {
+      "name": "hooklab",
+      "runtimeExecutable": "cmd",
+      "runtimeArgs": [
+        "/c",
+        "cd /d C:\\Users\\ftass\\business-new-hooklab && npm run dev -- -p 3007"
+      ],
+      "port": 3007
+    },
+    {
+      "name": "seoscope",
+      "runtimeExecutable": "cmd",
+      "runtimeArgs": [
+        "/c",
+        "cd /d C:\\Users\\ftass\\business-new-seoscope && npm run dev -- -p 3001"
+      ],
+      "port": 3001
+    },
+    {
+      "name": "headershield",
+      "runtimeExecutable": "cmd",
+      "runtimeArgs": [
+        "/c",
+        "cd /d C:\\Users\\ftass\\business-new-headershield && npm run dev -- -p 3002"
+      ],
+      "port": 3002
+    },
+    {
+      "name": "cardforge",
+      "runtimeExecutable": "cmd",
+      "runtimeArgs": [
+        "/c",
+        "cd /d C:\\Users\\ftass\\business-new-cardforge && npm run dev -- -p 3003"
+      ],
+      "port": 3003
+    },
+    {
+      "name": "nexus",
+      "runtimeExecutable": "cmd",
+      "runtimeArgs": [
+        "/c",
+        "cd /d C:\\Users\\ftass\\business-nexus-store && npm run dev -- -p 3021"
+      ],
+      "port": 3021
+    },
+    {
+      "name": "toldos-adeje",
+      "runtimeExecutable": "cmd",
+      "runtimeArgs": [
+        "/c",
+        "cd /d C:\\Users\\ftass\\business-toldos-tenerife && npm run dev -- -p 3009"
+      ],
+      "port": 3009
+    },
+    {
+      "name": "emailguard",
+      "runtimeExecutable": "cmd",
+      "runtimeArgs": ["/c", "cd /d C:\\Users\\ftass\\business-new-emailguard && npm run dev"],
+      "port": 3000
+    },
+    {
       "name": "Next.js Dev Server",
       "runtimeExecutable": "node",
       "runtimeArgs": ["C:/Program Files/nodejs/node_modules/npm/bin/npm-cli.js", "run", "dev"],
@@ -18,6 +114,213 @@
       "runtimeExecutable": "npm",
       "runtimeArgs": ["run", "start"],
       "port": 3000
+    },
+    {
+      "name": "hsh-lab",
+      "runtimeExecutable": "cmd",
+      "runtimeArgs": [
+        "/c",
+        "cd /d C:\\Users\\ftass\\business-new-headershield && npm run start -- -p 3110"
+      ],
+      "port": 3110
+    },
+    {
+      "name": "instanttrip",
+      "runtimeExecutable": "cmd",
+      "runtimeArgs": ["/c", "cd /d C:\\Users\\ftass\\instanttrip && npx next dev -p 3050"],
+      "port": 3050
+    },
+    {
+      "name": "complipilot",
+      "runtimeExecutable": "cmd",
+      "runtimeArgs": [
+        "/c",
+        "cd /d C:\\Users\\ftass\\business-fast1-complipilot && npm run dev -- -p 3041"
+      ],
+      "port": 3041
+    },
+    {
+      "name": "uptimewatch",
+      "runtimeExecutable": "cmd",
+      "runtimeArgs": [
+        "/c",
+        "cd /d C:\\Users\\ftass\\business-new-uptimewatch && npm run dev -- -p 3131"
+      ],
+      "port": 3131
+    },
+    {
+      "name": "qa26-f1",
+      "runtimeExecutable": "node",
+      "runtimeArgs": ["C:/Users/ftass/toolkit-online/scratchpad/qa-infra/run-dev.cjs", "f1"],
+      "port": 3201
+    },
+    {
+      "name": "qa26-f2",
+      "runtimeExecutable": "node",
+      "runtimeArgs": ["C:/Users/ftass/toolkit-online/scratchpad/qa-infra/run-dev.cjs", "f2"],
+      "port": 3202
+    },
+    {
+      "name": "qa26-f3",
+      "runtimeExecutable": "node",
+      "runtimeArgs": ["C:/Users/ftass/toolkit-online/scratchpad/qa-infra/run-dev.cjs", "f3"],
+      "port": 3203
+    },
+    {
+      "name": "qa26-f4",
+      "runtimeExecutable": "node",
+      "runtimeArgs": ["C:/Users/ftass/toolkit-online/scratchpad/qa-infra/run-dev.cjs", "f4"],
+      "port": 3204
+    },
+    {
+      "name": "qa26-b7",
+      "runtimeExecutable": "node",
+      "runtimeArgs": ["C:/Users/ftass/toolkit-online/scratchpad/qa-infra/run-dev.cjs", "b7"],
+      "port": 3207
+    },
+    {
+      "name": "qa26-eg",
+      "runtimeExecutable": "node",
+      "runtimeArgs": ["C:/Users/ftass/toolkit-online/scratchpad/qa-infra/run-dev.cjs", "eg"],
+      "port": 3211
+    },
+    {
+      "name": "qa26-seo",
+      "runtimeExecutable": "node",
+      "runtimeArgs": ["C:/Users/ftass/toolkit-online/scratchpad/qa-infra/run-dev.cjs", "seo"],
+      "port": 3212
+    },
+    {
+      "name": "qa26-hsh",
+      "runtimeExecutable": "node",
+      "runtimeArgs": ["C:/Users/ftass/toolkit-online/scratchpad/qa-infra/run-dev.cjs", "hsh"],
+      "port": 3213
+    },
+    {
+      "name": "qa26-hkl",
+      "runtimeExecutable": "node",
+      "runtimeArgs": ["C:/Users/ftass/toolkit-online/scratchpad/qa-infra/run-dev.cjs", "hkl"],
+      "port": 3214
+    },
+    {
+      "name": "qa26-cfg",
+      "runtimeExecutable": "node",
+      "runtimeArgs": ["C:/Users/ftass/toolkit-online/scratchpad/qa-infra/run-dev.cjs", "cfg"],
+      "port": 3215
+    },
+    {
+      "name": "qa26-f1-prodbuild",
+      "runtimeExecutable": "node",
+      "runtimeArgs": [
+        "C:/Users/ftass/business-fast1-complipilot/node_modules/next/dist/bin/next",
+        "start",
+        "C:/Users/ftass/business-fast1-complipilot",
+        "-p",
+        "3301"
+      ],
+      "port": 3301
+    },
+    {
+      "name": "qa26-f2-prodbuild",
+      "runtimeExecutable": "node",
+      "runtimeArgs": [
+        "C:/Users/ftass/business-fast2-accessiscan/node_modules/next/dist/bin/next",
+        "start",
+        "C:/Users/ftass/business-fast2-accessiscan",
+        "-p",
+        "3302"
+      ],
+      "port": 3302
+    },
+    {
+      "name": "qa26-f3-turbo",
+      "runtimeExecutable": "node",
+      "runtimeArgs": [
+        "C:/Users/ftass/toolkit-online/scratchpad/qa-infra/run-dev.cjs",
+        "f3",
+        "turbo"
+      ],
+      "port": 3203
+    },
+    {
+      "name": "qa26-f4-turbo",
+      "runtimeExecutable": "node",
+      "runtimeArgs": [
+        "C:/Users/ftass/toolkit-online/scratchpad/qa-infra/run-dev.cjs",
+        "f4",
+        "turbo"
+      ],
+      "port": 3204
+    },
+    {
+      "name": "qa26-b7-turbo",
+      "runtimeExecutable": "node",
+      "runtimeArgs": [
+        "C:/Users/ftass/toolkit-online/scratchpad/qa-infra/run-dev.cjs",
+        "b7",
+        "turbo"
+      ],
+      "port": 3207
+    },
+    {
+      "name": "qa26-hsh-prodbuild",
+      "runtimeExecutable": "node",
+      "runtimeArgs": [
+        "C:/Users/ftass/business-new-headershield/node_modules/next/dist/bin/next",
+        "start",
+        "C:/Users/ftass/business-new-headershield",
+        "-p",
+        "3313"
+      ],
+      "port": 3313
+    },
+    {
+      "name": "qa26-hkl-prodbuild",
+      "runtimeExecutable": "node",
+      "runtimeArgs": [
+        "C:/Users/ftass/business-new-hooklab/node_modules/next/dist/bin/next",
+        "start",
+        "C:/Users/ftass/business-new-hooklab",
+        "-p",
+        "3314"
+      ],
+      "port": 3314
+    },
+    {
+      "name": "qa26-f3-prodbuild",
+      "runtimeExecutable": "node",
+      "runtimeArgs": [
+        "C:/Users/ftass/business-fast3-churnguard/node_modules/next/dist/bin/next",
+        "start",
+        "C:/Users/ftass/business-fast3-churnguard",
+        "-p",
+        "3303"
+      ],
+      "port": 3303
+    },
+    {
+      "name": "qa26-f4-prodbuild",
+      "runtimeExecutable": "node",
+      "runtimeArgs": [
+        "C:/Users/ftass/business-fast4-documint/node_modules/next/dist/bin/next",
+        "start",
+        "C:/Users/ftass/business-fast4-documint",
+        "-p",
+        "3304"
+      ],
+      "port": 3304
+    },
+    {
+      "name": "qa26-b7-prodbuild",
+      "runtimeExecutable": "node",
+      "runtimeArgs": [
+        "C:/Users/ftass/business-7-capture-api/node_modules/next/dist/bin/next",
+        "start",
+        "C:/Users/ftass/business-7-capture-api",
+        "-p",
+        "3307"
+      ],
+      "port": 3307
     }
   ]
 }

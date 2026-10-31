@@ -1,0 +1,52 @@
+%PDF-1.4
+%‚„œ”
+1 0 obj
+<< /Type /Catalog /Pages 2 0 R >>
+endobj
+2 0 obj
+<< /Type /Pages /Kids [3 0 R] /Count 1 >>
+endobj
+3 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 595.28 841.89] /Resources << /Font << /F1 4 0 R >> >> /Contents 5 0 R >>
+endobj
+4 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica /Encoding /WinAnsiEncoding >>
+endobj
+5 0 obj
+<< /Length 758 >>
+stream
+BT
+/F1 11 Tf
+1 0 0 1 50 800 Tm (Acme Ltd) Tj
+1 0 0 1 50 782 Tm (VAT ID: ES12345678A) Tj
+1 0 0 1 50 764 Tm () Tj
+1 0 0 1 50 746 Tm (INVOICE) Tj
+1 0 0 1 50 728 Tm (Invoice Number: QA-0001) Tj
+1 0 0 1 50 710 Tm (Invoice Date: 2026-10-26) Tj
+1 0 0 1 50 692 Tm (Due Date: 2026-11-25) Tj
+1 0 0 1 50 674 Tm () Tj
+1 0 0 1 50 656 Tm (Bill To: Buyer SL) Tj
+1 0 0 1 50 638 Tm () Tj
+1 0 0 1 50 620 Tm (Description            Qty    Unit Price    Amount) Tj
+1 0 0 1 50 602 Tm (Widget                   3         19.99         59.97) Tj
+1 0 0 1 50 584 Tm (Service                  1        250.00        250.00) Tj
+1 0 0 1 50 566 Tm () Tj
+1 0 0 1 50 548 Tm (Subtotal: EUR 309.97) Tj
+1 0 0 1 50 530 Tm (VAT \(21%\): EUR 65.09) Tj
+1 0 0 1 50 512 Tm (Total: EUR 375.06) Tj
+ET
+endstream
+endobj
+xref
+0 6
+0000000000 65535 f 
+0000000015 00000 n 
+0000000064 00000 n 
+0000000121 00000 n 
+0000000253 00000 n 
+0000000350 00000 n 
+trailer
+<< /Size 6 /Root 1 0 R >>
+startxref
+1159
+%%EOF
