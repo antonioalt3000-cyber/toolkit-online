@@ -100,3 +100,5 @@
 {"ts":"2026-11-03T19:26:20.903Z","repo":"hsh","phase":"M3-fix","esito":"skip","prova":"catch-all-404-gia-presente-[[...slug]]"}
 {"ts":"2026-11-03T19:26:20.997Z","repo":"hkl","phase":"M3-fix","esito":"skip","prova":"catch-all-404-gia-presente-[[...catchall]]"}
 {"ts":"2026-11-03T19:26:21.094Z","repo":"seo","phase":"M3-fix","esito":"skip","prova":"C:/Program Files/Git/api-inesistente-risponde-gia-404"}
+{"ts":"2026-11-03T19:28:58.575Z","repo":"cfg","phase":"M4-journey","esito":"ok","prova":"7/7: l'unico rosso era il soft-404, chiuso il 3 nov"}
+{"ts":"2026-11-03T19:28:58.669Z","repo":"eg","phase":"M4-journey","esito":"ok","prova":"7/7: l'unico rosso era il soft-404, chiuso il 3 nov"}

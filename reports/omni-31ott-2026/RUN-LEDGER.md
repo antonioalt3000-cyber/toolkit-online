@@ -10,8 +10,8 @@
 | **PaymentRescue** (`f3`) | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ⚠️ |
 | **ParseFlow** (`f4`) | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ⚠️ |
 | **CaptureAPI** (`b7`) | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ⚠️ |
-| **CardForge** (`cfg`) | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ⚠️ | ⚠️ |
-| **EmailGuard** (`eg`) | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ⚠️ | ⚠️ |
+| **CardForge** (`cfg`) | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ⚠️ |
+| **EmailGuard** (`eg`) | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ⚠️ |
 | **HeaderShield** (`hsh`) | ✅ | ✅ | — | — | — | — | ✅ | ⚠️ |
 | **HookLab** (`hkl`) | ✅ | ✅ | — | — | — | — | ✅ | ⚠️ |
 | **SEOScope** (`seo`) | ✅ | ✅ | — | ✅ | ✅ | ✅ | ✅ | ⚠️ |
@@ -20,8 +20,6 @@
 
 ## Ultimi eventi
 
-- `10-31 01:18` **hkl** M4-journey ✅ — 8/8
-- `10-31 01:18` **seo** M4-journey ✅ — 8/8
 - `10-31 01:18` **cfg** M4-journey ⚠️ — 6/7-unico-rosso-soft-404
 - `10-31 01:18` **f2** M3-deploy ✅ — auth/me-mergiata-07b4082
 - `10-31 01:18` **b7** M3-deploy ✅ — deploy-ready-dominio-200
@@ -60,3 +58,5 @@
 - `11-03 19:26` **hsh** M3-fix — — catch-all-404-gia-presente-[[...slug]]
 - `11-03 19:26` **hkl** M3-fix — — catch-all-404-gia-presente-[[...catchall]]
 - `11-03 19:26` **seo** M3-fix — — C:/Program Files/Git/api-inesistente-risponde-gia-404
+- `11-03 19:28` **cfg** M4-journey ✅ — 7/7: l'unico rosso era il soft-404, chiuso il 3 nov
+- `11-03 19:28` **eg** M4-journey ✅ — 7/7: l'unico rosso era il soft-404, chiuso il 3 nov
