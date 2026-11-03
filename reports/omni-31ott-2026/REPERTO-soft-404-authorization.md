@@ -1,9 +1,13 @@
 # Reperto — una rotta inesistente risponde 200 se la richiesta porta `Authorization`
 
 **Trovato**: 31 ottobre 2026, durante il collaudo del cliente pagante via browser reale.
+**Approfondito e in parte ritrattato**: 3 novembre 2026.
 **Prodotti colpiti**: CardForge, EmailGuard, HeaderShield, HookLab, SEOScope (i 5 round-2).
 **Prodotti sani**: CompliPilot, FixMyWeb, PaymentRescue, ParseFlow, CaptureAPI.
-**Stato**: confermato e riproducibile. **Non corretto** in questa sessione, per la ragione al §4.
+**Stato**: confermato, riproducibile, **causa nello strato di hosting**. **Caso API chiuso su
+tutti e 5** (CardForge [#50](https://github.com/antonioalt3000-cyber/cardforge/pull/50) e EmailGuard
+[#55](https://github.com/antonioalt3000-cyber/emailguard/pull/55), mergiate e verificate; gli altri
+tre erano gia' coperti). Caso **pagine** ancora aperto: da segnalare a Vercel, §6.
 
 ---
 
@@ -20,77 +24,98 @@ curl -s -o /dev/null -w '%{http_code}\n' https://getcardforge.dev/pagina-inventa
 # -> 200
 ```
 
-Il corpo è la pagina «Page not found» (`X-Matched-Path: /_not-found`,
-`<title>Page not found — …</title>`, `robots: noindex, nofollow`): il contenuto è
-giusto, **lo stato è sbagliato**.
+Il corpo è la pagina «Page not found» (`X-Matched-Path: /_not-found`, `robots: noindex`):
+il contenuto è giusto, **lo stato è sbagliato**. Riverificato il 3 novembre: invariato.
 
-## 2. Cosa l'ha scatenato e cosa no
+## 2. Cosa lo scatena
 
-Misurato su `getcardforge.dev`, una URL nuova a ogni tentativo:
+Misurato su `getcardforge.dev`, URL nuova a ogni tentativo:
 
 | Header inviato | Stato |
 |---|---|
 | nessuno | 404 ✅ |
-| `Authorization: Bearer x` | **200** ❌ |
-| `Authorization: Basic eHg6eXk=` | **200** ❌ |
-| `Authorization: x` (nemmeno uno schema valido) | **200** ❌ |
-| `Proxy-Authorization: Bearer x` | 404 ✅ |
-| `Cookie: a=b` | 404 ✅ |
-| `X-Api-Key: x` | 404 ✅ |
+| `Authorization: Bearer x` · `Basic …` · `x` (nemmeno uno schema valido) | **200** ❌ |
+| `Proxy-Authorization` · `Cookie` · `X-Api-Key` | 404 ✅ |
 
-Quindi: **solo** l'header `Authorization`, con qualunque valore.
+Solo `Authorization`, con qualunque valore. **Non è la cache**: una URL unica
+(`X-Vercel-Cache: MISS`, quindi la funzione viene eseguita) senza header dà 404.
 
-🔑 **Non è la cache.** Prima ipotesi scartata con un test: una URL unica (quindi
-`X-Vercel-Cache: MISS`, la funzione viene eseguita) **senza** header risponde 404.
-La stessa URL unica **con** l'header risponde 200. L'header è la causa, non il
-percorso edge/funzione.
+## 3. 🔴 Ritrattazione: NON è il middleware
 
-## 3. Perché proprio quei 5
+Il 31 ottobre avevo scritto che la causa era il middleware dei 5 round-2, che reinoltra la
+richiesta con header modificati (`NextResponse.next({ request: { headers } })`), contro il
+`NextResponse.next()` semplice dei F-series. **La correlazione era apparente.** Tre prove del
+3 novembre la smontano:
 
-La correlazione è esatta, 5 su 5 contro 5 su 5:
+1. **Non si riproduce in locale.** `npm run build` + `next start` sullo stesso commit, stesso
+   middleware: 404 in tutti i casi, con e senza `Authorization`, su pagine e su `/api`. Quindi
+   non è Next e non è il nostro codice: lo stato si perde **nello strato di hosting**.
+2. **Si riproduce su path che il middleware NON copre.** Il matcher di CardForge esclude
+   esplicitamente `api`, e `/api/inventata` + `Authorization` risponde 200 comunque.
+3. **Non si riproduce su `/_next/static/…`**, l'unica path esclusa che non raggiunge mai la
+   funzione (la serve lo strato statico).
 
-| Middleware | Repo | Esito |
-|---|---|---|
-| `NextResponse.next({ request: { headers: forwarded } })` | cardforge, emailguard, headershield, hooklab, seoscope | **200** |
-| `NextResponse.next()` semplice | complipilot, capture-api (e gli altri F-series) | 404 |
+🔑 La regola vera è più semplice: **ogni richiesta che arriva alla funzione Next con un header
+`Authorization` e che cadrebbe in 404 torna 200.**
 
-I 5 round-2 **reinoltrano la richiesta con header modificati** — serve a passare
-il nonce CSP e l'`X-Request-Id` al layout. Quel reinoltro fa ridispacciare la
-richiesta dentro Next, e in presenza di `Authorization` la pagina not-found torna
-con 200 invece di 404.
+Cade anche la spiegazione che avevo dato per la differenza fra `/api` e le pagine: i matcher
+non la giustificano. CardForge **esclude** `api` e mostra il difetto lì; HeaderShield lo
+**include** e lì risponde 404 correttamente.
 
-Variante secondaria non spiegata: su CardForge ed EmailGuard anche una rotta
-`/api/...` inesistente risponde 200, mentre su HeaderShield, HookLab e SEOScope
-le `/api/...` restano 404 correttamente — malgrado il `matcher` del middleware
-escluda `api` in tutti e cinque.
+🔑 **Lo split su `/api` ha una spiegazione banale, trovata il 3 novembre**: HeaderShield
+(`src/app/api/[[...slug]]/route.ts`) e HookLab (`src/app/api/[[...catchall]]/route.ts`)
+**hanno gia' una catch-all** che risponde `apiError("NOT_FOUND", …, 404)`. Rispondono 404 perche'
+la rotta esiste. CardForge ed EmailGuard non l'avevano, e cadevano nel fallthrough. Non era una
+differenza di piattaforma: era una rotta presente in tre prodotti su cinque e assente in due.
 
-## 4. Impatto, senza gonfiarlo
+Perché i 5 F-series siano immuni **sul caso pagine** resta non spiegato: stessa versione di Next
+(16.4.3), stessa piattaforma.
 
-- **SEO: trascurabile.** La pagina not-found porta già `robots: noindex, nofollow`,
-  quindi Google non la indicizza comunque.
-- **Integrazione API: reale.** Questi sono cinque prodotti che vendono una API.
-  Uno sviluppatore che sbaglia un path riceve `200` con dentro HTML: il suo
-  `if (res.ok) return res.json()` non fallisce con un 404 pulito, ma con un errore
-  di parsing JSON che non dice niente. È il tipo di difetto che fa perdere mezz'ora
-  a un cliente nuovo, nel momento peggiore — la prima integrazione.
+## 4. Perché non si corregge nel middleware
 
-## 5. Perché non l'ho corretto
+Era la mia prima idea: ridurre la lista di header reinoltrati così che `authorization` non vi
+compaia. **Non è praticabile.** Next serializza *ogni* chiave passata in
+`x-middleware-override-headers`, e il consumatore
+(`next/dist/server/lib/router-utils/resolve-routes.js:426-430`) **cancella ogni header di
+richiesta assente da quella lista**. È un replace, non un merge: passare 3 header farebbe
+arrivare all'app una richiesta senza `cookie`, `host`, `user-agent`. L'attuale
+`new Headers(req.headers)` è l'uso corretto e deve restare.
 
-Il reinoltro degli header non è un residuo da cancellare: è il canale con cui
-passa il **nonce CSP** al root layout. Toglierlo spegnerebbe la CSP con nonce su
-cinque siti per aggiustare uno stato HTTP — un cambio molto peggiore del difetto.
+Togliere il solo `authorization` dal set romperebbe l'autenticazione Bearer sulle rotte `/api`
+di EmailGuard, HeaderShield, HookLab e SEOScope, i cui matcher includono `api`.
 
-La correzione giusta è una delle due, e vuole una verifica in locale prima della
-produzione:
-1. restringere il `matcher` così che il reinoltro non copra i percorsi che possono
-   finire in not-found, oppure
-2. passare il nonce senza reinoltrare la richiesta (per esempio generandolo nel
-   layout e leggendolo da `headers()` nel solo ramo che serve HTML valido).
+## 5. Cosa è stato fatto invece
 
-Va fatta su un repo, verificata con la riproduzione del §1 in locale, e solo
-dopo replicata sugli altri quattro.
+**Un 404 JSON da una rotta che esiste.** Lo stato di una rotta **matchata** si conserva fino al
+client — i 400 e i 401 che queste API già restituiscono arrivano intatti — quindi rispondere da
+una catch-all `/api/[...unmatched]` aggira il fallthrough e dà un 404 corretto a prescindere da
+cosa fa l'hosting.
 
-🔑 **La lezione del reperto**: lo ha trovato un giro di *richieste autenticate*,
-non uno sweep delle pagine pubbliche. Nessuna suite dei 10 repo lo copriva, e
-nessuno dei round QA precedenti lo aveva visto, perché un visitatore anonimo non
-manda mai `Authorization` — e un cliente con una chiave API lo manda sempre.
+Non è un cerotto: per un prodotto che vende una API è anche la risposta giusta. Un client che
+sbaglia un path riceve l'envelope di errore strutturato con un `X-Request-Id` da citare in
+assistenza e il path che ha chiesto, invece di una pagina HTML.
+
+Era anche, si è scoperto, la convenzione che tre dei cinque prodotti già seguivano: la modifica
+li allinea invece di inventare un meccanismo nuovo.
+
+**Esito misurato.** Su preview (via `vercel curl`, le preview hanno Deployment Protection) e poi
+in produzione: `/api/<inesistente>` + `Authorization` passa da **200 + HTML** a **404 + JSON**;
+`POST` su una path sbagliata da 200 a 404; nessuna rotta ombreggiata (`/api/health` 200,
+`/api/openapi.json` 200, `/api/v1/card` 401, `/api/v1/verify` 401).
+
+Resta fuori il caso **pagine**: lì il 200 persiste. Impatto trascurabile (la pagina not-found è
+già `noindex, nofollow`), e qualunque rimedio richiederebbe di toccare la CSP con nonce di
+cinque siti in produzione per sistemare uno stato HTTP.
+
+## 6. Da segnalare a Vercel
+
+C'è una riproduzione minima e pulita da allegare a un ticket:
+
+> Un progetto Next 16.4.3 su Vercel risponde 200 (invece di 404) a una path inesistente quando
+> la richiesta porta un header `Authorization` di qualunque valore. Il corpo è la pagina
+> not-found, `X-Matched-Path: /_not-found`. Lo stesso build sotto `next start` risponde 404.
+> Non dipende dalla cache (si riproduce con `X-Vercel-Cache: MISS`) né dal middleware (avviene
+> anche su path escluse dal matcher). Altri progetti dello stesso account, stessa versione di
+> Next, non ne sono affetti.
+
+Il ticket lo deve aprire il fondatore: serve l'account.

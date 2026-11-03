@@ -90,3 +90,13 @@
 {"ts":"2026-10-31T01:18:38.506Z","repo":"hkl","phase":"M4-teardown","esito":"warn","prova":"chiavi registrate in REDIS-WRITES.jsonl, non cancellate (token Upstash non scrivibile) - account QA del fondatore, come i round precedenti"}
 {"ts":"2026-10-31T01:18:38.598Z","repo":"seo","phase":"M4-teardown","esito":"warn","prova":"chiavi registrate in REDIS-WRITES.jsonl, non cancellate (token Upstash non scrivibile) - account QA del fondatore, come i round precedenti"}
 {"ts":"2026-10-31T01:19:22.172Z","repo":"f1","phase":"M4-journey","esito":"ok","prova":"7/7 dopo correzione oracolo: scan AI Act overallScore 72"}
+{"ts":"2026-11-03T19:18:02.302Z","repo":"cfg","phase":"M3-fix","esito":"ok","prova":"404 JSON per /api non matchate, verificato su preview Vercel"}
+{"ts":"2026-11-03T19:18:02.399Z","repo":"cfg","phase":"M3-gate","esito":"ok","prova":"lint 0, typecheck, 729 test, build"}
+{"ts":"2026-11-03T19:18:02.494Z","repo":"cfg","phase":"M3-pr","esito":"ok","prova":"cardforge#50 mergiata"}
+{"ts":"2026-11-03T19:26:20.533Z","repo":"cfg","phase":"M3-deploy","esito":"ok","prova":"404-JSON-verificato-in-produzione"}
+{"ts":"2026-11-03T19:26:20.628Z","repo":"eg","phase":"M3-fix","esito":"ok","prova":"catch-all-404-JSON-come-i-repo-sorella"}
+{"ts":"2026-11-03T19:26:20.719Z","repo":"eg","phase":"M3-gate","esito":"ok","prova":"lint0-typecheck-580test-build"}
+{"ts":"2026-11-03T19:26:20.810Z","repo":"eg","phase":"M3-pr","esito":"ok","prova":"emailguard#55-mergiata"}
+{"ts":"2026-11-03T19:26:20.903Z","repo":"hsh","phase":"M3-fix","esito":"skip","prova":"catch-all-404-gia-presente-[[...slug]]"}
+{"ts":"2026-11-03T19:26:20.997Z","repo":"hkl","phase":"M3-fix","esito":"skip","prova":"catch-all-404-gia-presente-[[...catchall]]"}
+{"ts":"2026-11-03T19:26:21.094Z","repo":"seo","phase":"M3-fix","esito":"skip","prova":"C:/Program Files/Git/api-inesistente-risponde-gia-404"}

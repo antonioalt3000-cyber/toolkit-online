@@ -137,7 +137,7 @@ documentata nel codice, e funziona.
 
 ---
 
-## 4. 🔴 Reperto aperto: una rotta inesistente risponde 200 con `Authorization`
+## 4. Reperto: una rotta inesistente risponde 200 con `Authorization` — caso API chiuso il 3 nov
 
 Sui **5 repo round-2** (CardForge, EmailGuard, HeaderShield, HookLab, SEOScope) una rotta che
 non esiste risponde **HTTP 200**, col corpo della pagina 404, se la richiesta porta un header
@@ -151,10 +151,27 @@ Impatto onesto: trascurabile per la SEO (la pagina not-found è già `noindex`),
 l'integrazione** — sono cinque prodotti che vendono una API, e uno sviluppatore che sbaglia un
 path riceve 200 con dentro HTML invece di un 404 pulito.
 
-**Non l'ho corretto**: il reinoltro degli header non è un residuo, è il canale del nonce CSP.
-Spegnerlo per aggiustare uno stato HTTP sarebbe un cambio peggiore del difetto. La correzione
-va fatta su un repo, verificata in locale con la riproduzione, e solo dopo replicata.
-Riproduzione e due vie di fix: `REPERTO-soft-404-authorization.md`.
+### Aggiornamento 3 novembre — causa ritrattata, caso API chiuso
+
+La causa che avevo attribuito al middleware **era sbagliata** e l'ho ritrattata. Tre prove:
+non si riproduce in locale (`next start`, stesso commit, 404 sempre), si riproduce su path che
+il matcher **esclude**, e non si riproduce su `/_next/static` che non raggiunge la funzione.
+La regola vera: ogni richiesta che arriva alla funzione Next con `Authorization` e che cadrebbe
+in 404 torna 200. È lo strato di hosting, non il nostro codice.
+
+Lo split fra `/api` e pagine aveva una spiegazione banale: **HeaderShield e HookLab avevano già
+una catch-all** `/api` che risponde 404, CardForge ed EmailGuard no. Non piattaforma: una rotta
+presente in tre prodotti su cinque.
+
+Chiuso il caso che danneggiava i clienti: [cardforge#50](https://github.com/antonioalt3000-cyber/cardforge/pull/50)
+e [emailguard#55](https://github.com/antonioalt3000-cyber/emailguard/pull/55), mergiate, verificate
+su preview (`vercel curl`) e in produzione. **Tutti e 5 i prodotti** rispondono ora
+`404 application/json` su `/api/<inesistente>` anche con `Authorization`.
+
+Resta aperto il caso **pagine** (200 su tutti e 5): impatto trascurabile, la not-found è
+`noindex`, e il rimedio toccherebbe la CSP con nonce di cinque siti. C'è una riproduzione minima
+pronta per un ticket Vercel in `REPERTO-soft-404-authorization.md` §6 — lo deve aprire il
+fondatore, serve l'account.
 
 🔑 **Perché nessuno l'aveva visto**: l'hanno trovato richieste **autenticate**. Un visitatore
 anonimo non manda mai `Authorization`; un cliente con una chiave API lo manda sempre. Gli sweep
