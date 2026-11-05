@@ -11,24 +11,26 @@
 
 ## 1. Verdetto
 
-**36 pull request aperte, verificate e mergiate, su 10 repo** (contate, non stimate:
-`gh pr list --state merged` filtrato sull'inizio del round). Nessuna lasciata a metà. Le PR
+**46 pull request aperte, verificate e mergiate, su 10 repo** — contate, non sommate:
+`gh pr list --state merged` sui dieci repo con `mergedAt >= 2026-11-04` ed esclusi gli autori
+Dependabot. (Di queste, 10 sono del seguito del 5 novembre; la prima stesura di questa riga
+sommava due conteggi fatti con filtri diversi, ed è stata rifatta misurando.) Nessuna lasciata a metà. Le PR
 Dependabot aperte non sono state toccate. Stato finale misurato in produzione su tutti e 10:
 
-|                                                 | prima del round                     | dopo                          |
-| ----------------------------------------------- | ----------------------------------- | ----------------------------- |
-| `/<rotta esistente>\`                           | **500** su 62 pagine (9 prodotti)   | **404/308** su 10/10          |
-| `og:image` mancante                             | 8 pagine (hsh 5, seo 2, eg 1)       | **0**                         |
-| `'unsafe-inline'` in `script-src`               | 5 prodotti su 10                    | **0 su 10**                   |
-| nonce CSP per richiesta                         | 5 su 10                             | **10 su 10**                  |
-| `npm audit`: critical + high                    | 2 + 1 su 10/10                      | **0**                         |
-| `coupon-stats`: tasso d'uso riferito al partner | 19-21%                              | **4-6%** (il vero)            |
-| indirizzo fornitore estratto (ParseFlow)        | solo formato USA, o spazzatura      | 11 lingue, riga per riga      |
-| calcolatore ROI (PaymentRescue)                 | mostrava un tasso e usava un altro  | campo e calcolo non divergono |
-| backup del pool coupon FixMyWeb                 | **mai eseguito**                    | creato e verificato           |
-| `/api/health`                                   | ok 10/10                            | ok 10/10                      |
-| indirizzi pubblicati che rimbalzano             | **18** (25 pagine live, 5 prodotti) | **0 su 10**                   |
-| cancellazione/export raggiungibili da dashboard | 0 su 10                             | **10 su 10** (come richiesta) |
+|                                                 | prima del round                     | dopo                           |
+| ----------------------------------------------- | ----------------------------------- | ------------------------------ |
+| `/<rotta esistente>\`                           | **500** su 62 pagine (9 prodotti)   | **404/308** su 10/10           |
+| `og:image` mancante                             | 8 pagine (hsh 5, seo 2, eg 1)       | **0**                          |
+| `'unsafe-inline'` in `script-src`               | 5 prodotti su 10                    | **0 su 10**                    |
+| nonce CSP per richiesta                         | 5 su 10                             | **10 su 10**                   |
+| `npm audit`: critical + high                    | 2 + 1 su 10/10                      | **0**                          |
+| `coupon-stats`: tasso d'uso riferito al partner | 19-21%                              | **4-6%** (il vero)             |
+| indirizzo fornitore estratto (ParseFlow)        | solo formato USA, o spazzatura      | 11 lingue, riga per riga       |
+| calcolatore ROI (PaymentRescue)                 | mostrava un tasso e usava un altro  | campo e calcolo non divergono  |
+| backup del pool coupon FixMyWeb                 | **mai eseguito**                    | creato e verificato            |
+| `/api/health`                                   | ok 10/10                            | ok 10/10                       |
+| indirizzi pubblicati che rimbalzano             | **18** (25 pagine live, 5 prodotti) | **0 su 10** (misurato in prod) |
+| cancellazione/export raggiungibili da dashboard | 0 su 10                             | **10 su 10** (come richiesta)  |
 
 **12 reperti**, di cui 7 corretti e verificati in produzione, 1 mitigato a metà e 1 lasciato al
 fondatore con la ragione scritta. Il dodicesimo, R11, è arrivato il 5 novembre dalla voce di
@@ -168,6 +170,17 @@ dashboard **non conosce l'email dell'account**, mentre su CompliPilot l'`apiKey`
 **E sotto c'era R11.** Verificare che l'indirizzo del pulsante ricevesse posta ha scoperto che 18
 indirizzi pubblicati non esistono. Era la voce che sembrava cosmetica.
 
+**Verificato dopo il deploy** (10 PR mergiate, produzione che serve i nuovi commit su 10/10,
+confermato dal campo `commit` di `/api/health`, non da `state=READY`):
+
+- **zero indirizzi non consegnabili** su 10 domini × 8 tipi di pagina (privacy, terms, dpa,
+  security, ai-transparency, refund, about, contact) — tre tipi più della scansione che aveva
+  trovato i 25;
+- il `security.txt` di CaptureAPI ora dichiara `support@`, non il `security@` che rimbalzava;
+- la carta **nel browser reale**, con un controllo nei due versi: assente per un ospite vero su
+  3/3, presente per il cliente autenticato su 3/3 con i due `mailto:`, la frase dei 30 giorni e la
+  riga su cosa si conserva. Ogni `mailto:` punta a un alias provato.
+
 ---
 
 ## 5. Cosa resta al fondatore
@@ -221,7 +234,7 @@ indirizzi pubblicati non esistono. Era la voce che sembrava cosmetica.
 
 ---
 
-## 6. Autocritica — 9 falsi rossi, una premessa falsa e una misura sbagliata, tutti miei
+## 6. Autocritica — 11 falsi rossi, una premessa falsa e una misura sbagliata, tutti miei
 
 Un collaudo che non sbaglia mai in proprio favore va guardato con sospetto. Questi sono i rossi che
 ho prodotto io e che **non** erano difetti del prodotto. Li elenco perché sono la parte di questo
@@ -265,6 +278,15 @@ report che vale di più la prossima volta.
     due direzioni. 🔑 Un selettore inventato come controllo costa una query e avrebbe smascherato
     il wildcard al primo giro: la stessa lezione del controllo interno nella sonda RCPT, che lì
     avevo applicato e qui no.
+
+12. **«La carta compare a un ospite» su due prodotti: falso, era il mio profilo** (5 nov). La prima
+    passata della sonda nel browser ha dato due rossi. Il Chrome su :9223 porta le sessioni dei
+    round precedenti in `localStorage` — `captureapi-dashboard`, e `complipilot-auth` con l'email
+    del collaudo del 4 novembre — quindi quello che chiamavo «ospite» era **un cliente che
+    ritorna**. Svuotando lo storage: carta assente e richiesta di accesso, su 3 prodotti su 3.
+    🔑 Una sonda che misura uno stato «non autenticato» deve **creare** quello stato, non
+    presumerlo: in un profilo riusato la condizione di partenza è l'ultima sessione, non il vuoto.
+    La sonda ora svuota prima di guardare, e il motivo è scritto dentro.
 
 E tre errori di procedura, non di misura:
 
