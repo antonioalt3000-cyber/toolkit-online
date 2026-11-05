@@ -1,0 +1,265 @@
+-- complipilot.dev: 42 pagine dalla sitemap
+-- fixmyweb.dev: 51 pagine dalla sitemap
+-- paymentrescue.dev: 33 pagine dalla sitemap
+-- parseflow.dev: 31 pagine dalla sitemap
+-- captureapi.dev: 39 pagine dalla sitemap
+-- getcardforge.dev: 11 pagine dalla sitemap
+-- emailguard.dev: 11 pagine dalla sitemap
+-- headershield.dev: 11 pagine dalla sitemap
+-- gethooklab.dev: 13 pagine dalla sitemap
+-- seoscope.dev: 11 pagine dalla sitemap
+complipilot.dev    /                  support@complipilot.dev
+complipilot.dev    /scan              support@complipilot.dev
+complipilot.dev    /ai-act-article-50-check support@complipilot.dev
+complipilot.dev    /services          support@complipilot.dev hello@complipilot.dev
+complipilot.dev    /pricing           support@complipilot.dev
+complipilot.dev    /about             support@complipilot.dev
+complipilot.dev    /contact           support@complipilot.dev
+complipilot.dev    /eu-ai-act-compliance support@complipilot.dev
+complipilot.dev    /gdpr-compliance-checker support@complipilot.dev
+complipilot.dev    /ai-risk-assessment support@complipilot.dev
+complipilot.dev    /risk-assessment   support@complipilot.dev
+complipilot.dev    /checklist         support@complipilot.dev
+complipilot.dev    /timeline          support@complipilot.dev
+complipilot.dev    /templates         support@complipilot.dev
+complipilot.dev    /blog              support@complipilot.dev
+complipilot.dev    /blog/regulation-eu-2026-1744 support@complipilot.dev
+complipilot.dev    /faq               support@complipilot.dev
+complipilot.dev    /help              support@complipilot.dev hello@complipilot.dev
+complipilot.dev    /security          support@complipilot.dev
+complipilot.dev    /integrations      support@complipilot.dev
+complipilot.dev    /compare-scan      support@complipilot.dev
+complipilot.dev    /cross-reference   support@complipilot.dev
+complipilot.dev    /document-generator support@complipilot.dev
+complipilot.dev    /badge             support@complipilot.dev
+complipilot.dev    /changelog         support@complipilot.dev
+complipilot.dev    /blog/gdpr-vs-eu-ai-act support@complipilot.dev
+complipilot.dev    /blog/ai-act-penalties support@complipilot.dev
+complipilot.dev    /blog/eu-ai-act-compliance-checklist-2026 support@complipilot.dev
+complipilot.dev    /blog/eu-ai-act-compliance-software support@complipilot.dev
+complipilot.dev    /blog/eu-ai-act-compliance-tool support@complipilot.dev
+complipilot.dev    /glossary          support@complipilot.dev
+complipilot.dev    /free              support@complipilot.dev
+complipilot.dev    /api-docs          support@complipilot.dev
+complipilot.dev    /generate          support@complipilot.dev
+complipilot.dev    /audit-questionnaire support@complipilot.dev
+complipilot.dev    /status            support@complipilot.dev
+complipilot.dev    /privacy           support@complipilot.dev
+complipilot.dev    /terms             support@complipilot.dev
+complipilot.dev    /cookie-policy     support@complipilot.dev
+complipilot.dev    /refund            support@complipilot.dev
+complipilot.dev    /dpa               support@complipilot.dev
+complipilot.dev    /ai-transparency   support@complipilot.dev
+fixmyweb.dev       /                  support@fixmyweb.dev contact@fixmyweb.dev
+fixmyweb.dev       /scan              support@fixmyweb.dev contact@fixmyweb.dev
+fixmyweb.dev       /tools/contrast-checker support@fixmyweb.dev contact@fixmyweb.dev
+fixmyweb.dev       /pricing           support@fixmyweb.dev contact@fixmyweb.dev
+fixmyweb.dev       /badge             support@fixmyweb.dev contact@fixmyweb.dev
+fixmyweb.dev       /statement         support@fixmyweb.dev contact@fixmyweb.dev
+fixmyweb.dev       /services/eaa-audit support@fixmyweb.dev hello@fixmyweb.dev contact@fixmyweb.dev
+fixmyweb.dev       /eaa               support@fixmyweb.dev contact@fixmyweb.dev
+fixmyweb.dev       /eaa/germany       support@fixmyweb.dev contact@fixmyweb.dev
+fixmyweb.dev       /eaa/france        support@fixmyweb.dev contact@fixmyweb.dev
+fixmyweb.dev       /eaa/italy         support@fixmyweb.dev contact@fixmyweb.dev
+fixmyweb.dev       /eaa/spain         support@fixmyweb.dev contact@fixmyweb.dev
+fixmyweb.dev       /eaa/ireland       support@fixmyweb.dev contact@fixmyweb.dev
+fixmyweb.dev       /eaa/netherlands   support@fixmyweb.dev contact@fixmyweb.dev
+fixmyweb.dev       /wcag-audit        support@fixmyweb.dev contact@fixmyweb.dev
+fixmyweb.dev       /ada-compliance    support@fixmyweb.dev contact@fixmyweb.dev
+fixmyweb.dev       /accessibility-checker support@fixmyweb.dev contact@fixmyweb.dev
+fixmyweb.dev       /compare/fixmyweb-vs-axe support@fixmyweb.dev contact@fixmyweb.dev
+fixmyweb.dev       /compare/fixmyweb-vs-accessibe support@fixmyweb.dev contact@fixmyweb.dev
+fixmyweb.dev       /compare/fixmyweb-vs-silktide support@fixmyweb.dev contact@fixmyweb.dev
+fixmyweb.dev       /bulk              support@fixmyweb.dev contact@fixmyweb.dev
+fixmyweb.dev       /blog              support@fixmyweb.dev contact@fixmyweb.dev
+fixmyweb.dev       /blog/european-accessibility-act support@fixmyweb.dev contact@fixmyweb.dev
+fixmyweb.dev       /blog/wcag-checklist support@fixmyweb.dev contact@fixmyweb.dev
+fixmyweb.dev       /blog/wcag-checklist-2026 support@fixmyweb.dev contact@fixmyweb.dev
+fixmyweb.dev       /blog/european-accessibility-act-2025-guide support@fixmyweb.dev contact@fixmyweb.dev
+fixmyweb.dev       /blog/ada-title-ii-2026-deadline support@fixmyweb.dev contact@fixmyweb.dev
+fixmyweb.dev       /blog/wcag-2-2-new-criteria support@fixmyweb.dev contact@fixmyweb.dev
+fixmyweb.dev       /blog/color-contrast-wcag-guide support@fixmyweb.dev contact@fixmyweb.dev
+fixmyweb.dev       /blog/eaa-fines-enforcement-2026 support@fixmyweb.dev contact@fixmyweb.dev
+fixmyweb.dev       /blog/eaa-compliance-for-agencies support@fixmyweb.dev contact@fixmyweb.dev
+fixmyweb.dev       /blog/accessibility-statement-generator-guide support@fixmyweb.dev contact@fixmyweb.dev
+fixmyweb.dev       /blog/wcag-compliance-checker-guide support@fixmyweb.dev contact@fixmyweb.dev
+fixmyweb.dev       /free              support@fixmyweb.dev contact@fixmyweb.dev
+fixmyweb.dev       /guide             support@fixmyweb.dev contact@fixmyweb.dev
+fixmyweb.dev       /help              support@fixmyweb.dev hello@fixmyweb.dev contact@fixmyweb.dev
+fixmyweb.dev       /about             support@fixmyweb.dev contact@fixmyweb.dev
+fixmyweb.dev       /contact           support@fixmyweb.dev contact@fixmyweb.dev
+fixmyweb.dev       /tools/heading-checker support@fixmyweb.dev contact@fixmyweb.dev
+fixmyweb.dev       /vpat              support@fixmyweb.dev contact@fixmyweb.dev
+fixmyweb.dev       /monitoring        support@fixmyweb.dev contact@fixmyweb.dev
+fixmyweb.dev       /integrations      support@fixmyweb.dev contact@fixmyweb.dev
+fixmyweb.dev       /changelog         support@fixmyweb.dev contact@fixmyweb.dev
+fixmyweb.dev       /status            support@fixmyweb.dev contact@fixmyweb.dev
+fixmyweb.dev       /security          support@fixmyweb.dev contact@fixmyweb.dev
+fixmyweb.dev       /privacy           support@fixmyweb.dev contact@fixmyweb.dev
+fixmyweb.dev       /terms             support@fixmyweb.dev contact@fixmyweb.dev
+fixmyweb.dev       /cookie-policy     support@fixmyweb.dev contact@fixmyweb.dev
+fixmyweb.dev       /refund            support@fixmyweb.dev contact@fixmyweb.dev
+fixmyweb.dev       /dpa               support@fixmyweb.dev contact@fixmyweb.dev
+fixmyweb.dev       /ai-transparency   support@fixmyweb.dev contact@fixmyweb.dev
+paymentrescue.dev  /                  support@paymentrescue.dev
+paymentrescue.dev  /how-it-works      support@paymentrescue.dev
+paymentrescue.dev  /calculator        support@paymentrescue.dev
+paymentrescue.dev  /failed-payment-recovery support@paymentrescue.dev
+paymentrescue.dev  /dunning-automation support@paymentrescue.dev
+paymentrescue.dev  /stripe-churn-prevention support@paymentrescue.dev
+paymentrescue.dev  /case-studies      support@paymentrescue.dev
+paymentrescue.dev  /vs-stripe-smart-retries support@paymentrescue.dev
+paymentrescue.dev  /integrations      support@paymentrescue.dev
+paymentrescue.dev  /templates         support@paymentrescue.dev
+paymentrescue.dev  /analytics         support@paymentrescue.dev
+paymentrescue.dev  /tools/churn-predictor support@paymentrescue.dev
+paymentrescue.dev  /pricing           support@paymentrescue.dev
+paymentrescue.dev  /help              support@paymentrescue.dev hello@paymentrescue.dev
+paymentrescue.dev  /faq               support@paymentrescue.dev
+paymentrescue.dev  /docs              support@paymentrescue.dev
+paymentrescue.dev  /docs/webhooks     support@paymentrescue.dev
+paymentrescue.dev  /docs/email-deliverability support@paymentrescue.dev
+paymentrescue.dev  /blog              support@paymentrescue.dev
+paymentrescue.dev  /blog/how-failed-payments-cost-saas-9-percent-revenue support@paymentrescue.dev
+paymentrescue.dev  /blog/dunning-email-best-practices-2026 support@paymentrescue.dev
+paymentrescue.dev  /blog/reduce-churn-strategies support@paymentrescue.dev
+paymentrescue.dev  /blog/dunning-automation-guide support@paymentrescue.dev
+paymentrescue.dev  /blog/how-to-recover-failed-payments support@paymentrescue.dev
+paymentrescue.dev  /free              support@paymentrescue.dev
+paymentrescue.dev  /about             support@paymentrescue.dev
+paymentrescue.dev  /contact           support@paymentrescue.dev
+paymentrescue.dev  /privacy           support@paymentrescue.dev
+paymentrescue.dev  /terms             support@paymentrescue.dev
+paymentrescue.dev  /cookie-policy     support@paymentrescue.dev
+paymentrescue.dev  /refund            support@paymentrescue.dev
+paymentrescue.dev  /dpa               support@paymentrescue.dev
+paymentrescue.dev  /ai-transparency   support@paymentrescue.dev
+parseflow.dev      /                  support@parseflow.dev
+parseflow.dev      /playground        support@parseflow.dev
+parseflow.dev      /docs              support@parseflow.dev
+parseflow.dev      /docs/authentication support@parseflow.dev
+parseflow.dev      /formats           support@parseflow.dev
+parseflow.dev      /batch             support@parseflow.dev
+parseflow.dev      /pricing           support@parseflow.dev
+parseflow.dev      /blog              support@parseflow.dev
+parseflow.dev      /blog/pdf-invoice-to-json-api support@parseflow.dev
+parseflow.dev      /blog/free-invoice-parsing-api support@parseflow.dev
+parseflow.dev      /blog/automate-invoice-processing support@parseflow.dev
+parseflow.dev      /blog/document-ai-vs-manual support@parseflow.dev
+parseflow.dev      /blog/extract-invoices support@parseflow.dev
+parseflow.dev      /faq               support@parseflow.dev
+parseflow.dev      /help              support@parseflow.dev hello@parseflow.dev
+parseflow.dev      /invoice-extraction-api support@parseflow.dev
+parseflow.dev      /receipt-parser    support@parseflow.dev
+parseflow.dev      /document-ocr      support@parseflow.dev
+parseflow.dev      /compare/parseflow-vs-docparser support@parseflow.dev
+parseflow.dev      /free              support@parseflow.dev
+parseflow.dev      /about             support@parseflow.dev
+parseflow.dev      /contact           support@parseflow.dev
+parseflow.dev      /privacy           support@parseflow.dev
+parseflow.dev      /terms             support@parseflow.dev
+parseflow.dev      /cookie-policy     support@parseflow.dev
+parseflow.dev      /refund            support@parseflow.dev hello@parseflow.dev
+parseflow.dev      /dpa               support@parseflow.dev
+parseflow.dev      /ai-transparency   support@parseflow.dev
+parseflow.dev      /generate          support@parseflow.dev
+parseflow.dev      /status            support@parseflow.dev
+parseflow.dev      /docs/webhooks     support@parseflow.dev
+captureapi.dev     /                  (nessuno)
+captureapi.dev     /docs              (nessuno)
+captureapi.dev     /docs/screenshot   (nessuno)
+captureapi.dev     /docs/batch        (nessuno)
+captureapi.dev     /docs/pdf          (nessuno)
+captureapi.dev     /docs/og-image     (nessuno)
+captureapi.dev     /docs/authentication (nessuno)
+captureapi.dev     /docs/webhooks     hello@captureapi.dev
+captureapi.dev     /use-cases         (nessuno)
+captureapi.dev     /screenshot-api    (nessuno)
+captureapi.dev     /tools/meta-inspector (nessuno)
+captureapi.dev     /pricing           (nessuno)
+captureapi.dev     /blog              (nessuno)
+captureapi.dev     /faq               (nessuno)
+captureapi.dev     /help              hello@captureapi.dev
+captureapi.dev     /security          support@captureapi.dev
+captureapi.dev     /integrations      (nessuno)
+captureapi.dev     /free              (nessuno)
+captureapi.dev     /about             support@captureapi.dev
+captureapi.dev     /contact           support@captureapi.dev
+captureapi.dev     /privacy           support@captureapi.dev
+captureapi.dev     /terms             support@captureapi.dev
+captureapi.dev     /cookie-policy     (nessuno)
+captureapi.dev     /refund            hello@captureapi.dev
+captureapi.dev     /dpa               support@captureapi.dev
+captureapi.dev     /ai-transparency   support@captureapi.dev
+captureapi.dev     /blog/full-page-screenshot-api-complete-guide (nessuno)
+captureapi.dev     /blog/what-is-a-screenshot-api (nessuno)
+captureapi.dev     /blog/website-screenshots-python-api-guide (nessuno)
+captureapi.dev     /blog/og-images-guide (nessuno)
+captureapi.dev     /blog/screenshot-api-comparison-2026 (nessuno)
+captureapi.dev     /blog/og-image-generation-seo-complete-guide-2026 (nessuno)
+captureapi.dev     /blog/automate-website-screenshots-with-api (nessuno)
+captureapi.dev     /blog/best-free-screenshot-api-tools-2026 (nessuno)
+captureapi.dev     /blog/generate-website-screenshots-programmatically (nessuno)
+captureapi.dev     /blog/html-to-pdf-conversion-complete-guide (nessuno)
+captureapi.dev     /blog/dynamic-og-images-seo (nessuno)
+captureapi.dev     /blog/building-link-preview-service-screenshot-apis (nessuno)
+captureapi.dev     /blog/automated-visual-regression-testing-screenshots (nessuno)
+getcardforge.dev   /                  hello@getcardforge.dev
+getcardforge.dev   /pricing           hello@getcardforge.dev
+getcardforge.dev   /signup            hello@getcardforge.dev
+getcardforge.dev   /docs              hello@getcardforge.dev
+getcardforge.dev   /help              hello@getcardforge.dev
+getcardforge.dev   /gallery           hello@getcardforge.dev
+getcardforge.dev   /privacy           hello@getcardforge.dev
+getcardforge.dev   /terms             hello@getcardforge.dev
+getcardforge.dev   /cookie-policy     hello@getcardforge.dev
+getcardforge.dev   /refund            hello@getcardforge.dev
+getcardforge.dev   /dpa               hello@getcardforge.dev
+emailguard.dev     /                  hello@emailguard.dev
+emailguard.dev     /verify-email      hello@emailguard.dev
+emailguard.dev     /pricing           hello@emailguard.dev
+emailguard.dev     /signup            hello@emailguard.dev
+emailguard.dev     /docs              hello@emailguard.dev
+emailguard.dev     /help              hello@emailguard.dev
+emailguard.dev     /privacy           hello@emailguard.dev
+emailguard.dev     /terms             hello@emailguard.dev
+emailguard.dev     /cookie-policy     hello@emailguard.dev
+emailguard.dev     /refund            hello@emailguard.dev
+emailguard.dev     /dpa               hello@emailguard.dev
+headershield.dev   /                  hello@headershield.dev
+headershield.dev   /simulate          hello@headershield.dev
+headershield.dev   /pricing           hello@headershield.dev
+headershield.dev   /signup            hello@headershield.dev
+headershield.dev   /docs              hello@headershield.dev
+headershield.dev   /help              hello@headershield.dev
+headershield.dev   /privacy           hello@headershield.dev
+headershield.dev   /terms             hello@headershield.dev
+headershield.dev   /cookie-policy     hello@headershield.dev
+headershield.dev   /refund            hello@headershield.dev
+headershield.dev   /dpa               hello@headershield.dev
+gethooklab.dev     /                  hello@gethooklab.dev
+gethooklab.dev     /pricing           hello@gethooklab.dev
+gethooklab.dev     /signup            hello@gethooklab.dev
+gethooklab.dev     /docs              hello@gethooklab.dev
+gethooklab.dev     /help              hello@gethooklab.dev
+gethooklab.dev     /privacy           hello@gethooklab.dev
+gethooklab.dev     /terms             hello@gethooklab.dev
+gethooklab.dev     /cookie-policy     hello@gethooklab.dev
+gethooklab.dev     /refund            hello@gethooklab.dev
+gethooklab.dev     /dpa               hello@gethooklab.dev
+gethooklab.dev     /verify-stripe-webhook-signatures hello@gethooklab.dev
+gethooklab.dev     /test-github-webhook-deliveries hello@gethooklab.dev
+gethooklab.dev     /replay-webhook-to-staging hello@gethooklab.dev
+seoscope.dev       /                  hello@seoscope.dev
+seoscope.dev       /seo-audit         hello@seoscope.dev
+seoscope.dev       /pricing           hello@seoscope.dev
+seoscope.dev       /signup            hello@seoscope.dev
+seoscope.dev       /docs              hello@seoscope.dev
+seoscope.dev       /help              hello@seoscope.dev
+seoscope.dev       /privacy           hello@seoscope.dev
+seoscope.dev       /terms             hello@seoscope.dev
+seoscope.dev       /cookie-policy     hello@seoscope.dev
+seoscope.dev       /refund            hello@seoscope.dev
+seoscope.dev       /dpa               hello@seoscope.dev
+
+indirizzi non consegnabili trovati nel DOM: 0

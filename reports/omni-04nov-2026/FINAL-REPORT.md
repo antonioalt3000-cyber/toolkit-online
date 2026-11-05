@@ -31,8 +31,9 @@ Dependabot aperte non sono state toccate. Stato finale misurato in produzione su
 | `/api/health`                                   | ok 10/10                            | ok 10/10                       |
 | indirizzi pubblicati che rimbalzano             | **18** (25 pagine live, 5 prodotti) | **0 su 10** (misurato in prod) |
 | cancellazione/export raggiungibili da dashboard | 0 su 10                             | **10 su 10** (come richiesta)  |
+| monitor uptime: un timeout = tutto «down»       | 5 oscillazioni, 5 allerte false     | un retry prima di dichiarare   |
 
-**12 reperti**, di cui 7 corretti e verificati in produzione, 1 mitigato a metà e 1 lasciato al
+**15 reperti**, di cui 10 corretti e verificati in produzione, 1 mitigato a metà e 1 lasciato al
 fondatore con la ragione scritta. Il dodicesimo, R11, è arrivato il 5 novembre dalla voce di
 arretrato che sembrava la più piccola delle tre: **18 indirizzi stampati sulle pagine legali non
 esistevano**, fra cui l'unico canale GDPR di due prodotti e l'indirizzo della pagina rimborsi di un
@@ -344,6 +345,12 @@ python -I reports/omni-04nov-2026/rcpt-probe.py
 
 # e poi gli stessi indirizzi letti nel DOM servito da Vercel, non nel sorgente
 node reports/omni-04nov-2026/contacts-browser-check.cjs
+
+# monitor: la sonda col retry, sui 17 immobili veri (nessuna email, nessun alert)
+node -e "const{checkWithRetry}=require('./scripts/automation/uptime-check.js');const{NETWORK}=require('./scripts/automation/network.js');Promise.all(NETWORK.map(checkWithRetry)).then(r=>console.log(r.filter(x=>!x.ok).length+' down, '+r.filter(x=>x.attempts===2).length+' con retry'))"
+
+# la carta in dashboard, nel browser reale, nei due versi (ospite e cliente)
+node reports/omni-04nov-2026/card-browser-check.cjs
 
 # ledger
 node reports/omni-04nov-2026/progress.cjs table
