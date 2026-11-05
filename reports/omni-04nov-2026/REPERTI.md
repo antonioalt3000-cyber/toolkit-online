@@ -383,3 +383,28 @@ Secondo giro, cercando apposta i buchi di ciò che avevo appena scritto.
   output degli stessi script, che per fortuna non era tracciato). Il file resta su disco e resta in
   storia: non si cancella nulla. Il repo è privato, quindi non è stata una fuga pubblica — ma dati
   di contatto di terzi e bozze in uscita non stanno nel codice di prodotto.
+
+## R15 — Il monitor di uptime chiamava «down» un singolo inciampo, e mandava un'email ogni volta
+
+- **Passo**: il push dei report è stato rifiutato perché il repo era avanti — l'ultimo commit era
+  `chore(uptime): status -> up`. Nella storia recente: up → down → up → down → up, **cinque
+  oscillazioni**, e il file di stato contiene solo la parola `up`/`down`, senza dire quale sito né
+  perché.
+- **Atteso**: lo stato cambia quando un sito è davvero giù.
+- **Osservato**, dai log del workflow: nel run **41984539750**
+  `🔴 HookLab HTTP ERR · 12000ms — Timeout (12s)` mentre **gli altri sedici** rispondevano in
+  356-1919 ms. I run immediatamente prima e dopo hanno HookLab a **893 ms** e **666 ms**.
+- **Causa**: `checkSite` fa **un solo tentativo** con timeout 12 s e nessun retry. Un singolo
+  inciampo di rete — o un cold start — ribalta lo stato dell'intero portfolio, scrive un commit e
+  **manda un'email di allerta**. Cinque oscillazioni = cinque allerte false: è esattamente così che
+  una casella impara a ignorare quella vera. È la famiglia già in memoria («429 auto-inflitti ≠
+  bug», «la sonda si auto-avvelena»), vista dall'altro lato: non un monitor verde e bugiardo, ma
+  **rosso e bugiardo**.
+- **Fix**: un retry dopo 2,5 s prima di dichiarare down (`checkWithRetry`). La **sensibilità non
+  cambia** — un sito davvero giù fallisce anche il secondo tentativo nello stesso giro, quindi
+  l'allerta parte comunque subito — e il primo errore resta stampato nel log (`secondo tentativo;
+primo: …`), perché un sito che ha bisogno del retry a **ogni** giro è un reperto a sua volta.
+- **Prove**: 4 test nuovi in `uptime-check.test.ts` (9/9 verdi) che coprono i quattro casi, incluso
+  «un 500 persistente resta down, il retry non lo nasconde». E un giro vero sui 17 immobili:
+  **17/17 up, zero retry necessari**. `eslint` sui due file toccati: 0 errori; gli errori `tsc` del
+  repo sono **2 prima e 2 dopo**, nessuno nei miei file (frammenti preesistenti in `scratchpad/`).

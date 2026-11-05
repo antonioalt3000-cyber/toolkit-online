@@ -11,7 +11,7 @@ const { NETWORK } = require('./network');
 const { sendAndLog } = require('./brevo');
 
 // ── HTTP check with timeout ───────────────────────────────────────────────────
-function checkSite(site) {
+function probeOnce(site) {
   return new Promise((resolve) => {
     const startMs = Date.now();
     const parsed = new URL(site.url);
@@ -59,6 +59,30 @@ function checkSite(site) {
       });
     });
   });
+}
+
+// ── One retry before calling a site down ─────────────────────────────────────
+// A single 12-second timeout used to flip the whole portfolio to DOWN, write a
+// commit and send an alert email. Measured on run 41984539750: HookLab timed out
+// while the other sixteen answered in 356-1919 ms, and the runs either side had
+// it at 893 ms and 666 ms. The recent history holds five such flips, each one an
+// alert — which is exactly how an inbox learns to ignore the real one.
+//
+// One retry after a short pause separates a blip from an outage without delaying
+// a real alert: a site that is genuinely down fails the retry too, in the same
+// run, so recall is unchanged and only the false positives go away.
+const RETRY_DELAY_MS = 2500;
+
+const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
+
+async function checkWithRetry(site, probe = probeOnce, delayMs = RETRY_DELAY_MS) {
+  const first = await probe(site);
+  if (first.ok) return { ...first, attempts: 1 };
+  await sleep(delayMs);
+  const second = await probe(site);
+  // `firstError` keeps the blip visible in the log even when the retry succeeds:
+  // a site that needs a second attempt every run is a finding of its own.
+  return { ...second, attempts: 2, firstError: first.error || `HTTP ${first.status}` };
 }
 
 // ── Build HTML alert email ────────────────────────────────────────────────────
@@ -177,11 +201,12 @@ async function main() {
   console.log(`\n[${timestamp}] DevToolsmith Uptime Check`);
   console.log('─'.repeat(60));
 
-  const results = await Promise.all(NETWORK.map(checkSite));
+  const results = await Promise.all(NETWORK.map((site) => checkWithRetry(site)));
 
   results.forEach((r) => {
     const icon = r.ok ? '✅' : '🔴';
-    const info = r.error ? ` — ${r.error}` : '';
+    const retried = r.attempts === 2 ? ` (secondo tentativo; primo: ${r.firstError})` : '';
+    const info = (r.error ? ` — ${r.error}` : '') + retried;
     console.log(`  ${icon}  ${r.name.padEnd(14)} HTTP ${r.status || 'ERR'} · ${r.ms}ms${info}`);
   });
 
@@ -223,7 +248,7 @@ async function main() {
 }
 
 // Export pure logic for unit tests; only run main() when invoked as a script.
-module.exports = { decideUptimeAction };
+module.exports = { decideUptimeAction, checkWithRetry, probeOnce };
 
 if (require.main === module) {
   main().catch((err) => {
