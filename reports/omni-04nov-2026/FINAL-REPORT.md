@@ -174,9 +174,13 @@ indirizzi pubblicati non esistono. Era la voce che sembrava cosmetica.
 **Verificato dopo il deploy** (10 PR mergiate, produzione che serve i nuovi commit su 10/10,
 confermato dal campo `commit` di `/api/health`, non da `state=READY`):
 
-- **zero indirizzi non consegnabili** su 10 domini × 8 tipi di pagina (privacy, terms, dpa,
-  security, ai-transparency, refund, about, contact) — tre tipi più della scansione che aveva
-  trovato i 25;
+- **zero indirizzi non consegnabili** — prima su 10 domini × 8 tipi di pagina via HTTP, poi, per
+  non fermarsi a un campione, su **253 pagine lette nel browser reale**, con l'elenco preso dalla
+  sitemap di ciascun prodotto (42 CompliPilot, 51 FixMyWeb, 33 PaymentRescue, 31 ParseFlow, 39
+  CaptureAPI, 11-13 per i round-2). Ogni indirizzo trovato nel DOM è uno dei tre alias provati;
+  evidenza in `evidence/browser-contacts-after-05nov-2026.txt`. La scansione che aveva trovato i 25
+  guardava cinque tipi di pagina: avrebbe mancato `/refund`, `/about` e `/contact`, dove stavano
+  `legal@` e `sales@`;
 - il `security.txt` di CaptureAPI ora dichiara `support@`, non il `security@` che rimbalzava;
 - la carta **nel browser reale**, con un controllo nei due versi: assente per un ospite vero su
   3/3, presente per il cliente autenticato su 3/3 con i due `mailto:`, la frase dei 30 giorni e la
