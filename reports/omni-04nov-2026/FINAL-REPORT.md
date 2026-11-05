@@ -28,7 +28,7 @@ Dependabot aperte non sono state toccate. Stato finale misurato in produzione su
 | backup del pool coupon FixMyWeb                 | **mai eseguito**                   | creato e verificato           |
 | `/api/health`                                   | ok 10/10                           | ok 10/10                      |
 
-**7 reperti**, di cui 5 corretti e verificati in produzione, 1 mitigato a metà e 1 lasciato al
+**10 reperti**, di cui 6 corretti e verificati in produzione, 1 mitigato a metà e 1 lasciato al
 fondatore con la ragione scritta. **9 falsi rossi del collaudo**, tutti diagnosticati e dichiarati
 in §6: era la parte più probabile di sbagliare, ed è quella su cui ho speso più verifiche.
 
@@ -208,12 +208,16 @@ E tre errori di procedura, non di misura:
 
 Lo scrivo per non lasciare l'impressione che il round sia esaustivo.
 
-- **Il viaggio autenticato completo in locale coi mock** (signup → verifica email → login →
-  esaurimento quota → riscatto → checkout → webhook firmato → **guasto Redis** → cancellazione)
-  resta non eseguito, per il quarto round di fila. L'harness c'è e funziona
-  (`run-dev.cjs` + mock Upstash/Brevo/Stripe isolati, `POST /__qa/outage`): è tempo, non capacità.
-  In produzione quel giro non è inducibile.
-- **Il guasto Redis** non è stato simulato da nessuna parte in questo round.
+- **Il viaggio autenticato completo in locale**: ✅ **eseguito su PaymentRescue** — 40 controlli,
+  **29 PASS** — ed è stato trovato il motivo per cui non riusciva da quattro round: l'ambiente QA
+  girava `next dev --webpack` e **la pagina non idratava** (reperto R9). Con Turbopack idrata e il
+  giro gira. Fra i verdi, cose mai verificate prima: il checkout chiede a Stripe **esattamente** il
+  price id atteso, la **firma webhook falsificata viene respinta con 400**, e il **guasto Redis** dà
+  503 su `/api/auth/me`, `/api/dashboard` e `/api/auth/login` **senza sloggare**, con la sessione
+  intatta dopo. Restano **6 rossi** da capire (coupon admin in locale, email di dunning) e 3 che
+  erano aspettative sbagliate dell'harness (R10). **Sugli altri 9 prodotti il giro locale non è
+  stato eseguito**: ora però si sa che è possibile.
+- **Il guasto Redis** è stato simulato e supera la prova su PaymentRescue; sugli altri 9 no.
 - **Nessun pagamento con carta vera**: il checkout è verificato fino alla pagina Stripe. È un
   vincolo, non una dimenticanza.
 - **ParseFlow, letterhead europeo senza etichetta**: il fornitore resta vuoto. È la scelta

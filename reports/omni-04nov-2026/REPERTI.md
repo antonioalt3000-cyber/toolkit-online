@@ -231,3 +231,53 @@ not configured`**. Sulle preview quelle variabili non ci sono, quindi **nessuna*
   riscrivere la storia). La via pulita è **riconiarle**: sono 7 account di collaudo, il riscatto
   costa un coupon `internal: true` a testa. Si somma alla riconiatura delle 5 chiavi creator già
   chiesta dal round del 31 ott.
+
+## R9 — 🔑 Il viaggio autenticato locale non era mai riuscito perché **l'ambiente QA non idratava**
+
+- **Passo**: eseguire `track-b/f3-local.cjs` contro l'ambiente locale coi mock (`run-dev.cjs f3`)
+- **Atteso**: il giro completo signup → login → checkout → webhook → guasto Redis → cancellazione
+- **Osservato (prima)**: ogni asserzione di rete dava `observed=null` e la pagina restava su
+  `/signup`. Diagnosi: nessun gestore React sul bottone, **nessuna prop React sul form**, e
+  `form.requestSubmit()` non produceva alcuna richiesta. I 7 chunk Next si scaricavano,
+  `self.__next_f` c'era, **zero errori di console**, zero risposte ≥400: React semplicemente non si
+  attaccava. La stessa pagina **in produzione idrata** (`reactAttached: true`, 12 chunk).
+- **Causa**: `run-dev.cjs` avvia `next dev --webpack`. Con Turbopack (`run-dev.cjs f3 turbo`, cioè
+  la config `qa26-f3-turbo`) la pagina **idrata**: 27 chunk, React attaccato, `window.next` presente.
+- **Perché conta**: è la ragione per cui «il viaggio autenticato completo non è mai stato completato
+  su nessuno dei 10» per **quattro round di fila**. In quell'ambiente ogni interazione d'interfaccia
+  era morta e l'harness lo riportava come fallimento del prodotto. Non era il prodotto: era `--webpack`.
+- **Risultato dopo la correzione**: **40 controlli, 29 PASS**. Fra i verdi, cose mai verificate prima:
+  checkout che chiede a Stripe **esattamente** il price id atteso con metadata e `customer_email`
+  giusti · checkout senza sessione → 401 · webhook firmato 200 e **firma falsificata → 400** ·
+  `invoice.payment_failed` registrato come `pending_recovery` con importo ed email esatti, poi
+  transizione a `recovered` · **guasto Redis: 503 su `/api/auth/me`, `/api/dashboard` e
+  `/api/auth/login`, NON un logout, e sessione intatta dopo** · cancellare l'account di un altro → 403.
+- 🔑 Da fare: cambiare il default di `run-dev.cjs` a Turbopack, o rimuovere le entry `--webpack`.
+
+## R10 — `/api/user/export` e `/api/user/delete` non sono azioni self-service: sono moduli DSAR
+
+- **Passo**: chiamarli da una sessione autenticata
+- **Osservato**: `GET /api/user/export` → **200 con la propria documentazione**, non con i dati:
+  `{"endpoint":"POST /api/user/export","description":"GDPR Art. 15 … Send {email: string} …",
+"maxResponseDays":30}`. `POST /api/user/delete` senza corpo → **400 «Valid email required»**;
+  col verbo `DELETE` → 405.
+- **Perché conta per l'arretrato non fatto**: l'arretrato diceva «esporre la cancellazione
+  self-service su 10 dashboard». Ma dietro non c'è una cancellazione: c'è una **richiesta DSAR con
+  SLA di 30 giorni**, che qualcuno deve poi evadere. Un bottone «Elimina il mio account» che in
+  realtà apre una richiesta è una promessa diversa da quella che il bottone fa credere — ed è la
+  famiglia di difetti che ha già colpito questo portfolio. Quella voce va riscritta prima di essere
+  costruita: o si implementa l'erasure vera, o il pulsante dice «richiedi la cancellazione (entro
+  30 giorni)». Si lega al reperto storico «DSAR routes were a façade» del 2-4 ago.
+- **Conseguenza sui rossi del viaggio**: i check «delete own account → 200», «login dopo cancellazione
+  rifiutato» e «nessun record residuo» **non erano misure del prodotto**: pretendevano un'erasure
+  immediata da un endpoint che per progetto non la fa. 3 degli 11 rossi sono questo.
+
+### Gli altri rossi del viaggio locale, dichiarati e non diagnosticati a fondo
+
+- `admin generate-coupons` non risponde nell'ambiente locale → a cascata `redeem` 400 e i due check
+  sul piano in dashboard. Da capire se è il segreto admin generato dall'ambiente o la rotta.
+- `dunning email #1` non trovata nel mock Brevo (una email catturata, ma il mio parser non ne ha
+  letto la forma) e il link `update-payment`. Richiede un passaggio dedicato.
+- `export own data` conteneva l'email: falso per il motivo di R10.
+  Sono **6 rossi** che restano aperti come lavoro di collaudo, non come difetti accertati. Li scrivo
+  invece di arrotondarli a verde.
