@@ -188,19 +188,40 @@ indirizzi pubblicati non esistono. Era la voce che sembrava cosmetica.
    gestisce gli inoltri. Se li crei, aggiungi il local-part a `DELIVERABLE` in
    `__tests__/published-contacts.test.ts` nello stesso commit — e provalo con `rcpt-probe.py`
    prima di stamparlo su una pagina.
-6. **`noreply@paymentrescue.dev` non ha un Reply-To** (misurato: nessun `replyTo` in nessun send di
-   f3, e l'indirizzo rimbalza). Le email di dunning arrivano al _cliente del cliente_, che per
-   istinto risponde. A chi deve arrivare quella risposta: a noi (`support@paymentrescue.dev`) o al
-   commerciante? È una decisione di prodotto, non l'ho presa io.
-7. **~30 chiavi Redis di collaudo** in produzione, tutte registrate in `REDIS-WRITES.jsonl`: per
-   cancellarle serve un token Upstash scrivibile, che `vercel env pull` non fornisce.
-8. **PostHog è già bloccato oggi su F2 e B7**: `PostHogInit` punta a `eu.i.posthog.com`, host che
-   non è in `connect-src` né prima né dopo questo round. Pre-esistente, segnalato e non toccato:
-   allargare `connect-src` è una decisione separata.
+6. **SPF: i 5 F-series non hanno `include:spf.brevo.com`** (i 5 round-2 sì). Da mettere in
+   proporzione, perché la memoria la registrava come più grave di quanto sia: **il DKIM c'è e è
+   allineato su 10/10** (`brevo1`/`brevo2`, chiavi RSA valide), quindi il DMARC passa e la posta è
+   autenticata. Manca un segnale secondario, non l'autenticazione. La correzione è **un** record
+   TXT per dominio — e va fatta modificando l'SPF esistente, mai aggiungendone un secondo (due
+   record SPF sono un errore secco che rompe tutta la posta in uscita). Non l'ho toccata io: è un
+   record DNS vivo su cinque domini da cui parte la posta ai clienti.
+7. 🔴 **PaymentRescue e Resend: la domanda aperta più importante.** Il percorso di dunning — il
+   prodotto stesso — invia via **Resend**, non Brevo (`RESEND_API_KEY`, presente in produzione:
+   verificato). Ma su `paymentrescue.dev` **non esiste nessun record Resend**: né
+   `resend._domainkey` né il sottodominio `send.`, e un selettore inventato non risolve (nessun
+   wildcard a falsare la misura). Se il dominio non è verificato in Resend, un invio da
+   `noreply@paymentrescue.dev` viene **rifiutato dall'API**, e nei log runtime non c'è traccia né
+   di errori Resend né di invii: in 7 giorni zero (ma potrebbe semplicemente non esserci stato
+   alcun pagamento fallito da recuperare). La chiave in produzione è _send-only_, quindi non posso
+   interrogare `GET /domains`. **Si chiude in dieci secondi con un invio di prova al tuo stesso
+   indirizzo** da quella chiave: se il dominio non è verificato Resend risponde con un errore e non
+   manda nulla. Non l'ho fatto perché inviare email non è nel mio perimetro in questo round.
+8. **`noreply@paymentrescue.dev` non ha un Reply-To** (nessun `replyTo` in nessun send di f3, e
+   l'indirizzo rimbalza). Le email di dunning arrivano al _cliente del cliente_, che per istinto
+   risponde: a noi (`support@paymentrescue.dev`) o al commerciante? Decisione di prodotto.
+9. **[documint#79](https://github.com/antonioalt3000-cyber/documint/pull/79) è aperta da 7 giorni**,
+   CI tutta verde e `MERGEABLE`, solo documentazione. Corregge il parametro `language` che la
+   tabella `/docs` elencava e il codice non legge — il difetto che un cliente lifetime ha
+   incontrato il 27 ottobre. Mostrata, non mergiata.
+10. **~30 chiavi Redis di collaudo** in produzione, tutte registrate in `REDIS-WRITES.jsonl`: per
+    cancellarle serve un token Upstash scrivibile, che `vercel env pull` non fornisce.
+11. **PostHog è già bloccato oggi su F2 e B7**: `PostHogInit` punta a `eu.i.posthog.com`, host che
+    non è in `connect-src` né prima né dopo questo round. Pre-esistente, segnalato e non toccato:
+    allargare `connect-src` è una decisione separata.
 
 ---
 
-## 6. Autocritica — 9 falsi rossi e una premessa falsa, tutti miei
+## 6. Autocritica — 9 falsi rossi, una premessa falsa e una misura sbagliata, tutti miei
 
 Un collaudo che non sbaglia mai in proprio favore va guardato con sospetto. Questi sono i rossi che
 ho prodotto io e che **non** erano difetti del prodotto. Li elenco perché sono la parte di questo
@@ -235,6 +256,15 @@ report che vale di più la prossima volta.
     arretrato è una mia affermazione come un'altra: va verificata prima di costruirci sopra, non
     quando si costruisce. Qui la verifica ha cambiato il lavoro — dal pulsante alla posta che non
     arrivava.
+
+11. **Stavo per riportare che manca il DKIM sui 5 F-series. È falso** (5 nov). Avevo interrogato
+    `brevo._domainkey`, `mail._domainkey` e `resend._domainkey`: i selettori veri di Brevo sono
+    `brevo1`/`brevo2`, e ci sono su **tutti e 10** con chiavi RSA valide. Peggio: i «presenti» che
+    leggevo sui 5 round-2 erano un **wildcard** `*._domainkey` verso `pixie.porkbun.com`, che fa
+    risolvere qualunque selettore inventato — quella misura non significava nulla in nessuna delle
+    due direzioni. 🔑 Un selettore inventato come controllo costa una query e avrebbe smascherato
+    il wildcard al primo giro: la stessa lezione del controllo interno nella sonda RCPT, che lì
+    avevo applicato e qui no.
 
 E tre errori di procedura, non di misura:
 

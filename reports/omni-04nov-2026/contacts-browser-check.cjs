@@ -24,7 +24,32 @@ const DOMAINS = [
   'gethooklab.dev',
   'seoscope.dev',
 ];
-const PAGES = ['/privacy', '/terms', '/dpa', '/security', '/ai-transparency'];
+// Cinque pagine campione non bastano: l'indirizzo morto stava anche su /refund,
+// /about e /contact. La lista vera la dà il prodotto, dalla propria sitemap.
+const FALLBACK_PAGES = ['/privacy', '/terms', '/dpa', '/security', '/ai-transparency'];
+
+async function pagesOf(domain) {
+  try {
+    const res = await fetch(`https://${domain}/sitemap.xml`, {
+      signal: AbortSignal.timeout(20000),
+    });
+    if (!res.ok) return FALLBACK_PAGES;
+    const xml = await res.text();
+    const paths = [...xml.matchAll(/<loc>([^<]+)<\/loc>/g)]
+      .map((m) => {
+        try {
+          return new URL(m[1].trim()).pathname;
+        } catch {
+          return null;
+        }
+      })
+      .filter((x) => x && !/\.(xml|txt|json|png|jpg|svg|ico)$/.test(x));
+    const unique = [...new Set(paths)];
+    return unique.length ? unique : FALLBACK_PAGES;
+  } catch {
+    return FALLBACK_PAGES;
+  }
+}
 
 // Raccoglie gli indirizzi su QUALSIASI nostro dominio, non solo su quello corrente:
 // una pagina che rimanda al dominio sbagliato e' un difetto a sua volta.
@@ -43,7 +68,9 @@ const COLLECT = `(() => {
   const table = [];
   try {
     for (const domain of DOMAINS) {
-      for (const page of PAGES) {
+      const pages = await pagesOf(domain);
+      console.log(`-- ${domain}: ${pages.length} pagine dalla sitemap`);
+      for (const page of pages) {
         const url = `https://${domain}${page}`;
         await j.goto(url, { timeout: 40000 });
         await j.idle(500, 20000);

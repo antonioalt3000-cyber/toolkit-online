@@ -342,3 +342,44 @@ not configured`**. Sulle preview quelle variabili non ci sono, quindi **nessuna*
   dal magic link: un pulsante POST avrebbe dato 401 a un'intera classe di utenti. L'endpoint resta
   come canale API, documentato dal proprio GET. Il `mailto:` è l'unico canale che funziona per
   tutti e che la policy già dichiara — ora verso una casella che risponde.
+
+## R13 — La mia guardia aveva due buchi, e il mio inserimento un difetto
+
+Secondo giro, cercando apposta i buchi di ciò che avevo appena scritto.
+
+- **La guardia non leggeva i file serviti alla lettera.** `public/` (10 file su CompliPilot, 9 su
+  ParseFlow, 11 su CaptureAPI…) e `openapi-rapidapi.json` — quest'ultimo consegnato a un
+  marketplace di API — non erano fra le radici scansionate. Un indirizzo lì raggiunge il cliente
+  esattamente come in una pagina. Oggi quei file contengono solo `hello@`, quindi **nessun difetto
+  live**: era un buco, non un guasto. Ora coperti.
+- **La guardia non vedeva gli indirizzi interpolati.** `privacy@${SITE_HOST}` sfuggiva alla regex,
+  e su cinque prodotti su dieci l'indirizzo è costruito proprio così: era la forma esatta in cui
+  questo difetto sarebbe tornato. Aggiunto un controllo dedicato, con **esenzione nominata** per i
+  due soli file che costruiscono legittimamente un indirizzo sul dominio **del cliente** (il
+  generatore di privacy policy di CompliPilot e la sonda sintetica `postmaster@` di EmailGuard) più
+  l'asserzione che quei file esistano ancora, così un rename non allarga l'esenzione in silenzio.
+  Provata rossa aggiungendo `privacy@${BRAND.domain}` a `brand.ts`, verde dopo il ripristino.
+- **Un falso positivo mio**: la versione rinforzata accusava `src/lib/email-typo.test.ts` di
+  EmailGuard, che costruisce un indirizzo finto. Un test non è pubblicato; la regola ora lo dice
+  per iscritto invece di lasciarlo implicito.
+- 🔴 **Difetto nel mio stesso inserimento — CompliPilot.** Il ramo principale di quella dashboard
+  rende **anche per un ospite**: il gate è `!loaded || !authState`, e un ospite ha un `authState`
+  (`isGuest: true`, `user: null`). La carta era incondizionata, quindi un visitatore senza account
+  avrebbe letto «Request deletion» per un account che non ha. Avvolta in
+  `{authState.user?.email && (…)}`. Gli altri nove sono corretti, e su cinque la prova non è la mia
+  lettura del codice: usano `data.email`, quindi **`tsc --noEmit` verde dimostra** che il punto di
+  inserimento è nel ramo con `data` non nullo. 🔑 Un tipo può essere un oracolo migliore di una
+  rilettura.
+
+## R14 — Un file di outreach a terzi era committato nel repo di FixMyWeb
+
+- **Passo**: cercare indirizzi nei file non-TypeScript (il buco di R13).
+- **Osservato**: `business-fast2-accessiscan/outreach-emails.json`, **tracciato da git**, contiene
+  l'indirizzo di un terzo (`info@tenlive.net`, con nome del referente), il punteggio del suo sito e
+  il testo integrale di un messaggio in uscita. È l'output di `scripts/batch-scan-outreach.js`.
+- **Come è entrato**: commit `7a72a28`, intitolato **«fix type»**. Un artefatto generato finito
+  dentro un commit che parlava d'altro — la forma del `git add -A` già in memoria.
+- **Fix**: rimosso dall'indice e aggiunto a `.gitignore` insieme a `scan-results.json` (l'altro
+  output degli stessi script, che per fortuna non era tracciato). Il file resta su disco e resta in
+  storia: non si cancella nulla. Il repo è privato, quindi non è stata una fuga pubblica — ma dati
+  di contatto di terzi e bozze in uscita non stanno nel codice di prodotto.
