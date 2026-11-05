@@ -1,0 +1,32 @@
+{
+  "slug": "f2",
+  "dom": "fixmyweb.dev",
+  "email": "antonio.alt3000+qa04nov-f2@gmail.com",
+  "code": "QAOCT-BA87-E370",
+  "results": [
+    {
+      "day": 1,
+      "what": "coniato un coupon interno via /api/admin/generate-coupons",
+      "pass": true,
+      "detail": "QAOCT-BA87-E370"
+    },
+    {
+      "day": 1,
+      "what": "il riscatto parte e la POST /api/redeem risponde 2xx",
+      "pass": true,
+      "detail": "HTTP 200"
+    },
+    {
+      "day": 3,
+      "what": "la feature core risponde: uno scan WCAG con un punteggio",
+      "pass": false,
+      "detail": "nessuna chiave API dal riscatto"
+    },
+    {
+      "day": 30,
+      "what": "nessun errore di console nel viaggio autenticato",
+      "pass": true,
+      "detail": ""
+    }
+  ]
+}

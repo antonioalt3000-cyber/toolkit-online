@@ -1,0 +1,37 @@
+{
+  "slug": "cfg",
+  "domain": "getcardforge.dev",
+  "at": "2026-11-04T19:59:53.439Z",
+  "results": [
+    {
+      "what": "i 9 template consegnano le dimensioni dichiarate",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "what": "un titolo di 400 caratteri non rompe il render",
+      "pass": true,
+      "detail": "HTTP 200"
+    },
+    {
+      "what": "un titolo vuoto non da 500",
+      "pass": true,
+      "detail": "HTTP 200"
+    },
+    {
+      "what": "un colore non valido da 4xx o un default, mai 500",
+      "pass": true,
+      "detail": "HTTP 200"
+    },
+    {
+      "what": "un template ignoto ricade su og-gradient come documentato",
+      "pass": true,
+      "detail": "HTTP 200 1200x630"
+    },
+    {
+      "what": "questo prodotto non ha cron (nessun vercel.json)",
+      "pass": true,
+      "detail": "verificato sul repo, non assunto"
+    }
+  ]
+}

@@ -1,0 +1,62 @@
+{
+  "slug": "b7",
+  "domain": "captureapi.dev",
+  "at": "2026-11-04T20:00:13.751Z",
+  "results": [
+    {
+      "what": "screenshot (GET) risponde 200",
+      "pass": true,
+      "detail": "HTTP 200 image/png"
+    },
+    {
+      "what": "e un PNG vero (magic byte)",
+      "pass": true,
+      "detail": "89504e47"
+    },
+    {
+      "what": "le dimensioni consegnate sono esattamente 800x600",
+      "pass": true,
+      "detail": "800x600, 208223 byte"
+    },
+    {
+      "what": "screenshot (POST) risponde 200 con involucro JSON",
+      "pass": true,
+      "detail": "HTTP 200"
+    },
+    {
+      "what": "i pixel dentro il data-URI coincidono con le dimensioni dichiarate",
+      "pass": true,
+      "detail": "dichiarato 800x600, pixel 800x600"
+    },
+    {
+      "what": "size_bytes dichiarato coincide con i byte veri",
+      "pass": true,
+      "detail": "dichiarato 208524, reale 208524"
+    },
+    {
+      "what": "pdf risponde 200",
+      "pass": true,
+      "detail": "HTTP 200"
+    },
+    {
+      "what": "e un PDF vero con almeno una pagina",
+      "pass": true,
+      "detail": "v1.4, 3 pagine, 255911 byte"
+    },
+    {
+      "what": "il formato pagina e A4",
+      "pass": true,
+      "detail": "595.91998x841.91998 (A4)"
+    },
+    {
+      "what": "i 3 cron dichiarati accettano il proprio segreto",
+      "pass": true,
+      "detail": "ttl-audit=200 weekly-usage=200 review-requests=200"
+    },
+    {
+      "what": "i cron rifiutano un segreto sbagliato",
+      "pass": true,
+      "detail": "401/403 su tutti"
+    }
+  ]
+}

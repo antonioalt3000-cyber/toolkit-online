@@ -1,0 +1,78 @@
+{
+  "id": "14345d61-8767-4450-8afc-1774cd7dc256",
+  "status": "completed",
+  "documentType": "invoice",
+  "confidence": 0.95,
+  "data": {
+    "type": "invoice",
+    "invoiceNumber": "QA-04NOV-0001",
+    "invoiceDate": "2026-11-04",
+    "dueDate": "2026-12-04",
+    "vendor": {
+      "name": "",
+      "address": "",
+      "email": "",
+      "phone": "",
+      "taxId": ""
+    },
+    "customer": {
+      "name": "Officina Marelli SNC",
+      "address": "",
+      "email": "",
+      "phone": "",
+      "taxId": ""
+    },
+    "lineItems": [
+      {
+        "description": "Consulenza tecnica",
+        "quantity": 3,
+        "unitPrice": 85.5,
+        "amount": 256.5
+      },
+      {
+        "description": "Licenza annuale",
+        "quantity": 1,
+        "unitPrice": 240,
+        "amount": 240
+      },
+      {
+        "description": "Supporto extra",
+        "quantity": 7,
+        "unitPrice": 12.75,
+        "amount": 89.25
+      }
+    ],
+    "subtotal": 585.75,
+    "taxAmount": 123.01,
+    "taxRate": 21,
+    "total": 708.76,
+    "currency": "EUR",
+    "currencyDetected": true,
+    "paymentTerms": "",
+    "notes": ""
+  },
+  "metadata": {
+    "fileName": "fattura-oracolo.pdf",
+    "fileSize": 1452,
+    "mimeType": "application/pdf",
+    "pageCount": 1,
+    "language": "en"
+  },
+  "createdAt": "2026-11-05T00:00:13.745Z",
+  "processingTimeMs": 0,
+  "localized": {
+    "lang": "en",
+    "status": "Extracted",
+    "labels": {
+      "invoiceNumber": "Invoice number",
+      "invoiceDate": "Issue date",
+      "dueDate": "Due date",
+      "vendor": "Supplier",
+      "customer": "Customer",
+      "subtotal": "Subtotal",
+      "taxAmount": "VAT",
+      "total": "Total",
+      "currency": "Currency"
+    }
+  }
+}

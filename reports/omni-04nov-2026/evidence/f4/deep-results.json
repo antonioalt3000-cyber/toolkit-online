@@ -1,0 +1,38 @@
+{
+  "slug": "f4",
+  "dom": "parseflow.dev",
+  "email": "antonio.alt3000+qa04nov-f4@gmail.com",
+  "code": "QAOCT-8C48-977C",
+  "results": [
+    {
+      "day": 1,
+      "what": "coniato un coupon interno via /api/admin/generate-coupons",
+      "pass": true,
+      "detail": "QAOCT-8C48-977C"
+    },
+    {
+      "day": 1,
+      "what": "il riscatto parte e la POST /api/redeem risponde 2xx",
+      "pass": true,
+      "detail": "HTTP 200"
+    },
+    {
+      "day": 1,
+      "what": "la pagina consegna la chiave API",
+      "pass": true,
+      "detail": "dm_live_5e…"
+    },
+    {
+      "day": 3,
+      "what": "la feature core risponde: la dashboard estrazioni",
+      "pass": true,
+      "detail": "{\"usage\":{\"documentsProcessed\":0,\"documentsLimit\":100000,\"plan\":\"enterprise\",\"periodStart\":\"2026-11-01T00:00:00.000Z\",\"periodEnd\":\"2026-11-30T00:00:00.000Z\"},\"apiKeys\":[{\"id\":\"2be5"
+    },
+    {
+      "day": 30,
+      "what": "nessun errore di console nel viaggio autenticato",
+      "pass": true,
+      "detail": ""
+    }
+  ]
+}

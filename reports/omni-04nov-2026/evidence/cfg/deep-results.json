@@ -1,0 +1,56 @@
+{
+  "slug": "cfg",
+  "dom": "getcardforge.dev",
+  "email": "antonio.alt3000+qa04nov-cfg@gmail.com",
+  "code": "QAOCTB-353C-B8B4-ABA1-7F85",
+  "results": [
+    {
+      "day": 1,
+      "what": "coniato un coupon interno via /api/admin/generate-coupons",
+      "pass": true,
+      "detail": "QAOCTB-353C-B8B4-ABA1-7F85"
+    },
+    {
+      "day": 1,
+      "what": "il riscatto parte e la POST /api/redeem risponde 2xx",
+      "pass": true,
+      "detail": "HTTP 200"
+    },
+    {
+      "day": 1,
+      "what": "la pagina consegna la chiave API",
+      "pass": true,
+      "detail": "cfg_7cb5f5…"
+    },
+    {
+      "day": 3,
+      "what": "la feature core risponde: una card PNG vera",
+      "pass": true,
+      "detail": "27560 byte, firma 89504e47"
+    },
+    {
+      "day": 7,
+      "what": "il cron review-requests accetta il proprio segreto",
+      "pass": true,
+      "detail": "HTTP 404"
+    },
+    {
+      "day": 30,
+      "what": "il cron cleanup accetta il proprio segreto",
+      "pass": true,
+      "detail": "HTTP 404"
+    },
+    {
+      "day": 7,
+      "what": "il cron rifiuta un segreto sbagliato",
+      "pass": true,
+      "detail": "HTTP 404"
+    },
+    {
+      "day": 30,
+      "what": "nessun errore di console nel viaggio autenticato",
+      "pass": true,
+      "detail": ""
+    }
+  ]
+}

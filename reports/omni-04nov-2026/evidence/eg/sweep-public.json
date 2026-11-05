@@ -1,0 +1,205 @@
+{
+  "slug": "eg",
+  "base": "https://emailguard.dev",
+  "at": "2026-11-04T23:49:31.371Z",
+  "totals": {
+    "pages": 11,
+    "non200": 0,
+    "noOgImage": 0,
+    "inheritedMeta": 0,
+    "multiH1": 0,
+    "backslashProbed": 11,
+    "backslash500": 0
+  },
+  "pages": [
+    {
+      "path": "/",
+      "status": 200,
+      "title": "EmailGuard — Email validation API for developers",
+      "inheritsHomeTitle": false,
+      "inheritsHomeDesc": false,
+      "hasDesc": true,
+      "ogImage": "https://emailguard.dev/opengraph-image?217133b06fe67422",
+      "canonical": "https://emailguard.dev",
+      "h1Count": 1,
+      "imagesMissingAlt": 0
+    },
+    {
+      "path": "/cookie-policy",
+      "status": 200,
+      "title": "Cookie Policy — EmailGuard",
+      "inheritsHomeTitle": false,
+      "inheritsHomeDesc": false,
+      "hasDesc": true,
+      "ogImage": "https://emailguard.dev/opengraph-image?217133b06fe67422",
+      "canonical": "https://emailguard.dev/cookie-policy",
+      "h1Count": 1,
+      "imagesMissingAlt": 0
+    },
+    {
+      "path": "/docs",
+      "status": 200,
+      "title": "API Documentation — EmailGuard",
+      "inheritsHomeTitle": false,
+      "inheritsHomeDesc": false,
+      "hasDesc": true,
+      "ogImage": "https://emailguard.dev/opengraph-image?217133b06fe67422",
+      "canonical": "https://emailguard.dev/docs",
+      "h1Count": 1,
+      "imagesMissingAlt": 0
+    },
+    {
+      "path": "/dpa",
+      "status": 200,
+      "title": "Data Processing Agreement — EmailGuard",
+      "inheritsHomeTitle": false,
+      "inheritsHomeDesc": false,
+      "hasDesc": true,
+      "ogImage": "https://emailguard.dev/opengraph-image?217133b06fe67422",
+      "canonical": "https://emailguard.dev/dpa",
+      "h1Count": 1,
+      "imagesMissingAlt": 0
+    },
+    {
+      "path": "/help",
+      "status": 200,
+      "title": "Help &amp; Knowledge Hub — EmailGuard",
+      "inheritsHomeTitle": false,
+      "inheritsHomeDesc": false,
+      "hasDesc": true,
+      "ogImage": "https://emailguard.dev/opengraph-image?217133b06fe67422",
+      "canonical": "https://emailguard.dev/help",
+      "h1Count": 1,
+      "imagesMissingAlt": 0
+    },
+    {
+      "path": "/pricing",
+      "status": 200,
+      "title": "Pricing — EmailGuard",
+      "inheritsHomeTitle": false,
+      "inheritsHomeDesc": false,
+      "hasDesc": true,
+      "ogImage": "https://emailguard.dev/opengraph-image?217133b06fe67422",
+      "canonical": "https://emailguard.dev/pricing",
+      "h1Count": 1,
+      "imagesMissingAlt": 0
+    },
+    {
+      "path": "/privacy",
+      "status": 200,
+      "title": "Privacy Policy — EmailGuard",
+      "inheritsHomeTitle": false,
+      "inheritsHomeDesc": false,
+      "hasDesc": true,
+      "ogImage": "https://emailguard.dev/opengraph-image?217133b06fe67422",
+      "canonical": "https://emailguard.dev/privacy",
+      "h1Count": 1,
+      "imagesMissingAlt": 0
+    },
+    {
+      "path": "/refund",
+      "status": 200,
+      "title": "Refunds and Cancellation — EmailGuard",
+      "inheritsHomeTitle": false,
+      "inheritsHomeDesc": false,
+      "hasDesc": true,
+      "ogImage": "https://emailguard.dev/opengraph-image?217133b06fe67422",
+      "canonical": "https://emailguard.dev/refund",
+      "h1Count": 1,
+      "imagesMissingAlt": 0
+    },
+    {
+      "path": "/signup",
+      "status": 200,
+      "title": "Get a free API key — EmailGuard",
+      "inheritsHomeTitle": false,
+      "inheritsHomeDesc": false,
+      "hasDesc": true,
+      "ogImage": "https://emailguard.dev/opengraph-image?217133b06fe67422",
+      "canonical": "https://emailguard.dev/signup",
+      "h1Count": 1,
+      "imagesMissingAlt": 0
+    },
+    {
+      "path": "/terms",
+      "status": 200,
+      "title": "Terms of Service — EmailGuard",
+      "inheritsHomeTitle": false,
+      "inheritsHomeDesc": false,
+      "hasDesc": true,
+      "ogImage": "https://emailguard.dev/opengraph-image?217133b06fe67422",
+      "canonical": "https://emailguard.dev/terms",
+      "h1Count": 1,
+      "imagesMissingAlt": 0
+    },
+    {
+      "path": "/verify-email",
+      "status": 200,
+      "title": "Free Email Verification — check an address without signing up — EmailGuard",
+      "inheritsHomeTitle": false,
+      "inheritsHomeDesc": false,
+      "hasDesc": true,
+      "ogImage": "https://emailguard.dev/opengraph-image",
+      "canonical": "https://emailguard.dev/verify-email",
+      "h1Count": 1,
+      "imagesMissingAlt": 0
+    }
+  ],
+  "backslash": [
+    {
+      "path": "/",
+      "probe": "/%5C",
+      "status": 308
+    },
+    {
+      "path": "/cookie-policy",
+      "probe": "/cookie-policy%5C",
+      "status": 308
+    },
+    {
+      "path": "/docs",
+      "probe": "/docs%5C",
+      "status": 308
+    },
+    {
+      "path": "/dpa",
+      "probe": "/dpa%5C",
+      "status": 308
+    },
+    {
+      "path": "/help",
+      "probe": "/help%5C",
+      "status": 308
+    },
+    {
+      "path": "/pricing",
+      "probe": "/pricing%5C",
+      "status": 308
+    },
+    {
+      "path": "/privacy",
+      "probe": "/privacy%5C",
+      "status": 308
+    },
+    {
+      "path": "/refund",
+      "probe": "/refund%5C",
+      "status": 308
+    },
+    {
+      "path": "/signup",
+      "probe": "/signup%5C",
+      "status": 308
+    },
+    {
+      "path": "/terms",
+      "probe": "/terms%5C",
+      "status": 308
+    },
+    {
+      "path": "/verify-email",
+      "probe": "/verify-email%5C",
+      "status": 308
+    }
+  ]
+}

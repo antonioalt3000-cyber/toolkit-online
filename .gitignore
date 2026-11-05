@@ -102,3 +102,10 @@ reports/**/scans/
 
 # screenshot di evidenza: restano su disco, come nei round precedenti
 reports/**/evidence/**/*.png
+
+# Le chiavi API consegnate dal riscatto durante un collaudo NON si versionano.
+# Il round del 31 ott 2026 ne ha committate 7 (reports/omni-31ott-2026/evidence/*/
+# apikey.txt): chiavi di account enterprise paganti, in un repo, nella storia.
+# Qui sono escluse per sempre; quelle in storia richiedono una riconiatura.
+reports/**/apikey.txt
+reports/**/evidence/**/*.pdf

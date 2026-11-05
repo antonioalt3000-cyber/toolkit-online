@@ -1,0 +1,63 @@
+{"ts":"2026-11-04T19:26:41.952Z","repo":"hsh","phase":"M2-scan","esito":"ok","prova":"sweep: 11 pagine, 0 non-200, 5 senza og:image, 11/11 backslash-500"}
+{"ts":"2026-11-04T19:26:42.077Z","repo":"seo","phase":"M2-scan","esito":"ok","prova":"sweep: 11 pagine, 2 senza og:image, 11/11 backslash-500"}
+{"ts":"2026-11-04T19:26:42.171Z","repo":"eg","phase":"M2-scan","esito":"ok","prova":"sweep: 11 pagine, 1 senza og:image, 11/11 backslash-500"}
+{"ts":"2026-11-04T19:26:42.289Z","repo":"cfg","phase":"M2-scan","esito":"ok","prova":"sweep: 11 pagine, og:image ok, 11/11 backslash-500"}
+{"ts":"2026-11-04T19:26:42.387Z","repo":"hkl","phase":"M2-scan","esito":"ok","prova":"sweep: 13 pagine, og:image ok, 13/13 backslash-500"}
+{"ts":"2026-11-04T19:26:42.506Z","repo":"f1","phase":"M2-scan","esito":"ok","prova":"sweep: 0 non-200, og:image ok, 1 backslash-500 (/pricing)"}
+{"ts":"2026-11-04T19:26:42.599Z","repo":"f2","phase":"M2-scan","esito":"ok","prova":"sweep: 0 non-200, og:image ok, 1 backslash-500 (/pricing)"}
+{"ts":"2026-11-04T19:26:42.721Z","repo":"f3","phase":"M2-scan","esito":"ok","prova":"sweep: 0 non-200, og:image ok, 1 backslash-500 (/pricing)"}
+{"ts":"2026-11-04T19:26:42.827Z","repo":"f4","phase":"M2-scan","esito":"ok","prova":"sweep: 31 pagine, og:image ok, 2 backslash-500 (/pricing /status)"}
+{"ts":"2026-11-04T19:26:42.936Z","repo":"b7","phase":"M2-scan","esito":"ok","prova":"sweep: 39 pagine, og:image ok, 0 backslash-500 (immune)"}
+{"ts":"2026-11-04T19:48:35.664Z","repo":"hsh","phase":"M3-fix","esito":"ok","prova":"middleware backslash 308 + og:image via pageMetadata + test estesi"}
+{"ts":"2026-11-04T19:48:35.761Z","repo":"hsh","phase":"M3-gate","esito":"ok","prova":"lint 0, tsc pulito, 771 test/68 file (baseline 749/67), build verde"}
+{"ts":"2026-11-04T19:48:35.862Z","repo":"hsh","phase":"M3-pr","esito":"ok","prova":"headershield#56 mergiata (db444fa)"}
+{"ts":"2026-11-04T19:48:35.978Z","repo":"hsh","phase":"M3-deploy","esito":"ok","prova":"prod db444fa: backslash-500 0/11, og:image 0 mancanti, /pricing\\ 308->200"}
+{"ts":"2026-11-04T20:11:34.867Z","repo":"f2","phase":"M2-scan","esito":"warn","prova":"CRON_SECRET assente in produzione: 4 job schedulati mai girati; backup coupon creato a mano (920+104)"}
+{"ts":"2026-11-04T20:11:34.963Z","repo":"f4","phase":"M3-fix","esito":"ok","prova":"extractAddress riga-per-riga, 11 lingue, +5 test"}
+{"ts":"2026-11-04T23:50:32.350Z","repo":"f1","phase":"M3-pr","esito":"ok","prova":"complipilot#73 c5f9982 mergiata"}
+{"ts":"2026-11-04T23:50:32.439Z","repo":"f1","phase":"M3-deploy","esito":"ok","prova":"prod: backslash-500 0, og:image completo (verificato con la sonda che l'aveva trovato)"}
+{"ts":"2026-11-04T23:50:32.528Z","repo":"f2","phase":"M3-pr","esito":"ok","prova":"accessiscan#85 065eb40 mergiata"}
+{"ts":"2026-11-04T23:50:32.620Z","repo":"f2","phase":"M3-deploy","esito":"ok","prova":"prod: backslash-500 0, og:image completo (verificato con la sonda che l'aveva trovato)"}
+{"ts":"2026-11-04T23:50:32.711Z","repo":"f3","phase":"M3-pr","esito":"ok","prova":"churnguard#81 5f4d0da mergiata"}
+{"ts":"2026-11-04T23:50:32.804Z","repo":"f3","phase":"M3-deploy","esito":"ok","prova":"prod: backslash-500 0, og:image completo (verificato con la sonda che l'aveva trovato)"}
+{"ts":"2026-11-04T23:50:32.893Z","repo":"f4","phase":"M3-pr","esito":"ok","prova":"documint#83 a5cb387 mergiata"}
+{"ts":"2026-11-04T23:50:32.987Z","repo":"f4","phase":"M3-deploy","esito":"ok","prova":"prod: backslash-500 0, og:image completo (verificato con la sonda che l'aveva trovato)"}
+{"ts":"2026-11-04T23:50:33.083Z","repo":"cfg","phase":"M3-pr","esito":"ok","prova":"cardforge#51 5a4211d mergiata"}
+{"ts":"2026-11-04T23:50:33.196Z","repo":"cfg","phase":"M3-deploy","esito":"ok","prova":"prod: backslash-500 0, og:image completo (verificato con la sonda che l'aveva trovato)"}
+{"ts":"2026-11-04T23:50:33.290Z","repo":"eg","phase":"M3-pr","esito":"ok","prova":"emailguard#56 23368ba mergiata"}
+{"ts":"2026-11-04T23:50:33.381Z","repo":"eg","phase":"M3-deploy","esito":"ok","prova":"prod: backslash-500 0, og:image completo (verificato con la sonda che l'aveva trovato)"}
+{"ts":"2026-11-04T23:50:33.469Z","repo":"hkl","phase":"M3-pr","esito":"ok","prova":"hooklab#59 3bc195a mergiata"}
+{"ts":"2026-11-04T23:50:33.566Z","repo":"hkl","phase":"M3-deploy","esito":"ok","prova":"prod: backslash-500 0, og:image completo (verificato con la sonda che l'aveva trovato)"}
+{"ts":"2026-11-04T23:50:33.658Z","repo":"seo","phase":"M3-pr","esito":"ok","prova":"seoscope#62 c97fe92 mergiata"}
+{"ts":"2026-11-04T23:50:33.749Z","repo":"seo","phase":"M3-deploy","esito":"ok","prova":"prod: backslash-500 0, og:image completo (verificato con la sonda che l'aveva trovato)"}
+{"ts":"2026-11-04T23:50:33.836Z","repo":"b7","phase":"M3-fix","esito":"skip","prova":"immune al backslash: 0/39 pagine colpite, nessun fix necessario"}
+{"ts":"2026-11-04T23:50:33.929Z","repo":"cfg","phase":"M4-journey","esito":"ok","prova":"giro pubblico 6/6 PASS nel browser reale"}
+{"ts":"2026-11-04T23:50:34.024Z","repo":"eg","phase":"M4-journey","esito":"ok","prova":"giro pubblico 6/6 PASS nel browser reale"}
+{"ts":"2026-11-04T23:50:34.113Z","repo":"hsh","phase":"M4-journey","esito":"ok","prova":"giro pubblico 6/6 PASS nel browser reale"}
+{"ts":"2026-11-04T23:50:34.211Z","repo":"hkl","phase":"M4-journey","esito":"ok","prova":"giro pubblico 6/6 PASS nel browser reale"}
+{"ts":"2026-11-04T23:50:34.298Z","repo":"seo","phase":"M4-journey","esito":"ok","prova":"giro pubblico 6/6 PASS nel browser reale"}
+{"ts":"2026-11-04T23:50:34.392Z","repo":"f1","phase":"M4-journey","esito":"ok","prova":"giro pubblico 6/6 PASS nel browser reale"}
+{"ts":"2026-11-04T23:50:34.484Z","repo":"f2","phase":"M4-journey","esito":"ok","prova":"giro pubblico 6/6 PASS nel browser reale"}
+{"ts":"2026-11-04T23:50:34.573Z","repo":"f3","phase":"M4-journey","esito":"ok","prova":"giro pubblico 6/6 PASS nel browser reale"}
+{"ts":"2026-11-04T23:50:34.665Z","repo":"f4","phase":"M4-journey","esito":"ok","prova":"giro pubblico 6/6 PASS nel browser reale"}
+{"ts":"2026-11-04T23:50:34.755Z","repo":"b7","phase":"M4-journey","esito":"ok","prova":"giro pubblico 6/6 PASS nel browser reale"}
+{"ts":"2026-11-04T23:50:47.952Z","repo":"f1","phase":"M3-gate","esito":"ok","prova":"lint 0 err, tsc pulito, 951 test/69 file (base 944/68), build verde"}
+{"ts":"2026-11-04T23:50:48.042Z","repo":"f2","phase":"M3-gate","esito":"ok","prova":"lint 0 err, tsc pulito, 670 test/64 file (base 663/63), build verde"}
+{"ts":"2026-11-04T23:50:48.133Z","repo":"f3","phase":"M3-gate","esito":"ok","prova":"lint 0 err, tsc pulito, 678 test/65 file (base 672/64), build verde"}
+{"ts":"2026-11-04T23:50:48.228Z","repo":"f4","phase":"M3-gate","esito":"ok","prova":"lint 0 err, tsc pulito, 687 test/62 file (base 676/61), build verde"}
+{"ts":"2026-11-04T23:50:48.319Z","repo":"cfg","phase":"M3-gate","esito":"ok","prova":"lint 0 err, typecheck pulito, 735 test/70 file (base 729/69), build verde"}
+{"ts":"2026-11-04T23:50:48.415Z","repo":"eg","phase":"M3-gate","esito":"ok","prova":"lint 0 err, typecheck pulito, 599 test/61 file (base 580/60), build verde"}
+{"ts":"2026-11-04T23:50:48.504Z","repo":"hkl","phase":"M3-gate","esito":"ok","prova":"lint 0 err, typecheck pulito, 884 test/73 file (base 878/72), build verde"}
+{"ts":"2026-11-04T23:50:48.592Z","repo":"seo","phase":"M3-gate","esito":"ok","prova":"lint 0 err, typecheck pulito, 821 test/65 file (base 801/65), build verde"}
+{"ts":"2026-11-05T00:17:46.888Z","repo":"cfg","phase":"M3-fix","esito":"ok","prova":"coupon-stats esclude i coupon interni dai totali partner; errore della rotta non piu' occultato"}
+{"ts":"2026-11-05T05:02:16.138Z","repo":"f1","phase":"M3-fix","esito":"ok","prova":"CSP a nonce: via unsafe-inline da script-src; verificata nel browser reale in produzione"}
+{"ts":"2026-11-05T05:02:16.438Z","repo":"f2","phase":"M3-fix","esito":"ok","prova":"CSP a nonce: via unsafe-inline da script-src; verificata nel browser reale in produzione"}
+{"ts":"2026-11-05T05:02:16.699Z","repo":"f3","phase":"M3-fix","esito":"ok","prova":"CSP a nonce: via unsafe-inline da script-src; verificata nel browser reale in produzione"}
+{"ts":"2026-11-05T05:02:17.071Z","repo":"f4","phase":"M3-fix","esito":"ok","prova":"CSP a nonce: via unsafe-inline da script-src; verificata nel browser reale in produzione"}
+{"ts":"2026-11-05T05:02:17.425Z","repo":"eg","phase":"M4-teardown","esito":"warn","prova":"coupon-stats ora separa i coupon interni: i nostri riscatti non falsano piu' i numeri partner"}
+{"ts":"2026-11-05T05:02:17.698Z","repo":"hsh","phase":"M4-teardown","esito":"warn","prova":"coupon-stats ora separa i coupon interni: i nostri riscatti non falsano piu' i numeri partner"}
+{"ts":"2026-11-05T05:02:18.097Z","repo":"hkl","phase":"M4-teardown","esito":"warn","prova":"coupon-stats ora separa i coupon interni: i nostri riscatti non falsano piu' i numeri partner"}
+{"ts":"2026-11-05T05:02:18.541Z","repo":"seo","phase":"M4-teardown","esito":"warn","prova":"coupon-stats ora separa i coupon interni: i nostri riscatti non falsano piu' i numeri partner"}
+{"ts":"2026-11-05T05:02:18.871Z","repo":"b7","phase":"M4-teardown","esito":"warn","prova":"coupon-stats ora separa i coupon interni: i nostri riscatti non falsano piu' i numeri partner"}
+{"ts":"2026-11-05T05:02:19.274Z","repo":"cfg","phase":"M4-teardown","esito":"warn","prova":"coupon-stats ora separa i coupon interni: i nostri riscatti non falsano piu' i numeri partner"}
+{"ts":"2026-11-05T05:02:19.658Z","repo":"f4","phase":"M3-deploy","esito":"ok","prova":"prod: indirizzo fornitore corretto + CSP a nonce + backslash; 3/3 pagine pulite nel browser"}

@@ -1,0 +1,11 @@
+{"ts":"2026-11-04T19:48:47.248Z","repo":"hsh","key":"coupons:used -> QAOCT-085C-6CB1-3B10-655A","nota":"coniato e riscattato nel journey 31 ott"}
+{"ts":"2026-11-04T20:10:44.212Z","repo":"f2","key":"fmw:backup:coupons:latest","nota":"backup pool coupon creato a mano: il cron che lo crea non si autentica (CRON_SECRET assente in produzione)"}
+{"ts":"2026-11-04T23:50:50.380Z","repo":"cfg","key":"coupons:used -> QAOCTB-353C-B8B4-ABA1-7F85","nota":"coniato e riscattato nel journey 31 ott"}
+{"ts":"2026-11-04T23:51:22.547Z","repo":"eg","key":"coupons:used -> QAOCT-4518-D7D3-EA40-7ADF","nota":"coniato e riscattato nel journey 31 ott"}
+{"ts":"2026-11-04T23:51:54.769Z","repo":"seo","key":"coupons:used -> QAOCT-1B8C-ED0D-8CFB-27AB","nota":"coniato e riscattato nel journey 31 ott"}
+{"ts":"2026-11-04T23:52:58.077Z","repo":"hkl","key":"coupons:used -> QAOCT-8076-5CA6-B4A8-AA0B","nota":"coniato e riscattato nel journey 31 ott"}
+{"ts":"2026-11-04T23:53:30.076Z","repo":"f4","key":"coupons:used -> QAOCT-8C48-977C","nota":"coniato e riscattato nel journey 31 ott"}
+{"ts":"2026-11-04T23:54:01.908Z","repo":"b7","key":"coupons:used -> QAOCT-96EC-F50A","nota":"coniato e riscattato nel journey 31 ott"}
+{"ts":"2026-11-04T23:54:38.253Z","repo":"f1","key":"coupons:used -> QAOCT-C9A5-9F36","nota":"coniato e riscattato nel journey 31 ott"}
+{"ts":"2026-11-04T23:55:09.988Z","repo":"f2","key":"coupons:used -> QAOCT-BA87-E370","nota":"coniato e riscattato nel journey 31 ott"}
+{"ts":"2026-11-04T23:55:41.522Z","repo":"f3","key":"coupons:used -> QAOCT-5738-04B5","nota":"coniato e riscattato nel journey 31 ott"}

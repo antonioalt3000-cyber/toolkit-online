@@ -1,0 +1,56 @@
+{
+  "slug": "seo",
+  "dom": "seoscope.dev",
+  "email": "antonio.alt3000+qa04nov-seo@gmail.com",
+  "code": "QAOCT-1B8C-ED0D-8CFB-27AB",
+  "results": [
+    {
+      "day": 1,
+      "what": "coniato un coupon interno via /api/admin/generate-coupons",
+      "pass": true,
+      "detail": "QAOCT-1B8C-ED0D-8CFB-27AB"
+    },
+    {
+      "day": 1,
+      "what": "il riscatto parte e la POST /api/redeem risponde 2xx",
+      "pass": true,
+      "detail": "HTTP 200"
+    },
+    {
+      "day": 1,
+      "what": "la pagina consegna la chiave API",
+      "pass": true,
+      "detail": "seo_636aeb…"
+    },
+    {
+      "day": 3,
+      "what": "la feature core risponde: un audit SEO con punteggio",
+      "pass": true,
+      "detail": "{\"url\":\"https://example.com\",\"score\":67,\"categories\":{\"content\":44,\"meta\":64,\"social\":17,\"technical\":92,\"performance\":100},\"checks\":[{\"id\":\"title\",\"label\":\"Title tag\",\"category\":\"m"
+    },
+    {
+      "day": 7,
+      "what": "il cron review-requests accetta il proprio segreto",
+      "pass": true,
+      "detail": "HTTP 404"
+    },
+    {
+      "day": 30,
+      "what": "il cron cleanup accetta il proprio segreto",
+      "pass": true,
+      "detail": "HTTP 404"
+    },
+    {
+      "day": 7,
+      "what": "il cron rifiuta un segreto sbagliato",
+      "pass": true,
+      "detail": "HTTP 404"
+    },
+    {
+      "day": 30,
+      "what": "nessun errore di console nel viaggio autenticato",
+      "pass": true,
+      "detail": ""
+    }
+  ]
+}

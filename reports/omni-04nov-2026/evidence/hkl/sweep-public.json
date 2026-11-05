@@ -1,0 +1,239 @@
+{
+  "slug": "hkl",
+  "base": "https://gethooklab.dev",
+  "at": "2026-11-04T23:49:38.930Z",
+  "totals": {
+    "pages": 13,
+    "non200": 0,
+    "noOgImage": 0,
+    "inheritedMeta": 0,
+    "multiH1": 0,
+    "backslashProbed": 13,
+    "backslash500": 0
+  },
+  "pages": [
+    {
+      "path": "/",
+      "status": 200,
+      "title": "HookLab — Webhook inspection &amp; replay, built for developers",
+      "inheritsHomeTitle": false,
+      "inheritsHomeDesc": false,
+      "hasDesc": true,
+      "ogImage": "https://gethooklab.dev/opengraph-image?d3ffa554dd0c5e9e",
+      "canonical": "https://gethooklab.dev",
+      "h1Count": 1,
+      "imagesMissingAlt": 0
+    },
+    {
+      "path": "/cookie-policy",
+      "status": 200,
+      "title": "Cookie Policy — HookLab",
+      "inheritsHomeTitle": false,
+      "inheritsHomeDesc": false,
+      "hasDesc": true,
+      "ogImage": "https://gethooklab.dev/opengraph-image?d3ffa554dd0c5e9e",
+      "canonical": "https://gethooklab.dev/cookie-policy",
+      "h1Count": 1,
+      "imagesMissingAlt": 0
+    },
+    {
+      "path": "/docs",
+      "status": 200,
+      "title": "API Documentation — HookLab",
+      "inheritsHomeTitle": false,
+      "inheritsHomeDesc": false,
+      "hasDesc": true,
+      "ogImage": "https://gethooklab.dev/opengraph-image?d3ffa554dd0c5e9e",
+      "canonical": "https://gethooklab.dev/docs",
+      "h1Count": 1,
+      "imagesMissingAlt": 0
+    },
+    {
+      "path": "/dpa",
+      "status": 200,
+      "title": "Data Processing Agreement — HookLab",
+      "inheritsHomeTitle": false,
+      "inheritsHomeDesc": false,
+      "hasDesc": true,
+      "ogImage": "https://gethooklab.dev/opengraph-image?d3ffa554dd0c5e9e",
+      "canonical": "https://gethooklab.dev/dpa",
+      "h1Count": 1,
+      "imagesMissingAlt": 0
+    },
+    {
+      "path": "/help",
+      "status": 200,
+      "title": "Help &amp; Knowledge Hub — HookLab",
+      "inheritsHomeTitle": false,
+      "inheritsHomeDesc": false,
+      "hasDesc": true,
+      "ogImage": "https://gethooklab.dev/opengraph-image?d3ffa554dd0c5e9e",
+      "canonical": "https://gethooklab.dev/help",
+      "h1Count": 1,
+      "imagesMissingAlt": 0
+    },
+    {
+      "path": "/pricing",
+      "status": 200,
+      "title": "Pricing — HookLab",
+      "inheritsHomeTitle": false,
+      "inheritsHomeDesc": false,
+      "hasDesc": true,
+      "ogImage": "https://gethooklab.dev/opengraph-image?d3ffa554dd0c5e9e",
+      "canonical": "https://gethooklab.dev/pricing",
+      "h1Count": 1,
+      "imagesMissingAlt": 0
+    },
+    {
+      "path": "/privacy",
+      "status": 200,
+      "title": "Privacy Policy — HookLab",
+      "inheritsHomeTitle": false,
+      "inheritsHomeDesc": false,
+      "hasDesc": true,
+      "ogImage": "https://gethooklab.dev/opengraph-image?d3ffa554dd0c5e9e",
+      "canonical": "https://gethooklab.dev/privacy",
+      "h1Count": 1,
+      "imagesMissingAlt": 0
+    },
+    {
+      "path": "/refund",
+      "status": 200,
+      "title": "Refunds and Cancellation — HookLab",
+      "inheritsHomeTitle": false,
+      "inheritsHomeDesc": false,
+      "hasDesc": true,
+      "ogImage": "https://gethooklab.dev/opengraph-image?d3ffa554dd0c5e9e",
+      "canonical": "https://gethooklab.dev/refund",
+      "h1Count": 1,
+      "imagesMissingAlt": 0
+    },
+    {
+      "path": "/replay-webhook-to-staging",
+      "status": 200,
+      "title": "Replay a captured webhook — fix the handler, resend the same payload — HookLab",
+      "inheritsHomeTitle": false,
+      "inheritsHomeDesc": false,
+      "hasDesc": true,
+      "ogImage": "https://gethooklab.dev/opengraph-image?d3ffa554dd0c5e9e",
+      "canonical": "https://gethooklab.dev/replay-webhook-to-staging",
+      "h1Count": 1,
+      "imagesMissingAlt": 0
+    },
+    {
+      "path": "/signup",
+      "status": 200,
+      "title": "Get a free API key — HookLab",
+      "inheritsHomeTitle": false,
+      "inheritsHomeDesc": false,
+      "hasDesc": true,
+      "ogImage": "https://gethooklab.dev/opengraph-image?d3ffa554dd0c5e9e",
+      "canonical": "https://gethooklab.dev/signup",
+      "h1Count": 1,
+      "imagesMissingAlt": 0
+    },
+    {
+      "path": "/terms",
+      "status": 200,
+      "title": "Terms of Service — HookLab",
+      "inheritsHomeTitle": false,
+      "inheritsHomeDesc": false,
+      "hasDesc": true,
+      "ogImage": "https://gethooklab.dev/opengraph-image?d3ffa554dd0c5e9e",
+      "canonical": "https://gethooklab.dev/terms",
+      "h1Count": 1,
+      "imagesMissingAlt": 0
+    },
+    {
+      "path": "/test-github-webhook-deliveries",
+      "status": 200,
+      "title": "Test GitHub webhook deliveries — inspect, verify, replay — HookLab",
+      "inheritsHomeTitle": false,
+      "inheritsHomeDesc": false,
+      "hasDesc": true,
+      "ogImage": "https://gethooklab.dev/opengraph-image?d3ffa554dd0c5e9e",
+      "canonical": "https://gethooklab.dev/test-github-webhook-deliveries",
+      "h1Count": 1,
+      "imagesMissingAlt": 0
+    },
+    {
+      "path": "/verify-stripe-webhook-signatures",
+      "status": 200,
+      "title": "Verify Stripe webhook signatures — without deploying first — HookLab",
+      "inheritsHomeTitle": false,
+      "inheritsHomeDesc": false,
+      "hasDesc": true,
+      "ogImage": "https://gethooklab.dev/opengraph-image?d3ffa554dd0c5e9e",
+      "canonical": "https://gethooklab.dev/verify-stripe-webhook-signatures",
+      "h1Count": 1,
+      "imagesMissingAlt": 0
+    }
+  ],
+  "backslash": [
+    {
+      "path": "/",
+      "probe": "/%5C",
+      "status": 308
+    },
+    {
+      "path": "/cookie-policy",
+      "probe": "/cookie-policy%5C",
+      "status": 308
+    },
+    {
+      "path": "/docs",
+      "probe": "/docs%5C",
+      "status": 308
+    },
+    {
+      "path": "/dpa",
+      "probe": "/dpa%5C",
+      "status": 308
+    },
+    {
+      "path": "/help",
+      "probe": "/help%5C",
+      "status": 308
+    },
+    {
+      "path": "/pricing",
+      "probe": "/pricing%5C",
+      "status": 308
+    },
+    {
+      "path": "/privacy",
+      "probe": "/privacy%5C",
+      "status": 308
+    },
+    {
+      "path": "/refund",
+      "probe": "/refund%5C",
+      "status": 308
+    },
+    {
+      "path": "/replay-webhook-to-staging",
+      "probe": "/replay-webhook-to-staging%5C",
+      "status": 308
+    },
+    {
+      "path": "/signup",
+      "probe": "/signup%5C",
+      "status": 308
+    },
+    {
+      "path": "/terms",
+      "probe": "/terms%5C",
+      "status": 308
+    },
+    {
+      "path": "/test-github-webhook-deliveries",
+      "probe": "/test-github-webhook-deliveries%5C",
+      "status": 308
+    },
+    {
+      "path": "/verify-stripe-webhook-signatures",
+      "probe": "/verify-stripe-webhook-signatures%5C",
+      "status": 308
+    }
+  ]
+}

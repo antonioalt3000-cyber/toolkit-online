@@ -1,0 +1,579 @@
+{
+  "slug": "f3",
+  "base": "https://paymentrescue.dev",
+  "at": "2026-11-04T23:49:58.830Z",
+  "totals": {
+    "pages": 33,
+    "non200": 0,
+    "noOgImage": 0,
+    "inheritedMeta": 0,
+    "multiH1": 0,
+    "backslashProbed": 33,
+    "backslash500": 0
+  },
+  "pages": [
+    {
+      "path": "/",
+      "status": 200,
+      "title": "Recover Failed Stripe Payments Automatically | PaymentRescue",
+      "inheritsHomeTitle": false,
+      "inheritsHomeDesc": false,
+      "hasDesc": true,
+      "ogImage": "https://paymentrescue.dev/opengraph-image?689a99480e906341",
+      "canonical": "https://paymentrescue.dev",
+      "h1Count": 1,
+      "imagesMissingAlt": 0
+    },
+    {
+      "path": "/about",
+      "status": 200,
+      "title": "About Us | PaymentRescue",
+      "inheritsHomeTitle": false,
+      "inheritsHomeDesc": false,
+      "hasDesc": true,
+      "ogImage": "https://paymentrescue.dev/opengraph-image?689a99480e906341",
+      "canonical": "https://paymentrescue.dev/about",
+      "h1Count": 1,
+      "imagesMissingAlt": 0
+    },
+    {
+      "path": "/ai-transparency",
+      "status": 200,
+      "title": "AI Transparency | PaymentRescue",
+      "inheritsHomeTitle": false,
+      "inheritsHomeDesc": false,
+      "hasDesc": true,
+      "ogImage": "https://paymentrescue.dev/opengraph-image?689a99480e906341",
+      "canonical": "https://paymentrescue.dev/ai-transparency",
+      "h1Count": 1,
+      "imagesMissingAlt": 0
+    },
+    {
+      "path": "/analytics",
+      "status": 200,
+      "title": "Churn Analytics Calculator — Predict Revenue Loss &amp; Recovery | PaymentRescue",
+      "inheritsHomeTitle": false,
+      "inheritsHomeDesc": false,
+      "hasDesc": true,
+      "ogImage": "https://paymentrescue.dev/opengraph-image?689a99480e906341",
+      "canonical": "https://paymentrescue.dev/analytics",
+      "h1Count": 1,
+      "imagesMissingAlt": 0
+    },
+    {
+      "path": "/blog",
+      "status": 200,
+      "title": "Blog — Failed Payment Recovery Insights | PaymentRescue",
+      "inheritsHomeTitle": false,
+      "inheritsHomeDesc": false,
+      "hasDesc": true,
+      "ogImage": "https://paymentrescue.dev/opengraph-image?689a99480e906341",
+      "canonical": "https://paymentrescue.dev/blog",
+      "h1Count": 1,
+      "imagesMissingAlt": 0
+    },
+    {
+      "path": "/blog/dunning-automation-guide",
+      "status": 200,
+      "title": "Dunning Automation: How to Set It Up Step by Step (2026 Guide) | PaymentRescue",
+      "inheritsHomeTitle": false,
+      "inheritsHomeDesc": false,
+      "hasDesc": true,
+      "ogImage": "https://paymentrescue.dev/opengraph-image?689a99480e906341",
+      "canonical": "https://paymentrescue.dev/blog/dunning-automation-guide",
+      "h1Count": 1,
+      "imagesMissingAlt": 0
+    },
+    {
+      "path": "/blog/dunning-email-best-practices-2026",
+      "status": 200,
+      "title": "Dunning Email Best Practices for 2026 | PaymentRescue",
+      "inheritsHomeTitle": false,
+      "inheritsHomeDesc": false,
+      "hasDesc": true,
+      "ogImage": "https://paymentrescue.dev/opengraph-image?689a99480e906341",
+      "canonical": "https://paymentrescue.dev/blog/dunning-email-best-practices-2026",
+      "h1Count": 1,
+      "imagesMissingAlt": 0
+    },
+    {
+      "path": "/blog/how-failed-payments-cost-saas-9-percent-revenue",
+      "status": 200,
+      "title": "How Failed Payments Cost SaaS Companies 9% of Revenue | PaymentRescue",
+      "inheritsHomeTitle": false,
+      "inheritsHomeDesc": false,
+      "hasDesc": true,
+      "ogImage": "https://paymentrescue.dev/opengraph-image?689a99480e906341",
+      "canonical": "https://paymentrescue.dev/blog/how-failed-payments-cost-saas-9-percent-revenue",
+      "h1Count": 1,
+      "imagesMissingAlt": 0
+    },
+    {
+      "path": "/blog/how-to-recover-failed-payments",
+      "status": 200,
+      "title": "How to Recover Failed Payments in SaaS (2026 Playbook) | PaymentRescue",
+      "inheritsHomeTitle": false,
+      "inheritsHomeDesc": false,
+      "hasDesc": true,
+      "ogImage": "https://paymentrescue.dev/opengraph-image?689a99480e906341",
+      "canonical": "https://paymentrescue.dev/blog/how-to-recover-failed-payments",
+      "h1Count": 1,
+      "imagesMissingAlt": 0
+    },
+    {
+      "path": "/blog/reduce-churn-strategies",
+      "status": 200,
+      "title": "10 Proven Strategies to Reduce Involuntary Churn in 2026 | PaymentRescue",
+      "inheritsHomeTitle": false,
+      "inheritsHomeDesc": false,
+      "hasDesc": true,
+      "ogImage": "https://paymentrescue.dev/opengraph-image?689a99480e906341",
+      "canonical": "https://paymentrescue.dev/blog/reduce-churn-strategies",
+      "h1Count": 1,
+      "imagesMissingAlt": 0
+    },
+    {
+      "path": "/calculator",
+      "status": 200,
+      "title": "Payment Recovery ROI Calculator | PaymentRescue",
+      "inheritsHomeTitle": false,
+      "inheritsHomeDesc": false,
+      "hasDesc": true,
+      "ogImage": "https://paymentrescue.dev/opengraph-image",
+      "canonical": "https://paymentrescue.dev/calculator",
+      "h1Count": 0,
+      "imagesMissingAlt": 0
+    },
+    {
+      "path": "/case-studies",
+      "status": 200,
+      "title": "Recovery Scenarios — Modeled Outcomes by Industry | PaymentRescue | PaymentRescue",
+      "inheritsHomeTitle": false,
+      "inheritsHomeDesc": false,
+      "hasDesc": true,
+      "ogImage": "https://paymentrescue.dev/opengraph-image?689a99480e906341",
+      "canonical": "https://paymentrescue.dev/case-studies",
+      "h1Count": 1,
+      "imagesMissingAlt": 0
+    },
+    {
+      "path": "/contact",
+      "status": 200,
+      "title": "Contact Us | PaymentRescue",
+      "inheritsHomeTitle": false,
+      "inheritsHomeDesc": false,
+      "hasDesc": true,
+      "ogImage": "https://paymentrescue.dev/opengraph-image?689a99480e906341",
+      "canonical": "https://paymentrescue.dev/contact",
+      "h1Count": 1,
+      "imagesMissingAlt": 0
+    },
+    {
+      "path": "/cookie-policy",
+      "status": 200,
+      "title": "Cookie Policy | PaymentRescue | PaymentRescue",
+      "inheritsHomeTitle": false,
+      "inheritsHomeDesc": false,
+      "hasDesc": true,
+      "ogImage": "https://paymentrescue.dev/opengraph-image?689a99480e906341",
+      "canonical": "https://paymentrescue.dev/cookie-policy",
+      "h1Count": 1,
+      "imagesMissingAlt": 0
+    },
+    {
+      "path": "/docs",
+      "status": 200,
+      "title": "Integration Guide — Set Up PaymentRescue in 2 Minutes | PaymentRescue",
+      "inheritsHomeTitle": false,
+      "inheritsHomeDesc": false,
+      "hasDesc": true,
+      "ogImage": "https://paymentrescue.dev/opengraph-image?689a99480e906341",
+      "canonical": "https://paymentrescue.dev/docs",
+      "h1Count": 1,
+      "imagesMissingAlt": 0
+    },
+    {
+      "path": "/docs/email-deliverability",
+      "status": 200,
+      "title": "Email Deliverability — SPF, DKIM &amp; DMARC Setup | PaymentRescue",
+      "inheritsHomeTitle": false,
+      "inheritsHomeDesc": false,
+      "hasDesc": true,
+      "ogImage": "https://paymentrescue.dev/opengraph-image?689a99480e906341",
+      "canonical": "https://paymentrescue.dev/docs/email-deliverability",
+      "h1Count": 1,
+      "imagesMissingAlt": 0
+    },
+    {
+      "path": "/docs/webhooks",
+      "status": 200,
+      "title": "Webhook Documentation — Event Types, Payloads &amp; Verification | PaymentRescue",
+      "inheritsHomeTitle": false,
+      "inheritsHomeDesc": false,
+      "hasDesc": true,
+      "ogImage": "https://paymentrescue.dev/opengraph-image?689a99480e906341",
+      "canonical": "https://paymentrescue.dev/docs/webhooks",
+      "h1Count": 1,
+      "imagesMissingAlt": 0
+    },
+    {
+      "path": "/dpa",
+      "status": 200,
+      "title": "Data Processing Agreement (DPA) | PaymentRescue",
+      "inheritsHomeTitle": false,
+      "inheritsHomeDesc": false,
+      "hasDesc": true,
+      "ogImage": "https://paymentrescue.dev/opengraph-image?689a99480e906341",
+      "canonical": "https://paymentrescue.dev/dpa",
+      "h1Count": 1,
+      "imagesMissingAlt": 0
+    },
+    {
+      "path": "/dunning-automation",
+      "status": 200,
+      "title": "Dunning Automation for SaaS — Automated Payment Recovery Emails | PaymentRescue",
+      "inheritsHomeTitle": false,
+      "inheritsHomeDesc": false,
+      "hasDesc": true,
+      "ogImage": "https://paymentrescue.dev/opengraph-image?689a99480e906341",
+      "canonical": "https://paymentrescue.dev/dunning-automation",
+      "h1Count": 1,
+      "imagesMissingAlt": 0
+    },
+    {
+      "path": "/failed-payment-recovery",
+      "status": 200,
+      "title": "Failed Payment Recovery for SaaS — Automated Dunning on Top of Stripe | PaymentRescue",
+      "inheritsHomeTitle": false,
+      "inheritsHomeDesc": false,
+      "hasDesc": true,
+      "ogImage": "https://paymentrescue.dev/opengraph-image?689a99480e906341",
+      "canonical": "https://paymentrescue.dev/failed-payment-recovery",
+      "h1Count": 1,
+      "imagesMissingAlt": 0
+    },
+    {
+      "path": "/faq",
+      "status": 200,
+      "title": "FAQ — Failed Payment Recovery Questions | PaymentRescue",
+      "inheritsHomeTitle": false,
+      "inheritsHomeDesc": false,
+      "hasDesc": true,
+      "ogImage": "https://paymentrescue.dev/opengraph-image?689a99480e906341",
+      "canonical": "https://paymentrescue.dev/faq",
+      "h1Count": 1,
+      "imagesMissingAlt": 0
+    },
+    {
+      "path": "/free",
+      "status": 200,
+      "title": "Free Payment Recovery Tools — No Account Required | PaymentRescue",
+      "inheritsHomeTitle": false,
+      "inheritsHomeDesc": false,
+      "hasDesc": true,
+      "ogImage": "https://paymentrescue.dev/opengraph-image",
+      "canonical": "https://paymentrescue.dev/free",
+      "h1Count": 1,
+      "imagesMissingAlt": 0
+    },
+    {
+      "path": "/help",
+      "status": 200,
+      "title": "Help &amp; Getting Started — PaymentRescue | PaymentRescue",
+      "inheritsHomeTitle": false,
+      "inheritsHomeDesc": false,
+      "hasDesc": true,
+      "ogImage": "https://paymentrescue.dev/opengraph-image?689a99480e906341",
+      "canonical": "https://paymentrescue.dev/help",
+      "h1Count": 1,
+      "imagesMissingAlt": 0
+    },
+    {
+      "path": "/how-it-works",
+      "status": 200,
+      "title": "How PaymentRescue Works — Setup in 2 Minutes | PaymentRescue",
+      "inheritsHomeTitle": false,
+      "inheritsHomeDesc": false,
+      "hasDesc": true,
+      "ogImage": "https://paymentrescue.dev/opengraph-image?689a99480e906341",
+      "canonical": "https://paymentrescue.dev/how-it-works",
+      "h1Count": 1,
+      "imagesMissingAlt": 0
+    },
+    {
+      "path": "/integrations",
+      "status": 200,
+      "title": "Integrations — PaymentRescue | PaymentRescue",
+      "inheritsHomeTitle": false,
+      "inheritsHomeDesc": false,
+      "hasDesc": true,
+      "ogImage": "https://paymentrescue.dev/opengraph-image?689a99480e906341",
+      "canonical": "https://paymentrescue.dev/integrations",
+      "h1Count": 1,
+      "imagesMissingAlt": 0
+    },
+    {
+      "path": "/pricing",
+      "status": 200,
+      "title": "Pricing — Plans for Every SaaS Size | PaymentRescue",
+      "inheritsHomeTitle": false,
+      "inheritsHomeDesc": false,
+      "hasDesc": true,
+      "ogImage": "https://paymentrescue.dev/opengraph-image",
+      "canonical": "https://paymentrescue.dev/pricing",
+      "h1Count": 1,
+      "imagesMissingAlt": 0
+    },
+    {
+      "path": "/privacy",
+      "status": 200,
+      "title": "Privacy Policy | PaymentRescue",
+      "inheritsHomeTitle": false,
+      "inheritsHomeDesc": false,
+      "hasDesc": true,
+      "ogImage": "https://paymentrescue.dev/opengraph-image?689a99480e906341",
+      "canonical": "https://paymentrescue.dev/privacy",
+      "h1Count": 1,
+      "imagesMissingAlt": 0
+    },
+    {
+      "path": "/refund",
+      "status": 200,
+      "title": "Refunds and Cancellation | PaymentRescue | PaymentRescue",
+      "inheritsHomeTitle": false,
+      "inheritsHomeDesc": false,
+      "hasDesc": true,
+      "ogImage": "https://paymentrescue.dev/opengraph-image?689a99480e906341",
+      "canonical": "https://paymentrescue.dev/refund",
+      "h1Count": 1,
+      "imagesMissingAlt": 0
+    },
+    {
+      "path": "/stripe-churn-prevention",
+      "status": 200,
+      "title": "Stripe Churn Prevention — Reduce Involuntary Churn by 40% | PaymentRescue",
+      "inheritsHomeTitle": false,
+      "inheritsHomeDesc": false,
+      "hasDesc": true,
+      "ogImage": "https://paymentrescue.dev/opengraph-image?689a99480e906341",
+      "canonical": "https://paymentrescue.dev/stripe-churn-prevention",
+      "h1Count": 1,
+      "imagesMissingAlt": 0
+    },
+    {
+      "path": "/templates",
+      "status": 200,
+      "title": "Dunning Email Templates — See How Recovery Emails Look | PaymentRescue",
+      "inheritsHomeTitle": false,
+      "inheritsHomeDesc": false,
+      "hasDesc": true,
+      "ogImage": "https://paymentrescue.dev/opengraph-image?689a99480e906341",
+      "canonical": "https://paymentrescue.dev/templates",
+      "h1Count": 1,
+      "imagesMissingAlt": 0
+    },
+    {
+      "path": "/terms",
+      "status": 200,
+      "title": "Terms of Service | PaymentRescue",
+      "inheritsHomeTitle": false,
+      "inheritsHomeDesc": false,
+      "hasDesc": true,
+      "ogImage": "https://paymentrescue.dev/opengraph-image?689a99480e906341",
+      "canonical": "https://paymentrescue.dev/terms",
+      "h1Count": 1,
+      "imagesMissingAlt": 0
+    },
+    {
+      "path": "/tools/churn-predictor",
+      "status": 200,
+      "title": "Churn Risk Predictor | PaymentRescue",
+      "inheritsHomeTitle": false,
+      "inheritsHomeDesc": false,
+      "hasDesc": true,
+      "ogImage": "https://paymentrescue.dev/opengraph-image",
+      "canonical": "https://paymentrescue.dev/tools/churn-predictor",
+      "h1Count": 1,
+      "imagesMissingAlt": 0
+    },
+    {
+      "path": "/vs-stripe-smart-retries",
+      "status": 200,
+      "title": "PaymentRescue vs Stripe Smart Retries — Side-by-Side Comparison | PaymentRescue",
+      "inheritsHomeTitle": false,
+      "inheritsHomeDesc": false,
+      "hasDesc": true,
+      "ogImage": "https://paymentrescue.dev/opengraph-image?689a99480e906341",
+      "canonical": "https://paymentrescue.dev/vs-stripe-smart-retries",
+      "h1Count": 1,
+      "imagesMissingAlt": 0
+    }
+  ],
+  "backslash": [
+    {
+      "path": "/",
+      "probe": "/%5C",
+      "status": 308
+    },
+    {
+      "path": "/about",
+      "probe": "/about%5C",
+      "status": 308
+    },
+    {
+      "path": "/ai-transparency",
+      "probe": "/ai-transparency%5C",
+      "status": 308
+    },
+    {
+      "path": "/analytics",
+      "probe": "/analytics%5C",
+      "status": 308
+    },
+    {
+      "path": "/blog",
+      "probe": "/blog%5C",
+      "status": 308
+    },
+    {
+      "path": "/blog/dunning-automation-guide",
+      "probe": "/blog/dunning-automation-guide%5C",
+      "status": 308
+    },
+    {
+      "path": "/blog/dunning-email-best-practices-2026",
+      "probe": "/blog/dunning-email-best-practices-2026%5C",
+      "status": 308
+    },
+    {
+      "path": "/blog/how-failed-payments-cost-saas-9-percent-revenue",
+      "probe": "/blog/how-failed-payments-cost-saas-9-percent-revenue%5C",
+      "status": 308
+    },
+    {
+      "path": "/blog/how-to-recover-failed-payments",
+      "probe": "/blog/how-to-recover-failed-payments%5C",
+      "status": 308
+    },
+    {
+      "path": "/blog/reduce-churn-strategies",
+      "probe": "/blog/reduce-churn-strategies%5C",
+      "status": 308
+    },
+    {
+      "path": "/calculator",
+      "probe": "/calculator%5C",
+      "status": 308
+    },
+    {
+      "path": "/case-studies",
+      "probe": "/case-studies%5C",
+      "status": 308
+    },
+    {
+      "path": "/contact",
+      "probe": "/contact%5C",
+      "status": 308
+    },
+    {
+      "path": "/cookie-policy",
+      "probe": "/cookie-policy%5C",
+      "status": 308
+    },
+    {
+      "path": "/docs",
+      "probe": "/docs%5C",
+      "status": 308
+    },
+    {
+      "path": "/docs/email-deliverability",
+      "probe": "/docs/email-deliverability%5C",
+      "status": 308
+    },
+    {
+      "path": "/docs/webhooks",
+      "probe": "/docs/webhooks%5C",
+      "status": 308
+    },
+    {
+      "path": "/dpa",
+      "probe": "/dpa%5C",
+      "status": 308
+    },
+    {
+      "path": "/dunning-automation",
+      "probe": "/dunning-automation%5C",
+      "status": 308
+    },
+    {
+      "path": "/failed-payment-recovery",
+      "probe": "/failed-payment-recovery%5C",
+      "status": 308
+    },
+    {
+      "path": "/faq",
+      "probe": "/faq%5C",
+      "status": 308
+    },
+    {
+      "path": "/free",
+      "probe": "/free%5C",
+      "status": 308
+    },
+    {
+      "path": "/help",
+      "probe": "/help%5C",
+      "status": 308
+    },
+    {
+      "path": "/how-it-works",
+      "probe": "/how-it-works%5C",
+      "status": 308
+    },
+    {
+      "path": "/integrations",
+      "probe": "/integrations%5C",
+      "status": 308
+    },
+    {
+      "path": "/pricing",
+      "probe": "/pricing%5C",
+      "status": 308
+    },
+    {
+      "path": "/privacy",
+      "probe": "/privacy%5C",
+      "status": 308
+    },
+    {
+      "path": "/refund",
+      "probe": "/refund%5C",
+      "status": 308
+    },
+    {
+      "path": "/stripe-churn-prevention",
+      "probe": "/stripe-churn-prevention%5C",
+      "status": 308
+    },
+    {
+      "path": "/templates",
+      "probe": "/templates%5C",
+      "status": 308
+    },
+    {
+      "path": "/terms",
+      "probe": "/terms%5C",
+      "status": 308
+    },
+    {
+      "path": "/tools/churn-predictor",
+      "probe": "/tools/churn-predictor%5C",
+      "status": 308
+    },
+    {
+      "path": "/vs-stripe-smart-retries",
+      "probe": "/vs-stripe-smart-retries%5C",
+      "status": 308
+    }
+  ]
+}

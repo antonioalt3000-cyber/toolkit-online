@@ -1,0 +1,66 @@
+{
+  "id": "50797782-d0ea-4f70-8878-1e4f4c84a428",
+  "status": "completed",
+  "documentType": "invoice",
+  "confidence": 0.95,
+  "data": {
+    "type": "invoice",
+    "invoiceNumber": "QA-04NOV-0002",
+    "invoiceDate": "2026-11-04",
+    "dueDate": "2026-12-04",
+    "vendor": {
+      "name": "Studio Vallone SRL",
+      "address": "09876543210\nSupplier Address",
+      "email": "amministrazione@studiovallone.it",
+      "phone": "",
+      "taxId": "IT09876543210"
+    },
+    "customer": {
+      "name": "Officina Marelli SNC",
+      "address": "",
+      "email": "",
+      "phone": "",
+      "taxId": ""
+    },
+    "lineItems": [
+      {
+        "description": "Consulenza tecnica",
+        "quantity": 2,
+        "unitPrice": 100,
+        "amount": 200
+      }
+    ],
+    "subtotal": 200,
+    "taxAmount": 42,
+    "taxRate": 21,
+    "total": 242,
+    "currency": "EUR",
+    "currencyDetected": true,
+    "paymentTerms": "",
+    "notes": ""
+  },
+  "metadata": {
+    "fileName": "fattura-etichettata.pdf",
+    "fileSize": 1462,
+    "mimeType": "application/pdf",
+    "pageCount": 1,
+    "language": "en"
+  },
+  "createdAt": "2026-11-04T20:01:27.672Z",
+  "processingTimeMs": 13,
+  "localized": {
+    "lang": "en",
+    "status": "Extracted",
+    "labels": {
+      "invoiceNumber": "Invoice number",
+      "invoiceDate": "Issue date",
+      "dueDate": "Due date",
+      "vendor": "Supplier",
+      "customer": "Customer",
+      "subtotal": "Subtotal",
+      "taxAmount": "VAT",
+      "total": "Total",
+      "currency": "Currency"
+    }
+  }
+}

@@ -1,0 +1,56 @@
+{
+  "slug": "eg",
+  "dom": "emailguard.dev",
+  "email": "antonio.alt3000+qa04nov-eg@gmail.com",
+  "code": "QAOCT-4518-D7D3-EA40-7ADF",
+  "results": [
+    {
+      "day": 1,
+      "what": "coniato un coupon interno via /api/admin/generate-coupons",
+      "pass": true,
+      "detail": "QAOCT-4518-D7D3-EA40-7ADF"
+    },
+    {
+      "day": 1,
+      "what": "il riscatto parte e la POST /api/redeem risponde 2xx",
+      "pass": true,
+      "detail": "HTTP 200"
+    },
+    {
+      "day": 1,
+      "what": "la pagina consegna la chiave API",
+      "pass": true,
+      "detail": "eg_aa56dcc…"
+    },
+    {
+      "day": 3,
+      "what": "la feature core risponde: una verifica email con punteggio",
+      "pass": true,
+      "detail": "{\"email\":\"postmaster@gmail.com\",\"valid\":true,\"score\":70,\"status\":\"risky\",\"checks\":{\"syntax\":true,\"mx\":true,\"spf\":true,\"dmarc\":true,\"disposable\":false,\"role\":true,\"free\":true,\"catch"
+    },
+    {
+      "day": 7,
+      "what": "il cron review-requests accetta il proprio segreto",
+      "pass": true,
+      "detail": "HTTP 404"
+    },
+    {
+      "day": 30,
+      "what": "il cron cleanup accetta il proprio segreto",
+      "pass": true,
+      "detail": "HTTP 404"
+    },
+    {
+      "day": 7,
+      "what": "il cron rifiuta un segreto sbagliato",
+      "pass": true,
+      "detail": "HTTP 404"
+    },
+    {
+      "day": 30,
+      "what": "nessun errore di console nel viaggio autenticato",
+      "pass": true,
+      "detail": ""
+    }
+  ]
+}

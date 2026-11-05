@@ -1,0 +1,62 @@
+{
+  "slug": "eg",
+  "domain": "emailguard.dev",
+  "at": "2026-11-04T19:55:15.076Z",
+  "results": [
+    {
+      "what": "verify risponde 200",
+      "pass": true,
+      "detail": "HTTP 200"
+    },
+    {
+      "what": "il verdetto MX coincide col DNS reale",
+      "pass": true,
+      "detail": "prodotto mx=true, DNS 5 record"
+    },
+    {
+      "what": "il verdetto SPF coincide col DNS reale",
+      "pass": true,
+      "detail": "prodotto spf=true, DNS spf=true"
+    },
+    {
+      "what": "il verdetto DMARC coincide col DNS reale",
+      "pass": true,
+      "detail": "prodotto dmarc=true, DNS dmarc=true"
+    },
+    {
+      "what": "i record MX elencati sono quelli veri",
+      "pass": true,
+      "detail": "prodotto 5, DNS 5"
+    },
+    {
+      "what": "un indirizzo di ruolo e segnalato come tale",
+      "pass": true,
+      "detail": "role_address,free_provider"
+    },
+    {
+      "what": "una sintassi rotta viene rifiutata o segnata non valida",
+      "pass": true,
+      "detail": "HTTP 400 valid=undefined"
+    },
+    {
+      "what": "un dominio senza MX: il verdetto segue il DNS",
+      "pass": true,
+      "detail": "prodotto mx=true, DNS 2 record"
+    },
+    {
+      "what": "un lotto oltre il limite di 100 viene rifiutato",
+      "pass": true,
+      "detail": "HTTP 400"
+    },
+    {
+      "what": "i 3 cron dichiarati accettano il proprio segreto",
+      "pass": true,
+      "detail": "monitors=200 weekly-summary=200 portfolio-watch=200"
+    },
+    {
+      "what": "i cron rifiutano un segreto sbagliato",
+      "pass": true,
+      "detail": "401/403 su tutti"
+    }
+  ]
+}
