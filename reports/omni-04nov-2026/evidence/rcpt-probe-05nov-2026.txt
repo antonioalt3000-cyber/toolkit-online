@@ -1,0 +1,54 @@
+Sonda RCPT — 5 novembre 2026, fwd1.porkbun.com:25
+==================================================
+Metodo: EHLO toolkitonline.vip / MAIL FROM postmaster@toolkitonline.vip / RCPT TO <bersaglio>
+        / RSET / QUIT. **Nessun DATA: nessuna email e' stata inviata.**
+        Una sonda ravvicinata si auto-avvelena (greylisting Porkbun: 450 su tutto, anche su
+        indirizzi appena accettati) quindi i bersagli sono spaziati 11-12 s e ogni passata
+        porta un **controllo interno**: un local-part casuale, che DEVE essere rifiutato.
+        Senza quel controllo un 554 non distingue "l'alias non esiste" da "il dominio e' rotto".
+Fonte della regola: i domini non hanno catch-all. Inoltra solo cio' che ha una regola esplicita
+        (Porkbun, UI-only: l'API non gestisce gli inoltri).
+
+CONSEGNANO (250) — matrice completa, 30 su 30
+---------------------------------------------
+hello@      complipilot.dev fixmyweb.dev paymentrescue.dev parseflow.dev captureapi.dev
+            getcardforge.dev emailguard.dev headershield.dev gethooklab.dev seoscope.dev
+support@    (idem, 10/10)
+contact@    (idem, 10/10)
+
+RIMBALZANO (554 5.7.1 Relay access denied) — 18 indirizzi pubblicati
+--------------------------------------------------------------------
+privacy@complipilot.dev      privacy / dpa / ai-transparency + sezione "Data Protection Officer"
+legal@complipilot.dev        LEGAL_ENTITY.legalEmail -> terms, pricing, **pagina rimborsi** (recesso UE)
+security@complipilot.dev     pagina /security  (mentre security.txt dichiarava support@: si contraddicevano)
+privacy@fixmyweb.dev         privacy ("To exercise these rights, contact us at ...") + dpa + ai-transparency
+legal@fixmyweb.dev           terms
+security@fixmyweb.dev        /security
+privacy@paymentrescue.dev    privacy + ai-transparency
+legal@paymentrescue.dev      terms
+dpa@paymentrescue.dev        dpa
+security@paymentrescue.dev   /security
+dmarc@paymentrescue.dev      docs/email-deliverability: valore rua= consigliato AL CLIENTE sul NOSTRO dominio
+privacy@parseflow.dev        privacy + ai-transparency
+legal@parseflow.dev          terms (+ dati demo del playground)
+dpo@parseflow.dev            dpa, etichettato "Data Protection Officer"
+security@parseflow.dev       /security
+privacy@captureapi.dev       privacy (x3, incl. "Data Protection Officer") + dpa + ai-transparency
+legal@captureapi.dev         terms
+sales@captureapi.dev         /about e /contact, "Enterprise Sales"
+security@captureapi.dev      /security **e** .well-known/security.txt
+
+noreply@paymentrescue.dev    554 — ma e' un'identita' di invio (From dei dunning), non un contatto.
+                             Resta aperto: nessun Reply-To in nessun send di f3.
+
+CONTROLLI INTERNI (devono rimbalzare, e rimbalzano)
+---------------------------------------------------
+zzqa-nonexistent-9x7@seoscope.dev     554
+zzqa-control-4k2@complipilot.dev      554
+zzqa-ctl-7m1@parseflow.dev            554
+zzqa-ctl-3h8@getcardforge.dev         554
+
+MX (tutti e 10, via dns.google)
+-------------------------------
+10 fwd1.porkbun.com / 20 fwd2.porkbun.com su 10/10 — la ricezione era configurata,
+mancavano gli alias.

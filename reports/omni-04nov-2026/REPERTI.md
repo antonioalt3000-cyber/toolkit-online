@@ -281,3 +281,64 @@ not configured`**. Sulle preview quelle variabili non ci sono, quindi **nessuna*
 - `export own data` conteneva l'email: falso per il motivo di R10.
   Sono **6 rossi** che restano aperti come lavoro di collaudo, non come difetti accertati. Li scrivo
   invece di arrotondarli a verde.
+
+---
+
+# Seguito del 5 novembre 2026 — la voce di arretrato riscritta, e cosa c'era sotto
+
+## R11 — 🔴 Diciotto indirizzi pubblicati rimbalzano, fra cui l'unico canale GDPR di due prodotti
+
+- **Passo**: la voce di arretrato chiedeva di esporre la cancellazione in dashboard. Prima di
+  costruire un pulsante che manda a un indirizzo, ho verificato che quell'indirizzo riceva.
+  Sonda RCPT su `fwd1.porkbun.com`, senza DATA, spaziata, con controllo interno in ogni passata
+  (`evidence/rcpt-probe-05nov-2026.txt`, script `rcpt-probe.py`).
+- **Atteso**: gli indirizzi stampati sulle pagine legali accettano posta.
+- **Osservato**: **18 rimbalzano con `554 5.7.1 Relay access denied`**, e i quattro controlli
+  casuali rimbalzano identici — quindi la sonda discrimina. Fra i 18:
+  - `privacy@fixmyweb.dev` e `privacy@captureapi.dev`: l'**unico** canale che la privacy policy
+    indica per esercitare i diritti GDPR (_«To exercise these rights, contact us at …»_).
+  - `legal@complipilot.dev`: oltre a terms e pricing, è l'indirizzo della **pagina rimborsi**.
+    Un cliente che esercita il recesso UE a 14 giorni riceveva un bounce.
+  - `security@` su **5/5**: il contatto per le segnalazioni di vulnerabilità. Su CaptureAPI era
+    anche quello dichiarato in `.well-known/security.txt`, cioè quello che legge un tool
+    automatico di disclosure.
+  - `dpo@parseflow.dev`, etichettato _«Data Protection Officer»_ in un DPA firmabile.
+  - `sales@captureapi.dev` su `/about` e `/contact`: una richiesta enterprise rimbalzava.
+- **Causa alla radice**: questi domini **non hanno catch-all**. Il registrar inoltra solo gli alias
+  con una regola esplicita, e le regole esistenti sono `hello@`, `support@`, `contact@` — misurate,
+  non assunte: **30 su 30** sui dieci domini. Ogni altro local-part scritto in una pagina è un
+  buco nero. Gli MX c'erano su 10/10: non era la ricezione, erano gli alias.
+- **Fix**: ogni indirizzo pubblicato ora è uno dei tre consegnabili, sullo stesso dominio. Su
+  CompliPilot/FixMyWeb/ParseFlow la `/security` ora coincide con il `security.txt` che già diceva
+  `support@` (si contraddicevano). Due etichette «Data Protection Officer» sono diventate
+  «Data protection contact»: nessun DPO è nominato, e il corpo del testo lo diceva già mentre il
+  titolo no.
+- **Anti-regressione**: `__tests__/published-contacts.test.ts` su 10/10. Non è un test di
+  ortografia: un local-part fuori lista è una pagina che perde posta in silenzio. Ha trovato da
+  sé i 5 `security@` e il `sales@` che la mia lettura delle pagine legali aveva mancato.
+  Provato rosso reintroducendo `privacy@fixmyweb.dev` e verde dopo averlo ritirato.
+
+## R12 — La voce «UI di cancellazione» riscritta: la richiesta onesta, non l'erasure finta
+
+- **Decisione**: **pulsante-richiesta**, non erasure vera. Le ragioni sono misurate, non di comodo:
+  1. **Nessuna delle 10 privacy policy promette self-service.** Le cinque F-series dicono
+     _«request deletion»_; le cinque round-2 dicono _«by emailing …»_. Non c'era una promessa da
+     raggiungere.
+  2. **Un'erasure vera non potrebbe fare ciò che l'etichetta dice.** Le fatture vanno conservate
+     per legge, e il record di riscatto di una licenza lifetime è la prova dell'entitlement che il
+     marketplace verifica: cancellarlo distruggerebbe il diritto del cliente e la tracciabilità del
+     partner. Un pulsante «cancella tutto adesso» mentirebbe o romperebbe qualcosa.
+  3. `/api/user/delete` **non esiste sui 5 round-2** (404 in produzione, verificato) — la voce
+     diceva «10 su 10». E dove esiste è un modulo DSAR (R10), con **zero** copertura di test.
+  4. Una **decisione già registrata** (2 ago, `dsar-routes-were-a-facade`) aveva scelto la via
+     email per i round-2 _proprio_ per non produrre altre facciate. Non la ribalto.
+- **Costruito**: una carta «Your data» in fondo a **10/10** dashboard: una frase che dice che è una
+  richiesta gestita da una persona entro 30 giorni, due `mailto:` precompilati (oggetto, e sui 5
+  round-2 anche l'email dell'account, che lì la dashboard conosce), l'indirizzo in chiaro per chi
+  non ha un client di posta, e una riga su cosa la cancellazione **conserva** e perché.
+- **Perché il `mailto:` e non il POST all'endpoint**: i cinque F-series hanno cinque modelli di auth
+  diversi (cookie su f2/f3, `x-api-key` su f1/f4/b7), **ParseFlow e CaptureAPI non conoscono
+  l'email dell'account** nella dashboard, e su CompliPilot l'`apiKey` esiste solo per chi è entrato
+  dal magic link: un pulsante POST avrebbe dato 401 a un'intera classe di utenti. L'endpoint resta
+  come canale API, documentato dal proprio GET. Il `mailto:` è l'unico canale che funziona per
+  tutti e che la policy già dichiara — ora verso una casella che risponde.

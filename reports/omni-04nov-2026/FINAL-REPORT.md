@@ -15,21 +15,26 @@
 `gh pr list --state merged` filtrato sull'inizio del round). Nessuna lasciata a metà. Le PR
 Dependabot aperte non sono state toccate. Stato finale misurato in produzione su tutti e 10:
 
-|                                                 | prima del round                    | dopo                          |
-| ----------------------------------------------- | ---------------------------------- | ----------------------------- |
-| `/<rotta esistente>\`                           | **500** su 62 pagine (9 prodotti)  | **404/308** su 10/10          |
-| `og:image` mancante                             | 8 pagine (hsh 5, seo 2, eg 1)      | **0**                         |
-| `'unsafe-inline'` in `script-src`               | 5 prodotti su 10                   | **0 su 10**                   |
-| nonce CSP per richiesta                         | 5 su 10                            | **10 su 10**                  |
-| `npm audit`: critical + high                    | 2 + 1 su 10/10                     | **0**                         |
-| `coupon-stats`: tasso d'uso riferito al partner | 19-21%                             | **4-6%** (il vero)            |
-| indirizzo fornitore estratto (ParseFlow)        | solo formato USA, o spazzatura     | 11 lingue, riga per riga      |
-| calcolatore ROI (PaymentRescue)                 | mostrava un tasso e usava un altro | campo e calcolo non divergono |
-| backup del pool coupon FixMyWeb                 | **mai eseguito**                   | creato e verificato           |
-| `/api/health`                                   | ok 10/10                           | ok 10/10                      |
+|                                                 | prima del round                     | dopo                          |
+| ----------------------------------------------- | ----------------------------------- | ----------------------------- |
+| `/<rotta esistente>\`                           | **500** su 62 pagine (9 prodotti)   | **404/308** su 10/10          |
+| `og:image` mancante                             | 8 pagine (hsh 5, seo 2, eg 1)       | **0**                         |
+| `'unsafe-inline'` in `script-src`               | 5 prodotti su 10                    | **0 su 10**                   |
+| nonce CSP per richiesta                         | 5 su 10                             | **10 su 10**                  |
+| `npm audit`: critical + high                    | 2 + 1 su 10/10                      | **0**                         |
+| `coupon-stats`: tasso d'uso riferito al partner | 19-21%                              | **4-6%** (il vero)            |
+| indirizzo fornitore estratto (ParseFlow)        | solo formato USA, o spazzatura      | 11 lingue, riga per riga      |
+| calcolatore ROI (PaymentRescue)                 | mostrava un tasso e usava un altro  | campo e calcolo non divergono |
+| backup del pool coupon FixMyWeb                 | **mai eseguito**                    | creato e verificato           |
+| `/api/health`                                   | ok 10/10                            | ok 10/10                      |
+| indirizzi pubblicati che rimbalzano             | **18** (25 pagine live, 5 prodotti) | **0 su 10**                   |
+| cancellazione/export raggiungibili da dashboard | 0 su 10                             | **10 su 10** (come richiesta) |
 
-**10 reperti**, di cui 6 corretti e verificati in produzione, 1 mitigato a metà e 1 lasciato al
-fondatore con la ragione scritta. **9 falsi rossi del collaudo**, tutti diagnosticati e dichiarati
+**12 reperti**, di cui 7 corretti e verificati in produzione, 1 mitigato a metà e 1 lasciato al
+fondatore con la ragione scritta. Il dodicesimo, R11, è arrivato il 5 novembre dalla voce di
+arretrato che sembrava la più piccola delle tre: **18 indirizzi stampati sulle pagine legali non
+esistevano**, fra cui l'unico canale GDPR di due prodotti e l'indirizzo della pagina rimborsi di un
+terzo. **9 falsi rossi del collaudo**, tutti diagnosticati e dichiarati
 in §6: era la parte più probabile di sbagliare, ed è quella su cui ho speso più verifiche.
 
 ---
@@ -133,14 +138,35 @@ il prodotto fa `new Stripe(...)` / `new Redis(...)`. Una arrow function non è u
 3 lo tollerava, vitest 5 no — **e vitest 5 ha ragione**, perché quei mock non rispecchiavano come il
 prodotto costruisce i suoi client. Corretti, e i conteggi sono tornati identici al baseline.
 
-### UI di cancellazione self-service — NON fatta
+### UI di cancellazione self-service — fatta il 5 novembre, e la voce era sbagliata in due punti
 
-È l'unica delle tre voci che resta aperta, e lo dico senza girarci intorno. `/api/user/delete` e
-`/api/user/export` esistono su 10/10 ma nessuna dashboard li espone. È una **feature nuova** su
-un'azione irreversibile, su 10 prodotti, e serve un flusso di conferma progettato (digitare
-l'email, avviso di definitività, export offerto prima). Non l'ho iniziata perché farla male su
-dieci dashboard è peggio che non farla: va progettata una volta e replicata, con il passo
-«cancellazione» del viaggio cliente rieseguito su ciascun prodotto dopo.
+Prima di costruirla ho verificato le due premesse su cui poggiava. Nessuna delle due regge.
+
+**Premessa 1, falsa**: «`/api/user/delete` e `/api/user/export` esistono su 10/10». Esistono sui
+**5 F-series**; sui 5 round-2 rispondono **404 in produzione** (misurato). Quella frase è mia, l'ho
+scritta il 4 novembre e la correggo qui.
+
+**Premessa 2, falsa**: «la privacy policy descrive la cancellazione come azione dell'utente». Ho
+riletto tutte e 10: le F-series dicono _«request deletion»_, le round-2 dicono _«by emailing …»_.
+Nessuna promette un interruttore. Non c'era una promessa da raggiungere.
+
+**Decisione: la richiesta onesta, non l'erasure vera.** Non per risparmiare lavoro — perché
+l'erasure vera non potrebbe fare ciò che la sua etichetta dice. Le fatture vanno conservate per
+legge; il record di riscatto di una licenza lifetime è la prova dell'entitlement che il marketplace
+verifica, e cancellarlo distruggerebbe il diritto del cliente insieme alla tracciabilità del
+partner. Un pulsante «cancella tutto adesso» mentirebbe. In più sarebbe un percorso distruttivo
+nuovo su dati live, su route con **zero** copertura di test, e una decisione già registrata il 2
+agosto aveva scelto la via email proprio per non moltiplicare le facciate.
+
+**Costruito**: una carta «Your data» in fondo a **10/10** dashboard — la richiesta dichiarata per
+quello che è (una persona, entro 30 giorni), due `mailto:` precompilati, l'indirizzo in chiaro per
+chi non ha un client di posta, e una riga su cosa la cancellazione conserva e perché. Sul `mailto:`
+invece del POST all'endpoint: cinque modelli di auth diversi, e su ParseFlow e CaptureAPI la
+dashboard **non conosce l'email dell'account**, mentre su CompliPilot l'`apiKey` esiste solo per chi
+è entrato dal magic link — un pulsante POST avrebbe dato 401 a un'intera classe di utenti.
+
+**E sotto c'era R11.** Verificare che l'indirizzo del pulsante ricevesse posta ha scoperto che 18
+indirizzi pubblicati non esistono. Era la voce che sembrava cosmetica.
 
 ---
 
@@ -156,16 +182,25 @@ dieci dashboard è peggio che non farla: va progettata una volta e replicata, co
 3. 🔴 **Credenziali Upstash alle preview** (reperto R6). Senza, metà della superficie del portfolio
    resta collaudabile **solo dopo** il merge.
 4. **Ticket Vercel sul soft-404 pagine** — riproduzione pronta dal 31 ott, serve l'account.
-5. **UI di cancellazione self-service** — decidere se farla, vedi §4.
-6. **~30 chiavi Redis di collaudo** in produzione, tutte registrate in `REDIS-WRITES.jsonl`: per
+5. **Gli alias di posta, se li vuoi davvero** (reperto R11). Ho risolto puntando ogni pagina su
+   `hello@`/`support@`/`contact@`, i soli tre con una regola di inoltro. L'alternativa è crearne
+   altri (`privacy@`, `security@`, `legal@`, `sales@`): va fatta **dalla UI Porkbun**, l'API non
+   gestisce gli inoltri. Se li crei, aggiungi il local-part a `DELIVERABLE` in
+   `__tests__/published-contacts.test.ts` nello stesso commit — e provalo con `rcpt-probe.py`
+   prima di stamparlo su una pagina.
+6. **`noreply@paymentrescue.dev` non ha un Reply-To** (misurato: nessun `replyTo` in nessun send di
+   f3, e l'indirizzo rimbalza). Le email di dunning arrivano al _cliente del cliente_, che per
+   istinto risponde. A chi deve arrivare quella risposta: a noi (`support@paymentrescue.dev`) o al
+   commerciante? È una decisione di prodotto, non l'ho presa io.
+7. **~30 chiavi Redis di collaudo** in produzione, tutte registrate in `REDIS-WRITES.jsonl`: per
    cancellarle serve un token Upstash scrivibile, che `vercel env pull` non fornisce.
-7. **PostHog è già bloccato oggi su F2 e B7**: `PostHogInit` punta a `eu.i.posthog.com`, host che
+8. **PostHog è già bloccato oggi su F2 e B7**: `PostHogInit` punta a `eu.i.posthog.com`, host che
    non è in `connect-src` né prima né dopo questo round. Pre-esistente, segnalato e non toccato:
    allargare `connect-src` è una decisione separata.
 
 ---
 
-## 6. Autocritica — 9 falsi rossi, tutti miei
+## 6. Autocritica — 9 falsi rossi e una premessa falsa, tutti miei
 
 Un collaudo che non sbaglia mai in proprio favore va guardato con sospetto. Questi sono i rossi che
 ho prodotto io e che **non** erano difetti del prodotto. Li elenco perché sono la parte di questo
@@ -191,6 +226,15 @@ report che vale di più la prossima volta.
 9. **CSP, «7 script senza nonce»** — 🔑 il browser **maschera il valore dell'attributo `nonce`** nel
    DOM: si legge solo dalla proprietà IDL `.nonce`, mai da `getAttribute`, per impedirne
    l'esfiltrazione via selettori CSS. La presenza si verifica con `hasAttribute`.
+
+10. **La premessa dell'arretrato era mia, e falsa in due punti** (5 nov). Avevo scritto che
+    `/api/user/delete` e `/api/user/export` «esistono su 10/10»: esistono su 5, e sui round-2
+    rispondono 404. E che «la privacy policy descrive la cancellazione come azione dell'utente»:
+    nessuna delle 10 lo fa. Entrambe le frasi le avevo scritte **senza aprire le dieci policy né
+    interrogare i dieci domini**, e sono rimaste in un report per un giorno. 🔑 Una voce di
+    arretrato è una mia affermazione come un'altra: va verificata prima di costruirci sopra, non
+    quando si costruisce. Qui la verifica ha cambiato il lavoro — dal pulsante alla posta che non
+    arrivava.
 
 E tre errori di procedura, non di misura:
 
@@ -243,6 +287,12 @@ node reports/omni-04nov-2026/journey-core.cjs <slug>
 node reports/omni-04nov-2026/journey-deep.cjs <slug>
 # CSP nel browser reale (console, idratazione, nonce) contro un build di produzione
 node reports/omni-04nov-2026/csp-browser-check.cjs http://localhost:<porta> / /pricing /redeem
+# indirizzi pubblicati: quali caselle esistono davvero (una passata, spaziata, con controllo)
+python -I reports/omni-04nov-2026/rcpt-probe.py
+
+# e poi gli stessi indirizzi letti nel DOM servito da Vercel, non nel sorgente
+node reports/omni-04nov-2026/contacts-browser-check.cjs
+
 # ledger
 node reports/omni-04nov-2026/progress.cjs table
 ```
