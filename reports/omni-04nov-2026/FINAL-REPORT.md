@@ -33,7 +33,7 @@ Dependabot aperte non sono state toccate. Stato finale misurato in produzione su
 | cancellazione/export raggiungibili da dashboard | 0 su 10                             | **10 su 10** (come richiesta)  |
 | monitor uptime: un timeout = tutto «down»       | 5 oscillazioni, 5 allerte false     | un retry prima di dichiarare   |
 
-**17 reperti**, di cui 10 corretti e verificati in produzione, 1 mitigato a metà e 1 lasciato al
+**18 reperti**, di cui 12 corretti e verificati in produzione, 1 mitigato a metà e 1 lasciato al
 fondatore con la ragione scritta. Il dodicesimo, R11, è arrivato il 5 novembre dalla voce di
 arretrato che sembrava la più piccola delle tre: **18 indirizzi stampati sulle pagine legali non
 esistevano**, fra cui l'unico canale GDPR di due prodotti e l'indirizzo della pagina rimborsi di un
@@ -212,22 +212,21 @@ confermato dal campo `commit` di `/api/health`, non da `state=READY`):
    valutato sul return-path di Brevo (`gw.d.sender-sib.com`): **il nostro record SPF non viene mai
    consultato** per queste email. Aggiungere l'include non cambierebbe nulla di misurabile. Niente
    da fare. (Vedi R17: avevo dedotto l'impatto dal DNS invece di leggerlo da un messaggio arrivato.)
-7. 🔴 **PaymentRescue non può inviare un'email di dunning — risposto il 6 nov, serve una tua
-   decisione.** La prova che hai autorizzato ha dato `403 The paymentrescue.dev domain is not
-verified`: **nessuna email inviata**, il percorso che _è_ il prodotto non ha mai potuto
-   funzionare in produzione. Impatto misurato: **zero pagamenti falliti** registrati finora (e il
-   digest del prodotto lo diceva già: `0 that got a dunning email · idle`), quindi il difetto è
-   **latente**, non ha toccato nessuno — si manifesterebbe alla prima carta rifiutata di un cliente
-   di un commerciante. Due rimedi, e la scelta è di prodotto:
-   - **verificare `paymentrescue.dev` in Resend** — preserva l'architettura (Resend per il dunning,
-     Brevo per il resto), ma i record da aggiungere si vedono solo dalla dashboard Resend: la chiave
-     in produzione è _send-only_ e non può leggerli, quindi questo passo è tuo;
-   - **spostare il dunning sul canale Brevo già presente nel repo** — `hello@paymentrescue.dev`,
-     stessa parità di resilienza, già usato per signup/redeem/digest. **Provato: HTTP 201, arrivato
-     in INBOX, `dkim=pass` allineato, `dmarc=pass`.** È tre call-site e l'aggiornamento di due test;
-     risolve anche la voce 8, perché `hello@` riceve posta mentre `noreply@` rimbalza. Lo faccio io
-     in una PR appena mi dici quale strada.
-8. **`noreply@paymentrescue.dev` non ha un Reply-To** (nessun `replyTo` in nessun send di f3, e
+7. ~~🔴 **PaymentRescue non può inviare un'email di dunning**~~ — **chiuso il 6 nov.** La prova che
+   hai autorizzato ha dato `403 The paymentrescue.dev domain is not verified`: nessuna email
+   inviata, e il percorso che _è_ il prodotto non aveva mai potuto funzionare. Impatto misurato
+   **zero** (nessun pagamento fallito in produzione; il digest lo diceva già: `0 that got a dunning
+email · idle`), quindi latente. Hai scelto il rimedio Brevo:
+   [churnguard#87](https://github.com/antonioalt3000-cyber/churnguard/pull/87) mergiata e **live**
+   su `1cafcb9`. Verificato in produzione: con segreto sbagliato il cron risponde **401**, col
+   segreto vero **200** `{"scanned":0,"emailsSent":0,"errorCount":0}`, zero errori runtime nelle due
+   ore che coprono deploy e chiamata. Prima di invocarlo ho controllato l'indice che il cron legge
+   (`pending_failed_payments`) e le chiavi dei pagamenti: entrambi vuoti — ora il percorso invia
+   davvero, quindi senza quel cancello la chiamata sarebbe stata un invio non autorizzato a terzi.
+   Resta non provato, e scritto: nessuna email di dunning reale è consegnabile finché un pagamento
+   non fallisce davvero. Dettagli in R18, evidenza in
+   `evidence/dunning-cron-verified-06nov-2026.txt`.
+8. ~~**`noreply@paymentrescue.dev` non ha un Reply-To**~~ — **risolto di conseguenza il 6 nov**: il dunning parte da `hello@paymentrescue.dev`, che riceve posta, col nome del commerciante come display name. Una risposta del pagatore arriva a una persona invece del 554. Testo originale: (nessun `replyTo` in nessun send di f3, e
    l'indirizzo rimbalza). Le email di dunning arrivano al _cliente del cliente_, che per istinto
    risponde: a noi (`support@paymentrescue.dev`) o al commerciante? Decisione di prodotto.
 9. **[documint#79](https://github.com/antonioalt3000-cyber/documint/pull/79) è aperta da 7 giorni**,
