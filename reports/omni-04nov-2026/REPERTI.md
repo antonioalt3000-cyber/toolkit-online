@@ -463,3 +463,43 @@ dmarc=pass (p=NONE sp=NONE dis=NONE) header.from=paymentrescue.dev
 - 🔑 Avevo dedotto l'impatto dalla configurazione DNS invece di leggerlo da un messaggio arrivato.
   **Una riga di `Authentication-Results` vale più di tre interrogazioni DNS**: dice cosa il
   destinatario ha effettivamente verificato, non cosa avrebbe potuto.
+
+## R18 — Spostare il dunning su Brevo: due cose che avrebbero reso il fix una facciata
+
+Il fondatore ha scelto il rimedio (Brevo). Durante l'implementazione sono emersi due dettagli che,
+ignorati, avrebbero prodotto un fix che _sembra_ fatto.
+
+- 🔴 **Le tre funzioni facevano early-return su `RESEND_API_KEY`.**
+  `if (!payment.customerEmail || !process.env.RESEND_API_KEY) return false;` — cioè la guardia
+  controllava la chiave di un provider che rifiuta questo dominio. Lasciata così, il percorso
+  avrebbe continuato a vivere su una chiave inutile, e **si sarebbe fermato in silenzio il giorno
+  in cui qualcuno rimuove quella chiave ormai inutilizzata**. Ora guardano `BREVO_API_KEY`, e il
+  guardiano lo asserisce su tutti e tre i file.
+- 🔴 **`lib/resend.ts` conteneva anche i template**, non solo il provider: `getDunningSubject`,
+  `getDunningHtml`, `DunningEmailData`. Cancellare il file senza spostarli avrebbe rotto tre route;
+  lasciarlo intatto avrebbe lasciato dormiente un provider che risponde 403. I template sono andati
+  in `lib/dunning-templates.ts` — un nome che dice cosa c'è dentro — e il modulo del provider è
+  stato **rimosso**, non deprecato.
+- **Due mock che non mockavano niente**: `app/api/digest/route.test.ts` e
+  `app/api/insights/route.test.ts` facevano `vi.mock("./resend", …)` con un path relativo che dalle
+  loro cartelle non risolve a nulla. Erano **no-op**: quei test credevano di avere isolato il
+  canale email e non lo avevano isolato. Rimossi.
+- 🔴 **Collisione di nome che il mio primo tentativo aveva introdotto.** Entrambe le route hanno
+  gia' una `async function sendDunningEmail(userId, payment, step)` — l'orchestratore che decide
+  _se_ inviare. La mia import con lo stesso nome la ombreggiava, e la chiamata risolveva alla
+  funzione sbagliata con l'arieta' sbagliata. **`tsc --noEmit` l'ha preso** (`TS2440` +
+  `TS2554`), il build era rosso e `BUILD_ID` mancante. Risolto chiamando la funzione di libreria
+  `sendDunningMessage`: una invia _un messaggio_, l'altra decide. 🔑 Il gate non e' burocrazia:
+  qui ha intercettato un bug mio prima della PR, su un percorso che non ho modo di esercitare in
+  produzione.
+- **Un test dimenticato dal mio grep**: `lib/dunning-email-escape.test.ts` importava i template da
+  `./resend` ma non menzionava `sendEmailWithResilience`, quindi non era nella lista dei file da
+  toccare. L'ha trovato `tsc` (`TS2307`), non io. 🔑 Cercare i _chiamanti di una funzione_ non
+  trova i _consumatori di un modulo_: per spostare un file si cerca il percorso, non il simbolo.
+- **E un errore mio, ripetuto a quattro giorni di distanza.** Il primo guardiano asseriva
+  `not.toMatch(/RESEND_API_KEY/)` sul testo del file — e falliva sul **commento** che spiega il fix
+  nominando la vecchia variabile. È _identica_ alla trappola del guardiano CSP di CompliPilot del
+  4 novembre («checked on the keys, not on the text: the list is preceded by a comment that names
+  the directive precisely to say it is NOT there any more»). Corretto asserendo sulla **lettura**
+  (`process.env.RESEND_API_KEY`), non sulla parola. 🔑 Una lezione scritta in un report non è una
+  lezione applicata: questo guardiano andava scritto guardando quello di quattro giorni prima.
