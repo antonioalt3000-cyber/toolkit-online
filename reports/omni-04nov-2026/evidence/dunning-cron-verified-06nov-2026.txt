@@ -1,0 +1,35 @@
+Verifica in produzione del percorso dunning dopo il merge — 6 novembre 2026
+===========================================================================
+PR churnguard#87 mergiata (squash) alle 00:48:08Z -> master 1cafcb9.
+Deploy: produzione serve 1cafcb9 dopo ~60s (letto dal campo `commit` di
+/api/health, non da state=READY). health=ok, redis 59 ms.
+
+CANCELLO DI SICUREZZA (ora il percorso invia davvero: un pagamento fallito
+presente verrebbe emailato a un cliente finale reale)
+  SCARD pending_failed_payments = 0     <- l'indice che il cron legge
+  chiavi failed_payment:*        = 0
+  -> invocare non manda nulla a nessuno. Senza questo controllo l'invocazione
+     sarebbe stata un invio a terzi non autorizzato.
+
+CONTROLLO CHE RENDE SIGNIFICATIVO IL 200
+  GET /api/cron/dunning  con "Authorization: Bearer segreto-sbagliato"  -> HTTP 401
+  -> il 200 che segue non viene da un endpoint aperto.
+
+INVOCAZIONE COL SEGRETO VERO
+  GET /api/cron/dunning  con "Authorization: Bearer <CRON_SECRET di produzione>"
+  HTTP 200
+  {"success":true,"scanned":0,"processedCount":0,"emailsSent":0,
+   "abandonedCount":0,"errorCount":0,"timestamp":"2026-11-06T00:49:42.302Z"}
+
+  -> il nuovo grafo di import si carica in produzione (prima il modulo
+     lib/resend.ts non esiste piu', i template stanno in lib/dunning-templates.ts
+     e il sender e' lib/email-send.ts), il cron gira, errorCount=0.
+
+RUNTIME ERRORS (ultime 2 ore, dopo il deploy e l'invocazione)
+  nessuno.
+
+COSA QUESTO NON PROVA
+  Che un'email di dunning reale venga consegnata a un pagatore: per quello serve
+  un pagamento fallito, e in produzione non ne esiste nessuno. Cio' che e' provato
+  e' che il canale accetta e consegna (HTTP 201 + arrivo in INBOX con dkim=pass
+  allineato, misurato prima del merge) e che il cron che lo usa gira senza errori.
