@@ -1,0 +1,45 @@
+Prova del percorso di dunning di PaymentRescue — 6 novembre 2026
+=================================================================
+Autorizzata dal fondatore. Entrambe le prove dirette al suo stesso indirizzo.
+Nessun destinatario terzo coinvolto.
+
+1) RESEND — chiave RESEND_API_KEY di PRODUZIONE (letta da Vercel, mai stampata)
+   POST https://api.resend.com/emails
+   from: PaymentRescue <noreply@paymentrescue.dev>
+   to:   antonio.alt3000@gmail.com
+
+   HTTP 403
+   {"message":"The paymentrescue.dev domain is not verified. Please, add and verify
+     your domain on https://resend.com/domains","name":"validation_error","statusCode":403}
+
+   -> NESSUNA EMAIL INVIATA. Il rifiuto precede l'invio.
+   -> Coerente col DNS: nessun record Resend sul dominio
+      (resend._domainkey assente, send.paymentrescue.dev assente,
+       e un selettore inventato NON risolve: nessun wildcard a falsare la misura).
+
+2) IMPATTO — SCAN in sola lettura su Upstash di produzione
+   failed_payment:*       0 chiavi
+   failed_payments:*      0 chiavi
+   invoice_owner:*        0 chiavi
+   dunning:step:sent:*    0 chiavi
+   pre:user:email:*      25 chiavi  (23 nostre, 2 reali)
+   -> il percorso non e' mai stato esercitato: difetto LATENTE, non storico.
+   -> corroborato dal digest del prodotto (5 nov, a support@paymentrescue.dev):
+      "Failed payments 0 ... that got a dunning email 0 ... Recovery rate: 0% (idle)"
+
+3) BREVO — il rimedio, provato
+   POST https://api.brevo.com/v3/smtp/email
+   sender: PaymentRescue <hello@paymentrescue.dev>
+   to:     antonio.alt3000@gmail.com
+
+   HTTP 201  {"messageId":"<202611060011.76273801576@smtp-relay.mailin.fr>"}
+   -> ARRIVATA in INBOX (CATEGORY_UPDATES, non spam) ~1s dopo, thread 1a1ae32ac63a3313
+
+   Authentication-Results (dagli header del messaggio ricevuto):
+     dkim=pass  header.i=@paymentrescue.dev  header.s=brevo1
+     spf=pass   smtp.mailfrom=bounces-457202026-...@gw.d.sender-sib.com
+     dmarc=pass (p=NONE sp=NONE dis=NONE) header.from=paymentrescue.dev
+
+   -> DKIM firmato col NOSTRO dominio e ALLINEATO: il DMARC passa per DKIM.
+   -> L'SPF e' valutato sul return-path di Brevo: il NOSTRO record SPF non viene
+      mai consultato. Ritira la voce "manca include:spf.brevo.com sui 5 F-series".

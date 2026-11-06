@@ -408,3 +408,58 @@ primo: …`), perché un sito che ha bisogno del retry a **ogni** giro è un rep
   «un 500 persistente resta down, il retry non lo nasconde». E un giro vero sui 17 immobili:
   **17/17 up, zero retry necessari**. `eslint` sui due file toccati: 0 errori; gli errori `tsc` del
   repo sono **2 prima e 2 dopo**, nessuno nei miei file (frammenti preesistenti in `scratchpad/`).
+
+## R16 — 🔴 PaymentRescue non può inviare un'email di dunning: Resend rifiuta il dominio
+
+- **Passo** (autorizzato dal fondatore): invio di prova dalla chiave Resend **di produzione**, da
+  `noreply@paymentrescue.dev` al suo stesso indirizzo.
+- **Osservato**: `HTTP 403` —
+  `{"message":"The paymentrescue.dev domain is not verified. Please, add and verify your domain on
+https://resend.com/domains","name":"validation_error","statusCode":403}`. **Nessuna email è
+  stata inviata**: il rifiuto arriva prima dell'invio.
+- **Significato**: il percorso di dunning — cioè _il prodotto_ — non ha mai potuto inviare in
+  produzione. Coerente col DNS: su `paymentrescue.dev` non esiste alcun record Resend (né
+  `resend._domainkey` né il sottodominio `send.`), e un selettore inventato non risolve, quindi la
+  misura non è falsata da un wildcard.
+- **Il codice NON falliva in silenzio**: il 403 è 4xx → `isNonRetriableResendError` interrompe
+  subito, `console.error` + `Sentry.captureException`, poi **throw**; il chiamante rilascia la
+  claim del passo di dunning e manda un secondo evento a Sentry. Fallisce ad alta voce — verso
+  Sentry, non verso una casella che qualcuno legge.
+- 🔑 **Impatto misurato, e qui la notizia è buona**: in produzione i pagamenti falliti registrati
+  sono **zero** (`failed_payment:*`, `failed_payments:*`, `invoice_owner:*`,
+  `dunning:step:sent:*` → 0 chiavi, SCAN in sola lettura). Dei 25 utenti, 23 sono nostri e **2
+  sono reali**, ma nessuno dei due ha mai prodotto un pagamento fallito. **Il difetto è latente:
+  certo, ma non ha ancora toccato nessuno.** Si manifesterebbe la prima volta che la carta di un
+  cliente di un commerciante viene rifiutata — cioè nel momento peggiore per scoprirlo.
+- **Corroborazione dal prodotto stesso**: il digest giornaliero del 5 nov (arrivato a
+  `support@paymentrescue.dev`) dice `Failed payments 0 · recovered 0 · that got a dunning email 0 ·
+Recovery rate: 0% (idle)`. I dati erano onesti e combaciano con la misura: nessun numero gonfiato.
+- **Il rimedio esiste già nel repo, e l'ho provato**: lo stesso progetto ha un canale **Brevo**
+  sullo stesso dominio (`hello@paymentrescue.dev`), con parità di resilienza (3 tentativi, timeout
+  8 s, backoff, 4xx permanenti) e già usato per signup, redeem e digest. Invio di prova:
+  **HTTP 201**, `messageId <202611060011.76273801576@smtp-relay.mailin.fr>`, **arrivato in INBOX**
+  (non spam) un secondo dopo.
+- 🔑 **Ironia da registrare**: il commento di quel file dice _«questo è il SaaS che vende
+  deliverability, un POST singolo era l'anello debole»_ — mentre il percorso che _è_ il prodotto
+  non poteva inviare affatto. La resilienza era stata messa sul canale secondario.
+
+## R17 — Correzione misurata: l'SPF mancante sui 5 F-series non è un difetto
+
+Avevo elencato al fondatore «aggiungere `include:spf.brevo.com` sui 5 F-series». Gli header del
+messaggio arrivato lo smentiscono:
+
+```
+dkim=pass header.i=@paymentrescue.dev header.s=brevo1
+spf=pass  smtp.mailfrom=bounces-457202026-...@gw.d.sender-sib.com
+dmarc=pass (p=NONE sp=NONE dis=NONE) header.from=paymentrescue.dev
+```
+
+- Il **DKIM è firmato col nostro dominio** (`header.i=@paymentrescue.dev`, selettore `brevo1`) ed è
+  **allineato** → il DMARC passa per via del DKIM.
+- L'**SPF è valutato sul return-path di Brevo** (`gw.d.sender-sib.com`), non sul nostro dominio:
+  il nostro record SPF **non viene mai consultato** per questi messaggi. Aggiungere l'include
+  sarebbe innocuo e **non cambierebbe nulla di misurabile** — e i 5 round-2, che ce l'hanno, non ne
+  traggono alcun beneficio.
+- 🔑 Avevo dedotto l'impatto dalla configurazione DNS invece di leggerlo da un messaggio arrivato.
+  **Una riga di `Authentication-Results` vale più di tre interrogazioni DNS**: dice cosa il
+  destinatario ha effettivamente verificato, non cosa avrebbe potuto.

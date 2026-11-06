@@ -33,7 +33,7 @@ Dependabot aperte non sono state toccate. Stato finale misurato in produzione su
 | cancellazione/export raggiungibili da dashboard | 0 su 10                             | **10 su 10** (come richiesta)  |
 | monitor uptime: un timeout = tutto «down»       | 5 oscillazioni, 5 allerte false     | un retry prima di dichiarare   |
 
-**15 reperti**, di cui 10 corretti e verificati in produzione, 1 mitigato a metà e 1 lasciato al
+**17 reperti**, di cui 10 corretti e verificati in produzione, 1 mitigato a metà e 1 lasciato al
 fondatore con la ragione scritta. Il dodicesimo, R11, è arrivato il 5 novembre dalla voce di
 arretrato che sembrava la più piccola delle tre: **18 indirizzi stampati sulle pagine legali non
 esistevano**, fra cui l'unico canale GDPR di due prodotti e l'indirizzo della pagina rimborsi di un
@@ -206,24 +206,27 @@ confermato dal campo `commit` di `/api/health`, non da `state=READY`):
    gestisce gli inoltri. Se li crei, aggiungi il local-part a `DELIVERABLE` in
    `__tests__/published-contacts.test.ts` nello stesso commit — e provalo con `rcpt-probe.py`
    prima di stamparlo su una pagina.
-6. **SPF: i 5 F-series non hanno `include:spf.brevo.com`** (i 5 round-2 sì). Da mettere in
-   proporzione, perché la memoria la registrava come più grave di quanto sia: **il DKIM c'è e è
-   allineato su 10/10** (`brevo1`/`brevo2`, chiavi RSA valide), quindi il DMARC passa e la posta è
-   autenticata. Manca un segnale secondario, non l'autenticazione. La correzione è **un** record
-   TXT per dominio — e va fatta modificando l'SPF esistente, mai aggiungendone un secondo (due
-   record SPF sono un errore secco che rompe tutta la posta in uscita). Non l'ho toccata io: è un
-   record DNS vivo su cinque domini da cui parte la posta ai clienti.
-7. 🔴 **PaymentRescue e Resend: la domanda aperta più importante.** Il percorso di dunning — il
-   prodotto stesso — invia via **Resend**, non Brevo (`RESEND_API_KEY`, presente in produzione:
-   verificato). Ma su `paymentrescue.dev` **non esiste nessun record Resend**: né
-   `resend._domainkey` né il sottodominio `send.`, e un selettore inventato non risolve (nessun
-   wildcard a falsare la misura). Se il dominio non è verificato in Resend, un invio da
-   `noreply@paymentrescue.dev` viene **rifiutato dall'API**, e nei log runtime non c'è traccia né
-   di errori Resend né di invii: in 7 giorni zero (ma potrebbe semplicemente non esserci stato
-   alcun pagamento fallito da recuperare). La chiave in produzione è _send-only_, quindi non posso
-   interrogare `GET /domains`. **Si chiude in dieci secondi con un invio di prova al tuo stesso
-   indirizzo** da quella chiave: se il dominio non è verificato Resend risponde con un errore e non
-   manda nulla. Non l'ho fatto perché inviare email non è nel mio perimetro in questo round.
+6. ~~**SPF: i 5 F-series non hanno `include:spf.brevo.com`**~~ — **ritirata il 6 nov, misurata e
+   infondata.** Gli `Authentication-Results` di un messaggio realmente arrivato dicono
+   `dkim=pass header.i=@paymentrescue.dev header.s=brevo1` e `dmarc=pass`, mentre lo `spf=pass` è
+   valutato sul return-path di Brevo (`gw.d.sender-sib.com`): **il nostro record SPF non viene mai
+   consultato** per queste email. Aggiungere l'include non cambierebbe nulla di misurabile. Niente
+   da fare. (Vedi R17: avevo dedotto l'impatto dal DNS invece di leggerlo da un messaggio arrivato.)
+7. 🔴 **PaymentRescue non può inviare un'email di dunning — risposto il 6 nov, serve una tua
+   decisione.** La prova che hai autorizzato ha dato `403 The paymentrescue.dev domain is not
+verified`: **nessuna email inviata**, il percorso che _è_ il prodotto non ha mai potuto
+   funzionare in produzione. Impatto misurato: **zero pagamenti falliti** registrati finora (e il
+   digest del prodotto lo diceva già: `0 that got a dunning email · idle`), quindi il difetto è
+   **latente**, non ha toccato nessuno — si manifesterebbe alla prima carta rifiutata di un cliente
+   di un commerciante. Due rimedi, e la scelta è di prodotto:
+   - **verificare `paymentrescue.dev` in Resend** — preserva l'architettura (Resend per il dunning,
+     Brevo per il resto), ma i record da aggiungere si vedono solo dalla dashboard Resend: la chiave
+     in produzione è _send-only_ e non può leggerli, quindi questo passo è tuo;
+   - **spostare il dunning sul canale Brevo già presente nel repo** — `hello@paymentrescue.dev`,
+     stessa parità di resilienza, già usato per signup/redeem/digest. **Provato: HTTP 201, arrivato
+     in INBOX, `dkim=pass` allineato, `dmarc=pass`.** È tre call-site e l'aggiornamento di due test;
+     risolve anche la voce 8, perché `hello@` riceve posta mentre `noreply@` rimbalza. Lo faccio io
+     in una PR appena mi dici quale strada.
 8. **`noreply@paymentrescue.dev` non ha un Reply-To** (nessun `replyTo` in nessun send di f3, e
    l'indirizzo rimbalza). Le email di dunning arrivano al _cliente del cliente_, che per istinto
    risponde: a noi (`support@paymentrescue.dev`) o al commerciante? Decisione di prodotto.
