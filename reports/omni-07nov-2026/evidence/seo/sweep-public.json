@@ -1,0 +1,205 @@
+{
+  "slug": "seo",
+  "base": "https://seoscope.dev",
+  "at": "2026-11-07T07:16:01.283Z",
+  "totals": {
+    "pages": 11,
+    "non200": 0,
+    "noOgImage": 0,
+    "inheritedMeta": 0,
+    "multiH1": 0,
+    "backslashProbed": 11,
+    "backslash500": 0
+  },
+  "pages": [
+    {
+      "path": "/",
+      "status": 200,
+      "title": "SEOScope — On-page SEO audits, built for developers",
+      "inheritsHomeTitle": false,
+      "inheritsHomeDesc": false,
+      "hasDesc": true,
+      "ogImage": "https://seoscope.dev/opengraph-image?79e11cc3602c6124",
+      "canonical": "https://seoscope.dev",
+      "h1Count": 1,
+      "imagesMissingAlt": 0
+    },
+    {
+      "path": "/cookie-policy",
+      "status": 200,
+      "title": "Cookie Policy — SEOScope",
+      "inheritsHomeTitle": false,
+      "inheritsHomeDesc": false,
+      "hasDesc": true,
+      "ogImage": "https://seoscope.dev/opengraph-image?79e11cc3602c6124",
+      "canonical": "https://seoscope.dev/cookie-policy",
+      "h1Count": 1,
+      "imagesMissingAlt": 0
+    },
+    {
+      "path": "/docs",
+      "status": 200,
+      "title": "API Documentation — SEOScope",
+      "inheritsHomeTitle": false,
+      "inheritsHomeDesc": false,
+      "hasDesc": true,
+      "ogImage": "https://seoscope.dev/opengraph-image?79e11cc3602c6124",
+      "canonical": "https://seoscope.dev/docs",
+      "h1Count": 1,
+      "imagesMissingAlt": 0
+    },
+    {
+      "path": "/dpa",
+      "status": 200,
+      "title": "Data Processing Agreement — SEOScope",
+      "inheritsHomeTitle": false,
+      "inheritsHomeDesc": false,
+      "hasDesc": true,
+      "ogImage": "https://seoscope.dev/opengraph-image?79e11cc3602c6124",
+      "canonical": "https://seoscope.dev/dpa",
+      "h1Count": 1,
+      "imagesMissingAlt": 0
+    },
+    {
+      "path": "/help",
+      "status": 200,
+      "title": "Help &amp; Knowledge Hub — SEOScope",
+      "inheritsHomeTitle": false,
+      "inheritsHomeDesc": false,
+      "hasDesc": true,
+      "ogImage": "https://seoscope.dev/opengraph-image",
+      "canonical": "https://seoscope.dev/help",
+      "h1Count": 1,
+      "imagesMissingAlt": 0
+    },
+    {
+      "path": "/pricing",
+      "status": 200,
+      "title": "Pricing — SEOScope",
+      "inheritsHomeTitle": false,
+      "inheritsHomeDesc": false,
+      "hasDesc": true,
+      "ogImage": "https://seoscope.dev/opengraph-image?79e11cc3602c6124",
+      "canonical": "https://seoscope.dev/pricing",
+      "h1Count": 1,
+      "imagesMissingAlt": 0
+    },
+    {
+      "path": "/privacy",
+      "status": 200,
+      "title": "Privacy Policy — SEOScope",
+      "inheritsHomeTitle": false,
+      "inheritsHomeDesc": false,
+      "hasDesc": true,
+      "ogImage": "https://seoscope.dev/opengraph-image?79e11cc3602c6124",
+      "canonical": "https://seoscope.dev/privacy",
+      "h1Count": 1,
+      "imagesMissingAlt": 0
+    },
+    {
+      "path": "/refund",
+      "status": 200,
+      "title": "Refunds and Cancellation — SEOScope",
+      "inheritsHomeTitle": false,
+      "inheritsHomeDesc": false,
+      "hasDesc": true,
+      "ogImage": "https://seoscope.dev/opengraph-image?79e11cc3602c6124",
+      "canonical": "https://seoscope.dev/refund",
+      "h1Count": 1,
+      "imagesMissingAlt": 0
+    },
+    {
+      "path": "/seo-audit",
+      "status": 200,
+      "title": "Free SEO Audit — check any page without signing up — SEOScope",
+      "inheritsHomeTitle": false,
+      "inheritsHomeDesc": false,
+      "hasDesc": true,
+      "ogImage": "https://seoscope.dev/opengraph-image",
+      "canonical": "https://seoscope.dev/seo-audit",
+      "h1Count": 1,
+      "imagesMissingAlt": 0
+    },
+    {
+      "path": "/signup",
+      "status": 200,
+      "title": "Get a free API key — SEOScope",
+      "inheritsHomeTitle": false,
+      "inheritsHomeDesc": false,
+      "hasDesc": true,
+      "ogImage": "https://seoscope.dev/opengraph-image?79e11cc3602c6124",
+      "canonical": "https://seoscope.dev/signup",
+      "h1Count": 1,
+      "imagesMissingAlt": 0
+    },
+    {
+      "path": "/terms",
+      "status": 200,
+      "title": "Terms of Service — SEOScope",
+      "inheritsHomeTitle": false,
+      "inheritsHomeDesc": false,
+      "hasDesc": true,
+      "ogImage": "https://seoscope.dev/opengraph-image?79e11cc3602c6124",
+      "canonical": "https://seoscope.dev/terms",
+      "h1Count": 1,
+      "imagesMissingAlt": 0
+    }
+  ],
+  "backslash": [
+    {
+      "path": "/",
+      "probe": "/%5C",
+      "status": 308
+    },
+    {
+      "path": "/cookie-policy",
+      "probe": "/cookie-policy%5C",
+      "status": 308
+    },
+    {
+      "path": "/docs",
+      "probe": "/docs%5C",
+      "status": 308
+    },
+    {
+      "path": "/dpa",
+      "probe": "/dpa%5C",
+      "status": 308
+    },
+    {
+      "path": "/help",
+      "probe": "/help%5C",
+      "status": 308
+    },
+    {
+      "path": "/pricing",
+      "probe": "/pricing%5C",
+      "status": 308
+    },
+    {
+      "path": "/privacy",
+      "probe": "/privacy%5C",
+      "status": 308
+    },
+    {
+      "path": "/refund",
+      "probe": "/refund%5C",
+      "status": 308
+    },
+    {
+      "path": "/seo-audit",
+      "probe": "/seo-audit%5C",
+      "status": 308
+    },
+    {
+      "path": "/signup",
+      "probe": "/signup%5C",
+      "status": 308
+    },
+    {
+      "path": "/terms",
+      "probe": "/terms%5C",
+      "status": 308
+    }
+  ]
+}

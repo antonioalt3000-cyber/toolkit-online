@@ -1,0 +1,45 @@
+{
+  "slug": "hkl",
+  "domain": "gethooklab.dev",
+  "startedAt": "2026-11-06T23:32:31.890Z",
+  "finishedAt": "2026-11-06T23:33:37.790Z",
+  "healthBefore": {
+    "status": 200,
+    "commit": "0c6d0cf"
+  },
+  "healthAfter": {
+    "status": 200,
+    "commit": "0c6d0cf"
+  },
+  "allGreen": true,
+  "steps": [
+    {
+      "step": "sweep-public",
+      "exit": 0,
+      "signal": null,
+      "ms": 3049,
+      "summary": "hkl  gethooklab.dev     pagine= 13 non-200=0 senza-og:image=0 meta-ereditati=0 h1-multipli=0 backslash-500=0/13",
+      "ok": true
+    },
+    {
+      "step": "journey-public",
+      "exit": 0,
+      "signal": null,
+      "ms": 38002,
+      "summary": "--- HookLab: 6/6 PASS",
+      "nonVerified": false,
+      "fails": [],
+      "ok": true
+    },
+    {
+      "step": "journey-core",
+      "exit": 0,
+      "signal": null,
+      "ms": 14919,
+      "summary": "--- hkl: 14/14 PASS",
+      "nonVerified": false,
+      "fails": [],
+      "ok": true
+    }
+  ]
+}

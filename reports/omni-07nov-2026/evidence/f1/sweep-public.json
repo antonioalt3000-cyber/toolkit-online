@@ -1,0 +1,732 @@
+{
+  "slug": "f1",
+  "base": "https://complipilot.dev",
+  "at": "2026-11-07T07:04:43.935Z",
+  "totals": {
+    "pages": 42,
+    "non200": 0,
+    "noOgImage": 0,
+    "inheritedMeta": 0,
+    "multiH1": 0,
+    "backslashProbed": 42,
+    "backslash500": 0
+  },
+  "pages": [
+    {
+      "path": "/",
+      "status": 200,
+      "title": "EU AI Act Compliance Scanner — 200+ Checks | CompliPilot",
+      "inheritsHomeTitle": false,
+      "inheritsHomeDesc": false,
+      "hasDesc": true,
+      "ogImage": "https://complipilot.dev/opengraph-image?7a718c702d7a5797",
+      "canonical": "https://complipilot.dev",
+      "h1Count": 1,
+      "imagesMissingAlt": 0
+    },
+    {
+      "path": "/about",
+      "status": 200,
+      "title": "About CompliPilot — AI Compliance Experts | CompliPilot",
+      "inheritsHomeTitle": false,
+      "inheritsHomeDesc": false,
+      "hasDesc": true,
+      "ogImage": "https://complipilot.dev/opengraph-image?7a718c702d7a5797",
+      "canonical": "https://complipilot.dev/about",
+      "h1Count": 1,
+      "imagesMissingAlt": 0
+    },
+    {
+      "path": "/ai-act-article-50-check",
+      "status": 200,
+      "title": "Free EU AI Act Article 50 Check — Is Your Chatbot Disclosed? | CompliPilot",
+      "inheritsHomeTitle": false,
+      "inheritsHomeDesc": false,
+      "hasDesc": true,
+      "ogImage": "https://complipilot.dev/opengraph-image",
+      "canonical": "https://complipilot.dev/ai-act-article-50-check",
+      "h1Count": 1,
+      "imagesMissingAlt": 0
+    },
+    {
+      "path": "/ai-risk-assessment",
+      "status": 200,
+      "title": "AI Risk Assessment Tool — Classify Your AI Systems | CompliPilot",
+      "inheritsHomeTitle": false,
+      "inheritsHomeDesc": false,
+      "hasDesc": true,
+      "ogImage": "https://complipilot.dev/opengraph-image?7a718c702d7a5797",
+      "canonical": "https://complipilot.dev/ai-risk-assessment",
+      "h1Count": 1,
+      "imagesMissingAlt": 0
+    },
+    {
+      "path": "/ai-transparency",
+      "status": 200,
+      "title": "AI Transparency | CompliPilot",
+      "inheritsHomeTitle": false,
+      "inheritsHomeDesc": false,
+      "hasDesc": true,
+      "ogImage": "https://complipilot.dev/opengraph-image?7a718c702d7a5797",
+      "canonical": "https://complipilot.dev/ai-transparency",
+      "h1Count": 1,
+      "imagesMissingAlt": 0
+    },
+    {
+      "path": "/api-docs",
+      "status": 200,
+      "title": "API Documentation — CompliPilot Compliance Scan API | CompliPilot",
+      "inheritsHomeTitle": false,
+      "inheritsHomeDesc": false,
+      "hasDesc": true,
+      "ogImage": "https://complipilot.dev/opengraph-image?7a718c702d7a5797",
+      "canonical": "https://complipilot.dev/api-docs",
+      "h1Count": 1,
+      "imagesMissingAlt": 0
+    },
+    {
+      "path": "/audit-questionnaire",
+      "status": 200,
+      "title": "Compliance Audit Questionnaire | CompliPilot",
+      "inheritsHomeTitle": false,
+      "inheritsHomeDesc": false,
+      "hasDesc": true,
+      "ogImage": "https://complipilot.dev/opengraph-image?7a718c702d7a5797",
+      "canonical": "https://complipilot.dev/audit-questionnaire",
+      "h1Count": 1,
+      "imagesMissingAlt": 0
+    },
+    {
+      "path": "/badge",
+      "status": 200,
+      "title": "Compliance Badge — Show Your EU AI Act Readiness | CompliPilot | CompliPilot",
+      "inheritsHomeTitle": false,
+      "inheritsHomeDesc": false,
+      "hasDesc": true,
+      "ogImage": "https://complipilot.dev/opengraph-image?7a718c702d7a5797",
+      "canonical": "https://complipilot.dev/badge",
+      "h1Count": 1,
+      "imagesMissingAlt": 0
+    },
+    {
+      "path": "/blog",
+      "status": 200,
+      "title": "AI Compliance Blog — EU AI Act &amp; GDPR Insights | CompliPilot",
+      "inheritsHomeTitle": false,
+      "inheritsHomeDesc": false,
+      "hasDesc": true,
+      "ogImage": "https://complipilot.dev/opengraph-image?7a718c702d7a5797",
+      "canonical": "https://complipilot.dev/blog",
+      "h1Count": 1,
+      "imagesMissingAlt": 0
+    },
+    {
+      "path": "/blog/ai-act-penalties",
+      "status": 200,
+      "title": "EU AI Act Penalties: What You Need to Know in 2026 | CompliPilot",
+      "inheritsHomeTitle": false,
+      "inheritsHomeDesc": false,
+      "hasDesc": true,
+      "ogImage": "https://complipilot.dev/opengraph-image",
+      "canonical": "https://complipilot.dev/blog/ai-act-penalties",
+      "h1Count": 1,
+      "imagesMissingAlt": 0
+    },
+    {
+      "path": "/blog/eu-ai-act-compliance-checklist-2026",
+      "status": 200,
+      "title": "EU AI Act Compliance Checklist 2026: Complete Guide | CompliPilot",
+      "inheritsHomeTitle": false,
+      "inheritsHomeDesc": false,
+      "hasDesc": true,
+      "ogImage": "https://complipilot.dev/opengraph-image",
+      "canonical": "https://complipilot.dev/blog/eu-ai-act-compliance-checklist-2026",
+      "h1Count": 1,
+      "imagesMissingAlt": 0
+    },
+    {
+      "path": "/blog/eu-ai-act-compliance-software",
+      "status": 200,
+      "title": "EU AI Act Compliance Software: How to Choose the Right Tool (2026) | CompliPilot",
+      "inheritsHomeTitle": false,
+      "inheritsHomeDesc": false,
+      "hasDesc": true,
+      "ogImage": "https://complipilot.dev/opengraph-image",
+      "canonical": "https://complipilot.dev/blog/eu-ai-act-compliance-software",
+      "h1Count": 1,
+      "imagesMissingAlt": 0
+    },
+    {
+      "path": "/blog/eu-ai-act-compliance-tool",
+      "status": 200,
+      "title": "EU AI Act Compliance Tool: How an Automated Checker Works (2026) | CompliPilot",
+      "inheritsHomeTitle": false,
+      "inheritsHomeDesc": false,
+      "hasDesc": true,
+      "ogImage": "https://complipilot.dev/opengraph-image",
+      "canonical": "https://complipilot.dev/blog/eu-ai-act-compliance-tool",
+      "h1Count": 1,
+      "imagesMissingAlt": 0
+    },
+    {
+      "path": "/blog/gdpr-vs-eu-ai-act",
+      "status": 200,
+      "title": "GDPR vs EU AI Act: Key Differences Explained | CompliPilot",
+      "inheritsHomeTitle": false,
+      "inheritsHomeDesc": false,
+      "hasDesc": true,
+      "ogImage": "https://complipilot.dev/opengraph-image?7a718c702d7a5797",
+      "canonical": "https://complipilot.dev/blog/gdpr-vs-eu-ai-act",
+      "h1Count": 1,
+      "imagesMissingAlt": 0
+    },
+    {
+      "path": "/blog/regulation-eu-2026-1744",
+      "status": 200,
+      "title": "Reg. (EU) 2026/1744: What Applied on 2 August 2026 — and What Moved | CompliPilot",
+      "inheritsHomeTitle": false,
+      "inheritsHomeDesc": false,
+      "hasDesc": true,
+      "ogImage": "https://complipilot.dev/opengraph-image",
+      "canonical": "https://complipilot.dev/blog/regulation-eu-2026-1744",
+      "h1Count": 1,
+      "imagesMissingAlt": 0
+    },
+    {
+      "path": "/changelog",
+      "status": 200,
+      "title": "Changelog — CompliPilot | CompliPilot",
+      "inheritsHomeTitle": false,
+      "inheritsHomeDesc": false,
+      "hasDesc": true,
+      "ogImage": "https://complipilot.dev/opengraph-image?7a718c702d7a5797",
+      "canonical": "https://complipilot.dev/changelog",
+      "h1Count": 1,
+      "imagesMissingAlt": 0
+    },
+    {
+      "path": "/checklist",
+      "status": 200,
+      "title": "EU AI Act Compliance Checklist — Filter by Risk Level | CompliPilot",
+      "inheritsHomeTitle": false,
+      "inheritsHomeDesc": false,
+      "hasDesc": true,
+      "ogImage": "https://complipilot.dev/opengraph-image?7a718c702d7a5797",
+      "canonical": "https://complipilot.dev/checklist",
+      "h1Count": 1,
+      "imagesMissingAlt": 0
+    },
+    {
+      "path": "/compare-scan",
+      "status": 200,
+      "title": "Compare Two URLs — Side-by-Side Compliance Scan | CompliPilot",
+      "inheritsHomeTitle": false,
+      "inheritsHomeDesc": false,
+      "hasDesc": true,
+      "ogImage": "https://complipilot.dev/opengraph-image?7a718c702d7a5797",
+      "canonical": "https://complipilot.dev/compare-scan",
+      "h1Count": 1,
+      "imagesMissingAlt": 0
+    },
+    {
+      "path": "/contact",
+      "status": 200,
+      "title": "Contact Us — CompliPilot Support | CompliPilot",
+      "inheritsHomeTitle": false,
+      "inheritsHomeDesc": false,
+      "hasDesc": true,
+      "ogImage": "https://complipilot.dev/opengraph-image?7a718c702d7a5797",
+      "canonical": "https://complipilot.dev/contact",
+      "h1Count": 1,
+      "imagesMissingAlt": 0
+    },
+    {
+      "path": "/cookie-policy",
+      "status": 200,
+      "title": "Cookie Policy | CompliPilot",
+      "inheritsHomeTitle": false,
+      "inheritsHomeDesc": false,
+      "hasDesc": true,
+      "ogImage": "https://complipilot.dev/opengraph-image?7a718c702d7a5797",
+      "canonical": "https://complipilot.dev/cookie-policy",
+      "h1Count": 1,
+      "imagesMissingAlt": 0
+    },
+    {
+      "path": "/cross-reference",
+      "status": 200,
+      "title": "GDPR x EU AI Act Cross-Reference Map | CompliPilot | CompliPilot",
+      "inheritsHomeTitle": false,
+      "inheritsHomeDesc": false,
+      "hasDesc": true,
+      "ogImage": "https://complipilot.dev/opengraph-image?7a718c702d7a5797",
+      "canonical": "https://complipilot.dev/cross-reference",
+      "h1Count": 1,
+      "imagesMissingAlt": 0
+    },
+    {
+      "path": "/document-generator",
+      "status": 200,
+      "title": "Document Generator — EU AI Act + GDPR Compliance Documents | CompliPilot | CompliPilot",
+      "inheritsHomeTitle": false,
+      "inheritsHomeDesc": false,
+      "hasDesc": true,
+      "ogImage": "https://complipilot.dev/opengraph-image?7a718c702d7a5797",
+      "canonical": "https://complipilot.dev/document-generator",
+      "h1Count": 1,
+      "imagesMissingAlt": 0
+    },
+    {
+      "path": "/dpa",
+      "status": 200,
+      "title": "Data Processing Agreement (DPA) | CompliPilot",
+      "inheritsHomeTitle": false,
+      "inheritsHomeDesc": false,
+      "hasDesc": true,
+      "ogImage": "https://complipilot.dev/opengraph-image?7a718c702d7a5797",
+      "canonical": "https://complipilot.dev/dpa",
+      "h1Count": 1,
+      "imagesMissingAlt": 0
+    },
+    {
+      "path": "/eu-ai-act-compliance",
+      "status": 200,
+      "title": "EU AI Act Compliance Guide 2026 | CompliPilot",
+      "inheritsHomeTitle": false,
+      "inheritsHomeDesc": false,
+      "hasDesc": true,
+      "ogImage": "https://complipilot.dev/opengraph-image?7a718c702d7a5797",
+      "canonical": "https://complipilot.dev/eu-ai-act-compliance",
+      "h1Count": 1,
+      "imagesMissingAlt": 0
+    },
+    {
+      "path": "/faq",
+      "status": 200,
+      "title": "FAQ — EU AI Act &amp; GDPR Compliance Questions | CompliPilot",
+      "inheritsHomeTitle": false,
+      "inheritsHomeDesc": false,
+      "hasDesc": true,
+      "ogImage": "https://complipilot.dev/opengraph-image?7a718c702d7a5797",
+      "canonical": "https://complipilot.dev/faq",
+      "h1Count": 1,
+      "imagesMissingAlt": 0
+    },
+    {
+      "path": "/free",
+      "status": 200,
+      "title": "Use CompliPilot Free — No Credit Card Required | CompliPilot",
+      "inheritsHomeTitle": false,
+      "inheritsHomeDesc": false,
+      "hasDesc": true,
+      "ogImage": "https://complipilot.dev/opengraph-image",
+      "canonical": "https://complipilot.dev/free",
+      "h1Count": 1,
+      "imagesMissingAlt": 0
+    },
+    {
+      "path": "/gdpr-compliance-checker",
+      "status": 200,
+      "title": "Free GDPR Compliance Checker | CompliPilot",
+      "inheritsHomeTitle": false,
+      "inheritsHomeDesc": false,
+      "hasDesc": true,
+      "ogImage": "https://complipilot.dev/opengraph-image?7a718c702d7a5797",
+      "canonical": "https://complipilot.dev/gdpr-compliance-checker",
+      "h1Count": 1,
+      "imagesMissingAlt": 0
+    },
+    {
+      "path": "/generate",
+      "status": 200,
+      "title": "Generate Legal Documents — GDPR &amp; EU AI Act | CompliPilot",
+      "inheritsHomeTitle": false,
+      "inheritsHomeDesc": false,
+      "hasDesc": true,
+      "ogImage": "https://complipilot.dev/opengraph-image?7a718c702d7a5797",
+      "canonical": "https://complipilot.dev/generate",
+      "h1Count": 1,
+      "imagesMissingAlt": 0
+    },
+    {
+      "path": "/glossary",
+      "status": 200,
+      "title": "AI Compliance Glossary — EU AI Act &amp; GDPR Terms Explained | CompliPilot",
+      "inheritsHomeTitle": false,
+      "inheritsHomeDesc": false,
+      "hasDesc": true,
+      "ogImage": "https://complipilot.dev/opengraph-image?7a718c702d7a5797",
+      "canonical": "https://complipilot.dev/glossary",
+      "h1Count": 1,
+      "imagesMissingAlt": 0
+    },
+    {
+      "path": "/help",
+      "status": 200,
+      "title": "Help &amp; Getting Started — CompliPilot | CompliPilot",
+      "inheritsHomeTitle": false,
+      "inheritsHomeDesc": false,
+      "hasDesc": true,
+      "ogImage": "https://complipilot.dev/opengraph-image?7a718c702d7a5797",
+      "canonical": "https://complipilot.dev/help",
+      "h1Count": 1,
+      "imagesMissingAlt": 0
+    },
+    {
+      "path": "/integrations",
+      "status": 200,
+      "title": "Integrations — CompliPilot | CompliPilot",
+      "inheritsHomeTitle": false,
+      "inheritsHomeDesc": false,
+      "hasDesc": true,
+      "ogImage": "https://complipilot.dev/opengraph-image?7a718c702d7a5797",
+      "canonical": "https://complipilot.dev/integrations",
+      "h1Count": 1,
+      "imagesMissingAlt": 0
+    },
+    {
+      "path": "/pricing",
+      "status": 200,
+      "title": "AI Compliance Pricing — Free Scan &amp; Premium Plans | CompliPilot",
+      "inheritsHomeTitle": false,
+      "inheritsHomeDesc": false,
+      "hasDesc": true,
+      "ogImage": "https://complipilot.dev/opengraph-image?7a718c702d7a5797",
+      "canonical": "https://complipilot.dev/pricing",
+      "h1Count": 1,
+      "imagesMissingAlt": 0
+    },
+    {
+      "path": "/privacy",
+      "status": 200,
+      "title": "Privacy Policy | CompliPilot",
+      "inheritsHomeTitle": false,
+      "inheritsHomeDesc": false,
+      "hasDesc": true,
+      "ogImage": "https://complipilot.dev/opengraph-image?7a718c702d7a5797",
+      "canonical": "https://complipilot.dev/privacy",
+      "h1Count": 1,
+      "imagesMissingAlt": 0
+    },
+    {
+      "path": "/refund",
+      "status": 200,
+      "title": "Refunds &amp; Right of Withdrawal — CompliPilot | CompliPilot",
+      "inheritsHomeTitle": false,
+      "inheritsHomeDesc": false,
+      "hasDesc": true,
+      "ogImage": "https://complipilot.dev/opengraph-image?7a718c702d7a5797",
+      "canonical": "https://complipilot.dev/refund",
+      "h1Count": 1,
+      "imagesMissingAlt": 0
+    },
+    {
+      "path": "/risk-assessment",
+      "status": 200,
+      "title": "AI Risk Assessment Questionnaire — EU AI Act Risk Level | CompliPilot",
+      "inheritsHomeTitle": false,
+      "inheritsHomeDesc": false,
+      "hasDesc": true,
+      "ogImage": "https://complipilot.dev/opengraph-image?7a718c702d7a5797",
+      "canonical": "https://complipilot.dev/risk-assessment",
+      "h1Count": 1,
+      "imagesMissingAlt": 0
+    },
+    {
+      "path": "/scan",
+      "status": 200,
+      "title": "Free Compliance Scan — EU AI Act &amp; GDPR Checker | CompliPilot",
+      "inheritsHomeTitle": false,
+      "inheritsHomeDesc": false,
+      "hasDesc": true,
+      "ogImage": "https://complipilot.dev/opengraph-image?7a718c702d7a5797",
+      "canonical": "https://complipilot.dev/scan",
+      "h1Count": 0,
+      "imagesMissingAlt": 0
+    },
+    {
+      "path": "/security",
+      "status": 200,
+      "title": "Security — CompliPilot | CompliPilot",
+      "inheritsHomeTitle": false,
+      "inheritsHomeDesc": false,
+      "hasDesc": true,
+      "ogImage": "https://complipilot.dev/opengraph-image?7a718c702d7a5797",
+      "canonical": "https://complipilot.dev/security",
+      "h1Count": 1,
+      "imagesMissingAlt": 0
+    },
+    {
+      "path": "/services",
+      "status": 200,
+      "title": "Compliance Services — GDPR DPIA, AI Act &amp; CRA Readiness | CompliPilot",
+      "inheritsHomeTitle": false,
+      "inheritsHomeDesc": false,
+      "hasDesc": true,
+      "ogImage": "https://complipilot.dev/opengraph-image",
+      "canonical": "https://complipilot.dev/services",
+      "h1Count": 1,
+      "imagesMissingAlt": 0
+    },
+    {
+      "path": "/status",
+      "status": 200,
+      "title": "System Status — CompliPilot | CompliPilot",
+      "inheritsHomeTitle": false,
+      "inheritsHomeDesc": false,
+      "hasDesc": true,
+      "ogImage": "https://complipilot.dev/opengraph-image?7a718c702d7a5797",
+      "canonical": "https://complipilot.dev/status",
+      "h1Count": 1,
+      "imagesMissingAlt": 0
+    },
+    {
+      "path": "/templates",
+      "status": 200,
+      "title": "Compliance Documentation Templates — EU AI Act &amp; GDPR | CompliPilot",
+      "inheritsHomeTitle": false,
+      "inheritsHomeDesc": false,
+      "hasDesc": true,
+      "ogImage": "https://complipilot.dev/opengraph-image?7a718c702d7a5797",
+      "canonical": "https://complipilot.dev/templates",
+      "h1Count": 1,
+      "imagesMissingAlt": 0
+    },
+    {
+      "path": "/terms",
+      "status": 200,
+      "title": "Terms of Service | CompliPilot",
+      "inheritsHomeTitle": false,
+      "inheritsHomeDesc": false,
+      "hasDesc": true,
+      "ogImage": "https://complipilot.dev/opengraph-image?7a718c702d7a5797",
+      "canonical": "https://complipilot.dev/terms",
+      "h1Count": 1,
+      "imagesMissingAlt": 0
+    },
+    {
+      "path": "/timeline",
+      "status": 200,
+      "title": "EU AI Act Timeline — Key Deadlines and Milestones | CompliPilot",
+      "inheritsHomeTitle": false,
+      "inheritsHomeDesc": false,
+      "hasDesc": true,
+      "ogImage": "https://complipilot.dev/opengraph-image?7a718c702d7a5797",
+      "canonical": "https://complipilot.dev/timeline",
+      "h1Count": 1,
+      "imagesMissingAlt": 0
+    }
+  ],
+  "backslash": [
+    {
+      "path": "/",
+      "probe": "/%5C",
+      "status": 308
+    },
+    {
+      "path": "/about",
+      "probe": "/about%5C",
+      "status": 308
+    },
+    {
+      "path": "/ai-act-article-50-check",
+      "probe": "/ai-act-article-50-check%5C",
+      "status": 308
+    },
+    {
+      "path": "/ai-risk-assessment",
+      "probe": "/ai-risk-assessment%5C",
+      "status": 308
+    },
+    {
+      "path": "/ai-transparency",
+      "probe": "/ai-transparency%5C",
+      "status": 308
+    },
+    {
+      "path": "/api-docs",
+      "probe": "/api-docs%5C",
+      "status": 308
+    },
+    {
+      "path": "/audit-questionnaire",
+      "probe": "/audit-questionnaire%5C",
+      "status": 308
+    },
+    {
+      "path": "/badge",
+      "probe": "/badge%5C",
+      "status": 308
+    },
+    {
+      "path": "/blog",
+      "probe": "/blog%5C",
+      "status": 308
+    },
+    {
+      "path": "/blog/ai-act-penalties",
+      "probe": "/blog/ai-act-penalties%5C",
+      "status": 308
+    },
+    {
+      "path": "/blog/eu-ai-act-compliance-checklist-2026",
+      "probe": "/blog/eu-ai-act-compliance-checklist-2026%5C",
+      "status": 308
+    },
+    {
+      "path": "/blog/eu-ai-act-compliance-software",
+      "probe": "/blog/eu-ai-act-compliance-software%5C",
+      "status": 308
+    },
+    {
+      "path": "/blog/eu-ai-act-compliance-tool",
+      "probe": "/blog/eu-ai-act-compliance-tool%5C",
+      "status": 308
+    },
+    {
+      "path": "/blog/gdpr-vs-eu-ai-act",
+      "probe": "/blog/gdpr-vs-eu-ai-act%5C",
+      "status": 308
+    },
+    {
+      "path": "/blog/regulation-eu-2026-1744",
+      "probe": "/blog/regulation-eu-2026-1744%5C",
+      "status": 308
+    },
+    {
+      "path": "/changelog",
+      "probe": "/changelog%5C",
+      "status": 308
+    },
+    {
+      "path": "/checklist",
+      "probe": "/checklist%5C",
+      "status": 308
+    },
+    {
+      "path": "/compare-scan",
+      "probe": "/compare-scan%5C",
+      "status": 308
+    },
+    {
+      "path": "/contact",
+      "probe": "/contact%5C",
+      "status": 308
+    },
+    {
+      "path": "/cookie-policy",
+      "probe": "/cookie-policy%5C",
+      "status": 308
+    },
+    {
+      "path": "/cross-reference",
+      "probe": "/cross-reference%5C",
+      "status": 308
+    },
+    {
+      "path": "/document-generator",
+      "probe": "/document-generator%5C",
+      "status": 308
+    },
+    {
+      "path": "/dpa",
+      "probe": "/dpa%5C",
+      "status": 308
+    },
+    {
+      "path": "/eu-ai-act-compliance",
+      "probe": "/eu-ai-act-compliance%5C",
+      "status": 308
+    },
+    {
+      "path": "/faq",
+      "probe": "/faq%5C",
+      "status": 308
+    },
+    {
+      "path": "/free",
+      "probe": "/free%5C",
+      "status": 308
+    },
+    {
+      "path": "/gdpr-compliance-checker",
+      "probe": "/gdpr-compliance-checker%5C",
+      "status": 308
+    },
+    {
+      "path": "/generate",
+      "probe": "/generate%5C",
+      "status": 308
+    },
+    {
+      "path": "/glossary",
+      "probe": "/glossary%5C",
+      "status": 308
+    },
+    {
+      "path": "/help",
+      "probe": "/help%5C",
+      "status": 308
+    },
+    {
+      "path": "/integrations",
+      "probe": "/integrations%5C",
+      "status": 308
+    },
+    {
+      "path": "/pricing",
+      "probe": "/pricing%5C",
+      "status": 308
+    },
+    {
+      "path": "/privacy",
+      "probe": "/privacy%5C",
+      "status": 308
+    },
+    {
+      "path": "/refund",
+      "probe": "/refund%5C",
+      "status": 308
+    },
+    {
+      "path": "/risk-assessment",
+      "probe": "/risk-assessment%5C",
+      "status": 308
+    },
+    {
+      "path": "/scan",
+      "probe": "/scan%5C",
+      "status": 308
+    },
+    {
+      "path": "/security",
+      "probe": "/security%5C",
+      "status": 308
+    },
+    {
+      "path": "/services",
+      "probe": "/services%5C",
+      "status": 308
+    },
+    {
+      "path": "/status",
+      "probe": "/status%5C",
+      "status": 308
+    },
+    {
+      "path": "/templates",
+      "probe": "/templates%5C",
+      "status": 308
+    },
+    {
+      "path": "/terms",
+      "probe": "/terms%5C",
+      "status": 308
+    },
+    {
+      "path": "/timeline",
+      "probe": "/timeline%5C",
+      "status": 308
+    }
+  ]
+}

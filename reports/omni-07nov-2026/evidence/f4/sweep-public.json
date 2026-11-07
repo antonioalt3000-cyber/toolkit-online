@@ -1,0 +1,545 @@
+{
+  "slug": "f4",
+  "base": "https://parseflow.dev",
+  "at": "2026-11-07T07:12:03.981Z",
+  "totals": {
+    "pages": 31,
+    "non200": 0,
+    "noOgImage": 0,
+    "inheritedMeta": 0,
+    "multiH1": 0,
+    "backslashProbed": 31,
+    "backslash500": 0
+  },
+  "pages": [
+    {
+      "path": "/",
+      "status": 200,
+      "title": "Invoice Data Extraction API — PDF to JSON | ParseFlow",
+      "inheritsHomeTitle": false,
+      "inheritsHomeDesc": false,
+      "hasDesc": true,
+      "ogImage": "https://parseflow.dev/opengraph-image?21f6b55e8c54238a",
+      "canonical": "https://parseflow.dev",
+      "h1Count": 1,
+      "imagesMissingAlt": 0
+    },
+    {
+      "path": "/about",
+      "status": 200,
+      "title": "About Us | ParseFlow",
+      "inheritsHomeTitle": false,
+      "inheritsHomeDesc": false,
+      "hasDesc": true,
+      "ogImage": "https://parseflow.dev/opengraph-image?21f6b55e8c54238a",
+      "canonical": "https://parseflow.dev/about",
+      "h1Count": 1,
+      "imagesMissingAlt": 0
+    },
+    {
+      "path": "/ai-transparency",
+      "status": 200,
+      "title": "AI Transparency | ParseFlow",
+      "inheritsHomeTitle": false,
+      "inheritsHomeDesc": false,
+      "hasDesc": true,
+      "ogImage": "https://parseflow.dev/opengraph-image?21f6b55e8c54238a",
+      "canonical": "https://parseflow.dev/ai-transparency",
+      "h1Count": 1,
+      "imagesMissingAlt": 0
+    },
+    {
+      "path": "/batch",
+      "status": 200,
+      "title": "Invoice Data Extraction API — PDF to JSON in One Call | ParseFlow",
+      "inheritsHomeTitle": false,
+      "inheritsHomeDesc": false,
+      "hasDesc": true,
+      "ogImage": "https://parseflow.dev/opengraph-image?21f6b55e8c54238a",
+      "canonical": "https://parseflow.dev/batch",
+      "h1Count": 1,
+      "imagesMissingAlt": 0
+    },
+    {
+      "path": "/blog",
+      "status": 200,
+      "title": "Blog — Document Processing Insights | ParseFlow",
+      "inheritsHomeTitle": false,
+      "inheritsHomeDesc": false,
+      "hasDesc": true,
+      "ogImage": "https://parseflow.dev/opengraph-image?21f6b55e8c54238a",
+      "canonical": "https://parseflow.dev/blog",
+      "h1Count": 1,
+      "imagesMissingAlt": 0
+    },
+    {
+      "path": "/blog/automate-invoice-processing",
+      "status": 200,
+      "title": "How to Automate Invoice Processing in 2026 | ParseFlow",
+      "inheritsHomeTitle": false,
+      "inheritsHomeDesc": false,
+      "hasDesc": true,
+      "ogImage": "https://parseflow.dev/opengraph-image?21f6b55e8c54238a",
+      "canonical": "https://parseflow.dev/blog/automate-invoice-processing",
+      "h1Count": 1,
+      "imagesMissingAlt": 0
+    },
+    {
+      "path": "/blog/document-ai-vs-manual",
+      "status": 200,
+      "title": "Document AI vs Manual Data Entry: A Complete Comparison | ParseFlow",
+      "inheritsHomeTitle": false,
+      "inheritsHomeDesc": false,
+      "hasDesc": true,
+      "ogImage": "https://parseflow.dev/opengraph-image?21f6b55e8c54238a",
+      "canonical": "https://parseflow.dev/blog/document-ai-vs-manual",
+      "h1Count": 1,
+      "imagesMissingAlt": 0
+    },
+    {
+      "path": "/blog/extract-invoices",
+      "status": 200,
+      "title": "How to Extract Data from Invoices with an API — Complete Tutorial | ParseFlow",
+      "inheritsHomeTitle": false,
+      "inheritsHomeDesc": false,
+      "hasDesc": true,
+      "ogImage": "https://parseflow.dev/opengraph-image?21f6b55e8c54238a",
+      "canonical": "https://parseflow.dev/blog/extract-invoices",
+      "h1Count": 1,
+      "imagesMissingAlt": 0
+    },
+    {
+      "path": "/blog/free-invoice-parsing-api",
+      "status": 200,
+      "title": "Free Invoice Parsing API: Extract Invoice Data Without Paying — 2026 Guide | ParseFlow",
+      "inheritsHomeTitle": false,
+      "inheritsHomeDesc": false,
+      "hasDesc": true,
+      "ogImage": "https://parseflow.dev/opengraph-image?21f6b55e8c54238a",
+      "canonical": "https://parseflow.dev/blog/free-invoice-parsing-api",
+      "h1Count": 1,
+      "imagesMissingAlt": 0
+    },
+    {
+      "path": "/blog/pdf-invoice-to-json-api",
+      "status": 200,
+      "title": "PDF Invoice to JSON API: Convert Invoices to Structured Data — 2026 Guide | ParseFlow",
+      "inheritsHomeTitle": false,
+      "inheritsHomeDesc": false,
+      "hasDesc": true,
+      "ogImage": "https://parseflow.dev/opengraph-image?21f6b55e8c54238a",
+      "canonical": "https://parseflow.dev/blog/pdf-invoice-to-json-api",
+      "h1Count": 1,
+      "imagesMissingAlt": 0
+    },
+    {
+      "path": "/compare/parseflow-vs-docparser",
+      "status": 200,
+      "title": "ParseFlow vs Docparser: Document &amp; Invoice Extraction (2026) | ParseFlow",
+      "inheritsHomeTitle": false,
+      "inheritsHomeDesc": false,
+      "hasDesc": true,
+      "ogImage": "https://parseflow.dev/opengraph-image?21f6b55e8c54238a",
+      "canonical": "https://parseflow.dev/compare/parseflow-vs-docparser",
+      "h1Count": 1,
+      "imagesMissingAlt": 0
+    },
+    {
+      "path": "/contact",
+      "status": 200,
+      "title": "Contact Us | ParseFlow",
+      "inheritsHomeTitle": false,
+      "inheritsHomeDesc": false,
+      "hasDesc": true,
+      "ogImage": "https://parseflow.dev/opengraph-image?21f6b55e8c54238a",
+      "canonical": "https://parseflow.dev/contact",
+      "h1Count": 1,
+      "imagesMissingAlt": 0
+    },
+    {
+      "path": "/cookie-policy",
+      "status": 200,
+      "title": "Cookie Policy | ParseFlow | ParseFlow",
+      "inheritsHomeTitle": false,
+      "inheritsHomeDesc": false,
+      "hasDesc": true,
+      "ogImage": "https://parseflow.dev/opengraph-image?21f6b55e8c54238a",
+      "canonical": "https://parseflow.dev/cookie-policy",
+      "h1Count": 1,
+      "imagesMissingAlt": 0
+    },
+    {
+      "path": "/docs",
+      "status": 200,
+      "title": "API Documentation | ParseFlow",
+      "inheritsHomeTitle": false,
+      "inheritsHomeDesc": false,
+      "hasDesc": true,
+      "ogImage": "https://parseflow.dev/opengraph-image?21f6b55e8c54238a",
+      "canonical": "https://parseflow.dev/docs",
+      "h1Count": 1,
+      "imagesMissingAlt": 0
+    },
+    {
+      "path": "/docs/authentication",
+      "status": 200,
+      "title": "Authentication Guide — API Key Management",
+      "inheritsHomeTitle": false,
+      "inheritsHomeDesc": false,
+      "hasDesc": true,
+      "ogImage": "https://parseflow.dev/opengraph-image?21f6b55e8c54238a",
+      "canonical": "https://parseflow.dev/docs/authentication",
+      "h1Count": 1,
+      "imagesMissingAlt": 0
+    },
+    {
+      "path": "/docs/webhooks",
+      "status": 200,
+      "title": "Webhook Documentation (not yet available) — ParseFlow",
+      "inheritsHomeTitle": false,
+      "inheritsHomeDesc": false,
+      "hasDesc": true,
+      "ogImage": "https://parseflow.dev/opengraph-image?21f6b55e8c54238a",
+      "canonical": "https://parseflow.dev/docs/webhooks",
+      "h1Count": 1,
+      "imagesMissingAlt": 0
+    },
+    {
+      "path": "/document-ocr",
+      "status": 200,
+      "title": "Document Data Extraction API — PDF, DOCX and XLSX to JSON | ParseFlow",
+      "inheritsHomeTitle": false,
+      "inheritsHomeDesc": false,
+      "hasDesc": true,
+      "ogImage": "https://parseflow.dev/opengraph-image?21f6b55e8c54238a",
+      "canonical": "https://parseflow.dev/document-ocr",
+      "h1Count": 1,
+      "imagesMissingAlt": 0
+    },
+    {
+      "path": "/dpa",
+      "status": 200,
+      "title": "Data Processing Agreement (DPA) | ParseFlow",
+      "inheritsHomeTitle": false,
+      "inheritsHomeDesc": false,
+      "hasDesc": true,
+      "ogImage": "https://parseflow.dev/opengraph-image?21f6b55e8c54238a",
+      "canonical": "https://parseflow.dev/dpa",
+      "h1Count": 1,
+      "imagesMissingAlt": 0
+    },
+    {
+      "path": "/faq",
+      "status": 200,
+      "title": "FAQ — Frequently Asked Questions | ParseFlow",
+      "inheritsHomeTitle": false,
+      "inheritsHomeDesc": false,
+      "hasDesc": true,
+      "ogImage": "https://parseflow.dev/opengraph-image?21f6b55e8c54238a",
+      "canonical": "https://parseflow.dev/faq",
+      "h1Count": 1,
+      "imagesMissingAlt": 0
+    },
+    {
+      "path": "/formats",
+      "status": 200,
+      "title": "Supported Formats — Document Types &amp; File Formats | ParseFlow",
+      "inheritsHomeTitle": false,
+      "inheritsHomeDesc": false,
+      "hasDesc": true,
+      "ogImage": "https://parseflow.dev/opengraph-image?21f6b55e8c54238a",
+      "canonical": "https://parseflow.dev/formats",
+      "h1Count": 1,
+      "imagesMissingAlt": 0
+    },
+    {
+      "path": "/free",
+      "status": 200,
+      "title": "Try ParseFlow Free — 100 Pages/Month, No Credit Card | ParseFlow",
+      "inheritsHomeTitle": false,
+      "inheritsHomeDesc": false,
+      "hasDesc": true,
+      "ogImage": "https://parseflow.dev/opengraph-image",
+      "canonical": "https://parseflow.dev/free",
+      "h1Count": 1,
+      "imagesMissingAlt": 0
+    },
+    {
+      "path": "/generate",
+      "status": 200,
+      "title": "Invoice Data Extraction API — PDF to JSON in One Call | ParseFlow",
+      "inheritsHomeTitle": false,
+      "inheritsHomeDesc": false,
+      "hasDesc": true,
+      "ogImage": "https://parseflow.dev/opengraph-image?21f6b55e8c54238a",
+      "canonical": "https://parseflow.dev/generate",
+      "h1Count": 1,
+      "imagesMissingAlt": 0
+    },
+    {
+      "path": "/help",
+      "status": 200,
+      "title": "Help &amp; Getting Started — ParseFlow | ParseFlow",
+      "inheritsHomeTitle": false,
+      "inheritsHomeDesc": false,
+      "hasDesc": true,
+      "ogImage": "https://parseflow.dev/opengraph-image?21f6b55e8c54238a",
+      "canonical": "https://parseflow.dev/help",
+      "h1Count": 1,
+      "imagesMissingAlt": 0
+    },
+    {
+      "path": "/invoice-extraction-api",
+      "status": 200,
+      "title": "Invoice Extraction API — Automate Invoice Processing | ParseFlow",
+      "inheritsHomeTitle": false,
+      "inheritsHomeDesc": false,
+      "hasDesc": true,
+      "ogImage": "https://parseflow.dev/opengraph-image?21f6b55e8c54238a",
+      "canonical": "https://parseflow.dev/invoice-extraction-api",
+      "h1Count": 1,
+      "imagesMissingAlt": 0
+    },
+    {
+      "path": "/playground",
+      "status": 200,
+      "title": "API Playground — Try Document Extraction Live | ParseFlow",
+      "inheritsHomeTitle": false,
+      "inheritsHomeDesc": false,
+      "hasDesc": true,
+      "ogImage": "https://parseflow.dev/opengraph-image",
+      "canonical": "https://parseflow.dev/playground",
+      "h1Count": 1,
+      "imagesMissingAlt": 0
+    },
+    {
+      "path": "/pricing",
+      "status": 200,
+      "title": "Pricing — Simple, Transparent Plans | ParseFlow",
+      "inheritsHomeTitle": false,
+      "inheritsHomeDesc": false,
+      "hasDesc": true,
+      "ogImage": "https://parseflow.dev/opengraph-image?21f6b55e8c54238a",
+      "canonical": "https://parseflow.dev/pricing",
+      "h1Count": 1,
+      "imagesMissingAlt": 0
+    },
+    {
+      "path": "/privacy",
+      "status": 200,
+      "title": "Privacy Policy | ParseFlow",
+      "inheritsHomeTitle": false,
+      "inheritsHomeDesc": false,
+      "hasDesc": true,
+      "ogImage": "https://parseflow.dev/opengraph-image?21f6b55e8c54238a",
+      "canonical": "https://parseflow.dev/privacy",
+      "h1Count": 1,
+      "imagesMissingAlt": 0
+    },
+    {
+      "path": "/receipt-parser",
+      "status": 200,
+      "title": "Receipt Parser API — Extract Receipt Data to JSON | ParseFlow",
+      "inheritsHomeTitle": false,
+      "inheritsHomeDesc": false,
+      "hasDesc": true,
+      "ogImage": "https://parseflow.dev/opengraph-image?21f6b55e8c54238a",
+      "canonical": "https://parseflow.dev/receipt-parser",
+      "h1Count": 1,
+      "imagesMissingAlt": 0
+    },
+    {
+      "path": "/refund",
+      "status": 200,
+      "title": "Refunds and Cancellation | ParseFlow | ParseFlow",
+      "inheritsHomeTitle": false,
+      "inheritsHomeDesc": false,
+      "hasDesc": true,
+      "ogImage": "https://parseflow.dev/opengraph-image?21f6b55e8c54238a",
+      "canonical": "https://parseflow.dev/refund",
+      "h1Count": 1,
+      "imagesMissingAlt": 0
+    },
+    {
+      "path": "/status",
+      "status": 200,
+      "title": "System Status — ParseFlow | ParseFlow",
+      "inheritsHomeTitle": false,
+      "inheritsHomeDesc": false,
+      "hasDesc": true,
+      "ogImage": "https://parseflow.dev/opengraph-image?21f6b55e8c54238a",
+      "canonical": "https://parseflow.dev/status",
+      "h1Count": 1,
+      "imagesMissingAlt": 0
+    },
+    {
+      "path": "/terms",
+      "status": 200,
+      "title": "Terms of Service | ParseFlow",
+      "inheritsHomeTitle": false,
+      "inheritsHomeDesc": false,
+      "hasDesc": true,
+      "ogImage": "https://parseflow.dev/opengraph-image?21f6b55e8c54238a",
+      "canonical": "https://parseflow.dev/terms",
+      "h1Count": 1,
+      "imagesMissingAlt": 0
+    }
+  ],
+  "backslash": [
+    {
+      "path": "/",
+      "probe": "/%5C",
+      "status": 308
+    },
+    {
+      "path": "/about",
+      "probe": "/about%5C",
+      "status": 308
+    },
+    {
+      "path": "/ai-transparency",
+      "probe": "/ai-transparency%5C",
+      "status": 308
+    },
+    {
+      "path": "/batch",
+      "probe": "/batch%5C",
+      "status": 308
+    },
+    {
+      "path": "/blog",
+      "probe": "/blog%5C",
+      "status": 308
+    },
+    {
+      "path": "/blog/automate-invoice-processing",
+      "probe": "/blog/automate-invoice-processing%5C",
+      "status": 308
+    },
+    {
+      "path": "/blog/document-ai-vs-manual",
+      "probe": "/blog/document-ai-vs-manual%5C",
+      "status": 308
+    },
+    {
+      "path": "/blog/extract-invoices",
+      "probe": "/blog/extract-invoices%5C",
+      "status": 308
+    },
+    {
+      "path": "/blog/free-invoice-parsing-api",
+      "probe": "/blog/free-invoice-parsing-api%5C",
+      "status": 308
+    },
+    {
+      "path": "/blog/pdf-invoice-to-json-api",
+      "probe": "/blog/pdf-invoice-to-json-api%5C",
+      "status": 308
+    },
+    {
+      "path": "/compare/parseflow-vs-docparser",
+      "probe": "/compare/parseflow-vs-docparser%5C",
+      "status": 308
+    },
+    {
+      "path": "/contact",
+      "probe": "/contact%5C",
+      "status": 308
+    },
+    {
+      "path": "/cookie-policy",
+      "probe": "/cookie-policy%5C",
+      "status": 308
+    },
+    {
+      "path": "/docs",
+      "probe": "/docs%5C",
+      "status": 308
+    },
+    {
+      "path": "/docs/authentication",
+      "probe": "/docs/authentication%5C",
+      "status": 308
+    },
+    {
+      "path": "/docs/webhooks",
+      "probe": "/docs/webhooks%5C",
+      "status": 308
+    },
+    {
+      "path": "/document-ocr",
+      "probe": "/document-ocr%5C",
+      "status": 308
+    },
+    {
+      "path": "/dpa",
+      "probe": "/dpa%5C",
+      "status": 308
+    },
+    {
+      "path": "/faq",
+      "probe": "/faq%5C",
+      "status": 308
+    },
+    {
+      "path": "/formats",
+      "probe": "/formats%5C",
+      "status": 308
+    },
+    {
+      "path": "/free",
+      "probe": "/free%5C",
+      "status": 308
+    },
+    {
+      "path": "/generate",
+      "probe": "/generate%5C",
+      "status": 308
+    },
+    {
+      "path": "/help",
+      "probe": "/help%5C",
+      "status": 308
+    },
+    {
+      "path": "/invoice-extraction-api",
+      "probe": "/invoice-extraction-api%5C",
+      "status": 308
+    },
+    {
+      "path": "/playground",
+      "probe": "/playground%5C",
+      "status": 308
+    },
+    {
+      "path": "/pricing",
+      "probe": "/pricing%5C",
+      "status": 308
+    },
+    {
+      "path": "/privacy",
+      "probe": "/privacy%5C",
+      "status": 308
+    },
+    {
+      "path": "/receipt-parser",
+      "probe": "/receipt-parser%5C",
+      "status": 308
+    },
+    {
+      "path": "/refund",
+      "probe": "/refund%5C",
+      "status": 308
+    },
+    {
+      "path": "/status",
+      "probe": "/status%5C",
+      "status": 308
+    },
+    {
+      "path": "/terms",
+      "probe": "/terms%5C",
+      "status": 308
+    }
+  ]
+}

@@ -1,0 +1,26 @@
+{
+  "slug": "cfg",
+  "at": "2026-11-07T01:40:28.733Z",
+  "results": [
+    {
+      "what": "9 template x 8 titles (0, 1, 400, 10000 chars, emoji, RTL, NUL, CRLF): never a 5xx, every 200 is the declared size",
+      "pass": true,
+      "detail": "72 PNG a misura, 0 rifiuti onesti ()"
+    },
+    {
+      "what": "almeno 63 dei 72 casi consegnano una PNG (i rifiuti sono solo i titoli assurdi)",
+      "pass": true,
+      "detail": "72/72 PNG"
+    },
+    {
+      "what": "controllo negativo: lo stesso PNG contro una dimensione sbagliata (+1 px) viene rilevato",
+      "pass": true,
+      "detail": "og-minimal/empty 1200x630"
+    },
+    {
+      "what": "controllo negativo: un PNG troncato NON passa il controllo IEND",
+      "pass": true,
+      "detail": ""
+    }
+  ]
+}

@@ -1,0 +1,38 @@
+{
+  "slug": "cfg",
+  "dom": "getcardforge.dev",
+  "email": "antonio.alt3000+qa07novcfg@gmail.com",
+  "code": "QAOCTB-E05A-B384-1DB2-1FEA",
+  "results": [
+    {
+      "day": 1,
+      "what": "coniato un coupon interno via /api/admin/generate-coupons",
+      "pass": true,
+      "detail": "QAOCTB-E05A-B384-1DB2-1FEA"
+    },
+    {
+      "day": 1,
+      "what": "il riscatto parte e la POST /api/redeem risponde 2xx",
+      "pass": true,
+      "detail": "HTTP 200"
+    },
+    {
+      "day": 1,
+      "what": "la pagina consegna la chiave API",
+      "pass": true,
+      "detail": "cfg_d58942…"
+    },
+    {
+      "day": 3,
+      "what": "la feature core risponde: una card PNG vera",
+      "pass": true,
+      "detail": "27560 byte, firma 89504e47"
+    },
+    {
+      "day": 30,
+      "what": "nessun errore di console nel viaggio autenticato",
+      "pass": true,
+      "detail": ""
+    }
+  ]
+}

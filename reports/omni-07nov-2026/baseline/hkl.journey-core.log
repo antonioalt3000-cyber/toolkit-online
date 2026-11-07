@@ -1,0 +1,18 @@
+
+===== hkl gethooklab.dev — feature core con oracolo indipendente
+
+PASS  creazione endpoint 2xx  — HTTP 201
+PASS  la cattura accetta il webhook  — HTTP 200
+PASS  le richieste catturate si rileggono  — HTTP 200
+PASS  la richiesta spedita e fra quelle catturate  — 1 richieste
+PASS  bodyRaw e byte-per-byte il payload spedito  — catturato "{\"event\":\"invoice.paid\",\"amount\":4917,\"ref\":\"QA-04NOV\"}"
+PASS  la firma e arrivata intatta nell header  — header sha256=d21569970bda9e2cae9e544bf4322181a6d407bd0a2db63d7823104e48bc78f7
+PASS  il contentType catturato e quello spedito  — application/json json=true
+PASS  verify-signature conferma la firma che ho calcolato  — HTTP 200 {"provider":"github","source":"literal","valid":true,"reason":"OK","details":{}}
+PASS  verify-signature dichiara non valida una firma sbagliata  — HTTP 200 {"provider":"github","source":"literal","valid":false,"reason":"SIGNATURE_MISMATCH","details":{}}
+PASS  un corpo alterato di un byte invalida la firma  — HTTP 200 {"provider":"github","source":"literal","valid":false,"reason":"SIGNATURE_MISMATCH","details":{}}
+PASS  verify-signature verifica anche la richiesta memorizzata  — HTTP 200 {"provider":"github","source":"captured","valid":true,"reason":"OK","details":{}}
+PASS  l endpoint di collaudo viene rimosso  — HTTP 200
+NON VERIF.  i 2 cron di questo prodotto  — CRON_SECRET esiste ma e' marcata Sensitive: vercel env pull la restituisce vuota, quindi il percorso positivo non e' stato esercitato
+
+--- hkl: 12/12 PASS · 1 NON VERIFICATI (i 2 cron di questo prodotto)

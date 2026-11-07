@@ -1,0 +1,16 @@
+
+===== eg emailguard.dev — feature core con oracolo indipendente
+
+PASS  verify risponde 200  — HTTP 200
+PASS  il verdetto MX coincide col DNS reale  — prodotto mx=true, DNS 5 record
+PASS  il verdetto SPF coincide col DNS reale  — prodotto spf=true, DNS spf=true
+PASS  il verdetto DMARC coincide col DNS reale  — prodotto dmarc=true, DNS dmarc=true
+PASS  i record MX elencati sono quelli veri  — prodotto 5, DNS 5
+PASS  un indirizzo di ruolo e segnalato come tale  — role_address,free_provider
+PASS  una sintassi rotta viene rifiutata o segnata non valida  — HTTP 400 valid=undefined
+PASS  un dominio senza MX: il verdetto segue il DNS  — prodotto mx=true, DNS 2 record
+PASS  un lotto oltre il limite di 100 viene rifiutato  — HTTP 400
+PASS  i 3 cron dichiarati accettano il proprio segreto  — monitors=200 weekly-summary=200 portfolio-watch=200
+PASS  i cron rifiutano un segreto sbagliato  — 401/403 su tutti
+
+--- eg: 11/11 PASS

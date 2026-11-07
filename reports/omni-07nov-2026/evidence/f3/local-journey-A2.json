@@ -1,0 +1,394 @@
+[
+  {
+    "saas": "f3",
+    "step": "signup: POST /api/auth/signup 200",
+    "expected": 200,
+    "observed": 200,
+    "ok": true,
+    "note": ""
+  },
+  {
+    "saas": "f3",
+    "step": "signup: lands on /dashboard",
+    "expected": "/dashboard",
+    "observed": "/dashboard",
+    "ok": true,
+    "note": ""
+  },
+  {
+    "saas": "f3",
+    "step": "signup: dashboard shows Free plan",
+    "expected": "free",
+    "observed": "free",
+    "ok": true,
+    "note": ""
+  },
+  {
+    "saas": "f3",
+    "step": "signup: /api/auth/me 200 with the new session",
+    "expected": 200,
+    "observed": 200,
+    "ok": true,
+    "note": ""
+  },
+  {
+    "saas": "f3",
+    "step": "duplicate signup: generic response (HTTP 200)",
+    "expected": true,
+    "observed": true,
+    "ok": true,
+    "note": ""
+  },
+  {
+    "saas": "f3",
+    "step": "duplicate signup: account-exists email to the owner",
+    "expected": true,
+    "observed": true,
+    "ok": true,
+    "note": ""
+  },
+  {
+    "saas": "f3",
+    "step": "login wrong password: 401",
+    "expected": 401,
+    "observed": 401,
+    "ok": true,
+    "note": ""
+  },
+  {
+    "saas": "f3",
+    "step": "login wrong password: error shown",
+    "expected": true,
+    "observed": true,
+    "ok": true,
+    "note": ""
+  },
+  {
+    "saas": "f3",
+    "step": "login correct password: 200",
+    "expected": 200,
+    "observed": 200,
+    "ok": true,
+    "note": ""
+  },
+  {
+    "saas": "f3",
+    "step": "login: lands on /dashboard",
+    "expected": "/dashboard",
+    "observed": "/dashboard",
+    "ok": true,
+    "note": ""
+  },
+  {
+    "saas": "f3",
+    "step": "checkout growth monthly: 200",
+    "expected": 200,
+    "observed": 200,
+    "ok": true,
+    "note": ""
+  },
+  {
+    "saas": "f3",
+    "step": "checkout scale annual: 200",
+    "expected": 200,
+    "observed": 200,
+    "ok": true,
+    "note": ""
+  },
+  {
+    "saas": "f3",
+    "step": "checkout growth monthly: Stripe asked for the Growth monthly price",
+    "expected": "price_1TEuqgQ4hv1lIuBUgEI2uVnA",
+    "observed": "price_1TEuqgQ4hv1lIuBUgEI2uVnA",
+    "ok": true,
+    "note": ""
+  },
+  {
+    "saas": "f3",
+    "step": "checkout growth monthly: metadata plan/cycle/user",
+    "expected": ["growth", "monthly", "abb9f8df9687660a9f6d027dd5887a81"],
+    "observed": ["growth", "monthly", "abb9f8df9687660a9f6d027dd5887a81"],
+    "ok": true,
+    "note": ""
+  },
+  {
+    "saas": "f3",
+    "step": "checkout growth monthly: customer_email = account email",
+    "expected": "antonio.alt3000+qa07-f3-mw5okz4l@gmail.com",
+    "observed": "antonio.alt3000+qa07-f3-mw5okz4l@gmail.com",
+    "ok": true,
+    "note": ""
+  },
+  {
+    "saas": "f3",
+    "step": "checkout scale annual: Stripe asked for the Scale annual price",
+    "expected": "price_qa_scale_annual",
+    "observed": "price_qa_scale_annual",
+    "ok": true,
+    "note": ""
+  },
+  {
+    "saas": "f3",
+    "step": "checkout without session: 401",
+    "expected": 401,
+    "observed": 401,
+    "ok": true,
+    "note": ""
+  },
+  {
+    "saas": "f3",
+    "step": "billing webhook checkout.session.completed: 200 ({\"received\":true})",
+    "expected": 200,
+    "observed": 200,
+    "ok": true,
+    "note": ""
+  },
+  {
+    "saas": "f3",
+    "step": "billing webhook with a forged signature: 400",
+    "expected": 400,
+    "observed": 400,
+    "ok": true,
+    "note": ""
+  },
+  {
+    "saas": "f3",
+    "step": "dashboard after payment: Growth plan",
+    "expected": "growth",
+    "observed": "growth",
+    "ok": true,
+    "note": ""
+  },
+  {
+    "saas": "f3",
+    "step": "admin generate-coupons: 200 with a code (200)",
+    "expected": true,
+    "observed": true,
+    "ok": true,
+    "note": ""
+  },
+  {
+    "saas": "f3",
+    "step": "redeem: 200 ({\"success\":true,\"message\":\"Scale (Lifetime) plan activated! Welcome back.\",\"plan\":\"scale\",\"isNewUser)",
+    "expected": 200,
+    "observed": 200,
+    "ok": true,
+    "note": ""
+  },
+  {
+    "saas": "f3",
+    "step": "dashboard after redeem: Scale plan",
+    "expected": "scale",
+    "observed": "growth",
+    "ok": false,
+    "note": ""
+  },
+  {
+    "saas": "f3",
+    "step": "same coupon a second time: rejected 4xx",
+    "expected": true,
+    "observed": true,
+    "ok": true,
+    "note": ""
+  },
+  {
+    "saas": "f3",
+    "step": "connect invoice.payment_failed: 200",
+    "expected": 200,
+    "observed": 200,
+    "ok": true,
+    "note": ""
+  },
+  {
+    "saas": "f3",
+    "step": "failed payment recorded: pending_recovery, amount 4900 eur, exact address",
+    "expected": ["pending_recovery", 4900, "eur", "end.customer.qa07@example.org"],
+    "observed": ["pending_recovery", 4900, "eur", "end.customer.qa07@example.org"],
+    "ok": true,
+    "note": ""
+  },
+  {
+    "saas": "f3",
+    "step": "dunning #1: exactly one message to the end customer",
+    "expected": 1,
+    "observed": 1,
+    "ok": true,
+    "note": ""
+  },
+  {
+    "saas": "f3",
+    "step": "dunning #1: recipient is exactly the end customer",
+    "expected": [
+      {
+        "email": "end.customer.qa07@example.org"
+      }
+    ],
+    "observed": [
+      {
+        "email": "end.customer.qa07@example.org"
+      }
+    ],
+    "ok": true,
+    "note": ""
+  },
+  {
+    "saas": "f3",
+    "step": "dunning #1: sender is hello@paymentrescue.dev (a mailbox that receives replies)",
+    "expected": "hello@paymentrescue.dev",
+    "observed": "hello@paymentrescue.dev",
+    "ok": true,
+    "note": ""
+  },
+  {
+    "saas": "f3",
+    "step": "dunning #1: display name is the merchant, not us",
+    "expected": "Rescue QA Ltd",
+    "observed": "Rescue QA Ltd",
+    "ok": true,
+    "note": ""
+  },
+  {
+    "saas": "f3",
+    "step": "dunning #1: body states the exact amount 49.00",
+    "expected": true,
+    "observed": true,
+    "ok": true,
+    "note": "We tried to charge €49.00 for your "
+  },
+  {
+    "saas": "f3",
+    "step": "dunning #1: body carries the signed update-payment link for THIS invoice",
+    "expected": true,
+    "observed": true,
+    "ok": true,
+    "note": ""
+  },
+  {
+    "saas": "f3",
+    "step": "replayed event: 200 and NO second message",
+    "expected": [200, 1],
+    "observed": [200, 1],
+    "ok": true,
+    "note": ""
+  },
+  {
+    "saas": "f3",
+    "step": "dunning cron with a wrong secret: 401/403",
+    "expected": true,
+    "observed": true,
+    "ok": true,
+    "note": ""
+  },
+  {
+    "saas": "f3",
+    "step": "dunning cron with the right secret: 200 ({\"success\":true,\"scanned\":1,\"processedCount\":1,\"emailsSent\":1,\"abandonedCount\":0,\"errorCount\":0,\"tim)",
+    "expected": 200,
+    "observed": 200,
+    "ok": true,
+    "note": ""
+  },
+  {
+    "saas": "f3",
+    "step": "cron: exactly one NEW message (step 2), to the same address",
+    "expected": 2,
+    "observed": 2,
+    "ok": true,
+    "note": ""
+  },
+  {
+    "saas": "f3",
+    "step": "cron step 2: still the exact amount 49.00 and the same invoice link",
+    "expected": true,
+    "observed": true,
+    "ok": true,
+    "note": ""
+  },
+  {
+    "saas": "f3",
+    "step": "step 1 and step 2 differ (a real sequence, not the same text twice)",
+    "expected": true,
+    "observed": true,
+    "ok": true,
+    "note": ""
+  },
+  {
+    "saas": "f3",
+    "step": "connect invoice.payment_succeeded: 200",
+    "expected": 200,
+    "observed": 200,
+    "ok": true,
+    "note": ""
+  },
+  {
+    "saas": "f3",
+    "step": "failed payment transitions to recovered with a timestamp",
+    "expected": ["recovered", true],
+    "observed": ["recovered", true],
+    "ok": true,
+    "note": ""
+  },
+  {
+    "saas": "f3",
+    "step": "after recovery the cron sends nothing more",
+    "expected": 2,
+    "observed": 2,
+    "ok": true,
+    "note": ""
+  },
+  {
+    "saas": "f3",
+    "step": "Redis outage: /api/auth/me 503 (not a logout)",
+    "expected": 503,
+    "observed": 503,
+    "ok": true,
+    "note": ""
+  },
+  {
+    "saas": "f3",
+    "step": "Redis outage: /api/dashboard 503",
+    "expected": 503,
+    "observed": 503,
+    "ok": true,
+    "note": ""
+  },
+  {
+    "saas": "f3",
+    "step": "Redis outage: /api/auth/login 503",
+    "expected": 503,
+    "observed": 503,
+    "ok": true,
+    "note": ""
+  },
+  {
+    "saas": "f3",
+    "step": "after outage: /api/auth/me back to 200 (session intact)",
+    "expected": 200,
+    "observed": 200,
+    "ok": true,
+    "note": ""
+  },
+  {
+    "saas": "f3",
+    "step": "export endpoint documents itself as a 30-day request",
+    "expected": true,
+    "observed": true,
+    "ok": true,
+    "note": ""
+  },
+  {
+    "saas": "f3",
+    "step": "delete request for someone else's address: 403",
+    "expected": 403,
+    "observed": 403,
+    "ok": true,
+    "note": ""
+  },
+  {
+    "saas": "f3",
+    "step": "journey: uncaught exceptions",
+    "expected": [],
+    "observed": [],
+    "ok": true,
+    "note": ""
+  }
+]

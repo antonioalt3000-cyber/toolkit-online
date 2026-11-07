@@ -1,0 +1,45 @@
+{
+  "slug": "f3",
+  "domain": "paymentrescue.dev",
+  "startedAt": "2026-11-07T07:09:41.157Z",
+  "finishedAt": "2026-11-07T07:10:47.547Z",
+  "healthBefore": {
+    "status": 200,
+    "commit": "80afb41"
+  },
+  "healthAfter": {
+    "status": 200,
+    "commit": "80afb41"
+  },
+  "allGreen": false,
+  "steps": [
+    {
+      "step": "sweep-public",
+      "exit": 0,
+      "signal": null,
+      "ms": 3804,
+      "summary": "f3   paymentrescue.dev  pagine= 33 non-200=0 senza-og:image=0 meta-ereditati=0 h1-multipli=0 backslash-500=0/33",
+      "ok": true
+    },
+    {
+      "step": "journey-public",
+      "exit": 0,
+      "signal": null,
+      "ms": 52886,
+      "summary": "--- PaymentRescue: 6/6 PASS",
+      "nonVerified": false,
+      "fails": [],
+      "ok": true
+    },
+    {
+      "step": "journey-core",
+      "exit": 2,
+      "signal": null,
+      "ms": 74,
+      "summary": "",
+      "nonVerified": false,
+      "fails": [],
+      "ok": false
+    }
+  ]
+}

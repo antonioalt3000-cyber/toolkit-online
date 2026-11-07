@@ -1,0 +1,16 @@
+[PASS] R01 baseline (no emulation)
+[PASS] R02 clock +5 min
+[PASS] R03 clock -5 min
+[PASS] R04 clock +1 h
+[PASS] R05 clock -1 h
+[FAIL] R06 clock +1 day  -> refused: undefined "no-response" | ui=""
+[FAIL] R07 clock -7 h (also = a tab left open ~7 h)  -> refused: undefined "no-response" | ui=""
+[FAIL] R08 clock -1 day  -> refused: undefined "no-response" | ui=""
+[FAIL] R09 tz Pacific/Kiritimati (UTC+14) + locale ar-EG (RTL)  -> refused: undefined "no-response" | ui=""
+[FAIL] R10 tz America/Los_Angeles + locale he-IL (RTL)  -> refused: undefined "no-response" | ui=""
+[FAIL] R11 tz Asia/Kolkata + locale ja-JP  -> refused: undefined "no-response" | ui=""
+[FAIL] R12 Safari iOS user agent (mobile)  -> refused: undefined "no-response" | ui=""
+[FAIL] R13 Firefox Android user agent (mobile)  -> refused: undefined "no-response" | ui=""
+[FAIL] R14 trackers blocked (GA / GTM / PostHog / Vercel / Sentry)  -> refused: undefined "no-response" | ui=""
+[FAIL] R15 slow 3G on the API call (2 s latency, 400 kbps)  -> ui=""
+[FAIL] R16 autofill also fills the honeypot (a customer with a password manager)  -> was NOT refused

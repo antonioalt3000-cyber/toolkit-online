@@ -1,0 +1,114 @@
+[
+  {
+    "saas": "f2",
+    "step": "control: a legitimate scan from the page answers 200 with a numeric score",
+    "expected": [200, true],
+    "observed": [200, true],
+    "ok": true,
+    "note": "{\"url\":\"https://example.com\",\"timestamp\":\"2026-11-07T01:10:55.631Z\",\"score\":99,\""
+  },
+  {
+    "saas": "f2",
+    "step": "invalid/hostile url \"not a url\": a 4xx that is NOT the bot gate",
+    "expected": true,
+    "observed": true,
+    "ok": true,
+    "note": "HTTP 400 {\"error\":\"url: Invalid URL, url: Only http(s) URLs allowed\",\"code\":\"VALIDATION_FAILED\"}"
+  },
+  {
+    "saas": "f2",
+    "step": "invalid/hostile url \"\": a 4xx that is NOT the bot gate",
+    "expected": true,
+    "observed": true,
+    "ok": true,
+    "note": "HTTP 400 {\"error\":\"url: Invalid URL, url: Only http(s) URLs allowed\",\"code\":\"VALIDATION_FAILED\"}"
+  },
+  {
+    "saas": "f2",
+    "step": "invalid/hostile url \"ftp://example.org/\": a 4xx that is NOT the bot gate",
+    "expected": true,
+    "observed": true,
+    "ok": true,
+    "note": "HTTP 400 {\"error\":\"url: Only http(s) URLs allowed\",\"code\":\"VALIDATION_FAILED\"}"
+  },
+  {
+    "saas": "f2",
+    "step": "invalid/hostile url \"javascript:alert(1)\": a 4xx that is NOT the bot gate",
+    "expected": true,
+    "observed": true,
+    "ok": true,
+    "note": "HTTP 400 {\"error\":\"url: Only http(s) URLs allowed\",\"code\":\"VALIDATION_FAILED\"}"
+  },
+  {
+    "saas": "f2",
+    "step": "invalid/hostile url \"file:///etc/passwd\": a 4xx that is NOT the bot gate",
+    "expected": true,
+    "observed": true,
+    "ok": true,
+    "note": "HTTP 400 {\"error\":\"url: Only http(s) URLs allowed\",\"code\":\"VALIDATION_FAILED\"}"
+  },
+  {
+    "saas": "f2",
+    "step": "invalid/hostile url \"http://127.0.0.1/\": a 4xx that is NOT the bot gate",
+    "expected": true,
+    "observed": true,
+    "ok": true,
+    "note": "HTTP 400 {\"error\":\"Internal/private URLs are not allowed\"}"
+  },
+  {
+    "saas": "f2",
+    "step": "invalid/hostile url \"http://169.254.169.254/\": a 4xx that is NOT the bot gate",
+    "expected": true,
+    "observed": true,
+    "ok": true,
+    "note": "HTTP 400 {\"error\":\"Internal/private URLs are not allowed\"}"
+  },
+  {
+    "saas": "f2",
+    "step": "invalid/hostile url \"http://2130706433/\": a 4xx that is NOT the bot gate",
+    "expected": true,
+    "observed": true,
+    "ok": true,
+    "note": "HTTP 400 {\"error\":\"Internal/private URLs are not allowed\"}"
+  },
+  {
+    "saas": "f2",
+    "step": "invalid/hostile url \"http://[::1]/\": a 4xx that is NOT the bot gate",
+    "expected": true,
+    "observed": true,
+    "ok": true,
+    "note": "HTTP 400 {\"error\":\"Internal/private URLs are not allowed\"}"
+  },
+  {
+    "saas": "f2",
+    "step": "invalid/hostile url \"https://aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\": a 4xx that is NOT the bot gate",
+    "expected": true,
+    "observed": true,
+    "ok": true,
+    "note": "HTTP 400 {\"error\":\"Invalid hostname\"}"
+  },
+  {
+    "saas": "f2",
+    "step": "empty 200 body: no 5xx and no NaN/null score",
+    "expected": true,
+    "observed": true,
+    "ok": true,
+    "note": "HTTP 200 score=97 "
+  },
+  {
+    "saas": "f2",
+    "step": "404 page: no 5xx and no NaN/null score",
+    "expected": true,
+    "observed": true,
+    "ok": true,
+    "note": "HTTP 200 score=97 "
+  },
+  {
+    "saas": "f2",
+    "step": "determinism: the same page scanned again has the same score",
+    "expected": 99,
+    "observed": 99,
+    "ok": true,
+    "note": "200/200"
+  }
+]

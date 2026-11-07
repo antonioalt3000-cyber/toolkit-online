@@ -1,0 +1,15 @@
+
+===== seo seoscope.dev — feature core con oracolo indipendente
+
+PASS  audit risponde 200  — HTTP 200
+PASS  score = media dei punteggi di categoria pesata  — riportato 84, ricalcolato 84.31 (pesi content:9 meta:7 social:3 technical:6 performance:7)
+PASS  i punteggi di categoria coincidono fra le due viste
+PASS  l oracolo e il prodotto guardano la stessa pagina  — oracolo su https://toolkitonline.vip/en
+PASS  il titolo letto e quello della pagina  — prodotto "ToolKit Online — Free Calculators, Converters & Tools | ToolKit Online" vs reale "ToolKit Online — Free Calculators, Converters & Tools | ToolKit Online"
+PASS  la description letta e quella della pagina  — prodotto 83 car, reale 83 car
+PASS  il conteggio immagini coincide col parser indipendente  — prodotto 0, parser 0
+PASS  fail_under non soddisfatto da 422  — HTTP 422 (score 84 < 99)
+PASS  i 2 cron dichiarati accettano il proprio segreto  — monitors=200 weekly-summary=200
+PASS  i cron rifiutano un segreto sbagliato  — 401/403 su tutti
+
+--- seo: 10/10 PASS

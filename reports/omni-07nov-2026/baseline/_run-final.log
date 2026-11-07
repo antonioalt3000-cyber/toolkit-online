@@ -1,0 +1,40 @@
+f1   sweep-public    OK   f1   complipilot.dev    pagine= 42 non-200=0 senza-og:image=0 meta-ereditati=0 h1-multipli=0 backslash-500=0/42
+f1   journey-public  OK   --- CompliPilot: 6/6 PASS
+f1   journey-core    OK   --- f1: 7/7 PASS
+== f1 baseline VERDE · commit 67d23a2 · marker scritto
+cfg  sweep-public    OK   cfg  getcardforge.dev   pagine= 11 non-200=0 senza-og:image=0 meta-ereditati=0 h1-multipli=0 backslash-500=0/11
+cfg  journey-public  OK   --- CardForge: 6/6 PASS
+cfg  journey-core    OK   --- cfg: 6/6 PASS
+== cfg baseline VERDE · commit 9ed8924 · marker scritto
+f2   sweep-public    OK   f2   fixmyweb.dev       pagine= 51 non-200=0 senza-og:image=0 meta-ereditati=0 h1-multipli=0 backslash-500=0/51
+f2   journey-public  OK   --- FixMyWeb: 6/6 PASS
+f2   journey-core    ROSSO  --- f2: 12/13 PASS
+== f2 baseline CON ROSSI · commit 946e843 · marker scritto
+eg   sweep-public    OK   eg   emailguard.dev     pagine= 11 non-200=0 senza-og:image=0 meta-ereditati=0 h1-multipli=0 backslash-500=0/11
+eg   journey-public  OK   --- EmailGuard: 6/6 PASS
+eg   journey-core    OK   --- eg: 9/9 PASS · 1 NON VERIFICATI (i 3 cron di questo prodotto)
+== eg baseline VERDE · commit 4ed29e6 · marker scritto
+f3   sweep-public    OK   f3   paymentrescue.dev  pagine= 33 non-200=0 senza-og:image=0 meta-ereditati=0 h1-multipli=0 backslash-500=0/33
+f3   journey-public  OK   --- PaymentRescue: 6/6 PASS
+f3   journey-core    ROSSO  
+== f3 baseline CON ROSSI · commit 80afb41 · marker scritto
+hsh  sweep-public    OK   hsh  headershield.dev   pagine= 11 non-200=0 senza-og:image=0 meta-ereditati=0 h1-multipli=0 backslash-500=0/11
+hsh  journey-public  OK   --- HeaderShield: 6/6 PASS
+hsh  journey-core    OK   --- hsh: 5/5 PASS · 1 NON VERIFICATI (i 1 cron di questo prodotto)
+== hsh baseline VERDE · commit 951f6f1 · marker scritto
+f4   sweep-public    OK   f4   parseflow.dev      pagine= 31 non-200=0 senza-og:image=0 meta-ereditati=0 h1-multipli=0 backslash-500=0/31
+f4   journey-public  OK   --- ParseFlow: 6/6 PASS
+f4   journey-core    OK   --- f4: 12/12 PASS · 1 NON VERIFICATI (i 4 cron di questo prodotto)
+== f4 baseline VERDE · commit c6f6728 · marker scritto
+hkl  sweep-public    OK   hkl  gethooklab.dev     pagine= 13 non-200=0 senza-og:image=0 meta-ereditati=0 h1-multipli=0 backslash-500=0/13
+hkl  journey-public  OK   --- HookLab: 6/6 PASS
+hkl  journey-core    OK   --- hkl: 12/12 PASS · 1 NON VERIFICATI (i 2 cron di questo prodotto)
+== hkl baseline VERDE · commit 454cfab · marker scritto
+b7   sweep-public    OK   b7   captureapi.dev     pagine= 39 non-200=0 senza-og:image=0 meta-ereditati=0 h1-multipli=0 backslash-500=0/39
+b7   journey-public  OK   --- CaptureAPI: 6/6 PASS
+b7   journey-core    OK   --- b7: 11/11 PASS
+== b7 baseline VERDE · commit 1945ec8 · marker scritto
+seo  sweep-public    OK   seo  seoscope.dev       pagine= 11 non-200=0 senza-og:image=0 meta-ereditati=0 h1-multipli=0 backslash-500=0/11
+seo  journey-public  OK   --- SEOScope: 6/6 PASS
+seo  journey-core    OK   --- seo: 8/8 PASS · 1 NON VERIFICATI (i 2 cron di questo prodotto)
+== seo baseline VERDE · commit 805a51d · marker scritto

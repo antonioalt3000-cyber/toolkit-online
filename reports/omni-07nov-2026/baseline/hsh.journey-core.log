@@ -1,0 +1,11 @@
+
+===== hsh headershield.dev — feature core con oracolo indipendente
+
+PASS  scan risponde 200  — HTTP 200
+PASS  score = punti ottenuti / punti massimi  — riportato 95, ricalcolato 95 (95/100)
+PASS  ogni rilievo coincide con gli header veri  — 9 rilievi confrontati
+PASS  la postura SPF coincide col DNS reale  — prodotto found, DNS presente
+PASS  fail_under non soddisfatto da 422  — HTTP 422 (score 95 < 99)
+NON VERIF.  i 1 cron di questo prodotto  — CRON_SECRET esiste ma e' marcata Sensitive: vercel env pull la restituisce vuota, quindi il percorso positivo non e' stato esercitato
+
+--- hsh: 5/5 PASS · 1 NON VERIFICATI (i 1 cron di questo prodotto)

@@ -1,0 +1,121 @@
+{
+  "label": "T0",
+  "at": "2026-11-06T23:37:14.052Z",
+  "products": {
+    "f1": {
+      "status": 200,
+      "dealMirrorPrice": 49,
+      "totalDelivered": 976,
+      "totalUsed": 58,
+      "remaining": 918,
+      "usagePercent": 6,
+      "internal.delivered": 49,
+      "internal.used": 34,
+      "internal.remaining": 15
+    },
+    "f2": {
+      "status": 200,
+      "dealMirrorPrice": 25,
+      "totalDelivered": 977,
+      "totalUsed": 76,
+      "remaining": 901,
+      "usagePercent": 8,
+      "internal.delivered": 48,
+      "internal.used": 30,
+      "internal.remaining": 18
+    },
+    "f3": {
+      "status": 200,
+      "dealMirrorPrice": 49,
+      "totalDelivered": 469,
+      "totalUsed": 44,
+      "remaining": 425,
+      "usagePercent": 9,
+      "internal.delivered": 46,
+      "internal.used": 28,
+      "internal.remaining": 18
+    },
+    "f4": {
+      "status": 200,
+      "dealMirrorPrice": 25,
+      "totalDelivered": 966,
+      "totalUsed": 62,
+      "remaining": 904,
+      "usagePercent": 6,
+      "internal.delivered": 61,
+      "internal.used": 39,
+      "internal.remaining": 22
+    },
+    "b7": {
+      "status": 200,
+      "dealMirrorPrice": 25,
+      "totalDelivered": 962,
+      "totalUsed": 58,
+      "remaining": 904,
+      "usagePercent": 6,
+      "internal.delivered": 65,
+      "internal.used": 42,
+      "internal.remaining": 23
+    },
+    "cfg": {
+      "status": 200,
+      "dealMirrorPrice": 39,
+      "totalDelivered": 214,
+      "totalUsed": 10,
+      "remaining": 204,
+      "usagePercent": 5,
+      "internal.delivered": 77,
+      "internal.used": 49,
+      "internal.remaining": 28,
+      "redemptionsTruncated": false
+    },
+    "eg": {
+      "status": 200,
+      "dealMirrorPrice": 39,
+      "totalDelivered": 214,
+      "totalUsed": 12,
+      "remaining": 202,
+      "usagePercent": 6,
+      "internal.delivered": 56,
+      "internal.used": 38,
+      "internal.remaining": 18,
+      "redemptionsTruncated": false
+    },
+    "hsh": {
+      "status": 200,
+      "dealMirrorPrice": 39,
+      "totalDelivered": 214,
+      "totalUsed": 9,
+      "remaining": 205,
+      "usagePercent": 4,
+      "internal.delivered": 64,
+      "internal.used": 43,
+      "internal.remaining": 21,
+      "redemptionsTruncated": false
+    },
+    "hkl": {
+      "status": 200,
+      "dealMirrorPrice": 39,
+      "totalDelivered": 214,
+      "totalUsed": 11,
+      "remaining": 203,
+      "usagePercent": 5,
+      "internal.delivered": 1075,
+      "internal.used": 47,
+      "internal.remaining": 1028,
+      "redemptionsTruncated": false
+    },
+    "seo": {
+      "status": 200,
+      "dealMirrorPrice": 59,
+      "totalDelivered": 214,
+      "totalUsed": 10,
+      "remaining": 204,
+      "usagePercent": 5,
+      "internal.delivered": 76,
+      "internal.used": 50,
+      "internal.remaining": 26,
+      "redemptionsTruncated": false
+    }
+  }
+}

@@ -1,0 +1,32 @@
+{
+  "slug": "f1",
+  "dom": "complipilot.dev",
+  "email": "antonio.alt3000+qa07novf1@gmail.com",
+  "code": "QAOCT-5920-4679",
+  "results": [
+    {
+      "day": 1,
+      "what": "coniato un coupon interno via /api/admin/generate-coupons",
+      "pass": true,
+      "detail": "QAOCT-5920-4679"
+    },
+    {
+      "day": 1,
+      "what": "il riscatto parte e la POST /api/redeem risponde 2xx",
+      "pass": true,
+      "detail": "HTTP 200"
+    },
+    {
+      "day": 3,
+      "what": "la feature core risponde: uno scan AI Act con un punteggio",
+      "pass": true,
+      "detail": "{\"url\":\"https://example.com/\",\"overallScore\":72,\"categoryScores\":{\"aiAct\":96,\"gdpr\":29,\"dataProtection\":82,\"transparency\":69,\"hipaa\":null,\"ccpa\":null,\"nis2\":86},\"issues\":[{\"categor"
+    },
+    {
+      "day": 30,
+      "what": "nessun errore di console nel viaggio autenticato",
+      "pass": true,
+      "detail": ""
+    }
+  ]
+}

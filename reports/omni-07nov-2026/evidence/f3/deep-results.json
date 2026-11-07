@@ -1,0 +1,32 @@
+{
+  "slug": "f3",
+  "dom": "paymentrescue.dev",
+  "email": "antonio.alt3000+qa07novf3@gmail.com",
+  "code": "QAOCT-24D2-D753",
+  "results": [
+    {
+      "day": 1,
+      "what": "coniato un coupon interno via /api/admin/generate-coupons",
+      "pass": true,
+      "detail": "QAOCT-24D2-D753"
+    },
+    {
+      "day": 1,
+      "what": "il riscatto parte e la POST /api/redeem risponde 2xx",
+      "pass": true,
+      "detail": "HTTP 200"
+    },
+    {
+      "day": 3,
+      "what": "la feature core risponde: la dashboard dunning",
+      "pass": true,
+      "detail": "{\"failedPayments\":0,\"recoveryAttempts\":0,\"revenueRecovered\":0,\"revenueFailed\":0,\"recoveryRate\":0,\"recentPayments\":[],\"isConnected\":false,\"plan\":\"scale\",\"email\":\"antonio.alt3000+qa0"
+    },
+    {
+      "day": 30,
+      "what": "nessun errore di console nel viaggio autenticato",
+      "pass": true,
+      "detail": ""
+    }
+  ]
+}

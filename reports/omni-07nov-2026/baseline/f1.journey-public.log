@@ -1,0 +1,11 @@
+
+===== CompliPilot (complipilot.dev) — mese compresso, browser reale
+
+PASS  D1  home rende senza errori di console
+PASS  D1  home senza risposte >=400
+PASS  D1  nessuno scorrimento orizzontale a 1366px  — scrollWidth 1351 vs clientWidth 1351
+PASS  D1  /redeem espone un campo email
+PASS  D1  /redeem senza errori di console
+PASS  D2  nessuno scorrimento orizzontale a 375px  — scrollWidth 375 vs clientWidth 375 | span.font-semibold
+
+--- CompliPilot: 6/6 PASS

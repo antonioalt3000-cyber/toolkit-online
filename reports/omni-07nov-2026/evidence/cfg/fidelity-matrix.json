@@ -1,0 +1,229 @@
+{
+  "slug": "cfg",
+  "base": "http://localhost:3215",
+  "at": "2026-11-06T23:36:25.197Z",
+  "results": [
+    {
+      "id": "S01",
+      "desc": "signup baseline",
+      "verdict": "PASS",
+      "observed": {
+        "requests": 1,
+        "statuses": [200],
+        "causes": [
+          {
+            "code": "",
+            "msg": ""
+          }
+        ],
+        "ui": {
+          "error": "",
+          "formPresent": false
+        },
+        "consoleErrors": [
+          "eval() is not supported in this environment. If this page was served with a `Content-Security-Policy` header, make sure that `unsafe-eval` is included. React requires eval() in development mode for various debugging features like reconstructing callstacks from a different environment.\nReact will never use eval() in production mode"
+        ],
+        "exceptions": []
+      },
+      "note": ""
+    },
+    {
+      "id": "S02",
+      "desc": "signup clock +5 min",
+      "verdict": "PASS",
+      "observed": {
+        "requests": 1,
+        "statuses": [200],
+        "causes": [
+          {
+            "code": "",
+            "msg": ""
+          }
+        ],
+        "ui": {
+          "error": "",
+          "formPresent": false
+        },
+        "consoleErrors": [
+          "eval() is not supported in this environment. If this page was served with a `Content-Security-Policy` header, make sure that `unsafe-eval` is included. React requires eval() in development mode for various debugging features like reconstructing callstacks from a different environment.\nReact will never use eval() in production mode"
+        ],
+        "exceptions": []
+      },
+      "note": ""
+    },
+    {
+      "id": "S03",
+      "desc": "signup clock -5 min",
+      "verdict": "PASS",
+      "observed": {
+        "requests": 1,
+        "statuses": [200],
+        "causes": [
+          {
+            "code": "",
+            "msg": ""
+          }
+        ],
+        "ui": {
+          "error": "",
+          "formPresent": false
+        },
+        "consoleErrors": [
+          "eval() is not supported in this environment. If this page was served with a `Content-Security-Policy` header, make sure that `unsafe-eval` is included. React requires eval() in development mode for various debugging features like reconstructing callstacks from a different environment.\nReact will never use eval() in production mode"
+        ],
+        "exceptions": []
+      },
+      "note": ""
+    },
+    {
+      "id": "S04",
+      "desc": "signup clock -7 h (tab left open)",
+      "verdict": "PASS",
+      "observed": {
+        "requests": 1,
+        "statuses": [200],
+        "causes": [
+          {
+            "code": "",
+            "msg": ""
+          }
+        ],
+        "ui": {
+          "error": "",
+          "formPresent": false
+        },
+        "consoleErrors": [
+          "eval() is not supported in this environment. If this page was served with a `Content-Security-Policy` header, make sure that `unsafe-eval` is included. React requires eval() in development mode for various debugging features like reconstructing callstacks from a different environment.\nReact will never use eval() in production mode"
+        ],
+        "exceptions": []
+      },
+      "note": ""
+    },
+    {
+      "id": "S05",
+      "desc": "signup RTL locale + far time zone",
+      "verdict": "FAIL",
+      "observed": {
+        "requests": 1,
+        "statuses": [400],
+        "causes": [
+          {
+            "code": "FORM_TOO_FAST",
+            "msg": "That was too quick — please wait a moment and submit again."
+          }
+        ],
+        "ui": {
+          "error": "That was too quick — please wait a moment and submit again.",
+          "formPresent": true
+        },
+        "consoleErrors": [
+          "eval() is not supported in this environment. If this page was served with a `Content-Security-Policy` header, make sure that `unsafe-eval` is included. React requires eval() in development mode for various debugging features like reconstructing callstacks from a different environment.\nReact will never use eval() in production mode",
+          "[network] Failed to load resource: the server responded with a status of 400 (Bad Request) http://localhost:3215/api/signup"
+        ],
+        "exceptions": []
+      },
+      "note": "refused: {\"code\":\"FORM_TOO_FAST\",\"msg\":\"That was too quick — please wait a moment and submit again.\"} | ui=\"That was too quick — please wait a moment and submit again.\""
+    },
+    {
+      "id": "S06",
+      "desc": "signup Safari iOS UA",
+      "verdict": "FAIL",
+      "observed": {
+        "requests": 1,
+        "statuses": [400],
+        "causes": [
+          {
+            "code": "FORM_TOO_FAST",
+            "msg": "That was too quick — please wait a moment and submit again."
+          }
+        ],
+        "ui": {
+          "error": "That was too quick — please wait a moment and submit again.",
+          "formPresent": true
+        },
+        "consoleErrors": [
+          "eval() is not supported in this environment. If this page was served with a `Content-Security-Policy` header, make sure that `unsafe-eval` is included. React requires eval() in development mode for various debugging features like reconstructing callstacks from a different environment.\nReact will never use eval() in production mode",
+          "[network] Failed to load resource: the server responded with a status of 400 (Bad Request) http://localhost:3215/api/signup"
+        ],
+        "exceptions": []
+      },
+      "note": "refused: {\"code\":\"FORM_TOO_FAST\",\"msg\":\"That was too quick — please wait a moment and submit again.\"} | ui=\"That was too quick — please wait a moment and submit again.\""
+    },
+    {
+      "id": "S07",
+      "desc": "signup trackers blocked",
+      "verdict": "FAIL",
+      "observed": {
+        "requests": 1,
+        "statuses": [400],
+        "causes": [
+          {
+            "code": "FORM_TOO_FAST",
+            "msg": "That was too quick — please wait a moment and submit again."
+          }
+        ],
+        "ui": {
+          "error": "That was too quick — please wait a moment and submit again.",
+          "formPresent": true
+        },
+        "consoleErrors": [
+          "eval() is not supported in this environment. If this page was served with a `Content-Security-Policy` header, make sure that `unsafe-eval` is included. React requires eval() in development mode for various debugging features like reconstructing callstacks from a different environment.\nReact will never use eval() in production mode",
+          "[network] Failed to load resource: the server responded with a status of 400 (Bad Request) http://localhost:3215/api/signup"
+        ],
+        "exceptions": []
+      },
+      "note": "refused: {\"code\":\"FORM_TOO_FAST\",\"msg\":\"That was too quick — please wait a moment and submit again.\"} | ui=\"That was too quick — please wait a moment and submit again.\""
+    },
+    {
+      "id": "S08",
+      "desc": "signup: autofill also fills the honeypot",
+      "verdict": "PASS",
+      "observed": {
+        "requests": 1,
+        "statuses": [400],
+        "causes": [
+          {
+            "code": "FORM_UNVERIFIED",
+            "msg": "This form could not be verified. Please reload the page and try again."
+          }
+        ],
+        "ui": {
+          "error": "This form could not be verified. Please reload the page and try again.",
+          "formPresent": true
+        },
+        "consoleErrors": [
+          "eval() is not supported in this environment. If this page was served with a `Content-Security-Policy` header, make sure that `unsafe-eval` is included. React requires eval() in development mode for various debugging features like reconstructing callstacks from a different environment.\nReact will never use eval() in production mode",
+          "[network] Failed to load resource: the server responded with a status of 400 (Bad Request) http://localhost:3215/api/signup"
+        ],
+        "exceptions": []
+      },
+      "note": "refused: {\"code\":\"FORM_UNVERIFIED\",\"msg\":\"This form could not be verified. Please reload the page and try again.\"}"
+    },
+    {
+      "id": "S09",
+      "desc": "signup: autofill + immediate click",
+      "verdict": "PASS",
+      "observed": {
+        "requests": 1,
+        "statuses": [400],
+        "causes": [
+          {
+            "code": "FORM_TOO_FAST",
+            "msg": "That was too quick — please wait a moment and submit again."
+          }
+        ],
+        "ui": {
+          "error": "That was too quick — please wait a moment and submit again.",
+          "formPresent": true
+        },
+        "consoleErrors": [
+          "eval() is not supported in this environment. If this page was served with a `Content-Security-Policy` header, make sure that `unsafe-eval` is included. React requires eval() in development mode for various debugging features like reconstructing callstacks from a different environment.\nReact will never use eval() in production mode",
+          "[network] Failed to load resource: the server responded with a status of 400 (Bad Request) http://localhost:3215/api/signup"
+        ],
+        "exceptions": [],
+        "sinceHydrationMs": 0
+      },
+      "note": "refused: {\"code\":\"FORM_TOO_FAST\",\"msg\":\"That was too quick — please wait a moment and submit again.\"}"
+    }
+  ]
+}

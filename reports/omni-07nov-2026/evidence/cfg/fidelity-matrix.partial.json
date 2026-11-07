@@ -1,0 +1,186 @@
+{
+  "slug": "cfg",
+  "base": "https://getcardforge.dev",
+  "at": "2026-11-07T01:37:31.654Z",
+  "results": [
+    {
+      "id": "R01",
+      "desc": "baseline (no emulation)",
+      "verdict": "PASS",
+      "observed": {
+        "requests": 1,
+        "statuses": [200],
+        "causes": [
+          {
+            "code": "",
+            "msg": "Lifetime access activated."
+          }
+        ],
+        "ui": {
+          "error": "",
+          "formPresent": false
+        },
+        "consoleErrors": [],
+        "exceptions": [],
+        "couponState": {
+          "valid": true,
+          "used": false
+        }
+      },
+      "note": ""
+    },
+    {
+      "id": "R02b",
+      "desc": "clock +3.0 s, a customer who really takes 3.0 s+ (skew equal to the think time: the gate sees ~0 s)",
+      "verdict": "PASS",
+      "observed": {
+        "requests": 1,
+        "statuses": [200],
+        "causes": [
+          {
+            "code": "",
+            "msg": "Lifetime access activated."
+          }
+        ],
+        "ui": {
+          "error": "",
+          "formPresent": false
+        },
+        "consoleErrors": [],
+        "exceptions": [],
+        "couponState": {
+          "valid": true,
+          "used": false
+        }
+      },
+      "note": ""
+    },
+    {
+      "id": "R07",
+      "desc": "clock -7 h (also = a tab left open ~7 h)",
+      "verdict": "PASS",
+      "observed": {
+        "requests": 1,
+        "statuses": [200],
+        "causes": [
+          {
+            "code": "",
+            "msg": "Lifetime access activated."
+          }
+        ],
+        "ui": {
+          "error": "",
+          "formPresent": false
+        },
+        "consoleErrors": [],
+        "exceptions": [],
+        "couponState": {
+          "valid": true,
+          "used": false
+        }
+      },
+      "note": ""
+    },
+    {
+      "id": "R18",
+      "desc": "double-click on the submit control",
+      "verdict": "PASS",
+      "observed": {
+        "requests": 1,
+        "statuses": [200],
+        "causes": [
+          {
+            "code": "",
+            "msg": "Lifetime access activated."
+          }
+        ],
+        "ui": {
+          "error": "",
+          "formPresent": false
+        },
+        "consoleErrors": [],
+        "exceptions": [],
+        "couponState": {
+          "valid": true,
+          "used": false
+        },
+        "successes": 1
+      },
+      "note": "requests=1"
+    },
+    {
+      "id": "R19",
+      "desc": "double-enter on the submit control",
+      "verdict": "PASS",
+      "observed": {
+        "requests": 1,
+        "statuses": [200],
+        "causes": [
+          {
+            "code": "",
+            "msg": "Lifetime access activated."
+          }
+        ],
+        "ui": {
+          "error": "",
+          "formPresent": false
+        },
+        "consoleErrors": [],
+        "exceptions": [],
+        "couponState": {
+          "valid": true,
+          "used": false
+        },
+        "successes": 1
+      },
+      "note": "requests=1"
+    },
+    {
+      "id": "R20",
+      "desc": "two tabs submit the same coupon together",
+      "verdict": "PASS",
+      "observed": {
+        "wins": 1,
+        "statuses": [400, 200],
+        "loser": {
+          "code": "COUPON_USED",
+          "msg": "This coupon has already been redeemed."
+        },
+        "couponState": {
+          "valid": true,
+          "used": false
+        }
+      },
+      "note": "loser told: {\"code\":\"COUPON_USED\",\"msg\":\"This coupon has already been redeemed.\"}"
+    },
+    {
+      "id": "R21",
+      "desc": "refresh after redeeming, then redeem the same coupon again",
+      "verdict": "PASS",
+      "observed": {
+        "first": 200,
+        "second": 400,
+        "cause": {
+          "code": "COUPON_USED",
+          "msg": "This coupon has already been redeemed."
+        }
+      },
+      "note": "told: {\"code\":\"COUPON_USED\",\"msg\":\"This coupon has already been redeemed.\"}"
+    },
+    {
+      "id": "R22",
+      "desc": "rate limit trips: the message says slow down, not \"invalid coupon\"",
+      "verdict": "PASS",
+      "observed": {
+        "statuses": [400, 400, 429, 429, 429, 429, 429],
+        "retryAfter": "34",
+        "cause": {
+          "code": "RATE_LIMIT_EXCEEDED",
+          "msg": "Too many requests. Please slow down."
+        },
+        "ui": "Too many requests. Please slow down."
+      },
+      "note": "429 told: {\"code\":\"RATE_LIMIT_EXCEEDED\",\"msg\":\"Too many requests. Please slow down.\"} | ui=\"Too many requests. Please slow down.\""
+    }
+  ]
+}

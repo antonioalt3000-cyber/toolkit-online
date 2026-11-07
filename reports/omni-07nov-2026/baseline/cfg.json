@@ -1,0 +1,45 @@
+{
+  "slug": "cfg",
+  "domain": "getcardforge.dev",
+  "startedAt": "2026-11-07T07:05:58.198Z",
+  "finishedAt": "2026-11-07T07:07:07.605Z",
+  "healthBefore": {
+    "status": 200,
+    "commit": "9ed8924"
+  },
+  "healthAfter": {
+    "status": 200,
+    "commit": "9ed8924"
+  },
+  "allGreen": true,
+  "steps": [
+    {
+      "step": "sweep-public",
+      "exit": 0,
+      "signal": null,
+      "ms": 3115,
+      "summary": "cfg  getcardforge.dev   pagine= 11 non-200=0 senza-og:image=0 meta-ereditati=0 h1-multipli=0 backslash-500=0/11",
+      "ok": true
+    },
+    {
+      "step": "journey-public",
+      "exit": 0,
+      "signal": null,
+      "ms": 38029,
+      "summary": "--- CardForge: 6/6 PASS",
+      "nonVerified": false,
+      "fails": [],
+      "ok": true
+    },
+    {
+      "step": "journey-core",
+      "exit": 0,
+      "signal": null,
+      "ms": 18589,
+      "summary": "--- cfg: 6/6 PASS",
+      "nonVerified": false,
+      "fails": [],
+      "ok": true
+    }
+  ]
+}

@@ -1,0 +1,111 @@
+{
+  "slug": "hsh",
+  "at": "2026-11-07T01:45:34.245Z",
+  "results": [
+    {
+      "what": "un nostro sito (https://emailguard.dev): lo scan risponde 200",
+      "pass": true,
+      "detail": "HTTP 200"
+    },
+    {
+      "what": "un nostro sito: score = punti/massimo (95/100 -> 95)",
+      "pass": true,
+      "detail": "riportato 95"
+    },
+    {
+      "what": "un nostro sito: ogni rilievo coincide con gli header letti da una connessione indipendente",
+      "pass": true,
+      "detail": "9 rilievi"
+    },
+    {
+      "what": "un nostro sito: fail_under = score (95) passa, fail_under = score+1 -> 422",
+      "pass": true,
+      "detail": "uguale HTTP 200, sopra HTTP 422"
+    },
+    {
+      "what": "un bersaglio volutamente scadente (https://example.com): lo scan risponde 200",
+      "pass": true,
+      "detail": "HTTP 200"
+    },
+    {
+      "what": "un bersaglio volutamente scadente: score = punti/massimo (0/100 -> 0)",
+      "pass": true,
+      "detail": "riportato 0"
+    },
+    {
+      "what": "un bersaglio volutamente scadente: ogni rilievo coincide con gli header letti da una connessione indipendente",
+      "pass": true,
+      "detail": "9 rilievi"
+    },
+    {
+      "what": "un bersaglio volutamente scadente: fail_under = score (0) passa, fail_under = score+1 -> 422",
+      "pass": true,
+      "detail": "uguale HTTP 200, sopra HTTP 422"
+    },
+    {
+      "what": "controllo negativo: ricalcolare con un massimo sbagliato (+10) smentisce il prodotto su almeno un bersaglio",
+      "pass": true,
+      "detail": "https://emailguard.dev 95, https://example.com 0"
+    },
+    {
+      "what": "il bersaglio scadente prende un voto più basso del nostro sito",
+      "pass": true,
+      "detail": "scadente 0, nostro 95"
+    },
+    {
+      "what": "bersaglio \"http://127.0.0.1/\": rifiutato con 4xx, mai 5xx e nessun dato",
+      "pass": true,
+      "detail": "HTTP 400"
+    },
+    {
+      "what": "bersaglio \"http://169.254.169.254/latest/meta-data/\": rifiutato con 4xx, mai 5xx e nessun dato",
+      "pass": true,
+      "detail": "HTTP 400"
+    },
+    {
+      "what": "bersaglio \"http://localhost:3000\": rifiutato con 4xx, mai 5xx e nessun dato",
+      "pass": true,
+      "detail": "HTTP 400"
+    },
+    {
+      "what": "bersaglio \"file:///etc/passwd\": rifiutato con 4xx, mai 5xx e nessun dato",
+      "pass": true,
+      "detail": "HTTP 400"
+    },
+    {
+      "what": "bersaglio \"http://[::1]/\": rifiutato con 4xx, mai 5xx e nessun dato",
+      "pass": true,
+      "detail": "HTTP 400"
+    },
+    {
+      "what": "bersaglio \"not a url\": rifiutato con 4xx, mai 5xx e nessun dato",
+      "pass": true,
+      "detail": "HTTP 400"
+    },
+    {
+      "what": "bersaglio \"(vuoto)\": rifiutato con 4xx, mai 5xx e nessun dato",
+      "pass": true,
+      "detail": "HTTP 400"
+    },
+    {
+      "what": "fail_under=abc: mai 5xx",
+      "pass": true,
+      "detail": "HTTP 400"
+    },
+    {
+      "what": "fail_under=-5: mai 5xx",
+      "pass": true,
+      "detail": "HTTP 400"
+    },
+    {
+      "what": "fail_under=101: mai 5xx",
+      "pass": true,
+      "detail": "HTTP 400"
+    },
+    {
+      "what": "fail_under=1e9: mai 5xx",
+      "pass": true,
+      "detail": "HTTP 400"
+    }
+  ]
+}

@@ -1,0 +1,38 @@
+{
+  "slug": "eg",
+  "dom": "emailguard.dev",
+  "email": "antonio.alt3000+qa07noveg@gmail.com",
+  "code": "QAOCT-5C62-1C2A-A007-BB12",
+  "results": [
+    {
+      "day": 1,
+      "what": "coniato un coupon interno via /api/admin/generate-coupons",
+      "pass": true,
+      "detail": "QAOCT-5C62-1C2A-A007-BB12"
+    },
+    {
+      "day": 1,
+      "what": "il riscatto parte e la POST /api/redeem risponde 2xx",
+      "pass": true,
+      "detail": "HTTP 200"
+    },
+    {
+      "day": 1,
+      "what": "la pagina consegna la chiave API",
+      "pass": true,
+      "detail": "eg_7e5d564…"
+    },
+    {
+      "day": 3,
+      "what": "la feature core risponde: una verifica email con punteggio",
+      "pass": true,
+      "detail": "{\"email\":\"postmaster@gmail.com\",\"valid\":true,\"score\":70,\"status\":\"risky\",\"checks\":{\"syntax\":true,\"mx\":true,\"spf\":true,\"dmarc\":true,\"disposable\":false,\"role\":true,\"free\":true,\"catch"
+    },
+    {
+      "day": 30,
+      "what": "nessun errore di console nel viaggio autenticato",
+      "pass": true,
+      "detail": ""
+    }
+  ]
+}

@@ -1,0 +1,31 @@
+{
+  "slug": "hkl",
+  "base": "https://gethooklab.dev",
+  "at": "2026-11-07T01:01:52.864Z",
+  "results": [
+    {
+      "id": "S08",
+      "desc": "signup: autofill also fills the honeypot",
+      "verdict": "PASS",
+      "observed": {
+        "requests": 1,
+        "statuses": [400],
+        "causes": [
+          {
+            "code": "FORM_UNVERIFIED",
+            "msg": "We couldn't verify this form. If your browser or password manager filled in a field you can't see, turn autofill off for this page and try again — or contact support."
+          }
+        ],
+        "ui": {
+          "error": "We couldn't verify this form. If your browser or password manager filled in a field you can't see, turn autofill off for this page and try again — or contact support.",
+          "formPresent": true
+        },
+        "consoleErrors": [
+          "[network] Failed to load resource: the server responded with a status of 400 () https://gethooklab.dev/api/signup"
+        ],
+        "exceptions": []
+      },
+      "note": "refused: {\"code\":\"FORM_UNVERIFIED\",\"msg\":\"We couldn't verify this form. If your browser or password manager filled in a field you can't see, turn autofill off for this page and try again — or contact support.\"}"
+    }
+  ]
+}

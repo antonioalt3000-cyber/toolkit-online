@@ -1,0 +1,37 @@
+{
+  "slug": "hsh",
+  "domain": "headershield.dev",
+  "at": "2026-11-07T07:11:48.013Z",
+  "results": [
+    {
+      "what": "scan risponde 200",
+      "pass": true,
+      "detail": "HTTP 200"
+    },
+    {
+      "what": "score = punti ottenuti / punti massimi",
+      "pass": true,
+      "detail": "riportato 95, ricalcolato 95 (95/100)"
+    },
+    {
+      "what": "ogni rilievo coincide con gli header veri",
+      "pass": true,
+      "detail": "9 rilievi confrontati"
+    },
+    {
+      "what": "la postura SPF coincide col DNS reale",
+      "pass": true,
+      "detail": "prodotto found, DNS presente"
+    },
+    {
+      "what": "fail_under non soddisfatto da 422",
+      "pass": true,
+      "detail": "HTTP 422 (score 95 < 99)"
+    },
+    {
+      "what": "i 1 cron di questo prodotto",
+      "pass": null,
+      "detail": "CRON_SECRET esiste ma e' marcata Sensitive: vercel env pull la restituisce vuota, quindi il percorso positivo non e' stato esercitato"
+    }
+  ]
+}

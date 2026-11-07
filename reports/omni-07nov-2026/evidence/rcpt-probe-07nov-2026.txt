@@ -1,0 +1,13 @@
+support@complipilot.dev            250 2.1.5 Ok
+contact@fixmyweb.dev               250 2.1.5 Ok
+privacy@fixmyweb.dev               554 5.7.1 <privacy@fixmyweb.dev>: Relay access denied
+support@paymentrescue.dev          250 2.1.5 Ok
+hello@parseflow.dev                250 2.1.5 Ok
+hello@captureapi.dev               250 2.1.5 Ok
+privacy@captureapi.dev             554 5.7.1 <privacy@captureapi.dev>: Relay access denied
+hello@getcardforge.dev             250 2.1.5 Ok
+hello@emailguard.dev               250 2.1.5 Ok
+hello@headershield.dev             250 2.1.5 Ok
+hello@gethooklab.dev               250 2.1.5 Ok
+hello@seoscope.dev                 250 2.1.5 Ok
+zzqa-nonexistent-9x7@seoscope.dev  554 5.7.1 <zzqa-nonexistent-9x7@seoscope.dev>: Relay access denied

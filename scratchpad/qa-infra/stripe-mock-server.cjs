@@ -94,7 +94,18 @@ function handleRequest(req, res, body) {
   const retrieveMatch = url.match(/^\/v1\/checkout\/sessions\/(cs_qa_[0-9]+)(\?|$)/);
   if (req.method === 'GET' && retrieveMatch && createdSessions.has(retrieveMatch[1])) {
     res.writeHead(200);
-    res.end(JSON.stringify(createdSessions.get(retrieveMatch[1])));
+    // Real Stripe returns `line_items` on a session retrieved with expand[]=line_items. F4 (and any product that
+    // decides the plan from the paid price) reads it from there; before 7 Nov 2026 the mock omitted it, so F4's
+    // webhook saw "no price" locally. Additive: the price asked at creation, unless a test injects another one.
+    const created = createdSessions.get(retrieveMatch[1]);
+    const askedPrice = (created.params || {})['line_items[0][price]'];
+    const priceForLines = fixtures.priceId || askedPrice || 'price_qa_fake';
+    res.end(
+      JSON.stringify({
+        ...created,
+        line_items: { object: 'list', data: [{ price: { id: priceForLines } }], has_more: false },
+      })
+    );
     return;
   }
   if (req.method === 'GET' && /^\/v1\/customers(\?|$)/.test(url)) {

@@ -1,0 +1,1042 @@
+[
+  {
+    "saas": "f4mx",
+    "step": "it-22: extract answers 200",
+    "expected": 200,
+    "observed": 200,
+    "ok": true,
+    "note": "{\"id\":\"6dd97349-9d36-4e9a-a3b3-c89ed75df74e\",\"status\":\"completed\",\"documentType\":\"invoice\",\"confidence\":0.9,\"data\":{\"type\":\"invoice\",\"invoic"
+  },
+  {
+    "saas": "f4mx",
+    "step": "it-22: total 6268.34",
+    "expected": true,
+    "observed": true,
+    "ok": true,
+    "note": "read 6268.34"
+  },
+  {
+    "saas": "f4mx",
+    "step": "it-22: subtotal 5137.98",
+    "expected": true,
+    "observed": true,
+    "ok": true,
+    "note": "read 5137.98"
+  },
+  {
+    "saas": "f4mx",
+    "step": "it-22: tax 1130.36",
+    "expected": true,
+    "observed": true,
+    "ok": true,
+    "note": "read 1130.36"
+  },
+  {
+    "saas": "f4mx",
+    "step": "it-22: subtotal + tax = total in the extracted data",
+    "expected": true,
+    "observed": true,
+    "ok": true,
+    "note": "5137.98+1130.36 vs 6268.34"
+  },
+  {
+    "saas": "f4mx",
+    "step": "it-22: tax = rate x subtotal (22%)",
+    "expected": true,
+    "observed": true,
+    "ok": true,
+    "note": "rate 22"
+  },
+  {
+    "saas": "f4mx",
+    "step": "it-22: invoice number IT-2026-0101",
+    "expected": "IT-2026-0101",
+    "observed": "IT-2026-0101",
+    "ok": true,
+    "note": ""
+  },
+  {
+    "saas": "f4mx",
+    "step": "it-22: rows read = [4938,199.98]",
+    "expected": [4938, 199.98],
+    "observed": [4938, 199.98],
+    "ok": true,
+    "note": ""
+  },
+  {
+    "saas": "f4mx",
+    "step": "it-22: every row qty x unit = amount",
+    "expected": true,
+    "observed": true,
+    "ok": true,
+    "note": ""
+  },
+  {
+    "saas": "f4mx",
+    "step": "it-22: the rows add up to the subtotal",
+    "expected": true,
+    "observed": true,
+    "ok": true,
+    "note": ""
+  },
+  {
+    "saas": "f4mx",
+    "step": "de-19: extract answers 200",
+    "expected": 200,
+    "observed": 200,
+    "ok": true,
+    "note": "{\"id\":\"56765d3d-4982-4af8-85f6-86b5beffdc7f\",\"status\":\"completed\",\"documentType\":\"invoice\",\"confidence\":0.9,\"data\":{\"type\":\"invoice\",\"invoic"
+  },
+  {
+    "saas": "f4mx",
+    "step": "de-19: total 2213.28",
+    "expected": true,
+    "observed": true,
+    "ok": true,
+    "note": "read 2213.28"
+  },
+  {
+    "saas": "f4mx",
+    "step": "de-19: subtotal 1859.9",
+    "expected": true,
+    "observed": true,
+    "ok": true,
+    "note": "read 1859.9"
+  },
+  {
+    "saas": "f4mx",
+    "step": "de-19: tax 353.38",
+    "expected": true,
+    "observed": true,
+    "ok": true,
+    "note": "read 353.38"
+  },
+  {
+    "saas": "f4mx",
+    "step": "de-19: subtotal + tax = total in the extracted data",
+    "expected": true,
+    "observed": true,
+    "ok": true,
+    "note": "1859.9+353.38 vs 2213.28"
+  },
+  {
+    "saas": "f4mx",
+    "step": "de-19: tax = rate x subtotal (19%)",
+    "expected": true,
+    "observed": true,
+    "ok": true,
+    "note": "rate 19"
+  },
+  {
+    "saas": "f4mx",
+    "step": "de-19: invoice number RE-2026-5521",
+    "expected": "RE-2026-5521",
+    "observed": "RE-2026-5521",
+    "ok": true,
+    "note": ""
+  },
+  {
+    "saas": "f4mx",
+    "step": "de-19: rows read = [1770,89.9]",
+    "expected": [1770, 89.9],
+    "observed": [1770, 89.9],
+    "ok": true,
+    "note": ""
+  },
+  {
+    "saas": "f4mx",
+    "step": "de-19: every row qty x unit = amount",
+    "expected": true,
+    "observed": true,
+    "ok": true,
+    "note": ""
+  },
+  {
+    "saas": "f4mx",
+    "step": "de-19: the rows add up to the subtotal",
+    "expected": true,
+    "observed": true,
+    "ok": true,
+    "note": ""
+  },
+  {
+    "saas": "f4mx",
+    "step": "fr-20: extract answers 200",
+    "expected": 200,
+    "observed": 200,
+    "ok": true,
+    "note": "{\"id\":\"7040a5a4-176c-45c7-9541-760135561d1b\",\"status\":\"completed\",\"documentType\":\"invoice\",\"confidence\":0.9,\"data\":{\"type\":\"invoice\",\"invoic"
+  },
+  {
+    "saas": "f4mx",
+    "step": "fr-20: total 2921.47",
+    "expected": true,
+    "observed": true,
+    "ok": true,
+    "note": "read 2921.47"
+  },
+  {
+    "saas": "f4mx",
+    "step": "fr-20: subtotal 2434.56",
+    "expected": true,
+    "observed": true,
+    "ok": true,
+    "note": "read 2434.56"
+  },
+  {
+    "saas": "f4mx",
+    "step": "fr-20: tax 486.91",
+    "expected": true,
+    "observed": true,
+    "ok": true,
+    "note": "read 486.91"
+  },
+  {
+    "saas": "f4mx",
+    "step": "fr-20: subtotal + tax = total in the extracted data",
+    "expected": true,
+    "observed": true,
+    "ok": true,
+    "note": "2434.56+486.91 vs 2921.47"
+  },
+  {
+    "saas": "f4mx",
+    "step": "fr-20: tax = rate x subtotal (20%)",
+    "expected": true,
+    "observed": true,
+    "ok": true,
+    "note": "rate 20"
+  },
+  {
+    "saas": "f4mx",
+    "step": "fr-20: invoice number FA-2026-3310",
+    "expected": "FA-2026-3310",
+    "observed": "FA-2026-3310",
+    "ok": true,
+    "note": ""
+  },
+  {
+    "saas": "f4mx",
+    "step": "fr-20: rows read = [1200,1234.56]",
+    "expected": [1200, 1234.56],
+    "observed": [1200, 1234.56],
+    "ok": true,
+    "note": ""
+  },
+  {
+    "saas": "f4mx",
+    "step": "fr-20: every row qty x unit = amount",
+    "expected": true,
+    "observed": true,
+    "ok": true,
+    "note": ""
+  },
+  {
+    "saas": "f4mx",
+    "step": "fr-20: the rows add up to the subtotal",
+    "expected": true,
+    "observed": true,
+    "ok": true,
+    "note": ""
+  },
+  {
+    "saas": "f4mx",
+    "step": "es-21: extract answers 200",
+    "expected": 200,
+    "observed": 200,
+    "ok": true,
+    "note": "{\"id\":\"4c2e232a-2f24-40a4-b3c9-ac32de0d8863\",\"status\":\"completed\",\"documentType\":\"invoice\",\"confidence\":0.9,\"data\":{\"type\":\"invoice\",\"invoic"
+  },
+  {
+    "saas": "f4mx",
+    "step": "es-21: total 5626.38",
+    "expected": true,
+    "observed": true,
+    "ok": true,
+    "note": "read 5626.38"
+  },
+  {
+    "saas": "f4mx",
+    "step": "es-21: subtotal 4649.9",
+    "expected": true,
+    "observed": true,
+    "ok": true,
+    "note": "read 4649.9"
+  },
+  {
+    "saas": "f4mx",
+    "step": "es-21: tax 976.48",
+    "expected": true,
+    "observed": true,
+    "ok": true,
+    "note": "read 976.48"
+  },
+  {
+    "saas": "f4mx",
+    "step": "es-21: subtotal + tax = total in the extracted data",
+    "expected": true,
+    "observed": true,
+    "ok": true,
+    "note": "4649.9+976.48 vs 5626.38"
+  },
+  {
+    "saas": "f4mx",
+    "step": "es-21: tax = rate x subtotal (21%)",
+    "expected": true,
+    "observed": true,
+    "ok": true,
+    "note": "rate 21"
+  },
+  {
+    "saas": "f4mx",
+    "step": "es-21: invoice number ES-2026-0412",
+    "expected": "ES-2026-0412",
+    "observed": "ES-2026-0412",
+    "ok": true,
+    "note": ""
+  },
+  {
+    "saas": "f4mx",
+    "step": "es-21: rows read = [3750,899.9]",
+    "expected": [3750, 899.9],
+    "observed": [3750, 899.9],
+    "ok": true,
+    "note": ""
+  },
+  {
+    "saas": "f4mx",
+    "step": "es-21: every row qty x unit = amount",
+    "expected": true,
+    "observed": true,
+    "ok": true,
+    "note": ""
+  },
+  {
+    "saas": "f4mx",
+    "step": "es-21: the rows add up to the subtotal",
+    "expected": true,
+    "observed": true,
+    "ok": true,
+    "note": ""
+  },
+  {
+    "saas": "f4mx",
+    "step": "es-10: extract answers 200",
+    "expected": 200,
+    "observed": 200,
+    "ok": true,
+    "note": "{\"id\":\"15614d54-2a97-434f-b78e-51e7dd5bbaf8\",\"status\":\"completed\",\"documentType\":\"invoice\",\"confidence\":0.9,\"data\":{\"type\":\"invoice\",\"invoic"
+  },
+  {
+    "saas": "f4mx",
+    "step": "es-10: total 1012",
+    "expected": true,
+    "observed": true,
+    "ok": true,
+    "note": "read 1012"
+  },
+  {
+    "saas": "f4mx",
+    "step": "es-10: subtotal 920",
+    "expected": true,
+    "observed": true,
+    "ok": true,
+    "note": "read 920"
+  },
+  {
+    "saas": "f4mx",
+    "step": "es-10: tax 92",
+    "expected": true,
+    "observed": true,
+    "ok": true,
+    "note": "read 92"
+  },
+  {
+    "saas": "f4mx",
+    "step": "es-10: subtotal + tax = total in the extracted data",
+    "expected": true,
+    "observed": true,
+    "ok": true,
+    "note": "920+92 vs 1012"
+  },
+  {
+    "saas": "f4mx",
+    "step": "es-10: tax = rate x subtotal (10%)",
+    "expected": true,
+    "observed": true,
+    "ok": true,
+    "note": "rate 10"
+  },
+  {
+    "saas": "f4mx",
+    "step": "es-10: invoice number ES-2026-0413",
+    "expected": "ES-2026-0413",
+    "observed": "ES-2026-0413",
+    "ok": true,
+    "note": ""
+  },
+  {
+    "saas": "f4mx",
+    "step": "es-10: rows read = [920]",
+    "expected": [920],
+    "observed": [920],
+    "ok": true,
+    "note": ""
+  },
+  {
+    "saas": "f4mx",
+    "step": "es-10: every row qty x unit = amount",
+    "expected": true,
+    "observed": true,
+    "ok": true,
+    "note": ""
+  },
+  {
+    "saas": "f4mx",
+    "step": "es-10: the rows add up to the subtotal",
+    "expected": true,
+    "observed": true,
+    "ok": true,
+    "note": ""
+  },
+  {
+    "saas": "f4mx",
+    "step": "es-4: extract answers 200",
+    "expected": 200,
+    "observed": 200,
+    "ok": true,
+    "note": "{\"id\":\"09bd1d31-90b8-441b-9f69-a98a429aa115\",\"status\":\"completed\",\"documentType\":\"invoice\",\"confidence\":0.9,\"data\":{\"type\":\"invoice\",\"invoic"
+  },
+  {
+    "saas": "f4mx",
+    "step": "es-4: total 697.32",
+    "expected": true,
+    "observed": true,
+    "ok": true,
+    "note": "read 697.32"
+  },
+  {
+    "saas": "f4mx",
+    "step": "es-4: subtotal 670.5",
+    "expected": true,
+    "observed": true,
+    "ok": true,
+    "note": "read 670.5"
+  },
+  {
+    "saas": "f4mx",
+    "step": "es-4: tax 26.82",
+    "expected": true,
+    "observed": true,
+    "ok": true,
+    "note": "read 26.82"
+  },
+  {
+    "saas": "f4mx",
+    "step": "es-4: subtotal + tax = total in the extracted data",
+    "expected": true,
+    "observed": true,
+    "ok": true,
+    "note": "670.5+26.82 vs 697.32"
+  },
+  {
+    "saas": "f4mx",
+    "step": "es-4: tax = rate x subtotal (4%)",
+    "expected": true,
+    "observed": true,
+    "ok": true,
+    "note": "rate 4"
+  },
+  {
+    "saas": "f4mx",
+    "step": "es-4: invoice number ES-2026-0414",
+    "expected": "ES-2026-0414",
+    "observed": "ES-2026-0414",
+    "ok": true,
+    "note": ""
+  },
+  {
+    "saas": "f4mx",
+    "step": "es-4: rows read = [670.5]",
+    "expected": [670.5],
+    "observed": [670.5],
+    "ok": true,
+    "note": ""
+  },
+  {
+    "saas": "f4mx",
+    "step": "es-4: every row qty x unit = amount",
+    "expected": true,
+    "observed": true,
+    "ok": true,
+    "note": ""
+  },
+  {
+    "saas": "f4mx",
+    "step": "es-4: the rows add up to the subtotal",
+    "expected": true,
+    "observed": true,
+    "ok": true,
+    "note": ""
+  },
+  {
+    "saas": "f4mx",
+    "step": "pt-23: extract answers 200",
+    "expected": 200,
+    "observed": 200,
+    "ok": true,
+    "note": "{\"id\":\"3f8b55f9-9489-4050-9708-1e2434b496d5\",\"status\":\"completed\",\"documentType\":\"invoice\",\"confidence\":0.9,\"data\":{\"type\":\"invoice\",\"invoic"
+  },
+  {
+    "saas": "f4mx",
+    "step": "pt-23: total 557.19",
+    "expected": true,
+    "observed": true,
+    "ok": true,
+    "note": "read 557.19"
+  },
+  {
+    "saas": "f4mx",
+    "step": "pt-23: subtotal 453",
+    "expected": true,
+    "observed": true,
+    "ok": true,
+    "note": "read 453"
+  },
+  {
+    "saas": "f4mx",
+    "step": "pt-23: tax 104.19",
+    "expected": true,
+    "observed": true,
+    "ok": true,
+    "note": "read 104.19"
+  },
+  {
+    "saas": "f4mx",
+    "step": "pt-23: subtotal + tax = total in the extracted data",
+    "expected": true,
+    "observed": true,
+    "ok": true,
+    "note": "453+104.19 vs 557.19"
+  },
+  {
+    "saas": "f4mx",
+    "step": "pt-23: tax = rate x subtotal (23%)",
+    "expected": true,
+    "observed": true,
+    "ok": true,
+    "note": "rate 23"
+  },
+  {
+    "saas": "f4mx",
+    "step": "pt-23: invoice number FT-2026-0077",
+    "expected": "FT-2026-0077",
+    "observed": "FT-2026-0077",
+    "ok": true,
+    "note": ""
+  },
+  {
+    "saas": "f4mx",
+    "step": "pt-23: rows read = [453]",
+    "expected": [453],
+    "observed": [453],
+    "ok": true,
+    "note": ""
+  },
+  {
+    "saas": "f4mx",
+    "step": "pt-23: every row qty x unit = amount",
+    "expected": true,
+    "observed": true,
+    "ok": true,
+    "note": ""
+  },
+  {
+    "saas": "f4mx",
+    "step": "pt-23: the rows add up to the subtotal",
+    "expected": true,
+    "observed": true,
+    "ok": true,
+    "note": ""
+  },
+  {
+    "saas": "f4mx",
+    "step": "nl-21: extract answers 200",
+    "expected": 200,
+    "observed": 200,
+    "ok": true,
+    "note": "{\"id\":\"ea469dce-9b94-4a32-bcce-3c15398aee82\",\"status\":\"completed\",\"documentType\":\"invoice\",\"confidence\":0.9,\"data\":{\"type\":\"invoice\",\"invoic"
+  },
+  {
+    "saas": "f4mx",
+    "step": "nl-21: total 11358.51",
+    "expected": true,
+    "observed": true,
+    "ok": true,
+    "note": "read 11358.51"
+  },
+  {
+    "saas": "f4mx",
+    "step": "nl-21: subtotal 9387.2",
+    "expected": true,
+    "observed": true,
+    "ok": true,
+    "note": "read 9387.2"
+  },
+  {
+    "saas": "f4mx",
+    "step": "nl-21: tax 1971.31",
+    "expected": true,
+    "observed": true,
+    "ok": true,
+    "note": "read 1971.31"
+  },
+  {
+    "saas": "f4mx",
+    "step": "nl-21: subtotal + tax = total in the extracted data",
+    "expected": true,
+    "observed": true,
+    "ok": true,
+    "note": "9387.2+1971.31 vs 11358.51"
+  },
+  {
+    "saas": "f4mx",
+    "step": "nl-21: tax = rate x subtotal (21%)",
+    "expected": true,
+    "observed": true,
+    "ok": true,
+    "note": "rate 21"
+  },
+  {
+    "saas": "f4mx",
+    "step": "nl-21: invoice number NL-2026-0909",
+    "expected": "NL-2026-0909",
+    "observed": "NL-2026-0909",
+    "ok": true,
+    "note": ""
+  },
+  {
+    "saas": "f4mx",
+    "step": "nl-21: rows read = [8450,937.2]",
+    "expected": [8450, 937.2],
+    "observed": [8450, 937.2],
+    "ok": true,
+    "note": ""
+  },
+  {
+    "saas": "f4mx",
+    "step": "nl-21: every row qty x unit = amount",
+    "expected": true,
+    "observed": true,
+    "ok": true,
+    "note": ""
+  },
+  {
+    "saas": "f4mx",
+    "step": "nl-21: the rows add up to the subtotal",
+    "expected": true,
+    "observed": true,
+    "ok": true,
+    "note": ""
+  },
+  {
+    "saas": "f4mx",
+    "step": "pl-23: extract answers 200",
+    "expected": 200,
+    "observed": 200,
+    "ok": true,
+    "note": "{\"id\":\"a9f2bba3-3f36-4355-8f60-f2cd87e68b2c\",\"status\":\"completed\",\"documentType\":\"invoice\",\"confidence\":0.85,\"data\":{\"type\":\"invoice\",\"invoi"
+  },
+  {
+    "saas": "f4mx",
+    "step": "pl-23: total 3936",
+    "expected": true,
+    "observed": true,
+    "ok": true,
+    "note": "read 3936"
+  },
+  {
+    "saas": "f4mx",
+    "step": "pl-23: subtotal 3200",
+    "expected": true,
+    "observed": true,
+    "ok": true,
+    "note": "read 3200"
+  },
+  {
+    "saas": "f4mx",
+    "step": "pl-23: tax 736",
+    "expected": true,
+    "observed": true,
+    "ok": true,
+    "note": "read 736"
+  },
+  {
+    "saas": "f4mx",
+    "step": "pl-23: subtotal + tax = total in the extracted data",
+    "expected": true,
+    "observed": true,
+    "ok": true,
+    "note": "3200+736 vs 3936"
+  },
+  {
+    "saas": "f4mx",
+    "step": "pl-23: tax = rate x subtotal (23%)",
+    "expected": true,
+    "observed": true,
+    "ok": true,
+    "note": "rate 23"
+  },
+  {
+    "saas": "f4mx",
+    "step": "pl-23: invoice number FV-2026-0155",
+    "expected": "FV-2026-0155",
+    "observed": "FV-2026-0155",
+    "ok": true,
+    "note": ""
+  },
+  {
+    "saas": "f4mx",
+    "step": "pl-23: rows read = [3200]",
+    "expected": [3200],
+    "observed": [3200],
+    "ok": true,
+    "note": ""
+  },
+  {
+    "saas": "f4mx",
+    "step": "pl-23: every row qty x unit = amount",
+    "expected": true,
+    "observed": true,
+    "ok": true,
+    "note": ""
+  },
+  {
+    "saas": "f4mx",
+    "step": "pl-23: the rows add up to the subtotal",
+    "expected": true,
+    "observed": true,
+    "ok": true,
+    "note": ""
+  },
+  {
+    "saas": "f4mx",
+    "step": "us-0: extract answers 200",
+    "expected": 200,
+    "observed": 200,
+    "ok": true,
+    "note": "{\"id\":\"2db094f6-aefa-4e71-b226-1a6b6ebb38b1\",\"status\":\"completed\",\"documentType\":\"invoice\",\"confidence\":0.85,\"data\":{\"type\":\"invoice\",\"invoi"
+  },
+  {
+    "saas": "f4mx",
+    "step": "us-0: total 9999.95",
+    "expected": true,
+    "observed": true,
+    "ok": true,
+    "note": "read 9999.95"
+  },
+  {
+    "saas": "f4mx",
+    "step": "us-0: subtotal 9999.95",
+    "expected": true,
+    "observed": true,
+    "ok": true,
+    "note": "read 9999.95"
+  },
+  {
+    "saas": "f4mx",
+    "step": "us-0: tax 0",
+    "expected": true,
+    "observed": true,
+    "ok": true,
+    "note": "read 0"
+  },
+  {
+    "saas": "f4mx",
+    "step": "us-0: subtotal + tax = total in the extracted data",
+    "expected": true,
+    "observed": true,
+    "ok": true,
+    "note": "9999.95+0 vs 9999.95"
+  },
+  {
+    "saas": "f4mx",
+    "step": "us-0: invoice number PF-RC-0001",
+    "expected": "PF-RC-0001",
+    "observed": "PF-RC-0001",
+    "ok": true,
+    "note": ""
+  },
+  {
+    "saas": "f4mx",
+    "step": "us-0: rows read = [9999.95]",
+    "expected": [9999.95],
+    "observed": [9999.95],
+    "ok": true,
+    "note": ""
+  },
+  {
+    "saas": "f4mx",
+    "step": "us-0: every row qty x unit = amount",
+    "expected": true,
+    "observed": true,
+    "ok": true,
+    "note": ""
+  },
+  {
+    "saas": "f4mx",
+    "step": "us-0: the rows add up to the subtotal",
+    "expected": true,
+    "observed": true,
+    "ok": true,
+    "note": ""
+  },
+  {
+    "saas": "f4mx",
+    "step": "half-cent: extract answers 200",
+    "expected": 200,
+    "observed": 200,
+    "ok": true,
+    "note": "{\"id\":\"dd8aad33-265f-4786-8bfa-229a447b93c1\",\"status\":\"completed\",\"documentType\":\"invoice\",\"confidence\":0.85,\"data\":{\"type\":\"invoice\",\"invoi"
+  },
+  {
+    "saas": "f4mx",
+    "step": "half-cent: total 1.16",
+    "expected": true,
+    "observed": true,
+    "ok": true,
+    "note": "read 1.16"
+  },
+  {
+    "saas": "f4mx",
+    "step": "half-cent: subtotal 1.05",
+    "expected": true,
+    "observed": true,
+    "ok": true,
+    "note": "read 1.05"
+  },
+  {
+    "saas": "f4mx",
+    "step": "half-cent: tax 0.11",
+    "expected": true,
+    "observed": true,
+    "ok": true,
+    "note": "read 0.11"
+  },
+  {
+    "saas": "f4mx",
+    "step": "half-cent: subtotal + tax = total in the extracted data",
+    "expected": true,
+    "observed": true,
+    "ok": true,
+    "note": "1.05+0.11 vs 1.16"
+  },
+  {
+    "saas": "f4mx",
+    "step": "half-cent: tax = rate x subtotal (10.48%)",
+    "expected": true,
+    "observed": true,
+    "ok": true,
+    "note": "rate 10.48"
+  },
+  {
+    "saas": "f4mx",
+    "step": "half-cent: invoice number PF-HC-0001",
+    "expected": "PF-HC-0001",
+    "observed": "PF-HC-0001",
+    "ok": true,
+    "note": ""
+  },
+  {
+    "saas": "f4mx",
+    "step": "half-cent: rows read = [1.05]",
+    "expected": [1.05],
+    "observed": [1.05],
+    "ok": true,
+    "note": ""
+  },
+  {
+    "saas": "f4mx",
+    "step": "half-cent: every row qty x unit = amount",
+    "expected": true,
+    "observed": true,
+    "ok": true,
+    "note": ""
+  },
+  {
+    "saas": "f4mx",
+    "step": "half-cent: the rows add up to the subtotal",
+    "expected": true,
+    "observed": true,
+    "ok": true,
+    "note": ""
+  },
+  {
+    "saas": "f4mx",
+    "step": "zero-total: extract answers 200",
+    "expected": 200,
+    "observed": 200,
+    "ok": true,
+    "note": "{\"id\":\"90cc4a2d-e064-48fc-8cc4-8e76da6c4723\",\"status\":\"completed\",\"documentType\":\"invoice\",\"confidence\":0.65,\"data\":{\"type\":\"invoice\",\"invoi"
+  },
+  {
+    "saas": "f4mx",
+    "step": "zero-total: total 0",
+    "expected": true,
+    "observed": true,
+    "ok": true,
+    "note": "read 0"
+  },
+  {
+    "saas": "f4mx",
+    "step": "zero-total: subtotal 0",
+    "expected": true,
+    "observed": true,
+    "ok": true,
+    "note": "read 0"
+  },
+  {
+    "saas": "f4mx",
+    "step": "zero-total: tax 0",
+    "expected": true,
+    "observed": true,
+    "ok": true,
+    "note": "read 0"
+  },
+  {
+    "saas": "f4mx",
+    "step": "zero-total: subtotal + tax = total in the extracted data",
+    "expected": true,
+    "observed": true,
+    "ok": true,
+    "note": "0+0 vs 0"
+  },
+  {
+    "saas": "f4mx",
+    "step": "zero-total: invoice number PF-ZERO-0001",
+    "expected": "PF-ZERO-0001",
+    "observed": "PF-ZERO-0001",
+    "ok": true,
+    "note": ""
+  },
+  {
+    "saas": "f4mx",
+    "step": "zero-total: rows read = []",
+    "expected": [],
+    "observed": [],
+    "ok": true,
+    "note": ""
+  },
+  {
+    "saas": "f4mx",
+    "step": "zero-total: every row qty x unit = amount",
+    "expected": true,
+    "observed": true,
+    "ok": true,
+    "note": ""
+  },
+  {
+    "saas": "f4mx",
+    "step": "zero-total: the rows add up to the subtotal",
+    "expected": true,
+    "observed": true,
+    "ok": true,
+    "note": ""
+  },
+  {
+    "saas": "f4mx",
+    "step": "credit-note: extract answers 200",
+    "expected": 200,
+    "observed": 200,
+    "ok": true,
+    "note": "{\"id\":\"7b038542-0c16-4371-94e8-e5c58cbe1d8d\",\"status\":\"completed\",\"documentType\":\"invoice\",\"confidence\":0.75,\"data\":{\"type\":\"invoice\",\"invoi"
+  },
+  {
+    "saas": "f4mx",
+    "step": "credit-note: total -145.2",
+    "expected": true,
+    "observed": true,
+    "ok": true,
+    "note": "read -145.2"
+  },
+  {
+    "saas": "f4mx",
+    "step": "credit-note: subtotal -120",
+    "expected": true,
+    "observed": true,
+    "ok": true,
+    "note": "read -120"
+  },
+  {
+    "saas": "f4mx",
+    "step": "credit-note: tax -25.2",
+    "expected": true,
+    "observed": true,
+    "ok": true,
+    "note": "read -25.2"
+  },
+  {
+    "saas": "f4mx",
+    "step": "credit-note: subtotal + tax = total in the extracted data",
+    "expected": true,
+    "observed": true,
+    "ok": true,
+    "note": "-120+-25.2 vs -145.2"
+  },
+  {
+    "saas": "f4mx",
+    "step": "credit-note: tax = rate x subtotal (21%)",
+    "expected": true,
+    "observed": true,
+    "ok": true,
+    "note": "rate 21"
+  },
+  {
+    "saas": "f4mx",
+    "step": "credit-note: invoice number CN-2026-0007",
+    "expected": "CN-2026-0007",
+    "observed": "CN-2026-0007",
+    "ok": true,
+    "note": ""
+  },
+  {
+    "saas": "f4mx",
+    "step": "credit-note: rows read = [-100,-20]",
+    "expected": [-100, -20],
+    "observed": [-100, -20],
+    "ok": true,
+    "note": ""
+  },
+  {
+    "saas": "f4mx",
+    "step": "credit-note: every row qty x unit = amount",
+    "expected": true,
+    "observed": true,
+    "ok": true,
+    "note": ""
+  },
+  {
+    "saas": "f4mx",
+    "step": "credit-note: the rows add up to the subtotal",
+    "expected": true,
+    "observed": true,
+    "ok": true,
+    "note": ""
+  },
+  {
+    "saas": "f4mx",
+    "step": "non-invoice PDF (a recipe) is NOT presented as a 200 invoice with totals",
+    "expected": true,
+    "observed": true,
+    "ok": true,
+    "note": "HTTP 200 {\"id\":\"4c31b761-7567-4b82-a332-00e8ebb88b37\",\"status\":\"completed\",\"documentType\":\"invoice\",\"confidence\":0.5,\"data\":{\"type\":\"invoice\",\"invoiceNumber\":\"\",\"invoice"
+  },
+  {
+    "saas": "f4mx",
+    "step": "PNG input -> 422",
+    "expected": 422,
+    "observed": 422,
+    "ok": true,
+    "note": "{\"error\":\"Image files are not supported. ParseFlow extracts from PDF, DOCX and XLSX; scanned images require OCR, which t"
+  }
+]

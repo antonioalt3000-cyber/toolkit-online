@@ -1,0 +1,9 @@
+[PASS] R01 baseline (no emulation)
+[PASS] R02 clock +5 min
+[PASS] R03 clock -5 min
+[PASS] R04 clock +1 h
+[PASS] R05 clock -1 h
+[FAIL] R06 clock +1 day  -> refused: undefined "no-response" | ui=""
+[FAIL] R07 clock -7 h (also = a tab left open ~7 h)  -> refused: undefined "no-response" | ui=""
+[FAIL] R08 clock -1 day  -> refused: undefined "no-response" | ui=""
+[FAIL] R09 tz Pacific/Kiritimati (UTC+14) + locale ar-EG (RTL)  -> refused: undefined "no-response" | ui=""

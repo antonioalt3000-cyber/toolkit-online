@@ -1,0 +1,681 @@
+{
+  "slug": "b7",
+  "base": "https://captureapi.dev",
+  "at": "2026-11-07T07:14:29.593Z",
+  "totals": {
+    "pages": 39,
+    "non200": 0,
+    "noOgImage": 0,
+    "inheritedMeta": 0,
+    "multiH1": 0,
+    "backslashProbed": 39,
+    "backslash500": 0
+  },
+  "pages": [
+    {
+      "path": "/",
+      "status": 200,
+      "title": "CaptureAPI — Screenshot, PDF &amp; OG Image API from $9/mo",
+      "inheritsHomeTitle": false,
+      "inheritsHomeDesc": false,
+      "hasDesc": true,
+      "ogImage": "https://captureapi.dev/api/v1/og?title=CaptureAPI&amp;description=Screenshot%20%26%20PDF%20API%20for%20Developers&amp;theme=dark",
+      "canonical": "https://captureapi.dev",
+      "h1Count": 1,
+      "imagesMissingAlt": 0
+    },
+    {
+      "path": "/about",
+      "status": 200,
+      "title": "About CaptureAPI - Screenshot &amp; PDF API for Developers | CaptureAPI",
+      "inheritsHomeTitle": false,
+      "inheritsHomeDesc": false,
+      "hasDesc": true,
+      "ogImage": "https://captureapi.dev/api/v1/og?title=CaptureAPI&amp;description=Screenshot%20%26%20PDF%20API%20for%20Developers&amp;theme=dark",
+      "canonical": "https://captureapi.dev/about",
+      "h1Count": 1,
+      "imagesMissingAlt": 0
+    },
+    {
+      "path": "/ai-transparency",
+      "status": 200,
+      "title": "AI Transparency | CaptureAPI",
+      "inheritsHomeTitle": false,
+      "inheritsHomeDesc": false,
+      "hasDesc": true,
+      "ogImage": "https://captureapi.dev/api/v1/og?title=CaptureAPI&amp;description=Screenshot%20%26%20PDF%20API%20for%20Developers&amp;theme=dark",
+      "canonical": "https://captureapi.dev/ai-transparency",
+      "h1Count": 1,
+      "imagesMissingAlt": 0
+    },
+    {
+      "path": "/blog",
+      "status": 200,
+      "title": "Blog - Developer Guides &amp; Tutorials | CaptureAPI",
+      "inheritsHomeTitle": false,
+      "inheritsHomeDesc": false,
+      "hasDesc": true,
+      "ogImage": "https://captureapi.dev/api/v1/og?title=CaptureAPI&amp;description=Screenshot%20%26%20PDF%20API%20for%20Developers&amp;theme=dark",
+      "canonical": "https://captureapi.dev/blog",
+      "h1Count": 1,
+      "imagesMissingAlt": 0
+    },
+    {
+      "path": "/blog/automate-website-screenshots-with-api",
+      "status": 200,
+      "title": "How to Automate Website Screenshots with an API in 2026 | CaptureAPI",
+      "inheritsHomeTitle": false,
+      "inheritsHomeDesc": false,
+      "hasDesc": true,
+      "ogImage": "https://captureapi.dev/api/v1/og?title=How%20to%20Automate%20Website%20Screenshots%20with%20an%20API%20in%202026&amp;description=Learn%20how%20to%20automate%20website%20screenshot%20capture%20using%20a%20REST%20API.%20Complete%20guide%20with%20code%20examples%20in%20JavaScript%2C%20Python%2C%20and%20cURL.&amp;theme=dark&amp;template=blog&amp;author=Alex%20Morgan",
+      "canonical": "https://captureapi.dev/blog/automate-website-screenshots-with-api",
+      "h1Count": 1,
+      "imagesMissingAlt": 0
+    },
+    {
+      "path": "/blog/automated-visual-regression-testing-screenshots",
+      "status": 200,
+      "title": "Automated Visual Regression Testing with Screenshots | CaptureAPI",
+      "inheritsHomeTitle": false,
+      "inheritsHomeDesc": false,
+      "hasDesc": true,
+      "ogImage": "https://captureapi.dev/api/v1/og?title=Automated%20Visual%20Regression%20Testing%20with%20Screenshots&amp;description=How%20to%20set%20up%20automated%20visual%20regression%20testing%20using%20screenshot%20comparisons%20to%20catch%20UI%20bugs%20before%20they%20reach%20production.&amp;theme=dark&amp;template=blog&amp;author=Michael%20Torres",
+      "canonical": "https://captureapi.dev/blog/automated-visual-regression-testing-screenshots",
+      "h1Count": 1,
+      "imagesMissingAlt": 0
+    },
+    {
+      "path": "/blog/best-free-screenshot-api-tools-2026",
+      "status": 200,
+      "title": "Best Free Screenshot API Tools in 2026: Complete Comparison | CaptureAPI",
+      "inheritsHomeTitle": false,
+      "inheritsHomeDesc": false,
+      "hasDesc": true,
+      "ogImage": "https://captureapi.dev/api/v1/og?title=Best%20Free%20Screenshot%20API%20Tools%20in%202026%3A%20Complete%20Comparison&amp;description=Compare%20the%20top%20free%20screenshot%20API%20services%20in%202026.%20Features%2C%20pricing%2C%20limits%2C%20and%20performance%20benchmarks%20to%20help%20you%20choose%20the%20right%20tool.&amp;theme=dark&amp;template=blog&amp;author=Sarah%20Kim",
+      "canonical": "https://captureapi.dev/blog/best-free-screenshot-api-tools-2026",
+      "h1Count": 1,
+      "imagesMissingAlt": 0
+    },
+    {
+      "path": "/blog/building-link-preview-service-screenshot-apis",
+      "status": 200,
+      "title": "Building a Link Preview Service with Screenshot APIs | CaptureAPI",
+      "inheritsHomeTitle": false,
+      "inheritsHomeDesc": false,
+      "hasDesc": true,
+      "ogImage": "https://captureapi.dev/api/v1/og?title=Building%20a%20Link%20Preview%20Service%20with%20Screenshot%20APIs&amp;description=Step-by-step%20guide%20to%20building%20a%20link%20preview%20service%20that%20generates%20thumbnails%20and%20metadata%20for%20any%20URL.&amp;theme=dark&amp;template=blog&amp;author=Elena%20Rodriguez",
+      "canonical": "https://captureapi.dev/blog/building-link-preview-service-screenshot-apis",
+      "h1Count": 1,
+      "imagesMissingAlt": 0
+    },
+    {
+      "path": "/blog/dynamic-og-images-seo",
+      "status": 200,
+      "title": "Dynamic OG Images: Why They Matter for SEO | CaptureAPI",
+      "inheritsHomeTitle": false,
+      "inheritsHomeDesc": false,
+      "hasDesc": true,
+      "ogImage": "https://captureapi.dev/api/v1/og?title=Dynamic%20OG%20Images%3A%20Why%20They%20Matter%20for%20SEO&amp;description=Learn%20why%20dynamic%20Open%20Graph%20images%20boost%20click-through%20rates%20and%20how%20to%20implement%20them%20for%20better%20social%20media%20presence.&amp;theme=dark&amp;template=blog&amp;author=James%20Wright",
+      "canonical": "https://captureapi.dev/blog/dynamic-og-images-seo",
+      "h1Count": 1,
+      "imagesMissingAlt": 0
+    },
+    {
+      "path": "/blog/full-page-screenshot-api-complete-guide",
+      "status": 200,
+      "title": "Full Page Screenshot API: How to Capture Entire Web Pages in 2026 | CaptureAPI",
+      "inheritsHomeTitle": false,
+      "inheritsHomeDesc": false,
+      "hasDesc": true,
+      "ogImage": "https://captureapi.dev/api/v1/og?title=Full%20Page%20Screenshot%20API%3A%20How%20to%20Capture%20Entire%20Web%20Pages%20in%202026&amp;description=A%20complete%20developer%20guide%20to%20using%20a%20full%20page%20screenshot%20API%3A%20how%20full-page%20capture%20works%2C%20how%20it%20differs%20from%20viewport%20screenshots%2C%20the%20parameters%20that%20matter%20for%20lazy-loaded%20content%2C%20and%20runnable%20examples%20in%20cURL%2C%20JavaScript%2C%20and%20Python.&amp;theme=dark&amp;template=blog&amp;author=Alex%20Morgan",
+      "canonical": "https://captureapi.dev/blog/full-page-screenshot-api-complete-guide",
+      "h1Count": 1,
+      "imagesMissingAlt": 0
+    },
+    {
+      "path": "/blog/generate-website-screenshots-programmatically",
+      "status": 200,
+      "title": "How to Generate Website Screenshots Programmatically in 2026 | CaptureAPI",
+      "inheritsHomeTitle": false,
+      "inheritsHomeDesc": false,
+      "hasDesc": true,
+      "ogImage": "https://captureapi.dev/api/v1/og?title=How%20to%20Generate%20Website%20Screenshots%20Programmatically%20in%202026&amp;description=A%20comprehensive%20guide%20to%20capturing%20website%20screenshots%20using%20APIs%2C%20headless%20browsers%2C%20and%20cloud%20services.&amp;theme=dark&amp;template=blog&amp;author=Alex%20Morgan",
+      "canonical": "https://captureapi.dev/blog/generate-website-screenshots-programmatically",
+      "h1Count": 1,
+      "imagesMissingAlt": 0
+    },
+    {
+      "path": "/blog/html-to-pdf-conversion-complete-guide",
+      "status": 200,
+      "title": "HTML to PDF Conversion: The Complete Developer Guide | CaptureAPI",
+      "inheritsHomeTitle": false,
+      "inheritsHomeDesc": false,
+      "hasDesc": true,
+      "ogImage": "https://captureapi.dev/api/v1/og?title=HTML%20to%20PDF%20Conversion%3A%20The%20Complete%20Developer%20Guide&amp;description=Master%20HTML%20to%20PDF%20conversion%20with%20this%20in-depth%20guide%20covering%20techniques%2C%20libraries%2C%20and%20best%20practices%20for%20developers.&amp;theme=dark&amp;template=blog&amp;author=Sarah%20Kim",
+      "canonical": "https://captureapi.dev/blog/html-to-pdf-conversion-complete-guide",
+      "h1Count": 1,
+      "imagesMissingAlt": 0
+    },
+    {
+      "path": "/blog/og-image-generation-seo-complete-guide-2026",
+      "status": 200,
+      "title": "Complete Guide to OG Image Generation for SEO in 2026 | CaptureAPI",
+      "inheritsHomeTitle": false,
+      "inheritsHomeDesc": false,
+      "hasDesc": true,
+      "ogImage": "https://captureapi.dev/api/v1/og?title=Complete%20Guide%20to%20OG%20Image%20Generation%20for%20SEO%20in%202026&amp;description=Learn%20how%20dynamic%20OG%20image%20generation%20boosts%20SEO%20and%20social%20media%20CTR.%20Step-by-step%20guide%20with%20API%20examples%2C%20best%20practices%2C%20and%20performance%20benchmarks.&amp;theme=dark&amp;template=blog&amp;author=Alex%20Morgan",
+      "canonical": "https://captureapi.dev/blog/og-image-generation-seo-complete-guide-2026",
+      "h1Count": 1,
+      "imagesMissingAlt": 0
+    },
+    {
+      "path": "/blog/og-images-guide",
+      "status": 200,
+      "title": "How to Generate OG Images Programmatically in 2026 | CaptureAPI",
+      "inheritsHomeTitle": false,
+      "inheritsHomeDesc": false,
+      "hasDesc": true,
+      "ogImage": "https://captureapi.dev/api/v1/og?title=How%20to%20Generate%20OG%20Images%20Programmatically%20in%202026&amp;description=A%20practical%20tutorial%20on%20generating%20Open%20Graph%20images%20with%20code.%20Learn%20to%20create%20dynamic%20social%20previews%20using%20APIs%2C%20templates%2C%20and%20automation%20for%20better%20CTR%20on%20Twitter%2C%20LinkedIn%2C%20and%20Facebook.&amp;theme=dark&amp;template=blog&amp;author=Alex%20Morgan",
+      "canonical": "https://captureapi.dev/blog/og-images-guide",
+      "h1Count": 1,
+      "imagesMissingAlt": 0
+    },
+    {
+      "path": "/blog/screenshot-api-comparison-2026",
+      "status": 200,
+      "title": "Best Screenshot APIs in 2026: Complete Comparison | CaptureAPI",
+      "inheritsHomeTitle": false,
+      "inheritsHomeDesc": false,
+      "hasDesc": true,
+      "ogImage": "https://captureapi.dev/api/v1/og?title=Best%20Screenshot%20APIs%20in%202026%3A%20Complete%20Comparison&amp;description=Compare%20the%20top%20screenshot%20APIs%20in%202026%3A%20CaptureAPI%20vs%20ScreenshotAPI%20vs%20Urlbox%20vs%20APIFlash.%20Feature%20comparison%2C%20pricing%2C%20speed%20benchmarks%2C%20and%20which%20one%20is%20best%20for%20your%20use%20case.&amp;theme=dark&amp;template=blog&amp;author=Alex%20Morgan",
+      "canonical": "https://captureapi.dev/blog/screenshot-api-comparison-2026",
+      "h1Count": 1,
+      "imagesMissingAlt": 0
+    },
+    {
+      "path": "/blog/website-screenshots-python-api-guide",
+      "status": 200,
+      "title": "How to Take Website Screenshots with Python (API Guide 2026) | CaptureAPI",
+      "inheritsHomeTitle": false,
+      "inheritsHomeDesc": false,
+      "hasDesc": true,
+      "ogImage": "https://captureapi.dev/api/v1/og?title=How%20to%20Take%20Website%20Screenshots%20with%20Python%20(API%20Guide%202026)&amp;description=Step-by-step%20guide%20to%20capturing%20website%20screenshots%20with%20Python%20using%20a%20REST%20API.%20Includes%20code%20examples%20with%20requests%2C%20aiohttp%2C%20async%20batch%20processing%2C%20and%20Django%2FFlask%20integration.&amp;theme=dark&amp;template=blog&amp;author=Alex%20Morgan",
+      "canonical": "https://captureapi.dev/blog/website-screenshots-python-api-guide",
+      "h1Count": 1,
+      "imagesMissingAlt": 0
+    },
+    {
+      "path": "/blog/what-is-a-screenshot-api",
+      "status": 200,
+      "title": "What Is a Screenshot API? A Developer&#x27;s Guide for 2026 | CaptureAPI",
+      "inheritsHomeTitle": false,
+      "inheritsHomeDesc": false,
+      "hasDesc": true,
+      "ogImage": "https://captureapi.dev/api/v1/og?title=What%20Is%20a%20Screenshot%20API%3F%20A%20Developer%27s%20Guide%20for%202026&amp;description=A%20clear%2C%20practical%20guide%20to%20what%20a%20screenshot%20API%20is%2C%20how%20a%20website%20screenshot%20API%20works%20under%20the%20hood%2C%20when%20to%20use%20one%2C%20and%20how%20to%20integrate%20it%20with%20code%20examples%20in%20cURL%2C%20JavaScript%2C%20and%20Python.&amp;theme=dark&amp;template=blog&amp;author=Alex%20Morgan",
+      "canonical": "https://captureapi.dev/blog/what-is-a-screenshot-api",
+      "h1Count": 1,
+      "imagesMissingAlt": 0
+    },
+    {
+      "path": "/contact",
+      "status": 200,
+      "title": "Contact CaptureAPI - Support &amp; Sales | CaptureAPI",
+      "inheritsHomeTitle": false,
+      "inheritsHomeDesc": false,
+      "hasDesc": true,
+      "ogImage": "https://captureapi.dev/api/v1/og?title=CaptureAPI&amp;description=Screenshot%20%26%20PDF%20API%20for%20Developers&amp;theme=dark",
+      "canonical": "https://captureapi.dev/contact",
+      "h1Count": 1,
+      "imagesMissingAlt": 0
+    },
+    {
+      "path": "/cookie-policy",
+      "status": 200,
+      "title": "Cookie Policy | CaptureAPI | CaptureAPI",
+      "inheritsHomeTitle": false,
+      "inheritsHomeDesc": false,
+      "hasDesc": true,
+      "ogImage": "https://captureapi.dev/api/v1/og?title=CaptureAPI&amp;description=Screenshot%20%26%20PDF%20API%20for%20Developers&amp;theme=dark",
+      "canonical": "https://captureapi.dev/cookie-policy",
+      "h1Count": 1,
+      "imagesMissingAlt": 0
+    },
+    {
+      "path": "/docs",
+      "status": 200,
+      "title": "API Documentation - Screenshot, PDF &amp; OG Image | CaptureAPI",
+      "inheritsHomeTitle": false,
+      "inheritsHomeDesc": false,
+      "hasDesc": true,
+      "ogImage": "https://captureapi.dev/api/v1/og?title=CaptureAPI&amp;description=Screenshot%20%26%20PDF%20API%20for%20Developers&amp;theme=dark",
+      "canonical": "https://captureapi.dev/docs",
+      "h1Count": 1,
+      "imagesMissingAlt": 0
+    },
+    {
+      "path": "/docs/authentication",
+      "status": 200,
+      "title": "Authentication - API Key Management &amp; Rate Limits | CaptureAPI",
+      "inheritsHomeTitle": false,
+      "inheritsHomeDesc": false,
+      "hasDesc": true,
+      "ogImage": "https://captureapi.dev/api/v1/og?title=CaptureAPI&amp;description=Screenshot%20%26%20PDF%20API%20for%20Developers&amp;theme=dark",
+      "canonical": "https://captureapi.dev/docs/authentication",
+      "h1Count": 1,
+      "imagesMissingAlt": 0
+    },
+    {
+      "path": "/docs/batch",
+      "status": 200,
+      "title": "Batch Screenshot API Documentation - Capture Multiple URLs | CaptureAPI",
+      "inheritsHomeTitle": false,
+      "inheritsHomeDesc": false,
+      "hasDesc": true,
+      "ogImage": "https://captureapi.dev/api/v1/og?title=CaptureAPI&amp;description=Screenshot%20%26%20PDF%20API%20for%20Developers&amp;theme=dark",
+      "canonical": "https://captureapi.dev/docs/batch",
+      "h1Count": 1,
+      "imagesMissingAlt": 0
+    },
+    {
+      "path": "/docs/og-image",
+      "status": 200,
+      "title": "OG Image Generation API - Dynamic Social Media Images | CaptureAPI",
+      "inheritsHomeTitle": false,
+      "inheritsHomeDesc": false,
+      "hasDesc": true,
+      "ogImage": "https://captureapi.dev/api/v1/og?title=CaptureAPI&amp;description=Screenshot%20%26%20PDF%20API%20for%20Developers&amp;theme=dark",
+      "canonical": "https://captureapi.dev/docs/og-image",
+      "h1Count": 1,
+      "imagesMissingAlt": 0
+    },
+    {
+      "path": "/docs/pdf",
+      "status": 200,
+      "title": "PDF Generation API Documentation - HTML to PDF Conversion | CaptureAPI",
+      "inheritsHomeTitle": false,
+      "inheritsHomeDesc": false,
+      "hasDesc": true,
+      "ogImage": "https://captureapi.dev/api/v1/og?title=CaptureAPI&amp;description=Screenshot%20%26%20PDF%20API%20for%20Developers&amp;theme=dark",
+      "canonical": "https://captureapi.dev/docs/pdf",
+      "h1Count": 1,
+      "imagesMissingAlt": 0
+    },
+    {
+      "path": "/docs/screenshot",
+      "status": 200,
+      "title": "Screenshot API Documentation - Parameters, Examples &amp; Rate Limits | CaptureAPI",
+      "inheritsHomeTitle": false,
+      "inheritsHomeDesc": false,
+      "hasDesc": true,
+      "ogImage": "https://captureapi.dev/api/v1/og?title=CaptureAPI&amp;description=Screenshot%20%26%20PDF%20API%20for%20Developers&amp;theme=dark",
+      "canonical": "https://captureapi.dev/docs/screenshot",
+      "h1Count": 1,
+      "imagesMissingAlt": 0
+    },
+    {
+      "path": "/docs/webhooks",
+      "status": 200,
+      "title": "Webhook Notifications — CaptureAPI Documentation | CaptureAPI",
+      "inheritsHomeTitle": false,
+      "inheritsHomeDesc": false,
+      "hasDesc": true,
+      "ogImage": "https://captureapi.dev/api/v1/og?title=CaptureAPI&amp;description=Screenshot%20%26%20PDF%20API%20for%20Developers&amp;theme=dark",
+      "canonical": "https://captureapi.dev/docs/webhooks",
+      "h1Count": 1,
+      "imagesMissingAlt": 0
+    },
+    {
+      "path": "/dpa",
+      "status": 200,
+      "title": "Data Processing Agreement (DPA) | CaptureAPI",
+      "inheritsHomeTitle": false,
+      "inheritsHomeDesc": false,
+      "hasDesc": true,
+      "ogImage": "https://captureapi.dev/api/v1/og?title=CaptureAPI&amp;description=Screenshot%20%26%20PDF%20API%20for%20Developers&amp;theme=dark",
+      "canonical": "https://captureapi.dev/dpa",
+      "h1Count": 1,
+      "imagesMissingAlt": 0
+    },
+    {
+      "path": "/faq",
+      "status": 200,
+      "title": "FAQ - Frequently Asked Questions | CaptureAPI",
+      "inheritsHomeTitle": false,
+      "inheritsHomeDesc": false,
+      "hasDesc": true,
+      "ogImage": "https://captureapi.dev/api/v1/og?title=CaptureAPI&amp;description=Screenshot%20%26%20PDF%20API%20for%20Developers&amp;theme=dark",
+      "canonical": "https://captureapi.dev/faq",
+      "h1Count": 1,
+      "imagesMissingAlt": 0
+    },
+    {
+      "path": "/free",
+      "status": 200,
+      "title": "CaptureAPI Free — 200 Screenshots/Month, No Signup | CaptureAPI",
+      "inheritsHomeTitle": false,
+      "inheritsHomeDesc": false,
+      "hasDesc": true,
+      "ogImage": "https://captureapi.dev/api/v1/og?title=CaptureAPI&amp;description=Screenshot%20%26%20PDF%20API%20for%20Developers&amp;theme=dark",
+      "canonical": "https://captureapi.dev/free",
+      "h1Count": 1,
+      "imagesMissingAlt": 0
+    },
+    {
+      "path": "/help",
+      "status": 200,
+      "title": "Help &amp; Getting Started — CaptureAPI | CaptureAPI",
+      "inheritsHomeTitle": false,
+      "inheritsHomeDesc": false,
+      "hasDesc": true,
+      "ogImage": "https://captureapi.dev/api/v1/og?title=CaptureAPI&amp;description=Screenshot%20%26%20PDF%20API%20for%20Developers&amp;theme=dark",
+      "canonical": "https://captureapi.dev/help",
+      "h1Count": 1,
+      "imagesMissingAlt": 0
+    },
+    {
+      "path": "/integrations",
+      "status": 200,
+      "title": "Integrations - Connect CaptureAPI with Your Stack | CaptureAPI",
+      "inheritsHomeTitle": false,
+      "inheritsHomeDesc": false,
+      "hasDesc": true,
+      "ogImage": "https://captureapi.dev/api/v1/og?title=CaptureAPI&amp;description=Screenshot%20%26%20PDF%20API%20for%20Developers&amp;theme=dark",
+      "canonical": "https://captureapi.dev/integrations",
+      "h1Count": 1,
+      "imagesMissingAlt": 0
+    },
+    {
+      "path": "/pricing",
+      "status": 200,
+      "title": "Pricing - Screenshot &amp; PDF API Plans | CaptureAPI",
+      "inheritsHomeTitle": false,
+      "inheritsHomeDesc": false,
+      "hasDesc": true,
+      "ogImage": "https://captureapi.dev/api/v1/og?title=CaptureAPI&amp;description=Screenshot%20%26%20PDF%20API%20for%20Developers&amp;theme=dark",
+      "canonical": "https://captureapi.dev/pricing",
+      "h1Count": 1,
+      "imagesMissingAlt": 0
+    },
+    {
+      "path": "/privacy",
+      "status": 200,
+      "title": "Privacy Policy | CaptureAPI",
+      "inheritsHomeTitle": false,
+      "inheritsHomeDesc": false,
+      "hasDesc": true,
+      "ogImage": "https://captureapi.dev/api/v1/og?title=CaptureAPI&amp;description=Screenshot%20%26%20PDF%20API%20for%20Developers&amp;theme=dark",
+      "canonical": "https://captureapi.dev/privacy",
+      "h1Count": 1,
+      "imagesMissingAlt": 0
+    },
+    {
+      "path": "/refund",
+      "status": 200,
+      "title": "Refunds and Cancellation | CaptureAPI | CaptureAPI",
+      "inheritsHomeTitle": false,
+      "inheritsHomeDesc": false,
+      "hasDesc": true,
+      "ogImage": "https://captureapi.dev/api/v1/og?title=CaptureAPI&amp;description=Screenshot%20%26%20PDF%20API%20for%20Developers&amp;theme=dark",
+      "canonical": "https://captureapi.dev/refund",
+      "h1Count": 1,
+      "imagesMissingAlt": 0
+    },
+    {
+      "path": "/screenshot-api",
+      "status": 200,
+      "title": "Screenshot API — Capture Any Website in &lt;2s | CaptureAPI",
+      "inheritsHomeTitle": false,
+      "inheritsHomeDesc": false,
+      "hasDesc": true,
+      "ogImage": "https://captureapi.dev/api/v1/og?title=CaptureAPI&amp;description=Screenshot%20%26%20PDF%20API%20for%20Developers&amp;theme=dark",
+      "canonical": "https://captureapi.dev/screenshot-api",
+      "h1Count": 1,
+      "imagesMissingAlt": 0
+    },
+    {
+      "path": "/security",
+      "status": 200,
+      "title": "Security - How We Protect Your Data | CaptureAPI",
+      "inheritsHomeTitle": false,
+      "inheritsHomeDesc": false,
+      "hasDesc": true,
+      "ogImage": "https://captureapi.dev/api/v1/og?title=CaptureAPI&amp;description=Screenshot%20%26%20PDF%20API%20for%20Developers&amp;theme=dark",
+      "canonical": "https://captureapi.dev/security",
+      "h1Count": 1,
+      "imagesMissingAlt": 0
+    },
+    {
+      "path": "/terms",
+      "status": 200,
+      "title": "Terms of Service | CaptureAPI",
+      "inheritsHomeTitle": false,
+      "inheritsHomeDesc": false,
+      "hasDesc": true,
+      "ogImage": "https://captureapi.dev/api/v1/og?title=CaptureAPI&amp;description=Screenshot%20%26%20PDF%20API%20for%20Developers&amp;theme=dark",
+      "canonical": "https://captureapi.dev/terms",
+      "h1Count": 1,
+      "imagesMissingAlt": 0
+    },
+    {
+      "path": "/tools/meta-inspector",
+      "status": 200,
+      "title": "Meta Tag Inspector — Free SEO &amp; Open Graph Checker | CaptureAPI",
+      "inheritsHomeTitle": false,
+      "inheritsHomeDesc": false,
+      "hasDesc": true,
+      "ogImage": "https://captureapi.dev/api/v1/og?title=Meta+Tag+Inspector&amp;description=Free+SEO+%26+Open+Graph+Checker&amp;theme=dark",
+      "canonical": "https://captureapi.dev/tools/meta-inspector",
+      "h1Count": 1,
+      "imagesMissingAlt": 0
+    },
+    {
+      "path": "/use-cases",
+      "status": 200,
+      "title": "Use Cases — CaptureAPI Screenshot &amp; PDF API | CaptureAPI",
+      "inheritsHomeTitle": false,
+      "inheritsHomeDesc": false,
+      "hasDesc": true,
+      "ogImage": "https://captureapi.dev/api/v1/og?title=CaptureAPI&amp;description=Screenshot%20%26%20PDF%20API%20for%20Developers&amp;theme=dark",
+      "canonical": "https://captureapi.dev/use-cases",
+      "h1Count": 1,
+      "imagesMissingAlt": 0
+    }
+  ],
+  "backslash": [
+    {
+      "path": "/",
+      "probe": "/%5C",
+      "status": 404
+    },
+    {
+      "path": "/about",
+      "probe": "/about%5C",
+      "status": 404
+    },
+    {
+      "path": "/ai-transparency",
+      "probe": "/ai-transparency%5C",
+      "status": 404
+    },
+    {
+      "path": "/blog",
+      "probe": "/blog%5C",
+      "status": 404
+    },
+    {
+      "path": "/blog/automate-website-screenshots-with-api",
+      "probe": "/blog/automate-website-screenshots-with-api%5C",
+      "status": 404
+    },
+    {
+      "path": "/blog/automated-visual-regression-testing-screenshots",
+      "probe": "/blog/automated-visual-regression-testing-screenshots%5C",
+      "status": 404
+    },
+    {
+      "path": "/blog/best-free-screenshot-api-tools-2026",
+      "probe": "/blog/best-free-screenshot-api-tools-2026%5C",
+      "status": 404
+    },
+    {
+      "path": "/blog/building-link-preview-service-screenshot-apis",
+      "probe": "/blog/building-link-preview-service-screenshot-apis%5C",
+      "status": 404
+    },
+    {
+      "path": "/blog/dynamic-og-images-seo",
+      "probe": "/blog/dynamic-og-images-seo%5C",
+      "status": 404
+    },
+    {
+      "path": "/blog/full-page-screenshot-api-complete-guide",
+      "probe": "/blog/full-page-screenshot-api-complete-guide%5C",
+      "status": 404
+    },
+    {
+      "path": "/blog/generate-website-screenshots-programmatically",
+      "probe": "/blog/generate-website-screenshots-programmatically%5C",
+      "status": 404
+    },
+    {
+      "path": "/blog/html-to-pdf-conversion-complete-guide",
+      "probe": "/blog/html-to-pdf-conversion-complete-guide%5C",
+      "status": 404
+    },
+    {
+      "path": "/blog/og-image-generation-seo-complete-guide-2026",
+      "probe": "/blog/og-image-generation-seo-complete-guide-2026%5C",
+      "status": 404
+    },
+    {
+      "path": "/blog/og-images-guide",
+      "probe": "/blog/og-images-guide%5C",
+      "status": 404
+    },
+    {
+      "path": "/blog/screenshot-api-comparison-2026",
+      "probe": "/blog/screenshot-api-comparison-2026%5C",
+      "status": 404
+    },
+    {
+      "path": "/blog/website-screenshots-python-api-guide",
+      "probe": "/blog/website-screenshots-python-api-guide%5C",
+      "status": 404
+    },
+    {
+      "path": "/blog/what-is-a-screenshot-api",
+      "probe": "/blog/what-is-a-screenshot-api%5C",
+      "status": 404
+    },
+    {
+      "path": "/contact",
+      "probe": "/contact%5C",
+      "status": 404
+    },
+    {
+      "path": "/cookie-policy",
+      "probe": "/cookie-policy%5C",
+      "status": 404
+    },
+    {
+      "path": "/docs",
+      "probe": "/docs%5C",
+      "status": 404
+    },
+    {
+      "path": "/docs/authentication",
+      "probe": "/docs/authentication%5C",
+      "status": 404
+    },
+    {
+      "path": "/docs/batch",
+      "probe": "/docs/batch%5C",
+      "status": 404
+    },
+    {
+      "path": "/docs/og-image",
+      "probe": "/docs/og-image%5C",
+      "status": 404
+    },
+    {
+      "path": "/docs/pdf",
+      "probe": "/docs/pdf%5C",
+      "status": 404
+    },
+    {
+      "path": "/docs/screenshot",
+      "probe": "/docs/screenshot%5C",
+      "status": 404
+    },
+    {
+      "path": "/docs/webhooks",
+      "probe": "/docs/webhooks%5C",
+      "status": 404
+    },
+    {
+      "path": "/dpa",
+      "probe": "/dpa%5C",
+      "status": 404
+    },
+    {
+      "path": "/faq",
+      "probe": "/faq%5C",
+      "status": 404
+    },
+    {
+      "path": "/free",
+      "probe": "/free%5C",
+      "status": 404
+    },
+    {
+      "path": "/help",
+      "probe": "/help%5C",
+      "status": 404
+    },
+    {
+      "path": "/integrations",
+      "probe": "/integrations%5C",
+      "status": 404
+    },
+    {
+      "path": "/pricing",
+      "probe": "/pricing%5C",
+      "status": 404
+    },
+    {
+      "path": "/privacy",
+      "probe": "/privacy%5C",
+      "status": 404
+    },
+    {
+      "path": "/refund",
+      "probe": "/refund%5C",
+      "status": 404
+    },
+    {
+      "path": "/screenshot-api",
+      "probe": "/screenshot-api%5C",
+      "status": 404
+    },
+    {
+      "path": "/security",
+      "probe": "/security%5C",
+      "status": 404
+    },
+    {
+      "path": "/terms",
+      "probe": "/terms%5C",
+      "status": 404
+    },
+    {
+      "path": "/tools/meta-inspector",
+      "probe": "/tools/meta-inspector%5C",
+      "status": 404
+    },
+    {
+      "path": "/use-cases",
+      "probe": "/use-cases%5C",
+      "status": 404
+    }
+  ]
+}

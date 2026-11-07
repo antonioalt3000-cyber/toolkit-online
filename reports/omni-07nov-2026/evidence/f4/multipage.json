@@ -1,0 +1,34 @@
+[
+  {
+    "saas": "f4mp",
+    "step": "two-page invoice: 200",
+    "expected": 200,
+    "observed": 200,
+    "ok": true,
+    "note": "{\"id\":\"21caa2c4-6e8f-47b8-8c8a-9538ae952db0\",\"status\":\"completed\",\"documentType\":\"invoice\",\"confidence\":0.9,\"data\":{\"typ"
+  },
+  {
+    "saas": "f4mp",
+    "step": "one invoice, all 6 rows from both pages in one array",
+    "expected": [960, 1250, 299.7, 600, 312.4, 294],
+    "observed": [960, 1250, 299.7, 600, 312.4, 294],
+    "ok": true,
+    "note": "6 rows"
+  },
+  {
+    "saas": "f4mp",
+    "step": "the repeated table header and the page footer are NOT rows",
+    "expected": false,
+    "observed": false,
+    "ok": true,
+    "note": ""
+  },
+  {
+    "saas": "f4mp",
+    "step": "the rows add up to the subtotal and the totals are exact",
+    "expected": [3716.1, 780.38, 4496.48],
+    "observed": [3716.1, 780.38, 4496.48],
+    "ok": true,
+    "note": ""
+  }
+]

@@ -1,0 +1,42 @@
+{
+  "slug": "f1",
+  "domain": "complipilot.dev",
+  "at": "2026-11-07T07:05:46.962Z",
+  "results": [
+    {
+      "what": "scan risponde 200",
+      "pass": true,
+      "detail": "HTTP 200"
+    },
+    {
+      "what": "overallScore = media delle categorie applicabili",
+      "pass": true,
+      "detail": "riportato 60, ricalcolato 60.00 da aiAct=92 gdpr=35 dataProtection=51 transparency=36 nis2=86"
+    },
+    {
+      "what": "ogni categoria sta in 0..100",
+      "pass": true,
+      "detail": "aiAct=92 gdpr=35 dataProtection=51 transparency=36 nis2=86"
+    },
+    {
+      "what": "ogni rilievo ha severita noto",
+      "pass": true,
+      "detail": "58 rilievi, severita: warning,critical,info"
+    },
+    {
+      "what": "due scansioni dello stesso URL danno lo stesso punteggio",
+      "pass": true,
+      "detail": "60 poi 60"
+    },
+    {
+      "what": "i 2 cron dichiarati accettano il proprio segreto",
+      "pass": true,
+      "detail": "eurlex=200 review-requests=200"
+    },
+    {
+      "what": "i cron rifiutano un segreto sbagliato",
+      "pass": true,
+      "detail": "401/403 su tutti"
+    }
+  ]
+}

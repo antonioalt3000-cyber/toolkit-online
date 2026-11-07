@@ -1,0 +1,137 @@
+[
+  {
+    "u": "http://127.0.0.1/",
+    "status": 400,
+    "body": "{\"error\":{\"code\":\"INVALID_PARAMS\",\"message\":\"Internal/private IPv4 host not allowed.\",\"status\":400}}"
+  },
+  {
+    "u": "http://localhost/",
+    "status": 400,
+    "body": "{\"error\":{\"code\":\"INVALID_PARAMS\",\"message\":\"Localhost URLs are not allowed.\",\"status\":400}}"
+  },
+  {
+    "u": "http://[::1]/",
+    "status": 400,
+    "body": "{\"error\":{\"code\":\"INVALID_PARAMS\",\"message\":\"Internal/private IPv6 host not allowed.\",\"status\":400}}"
+  },
+  {
+    "u": "http://0.0.0.0/",
+    "status": 400,
+    "body": "{\"error\":{\"code\":\"INVALID_PARAMS\",\"message\":\"Internal/private IPv4 host not allowed.\",\"status\":400}}"
+  },
+  {
+    "u": "http://2130706433/",
+    "status": 400,
+    "body": "{\"error\":{\"code\":\"INVALID_PARAMS\",\"message\":\"Internal/private IPv4 host not allowed.\",\"status\":400}}"
+  },
+  {
+    "u": "http://0x7f000001/",
+    "status": 400,
+    "body": "{\"error\":{\"code\":\"INVALID_PARAMS\",\"message\":\"Internal/private IPv4 host not allowed.\",\"status\":400}}"
+  },
+  {
+    "u": "http://017700000001/",
+    "status": 400,
+    "body": "{\"error\":{\"code\":\"INVALID_PARAMS\",\"message\":\"Internal/private IPv4 host not allowed.\",\"status\":400}}"
+  },
+  {
+    "u": "http://127.1/",
+    "status": 400,
+    "body": "{\"error\":{\"code\":\"INVALID_PARAMS\",\"message\":\"Internal/private IPv4 host not allowed.\",\"status\":400}}"
+  },
+  {
+    "u": "http://0177.0.0.1/",
+    "status": 400,
+    "body": "{\"error\":{\"code\":\"INVALID_PARAMS\",\"message\":\"Internal/private IPv4 host not allowed.\",\"status\":400}}"
+  },
+  {
+    "u": "http://[::ffff:127.0.0.1]/",
+    "status": 400,
+    "body": "{\"error\":{\"code\":\"INVALID_PARAMS\",\"message\":\"Internal/private IPv6 host not allowed.\",\"status\":400}}"
+  },
+  {
+    "u": "http://[::ffff:7f00:1]/",
+    "status": 400,
+    "body": "{\"error\":{\"code\":\"INVALID_PARAMS\",\"message\":\"Internal/private IPv6 host not allowed.\",\"status\":400}}"
+  },
+  {
+    "u": "http://169.254.169.254/latest/meta-data/",
+    "status": 400,
+    "body": "{\"error\":{\"code\":\"INVALID_PARAMS\",\"message\":\"Internal/private IPv4 host not allowed.\",\"status\":400}}"
+  },
+  {
+    "u": "http://[fd00::1]/",
+    "status": 400,
+    "body": "{\"error\":{\"code\":\"INVALID_PARAMS\",\"message\":\"Internal/private IPv6 host not allowed.\",\"status\":400}}"
+  },
+  {
+    "u": "http://[fe80::1]/",
+    "status": 400,
+    "body": "{\"error\":{\"code\":\"INVALID_PARAMS\",\"message\":\"Internal/private IPv6 host not allowed.\",\"status\":400}}"
+  },
+  {
+    "u": "http://10.0.0.1/",
+    "status": 400,
+    "body": "{\"error\":{\"code\":\"INVALID_PARAMS\",\"message\":\"Internal/private IPv4 host not allowed.\",\"status\":400}}"
+  },
+  {
+    "u": "http://172.16.0.1/",
+    "status": 400,
+    "body": "{\"error\":{\"code\":\"INVALID_PARAMS\",\"message\":\"Internal/private IPv4 host not allowed.\",\"status\":400}}"
+  },
+  {
+    "u": "http://192.168.0.1/",
+    "status": 400,
+    "body": "{\"error\":{\"code\":\"INVALID_PARAMS\",\"message\":\"Internal/private IPv4 host not allowed.\",\"status\":400}}"
+  },
+  {
+    "u": "http://100.64.0.1/",
+    "status": 400,
+    "body": "{\"error\":{\"code\":\"INVALID_PARAMS\",\"message\":\"Internal/private IPv4 host not allowed.\",\"status\":400}}"
+  },
+  {
+    "u": "http://foo.localhost/",
+    "status": 400,
+    "body": "{\"error\":{\"code\":\"INVALID_PARAMS\",\"message\":\"Localhost URLs are not allowed.\",\"status\":400}}"
+  },
+  {
+    "u": "http://user:pass@127.0.0.1/",
+    "status": 400,
+    "body": "{\"error\":{\"code\":\"INVALID_PARAMS\",\"message\":\"Internal/private IPv4 host not allowed.\",\"status\":400}}"
+  },
+  {
+    "u": "file:///etc/passwd",
+    "status": 400,
+    "body": "{\"error\":{\"code\":\"VALIDATION_FAILED\",\"message\":\"url: Only http(s) URLs allowed\",\"status\":400}}"
+  },
+  {
+    "u": "ftp://example.org/",
+    "status": 400,
+    "body": "{\"error\":{\"code\":\"VALIDATION_FAILED\",\"message\":\"url: Only http(s) URLs allowed\",\"status\":400}}"
+  },
+  {
+    "u": "gopher://example.org/",
+    "status": 400,
+    "body": "{\"error\":{\"code\":\"VALIDATION_FAILED\",\"message\":\"url: Only http(s) URLs allowed\",\"status\":400}}"
+  },
+  {
+    "u": "javascript:alert(1)",
+    "status": 400,
+    "body": "{\"error\":{\"code\":\"VALIDATION_FAILED\",\"message\":\"url: Only http(s) URLs allowed\",\"status\":400}}"
+  },
+  {
+    "u": "http://127.0.0.1.nip.io/",
+    "status": 400,
+    "body": "{\"error\":{\"code\":\"INVALID_PARAMS\",\"message\":\"DNS for \\\"127.0.0.1.nip.io\\\" resolved to a private IP (127.0.0.1); rebinding blocked.\",\"status\""
+  },
+  {
+    "u": "http://localtest.me/",
+    "status": 400,
+    "body": "{\"error\":{\"code\":\"INVALID_PARAMS\",\"message\":\"DNS for \\\"localtest.me\\\" resolved to a private IP (127.0.0.1); rebinding blocked.\",\"status\":400"
+  },
+  {
+    "u": "http://169.254.169.254.nip.io/",
+    "status": 400,
+    "body": "{\"error\":{\"code\":\"INVALID_PARAMS\",\"message\":\"DNS for \\\"169.254.169.254.nip.io\\\" resolved to a private IP (169.254.169.254); rebinding blocke"
+  }
+]

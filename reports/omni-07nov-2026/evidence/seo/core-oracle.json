@@ -1,0 +1,52 @@
+{
+  "slug": "seo",
+  "domain": "seoscope.dev",
+  "at": "2026-11-07T07:16:49.863Z",
+  "results": [
+    {
+      "what": "audit risponde 200",
+      "pass": true,
+      "detail": "HTTP 200"
+    },
+    {
+      "what": "score = media dei punteggi di categoria pesata",
+      "pass": true,
+      "detail": "riportato 84, ricalcolato 84.31 (pesi content:9 meta:7 social:3 technical:6 performance:7)"
+    },
+    {
+      "what": "i punteggi di categoria coincidono fra le due viste",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "what": "l oracolo e il prodotto guardano la stessa pagina",
+      "pass": true,
+      "detail": "oracolo su https://toolkitonline.vip/en"
+    },
+    {
+      "what": "il titolo letto e quello della pagina",
+      "pass": true,
+      "detail": "prodotto \"ToolKit Online — Free Calculators, Converters & Tools | ToolKit Online\" vs reale \"ToolKit Online — Free Calculators, Converters & Tools | ToolKit Online\""
+    },
+    {
+      "what": "la description letta e quella della pagina",
+      "pass": true,
+      "detail": "prodotto 83 car, reale 83 car"
+    },
+    {
+      "what": "il conteggio immagini coincide col parser indipendente",
+      "pass": true,
+      "detail": "prodotto 0, parser 0"
+    },
+    {
+      "what": "fail_under non soddisfatto da 422",
+      "pass": true,
+      "detail": "HTTP 422 (score 84 < 99)"
+    },
+    {
+      "what": "i 2 cron di questo prodotto",
+      "pass": null,
+      "detail": "CRON_SECRET esiste ma e' marcata Sensitive: vercel env pull la restituisce vuota, quindi il percorso positivo non e' stato esercitato"
+    }
+  ]
+}

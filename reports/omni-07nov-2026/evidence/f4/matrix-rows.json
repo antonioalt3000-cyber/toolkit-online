@@ -1,0 +1,267 @@
+[
+  {
+    "id": "it-22",
+    "truth": {
+      "number": "IT-2026-0101",
+      "subtotal": 5137.98,
+      "tax": 1130.36,
+      "total": 6268.34,
+      "rate": 22,
+      "cur": "EUR",
+      "rows": [4938, 199.98]
+    },
+    "got": {
+      "number": "IT-2026-0101",
+      "subtotal": 5137.98,
+      "tax": 1130.36,
+      "total": 6268.34,
+      "rate": 22
+    },
+    "raw": "{\"type\":\"invoice\",\"invoiceNumber\":\"IT-2026-0101\",\"invoiceDate\":\"2026-10-30\",\"dueDate\":\"\",\"vendor\":{\"name\":\"\",\"address\":\"\",\"email\":\"\",\"phone\":\"\",\"taxId\":\"\"},\"customer\":{\"name\":\"Bar Centrale SNC\",\"address\":\"\",\"email\":\"\",\"phone\":\"\",\"taxId\":\"\"},\"lineItems\":[{\"description\":\"Manutenzione impianto\",\"quantity\":4,\"unitPrice\":1234.5,\"amount\":4938},{\"description\":\"Ricambi\",\"quantity\":2,\"unitPrice\":99.99,\"amo"
+  },
+  {
+    "id": "de-19",
+    "truth": {
+      "number": "RE-2026-5521",
+      "subtotal": 1859.9,
+      "tax": 353.38,
+      "total": 2213.28,
+      "rate": 19,
+      "cur": "EUR",
+      "rows": [1770, 89.9]
+    },
+    "got": {
+      "number": "RE-2026-5521",
+      "subtotal": 1859.9,
+      "tax": 353.38,
+      "total": 2213.28,
+      "rate": 19
+    },
+    "raw": "{\"type\":\"invoice\",\"invoiceNumber\":\"RE-2026-5521\",\"invoiceDate\":\"2026-10-30\",\"dueDate\":\"\",\"vendor\":{\"name\":\"\",\"address\":\"\",\"email\":\"\",\"phone\":\"\",\"taxId\":\"\"},\"customer\":{\"name\":\"Bauer Metall AG\",\"address\":\"\",\"email\":\"\",\"phone\":\"\",\"taxId\":\"\"},\"lineItems\":[{\"description\":\"Frasteil Typ A\",\"quantity\":120,\"unitPrice\":14.75,\"amount\":1770},{\"description\":\"Versand\",\"quantity\":1,\"unitPrice\":89.9,\"amount\":89."
+  },
+  {
+    "id": "fr-20",
+    "truth": {
+      "number": "FA-2026-3310",
+      "subtotal": 2434.56,
+      "tax": 486.91,
+      "total": 2921.47,
+      "rate": 20,
+      "cur": "EUR",
+      "rows": [1200, 1234.56]
+    },
+    "got": {
+      "number": "FA-2026-3310",
+      "subtotal": 2434.56,
+      "tax": 486.91,
+      "total": 2921.47,
+      "rate": 20
+    },
+    "raw": "{\"type\":\"invoice\",\"invoiceNumber\":\"FA-2026-3310\",\"invoiceDate\":\"2026-10-30\",\"dueDate\":\"\",\"vendor\":{\"name\":\"\",\"address\":\"\",\"email\":\"\",\"phone\":\"\",\"taxId\":\"\"},\"customer\":{\"name\":\"Boulangerie Dupont\",\"address\":\"\",\"email\":\"\",\"phone\":\"\",\"taxId\":\"\"},\"lineItems\":[{\"description\":\"Conseil strategique\",\"quantity\":8,\"unitPrice\":150,\"amount\":1200},{\"description\":\"Deplacement\",\"quantity\":1,\"unitPrice\":1234.56,\""
+  },
+  {
+    "id": "es-21",
+    "truth": {
+      "number": "ES-2026-0412",
+      "subtotal": 4649.9,
+      "tax": 976.48,
+      "total": 5626.38,
+      "rate": 21,
+      "cur": "EUR",
+      "rows": [3750, 899.9]
+    },
+    "got": {
+      "number": "ES-2026-0412",
+      "subtotal": 4649.9,
+      "tax": 976.48,
+      "total": 5626.38,
+      "rate": 21
+    },
+    "raw": "{\"type\":\"invoice\",\"invoiceNumber\":\"ES-2026-0412\",\"invoiceDate\":\"2026-10-30\",\"dueDate\":\"\",\"vendor\":{\"name\":\"\",\"address\":\"\",\"email\":\"\",\"phone\":\"\",\"taxId\":\"\"},\"customer\":{\"name\":\"Ferreteria Norte SL\",\"address\":\"\",\"email\":\"\",\"phone\":\"\",\"taxId\":\"\"},\"lineItems\":[{\"description\":\"Diseno grafico\",\"quantity\":3,\"unitPrice\":1250,\"amount\":3750},{\"description\":\"Mantenimiento\",\"quantity\":1,\"unitPrice\":899.9,\"amo"
+  },
+  {
+    "id": "es-10",
+    "truth": {
+      "number": "ES-2026-0413",
+      "subtotal": 920,
+      "tax": 92,
+      "total": 1012,
+      "rate": 10,
+      "cur": "EUR",
+      "rows": [920]
+    },
+    "got": {
+      "number": "ES-2026-0413",
+      "subtotal": 920,
+      "tax": 92,
+      "total": 1012,
+      "rate": 10
+    },
+    "raw": "{\"type\":\"invoice\",\"invoiceNumber\":\"ES-2026-0413\",\"invoiceDate\":\"2026-10-30\",\"dueDate\":\"\",\"vendor\":{\"name\":\"\",\"address\":\"\",\"email\":\"\",\"phone\":\"\",\"taxId\":\"\"},\"customer\":{\"name\":\"Empresa Cliente SA\",\"address\":\"\",\"email\":\"\",\"phone\":\"\",\"taxId\":\"\"},\"lineItems\":[{\"description\":\"Catering evento\",\"quantity\":50,\"unitPrice\":18.4,\"amount\":920}],\"subtotal\":920,\"taxAmount\":92,\"taxRate\":10,\"total\":1012,\"currency"
+  },
+  {
+    "id": "es-4",
+    "truth": {
+      "number": "ES-2026-0414",
+      "subtotal": 670.5,
+      "tax": 26.82,
+      "total": 697.32,
+      "rate": 4,
+      "cur": "EUR",
+      "rows": [670.5]
+    },
+    "got": {
+      "number": "ES-2026-0414",
+      "subtotal": 670.5,
+      "tax": 26.82,
+      "total": 697.32,
+      "rate": 4
+    },
+    "raw": "{\"type\":\"invoice\",\"invoiceNumber\":\"ES-2026-0414\",\"invoiceDate\":\"2026-10-30\",\"dueDate\":\"\",\"vendor\":{\"name\":\"\",\"address\":\"\",\"email\":\"\",\"phone\":\"\",\"taxId\":\"\"},\"customer\":{\"name\":\"Colegio Publico\",\"address\":\"\",\"email\":\"\",\"phone\":\"\",\"taxId\":\"\"},\"lineItems\":[{\"description\":\"Libros de texto\",\"quantity\":30,\"unitPrice\":22.35,\"amount\":670.5}],\"subtotal\":670.5,\"taxAmount\":26.82,\"taxRate\":4,\"total\":697.32,\"cu"
+  },
+  {
+    "id": "pt-23",
+    "truth": {
+      "number": "FT-2026-0077",
+      "subtotal": 453,
+      "tax": 104.19,
+      "total": 557.19,
+      "rate": 23,
+      "cur": "EUR",
+      "rows": [453]
+    },
+    "got": {
+      "number": "FT-2026-0077",
+      "subtotal": 453,
+      "tax": 104.19,
+      "total": 557.19,
+      "rate": 23
+    },
+    "raw": "{\"type\":\"invoice\",\"invoiceNumber\":\"FT-2026-0077\",\"invoiceDate\":\"2026-10-30\",\"dueDate\":\"\",\"vendor\":{\"name\":\"\",\"address\":\"\",\"email\":\"\",\"phone\":\"\",\"taxId\":\"\"},\"customer\":{\"name\":\"Cafe Central Lda\",\"address\":\"\",\"email\":\"\",\"phone\":\"\",\"taxId\":\"\"},\"lineItems\":[{\"description\":\"Servico tecnico\",\"quantity\":6,\"unitPrice\":75.5,\"amount\":453}],\"subtotal\":453,\"taxAmount\":104.19,\"taxRate\":23,\"total\":557.19,\"curre"
+  },
+  {
+    "id": "nl-21",
+    "truth": {
+      "number": "NL-2026-0909",
+      "subtotal": 9387.2,
+      "tax": 1971.31,
+      "total": 11358.51,
+      "rate": 21,
+      "cur": "EUR",
+      "rows": [8450, 937.2]
+    },
+    "got": {
+      "number": "NL-2026-0909",
+      "subtotal": 9387.2,
+      "tax": 1971.31,
+      "total": 11358.51,
+      "rate": 21
+    },
+    "raw": "{\"type\":\"invoice\",\"invoiceNumber\":\"NL-2026-0909\",\"invoiceDate\":\"2026-10-30\",\"dueDate\":\"\",\"vendor\":{\"name\":\"\",\"address\":\"\",\"email\":\"\",\"phone\":\"\",\"taxId\":\"\"},\"customer\":{\"name\":\"De Vries Holding BV\",\"address\":\"\",\"email\":\"\",\"phone\":\"\",\"taxId\":\"\"},\"lineItems\":[{\"description\":\"Verbouwing keuken\",\"quantity\":1,\"unitPrice\":8450,\"amount\":8450},{\"description\":\"Materiaal\",\"quantity\":3,\"unitPrice\":312.4,\"amou"
+  },
+  {
+    "id": "pl-23",
+    "truth": {
+      "number": "FV-2026-0155",
+      "subtotal": 3200,
+      "tax": 736,
+      "total": 3936,
+      "rate": 23,
+      "cur": "PLN",
+      "rows": [3200]
+    },
+    "got": {
+      "number": "FV-2026-0155",
+      "subtotal": 3200,
+      "tax": 736,
+      "total": 3936,
+      "rate": 23
+    },
+    "raw": "{\"type\":\"invoice\",\"invoiceNumber\":\"FV-2026-0155\",\"invoiceDate\":\"2026-10-30\",\"dueDate\":\"\",\"vendor\":{\"name\":\"\",\"address\":\"\",\"email\":\"\",\"phone\":\"\",\"taxId\":\"\"},\"customer\":{\"name\":\"Nowak Handel Sp. z o.o.\",\"address\":\"\",\"email\":\"\",\"phone\":\"\",\"taxId\":\"\"},\"lineItems\":[{\"description\":\"Uslugi doradcze\",\"quantity\":10,\"unitPrice\":320,\"amount\":3200}],\"subtotal\":3200,\"taxAmount\":736,\"taxRate\":23,\"total\":3936,\"c"
+  },
+  {
+    "id": "us-0",
+    "truth": {
+      "number": "PF-RC-0001",
+      "subtotal": 9999.95,
+      "tax": 0,
+      "total": 9999.95,
+      "rate": 0,
+      "cur": "USD",
+      "rows": [9999.95]
+    },
+    "got": {
+      "number": "PF-RC-0001",
+      "subtotal": 9999.95,
+      "tax": 0,
+      "total": 9999.95,
+      "rate": 0
+    },
+    "raw": "{\"type\":\"invoice\",\"invoiceNumber\":\"PF-RC-0001\",\"invoiceDate\":\"2026-10-30\",\"dueDate\":\"\",\"vendor\":{\"name\":\"\",\"address\":\"\",\"email\":\"\",\"phone\":\"\",\"taxId\":\"\"},\"customer\":{\"name\":\"Acme Corp\",\"address\":\"\",\"email\":\"\",\"phone\":\"\",\"taxId\":\"\"},\"lineItems\":[{\"description\":\"Reverse charge services\",\"quantity\":5,\"unitPrice\":1999.99,\"amount\":9999.95}],\"subtotal\":9999.95,\"taxAmount\":0,\"taxRate\":0,\"total\":9999.95,\""
+  },
+  {
+    "id": "half-cent",
+    "truth": {
+      "number": "PF-HC-0001",
+      "subtotal": 1.05,
+      "tax": 0.11,
+      "total": 1.16,
+      "rate": 10,
+      "cur": "USD",
+      "rows": [1.05]
+    },
+    "got": {
+      "number": "PF-HC-0001",
+      "subtotal": 1.05,
+      "tax": 0.11,
+      "total": 1.16,
+      "rate": 10.48
+    },
+    "raw": "{\"type\":\"invoice\",\"invoiceNumber\":\"PF-HC-0001\",\"invoiceDate\":\"2026-10-30\",\"dueDate\":\"\",\"vendor\":{\"name\":\"\",\"address\":\"\",\"email\":\"\",\"phone\":\"\",\"taxId\":\"\"},\"customer\":{\"name\":\"Edge Case Inc\",\"address\":\"\",\"email\":\"\",\"phone\":\"\",\"taxId\":\"\"},\"lineItems\":[{\"description\":\"Item\",\"quantity\":1,\"unitPrice\":1.05,\"amount\":1.05}],\"subtotal\":1.05,\"taxAmount\":0.11,\"taxRate\":10.48,\"total\":1.16,\"currency\":\"USD\",\"cur"
+  },
+  {
+    "id": "zero-total",
+    "truth": {
+      "number": "PF-ZERO-0001",
+      "subtotal": 0,
+      "tax": 0,
+      "total": 0,
+      "rate": 21,
+      "cur": "USD",
+      "rows": []
+    },
+    "got": {
+      "number": "PF-ZERO-0001",
+      "subtotal": 0,
+      "tax": 0,
+      "total": 0,
+      "rate": 0
+    },
+    "raw": "{\"type\":\"invoice\",\"invoiceNumber\":\"PF-ZERO-0001\",\"invoiceDate\":\"2026-10-30\",\"dueDate\":\"\",\"vendor\":{\"name\":\"\",\"address\":\"\",\"email\":\"\",\"phone\":\"\",\"taxId\":\"\"},\"customer\":{\"name\":\"Trial Customer\",\"address\":\"\",\"email\":\"\",\"phone\":\"\",\"taxId\":\"\"},\"lineItems\":[],\"subtotal\":0,\"taxAmount\":0,\"taxRate\":0,\"total\":0,\"currency\":\"USD\",\"currencyDetected\":true,\"paymentTerms\":\"\",\"notes\":\"\"}"
+  },
+  {
+    "id": "credit-note",
+    "truth": {
+      "number": "CN-2026-0007",
+      "subtotal": -120,
+      "tax": -25.2,
+      "total": -145.2,
+      "rate": 21,
+      "cur": "EUR",
+      "rows": [-100, -20]
+    },
+    "got": {
+      "number": "CN-2026-0007",
+      "subtotal": -120,
+      "tax": -25.2,
+      "total": -145.2,
+      "rate": 21
+    },
+    "raw": "{\"type\":\"invoice\",\"invoiceNumber\":\"CN-2026-0007\",\"invoiceDate\":\"2026-10-30\",\"dueDate\":\"\",\"vendor\":{\"name\":\"\",\"address\":\"\",\"email\":\"\",\"phone\":\"\",\"taxId\":\"\"},\"customer\":{\"name\":\"Buyer SL\",\"address\":\"\",\"email\":\"\",\"phone\":\"\",\"taxId\":\"\"},\"lineItems\":[{\"description\":\"Returned goods\",\"quantity\":1,\"unitPrice\":-100,\"amount\":-100},{\"description\":\"Returned shipping\",\"quantity\":1,\"unitPrice\":-20,\"amount\":-20}"
+  },
+  {
+    "id": "non-invoice",
+    "status": 200,
+    "raw": "{\"id\":\"4c31b761-7567-4b82-a332-00e8ebb88b37\",\"status\":\"completed\",\"documentType\":\"invoice\",\"confidence\":0.5,\"data\":{\"type\":\"invoice\",\"invoiceNumber\":\"\",\"invoiceDate\":\"\",\"dueDate\":\"\",\"vendor\":{\"name\":\"\",\"address\":\"\",\"email\":\"\",\"phone\":\"\",\"taxId\":\"\"},\"customer\":{\"name\":\"\",\"address\":\"\",\"email\":\"\",\"phon"
+  }
+]

@@ -1,0 +1,6 @@
+[PASS] S01 signup baseline
+[FAIL] S04 signup clock -7 h (tab left open)  -> refused: {"code":"BAD_REQUEST","msg":"A valid email is required."} | ui="A valid email is required."
+[PASS] S08 signup: autofill also fills the honeypot  -> refused: {"code":"BAD_REQUEST","msg":"Bot detected."}
+[PASS] S09 signup: autofill + immediate click  -> refused: {"code":"BAD_REQUEST","msg":"A valid email is required."}
+
+eg: 4 scenarios, 3 PASS, 1 FAIL -> C:\Users\ftass\toolkit-online\reports\omni-07nov-2026\evidence\eg\fidelity-matrix.partial.json

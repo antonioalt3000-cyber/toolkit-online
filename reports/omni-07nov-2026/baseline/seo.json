@@ -1,0 +1,45 @@
+{
+  "slug": "seo",
+  "domain": "seoscope.dev",
+  "startedAt": "2026-11-07T07:15:58.465Z",
+  "finishedAt": "2026-11-07T07:16:53.275Z",
+  "healthBefore": {
+    "status": 200,
+    "commit": "805a51d"
+  },
+  "healthAfter": {
+    "status": 200,
+    "commit": "805a51d"
+  },
+  "allGreen": true,
+  "steps": [
+    {
+      "step": "sweep-public",
+      "exit": 0,
+      "signal": null,
+      "ms": 2325,
+      "summary": "seo  seoscope.dev       pagine= 11 non-200=0 senza-og:image=0 meta-ereditati=0 h1-multipli=0 backslash-500=0/11",
+      "ok": true
+    },
+    {
+      "step": "journey-public",
+      "exit": 0,
+      "signal": null,
+      "ms": 37936,
+      "summary": "--- SEOScope: 6/6 PASS",
+      "nonVerified": false,
+      "fails": [],
+      "ok": true
+    },
+    {
+      "step": "journey-core",
+      "exit": 0,
+      "signal": null,
+      "ms": 4630,
+      "summary": "--- seo: 8/8 PASS · 1 NON VERIFICATI (i 2 cron di questo prodotto)",
+      "nonVerified": true,
+      "fails": [],
+      "ok": true
+    }
+  ]
+}

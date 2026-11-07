@@ -1,0 +1,186 @@
+{
+  "slug": "eg",
+  "at": "2026-11-07T06:53:09.775Z",
+  "results": [
+    {
+      "what": "signup: 200 e consegna una chiave",
+      "pass": true,
+      "detail": "HTTP 200 {\"success\":true,\"plan\":\"free\",\"apiKey\":\"eg_3e949a67efc14dac9c67ca7ce81bc0e7\"}"
+    },
+    {
+      "what": "dashboard con la chiave: 200, piano free, email giusta",
+      "pass": true,
+      "detail": "HTTP 200 plan=free"
+    },
+    {
+      "what": "dashboard senza chiave: 401",
+      "pass": true,
+      "detail": "HTTP 401"
+    },
+    {
+      "what": "dashboard con chiave sbagliata: 401 (non 5xx)",
+      "pass": true,
+      "detail": "HTTP 401"
+    },
+    {
+      "what": "checkout starter: 200 con un url di pagamento",
+      "pass": true,
+      "detail": "HTTP 200 {\"url\":\"http://127.0.0.1:10113/__qa/hosted/cs_qa_2\"}"
+    },
+    {
+      "what": "checkout starter: chiede a Stripe ESATTAMENTE il price id atteso (price_qa_starter)",
+      "pass": true,
+      "detail": "chiesto price_qa_starter"
+    },
+    {
+      "what": "checkout starter: customer_email o customer = l'acquirente, metadata.plan = starter",
+      "pass": true,
+      "detail": "email=undefined customer=cus_qa_1 plan=starter"
+    },
+    {
+      "what": "checkout starter: modalità subscription",
+      "pass": true,
+      "detail": "mode=subscription"
+    },
+    {
+      "what": "checkout pro: 200 con un url di pagamento",
+      "pass": true,
+      "detail": "HTTP 200 {\"url\":\"http://127.0.0.1:10113/__qa/hosted/cs_qa_4\"}"
+    },
+    {
+      "what": "checkout pro: chiede a Stripe ESATTAMENTE il price id atteso (price_qa_pro)",
+      "pass": true,
+      "detail": "chiesto price_qa_pro"
+    },
+    {
+      "what": "checkout pro: customer_email o customer = l'acquirente, metadata.plan = pro",
+      "pass": true,
+      "detail": "email=undefined customer=cus_qa_3 plan=pro"
+    },
+    {
+      "what": "checkout pro: modalità subscription",
+      "pass": true,
+      "detail": "mode=subscription"
+    },
+    {
+      "what": "checkout business: 200 con un url di pagamento",
+      "pass": true,
+      "detail": "HTTP 200 {\"url\":\"http://127.0.0.1:10113/__qa/hosted/cs_qa_6\"}"
+    },
+    {
+      "what": "checkout business: chiede a Stripe ESATTAMENTE il price id atteso (price_qa_business)",
+      "pass": true,
+      "detail": "chiesto price_qa_business"
+    },
+    {
+      "what": "checkout business: customer_email o customer = l'acquirente, metadata.plan = business",
+      "pass": true,
+      "detail": "email=undefined customer=cus_qa_5 plan=business"
+    },
+    {
+      "what": "checkout business: modalità subscription",
+      "pass": true,
+      "detail": "mode=subscription"
+    },
+    {
+      "what": "controllo negativo: il price id di \"pro\" NON coincide con quello di \"starter\"",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "what": "checkout con piano ignoto: 400",
+      "pass": true,
+      "detail": "HTTP 400 {\"error\":{\"code\":\"UNKNOWN_PLAN\",\"message\":\"Unknown plan.\"}}"
+    },
+    {
+      "what": "checkout senza piano: 400",
+      "pass": true,
+      "detail": "HTTP 400"
+    },
+    {
+      "what": "checkout da un'origine esterna: 403 (CSRF)",
+      "pass": true,
+      "detail": "HTTP 403"
+    },
+    {
+      "what": "webhook con firma FALSA: 400",
+      "pass": true,
+      "detail": "HTTP 400"
+    },
+    {
+      "what": "webhook senza header di firma: 400",
+      "pass": true,
+      "detail": "HTTP 400"
+    },
+    {
+      "what": "webhook con firma giusta ma timestamp di 1 ora fa: 400",
+      "pass": true,
+      "detail": "HTTP 400"
+    },
+    {
+      "what": "webhook con corpo alterato dopo la firma: 400",
+      "pass": true,
+      "detail": "HTTP 400"
+    },
+    {
+      "what": "dopo i 4 rifiuti il piano è ANCORA free (nessuna provvista da un webhook non valido)",
+      "pass": true,
+      "detail": "plan=free"
+    },
+    {
+      "what": "webhook firmato ma su un price di un ALTRO prodotto: 200 «ignored», il piano NON cambia",
+      "pass": true,
+      "detail": "HTTP 200 {\"received\":true,\"ignored\":\"foreign_price\"} plan=free"
+    },
+    {
+      "what": "webhook FIRMATO checkout.session.completed: 200",
+      "pass": true,
+      "detail": "HTTP 200 {\"received\":true}"
+    },
+    {
+      "what": "dopo il webhook firmato la dashboard mostra il piano pro",
+      "pass": true,
+      "detail": "plan=pro"
+    },
+    {
+      "what": "lo stesso evento rispedito: nessun errore e il piano non cambia",
+      "pass": true,
+      "detail": "HTTP 200 plan=pro"
+    },
+    {
+      "what": "secondo checkout dello stesso account già pagante: rifiutato (409), non una seconda sottoscrizione",
+      "pass": true,
+      "detail": "HTTP 409 {\"error\":{\"code\":\"ALREADY_SUBSCRIBED\",\"message\":\"You already have an active subscription. Change or cancel you"
+    },
+    {
+      "what": "Redis giù: il checkout risponde 503 (un riprova lo risolve), non 500",
+      "pass": true,
+      "detail": "HTTP 503 {\"error\":{\"code\":\"SERVICE_UNAVAILABLE\",\"message\":\"Temporary service issue on our side — you were not charged. "
+    },
+    {
+      "what": "Redis giù: il portale di fatturazione risponde 503 o un rifiuto pulito, mai 500",
+      "pass": true,
+      "detail": "HTTP 503 {\"error\":{\"code\":\"SERVICE_UNAVAILABLE\",\"message\":\"Temporary service issue on our side — yo"
+    },
+    {
+      "what": "Redis giù: la dashboard risponde 503, NON 401 (la chiave non viene invalidata)",
+      "pass": true,
+      "detail": "HTTP 503 {\"error\":{\"code\":\"SERVICE_UNAVAILABLE\",\"message\":\"Temporary service issue on our side — yo"
+    },
+    {
+      "what": "Redis giù: il signup risponde 503, non 500",
+      "pass": true,
+      "detail": "HTTP 503"
+    },
+    {
+      "what": "Redis di nuovo su: la STESSA chiave funziona e il piano è intatto",
+      "pass": true,
+      "detail": "HTTP 200 plan=pro"
+    },
+    {
+      "what": "la email di benvenuto è partita verso il mock Brevo, all'indirizzo giusto",
+      "pass": true,
+      "detail": "2 occorrenze nel log del mock"
+    }
+  ]
+}

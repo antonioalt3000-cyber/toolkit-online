@@ -1,0 +1,30 @@
+headershield.dev   /terms             hello@headershield.dev
+headershield.dev   /cookie-policy     hello@headershield.dev
+headershield.dev   /refund            hello@headershield.dev
+headershield.dev   /dpa               hello@headershield.dev
+gethooklab.dev     /                  hello@gethooklab.dev
+gethooklab.dev     /pricing           hello@gethooklab.dev
+gethooklab.dev     /signup            hello@gethooklab.dev
+gethooklab.dev     /docs              hello@gethooklab.dev
+gethooklab.dev     /help              hello@gethooklab.dev
+gethooklab.dev     /privacy           hello@gethooklab.dev
+gethooklab.dev     /terms             hello@gethooklab.dev
+gethooklab.dev     /cookie-policy     hello@gethooklab.dev
+gethooklab.dev     /refund            hello@gethooklab.dev
+gethooklab.dev     /dpa               hello@gethooklab.dev
+gethooklab.dev     /verify-stripe-webhook-signatures hello@gethooklab.dev
+gethooklab.dev     /test-github-webhook-deliveries hello@gethooklab.dev
+gethooklab.dev     /replay-webhook-to-staging hello@gethooklab.dev
+seoscope.dev       /                  hello@seoscope.dev
+seoscope.dev       /seo-audit         hello@seoscope.dev
+seoscope.dev       /pricing           hello@seoscope.dev
+seoscope.dev       /signup            hello@seoscope.dev
+seoscope.dev       /docs              hello@seoscope.dev
+seoscope.dev       /help              hello@seoscope.dev
+seoscope.dev       /privacy           hello@seoscope.dev
+seoscope.dev       /terms             hello@seoscope.dev
+seoscope.dev       /cookie-policy     hello@seoscope.dev
+seoscope.dev       /refund            hello@seoscope.dev
+seoscope.dev       /dpa               hello@seoscope.dev
+
+indirizzi non consegnabili trovati nel DOM: 0

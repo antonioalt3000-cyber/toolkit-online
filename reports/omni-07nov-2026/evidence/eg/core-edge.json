@@ -1,0 +1,66 @@
+{
+  "slug": "eg",
+  "at": "2026-11-07T01:43:42.618Z",
+  "results": [
+    {
+      "what": "gmail.com: MX/SPF/DMARC del prodotto = DNS reale via DoH (mx true, spf true, dmarc true)",
+      "pass": true,
+      "detail": "HTTP 200; prodotto mx=true spf=true dmarc=true"
+    },
+    {
+      "what": "outlook.com: MX/SPF/DMARC del prodotto = DNS reale via DoH (mx true, spf true, dmarc true)",
+      "pass": true,
+      "detail": "HTTP 200; prodotto mx=true spf=true dmarc=true"
+    },
+    {
+      "what": "emailguard.dev: MX/SPF/DMARC del prodotto = DNS reale via DoH (mx true, spf true, dmarc true)",
+      "pass": true,
+      "detail": "HTTP 200; prodotto mx=true spf=true dmarc=true"
+    },
+    {
+      "what": "toolkitonline.vip: MX/SPF/DMARC del prodotto = DNS reale via DoH (mx true, spf true, dmarc false)",
+      "pass": true,
+      "detail": "HTTP 200; prodotto mx=true spf=true dmarc=false"
+    },
+    {
+      "what": "qa-no-such-domain-7nov-mw5qowon.com: MX/SPF/DMARC del prodotto = DNS reale via DoH (mx false, spf false, dmarc false)",
+      "pass": true,
+      "detail": "HTTP 200; prodotto mx=false spf=false dmarc=false"
+    },
+    {
+      "what": "qa-no-such-domain-7nov-mw5qowon.com (inesistente, DNS: nessun MX): 200 con mx=false e indirizzo non valido, mai 5xx",
+      "pass": true,
+      "detail": "HTTP 200 valid=false"
+    },
+    {
+      "what": "controllo negativo: l'aspettativa opposta (MX invertito) non regge su nessun dominio",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "what": "lotto di 100 indirizzi: accettato (200) con 100 risultati",
+      "pass": true,
+      "detail": "HTTP 200; chiavi count,results"
+    },
+    {
+      "what": "lotto di 100: ogni risultato torna nello stesso ordine e con il verdetto MX del DNS reale",
+      "pass": true,
+      "detail": "0 verdetti diversi dal DNS; primo qa0@gmail.com ultimo qa99@gmail.com"
+    },
+    {
+      "what": "lotto di 101 indirizzi: respinto con 4xx JSON, nessun risultato parziale",
+      "pass": true,
+      "detail": "HTTP 400 {\"error\":{\"code\":\"BAD_REQUEST\",\"message\":\"Too big: expected array to have <=100 items\"}}"
+    },
+    {
+      "what": "lotto vuoto: 4xx, oppure 200 con count 0 e nessun risultato inventato; mai 5xx",
+      "pass": true,
+      "detail": "HTTP 200 {\"count\":0,\"results\":[]}"
+    },
+    {
+      "what": "lotto con indirizzi spazzatura: 200 o 4xx, mai 5xx",
+      "pass": true,
+      "detail": "HTTP 400"
+    }
+  ]
+}

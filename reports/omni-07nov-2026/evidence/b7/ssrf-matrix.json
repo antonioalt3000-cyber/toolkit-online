@@ -1,0 +1,274 @@
+[
+  {
+    "saas": "b7ssrf",
+    "step": "positive control: own domain is captured (200, image/png)",
+    "expected": [200, true],
+    "observed": [200, true],
+    "ok": true,
+    "note": "186926 bytes"
+  },
+  {
+    "saas": "b7ssrf",
+    "step": "control: missing url is a 400 of ITS OWN kind (not the SSRF message)",
+    "expected": true,
+    "observed": true,
+    "ok": true,
+    "note": "{\"error\":{\"code\":\"VALIDATION_FAILED\",\"message\":\"url: Invalid input: expected string, received undefined\",\"status\":400}}"
+  },
+  {
+    "saas": "b7ssrf",
+    "step": "SSRF http://127.0.0.1/ -> 400 and no image",
+    "expected": [400, false],
+    "observed": [400, false],
+    "ok": true,
+    "note": "{\"error\":{\"code\":\"INVALID_PARAMS\",\"message\":\"Internal/private IPv4 host not allowed.\",\"status\":400}}"
+  },
+  {
+    "saas": "b7ssrf",
+    "step": "SSRF http://localhost/ -> 400 and no image",
+    "expected": [400, false],
+    "observed": [400, false],
+    "ok": true,
+    "note": "{\"error\":{\"code\":\"INVALID_PARAMS\",\"message\":\"Localhost URLs are not allowed.\",\"status\":400}}"
+  },
+  {
+    "saas": "b7ssrf",
+    "step": "SSRF http://[::1]/ -> 400 and no image",
+    "expected": [400, false],
+    "observed": [400, false],
+    "ok": true,
+    "note": "{\"error\":{\"code\":\"INVALID_PARAMS\",\"message\":\"Internal/private IPv6 host not allowed.\",\"status\":400}}"
+  },
+  {
+    "saas": "b7ssrf",
+    "step": "SSRF http://0.0.0.0/ -> 400 and no image",
+    "expected": [400, false],
+    "observed": [400, false],
+    "ok": true,
+    "note": "{\"error\":{\"code\":\"INVALID_PARAMS\",\"message\":\"Internal/private IPv4 host not allowed.\",\"status\":400}}"
+  },
+  {
+    "saas": "b7ssrf",
+    "step": "SSRF http://2130706433/ -> 400 and no image",
+    "expected": [400, false],
+    "observed": [400, false],
+    "ok": true,
+    "note": "{\"error\":{\"code\":\"INVALID_PARAMS\",\"message\":\"Internal/private IPv4 host not allowed.\",\"status\":400}}"
+  },
+  {
+    "saas": "b7ssrf",
+    "step": "SSRF http://0x7f000001/ -> 400 and no image",
+    "expected": [400, false],
+    "observed": [400, false],
+    "ok": true,
+    "note": "{\"error\":{\"code\":\"INVALID_PARAMS\",\"message\":\"Internal/private IPv4 host not allowed.\",\"status\":400}}"
+  },
+  {
+    "saas": "b7ssrf",
+    "step": "SSRF http://017700000001/ -> 400 and no image",
+    "expected": [400, false],
+    "observed": [400, false],
+    "ok": true,
+    "note": "{\"error\":{\"code\":\"INVALID_PARAMS\",\"message\":\"Internal/private IPv4 host not allowed.\",\"status\":400}}"
+  },
+  {
+    "saas": "b7ssrf",
+    "step": "SSRF http://127.1/ -> 400 and no image",
+    "expected": [400, false],
+    "observed": [400, false],
+    "ok": true,
+    "note": "{\"error\":{\"code\":\"INVALID_PARAMS\",\"message\":\"Internal/private IPv4 host not allowed.\",\"status\":400}}"
+  },
+  {
+    "saas": "b7ssrf",
+    "step": "SSRF http://0177.0.0.1/ -> 400 and no image",
+    "expected": [400, false],
+    "observed": [400, false],
+    "ok": true,
+    "note": "{\"error\":{\"code\":\"INVALID_PARAMS\",\"message\":\"Internal/private IPv4 host not allowed.\",\"status\":400}}"
+  },
+  {
+    "saas": "b7ssrf",
+    "step": "SSRF http://[::ffff:127.0.0.1]/ -> 400 and no image",
+    "expected": [400, false],
+    "observed": [400, false],
+    "ok": true,
+    "note": "{\"error\":{\"code\":\"INVALID_PARAMS\",\"message\":\"Internal/private IPv6 host not allowed.\",\"status\":400}}"
+  },
+  {
+    "saas": "b7ssrf",
+    "step": "SSRF http://[::ffff:7f00:1]/ -> 400 and no image",
+    "expected": [400, false],
+    "observed": [400, false],
+    "ok": true,
+    "note": "{\"error\":{\"code\":\"INVALID_PARAMS\",\"message\":\"Internal/private IPv6 host not allowed.\",\"status\":400}}"
+  },
+  {
+    "saas": "b7ssrf",
+    "step": "SSRF http://169.254.169.254/latest/meta-data/ -> 400 and no image",
+    "expected": [400, false],
+    "observed": [400, false],
+    "ok": true,
+    "note": "{\"error\":{\"code\":\"INVALID_PARAMS\",\"message\":\"Internal/private IPv4 host not allowed.\",\"status\":400}}"
+  },
+  {
+    "saas": "b7ssrf",
+    "step": "SSRF http://[fd00::1]/ -> 400 and no image",
+    "expected": [400, false],
+    "observed": [400, false],
+    "ok": true,
+    "note": "{\"error\":{\"code\":\"INVALID_PARAMS\",\"message\":\"Internal/private IPv6 host not allowed.\",\"status\":400}}"
+  },
+  {
+    "saas": "b7ssrf",
+    "step": "SSRF http://[fe80::1]/ -> 400 and no image",
+    "expected": [400, false],
+    "observed": [400, false],
+    "ok": true,
+    "note": "{\"error\":{\"code\":\"INVALID_PARAMS\",\"message\":\"Internal/private IPv6 host not allowed.\",\"status\":400}}"
+  },
+  {
+    "saas": "b7ssrf",
+    "step": "SSRF http://10.0.0.1/ -> 400 and no image",
+    "expected": [400, false],
+    "observed": [400, false],
+    "ok": true,
+    "note": "{\"error\":{\"code\":\"INVALID_PARAMS\",\"message\":\"Internal/private IPv4 host not allowed.\",\"status\":400}}"
+  },
+  {
+    "saas": "b7ssrf",
+    "step": "SSRF http://172.16.0.1/ -> 400 and no image",
+    "expected": [400, false],
+    "observed": [400, false],
+    "ok": true,
+    "note": "{\"error\":{\"code\":\"INVALID_PARAMS\",\"message\":\"Internal/private IPv4 host not allowed.\",\"status\":400}}"
+  },
+  {
+    "saas": "b7ssrf",
+    "step": "SSRF http://192.168.0.1/ -> 400 and no image",
+    "expected": [400, false],
+    "observed": [400, false],
+    "ok": true,
+    "note": "{\"error\":{\"code\":\"INVALID_PARAMS\",\"message\":\"Internal/private IPv4 host not allowed.\",\"status\":400}}"
+  },
+  {
+    "saas": "b7ssrf",
+    "step": "SSRF http://100.64.0.1/ -> 400 and no image",
+    "expected": [400, false],
+    "observed": [400, false],
+    "ok": true,
+    "note": "{\"error\":{\"code\":\"INVALID_PARAMS\",\"message\":\"Internal/private IPv4 host not allowed.\",\"status\":400}}"
+  },
+  {
+    "saas": "b7ssrf",
+    "step": "SSRF http://foo.localhost/ -> 400 and no image",
+    "expected": [400, false],
+    "observed": [400, false],
+    "ok": true,
+    "note": "{\"error\":{\"code\":\"INVALID_PARAMS\",\"message\":\"Localhost URLs are not allowed.\",\"status\":400}}"
+  },
+  {
+    "saas": "b7ssrf",
+    "step": "SSRF http://user:pass@127.0.0.1/ -> 400 and no image",
+    "expected": [400, false],
+    "observed": [400, false],
+    "ok": true,
+    "note": "{\"error\":{\"code\":\"INVALID_PARAMS\",\"message\":\"Internal/private IPv4 host not allowed.\",\"status\":400}}"
+  },
+  {
+    "saas": "b7ssrf",
+    "step": "SSRF file:///etc/passwd -> 400 and no image",
+    "expected": [400, false],
+    "observed": [400, false],
+    "ok": true,
+    "note": "{\"error\":{\"code\":\"VALIDATION_FAILED\",\"message\":\"url: Only http(s) URLs allowed\",\"status\":400}}"
+  },
+  {
+    "saas": "b7ssrf",
+    "step": "SSRF ftp://example.org/ -> 400 and no image",
+    "expected": [400, false],
+    "observed": [400, false],
+    "ok": true,
+    "note": "{\"error\":{\"code\":\"VALIDATION_FAILED\",\"message\":\"url: Only http(s) URLs allowed\",\"status\":400}}"
+  },
+  {
+    "saas": "b7ssrf",
+    "step": "SSRF gopher://example.org/ -> 400 and no image",
+    "expected": [400, false],
+    "observed": [400, false],
+    "ok": true,
+    "note": "{\"error\":{\"code\":\"VALIDATION_FAILED\",\"message\":\"url: Only http(s) URLs allowed\",\"status\":400}}"
+  },
+  {
+    "saas": "b7ssrf",
+    "step": "SSRF javascript:alert(1) -> 400 and no image",
+    "expected": [400, false],
+    "observed": [400, false],
+    "ok": true,
+    "note": "{\"error\":{\"code\":\"VALIDATION_FAILED\",\"message\":\"url: Only http(s) URLs allowed\",\"status\":400}}"
+  },
+  {
+    "saas": "b7ssrf",
+    "step": "SSRF http://127.0.0.1.nip.io/ -> 400 and no image",
+    "expected": [400, false],
+    "observed": [400, false],
+    "ok": true,
+    "note": "{\"error\":{\"code\":\"INVALID_PARAMS\",\"message\":\"DNS for \\\"127.0.0.1.nip.io\\\" resolved to a private IP (127.0.0.1); rebindin"
+  },
+  {
+    "saas": "b7ssrf",
+    "step": "SSRF http://localtest.me/ -> 400 and no image",
+    "expected": [400, false],
+    "observed": [400, false],
+    "ok": true,
+    "note": "{\"error\":{\"code\":\"INVALID_PARAMS\",\"message\":\"DNS for \\\"localtest.me\\\" resolved to a private IP (127.0.0.1); rebinding bl"
+  },
+  {
+    "saas": "b7ssrf",
+    "step": "SSRF http://169.254.169.254.nip.io/ -> 400 and no image",
+    "expected": [400, false],
+    "observed": [400, false],
+    "ok": true,
+    "note": "{\"error\":{\"code\":\"INVALID_PARAMS\",\"message\":\"DNS for \\\"169.254.169.254.nip.io\\\" resolved to a private IP (169.254.169.25"
+  },
+  {
+    "saas": "b7ssrf",
+    "step": "pdf positive control: own domain renders (200, application/pdf)",
+    "expected": [200, true],
+    "observed": [200, true],
+    "ok": true,
+    "note": "794376 bytes"
+  },
+  {
+    "saas": "b7ssrf",
+    "step": "pdf SSRF http://169.254.169.254/ -> 400",
+    "expected": 400,
+    "observed": 400,
+    "ok": true,
+    "note": "{\"error\":{\"code\":\"INVALID_PARAMS\",\"message\":\"Internal/private IPv4 host not allowed.\",\"status\":400}}"
+  },
+  {
+    "saas": "b7ssrf",
+    "step": "pdf SSRF http://2130706433/ -> 400",
+    "expected": 400,
+    "observed": 400,
+    "ok": true,
+    "note": "{\"error\":{\"code\":\"INVALID_PARAMS\",\"message\":\"Internal/private IPv4 host not allowed.\",\"status\":400}}"
+  },
+  {
+    "saas": "b7ssrf",
+    "step": "pdf SSRF file:///etc/passwd -> 400",
+    "expected": 400,
+    "observed": 400,
+    "ok": true,
+    "note": "{\"error\":{\"code\":\"INVALID_PARAMS\",\"message\":\"Only HTTP and HTTPS URLs are allowed.\",\"status\":400}}"
+  },
+  {
+    "saas": "b7ssrf",
+    "step": "pdf SSRF http://[::ffff:7f00:1]/ -> 400",
+    "expected": 400,
+    "observed": 400,
+    "ok": true,
+    "note": "{\"error\":{\"code\":\"INVALID_PARAMS\",\"message\":\"Internal/private IPv6 host not allowed.\",\"status\":400}}"
+  }
+]

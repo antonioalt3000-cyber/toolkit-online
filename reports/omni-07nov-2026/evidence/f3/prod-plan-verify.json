@@ -1,0 +1,42 @@
+[
+  {
+    "saas": "f3prod",
+    "step": "signup in production: POST 200",
+    "expected": 200,
+    "observed": 200,
+    "ok": true,
+    "note": "{\"ok\":true}"
+  },
+  {
+    "saas": "f3prod",
+    "step": "before the upgrade the dashboard says free (and fills its 30 s cache)",
+    "expected": "free",
+    "observed": "free",
+    "ok": true,
+    "note": ""
+  },
+  {
+    "saas": "f3prod",
+    "step": "internal coupon minted",
+    "expected": true,
+    "observed": true,
+    "ok": true,
+    "note": "QAOCT-0A9C-79C1"
+  },
+  {
+    "saas": "f3prod",
+    "step": "redeem as the existing account: 200",
+    "expected": 200,
+    "observed": 200,
+    "ok": true,
+    "note": "{\"success\":true,\"message\":\"Scale (Lifetime) plan activated! Welcome back.\",\"plan\":\"scale\",\"isNewUser\":false}"
+  },
+  {
+    "saas": "f3prod",
+    "step": "the VERY NEXT dashboard read already says scale (read 152 ms after the redeem)",
+    "expected": "scale",
+    "observed": "scale",
+    "ok": true,
+    "note": ""
+  }
+]

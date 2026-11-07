@@ -1,0 +1,7 @@
+[PASS] R01 baseline (no emulation)
+[FAIL] R07 clock -7 h (also = a tab left open ~7 h)  -> refused: 400 {"code":"BAD_REQUEST","msg":"Invalid or expired coupon code."} | ui="Invalid or expired coupon code."
+[FAIL] R16 autofill also fills the honeypot (a customer with a password manager)  -> refusal names the WRONG cause (coupon intact, valid=true; email fine): {"code":"BAD_REQUEST","msg":"Bot detected."}
+[FAIL] R17 autofill + immediate click (<1.2 s after render)  -> refusal blames the COUPON though the coupon is intact (valid=true): {"code":"BAD_REQUEST","msg":"Invalid or expired coupon code."}
+[PASS] R17b following the message ("wait and submit again") on the same page works
+
+eg: 5 scenarios, 2 PASS, 3 FAIL -> C:\Users\ftass\toolkit-online\reports\omni-07nov-2026\evidence\eg\fidelity-matrix.partial.json

@@ -1,0 +1,72 @@
+{
+  "slug": "f4",
+  "domain": "parseflow.dev",
+  "at": "2026-11-07T07:13:03.712Z",
+  "results": [
+    {
+      "what": "la fattura di prova e un PDF valido",
+      "pass": true,
+      "detail": "subtotale 585.75 IVA 123.01 totale 708.76"
+    },
+    {
+      "what": "extract risponde 200",
+      "pass": true,
+      "detail": "HTTP 200 {\"id\":\"78d12fa1-b4e9-48cc-af2f-efb2766dc6dd\",\"status\":\"completed\",\"documentType\":\"invoice\",\"confidence\":0.95,\"data\":{\"type\":\"invoice\",\"invoiceNumber\":\"QA-04NOV-"
+    },
+    {
+      "what": "il totale estratto coincide al centesimo",
+      "pass": true,
+      "detail": "atteso 708.76, letto 708.76"
+    },
+    {
+      "what": "subtotale e IVA coincidono al centesimo",
+      "pass": true,
+      "detail": "atteso 585.75/123.01, letto 585.75/123.01"
+    },
+    {
+      "what": "subtotale + IVA = totale nei dati estratti",
+      "pass": true,
+      "detail": "585.75 + 123.01 = 708.76 vs 708.76"
+    },
+    {
+      "what": "il numero di fattura estratto e quello scritto",
+      "pass": true,
+      "detail": "QA-04NOV-0001"
+    },
+    {
+      "what": "l aliquota estratta e quella della fattura",
+      "pass": true,
+      "detail": "attesa 21%, letta 21%"
+    },
+    {
+      "what": "IVA = subtotale x aliquota",
+      "pass": true,
+      "detail": "585.75 x 21% = 123.01 vs 123.01"
+    },
+    {
+      "what": "le 3 righe estratte sono quelle scritte, e ogni importo moltiplica",
+      "pass": true,
+      "detail": "3x85.5=256.5 1x240=240 7x12.75=89.25"
+    },
+    {
+      "what": "la somma delle righe e il subtotale",
+      "pass": true,
+      "detail": "somma 585.75 vs subtotale 585.75"
+    },
+    {
+      "what": "anche l indirizzo del fornitore e quello scritto (fix del 4 nov)",
+      "pass": true,
+      "detail": "vendor.address = \"\""
+    },
+    {
+      "what": "un PNG viene rifiutato con 4xx (nessun OCR promesso)",
+      "pass": true,
+      "detail": "HTTP 422 IMAGE_INPUT_UNSUPPORTED"
+    },
+    {
+      "what": "i 4 cron di questo prodotto",
+      "pass": null,
+      "detail": "CRON_SECRET esiste ma e' marcata Sensitive: vercel env pull la restituisce vuota, quindi il percorso positivo non e' stato esercitato"
+    }
+  ]
+}

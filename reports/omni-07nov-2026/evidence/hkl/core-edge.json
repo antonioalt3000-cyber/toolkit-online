@@ -1,0 +1,101 @@
+{
+  "slug": "hkl",
+  "at": "2026-11-07T01:42:26.665Z",
+  "results": [
+    {
+      "what": "endpoint di collaudo creato",
+      "pass": true,
+      "detail": "HTTP 201"
+    },
+    {
+      "what": "payload di 1 byte: accettato (2xx), mai 5xx",
+      "pass": true,
+      "detail": "HTTP 200"
+    },
+    {
+      "what": "payload di ~1 MB: accettato o rifiutato con 413, mai 5xx",
+      "pass": true,
+      "detail": "HTTP 200 (999993 byte)"
+    },
+    {
+      "what": "~1 MB: la richiesta si rilegge",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "what": "~1 MB: bodyRaw e byte-per-byte il payload, oppure il troncamento e dichiarato (mai silenzioso)",
+      "pass": true,
+      "detail": "lunghezza 65536, chiavi id,method,ts,ip,query,headers,bodyRaw,truncated,contentType,bodyPretty,bodyIsJson"
+    },
+    {
+      "what": "payload di 2 MB: rifiuto pulito (413) o accettato, mai 5xx",
+      "pass": true,
+      "detail": "HTTP 200"
+    },
+    {
+      "what": "corpo non-UTF8 (con byte nulli): accettato, mai 5xx",
+      "pass": true,
+      "detail": "HTTP 200"
+    },
+    {
+      "what": "non-UTF8: la richiesta si rilegge senza rompere la lista e non e marcata JSON",
+      "pass": true,
+      "detail": "bodyIsJson=false"
+    },
+    {
+      "what": "non-UTF8: la lista delle richieste risponde ancora 200",
+      "pass": true,
+      "detail": "HTTP 200"
+    },
+    {
+      "what": "header duplicati: accettati",
+      "pass": true,
+      "detail": "HTTP 200"
+    },
+    {
+      "what": "header duplicati: entrambi i valori sopravvivono nella cattura",
+      "pass": true,
+      "detail": "catturato \"alfa, beta\""
+    },
+    {
+      "what": "firma Stripe ricalcolata da me e fresca: valida",
+      "pass": true,
+      "detail": "HTTP 200 {\"provider\":\"stripe\",\"source\":\"literal\",\"valid\":true,\"reason\":\"OK\",\"details\":{\"timestamp\":1794015738,\"ageSeconds\":2}}"
+    },
+    {
+      "what": "un byte alterato nel corpo: invalida (e non e un 400 di validazione)",
+      "pass": true,
+      "detail": "HTTP 200 {\"provider\":\"stripe\",\"source\":\"literal\",\"valid\":false,\"reason\":\"SIGNATURE_MISMATCH\",\"details\":{\"timestamp\":1794015738,\"ageSeconds\":3}}"
+    },
+    {
+      "what": "firma corretta ma con timestamp di 1 ora fa: respinta",
+      "pass": true,
+      "detail": "HTTP 200 {\"provider\":\"stripe\",\"source\":\"literal\",\"valid\":false,\"reason\":\"TIMESTAMP_OUT_OF_TOLERANCE\",\"details\":{\"timestamp\":1794012138,\"ageSeconds\":3604,\"toleranceSeconds\":300}}"
+    },
+    {
+      "what": "controllo negativo: i tre esiti sono distinti (fresca=true, alterata=false, vecchia=false)",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "what": "payload firmato di 100 KB: accettato",
+      "pass": true,
+      "detail": "HTTP 200"
+    },
+    {
+      "what": "payload firmato di 100 KB: la cattura e dichiarata troncata",
+      "pass": true,
+      "detail": "truncated=true, bodyRaw 65536 byte"
+    },
+    {
+      "what": "verifica della richiesta memorizzata e troncata: o vale (corpo completo) o dichiara il troncamento, non un finto MISMATCH",
+      "pass": true,
+      "detail": "HTTP 400 {\"error\":{\"code\":\"BAD_REQUEST\",\"message\":\"Captured body was truncated at 64KB, so its signature cannot be verified. Use literal rawBody mode.\"}}"
+    },
+    {
+      "what": "l'endpoint di collaudo viene rimosso",
+      "pass": true,
+      "detail": "HTTP 200"
+    }
+  ]
+}

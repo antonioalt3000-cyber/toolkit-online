@@ -1,0 +1,16 @@
+
+===== b7 captureapi.dev — feature core con oracolo indipendente
+
+PASS  screenshot (GET) risponde 200  — HTTP 200 image/png
+PASS  e un PNG vero (magic byte)  — 89504e47
+PASS  le dimensioni consegnate sono esattamente 800x600  — 800x600, 208168 byte
+PASS  screenshot (POST) risponde 200 con involucro JSON  — HTTP 200
+PASS  i pixel dentro il data-URI coincidono con le dimensioni dichiarate  — dichiarato 800x600, pixel 800x600
+PASS  size_bytes dichiarato coincide con i byte veri  — dichiarato 208241, reale 208241
+PASS  pdf risponde 200  — HTTP 200
+PASS  e un PDF vero con almeno una pagina  — v1.4, 3 pagine, 255911 byte
+PASS  il formato pagina e A4  — 595.91998x841.91998 (A4)
+PASS  i 3 cron dichiarati accettano il proprio segreto  — ttl-audit=200 weekly-usage=200 review-requests=200
+PASS  i cron rifiutano un segreto sbagliato  — 401/403 su tutti
+
+--- b7: 11/11 PASS

@@ -1,0 +1,38 @@
+{
+  "slug": "b7",
+  "dom": "captureapi.dev",
+  "email": "antonio.alt3000+qa07novb7@gmail.com",
+  "code": "QAOCT-7A2A-7DD2",
+  "results": [
+    {
+      "day": 1,
+      "what": "coniato un coupon interno via /api/admin/generate-coupons",
+      "pass": true,
+      "detail": "QAOCT-7A2A-7DD2"
+    },
+    {
+      "day": 1,
+      "what": "il riscatto parte e la POST /api/redeem risponde 2xx",
+      "pass": true,
+      "detail": "HTTP 200"
+    },
+    {
+      "day": 1,
+      "what": "la pagina consegna la chiave API",
+      "pass": true,
+      "detail": "cap_25536d…"
+    },
+    {
+      "day": 3,
+      "what": "la feature core risponde: uno screenshot PNG vero",
+      "pass": true,
+      "detail": "52880 byte, firma 89504e47"
+    },
+    {
+      "day": 30,
+      "what": "nessun errore di console nel viaggio autenticato",
+      "pass": true,
+      "detail": ""
+    }
+  ]
+}

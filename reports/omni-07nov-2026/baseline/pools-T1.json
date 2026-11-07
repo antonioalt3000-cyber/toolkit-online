@@ -1,0 +1,36 @@
+{
+  "label": "T1",
+  "at": "2026-11-07T07:17:01.390Z",
+  "products": {
+    "f1": {
+      "error": "ADMIN_API_SECRET assente"
+    },
+    "f2": {
+      "error": "ADMIN_API_SECRET assente"
+    },
+    "f3": {
+      "error": "ADMIN_API_SECRET assente"
+    },
+    "f4": {
+      "error": "ADMIN_API_SECRET assente"
+    },
+    "b7": {
+      "error": "ADMIN_API_SECRET assente"
+    },
+    "cfg": {
+      "error": "ADMIN_API_SECRET assente"
+    },
+    "eg": {
+      "error": "ADMIN_API_SECRET assente"
+    },
+    "hsh": {
+      "error": "ADMIN_API_SECRET assente"
+    },
+    "hkl": {
+      "error": "ADMIN_API_SECRET assente"
+    },
+    "seo": {
+      "error": "ADMIN_API_SECRET assente"
+    }
+  }
+}

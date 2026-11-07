@@ -1,0 +1,18 @@
+
+===== f4 parseflow.dev — feature core con oracolo indipendente
+
+PASS  la fattura di prova e un PDF valido  — subtotale 585.75 IVA 123.01 totale 708.76
+PASS  extract risponde 200  — HTTP 200 {"id":"78d12fa1-b4e9-48cc-af2f-efb2766dc6dd","status":"completed","documentType":"invoice","confidence":0.95,"data":{"type":"invoice","invoiceNumber":"QA-04NOV-
+PASS  il totale estratto coincide al centesimo  — atteso 708.76, letto 708.76
+PASS  subtotale e IVA coincidono al centesimo  — atteso 585.75/123.01, letto 585.75/123.01
+PASS  subtotale + IVA = totale nei dati estratti  — 585.75 + 123.01 = 708.76 vs 708.76
+PASS  il numero di fattura estratto e quello scritto  — QA-04NOV-0001
+PASS  l aliquota estratta e quella della fattura  — attesa 21%, letta 21%
+PASS  IVA = subtotale x aliquota  — 585.75 x 21% = 123.01 vs 123.01
+PASS  le 3 righe estratte sono quelle scritte, e ogni importo moltiplica  — 3x85.5=256.5 1x240=240 7x12.75=89.25
+PASS  la somma delle righe e il subtotale  — somma 585.75 vs subtotale 585.75
+PASS  anche l indirizzo del fornitore e quello scritto (fix del 4 nov)  — vendor.address = ""
+PASS  un PNG viene rifiutato con 4xx (nessun OCR promesso)  — HTTP 422 IMAGE_INPUT_UNSUPPORTED
+NON VERIF.  i 4 cron di questo prodotto  — CRON_SECRET esiste ma e' marcata Sensitive: vercel env pull la restituisce vuota, quindi il percorso positivo non e' stato esercitato
+
+--- f4: 12/12 PASS · 1 NON VERIFICATI (i 4 cron di questo prodotto)

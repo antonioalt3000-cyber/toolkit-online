@@ -1,0 +1,50 @@
+{"ts":"2026-11-07T00:33:03.694Z","repo":"f1","key":"coupons:used -> QAOCT-5920-4679","nota":"coniato e riscattato, flusso A 7 nov"}
+{"ts":"2026-11-07T00:33:44.243Z","repo":"f2","key":"coupons:used -> QAOCT-C4E3-DC8B","nota":"coniato e riscattato, flusso A 7 nov"}
+{"ts":"2026-11-07T00:35:30.778Z","repo":"f2","key":"coupons:used -> QAOCT-C4E3-DC8B (+ fmw user/session for antonio.alt3000+qa07novf2@gmail.com)","nota":"flusso A: riscatto da redeem-probe.cjs; registrato DOPO la scrittura (errore di procedura, dichiarato)"}
+{"ts":"2026-11-07T00:35:35.617Z","repo":"f3","key":"coupons:used -> QAOCT-24D2-D753","nota":"coniato e riscattato, flusso A 7 nov"}
+{"ts":"2026-11-07T00:36:10.576Z","repo":"f4","key":"coupons:used -> QAOCT-DA0C-6B01","nota":"coniato e riscattato, flusso A 7 nov"}
+{"ts":"2026-11-07T00:36:45.463Z","repo":"b7","key":"coupons:used -> QAOCT-7A2A-7DD2","nota":"coniato e riscattato, flusso A 7 nov"}
+{"ts":"2026-11-07T00:37:21.393Z","repo":"f2","key":"coupons:used -> QAOCT-5D83-97B8","nota":"coniato e riscattato, flusso A 7 nov"}
+{"ts":"2026-11-07T00:55:51.889Z","repo":"f3","key":"pre:user:email:antonio.alt3000+qa07novf3plan@gmail.com (+ pre:user:<id>, session, cache:dashboard:<id>)","nota":"flusso A: verifica prod churnguard#88, registrato PRIMA della creazione"}
+{"ts":"2026-11-07T00:56:11.867Z","repo":"f3","key":"coupons:used -> QAOCT-0A9C-79C1","nota":"flusso A: verifica prod churnguard#88"}
+{"ts":"2026-11-07T01:28:51.698Z","repo":"cfg","key":"coupons:used -> QAOCTB-E05A-B384-1DB2-1FEA","nota":"coniato e riscattato, flusso A 7 nov"}
+{"ts":"2026-11-07T01:29:48.794Z","repo":"eg","key":"coupons:used -> QAOCT-5C62-1C2A-A007-BB12","nota":"coniato e riscattato, flusso A 7 nov"}
+{"ts":"2026-11-07T01:30:50.657Z","repo":"hsh","key":"coupons:used -> QAOCT-731E-E63E-EF1B-4BE6","nota":"coniato e riscattato, flusso A 7 nov"}
+{"ts":"2026-11-07T01:31:48.180Z","repo":"hkl","key":"coupons:used -> QAOCT-3871-287D-A52A-0D69","nota":"coniato e riscattato, flusso A 7 nov"}
+{"ts":"2026-11-07T01:32:45.546Z","repo":"seo","key":"coupons:used -> QAOCT-24EF-213E-8484-657E","nota":"coniato e riscattato, flusso A 7 nov"}
+{"ts":"2026-11-07T01:34:37.684Z","repo":"cfg","key":"cfg:coupons:valid ← 8 internal codes with prefix QAOCTB","nota":"B fidelity-matrix --prod-real: success paths (mint)"}
+{"ts":"2026-11-07T01:34:40.044Z","repo":"cfg","key":"cfg:coupons:used → QAOCTB-828D-BA36-4AFC-F89D","nota":"B fidelity-matrix --prod-real: redeemed in a scenario"}
+{"ts":"2026-11-07T01:34:40.110Z","repo":"cfg","key":"cfg:coupons:used → QAOCTB-5867-9281-3E1B-F7A3","nota":"B fidelity-matrix --prod-real: redeemed in a scenario"}
+{"ts":"2026-11-07T01:34:40.178Z","repo":"cfg","key":"cfg:coupons:used → QAOCTB-6DAC-BF52-BBE7-9483","nota":"B fidelity-matrix --prod-real: redeemed in a scenario"}
+{"ts":"2026-11-07T01:34:40.248Z","repo":"cfg","key":"cfg:coupons:used → QAOCTB-9F84-F38B-17F5-7D8D","nota":"B fidelity-matrix --prod-real: redeemed in a scenario"}
+{"ts":"2026-11-07T01:34:40.311Z","repo":"cfg","key":"cfg:coupons:used → QAOCTB-D415-DED0-A1EE-0B71","nota":"B fidelity-matrix --prod-real: redeemed in a scenario"}
+{"ts":"2026-11-07T01:34:40.376Z","repo":"cfg","key":"cfg:coupons:used → QAOCTB-AF1C-BEE3-B99B-A10A","nota":"B fidelity-matrix --prod-real: redeemed in a scenario"}
+{"ts":"2026-11-07T01:34:40.446Z","repo":"cfg","key":"cfg:coupons:used → QAOCTB-9064-3CFC-E657-B623","nota":"B fidelity-matrix --prod-real: redeemed in a scenario"}
+{"ts":"2026-11-07T01:34:40.512Z","repo":"cfg","key":"cfg:coupons:used → QAOCTB-C3C6-68AD-D0EE-C8A3","nota":"B fidelity-matrix --prod-real: redeemed in a scenario"}
+{"ts":"2026-11-07T01:38:07.530Z","repo":"eg","key":"eg:coupons:valid ← 8 internal codes with prefix QAOCT","nota":"B fidelity-matrix --prod-real: success paths (mint)"}
+{"ts":"2026-11-07T01:38:09.961Z","repo":"eg","key":"eg:coupons:used → QAOCT-B3FF-80D6-204A-A8D7","nota":"B fidelity-matrix --prod-real: redeemed in a scenario"}
+{"ts":"2026-11-07T01:38:10.029Z","repo":"eg","key":"eg:coupons:used → QAOCT-FEC7-40F8-499F-572C","nota":"B fidelity-matrix --prod-real: redeemed in a scenario"}
+{"ts":"2026-11-07T01:38:10.097Z","repo":"eg","key":"eg:coupons:used → QAOCT-C2D3-342B-1A8C-8009","nota":"B fidelity-matrix --prod-real: redeemed in a scenario"}
+{"ts":"2026-11-07T01:38:10.167Z","repo":"eg","key":"eg:coupons:used → QAOCT-3E66-AB15-1C4A-0236","nota":"B fidelity-matrix --prod-real: redeemed in a scenario"}
+{"ts":"2026-11-07T01:38:10.235Z","repo":"eg","key":"eg:coupons:used → QAOCT-215C-ADC3-6D82-9B65","nota":"B fidelity-matrix --prod-real: redeemed in a scenario"}
+{"ts":"2026-11-07T01:38:10.306Z","repo":"eg","key":"eg:coupons:used → QAOCT-C4CB-3CA5-4785-5AA9","nota":"B fidelity-matrix --prod-real: redeemed in a scenario"}
+{"ts":"2026-11-07T01:38:10.371Z","repo":"eg","key":"eg:coupons:used → QAOCT-87B2-24DD-5B93-40B2","nota":"B fidelity-matrix --prod-real: redeemed in a scenario"}
+{"ts":"2026-11-07T01:38:10.437Z","repo":"eg","key":"eg:coupons:used → QAOCT-3109-F25E-6C5C-63B2","nota":"B fidelity-matrix --prod-real: redeemed in a scenario"}
+{"ts":"2026-11-07T01:41:38.613Z","repo":"hsh","key":"hsh:coupons:valid ← 8 internal codes with prefix QAOCT","nota":"B fidelity-matrix --prod-real: success paths (mint)"}
+{"ts":"2026-11-07T01:41:41.145Z","repo":"hsh","key":"hsh:coupons:used → QAOCT-5784-8A2A-A5F2-C640","nota":"B fidelity-matrix --prod-real: redeemed in a scenario"}
+{"ts":"2026-11-07T01:41:41.212Z","repo":"hsh","key":"hsh:coupons:used → QAOCT-B38C-92E7-80ED-ABA8","nota":"B fidelity-matrix --prod-real: redeemed in a scenario"}
+{"ts":"2026-11-07T01:41:41.277Z","repo":"hsh","key":"hsh:coupons:used → QAOCT-1537-4D0C-764F-B86F","nota":"B fidelity-matrix --prod-real: redeemed in a scenario"}
+{"ts":"2026-11-07T01:41:41.345Z","repo":"hsh","key":"hsh:coupons:used → QAOCT-5814-03DB-34A8-983F","nota":"B fidelity-matrix --prod-real: redeemed in a scenario"}
+{"ts":"2026-11-07T01:41:41.413Z","repo":"hsh","key":"hsh:coupons:used → QAOCT-8ED1-4896-445C-6DF1","nota":"B fidelity-matrix --prod-real: redeemed in a scenario"}
+{"ts":"2026-11-07T01:41:41.484Z","repo":"hsh","key":"hsh:coupons:used → QAOCT-3EA2-AC21-F99C-11D0","nota":"B fidelity-matrix --prod-real: redeemed in a scenario"}
+{"ts":"2026-11-07T01:41:41.550Z","repo":"hsh","key":"hsh:coupons:used → QAOCT-D530-A1C4-F8E8-5E06","nota":"B fidelity-matrix --prod-real: redeemed in a scenario"}
+{"ts":"2026-11-07T01:41:41.616Z","repo":"hsh","key":"hsh:coupons:used → QAOCT-92ED-1CAA-7E5B-E5EE","nota":"B fidelity-matrix --prod-real: redeemed in a scenario"}
+{"ts":"2026-11-07T01:45:13.904Z","repo":"seo","key":"seo:coupons:valid ← 8 internal codes with prefix QAOCT","nota":"B fidelity-matrix --prod-real: success paths (mint)"}
+{"ts":"2026-11-07T01:45:16.352Z","repo":"seo","key":"seo:coupons:used → QAOCT-7E9E-F9DF-CEB6-7721","nota":"B fidelity-matrix --prod-real: redeemed in a scenario"}
+{"ts":"2026-11-07T01:45:16.423Z","repo":"seo","key":"seo:coupons:used → QAOCT-341C-FD6B-F273-9AAB","nota":"B fidelity-matrix --prod-real: redeemed in a scenario"}
+{"ts":"2026-11-07T01:45:16.491Z","repo":"seo","key":"seo:coupons:used → QAOCT-124D-1DA2-CD75-92AC","nota":"B fidelity-matrix --prod-real: redeemed in a scenario"}
+{"ts":"2026-11-07T01:45:16.556Z","repo":"seo","key":"seo:coupons:used → QAOCT-3AD7-CADF-98D4-D964","nota":"B fidelity-matrix --prod-real: redeemed in a scenario"}
+{"ts":"2026-11-07T01:45:16.625Z","repo":"seo","key":"seo:coupons:used → QAOCT-0FF8-BD6D-169B-7BC2","nota":"B fidelity-matrix --prod-real: redeemed in a scenario"}
+{"ts":"2026-11-07T01:45:16.691Z","repo":"seo","key":"seo:coupons:used → QAOCT-2D0A-FF16-A81D-8E44","nota":"B fidelity-matrix --prod-real: redeemed in a scenario"}
+{"ts":"2026-11-07T01:45:16.763Z","repo":"seo","key":"seo:coupons:used → QAOCT-FE03-2E78-E3B4-7924","nota":"B fidelity-matrix --prod-real: redeemed in a scenario"}
+{"ts":"2026-11-07T01:45:16.832Z","repo":"seo","key":"seo:coupons:used → QAOCT-17DC-358A-D89E-BE3F","nota":"B fidelity-matrix --prod-real: redeemed in a scenario"}

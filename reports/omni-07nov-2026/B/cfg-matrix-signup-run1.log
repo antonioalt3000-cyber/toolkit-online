@@ -1,0 +1,11 @@
+[PASS] S01 signup baseline
+[PASS] S02 signup clock +5 min
+[PASS] S03 signup clock -5 min
+[PASS] S04 signup clock -7 h (tab left open)
+[FAIL] S05 signup RTL locale + far time zone  -> refused: {"code":"FORM_TOO_FAST","msg":"That was too quick — please wait a moment and submit again."} | ui="That was too quick — please wait a moment and submit again."
+[FAIL] S06 signup Safari iOS UA  -> refused: {"code":"FORM_TOO_FAST","msg":"That was too quick — please wait a moment and submit again."} | ui="That was too quick — please wait a moment and submit again."
+[FAIL] S07 signup trackers blocked  -> refused: {"code":"FORM_TOO_FAST","msg":"That was too quick — please wait a moment and submit again."} | ui="That was too quick — please wait a moment and submit again."
+[PASS] S08 signup: autofill also fills the honeypot  -> refused: {"code":"FORM_UNVERIFIED","msg":"This form could not be verified. Please reload the page and try again."}
+[PASS] S09 signup: autofill + immediate click  -> refused: {"code":"FORM_TOO_FAST","msg":"That was too quick — please wait a moment and submit again."}
+
+cfg: 9 scenarios, 6 PASS, 3 FAIL -> C:\Users\ftass\toolkit-online\reports\omni-07nov-2026\evidence\cfg\fidelity-matrix.json

@@ -1,0 +1,45 @@
+{
+  "slug": "f1",
+  "dom": "complipilot.dev",
+  "name": "CompliPilot",
+  "auth": "apikey",
+  "email": "antonio.alt3000+qa04nov-f1@gmail.com",
+  "results": [
+    {
+      "day": 1,
+      "what": "home rende senza errori di console",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "day": 1,
+      "what": "home senza risposte >=400",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "day": 1,
+      "what": "nessuno scorrimento orizzontale a 1366px",
+      "pass": true,
+      "detail": "scrollWidth 1351 vs clientWidth 1351"
+    },
+    {
+      "day": 1,
+      "what": "/redeem espone un campo email",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "day": 1,
+      "what": "/redeem senza errori di console",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "day": 2,
+      "what": "nessuno scorrimento orizzontale a 375px",
+      "pass": true,
+      "detail": "scrollWidth 375 vs clientWidth 375 | span.font-semibold"
+    }
+  ]
+}

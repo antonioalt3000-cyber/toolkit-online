@@ -1,0 +1,27 @@
+HTTP/1.1 200 OK
+Access-Control-Allow-Headers: Content-Type, X-API-Key, Authorization
+Access-Control-Allow-Methods: GET, POST, OPTIONS
+Access-Control-Allow-Origin: *
+Age: 0
+Cache-Control: private, no-store
+Content-Length: 7509
+Content-Security-Policy: default-src 'self'; base-uri 'self'; object-src 'none'; form-action 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; frame-ancestors 'none'
+Content-Type: image/png
+Date: Sat, 07 Nov 2026 00:53:02 GMT
+Permissions-Policy: camera=(), microphone=(), geolocation=()
+Referrer-Policy: strict-origin-when-cross-origin
+Server: Vercel
+Strict-Transport-Security: max-age=63072000; includeSubDomains; preload
+X-Cache: HIT
+X-Capture-Duration: 10ms
+X-Content-Type-Options: nosniff
+X-Dns-Prefetch-Control: on
+X-Frame-Options: DENY
+X-Matched-Path: /api/v1/screenshot
+X-Ratelimit-Limit: 999999
+X-Ratelimit-Remaining: 999995
+X-Request-Id: req_mw5ow28l_elpa
+X-Vercel-Cache: MISS
+X-Vercel-Id: cdg1::fra1::8sv5v-1794012782307-ceedc046c1cc
+X-Xss-Protection: 1; mode=block
+

@@ -1,0 +1,12 @@
+
+===== f1 complipilot.dev — feature core con oracolo indipendente
+
+PASS  scan risponde 200  — HTTP 200
+PASS  overallScore = media delle categorie applicabili  — riportato 60, ricalcolato 60.00 da aiAct=92 gdpr=35 dataProtection=51 transparency=36 nis2=86
+PASS  ogni categoria sta in 0..100  — aiAct=92 gdpr=35 dataProtection=51 transparency=36 nis2=86
+PASS  ogni rilievo ha severita noto  — 58 rilievi, severita: warning,critical,info
+PASS  due scansioni dello stesso URL danno lo stesso punteggio  — 60 poi 60
+PASS  i 2 cron dichiarati accettano il proprio segreto  — eurlex=200 review-requests=200
+PASS  i cron rifiutano un segreto sbagliato  — 401/403 su tutti
+
+--- f1: 7/7 PASS

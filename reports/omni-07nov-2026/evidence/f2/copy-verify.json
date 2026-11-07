@@ -1,0 +1,50 @@
+[
+  {
+    "saas": "f2copy",
+    "step": "the consent banner is visible on a first visit",
+    "expected": true,
+    "observed": true,
+    "ok": true,
+    "note": "We use cookies to improve your experience and analyze site traffic. You can choose which cookies to accept. Customize Reject All Accept All"
+  },
+  {
+    "saas": "f2copy",
+    "step": "the banner does not say it serves ads",
+    "expected": false,
+    "observed": false,
+    "ok": true,
+    "note": ""
+  },
+  {
+    "saas": "f2copy",
+    "step": "the banner says what the cookies are for",
+    "expected": true,
+    "observed": true,
+    "ok": true,
+    "note": ""
+  },
+  {
+    "saas": "f2copy",
+    "step": "the privacy policy no longer names AdSense or promises ads",
+    "expected": false,
+    "observed": false,
+    "ok": true,
+    "note": ""
+  },
+  {
+    "saas": "f2copy",
+    "step": "the privacy policy says no advertisements are shown",
+    "expected": true,
+    "observed": true,
+    "ok": true,
+    "note": ""
+  },
+  {
+    "saas": "f2copy",
+    "step": "the cookie policy still says no advertising cookies are set",
+    "expected": true,
+    "observed": true,
+    "ok": true,
+    "note": ""
+  }
+]

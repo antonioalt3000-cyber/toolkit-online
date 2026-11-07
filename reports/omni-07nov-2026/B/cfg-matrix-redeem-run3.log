@@ -1,0 +1,26 @@
+[PASS] R01 baseline (no emulation)
+[PASS] R02 clock +5 min
+[PASS] R02b clock +3 s, a customer who really takes ~3.6 s (skew smaller than the fill time)
+[PASS] R03 clock -5 min
+[PASS] R04 clock +1 h
+[PASS] R05 clock -1 h
+[PASS] R06 clock +1 day
+[PASS] R07 clock -7 h (also = a tab left open ~7 h)
+[PASS] R08 clock -1 day
+[PASS] R09 tz Pacific/Kiritimati (UTC+14) + locale ar-EG (RTL)
+[PASS] R10 tz America/Los_Angeles + locale he-IL (RTL)
+[PASS] R11 tz Asia/Kolkata + locale ja-JP
+[PASS] R12 Safari iOS user agent (mobile)
+[PASS] R13 Firefox Android user agent (mobile)
+[PASS] R14 trackers blocked (GA / GTM / PostHog / Vercel / Sentry)
+[PASS] R15 slow 3G on the API call (2 s latency, 400 kbps)
+[PASS] R16 autofill also fills the honeypot (a customer with a password manager)  -> ok: {"code":"FORM_UNVERIFIED","msg":"This form could not be verified. Please reload the page and try again."}
+[PASS] R17 autofill + immediate click (<1.2 s after render)  -> ok: {"code":"FORM_TOO_FAST","msg":"That was too quick — please wait a moment and submit again."}
+[PASS] R17b following the message ("wait and submit again") on the same page works
+[PASS] R18 double-click on the submit control  -> requests=1
+[PASS] R19 double-enter on the submit control  -> requests=1
+[PASS] R20 two tabs submit the same coupon together  -> loser told: {"code":"COUPON_USED","msg":"This coupon has already been redeemed."}
+[PASS] R21 refresh after redeeming, then redeem the same coupon again  -> told: {"code":"COUPON_USED","msg":"This coupon has already been redeemed."}
+[PASS] R22 rate limit trips: the message says slow down, not "invalid coupon"  -> 429 told: {"code":"RATE_LIMIT_EXCEEDED","msg":"Too many requests. Please slow down."} | ui="Too many requests. Please slow down."
+
+cfg: 24 scenarios, 24 PASS, 0 FAIL -> C:\Users\ftass\toolkit-online\reports\omni-07nov-2026\evidence\cfg\fidelity-matrix.json

@@ -1,0 +1,47 @@
+{
+  "slug": "f2",
+  "domain": "fixmyweb.dev",
+  "startedAt": "2026-11-07T07:07:15.618Z",
+  "finishedAt": "2026-11-07T07:08:28.136Z",
+  "healthBefore": {
+    "status": 200,
+    "commit": "946e843"
+  },
+  "healthAfter": {
+    "status": 200,
+    "commit": "946e843"
+  },
+  "allGreen": false,
+  "steps": [
+    {
+      "step": "sweep-public",
+      "exit": 0,
+      "signal": null,
+      "ms": 5680,
+      "summary": "f2   fixmyweb.dev       pagine= 51 non-200=0 senza-og:image=0 meta-ereditati=0 h1-multipli=0 backslash-500=0/51",
+      "ok": true
+    },
+    {
+      "step": "journey-public",
+      "exit": 0,
+      "signal": null,
+      "ms": 52778,
+      "summary": "--- FixMyWeb: 6/6 PASS",
+      "nonVerified": false,
+      "fails": [],
+      "ok": true
+    },
+    {
+      "step": "journey-core",
+      "exit": 0,
+      "signal": null,
+      "ms": 3888,
+      "summary": "--- f2: 12/13 PASS",
+      "nonVerified": false,
+      "fails": [
+        "FAIL CRON_SECRET esiste in produzione: assente in OGNI ambiente: i 4 job schedulati in vercel.json (1 cron + 3 admin) falliscono chiusi a ogni invocazione — reperto R4"
+      ],
+      "ok": false
+    }
+  ]
+}

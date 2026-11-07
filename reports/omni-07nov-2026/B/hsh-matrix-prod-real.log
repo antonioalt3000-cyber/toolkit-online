@@ -1,0 +1,10 @@
+[PASS] R01 baseline (no emulation)
+[PASS] R02b clock +3.0 s, a customer who really takes 3.0 s+ (skew equal to the think time: the gate sees ~0 s)
+[PASS] R07 clock -7 h (also = a tab left open ~7 h)
+[PASS] R18 double-click on the submit control  -> requests=1
+[PASS] R19 double-enter on the submit control  -> requests=1
+[PASS] R20 two tabs submit the same coupon together  -> loser told: {"code":"CONFLICT","msg":"This coupon has already been redeemed."}
+[PASS] R21 refresh after redeeming, then redeem the same coupon again  -> told: {"code":"CONFLICT","msg":"This coupon has already been redeemed."}
+[PASS] R22 rate limit trips: the message says slow down, not "invalid coupon"  -> 429 told: {"code":"RATE_LIMIT_EXCEEDED","msg":"Too many requests. Please slow down."} | ui="Too many attempts — please retry in 26s."
+
+hsh: 8 scenarios, 8 PASS, 0 FAIL -> C:\Users\ftass\toolkit-online\reports\omni-07nov-2026\evidence\hsh\fidelity-matrix.partial.json

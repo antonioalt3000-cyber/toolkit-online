@@ -1,0 +1,38 @@
+{
+  "slug": "hsh",
+  "dom": "headershield.dev",
+  "email": "antonio.alt3000+qa07novhsh@gmail.com",
+  "code": "QAOCT-731E-E63E-EF1B-4BE6",
+  "results": [
+    {
+      "day": 1,
+      "what": "coniato un coupon interno via /api/admin/generate-coupons",
+      "pass": true,
+      "detail": "QAOCT-731E-E63E-EF1B-4BE6"
+    },
+    {
+      "day": 1,
+      "what": "il riscatto parte e la POST /api/redeem risponde 2xx",
+      "pass": true,
+      "detail": "HTTP 200"
+    },
+    {
+      "day": 1,
+      "what": "la pagina consegna la chiave API",
+      "pass": true,
+      "detail": "hsh_c89907…"
+    },
+    {
+      "day": 3,
+      "what": "la feature core risponde: uno scan header con voto",
+      "pass": true,
+      "detail": "{\"url\":\"https://example.com\",\"fetchedStatus\":200,\"score\":0,\"grade\":\"F\",\"findings\":[{\"header\":\"Content-Security-Policy\",\"status\":\"fail\",\"points\":0,\"maxPoints\":25,\"advice\":\"No CSP. W"
+    },
+    {
+      "day": 30,
+      "what": "nessun errore di console nel viaggio autenticato",
+      "pass": true,
+      "detail": ""
+    }
+  ]
+}

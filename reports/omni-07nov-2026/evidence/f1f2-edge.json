@@ -1,0 +1,232 @@
+[
+  {
+    "saas": "f1",
+    "step": "creator key available in the vault",
+    "expected": true,
+    "observed": true,
+    "ok": true,
+    "note": ""
+  },
+  {
+    "saas": "f1",
+    "step": "invalid/hostile url \"not a url\": a 4xx, never a 5xx",
+    "expected": true,
+    "observed": true,
+    "ok": true,
+    "note": "HTTP 400 {\"error\":\"Please enter a valid public URL, for example https://example.com.\",\"code\":\"VALIDATION_FAILED\",\"detai"
+  },
+  {
+    "saas": "f1",
+    "step": "invalid/hostile url \"\": a 4xx, never a 5xx",
+    "expected": true,
+    "observed": true,
+    "ok": true,
+    "note": "HTTP 400 {\"error\":\"Please enter a valid public URL, for example https://example.com.\",\"code\":\"VALIDATION_FAILED\",\"detai"
+  },
+  {
+    "saas": "f1",
+    "step": "invalid/hostile url \"ftp://example.org/\": a 4xx, never a 5xx",
+    "expected": true,
+    "observed": true,
+    "ok": true,
+    "note": "HTTP 400 {\"error\":\"Please enter a valid public URL, for example https://example.com.\",\"code\":\"VALIDATION_FAILED\",\"detai"
+  },
+  {
+    "saas": "f1",
+    "step": "invalid/hostile url \"javascript:alert(1)\": a 4xx, never a 5xx",
+    "expected": true,
+    "observed": true,
+    "ok": true,
+    "note": "HTTP 400 {\"error\":\"Please enter a valid public URL, for example https://example.com.\",\"code\":\"VALIDATION_FAILED\",\"detai"
+  },
+  {
+    "saas": "f1",
+    "step": "invalid/hostile url \"file:///etc/passwd\": a 4xx, never a 5xx",
+    "expected": true,
+    "observed": true,
+    "ok": true,
+    "note": "HTTP 400 {\"error\":\"Please enter a valid public URL, for example https://example.com.\",\"code\":\"VALIDATION_FAILED\",\"detai"
+  },
+  {
+    "saas": "f1",
+    "step": "invalid/hostile url \"http://127.0.0.1/\": a 4xx, never a 5xx",
+    "expected": true,
+    "observed": true,
+    "ok": true,
+    "note": "HTTP 400 {\"error\":\"Scanning private or internal URLs is not allowed.\"}"
+  },
+  {
+    "saas": "f1",
+    "step": "invalid/hostile url \"http://169.254.169.254/\": a 4xx, never a 5xx",
+    "expected": true,
+    "observed": true,
+    "ok": true,
+    "note": "HTTP 400 {\"error\":\"Scanning private or internal URLs is not allowed.\"}"
+  },
+  {
+    "saas": "f1",
+    "step": "invalid/hostile url \"http://2130706433/\": a 4xx, never a 5xx",
+    "expected": true,
+    "observed": true,
+    "ok": true,
+    "note": "HTTP 400 {\"error\":\"Scanning private or internal URLs is not allowed.\"}"
+  },
+  {
+    "saas": "f1",
+    "step": "invalid/hostile url \"http://[::1]/\": a 4xx, never a 5xx",
+    "expected": true,
+    "observed": true,
+    "ok": true,
+    "note": "HTTP 400 {\"error\":\"Scanning private or internal URLs is not allowed.\"}"
+  },
+  {
+    "saas": "f1",
+    "step": "invalid/hostile url \"https://aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\": a 4xx, never a 5xx",
+    "expected": true,
+    "observed": true,
+    "ok": true,
+    "note": "HTTP 400 {\"error\":\"Scanning private or internal URLs is not allowed.\"}"
+  },
+  {
+    "saas": "f1",
+    "step": "empty 200 body: no 5xx and no NaN/null score",
+    "expected": true,
+    "observed": true,
+    "ok": true,
+    "note": "HTTP 200 score=72 "
+  },
+  {
+    "saas": "f1",
+    "step": "404 page: no 5xx and no NaN/null score",
+    "expected": true,
+    "observed": true,
+    "ok": true,
+    "note": "HTTP 422 score=undefined {\"error\":\"Unable to scan this URL. The server returned HTTP 404. Please check the URL and try again."
+  },
+  {
+    "saas": "f1",
+    "step": "determinism: the same page scanned twice has the same score",
+    "expected": 72,
+    "observed": 72,
+    "ok": true,
+    "note": "200/200"
+  },
+  {
+    "saas": "f1",
+    "step": "determinism: both scans answered 200",
+    "expected": [200, 200],
+    "observed": [200, 200],
+    "ok": true,
+    "note": ""
+  },
+  {
+    "saas": "f2",
+    "step": "invalid/hostile url \"not a url\": a 4xx, never a 5xx",
+    "expected": true,
+    "observed": true,
+    "ok": true,
+    "note": "HTTP 403 {\"error\":\"Bot detected. Please use a valid API key for automated access.\",\"code\":\"BOT_DETECTED\"}"
+  },
+  {
+    "saas": "f2",
+    "step": "invalid/hostile url \"\": a 4xx, never a 5xx",
+    "expected": true,
+    "observed": true,
+    "ok": true,
+    "note": "HTTP 403 {\"error\":\"Bot detected. Please use a valid API key for automated access.\",\"code\":\"BOT_DETECTED\"}"
+  },
+  {
+    "saas": "f2",
+    "step": "invalid/hostile url \"ftp://example.org/\": a 4xx, never a 5xx",
+    "expected": true,
+    "observed": true,
+    "ok": true,
+    "note": "HTTP 403 {\"error\":\"Bot detected. Please use a valid API key for automated access.\",\"code\":\"BOT_DETECTED\"}"
+  },
+  {
+    "saas": "f2",
+    "step": "invalid/hostile url \"javascript:alert(1)\": a 4xx, never a 5xx",
+    "expected": true,
+    "observed": true,
+    "ok": true,
+    "note": "HTTP 403 {\"error\":\"Bot detected. Please use a valid API key for automated access.\",\"code\":\"BOT_DETECTED\"}"
+  },
+  {
+    "saas": "f2",
+    "step": "invalid/hostile url \"file:///etc/passwd\": a 4xx, never a 5xx",
+    "expected": true,
+    "observed": true,
+    "ok": true,
+    "note": "HTTP 403 {\"error\":\"Bot detected. Please use a valid API key for automated access.\",\"code\":\"BOT_DETECTED\"}"
+  },
+  {
+    "saas": "f2",
+    "step": "invalid/hostile url \"http://127.0.0.1/\": a 4xx, never a 5xx",
+    "expected": true,
+    "observed": true,
+    "ok": true,
+    "note": "HTTP 403 {\"error\":\"Bot detected. Please use a valid API key for automated access.\",\"code\":\"BOT_DETECTED\"}"
+  },
+  {
+    "saas": "f2",
+    "step": "invalid/hostile url \"http://169.254.169.254/\": a 4xx, never a 5xx",
+    "expected": true,
+    "observed": true,
+    "ok": true,
+    "note": "HTTP 403 {\"error\":\"Bot detected. Please use a valid API key for automated access.\",\"code\":\"BOT_DETECTED\"}"
+  },
+  {
+    "saas": "f2",
+    "step": "invalid/hostile url \"http://2130706433/\": a 4xx, never a 5xx",
+    "expected": true,
+    "observed": true,
+    "ok": true,
+    "note": "HTTP 403 {\"error\":\"Bot detected. Please use a valid API key for automated access.\",\"code\":\"BOT_DETECTED\"}"
+  },
+  {
+    "saas": "f2",
+    "step": "invalid/hostile url \"http://[::1]/\": a 4xx, never a 5xx",
+    "expected": true,
+    "observed": true,
+    "ok": true,
+    "note": "HTTP 403 {\"error\":\"Bot detected. Please use a valid API key for automated access.\",\"code\":\"BOT_DETECTED\"}"
+  },
+  {
+    "saas": "f2",
+    "step": "invalid/hostile url \"https://aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\": a 4xx, never a 5xx",
+    "expected": true,
+    "observed": true,
+    "ok": true,
+    "note": "HTTP 403 {\"error\":\"Bot detected. Please use a valid API key for automated access.\",\"code\":\"BOT_DETECTED\"}"
+  },
+  {
+    "saas": "f2",
+    "step": "empty 200 body: no 5xx and no NaN/null score",
+    "expected": true,
+    "observed": true,
+    "ok": true,
+    "note": "HTTP 403 score=undefined {\"error\":\"Bot detected. Please use a valid API key for automated access.\",\"code\":\"BOT_DETECTED\"}"
+  },
+  {
+    "saas": "f2",
+    "step": "404 page: no 5xx and no NaN/null score",
+    "expected": true,
+    "observed": true,
+    "ok": true,
+    "note": "HTTP 403 score=undefined {\"error\":\"Bot detected. Please use a valid API key for automated access.\",\"code\":\"BOT_DETECTED\"}"
+  },
+  {
+    "saas": "f2",
+    "step": "determinism: the same page scanned twice has the same score",
+    "ok": true,
+    "note": "403/403"
+  },
+  {
+    "saas": "f2",
+    "step": "determinism: both scans answered 200",
+    "expected": [200, 200],
+    "observed": [403, 403],
+    "ok": false,
+    "note": ""
+  }
+]

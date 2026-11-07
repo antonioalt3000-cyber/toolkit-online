@@ -1,0 +1,7 @@
+[PASS] R02b clock +3 s, a customer who really takes ~3.6 s (skew smaller than the fill time)
+[PASS] R07 clock -7 h (also = a tab left open ~7 h)
+[FAIL] R16 autofill also fills the honeypot (a customer with a password manager)  -> refusal names the WRONG cause (coupon intact, valid=true; email fine): {"code":"BAD_REQUEST","msg":"Invalid or expired coupon code."}
+[FAIL] R17 autofill + immediate click (<1.2 s after render)  -> refusal blames the COUPON though the coupon is intact (valid=true): {"code":"BAD_REQUEST","msg":"Invalid or expired coupon code."}
+[PASS] R17b following the message ("wait and submit again") on the same page works
+
+hsh: 5 scenarios, 3 PASS, 2 FAIL -> C:\Users\ftass\toolkit-online\reports\omni-07nov-2026\evidence\hsh\fidelity-matrix.partial.json

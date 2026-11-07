@@ -1,0 +1,194 @@
+##### complipilot.dev
+
+===== CSP nel browser reale — https://complipilot.dev
+
+PASS  /
+      h1: Is Your AI System Compliant?
+      script: {"totali":25,"inlineSenzaNonce":0,"jsonLd":1} · nonce distinti: 1 · meta CSP: solo header
+      idratato: true · listener React presenti
+PASS  /pricing
+      h1: Simple, Transparent Pricing
+      script: {"totali":25,"inlineSenzaNonce":0,"jsonLd":1} · nonce distinti: 1 · meta CSP: solo header
+      idratato: true · listener React presenti
+PASS  /redeem
+      h1: Redeem Your Code
+      script: {"totali":25,"inlineSenzaNonce":0,"jsonLd":1} · nonce distinti: 1 · meta CSP: solo header
+      idratato: true · listener React presenti
+
+--- https://complipilot.dev: 3/3 pagine pulite
+[exit=0]
+##### fixmyweb.dev
+
+===== CSP nel browser reale — https://fixmyweb.dev
+
+PASS  /
+      h1: Your Website Could Be Fined
+Fix It Before They Check.
+Free W
+      script: {"totali":25,"inlineSenzaNonce":0,"jsonLd":2} · nonce distinti: 1 · meta CSP: solo header
+      idratato: true · listener React presenti
+PASS  /pricing
+      h1: Simple, Transparent Pricing
+      script: {"totali":25,"inlineSenzaNonce":0,"jsonLd":2} · nonce distinti: 1 · meta CSP: solo header
+      idratato: true · listener React presenti
+PASS  /redeem
+      h1: Redeem Your Code
+      script: {"totali":24,"inlineSenzaNonce":0,"jsonLd":1} · nonce distinti: 1 · meta CSP: solo header
+      idratato: true · listener React presenti
+
+--- https://fixmyweb.dev: 3/3 pagine pulite
+[exit=0]
+##### paymentrescue.dev
+
+===== CSP nel browser reale — https://paymentrescue.dev
+
+PASS  /
+      h1: Recover 30-50% of Failed Payments.
+      script: {"totali":24,"inlineSenzaNonce":0,"jsonLd":2} · nonce distinti: 1 · meta CSP: solo header
+      idratato: true · listener React presenti
+PASS  /pricing
+      h1: Simple, Transparent Pricing
+      script: {"totali":24,"inlineSenzaNonce":0,"jsonLd":3} · nonce distinti: 1 · meta CSP: solo header
+      idratato: true · listener React presenti
+PASS  /redeem
+      h1: Redeem Your Code
+      script: {"totali":23,"inlineSenzaNonce":0,"jsonLd":1} · nonce distinti: 1 · meta CSP: solo header
+      idratato: true · listener React presenti
+
+--- https://paymentrescue.dev: 3/3 pagine pulite
+[exit=0]
+##### parseflow.dev
+
+===== CSP nel browser reale — https://parseflow.dev
+
+PASS  /
+      h1: PDF to JSON.
+One API Call.
+      script: {"totali":23,"inlineSenzaNonce":0,"jsonLd":1} · nonce distinti: 1 · meta CSP: solo header
+      idratato: true · listener React presenti
+PASS  /pricing
+      h1: Simple, transparent pricing
+      script: {"totali":24,"inlineSenzaNonce":0,"jsonLd":3} · nonce distinti: 1 · meta CSP: solo header
+      idratato: true · listener React presenti
+PASS  /redeem
+      h1: Redeem Your Code
+      script: {"totali":23,"inlineSenzaNonce":0,"jsonLd":1} · nonce distinti: 1 · meta CSP: solo header
+      idratato: true · listener React presenti
+
+--- https://parseflow.dev: 3/3 pagine pulite
+[exit=0]
+##### captureapi.dev
+
+===== CSP nel browser reale — https://captureapi.dev
+
+PASS  /
+      h1: Screenshot API
+That Just Works
+      script: {"totali":22,"inlineSenzaNonce":0,"jsonLd":2} · nonce distinti: 1 · meta CSP: solo header
+      idratato: true · listener React presenti
+PASS  /pricing
+      h1: Simple, Transparent Pricing
+      script: {"totali":23,"inlineSenzaNonce":0,"jsonLd":3} · nonce distinti: 1 · meta CSP: solo header
+      idratato: true · listener React presenti
+PASS  /redeem
+      h1: Redeem Your Code
+      script: {"totali":21,"inlineSenzaNonce":0,"jsonLd":1} · nonce distinti: 1 · meta CSP: solo header
+      idratato: true · listener React presenti
+
+--- https://captureapi.dev: 3/3 pagine pulite
+[exit=0]
+##### getcardforge.dev
+
+===== CSP nel browser reale — https://getcardforge.dev
+
+PASS  /
+      h1: Pixel-perfect social cards from a URL.
+      script: {"totali":25,"inlineSenzaNonce":0,"jsonLd":1} · nonce distinti: 1 · meta CSP: solo header
+      idratato: true · listener React presenti
+PASS  /pricing
+      h1: Simple, honest pricing
+      script: {"totali":24,"inlineSenzaNonce":0,"jsonLd":1} · nonce distinti: 1 · meta CSP: solo header
+      idratato: true · listener React presenti
+PASS  /redeem
+      h1: Redeem your lifetime deal
+      script: {"totali":22,"inlineSenzaNonce":0,"jsonLd":1} · nonce distinti: 1 · meta CSP: solo header
+      idratato: true · listener React presenti
+
+--- https://getcardforge.dev: 3/3 pagine pulite
+[exit=0]
+##### emailguard.dev
+
+===== CSP nel browser reale — https://emailguard.dev
+
+PASS  /
+      h1: Stop sending to dead inboxes.
+      script: {"totali":31,"inlineSenzaNonce":0,"jsonLd":1} · nonce distinti: 1 · meta CSP: solo header
+      idratato: true · listener React presenti
+PASS  /pricing
+      h1: Simple, honest pricing
+      script: {"totali":23,"inlineSenzaNonce":0,"jsonLd":1} · nonce distinti: 1 · meta CSP: solo header
+      idratato: true · listener React presenti
+PASS  /redeem
+      h1: Redeem your lifetime deal
+      script: {"totali":21,"inlineSenzaNonce":0,"jsonLd":1} · nonce distinti: 1 · meta CSP: solo header
+      idratato: true · listener React presenti
+
+--- https://emailguard.dev: 3/3 pagine pulite
+[exit=0]
+##### headershield.dev
+
+===== CSP nel browser reale — https://headershield.dev
+
+PASS  /
+      h1: Ship security headers like a bank.
+      script: {"totali":24,"inlineSenzaNonce":0,"jsonLd":1} · nonce distinti: 1 · meta CSP: solo header
+      idratato: true · listener React presenti
+PASS  /pricing
+      h1: Simple, honest pricing
+      script: {"totali":22,"inlineSenzaNonce":0,"jsonLd":1} · nonce distinti: 1 · meta CSP: solo header
+      idratato: true · listener React presenti
+PASS  /redeem
+      h1: Redeem your lifetime deal
+      script: {"totali":22,"inlineSenzaNonce":0,"jsonLd":1} · nonce distinti: 1 · meta CSP: solo header
+      idratato: true · listener React presenti
+
+--- https://headershield.dev: 3/3 pagine pulite
+[exit=0]
+##### gethooklab.dev
+
+===== CSP nel browser reale — https://gethooklab.dev
+
+PASS  /
+      h1: See every webhook. Replay any of them.
+      script: {"totali":24,"inlineSenzaNonce":0,"jsonLd":1} · nonce distinti: 1 · meta CSP: solo header
+      idratato: true · listener React presenti
+PASS  /pricing
+      h1: Simple, honest pricing
+      script: {"totali":23,"inlineSenzaNonce":0,"jsonLd":1} · nonce distinti: 1 · meta CSP: solo header
+      idratato: true · listener React presenti
+PASS  /redeem
+      h1: Redeem your lifetime deal
+      script: {"totali":21,"inlineSenzaNonce":0,"jsonLd":1} · nonce distinti: 1 · meta CSP: solo header
+      idratato: true · listener React presenti
+
+--- https://gethooklab.dev: 3/3 pagine pulite
+[exit=0]
+##### seoscope.dev
+
+===== CSP nel browser reale — https://seoscope.dev
+
+PASS  /
+      h1: See your site the way Google sees it.
+      script: {"totali":33,"inlineSenzaNonce":0,"jsonLd":1} · nonce distinti: 1 · meta CSP: solo header
+      idratato: true · listener React presenti
+PASS  /pricing
+      h1: Simple, honest pricing
+      script: {"totali":23,"inlineSenzaNonce":0,"jsonLd":1} · nonce distinti: 1 · meta CSP: solo header
+      idratato: true · listener React presenti
+PASS  /redeem
+      h1: Redeem your lifetime deal
+      script: {"totali":21,"inlineSenzaNonce":0,"jsonLd":1} · nonce distinti: 1 · meta CSP: solo header
+      idratato: true · listener React presenti
+
+--- https://seoscope.dev: 3/3 pagine pulite
+[exit=0]

@@ -1,0 +1,436 @@
+{
+  "slug": "seo",
+  "at": "2026-11-07T01:49:46.233Z",
+  "results": [
+    {
+      "what": "https://emailguard.dev/: titolo 48 car. -> pass",
+      "pass": true,
+      "detail": "prodotto pass \"\""
+    },
+    {
+      "what": "https://emailguard.dev/: il titolo letto coincide col parser indipendente",
+      "pass": true,
+      "detail": "prodotto \"EmailGuard — Email validation API for developers\" vs \"EmailGuard — Email validation API for developers\""
+    },
+    {
+      "what": "https://emailguard.dev/: 1 <h1> -> pass",
+      "pass": true,
+      "detail": "prodotto pass \"\""
+    },
+    {
+      "what": "https://emailguard.dev/: indicizzabile -> robots-meta non fail",
+      "pass": true,
+      "detail": "prodotto pass"
+    },
+    {
+      "what": "https://emailguard.dev/: score = media pesata delle categorie (96.91)",
+      "pass": true,
+      "detail": "riportato 97"
+    },
+    {
+      "what": "https://emailguard.dev/dashboard: titolo 48 car. -> pass",
+      "pass": true,
+      "detail": "prodotto pass \"\""
+    },
+    {
+      "what": "https://emailguard.dev/dashboard: il titolo letto coincide col parser indipendente",
+      "pass": true,
+      "detail": "prodotto \"EmailGuard — Email validation API for developers\" vs \"EmailGuard — Email validation API for developers\""
+    },
+    {
+      "what": "https://emailguard.dev/dashboard: 0 <h1> -> fail",
+      "pass": true,
+      "detail": "prodotto fail \"\""
+    },
+    {
+      "what": "https://emailguard.dev/dashboard: indicizzabile -> robots-meta non fail",
+      "pass": true,
+      "detail": "prodotto pass"
+    },
+    {
+      "what": "https://emailguard.dev/dashboard: score = media pesata delle categorie (85.94)",
+      "pass": true,
+      "detail": "riportato 86"
+    },
+    {
+      "what": "https://emailguard.dev/pricing: titolo 20 car. -> pass",
+      "pass": true,
+      "detail": "prodotto pass \"\""
+    },
+    {
+      "what": "https://emailguard.dev/pricing: il titolo letto coincide col parser indipendente",
+      "pass": true,
+      "detail": "prodotto \"Pricing — EmailGuard\" vs \"Pricing — EmailGuard\""
+    },
+    {
+      "what": "https://emailguard.dev/pricing: 1 <h1> -> pass",
+      "pass": true,
+      "detail": "prodotto pass \"\""
+    },
+    {
+      "what": "https://emailguard.dev/pricing: indicizzabile -> robots-meta non fail",
+      "pass": true,
+      "detail": "prodotto pass"
+    },
+    {
+      "what": "https://emailguard.dev/pricing: score = media pesata delle categorie (95.22)",
+      "pass": true,
+      "detail": "riportato 95"
+    },
+    {
+      "what": "https://headershield.dev/: titolo 48 car. -> pass",
+      "pass": true,
+      "detail": "prodotto pass \"\""
+    },
+    {
+      "what": "https://headershield.dev/: il titolo letto coincide col parser indipendente",
+      "pass": true,
+      "detail": "prodotto \"HeaderShield — Security headers scanner & grader\" vs \"HeaderShield — Security headers scanner & grader\""
+    },
+    {
+      "what": "https://headershield.dev/: 1 <h1> -> pass",
+      "pass": true,
+      "detail": "prodotto pass \"\""
+    },
+    {
+      "what": "https://headershield.dev/: indicizzabile -> robots-meta non fail",
+      "pass": true,
+      "detail": "prodotto pass"
+    },
+    {
+      "what": "https://headershield.dev/: score = media pesata delle categorie (96.94)",
+      "pass": true,
+      "detail": "riportato 97"
+    },
+    {
+      "what": "https://headershield.dev/dashboard: titolo 48 car. -> pass",
+      "pass": true,
+      "detail": "prodotto pass \"\""
+    },
+    {
+      "what": "https://headershield.dev/dashboard: il titolo letto coincide col parser indipendente",
+      "pass": true,
+      "detail": "prodotto \"HeaderShield — Security headers scanner & grader\" vs \"HeaderShield — Security headers scanner & grader\""
+    },
+    {
+      "what": "https://headershield.dev/dashboard: 0 <h1> -> fail",
+      "pass": true,
+      "detail": "prodotto fail \"\""
+    },
+    {
+      "what": "https://headershield.dev/dashboard: indicizzabile -> robots-meta non fail",
+      "pass": true,
+      "detail": "prodotto pass"
+    },
+    {
+      "what": "https://headershield.dev/dashboard: score = media pesata delle categorie (82.88)",
+      "pass": true,
+      "detail": "riportato 83"
+    },
+    {
+      "what": "https://gethooklab.dev/: titolo 59 car. -> pass",
+      "pass": true,
+      "detail": "prodotto pass \"\""
+    },
+    {
+      "what": "https://gethooklab.dev/: il titolo letto coincide col parser indipendente",
+      "pass": true,
+      "detail": "prodotto \"HookLab — Webhook inspection & replay, built for developers\" vs \"HookLab — Webhook inspection & replay, built for developers\""
+    },
+    {
+      "what": "https://gethooklab.dev/: 1 <h1> -> pass",
+      "pass": true,
+      "detail": "prodotto pass \"\""
+    },
+    {
+      "what": "https://gethooklab.dev/: indicizzabile -> robots-meta non fail",
+      "pass": true,
+      "detail": "prodotto pass"
+    },
+    {
+      "what": "https://gethooklab.dev/: score = media pesata delle categorie (96.94)",
+      "pass": true,
+      "detail": "riportato 97"
+    },
+    {
+      "what": "https://gethooklab.dev/dashboard: titolo 59 car. -> pass",
+      "pass": true,
+      "detail": "prodotto pass \"\""
+    },
+    {
+      "what": "https://gethooklab.dev/dashboard: il titolo letto coincide col parser indipendente",
+      "pass": true,
+      "detail": "prodotto \"HookLab — Webhook inspection & replay, built for developers\" vs \"HookLab — Webhook inspection & replay, built for developers\""
+    },
+    {
+      "what": "https://gethooklab.dev/dashboard: 0 <h1> -> fail",
+      "pass": true,
+      "detail": "prodotto fail \"\""
+    },
+    {
+      "what": "https://gethooklab.dev/dashboard: indicizzabile -> robots-meta non fail",
+      "pass": true,
+      "detail": "prodotto pass"
+    },
+    {
+      "what": "https://gethooklab.dev/dashboard: score = media pesata delle categorie (82.88)",
+      "pass": true,
+      "detail": "riportato 83"
+    },
+    {
+      "what": "https://getcardforge.dev/: titolo 49 car. -> pass",
+      "pass": true,
+      "detail": "prodotto pass \"\""
+    },
+    {
+      "what": "https://getcardforge.dev/: il titolo letto coincide col parser indipendente",
+      "pass": true,
+      "detail": "prodotto \"CardForge — Pixel-perfect social cards from a URL\" vs \"CardForge — Pixel-perfect social cards from a URL\""
+    },
+    {
+      "what": "https://getcardforge.dev/: 1 <h1> -> pass",
+      "pass": true,
+      "detail": "prodotto pass \"\""
+    },
+    {
+      "what": "https://getcardforge.dev/: indicizzabile -> robots-meta non fail",
+      "pass": true,
+      "detail": "prodotto pass"
+    },
+    {
+      "what": "https://getcardforge.dev/: score = media pesata delle categorie (92.34)",
+      "pass": true,
+      "detail": "riportato 92"
+    },
+    {
+      "what": "https://getcardforge.dev/dashboard: titolo 49 car. -> pass",
+      "pass": true,
+      "detail": "prodotto pass \"\""
+    },
+    {
+      "what": "https://getcardforge.dev/dashboard: il titolo letto coincide col parser indipendente",
+      "pass": true,
+      "detail": "prodotto \"CardForge — Pixel-perfect social cards from a URL\" vs \"CardForge — Pixel-perfect social cards from a URL\""
+    },
+    {
+      "what": "https://getcardforge.dev/dashboard: 0 <h1> -> fail",
+      "pass": true,
+      "detail": "prodotto fail \"\""
+    },
+    {
+      "what": "https://getcardforge.dev/dashboard: indicizzabile -> robots-meta non fail",
+      "pass": true,
+      "detail": "prodotto pass"
+    },
+    {
+      "what": "https://getcardforge.dev/dashboard: score = media pesata delle categorie (82.88)",
+      "pass": true,
+      "detail": "riportato 83"
+    },
+    {
+      "what": "https://seoscope.dev/: titolo 51 car. -> pass",
+      "pass": true,
+      "detail": "prodotto pass \"\""
+    },
+    {
+      "what": "https://seoscope.dev/: il titolo letto coincide col parser indipendente",
+      "pass": true,
+      "detail": "prodotto \"SEOScope — On-page SEO audits, built for developers\" vs \"SEOScope — On-page SEO audits, built for developers\""
+    },
+    {
+      "what": "https://seoscope.dev/: 1 <h1> -> pass",
+      "pass": true,
+      "detail": "prodotto pass \"\""
+    },
+    {
+      "what": "https://seoscope.dev/: indicizzabile -> robots-meta non fail",
+      "pass": true,
+      "detail": "prodotto pass"
+    },
+    {
+      "what": "https://seoscope.dev/: score = media pesata delle categorie (96.91)",
+      "pass": true,
+      "detail": "riportato 97"
+    },
+    {
+      "what": "https://seoscope.dev/dashboard: titolo 51 car. -> pass",
+      "pass": true,
+      "detail": "prodotto pass \"\""
+    },
+    {
+      "what": "https://seoscope.dev/dashboard: il titolo letto coincide col parser indipendente",
+      "pass": true,
+      "detail": "prodotto \"SEOScope — On-page SEO audits, built for developers\" vs \"SEOScope — On-page SEO audits, built for developers\""
+    },
+    {
+      "what": "https://seoscope.dev/dashboard: 0 <h1> -> fail",
+      "pass": true,
+      "detail": "prodotto fail \"\""
+    },
+    {
+      "what": "https://seoscope.dev/dashboard: indicizzabile -> robots-meta non fail",
+      "pass": true,
+      "detail": "prodotto pass"
+    },
+    {
+      "what": "https://seoscope.dev/dashboard: score = media pesata delle categorie (85.94)",
+      "pass": true,
+      "detail": "riportato 86"
+    },
+    {
+      "what": "https://seoscope.dev/docs: titolo 28 car. -> pass",
+      "pass": true,
+      "detail": "prodotto pass \"\""
+    },
+    {
+      "what": "https://seoscope.dev/docs: il titolo letto coincide col parser indipendente",
+      "pass": true,
+      "detail": "prodotto \"API Documentation — SEOScope\" vs \"API Documentation — SEOScope\""
+    },
+    {
+      "what": "https://seoscope.dev/docs: 1 <h1> -> pass",
+      "pass": true,
+      "detail": "prodotto pass \"\""
+    },
+    {
+      "what": "https://seoscope.dev/docs: indicizzabile -> robots-meta non fail",
+      "pass": true,
+      "detail": "prodotto pass"
+    },
+    {
+      "what": "https://seoscope.dev/docs: score = media pesata delle categorie (100.00)",
+      "pass": true,
+      "detail": "riportato 100"
+    },
+    {
+      "what": "https://toolkitonline.vip/en: titolo 70 car. -> warn",
+      "pass": true,
+      "detail": "prodotto warn \"\""
+    },
+    {
+      "what": "https://toolkitonline.vip/en: il titolo letto coincide col parser indipendente",
+      "pass": true,
+      "detail": "prodotto \"ToolKit Online — Free Calculators, Converters & Tools | Tool\" vs \"ToolKit Online — Free Calculators, Converters & Tools | Tool\""
+    },
+    {
+      "what": "https://toolkitonline.vip/en: 1 <h1> -> pass",
+      "pass": true,
+      "detail": "prodotto pass \"\""
+    },
+    {
+      "what": "https://toolkitonline.vip/en: indicizzabile -> robots-meta non fail",
+      "pass": true,
+      "detail": "prodotto pass"
+    },
+    {
+      "what": "https://toolkitonline.vip/en: score = media pesata delle categorie (84.31)",
+      "pass": true,
+      "detail": "riportato 84"
+    },
+    {
+      "what": "https://toolkitonline.vip/en/tools: titolo 71 car. -> warn",
+      "pass": true,
+      "detail": "prodotto warn \"\""
+    },
+    {
+      "what": "https://toolkitonline.vip/en/tools: il titolo letto coincide col parser indipendente",
+      "pass": true,
+      "detail": "prodotto \"All Free Online Tools — Calculators, Converters & More | Too\" vs \"All Free Online Tools — Calculators, Converters & More | Too\""
+    },
+    {
+      "what": "https://toolkitonline.vip/en/tools: 1 <h1> -> pass",
+      "pass": true,
+      "detail": "prodotto pass \"\""
+    },
+    {
+      "what": "https://toolkitonline.vip/en/tools: indicizzabile -> robots-meta non fail",
+      "pass": true,
+      "detail": "prodotto pass"
+    },
+    {
+      "what": "https://toolkitonline.vip/en/tools: score = media pesata delle categorie (84.31)",
+      "pass": true,
+      "detail": "riportato 84"
+    },
+    {
+      "what": "https://httpbin.org/html: titolo assente -> fail",
+      "pass": true,
+      "detail": "prodotto fail \"\""
+    },
+    {
+      "what": "https://httpbin.org/html: 1 <h1> -> pass",
+      "pass": true,
+      "detail": "prodotto pass \"\""
+    },
+    {
+      "what": "https://httpbin.org/html: indicizzabile -> robots-meta non fail",
+      "pass": true,
+      "detail": "prodotto pass"
+    },
+    {
+      "what": "https://httpbin.org/html: score = media pesata delle categorie (67.16)",
+      "pass": true,
+      "detail": "riportato 67"
+    },
+    {
+      "what": "https://en.wikipedia.org/wiki/Special:Search?search=qa: titolo 14 car. -> pass",
+      "pass": true,
+      "detail": "prodotto pass \"\""
+    },
+    {
+      "what": "https://en.wikipedia.org/wiki/Special:Search?search=qa: il titolo letto coincide col parser indipendente",
+      "pass": true,
+      "detail": "prodotto \"QA - Wikipedia\" vs \"QA - Wikipedia\""
+    },
+    {
+      "what": "https://en.wikipedia.org/wiki/Special:Search?search=qa: 1 <h1> -> pass",
+      "pass": true,
+      "detail": "prodotto pass \"\""
+    },
+    {
+      "what": "https://en.wikipedia.org/wiki/Special:Search?search=qa: indicizzabile -> robots-meta non fail",
+      "pass": true,
+      "detail": "prodotto pass"
+    },
+    {
+      "what": "https://en.wikipedia.org/wiki/Special:Search?search=qa: score = media pesata delle categorie (76.63)",
+      "pass": true,
+      "detail": "riportato 77"
+    },
+    {
+      "what": "controllo negativo: una media NON pesata si discosta da quella pesata su almeno una pagina (l'oracolo distingue i pesi)",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "what": "le pagine reali coprono: titolo assente, titolo fuori soglia, titolo valido, h1 assente",
+      "pass": true,
+      "detail": "{\"titleWarn\":2,\"titlePass\":13,\"titleFail\":1,\"h1Warn\":0,\"h1Fail\":5,\"noindex\":0}"
+    },
+    {
+      "what": "un URL che serve text/plain: 422 che dice «not an HTML page» (causa vera)",
+      "pass": true,
+      "detail": "HTTP 422 {\"error\":{\"code\":\"AUDIT_FAILED\",\"message\":\"Target is not an HTML page (content-type: text/plain)\"}}"
+    },
+    {
+      "what": "bersaglio \"http://127.0.0.1/\": 4xx, mai 5xx",
+      "pass": true,
+      "detail": "HTTP 422"
+    },
+    {
+      "what": "bersaglio \"http://169.254.169.254/\": 4xx, mai 5xx",
+      "pass": true,
+      "detail": "HTTP 422"
+    },
+    {
+      "what": "bersaglio \"file:///etc/passwd\": 4xx, mai 5xx",
+      "pass": true,
+      "detail": "HTTP 422"
+    },
+    {
+      "what": "bersaglio \"not a url\": 4xx, mai 5xx",
+      "pass": true,
+      "detail": "HTTP 422"
+    }
+  ]
+}

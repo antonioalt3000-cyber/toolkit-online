@@ -1,0 +1,885 @@
+{
+  "slug": "f2",
+  "base": "https://fixmyweb.dev",
+  "at": "2026-11-07T07:07:22.093Z",
+  "totals": {
+    "pages": 51,
+    "non200": 0,
+    "noOgImage": 0,
+    "inheritedMeta": 0,
+    "multiH1": 0,
+    "backslashProbed": 51,
+    "backslash500": 0
+  },
+  "pages": [
+    {
+      "path": "/",
+      "status": 200,
+      "title": "Free WCAG &amp; ADA Accessibility Checker | FixMyWeb",
+      "inheritsHomeTitle": false,
+      "inheritsHomeDesc": false,
+      "hasDesc": true,
+      "ogImage": "https://fixmyweb.dev/opengraph-image?7114a4c22178e2c6",
+      "canonical": "https://fixmyweb.dev",
+      "h1Count": 1,
+      "imagesMissingAlt": 0
+    },
+    {
+      "path": "/about",
+      "status": 200,
+      "title": "About Us | FixMyWeb",
+      "inheritsHomeTitle": false,
+      "inheritsHomeDesc": false,
+      "hasDesc": true,
+      "ogImage": "https://fixmyweb.dev/opengraph-image?7114a4c22178e2c6",
+      "canonical": "https://fixmyweb.dev/about",
+      "h1Count": 1,
+      "imagesMissingAlt": 0
+    },
+    {
+      "path": "/accessibility-checker",
+      "status": 200,
+      "title": "Free Accessibility Checker — Online Website Scanner | FixMyWeb",
+      "inheritsHomeTitle": false,
+      "inheritsHomeDesc": false,
+      "hasDesc": true,
+      "ogImage": "https://fixmyweb.dev/opengraph-image",
+      "canonical": "https://fixmyweb.dev/accessibility-checker",
+      "h1Count": 1,
+      "imagesMissingAlt": 0
+    },
+    {
+      "path": "/ada-compliance",
+      "status": 200,
+      "title": "ADA Compliance Checker — Title II/III Legal Conformance | FixMyWeb",
+      "inheritsHomeTitle": false,
+      "inheritsHomeDesc": false,
+      "hasDesc": true,
+      "ogImage": "https://fixmyweb.dev/opengraph-image",
+      "canonical": "https://fixmyweb.dev/ada-compliance",
+      "h1Count": 1,
+      "imagesMissingAlt": 0
+    },
+    {
+      "path": "/ai-transparency",
+      "status": 200,
+      "title": "AI Transparency | FixMyWeb",
+      "inheritsHomeTitle": false,
+      "inheritsHomeDesc": false,
+      "hasDesc": true,
+      "ogImage": "https://fixmyweb.dev/opengraph-image?7114a4c22178e2c6",
+      "canonical": "https://fixmyweb.dev/ai-transparency",
+      "h1Count": 1,
+      "imagesMissingAlt": 0
+    },
+    {
+      "path": "/badge",
+      "status": 200,
+      "title": "Accessibility Badge — Show Your Commitment | FixMyWeb",
+      "inheritsHomeTitle": false,
+      "inheritsHomeDesc": false,
+      "hasDesc": true,
+      "ogImage": "https://fixmyweb.dev/opengraph-image?7114a4c22178e2c6",
+      "canonical": "https://fixmyweb.dev/badge",
+      "h1Count": 1,
+      "imagesMissingAlt": 0
+    },
+    {
+      "path": "/blog",
+      "status": 200,
+      "title": "Blog — Web Accessibility Guides, Tips &amp; News | FixMyWeb",
+      "inheritsHomeTitle": false,
+      "inheritsHomeDesc": false,
+      "hasDesc": true,
+      "ogImage": "https://fixmyweb.dev/opengraph-image?7114a4c22178e2c6",
+      "canonical": "https://fixmyweb.dev/blog",
+      "h1Count": 1,
+      "imagesMissingAlt": 0
+    },
+    {
+      "path": "/blog/accessibility-statement-generator-guide",
+      "status": 200,
+      "title": "How to Use an Accessibility Statement Generator (2026 Guide) | FixMyWeb",
+      "inheritsHomeTitle": false,
+      "inheritsHomeDesc": false,
+      "hasDesc": true,
+      "ogImage": "https://fixmyweb.dev/opengraph-image",
+      "canonical": "https://fixmyweb.dev/blog/accessibility-statement-generator-guide",
+      "h1Count": 1,
+      "imagesMissingAlt": 0
+    },
+    {
+      "path": "/blog/ada-title-ii-2026-deadline",
+      "status": 200,
+      "title": "ADA Title II Web Accessibility Deadline 2026: Is Your Website Ready? | FixMyWeb",
+      "inheritsHomeTitle": false,
+      "inheritsHomeDesc": false,
+      "hasDesc": true,
+      "ogImage": "https://fixmyweb.dev/opengraph-image",
+      "canonical": "https://fixmyweb.dev/blog/ada-title-ii-2026-deadline",
+      "h1Count": 1,
+      "imagesMissingAlt": 0
+    },
+    {
+      "path": "/blog/color-contrast-wcag-guide",
+      "status": 200,
+      "title": "WCAG Color Contrast Requirements: Complete Guide with Examples | FixMyWeb",
+      "inheritsHomeTitle": false,
+      "inheritsHomeDesc": false,
+      "hasDesc": true,
+      "ogImage": "https://fixmyweb.dev/opengraph-image",
+      "canonical": "https://fixmyweb.dev/blog/color-contrast-wcag-guide",
+      "h1Count": 1,
+      "imagesMissingAlt": 0
+    },
+    {
+      "path": "/blog/eaa-compliance-for-agencies",
+      "status": 200,
+      "title": "EAA Compliance for Web Agencies: A Client Portfolio Playbook | FixMyWeb",
+      "inheritsHomeTitle": false,
+      "inheritsHomeDesc": false,
+      "hasDesc": true,
+      "ogImage": "https://fixmyweb.dev/opengraph-image",
+      "canonical": "https://fixmyweb.dev/blog/eaa-compliance-for-agencies",
+      "h1Count": 1,
+      "imagesMissingAlt": 0
+    },
+    {
+      "path": "/blog/eaa-fines-enforcement-2026",
+      "status": 200,
+      "title": "EAA Enforcement Is Live: Who Supervises It and What It Can Cost | FixMyWeb",
+      "inheritsHomeTitle": false,
+      "inheritsHomeDesc": false,
+      "hasDesc": true,
+      "ogImage": "https://fixmyweb.dev/opengraph-image",
+      "canonical": "https://fixmyweb.dev/blog/eaa-fines-enforcement-2026",
+      "h1Count": 1,
+      "imagesMissingAlt": 0
+    },
+    {
+      "path": "/blog/european-accessibility-act",
+      "status": 200,
+      "title": "European Accessibility Act 2025: Complete Guide | FixMyWeb",
+      "inheritsHomeTitle": false,
+      "inheritsHomeDesc": false,
+      "hasDesc": true,
+      "ogImage": "https://fixmyweb.dev/opengraph-image",
+      "canonical": "https://fixmyweb.dev/blog/european-accessibility-act",
+      "h1Count": 1,
+      "imagesMissingAlt": 0
+    },
+    {
+      "path": "/blog/european-accessibility-act-2025-guide",
+      "status": 200,
+      "title": "European Accessibility Act 2025: What Website Owners Must Know | FixMyWeb",
+      "inheritsHomeTitle": false,
+      "inheritsHomeDesc": false,
+      "hasDesc": true,
+      "ogImage": "https://fixmyweb.dev/opengraph-image",
+      "canonical": "https://fixmyweb.dev/blog/european-accessibility-act-2025-guide",
+      "h1Count": 1,
+      "imagesMissingAlt": 0
+    },
+    {
+      "path": "/blog/wcag-2-2-new-criteria",
+      "status": 200,
+      "title": "WCAG 2.2 New Success Criteria: What Changed from WCAG 2.1 | FixMyWeb",
+      "inheritsHomeTitle": false,
+      "inheritsHomeDesc": false,
+      "hasDesc": true,
+      "ogImage": "https://fixmyweb.dev/opengraph-image",
+      "canonical": "https://fixmyweb.dev/blog/wcag-2-2-new-criteria",
+      "h1Count": 1,
+      "imagesMissingAlt": 0
+    },
+    {
+      "path": "/blog/wcag-checklist",
+      "status": 200,
+      "title": "WCAG 2.2 Checklist for Developers — Practical Guide with Code Examples | FixMyWeb",
+      "inheritsHomeTitle": false,
+      "inheritsHomeDesc": false,
+      "hasDesc": true,
+      "ogImage": "https://fixmyweb.dev/opengraph-image",
+      "canonical": "https://fixmyweb.dev/blog/wcag-checklist",
+      "h1Count": 1,
+      "imagesMissingAlt": 0
+    },
+    {
+      "path": "/blog/wcag-checklist-2026",
+      "status": 200,
+      "title": "Complete WCAG 2.2 Checklist for 2026 — All Level AA Criteria | FixMyWeb",
+      "inheritsHomeTitle": false,
+      "inheritsHomeDesc": false,
+      "hasDesc": true,
+      "ogImage": "https://fixmyweb.dev/opengraph-image",
+      "canonical": "https://fixmyweb.dev/blog/wcag-checklist-2026",
+      "h1Count": 1,
+      "imagesMissingAlt": 0
+    },
+    {
+      "path": "/blog/wcag-compliance-checker-guide",
+      "status": 200,
+      "title": "WCAG Compliance Checker: How to Test Your Website (2026 Guide) | FixMyWeb",
+      "inheritsHomeTitle": false,
+      "inheritsHomeDesc": false,
+      "hasDesc": true,
+      "ogImage": "https://fixmyweb.dev/opengraph-image",
+      "canonical": "https://fixmyweb.dev/blog/wcag-compliance-checker-guide",
+      "h1Count": 1,
+      "imagesMissingAlt": 0
+    },
+    {
+      "path": "/bulk",
+      "status": 200,
+      "title": "Bulk Accessibility Scanner — Scan Multiple URLs at Once | FixMyWeb",
+      "inheritsHomeTitle": false,
+      "inheritsHomeDesc": false,
+      "hasDesc": true,
+      "ogImage": "https://fixmyweb.dev/opengraph-image",
+      "canonical": "https://fixmyweb.dev/bulk",
+      "h1Count": 1,
+      "imagesMissingAlt": 0
+    },
+    {
+      "path": "/changelog",
+      "status": 200,
+      "title": "Changelog — FixMyWeb | FixMyWeb",
+      "inheritsHomeTitle": false,
+      "inheritsHomeDesc": false,
+      "hasDesc": true,
+      "ogImage": "https://fixmyweb.dev/opengraph-image?7114a4c22178e2c6",
+      "canonical": "https://fixmyweb.dev/changelog",
+      "h1Count": 1,
+      "imagesMissingAlt": 0
+    },
+    {
+      "path": "/compare/fixmyweb-vs-accessibe",
+      "status": 200,
+      "title": "FixMyWeb vs accessiBe: Accessibility Tool Comparison (2026) | FixMyWeb",
+      "inheritsHomeTitle": false,
+      "inheritsHomeDesc": false,
+      "hasDesc": true,
+      "ogImage": "https://fixmyweb.dev/opengraph-image",
+      "canonical": "https://fixmyweb.dev/compare/fixmyweb-vs-accessibe",
+      "h1Count": 1,
+      "imagesMissingAlt": 0
+    },
+    {
+      "path": "/compare/fixmyweb-vs-axe",
+      "status": 200,
+      "title": "FixMyWeb vs axe: WCAG Accessibility Checker Comparison (2026) | FixMyWeb",
+      "inheritsHomeTitle": false,
+      "inheritsHomeDesc": false,
+      "hasDesc": true,
+      "ogImage": "https://fixmyweb.dev/opengraph-image",
+      "canonical": "https://fixmyweb.dev/compare/fixmyweb-vs-axe",
+      "h1Count": 1,
+      "imagesMissingAlt": 0
+    },
+    {
+      "path": "/compare/fixmyweb-vs-silktide",
+      "status": 200,
+      "title": "FixMyWeb vs Silktide: Accessibility Checker Comparison (2026) | FixMyWeb",
+      "inheritsHomeTitle": false,
+      "inheritsHomeDesc": false,
+      "hasDesc": true,
+      "ogImage": "https://fixmyweb.dev/opengraph-image",
+      "canonical": "https://fixmyweb.dev/compare/fixmyweb-vs-silktide",
+      "h1Count": 1,
+      "imagesMissingAlt": 0
+    },
+    {
+      "path": "/contact",
+      "status": 200,
+      "title": "Contact Us | FixMyWeb",
+      "inheritsHomeTitle": false,
+      "inheritsHomeDesc": false,
+      "hasDesc": true,
+      "ogImage": "https://fixmyweb.dev/opengraph-image?7114a4c22178e2c6",
+      "canonical": "https://fixmyweb.dev/contact",
+      "h1Count": 1,
+      "imagesMissingAlt": 0
+    },
+    {
+      "path": "/cookie-policy",
+      "status": 200,
+      "title": "Cookie Policy | FixMyWeb",
+      "inheritsHomeTitle": false,
+      "inheritsHomeDesc": false,
+      "hasDesc": true,
+      "ogImage": "https://fixmyweb.dev/opengraph-image?7114a4c22178e2c6",
+      "canonical": "https://fixmyweb.dev/cookie-policy",
+      "h1Count": 1,
+      "imagesMissingAlt": 0
+    },
+    {
+      "path": "/dpa",
+      "status": 200,
+      "title": "Data Processing Agreement (DPA) | FixMyWeb",
+      "inheritsHomeTitle": false,
+      "inheritsHomeDesc": false,
+      "hasDesc": true,
+      "ogImage": "https://fixmyweb.dev/opengraph-image?7114a4c22178e2c6",
+      "canonical": "https://fixmyweb.dev/dpa",
+      "h1Count": 1,
+      "imagesMissingAlt": 0
+    },
+    {
+      "path": "/eaa",
+      "status": 200,
+      "title": "European Accessibility Act by country: who enforces it where | FixMyWeb",
+      "inheritsHomeTitle": false,
+      "inheritsHomeDesc": false,
+      "hasDesc": true,
+      "ogImage": "https://fixmyweb.dev/opengraph-image?7114a4c22178e2c6",
+      "canonical": "https://fixmyweb.dev/eaa",
+      "h1Count": 1,
+      "imagesMissingAlt": 0
+    },
+    {
+      "path": "/eaa/france",
+      "status": 200,
+      "title": "European Accessibility Act in France: who enforces it | FixMyWeb",
+      "inheritsHomeTitle": false,
+      "inheritsHomeDesc": false,
+      "hasDesc": true,
+      "ogImage": "https://fixmyweb.dev/opengraph-image",
+      "canonical": "https://fixmyweb.dev/eaa/france",
+      "h1Count": 1,
+      "imagesMissingAlt": 0
+    },
+    {
+      "path": "/eaa/germany",
+      "status": 200,
+      "title": "European Accessibility Act in Germany: who enforces it | FixMyWeb",
+      "inheritsHomeTitle": false,
+      "inheritsHomeDesc": false,
+      "hasDesc": true,
+      "ogImage": "https://fixmyweb.dev/opengraph-image",
+      "canonical": "https://fixmyweb.dev/eaa/germany",
+      "h1Count": 1,
+      "imagesMissingAlt": 0
+    },
+    {
+      "path": "/eaa/ireland",
+      "status": 200,
+      "title": "European Accessibility Act in Ireland: who enforces it | FixMyWeb",
+      "inheritsHomeTitle": false,
+      "inheritsHomeDesc": false,
+      "hasDesc": true,
+      "ogImage": "https://fixmyweb.dev/opengraph-image",
+      "canonical": "https://fixmyweb.dev/eaa/ireland",
+      "h1Count": 1,
+      "imagesMissingAlt": 0
+    },
+    {
+      "path": "/eaa/italy",
+      "status": 200,
+      "title": "European Accessibility Act in Italy: who enforces it | FixMyWeb",
+      "inheritsHomeTitle": false,
+      "inheritsHomeDesc": false,
+      "hasDesc": true,
+      "ogImage": "https://fixmyweb.dev/opengraph-image",
+      "canonical": "https://fixmyweb.dev/eaa/italy",
+      "h1Count": 1,
+      "imagesMissingAlt": 0
+    },
+    {
+      "path": "/eaa/netherlands",
+      "status": 200,
+      "title": "European Accessibility Act in the Netherlands: who enforces it | FixMyWeb",
+      "inheritsHomeTitle": false,
+      "inheritsHomeDesc": false,
+      "hasDesc": true,
+      "ogImage": "https://fixmyweb.dev/opengraph-image",
+      "canonical": "https://fixmyweb.dev/eaa/netherlands",
+      "h1Count": 1,
+      "imagesMissingAlt": 0
+    },
+    {
+      "path": "/eaa/spain",
+      "status": 200,
+      "title": "European Accessibility Act in Spain: who enforces it | FixMyWeb",
+      "inheritsHomeTitle": false,
+      "inheritsHomeDesc": false,
+      "hasDesc": true,
+      "ogImage": "https://fixmyweb.dev/opengraph-image",
+      "canonical": "https://fixmyweb.dev/eaa/spain",
+      "h1Count": 1,
+      "imagesMissingAlt": 0
+    },
+    {
+      "path": "/free",
+      "status": 200,
+      "title": "Use FixMyWeb Free — 201 WCAG Checks, No Signup | FixMyWeb",
+      "inheritsHomeTitle": false,
+      "inheritsHomeDesc": false,
+      "hasDesc": true,
+      "ogImage": "https://fixmyweb.dev/opengraph-image",
+      "canonical": "https://fixmyweb.dev/free",
+      "h1Count": 1,
+      "imagesMissingAlt": 0
+    },
+    {
+      "path": "/guide",
+      "status": 200,
+      "title": "Accessibility Remediation Guide — Fix Common WCAG Issues | FixMyWeb",
+      "inheritsHomeTitle": false,
+      "inheritsHomeDesc": false,
+      "hasDesc": true,
+      "ogImage": "https://fixmyweb.dev/opengraph-image?7114a4c22178e2c6",
+      "canonical": "https://fixmyweb.dev/guide",
+      "h1Count": 1,
+      "imagesMissingAlt": 0
+    },
+    {
+      "path": "/help",
+      "status": 200,
+      "title": "Help &amp; Getting Started — FixMyWeb | FixMyWeb",
+      "inheritsHomeTitle": false,
+      "inheritsHomeDesc": false,
+      "hasDesc": true,
+      "ogImage": "https://fixmyweb.dev/opengraph-image?7114a4c22178e2c6",
+      "canonical": "https://fixmyweb.dev/help",
+      "h1Count": 1,
+      "imagesMissingAlt": 0
+    },
+    {
+      "path": "/integrations",
+      "status": 200,
+      "title": "Integrations — FixMyWeb | FixMyWeb",
+      "inheritsHomeTitle": false,
+      "inheritsHomeDesc": false,
+      "hasDesc": true,
+      "ogImage": "https://fixmyweb.dev/opengraph-image?7114a4c22178e2c6",
+      "canonical": "https://fixmyweb.dev/integrations",
+      "h1Count": 1,
+      "imagesMissingAlt": 0
+    },
+    {
+      "path": "/monitoring",
+      "status": 200,
+      "title": "Accessibility Monitoring — Automated WCAG Compliance Checks | FixMyWeb",
+      "inheritsHomeTitle": false,
+      "inheritsHomeDesc": false,
+      "hasDesc": true,
+      "ogImage": "https://fixmyweb.dev/opengraph-image?7114a4c22178e2c6",
+      "canonical": "https://fixmyweb.dev/monitoring",
+      "h1Count": 1,
+      "imagesMissingAlt": 0
+    },
+    {
+      "path": "/pricing",
+      "status": 200,
+      "title": "Pricing — Plans for Every Team Size | FixMyWeb",
+      "inheritsHomeTitle": false,
+      "inheritsHomeDesc": false,
+      "hasDesc": true,
+      "ogImage": "https://fixmyweb.dev/opengraph-image?7114a4c22178e2c6",
+      "canonical": "https://fixmyweb.dev/pricing",
+      "h1Count": 1,
+      "imagesMissingAlt": 0
+    },
+    {
+      "path": "/privacy",
+      "status": 200,
+      "title": "Privacy Policy | FixMyWeb",
+      "inheritsHomeTitle": false,
+      "inheritsHomeDesc": false,
+      "hasDesc": true,
+      "ogImage": "https://fixmyweb.dev/opengraph-image?7114a4c22178e2c6",
+      "canonical": "https://fixmyweb.dev/privacy",
+      "h1Count": 1,
+      "imagesMissingAlt": 0
+    },
+    {
+      "path": "/refund",
+      "status": 200,
+      "title": "Refunds and Cancellation | FixMyWeb",
+      "inheritsHomeTitle": false,
+      "inheritsHomeDesc": false,
+      "hasDesc": true,
+      "ogImage": "https://fixmyweb.dev/opengraph-image?7114a4c22178e2c6",
+      "canonical": "https://fixmyweb.dev/refund",
+      "h1Count": 1,
+      "imagesMissingAlt": 0
+    },
+    {
+      "path": "/scan",
+      "status": 200,
+      "title": "Accessibility Scanner — Free WCAG 2.1/2.2 Website Audit | FixMyWeb",
+      "inheritsHomeTitle": false,
+      "inheritsHomeDesc": false,
+      "hasDesc": true,
+      "ogImage": "https://fixmyweb.dev/opengraph-image?7114a4c22178e2c6",
+      "canonical": "https://fixmyweb.dev/scan",
+      "h1Count": 1,
+      "imagesMissingAlt": 0
+    },
+    {
+      "path": "/security",
+      "status": 200,
+      "title": "Security — FixMyWeb | FixMyWeb",
+      "inheritsHomeTitle": false,
+      "inheritsHomeDesc": false,
+      "hasDesc": true,
+      "ogImage": "https://fixmyweb.dev/opengraph-image?7114a4c22178e2c6",
+      "canonical": "https://fixmyweb.dev/security",
+      "h1Count": 1,
+      "imagesMissingAlt": 0
+    },
+    {
+      "path": "/services/eaa-audit",
+      "status": 200,
+      "title": "EAA Compliance Audit — WCAG 2.2 AA + EN 301 549 Review | FixMyWeb",
+      "inheritsHomeTitle": false,
+      "inheritsHomeDesc": false,
+      "hasDesc": true,
+      "ogImage": "https://fixmyweb.dev/opengraph-image",
+      "canonical": "https://fixmyweb.dev/services/eaa-audit",
+      "h1Count": 1,
+      "imagesMissingAlt": 0
+    },
+    {
+      "path": "/statement",
+      "status": 200,
+      "title": "Accessibility Statement Generator — W3C Template | FixMyWeb",
+      "inheritsHomeTitle": false,
+      "inheritsHomeDesc": false,
+      "hasDesc": true,
+      "ogImage": "https://fixmyweb.dev/opengraph-image?7114a4c22178e2c6",
+      "canonical": "https://fixmyweb.dev/statement",
+      "h1Count": 1,
+      "imagesMissingAlt": 0
+    },
+    {
+      "path": "/status",
+      "status": 200,
+      "title": "System Status — FixMyWeb | FixMyWeb",
+      "inheritsHomeTitle": false,
+      "inheritsHomeDesc": false,
+      "hasDesc": true,
+      "ogImage": "https://fixmyweb.dev/opengraph-image?7114a4c22178e2c6",
+      "canonical": "https://fixmyweb.dev/status",
+      "h1Count": 1,
+      "imagesMissingAlt": 0
+    },
+    {
+      "path": "/terms",
+      "status": 200,
+      "title": "Terms of Service | FixMyWeb",
+      "inheritsHomeTitle": false,
+      "inheritsHomeDesc": false,
+      "hasDesc": true,
+      "ogImage": "https://fixmyweb.dev/opengraph-image?7114a4c22178e2c6",
+      "canonical": "https://fixmyweb.dev/terms",
+      "h1Count": 1,
+      "imagesMissingAlt": 0
+    },
+    {
+      "path": "/tools/contrast-checker",
+      "status": 200,
+      "title": "Color Contrast Checker — WCAG AA &amp; AAA Compliance | FixMyWeb",
+      "inheritsHomeTitle": false,
+      "inheritsHomeDesc": false,
+      "hasDesc": true,
+      "ogImage": "https://fixmyweb.dev/opengraph-image?7114a4c22178e2c6",
+      "canonical": "https://fixmyweb.dev/tools/contrast-checker",
+      "h1Count": 1,
+      "imagesMissingAlt": 0
+    },
+    {
+      "path": "/tools/heading-checker",
+      "status": 200,
+      "title": "Heading Structure Checker — WCAG Heading Hierarchy (H1-H6) | FixMyWeb",
+      "inheritsHomeTitle": false,
+      "inheritsHomeDesc": false,
+      "hasDesc": true,
+      "ogImage": "https://fixmyweb.dev/opengraph-image?7114a4c22178e2c6",
+      "canonical": "https://fixmyweb.dev/tools/heading-checker",
+      "h1Count": 1,
+      "imagesMissingAlt": 0
+    },
+    {
+      "path": "/vpat",
+      "status": 200,
+      "title": "VPAT Template Generator — Voluntary Product Accessibility Template | FixMyWeb",
+      "inheritsHomeTitle": false,
+      "inheritsHomeDesc": false,
+      "hasDesc": true,
+      "ogImage": "https://fixmyweb.dev/opengraph-image?7114a4c22178e2c6",
+      "canonical": "https://fixmyweb.dev/vpat",
+      "h1Count": 1,
+      "imagesMissingAlt": 0
+    },
+    {
+      "path": "/wcag-audit",
+      "status": 200,
+      "title": "WCAG Audit Tool — Free WCAG 2.1/2.2 Compliance Report | FixMyWeb",
+      "inheritsHomeTitle": false,
+      "inheritsHomeDesc": false,
+      "hasDesc": true,
+      "ogImage": "https://fixmyweb.dev/opengraph-image",
+      "canonical": "https://fixmyweb.dev/wcag-audit",
+      "h1Count": 1,
+      "imagesMissingAlt": 0
+    }
+  ],
+  "backslash": [
+    {
+      "path": "/",
+      "probe": "/%5C",
+      "status": 308
+    },
+    {
+      "path": "/about",
+      "probe": "/about%5C",
+      "status": 308
+    },
+    {
+      "path": "/accessibility-checker",
+      "probe": "/accessibility-checker%5C",
+      "status": 308
+    },
+    {
+      "path": "/ada-compliance",
+      "probe": "/ada-compliance%5C",
+      "status": 308
+    },
+    {
+      "path": "/ai-transparency",
+      "probe": "/ai-transparency%5C",
+      "status": 308
+    },
+    {
+      "path": "/badge",
+      "probe": "/badge%5C",
+      "status": 308
+    },
+    {
+      "path": "/blog",
+      "probe": "/blog%5C",
+      "status": 308
+    },
+    {
+      "path": "/blog/accessibility-statement-generator-guide",
+      "probe": "/blog/accessibility-statement-generator-guide%5C",
+      "status": 308
+    },
+    {
+      "path": "/blog/ada-title-ii-2026-deadline",
+      "probe": "/blog/ada-title-ii-2026-deadline%5C",
+      "status": 308
+    },
+    {
+      "path": "/blog/color-contrast-wcag-guide",
+      "probe": "/blog/color-contrast-wcag-guide%5C",
+      "status": 308
+    },
+    {
+      "path": "/blog/eaa-compliance-for-agencies",
+      "probe": "/blog/eaa-compliance-for-agencies%5C",
+      "status": 308
+    },
+    {
+      "path": "/blog/eaa-fines-enforcement-2026",
+      "probe": "/blog/eaa-fines-enforcement-2026%5C",
+      "status": 308
+    },
+    {
+      "path": "/blog/european-accessibility-act",
+      "probe": "/blog/european-accessibility-act%5C",
+      "status": 308
+    },
+    {
+      "path": "/blog/european-accessibility-act-2025-guide",
+      "probe": "/blog/european-accessibility-act-2025-guide%5C",
+      "status": 308
+    },
+    {
+      "path": "/blog/wcag-2-2-new-criteria",
+      "probe": "/blog/wcag-2-2-new-criteria%5C",
+      "status": 308
+    },
+    {
+      "path": "/blog/wcag-checklist",
+      "probe": "/blog/wcag-checklist%5C",
+      "status": 308
+    },
+    {
+      "path": "/blog/wcag-checklist-2026",
+      "probe": "/blog/wcag-checklist-2026%5C",
+      "status": 308
+    },
+    {
+      "path": "/blog/wcag-compliance-checker-guide",
+      "probe": "/blog/wcag-compliance-checker-guide%5C",
+      "status": 308
+    },
+    {
+      "path": "/bulk",
+      "probe": "/bulk%5C",
+      "status": 308
+    },
+    {
+      "path": "/changelog",
+      "probe": "/changelog%5C",
+      "status": 308
+    },
+    {
+      "path": "/compare/fixmyweb-vs-accessibe",
+      "probe": "/compare/fixmyweb-vs-accessibe%5C",
+      "status": 308
+    },
+    {
+      "path": "/compare/fixmyweb-vs-axe",
+      "probe": "/compare/fixmyweb-vs-axe%5C",
+      "status": 308
+    },
+    {
+      "path": "/compare/fixmyweb-vs-silktide",
+      "probe": "/compare/fixmyweb-vs-silktide%5C",
+      "status": 308
+    },
+    {
+      "path": "/contact",
+      "probe": "/contact%5C",
+      "status": 308
+    },
+    {
+      "path": "/cookie-policy",
+      "probe": "/cookie-policy%5C",
+      "status": 308
+    },
+    {
+      "path": "/dpa",
+      "probe": "/dpa%5C",
+      "status": 308
+    },
+    {
+      "path": "/eaa",
+      "probe": "/eaa%5C",
+      "status": 308
+    },
+    {
+      "path": "/eaa/france",
+      "probe": "/eaa/france%5C",
+      "status": 308
+    },
+    {
+      "path": "/eaa/germany",
+      "probe": "/eaa/germany%5C",
+      "status": 308
+    },
+    {
+      "path": "/eaa/ireland",
+      "probe": "/eaa/ireland%5C",
+      "status": 308
+    },
+    {
+      "path": "/eaa/italy",
+      "probe": "/eaa/italy%5C",
+      "status": 308
+    },
+    {
+      "path": "/eaa/netherlands",
+      "probe": "/eaa/netherlands%5C",
+      "status": 308
+    },
+    {
+      "path": "/eaa/spain",
+      "probe": "/eaa/spain%5C",
+      "status": 308
+    },
+    {
+      "path": "/free",
+      "probe": "/free%5C",
+      "status": 308
+    },
+    {
+      "path": "/guide",
+      "probe": "/guide%5C",
+      "status": 308
+    },
+    {
+      "path": "/help",
+      "probe": "/help%5C",
+      "status": 308
+    },
+    {
+      "path": "/integrations",
+      "probe": "/integrations%5C",
+      "status": 308
+    },
+    {
+      "path": "/monitoring",
+      "probe": "/monitoring%5C",
+      "status": 308
+    },
+    {
+      "path": "/pricing",
+      "probe": "/pricing%5C",
+      "status": 308
+    },
+    {
+      "path": "/privacy",
+      "probe": "/privacy%5C",
+      "status": 308
+    },
+    {
+      "path": "/refund",
+      "probe": "/refund%5C",
+      "status": 308
+    },
+    {
+      "path": "/scan",
+      "probe": "/scan%5C",
+      "status": 308
+    },
+    {
+      "path": "/security",
+      "probe": "/security%5C",
+      "status": 308
+    },
+    {
+      "path": "/services/eaa-audit",
+      "probe": "/services/eaa-audit%5C",
+      "status": 308
+    },
+    {
+      "path": "/statement",
+      "probe": "/statement%5C",
+      "status": 308
+    },
+    {
+      "path": "/status",
+      "probe": "/status%5C",
+      "status": 308
+    },
+    {
+      "path": "/terms",
+      "probe": "/terms%5C",
+      "status": 308
+    },
+    {
+      "path": "/tools/contrast-checker",
+      "probe": "/tools/contrast-checker%5C",
+      "status": 308
+    },
+    {
+      "path": "/tools/heading-checker",
+      "probe": "/tools/heading-checker%5C",
+      "status": 308
+    },
+    {
+      "path": "/vpat",
+      "probe": "/vpat%5C",
+      "status": 308
+    },
+    {
+      "path": "/wcag-audit",
+      "probe": "/wcag-audit%5C",
+      "status": 308
+    }
+  ]
+}

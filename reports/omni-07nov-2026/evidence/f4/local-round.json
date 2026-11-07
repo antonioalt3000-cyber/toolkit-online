@@ -1,0 +1,146 @@
+[
+  {
+    "saas": "f4-local",
+    "step": "register: 2xx (201 {\"userId\":\"d68d3afc-6a78-44b3-9455-0c3bb29f7200\",\"apiKey\":\"dm_live_REDACTED)",
+    "expected": true,
+    "observed": true,
+    "ok": true,
+    "note": ""
+  },
+  {
+    "saas": "f4-local",
+    "step": "authenticated route with the new credential: 200 (200)",
+    "expected": 200,
+    "observed": 200,
+    "ok": true,
+    "note": ""
+  },
+  {
+    "saas": "f4-local",
+    "step": "starts on a non-paid plan (read: free)",
+    "expected": true,
+    "observed": true,
+    "ok": true,
+    "note": ""
+  },
+  {
+    "saas": "f4-local",
+    "step": "authenticated route with NO credential: 401",
+    "expected": 401,
+    "observed": 401,
+    "ok": true,
+    "note": ""
+  },
+  {
+    "saas": "f4-local",
+    "step": "checkout pro: 200 with a url (200 {\"url\":\"http://127.0.0.1:9043/__qa/hosted/cs_qa_1\"})",
+    "expected": true,
+    "observed": true,
+    "ok": true,
+    "note": ""
+  },
+  {
+    "saas": "f4-local",
+    "step": "Stripe was asked for EXACTLY the pro price id",
+    "expected": "price_1TEuqlQ4hv1lIuBUP7D2eI9j",
+    "observed": "price_1TEuqlQ4hv1lIuBUP7D2eI9j",
+    "ok": true,
+    "note": ""
+  },
+  {
+    "saas": "f4-local",
+    "step": "customer_email = the account email",
+    "expected": "antonio.alt3000+qa07novf4localmw61ggbj@gmail.com",
+    "observed": "antonio.alt3000+qa07novf4localmw61ggbj@gmail.com",
+    "ok": true,
+    "note": ""
+  },
+  {
+    "saas": "f4-local",
+    "step": "metadata.plan = pro",
+    "expected": "pro",
+    "observed": "pro",
+    "ok": true,
+    "note": ""
+  },
+  {
+    "saas": "f4-local",
+    "step": "checkout with a plan that does not exist: 400",
+    "expected": 400,
+    "observed": 400,
+    "ok": true,
+    "note": ""
+  },
+  {
+    "saas": "f4-local",
+    "step": "checkout for an email with no account: 404",
+    "expected": 404,
+    "observed": 404,
+    "ok": true,
+    "note": ""
+  },
+  {
+    "saas": "f4-local",
+    "step": "signed checkout.session.completed: 200 ({\"received\":true})",
+    "expected": 200,
+    "observed": 200,
+    "ok": true,
+    "note": ""
+  },
+  {
+    "saas": "f4-local",
+    "step": "forged signature: 400",
+    "expected": 400,
+    "observed": 400,
+    "ok": true,
+    "note": ""
+  },
+  {
+    "saas": "f4-local",
+    "step": "no signature at all: 400",
+    "expected": 400,
+    "observed": 400,
+    "ok": true,
+    "note": ""
+  },
+  {
+    "saas": "f4-local",
+    "step": "after the webhook the plan really is pro (read: pro)",
+    "expected": "pro",
+    "observed": "pro",
+    "ok": true,
+    "note": ""
+  },
+  {
+    "saas": "f4-local",
+    "step": "the same event replayed: 200 and the plan is unchanged",
+    "expected": [200, "pro"],
+    "observed": [200, "pro"],
+    "ok": true,
+    "note": ""
+  },
+  {
+    "saas": "f4-local",
+    "step": "Redis outage: authenticated route answers 503 (read 503, never a 401 logout)",
+    "expected": 503,
+    "observed": 503,
+    "ok": true,
+    "note": ""
+  },
+  {
+    "saas": "f4-local",
+    "step": "Redis outage: checkout works through (200) or says 503 - never a 500 (read 503)",
+    "expected": true,
+    "observed": true,
+    "ok": true,
+    "note": ""
+  },
+  {
+    "saas": "f4-local",
+    "step": "after the outage the same credential works again (200, plan pro)",
+    "expected": [200, "pro"],
+    "observed": [200, "pro"],
+    "ok": true,
+    "note": ""
+  }
+]

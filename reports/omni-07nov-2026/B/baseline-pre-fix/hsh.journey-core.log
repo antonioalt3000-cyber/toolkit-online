@@ -1,0 +1,12 @@
+
+===== hsh headershield.dev — feature core con oracolo indipendente
+
+PASS  scan risponde 200  — HTTP 200
+PASS  score = punti ottenuti / punti massimi  — riportato 95, ricalcolato 95 (95/100)
+PASS  ogni rilievo coincide con gli header veri  — 9 rilievi confrontati
+PASS  la postura SPF coincide col DNS reale  — prodotto found, DNS presente
+PASS  fail_under non soddisfatto da 422  — HTTP 422 (score 95 < 99)
+PASS  i 1 cron dichiarati accettano il proprio segreto  — dispatcher=200
+PASS  i cron rifiutano un segreto sbagliato  — 401/403 su tutti
+
+--- hsh: 7/7 PASS

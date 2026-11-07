@@ -1,0 +1,45 @@
+{
+  "slug": "hsh",
+  "domain": "headershield.dev",
+  "startedAt": "2026-11-07T07:10:55.550Z",
+  "finishedAt": "2026-11-07T07:11:51.307Z",
+  "healthBefore": {
+    "status": 200,
+    "commit": "951f6f1"
+  },
+  "healthAfter": {
+    "status": 200,
+    "commit": "951f6f1"
+  },
+  "allGreen": true,
+  "steps": [
+    {
+      "step": "sweep-public",
+      "exit": 0,
+      "signal": null,
+      "ms": 3074,
+      "summary": "hsh  headershield.dev   pagine= 11 non-200=0 senza-og:image=0 meta-ereditati=0 h1-multipli=0 backslash-500=0/11",
+      "ok": true
+    },
+    {
+      "step": "journey-public",
+      "exit": 0,
+      "signal": null,
+      "ms": 38554,
+      "summary": "--- HeaderShield: 6/6 PASS",
+      "nonVerified": false,
+      "fails": [],
+      "ok": true
+    },
+    {
+      "step": "journey-core",
+      "exit": 0,
+      "signal": null,
+      "ms": 4337,
+      "summary": "--- hsh: 5/5 PASS · 1 NON VERIFICATI (i 1 cron di questo prodotto)",
+      "nonVerified": true,
+      "fails": [],
+      "ok": true
+    }
+  ]
+}

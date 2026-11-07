@@ -1,0 +1,316 @@
+[
+  {
+    "saas": "b7dims",
+    "step": "320x568: 200 image/png",
+    "expected": [200, true],
+    "observed": [200, true],
+    "ok": true,
+    "note": ""
+  },
+  {
+    "saas": "b7dims",
+    "step": "320x568: the PNG really is 320x568",
+    "expected": {
+      "w": 320,
+      "h": 568
+    },
+    "observed": {
+      "w": 320,
+      "h": 568
+    },
+    "ok": true,
+    "note": ""
+  },
+  {
+    "saas": "b7dims",
+    "step": "320x568: Content-Length equals the bytes received",
+    "expected": 80627,
+    "observed": 80627,
+    "ok": true,
+    "note": ""
+  },
+  {
+    "saas": "b7dims",
+    "step": "375x812: 200 image/png",
+    "expected": [200, true],
+    "observed": [200, true],
+    "ok": true,
+    "note": ""
+  },
+  {
+    "saas": "b7dims",
+    "step": "375x812: the PNG really is 375x812",
+    "expected": {
+      "w": 375,
+      "h": 812
+    },
+    "observed": {
+      "w": 375,
+      "h": 812
+    },
+    "ok": true,
+    "note": ""
+  },
+  {
+    "saas": "b7dims",
+    "step": "375x812: Content-Length equals the bytes received",
+    "expected": 147139,
+    "observed": 147139,
+    "ok": true,
+    "note": ""
+  },
+  {
+    "saas": "b7dims",
+    "step": "768x1024: 200 image/png",
+    "expected": [200, true],
+    "observed": [200, true],
+    "ok": true,
+    "note": ""
+  },
+  {
+    "saas": "b7dims",
+    "step": "768x1024: the PNG really is 768x1024",
+    "expected": {
+      "w": 768,
+      "h": 1024
+    },
+    "observed": {
+      "w": 768,
+      "h": 1024
+    },
+    "ok": true,
+    "note": ""
+  },
+  {
+    "saas": "b7dims",
+    "step": "768x1024: Content-Length equals the bytes received",
+    "expected": 294918,
+    "observed": 294918,
+    "ok": true,
+    "note": ""
+  },
+  {
+    "saas": "b7dims",
+    "step": "1366x768: 200 image/png",
+    "expected": [200, true],
+    "observed": [200, true],
+    "ok": true,
+    "note": ""
+  },
+  {
+    "saas": "b7dims",
+    "step": "1366x768: the PNG really is 1366x768",
+    "expected": {
+      "w": 1366,
+      "h": 768
+    },
+    "observed": {
+      "w": 1366,
+      "h": 768
+    },
+    "ok": true,
+    "note": ""
+  },
+  {
+    "saas": "b7dims",
+    "step": "1366x768: Content-Length equals the bytes received",
+    "expected": 328437,
+    "observed": 328437,
+    "ok": true,
+    "note": ""
+  },
+  {
+    "saas": "b7dims",
+    "step": "1920x1080: 200 image/png",
+    "expected": [200, true],
+    "observed": [200, true],
+    "ok": true,
+    "note": ""
+  },
+  {
+    "saas": "b7dims",
+    "step": "1920x1080: the PNG really is 1920x1080",
+    "expected": {
+      "w": 1920,
+      "h": 1080
+    },
+    "observed": {
+      "w": 1920,
+      "h": 1080
+    },
+    "ok": true,
+    "note": ""
+  },
+  {
+    "saas": "b7dims",
+    "step": "1920x1080: Content-Length equals the bytes received",
+    "expected": 525292,
+    "observed": 525292,
+    "ok": true,
+    "note": ""
+  },
+  {
+    "saas": "b7dims",
+    "step": "3840x2160: 200 image/png",
+    "expected": [200, true],
+    "observed": [200, true],
+    "ok": true,
+    "note": ""
+  },
+  {
+    "saas": "b7dims",
+    "step": "3840x2160: the PNG really is 3840x2160",
+    "expected": {
+      "w": 3840,
+      "h": 2160
+    },
+    "observed": {
+      "w": 3840,
+      "h": 2160
+    },
+    "ok": true,
+    "note": ""
+  },
+  {
+    "saas": "b7dims",
+    "step": "3840x2160: Content-Length equals the bytes received",
+    "expected": 1054786,
+    "observed": 1054786,
+    "ok": true,
+    "note": ""
+  },
+  {
+    "saas": "b7dims",
+    "step": "format=jpeg: 200 and the right content-type",
+    "expected": [200, true],
+    "observed": [200, true],
+    "ok": true,
+    "note": ""
+  },
+  {
+    "saas": "b7dims",
+    "step": "jpeg: 800x600",
+    "expected": {
+      "w": 800,
+      "h": 600
+    },
+    "observed": {
+      "w": 800,
+      "h": 600
+    },
+    "ok": true,
+    "note": ""
+  },
+  {
+    "saas": "b7dims",
+    "step": "format=webp: 200 and the right content-type",
+    "expected": [200, true],
+    "observed": [200, true],
+    "ok": true,
+    "note": ""
+  },
+  {
+    "saas": "b7dims",
+    "step": "hostile width=0: not a 5xx",
+    "expected": true,
+    "observed": true,
+    "ok": true,
+    "note": "HTTP 400 application/json {\"error\":{\"code\":\"VALIDATION_FAILED\",\"message\":\"width: Too small: expected number to be >=320\",\"status\":400}}"
+  },
+  {
+    "saas": "b7dims",
+    "step": "hostile width=-1: not a 5xx",
+    "expected": true,
+    "observed": true,
+    "ok": true,
+    "note": "HTTP 400 application/json {\"error\":{\"code\":\"VALIDATION_FAILED\",\"message\":\"width: Too small: expected number to be >=320\",\"status\":400}}"
+  },
+  {
+    "saas": "b7dims",
+    "step": "hostile width=99999: not a 5xx",
+    "expected": true,
+    "observed": true,
+    "ok": true,
+    "note": "HTTP 400 application/json {\"error\":{\"code\":\"VALIDATION_FAILED\",\"message\":\"width: Too big: expected number to be <=3840\",\"status\":400}}"
+  },
+  {
+    "saas": "b7dims",
+    "step": "hostile width=abc: not a 5xx",
+    "expected": true,
+    "observed": true,
+    "ok": true,
+    "note": "HTTP 400 application/json {\"error\":{\"code\":\"VALIDATION_FAILED\",\"message\":\"width: Invalid input: expected number, received NaN\",\"status\":400}}"
+  },
+  {
+    "saas": "b7dims",
+    "step": "hostile height=0: not a 5xx",
+    "expected": true,
+    "observed": true,
+    "ok": true,
+    "note": "HTTP 400 application/json {\"error\":{\"code\":\"VALIDATION_FAILED\",\"message\":\"height: Too small: expected number to be >=240\",\"status\":400}}"
+  },
+  {
+    "saas": "b7dims",
+    "step": "hostile height=-5: not a 5xx",
+    "expected": true,
+    "observed": true,
+    "ok": true,
+    "note": "HTTP 400 application/json {\"error\":{\"code\":\"VALIDATION_FAILED\",\"message\":\"height: Too small: expected number to be >=240\",\"status\":400}}"
+  },
+  {
+    "saas": "b7dims",
+    "step": "hostile height=1e9: not a 5xx",
+    "expected": true,
+    "observed": true,
+    "ok": true,
+    "note": "HTTP 400 application/json {\"error\":{\"code\":\"VALIDATION_FAILED\",\"message\":\"height: Too big: expected number to be <=2160\",\"status\":400}}"
+  },
+  {
+    "saas": "b7dims",
+    "step": "hostile width=1.5: not a 5xx",
+    "expected": true,
+    "observed": true,
+    "ok": true,
+    "note": "HTTP 400 application/json {\"error\":{\"code\":\"VALIDATION_FAILED\",\"message\":\"width: Invalid input: expected int, received number\",\"status\":400}}"
+  },
+  {
+    "saas": "b7dims",
+    "step": "hostile width=: not a 5xx",
+    "expected": true,
+    "observed": true,
+    "ok": true,
+    "note": "HTTP 400 application/json {\"error\":{\"code\":\"VALIDATION_FAILED\",\"message\":\"width: Too small: expected number to be >=320\",\"status\":400}}"
+  },
+  {
+    "saas": "b7dims",
+    "step": "hostile format=gif: not a 5xx",
+    "expected": true,
+    "observed": true,
+    "ok": true,
+    "note": "HTTP 400 application/json {\"error\":{\"code\":\"VALIDATION_FAILED\",\"message\":\"format: Invalid option: expected one of \\\"png\\\"|\\\"jpeg\\\"|\\\"webp\\\"\",\"status\":400}}"
+  },
+  {
+    "saas": "b7dims",
+    "step": "hostile format=%00: not a 5xx",
+    "expected": true,
+    "observed": true,
+    "ok": true,
+    "note": "HTTP 400 application/json {\"error\":{\"code\":\"VALIDATION_FAILED\",\"message\":\"format: Invalid option: expected one of \\\"png\\\"|\\\"jpeg\\\"|\\\"webp\\\"\",\"status\":400}}"
+  },
+  {
+    "saas": "b7dims",
+    "step": "hostile delay=-1: not a 5xx",
+    "expected": true,
+    "observed": true,
+    "ok": true,
+    "note": "HTTP 400 application/json {\"error\":{\"code\":\"VALIDATION_FAILED\",\"message\":\"delay: Too small: expected number to be >=0\",\"status\":400}}"
+  },
+  {
+    "saas": "b7dims",
+    "step": "hostile delay=999999: not a 5xx",
+    "expected": true,
+    "observed": true,
+    "ok": true,
+    "note": "HTTP 400 application/json {\"error\":{\"code\":\"VALIDATION_FAILED\",\"message\":\"delay: Too big: expected number to be <=10000\",\"status\":400}}"
+  }
+]

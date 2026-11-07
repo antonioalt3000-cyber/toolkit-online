@@ -1,0 +1,6 @@
+[PASS] S01 signup baseline
+[PASS] S04 signup clock -7 h (tab left open)
+[FAIL] S08 signup: autofill also fills the honeypot  -> answered 200 (a customer sees "success" and waits for a key/email that never comes): ui="Skip to content SEOScope Free audit Features Compare Pricing Dashboard Help Ctrl K Get free key Get your free key 10 audits every month, no "
+[info] S09 signup: autofill + immediate click  -> accepted (client slower than threshold) or silently absorbed - see ui
+
+seo: 4 scenarios, 2 PASS, 1 FAIL -> C:\Users\ftass\toolkit-online\reports\omni-07nov-2026\evidence\seo\fidelity-matrix.partial.json

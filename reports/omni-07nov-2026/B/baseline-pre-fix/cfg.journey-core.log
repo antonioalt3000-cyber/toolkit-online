@@ -1,0 +1,11 @@
+
+===== cfg getcardforge.dev — feature core con oracolo indipendente
+
+PASS  i 9 template consegnano le dimensioni dichiarate
+PASS  un titolo di 400 caratteri non rompe il render  — HTTP 200
+PASS  un titolo vuoto non da 500  — HTTP 200
+PASS  un colore non valido da 4xx o un default, mai 500  — HTTP 200
+PASS  un template ignoto ricade su og-gradient come documentato  — HTTP 200 1200x630
+PASS  questo prodotto non ha cron (nessun vercel.json)  — verificato sul repo, non assunto
+
+--- cfg: 6/6 PASS

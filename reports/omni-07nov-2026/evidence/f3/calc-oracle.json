@@ -1,0 +1,594 @@
+[
+  {
+    "saas": "f3calc",
+    "step": "headline: 25,000 x 9% x 40% x 12 = 10,800: no NaN/Infinity/undefined on the page",
+    "expected": false,
+    "observed": false,
+    "ok": true,
+    "note": ""
+  },
+  {
+    "saas": "f3calc",
+    "step": "headline: 25,000 x 9% x 40% x 12 = 10,800: monthly loss -$2,250",
+    "expected": true,
+    "observed": true,
+    "ok": true,
+    "note": ""
+  },
+  {
+    "saas": "f3calc",
+    "step": "headline: 25,000 x 9% x 40% x 12 = 10,800: yearly loss $27,000/year",
+    "expected": true,
+    "observed": true,
+    "ok": true,
+    "note": ""
+  },
+  {
+    "saas": "f3calc",
+    "step": "headline: 25,000 x 9% x 40% x 12 = 10,800: recoverable +$900 at 40%",
+    "expected": true,
+    "observed": true,
+    "ok": true,
+    "note": ""
+  },
+  {
+    "saas": "f3calc",
+    "step": "headline: 25,000 x 9% x 40% x 12 = 10,800: saved per year $10,800",
+    "expected": true,
+    "observed": true,
+    "ok": true,
+    "note": ""
+  },
+  {
+    "saas": "f3calc",
+    "step": "headline: 25,000 x 9% x 40% x 12 = 10,800: mrr notice absent",
+    "expected": false,
+    "observed": false,
+    "ok": true,
+    "note": ""
+  },
+  {
+    "saas": "f3calc",
+    "step": "headline: 25,000 x 9% x 40% x 12 = 10,800: churn notice absent",
+    "expected": false,
+    "observed": false,
+    "ok": true,
+    "note": ""
+  },
+  {
+    "saas": "f3calc",
+    "step": "headline: 25,000 x 9% x 40% x 12 = 10,800: txn notice absent",
+    "expected": false,
+    "observed": false,
+    "ok": true,
+    "note": ""
+  },
+  {
+    "saas": "f3calc",
+    "step": "headline: 25,000 x 9% x 40% x 12 = 10,800: recovery notice absent",
+    "expected": false,
+    "observed": false,
+    "ok": true,
+    "note": ""
+  },
+  {
+    "saas": "f3calc",
+    "step": "MRR zero: no NaN/Infinity/undefined on the page",
+    "expected": false,
+    "observed": false,
+    "ok": true,
+    "note": ""
+  },
+  {
+    "saas": "f3calc",
+    "step": "MRR zero: monthly loss -$0",
+    "expected": true,
+    "observed": true,
+    "ok": true,
+    "note": ""
+  },
+  {
+    "saas": "f3calc",
+    "step": "MRR zero: yearly loss $0/year",
+    "expected": true,
+    "observed": true,
+    "ok": true,
+    "note": ""
+  },
+  {
+    "saas": "f3calc",
+    "step": "MRR zero: recoverable +$0 at 40%",
+    "expected": true,
+    "observed": true,
+    "ok": true,
+    "note": ""
+  },
+  {
+    "saas": "f3calc",
+    "step": "MRR zero: saved per year $0",
+    "expected": true,
+    "observed": true,
+    "ok": true,
+    "note": ""
+  },
+  {
+    "saas": "f3calc",
+    "step": "MRR zero: mrr notice absent",
+    "expected": false,
+    "observed": false,
+    "ok": true,
+    "note": ""
+  },
+  {
+    "saas": "f3calc",
+    "step": "MRR zero: churn notice absent",
+    "expected": false,
+    "observed": false,
+    "ok": true,
+    "note": ""
+  },
+  {
+    "saas": "f3calc",
+    "step": "MRR zero: txn notice absent",
+    "expected": false,
+    "observed": false,
+    "ok": true,
+    "note": ""
+  },
+  {
+    "saas": "f3calc",
+    "step": "MRR zero: recovery notice absent",
+    "expected": false,
+    "observed": false,
+    "ok": true,
+    "note": ""
+  },
+  {
+    "saas": "f3calc",
+    "step": "MRR negative (-5000): no NaN/Infinity/undefined on the page",
+    "expected": false,
+    "observed": false,
+    "ok": true,
+    "note": ""
+  },
+  {
+    "saas": "f3calc",
+    "step": "MRR negative (-5000): monthly loss -$0",
+    "expected": true,
+    "observed": true,
+    "ok": true,
+    "note": ""
+  },
+  {
+    "saas": "f3calc",
+    "step": "MRR negative (-5000): yearly loss $0/year",
+    "expected": true,
+    "observed": true,
+    "ok": true,
+    "note": ""
+  },
+  {
+    "saas": "f3calc",
+    "step": "MRR negative (-5000): recoverable +$0 at 40%",
+    "expected": true,
+    "observed": true,
+    "ok": true,
+    "note": ""
+  },
+  {
+    "saas": "f3calc",
+    "step": "MRR negative (-5000): saved per year $0",
+    "expected": true,
+    "observed": true,
+    "ok": true,
+    "note": ""
+  },
+  {
+    "saas": "f3calc",
+    "step": "MRR negative (-5000): mrr notice present",
+    "expected": true,
+    "observed": true,
+    "ok": true,
+    "note": "MRR accepts $0–$10,000,000. The figures below use $0."
+  },
+  {
+    "saas": "f3calc",
+    "step": "MRR negative (-5000): churn notice absent",
+    "expected": false,
+    "observed": false,
+    "ok": true,
+    "note": ""
+  },
+  {
+    "saas": "f3calc",
+    "step": "MRR negative (-5000): txn notice absent",
+    "expected": false,
+    "observed": false,
+    "ok": true,
+    "note": ""
+  },
+  {
+    "saas": "f3calc",
+    "step": "MRR negative (-5000): recovery notice absent",
+    "expected": false,
+    "observed": false,
+    "ok": true,
+    "note": ""
+  },
+  {
+    "saas": "f3calc",
+    "step": "recovery 65 > max 50: no NaN/Infinity/undefined on the page",
+    "expected": false,
+    "observed": false,
+    "ok": true,
+    "note": ""
+  },
+  {
+    "saas": "f3calc",
+    "step": "recovery 65 > max 50: monthly loss -$2,640",
+    "expected": true,
+    "observed": true,
+    "ok": true,
+    "note": ""
+  },
+  {
+    "saas": "f3calc",
+    "step": "recovery 65 > max 50: yearly loss $31,680/year",
+    "expected": true,
+    "observed": true,
+    "ok": true,
+    "note": ""
+  },
+  {
+    "saas": "f3calc",
+    "step": "recovery 65 > max 50: recoverable +$1,320 at 50%",
+    "expected": true,
+    "observed": true,
+    "ok": true,
+    "note": ""
+  },
+  {
+    "saas": "f3calc",
+    "step": "recovery 65 > max 50: saved per year $15,840",
+    "expected": true,
+    "observed": true,
+    "ok": true,
+    "note": ""
+  },
+  {
+    "saas": "f3calc",
+    "step": "recovery 65 > max 50: mrr notice absent",
+    "expected": false,
+    "observed": false,
+    "ok": true,
+    "note": ""
+  },
+  {
+    "saas": "f3calc",
+    "step": "recovery 65 > max 50: churn notice absent",
+    "expected": false,
+    "observed": false,
+    "ok": true,
+    "note": ""
+  },
+  {
+    "saas": "f3calc",
+    "step": "recovery 65 > max 50: txn notice absent",
+    "expected": false,
+    "observed": false,
+    "ok": true,
+    "note": ""
+  },
+  {
+    "saas": "f3calc",
+    "step": "recovery 65 > max 50: recovery notice present",
+    "expected": true,
+    "observed": true,
+    "ok": true,
+    "note": "Assumed recovery rate accepts 30%–50%. The figures below use 50%."
+  },
+  {
+    "saas": "f3calc",
+    "step": "recovery 15 < min 30: no NaN/Infinity/undefined on the page",
+    "expected": false,
+    "observed": false,
+    "ok": true,
+    "note": ""
+  },
+  {
+    "saas": "f3calc",
+    "step": "recovery 15 < min 30: monthly loss -$2,640",
+    "expected": true,
+    "observed": true,
+    "ok": true,
+    "note": ""
+  },
+  {
+    "saas": "f3calc",
+    "step": "recovery 15 < min 30: yearly loss $31,680/year",
+    "expected": true,
+    "observed": true,
+    "ok": true,
+    "note": ""
+  },
+  {
+    "saas": "f3calc",
+    "step": "recovery 15 < min 30: recoverable +$792 at 30%",
+    "expected": true,
+    "observed": true,
+    "ok": true,
+    "note": ""
+  },
+  {
+    "saas": "f3calc",
+    "step": "recovery 15 < min 30: saved per year $9,504",
+    "expected": true,
+    "observed": true,
+    "ok": true,
+    "note": ""
+  },
+  {
+    "saas": "f3calc",
+    "step": "recovery 15 < min 30: mrr notice absent",
+    "expected": false,
+    "observed": false,
+    "ok": true,
+    "note": ""
+  },
+  {
+    "saas": "f3calc",
+    "step": "recovery 15 < min 30: churn notice absent",
+    "expected": false,
+    "observed": false,
+    "ok": true,
+    "note": ""
+  },
+  {
+    "saas": "f3calc",
+    "step": "recovery 15 < min 30: txn notice absent",
+    "expected": false,
+    "observed": false,
+    "ok": true,
+    "note": ""
+  },
+  {
+    "saas": "f3calc",
+    "step": "recovery 15 < min 30: recovery notice present",
+    "expected": true,
+    "observed": true,
+    "ok": true,
+    "note": "Assumed recovery rate accepts 30%–50%. The figures below use 30%."
+  },
+  {
+    "saas": "f3calc",
+    "step": "churn 99 > max 30: no NaN/Infinity/undefined on the page",
+    "expected": false,
+    "observed": false,
+    "ok": true,
+    "note": ""
+  },
+  {
+    "saas": "f3calc",
+    "step": "churn 99 > max 30: monthly loss -$7,500",
+    "expected": true,
+    "observed": true,
+    "ok": true,
+    "note": ""
+  },
+  {
+    "saas": "f3calc",
+    "step": "churn 99 > max 30: yearly loss $90,000/year",
+    "expected": true,
+    "observed": true,
+    "ok": true,
+    "note": ""
+  },
+  {
+    "saas": "f3calc",
+    "step": "churn 99 > max 30: recoverable +$3,000 at 40%",
+    "expected": true,
+    "observed": true,
+    "ok": true,
+    "note": ""
+  },
+  {
+    "saas": "f3calc",
+    "step": "churn 99 > max 30: saved per year $36,000",
+    "expected": true,
+    "observed": true,
+    "ok": true,
+    "note": ""
+  },
+  {
+    "saas": "f3calc",
+    "step": "churn 99 > max 30: mrr notice absent",
+    "expected": false,
+    "observed": false,
+    "ok": true,
+    "note": ""
+  },
+  {
+    "saas": "f3calc",
+    "step": "churn 99 > max 30: churn notice present",
+    "expected": true,
+    "observed": true,
+    "ok": true,
+    "note": "Involuntary churn rate accepts 1%–30%. The figures below use 30%."
+  },
+  {
+    "saas": "f3calc",
+    "step": "churn 99 > max 30: txn notice absent",
+    "expected": false,
+    "observed": false,
+    "ok": true,
+    "note": ""
+  },
+  {
+    "saas": "f3calc",
+    "step": "churn 99 > max 30: recovery notice absent",
+    "expected": false,
+    "observed": false,
+    "ok": true,
+    "note": ""
+  },
+  {
+    "saas": "f3calc",
+    "step": "MRR 1e9 > max 10,000,000: no NaN/Infinity/undefined on the page",
+    "expected": false,
+    "observed": false,
+    "ok": true,
+    "note": ""
+  },
+  {
+    "saas": "f3calc",
+    "step": "MRR 1e9 > max 10,000,000: monthly loss -$900,000",
+    "expected": true,
+    "observed": true,
+    "ok": true,
+    "note": ""
+  },
+  {
+    "saas": "f3calc",
+    "step": "MRR 1e9 > max 10,000,000: yearly loss $10,800,000/year",
+    "expected": true,
+    "observed": true,
+    "ok": true,
+    "note": ""
+  },
+  {
+    "saas": "f3calc",
+    "step": "MRR 1e9 > max 10,000,000: recoverable +$360,000 at 40%",
+    "expected": true,
+    "observed": true,
+    "ok": true,
+    "note": ""
+  },
+  {
+    "saas": "f3calc",
+    "step": "MRR 1e9 > max 10,000,000: saved per year $4,320,000",
+    "expected": true,
+    "observed": true,
+    "ok": true,
+    "note": ""
+  },
+  {
+    "saas": "f3calc",
+    "step": "MRR 1e9 > max 10,000,000: mrr notice present",
+    "expected": true,
+    "observed": true,
+    "ok": true,
+    "note": "MRR accepts $0–$10,000,000. The figures below use $10,000,000."
+  },
+  {
+    "saas": "f3calc",
+    "step": "MRR 1e9 > max 10,000,000: churn notice absent",
+    "expected": false,
+    "observed": false,
+    "ok": true,
+    "note": ""
+  },
+  {
+    "saas": "f3calc",
+    "step": "MRR 1e9 > max 10,000,000: txn notice absent",
+    "expected": false,
+    "observed": false,
+    "ok": true,
+    "note": ""
+  },
+  {
+    "saas": "f3calc",
+    "step": "MRR 1e9 > max 10,000,000: recovery notice absent",
+    "expected": false,
+    "observed": false,
+    "ok": true,
+    "note": ""
+  },
+  {
+    "saas": "f3calc",
+    "step": "boundary: recovery exactly 30 and 50 are accepted as typed: no NaN/Infinity/undefined on the page",
+    "expected": false,
+    "observed": false,
+    "ok": true,
+    "note": ""
+  },
+  {
+    "saas": "f3calc",
+    "step": "boundary: recovery exactly 30 and 50 are accepted as typed: monthly loss -$1,000",
+    "expected": true,
+    "observed": true,
+    "ok": true,
+    "note": ""
+  },
+  {
+    "saas": "f3calc",
+    "step": "boundary: recovery exactly 30 and 50 are accepted as typed: yearly loss $12,000/year",
+    "expected": true,
+    "observed": true,
+    "ok": true,
+    "note": ""
+  },
+  {
+    "saas": "f3calc",
+    "step": "boundary: recovery exactly 30 and 50 are accepted as typed: recoverable +$500 at 50%",
+    "expected": true,
+    "observed": true,
+    "ok": true,
+    "note": ""
+  },
+  {
+    "saas": "f3calc",
+    "step": "boundary: recovery exactly 30 and 50 are accepted as typed: saved per year $6,000",
+    "expected": true,
+    "observed": true,
+    "ok": true,
+    "note": ""
+  },
+  {
+    "saas": "f3calc",
+    "step": "boundary: recovery exactly 30 and 50 are accepted as typed: mrr notice absent",
+    "expected": false,
+    "observed": false,
+    "ok": true,
+    "note": ""
+  },
+  {
+    "saas": "f3calc",
+    "step": "boundary: recovery exactly 30 and 50 are accepted as typed: churn notice absent",
+    "expected": false,
+    "observed": false,
+    "ok": true,
+    "note": ""
+  },
+  {
+    "saas": "f3calc",
+    "step": "boundary: recovery exactly 30 and 50 are accepted as typed: txn notice absent",
+    "expected": false,
+    "observed": false,
+    "ok": true,
+    "note": ""
+  },
+  {
+    "saas": "f3calc",
+    "step": "boundary: recovery exactly 30 and 50 are accepted as typed: recovery notice absent",
+    "expected": false,
+    "observed": false,
+    "ok": true,
+    "note": ""
+  },
+  {
+    "saas": "f3calc",
+    "step": "negative control: a WRONG expectation (10,801) is NOT found on the page",
+    "expected": false,
+    "observed": false,
+    "ok": true,
+    "note": ""
+  },
+  {
+    "saas": "f3calc",
+    "step": "journey: no console exceptions",
+    "expected": [],
+    "observed": [],
+    "ok": true,
+    "note": ""
+  }
+]
