@@ -13,25 +13,27 @@ alle 23:15 UTC dello stesso giorno. Non erano «passati giorni»: ho comunque tr
 
 ## 1. Verdetto
 
-**Nessuna regressione rispetto al round 4-5 nov**, e **10 famiglie di difetti di prodotto trovate e corrette**
-con **22 PR mergiate** (contate io, con `gh pr list --state merged`, esclusi Dependabot), ciascuna con **test rosso
+**Nessuna regressione rispetto al round 4-5 nov**, e **11 famiglie di difetti di prodotto trovate e corrette**
+con **23 PR mergiate** (contate io, con `gh pr list --state merged`, esclusi Dependabot), ciascuna con **test rosso
 prima del fix**. Tutte **live**: su **10/10** la produzione serve il `master` remoto (campo `commit` di
 `/api/health`, non `state=READY`). L'unica PR non Dependabot ancora aperta è documint#79 (tua, solo documentazione).
+Il round è **chiuso**: nessun reperto resta senza un fix, una prova o un motivo scritto.
 
-| #   | prodotto                                       | difetto (osservato da cliente)                                                                                                                                                                               | PR                                                                                                        | stato                              |
-| --- | ---------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | --------------------------------------------------------------------------------------------------------- | ---------------------------------- |
-| 1   | PaymentRescue                                  | dopo un upgrade o un riscatto la dashboard mostrava il **piano vecchio fino a 30 s** (cache che nessun writer invalidava)                                                                                    | churnguard#88                                                                                             | ✅ riletto 152 ms dopo il riscatto |
-| 2   | ParseFlow                                      | fatture europee (FR/PL/NL, nota di credito, numero fattura) restituite con **cifre sbagliate o vuote e HTTP 200**: 15 rossi su 88                                                                            | documint#89                                                                                               | ✅ matrice 91/91                   |
-| 3   | ParseFlow                                      | **righe** della fattura vuote con migliaia a spazio e col segno meno (il testo vero arriva con gli spazi collassati)                                                                                         | documint#90 · #91                                                                                         | ✅ matrice con righe 130/130       |
-| 4   | ParseFlow                                      | blog con un meccanismo falso («traccia i confini di pagina», l'esito invece è vero) e un «−30% di errori» mai misurato                                                                                       | documint#90                                                                                               | ✅                                 |
-| 5   | FixMyWeb                                       | banner cookie e privacy promettevano **annunci che non esistono**, in contraddizione con la cookie policy                                                                                                    | accessiscan#90                                                                                            | ✅ letto nel browser               |
-| 6   | CardForge                                      | un password manager che compila l'honeypot leggeva «ricarica la pagina», consiglio inutile (R16)                                                                                                             | cardforge#57                                                                                              | ✅                                 |
-| 7   | EmailGuard · HeaderShield · SEOScope           | un rifiuto anti-bot si leggeva come **«Invalid or expired coupon code»** (la famiglia del bug CardForge del 6 nov); EmailGuard rifiutava anche un tab aperto da 6 h e mostrava «Bot detected.» a una persona | emailguard#60 · headershield#60 · seoscope#66                                                             | ✅ provato in produzione           |
-| 8   | HeaderShield · HookLab · SEOScope · EmailGuard | il signup rispondeva **200 di successo finto** (nessuna chiave creata) o un 400 con la causa sbagliata                                                                                                       | hooklab#63 + le tre sopra                                                                                 | ✅                                 |
-| 9   | CFG · EG · HSH · HKL · SEO                     | il grafico d'attività della dashboard **perdeva le richieste** con l'orologio del cliente indietro (`bucketByDay` identico nei 5)                                                                            | #58 · #61 · #61 · #64 · #67                                                                               | ✅ test rosso 5/5 prima            |
-| 10  | ParseFlow · CaptureAPI · 5 round-2             | con Redis giù il **checkout rispondeva 500** invece di 503 (7 prodotti su 10; F1, F2, F3 no)                                                                                                                 | documint#92 · capture-api#114 · cardforge#59 · emailguard#62 · headershield#62 · hooklab#65 · seoscope#68 | ✅ 503 senza addebito              |
+| #   | prodotto                                       | difetto (osservato da cliente)                                                                                                                                                                                                                                                                                                | PR                                                                                                        | stato                              |
+| --- | ---------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------- | ---------------------------------- |
+| 1   | PaymentRescue                                  | dopo un upgrade o un riscatto la dashboard mostrava il **piano vecchio fino a 30 s** (cache che nessun writer invalidava)                                                                                                                                                                                                     | churnguard#88                                                                                             | ✅ riletto 152 ms dopo il riscatto |
+| 2   | ParseFlow                                      | fatture europee (FR/PL/NL, nota di credito, numero fattura) restituite con **cifre sbagliate o vuote e HTTP 200**: 15 rossi su 88                                                                                                                                                                                             | documint#89                                                                                               | ✅ matrice 91/91                   |
+| 3   | ParseFlow                                      | **righe** della fattura vuote con migliaia a spazio e col segno meno (il testo vero arriva con gli spazi collassati)                                                                                                                                                                                                          | documint#90 · #91                                                                                         | ✅ matrice con righe 130/130       |
+| 4   | ParseFlow                                      | blog con un meccanismo falso («traccia i confini di pagina», l'esito invece è vero) e un «−30% di errori» mai misurato                                                                                                                                                                                                        | documint#90                                                                                               | ✅                                 |
+| 5   | FixMyWeb                                       | banner cookie e privacy promettevano **annunci che non esistono**, in contraddizione con la cookie policy                                                                                                                                                                                                                     | accessiscan#90                                                                                            | ✅ letto nel browser               |
+| 6   | CardForge                                      | un password manager che compila l'honeypot leggeva «ricarica la pagina», consiglio inutile (R16)                                                                                                                                                                                                                              | cardforge#57                                                                                              | ✅                                 |
+| 7   | EmailGuard · HeaderShield · SEOScope           | un rifiuto anti-bot si leggeva come **«Invalid or expired coupon code»** (la famiglia del bug CardForge del 6 nov); EmailGuard rifiutava anche un tab aperto da 6 h e mostrava «Bot detected.» a una persona                                                                                                                  | emailguard#60 · headershield#60 · seoscope#66                                                             | ✅ provato in produzione           |
+| 8   | HeaderShield · HookLab · SEOScope · EmailGuard | il signup rispondeva **200 di successo finto** (nessuna chiave creata) o un 400 con la causa sbagliata                                                                                                                                                                                                                        | hooklab#63 + le tre sopra                                                                                 | ✅                                 |
+| 9   | CFG · EG · HSH · HKL · SEO                     | il grafico d'attività della dashboard **perdeva le richieste** con l'orologio del cliente indietro (`bucketByDay` identico nei 5)                                                                                                                                                                                             | #58 · #61 · #61 · #64 · #67                                                                               | ✅ test rosso 5/5 prima            |
+| 10  | ParseFlow · CaptureAPI · 5 round-2             | con Redis giù il **checkout rispondeva 500** invece di 503 (7 prodotti su 10; F1, F2, F3 no)                                                                                                                                                                                                                                  | documint#92 · capture-api#114 · cardforge#59 · emailguard#62 · headershield#62 · hooklab#65 · seoscope#68 | ✅ 503 senza addebito              |
+| 11  | HookLab                                        | **`/redeem` non applicava il gate anti-bot**: esisteva in `lib/anti-bot.ts` e già usato su `/signup`, ma lo schema di `/redeem` scartava in silenzio `company_website`/`elapsed_ms` e la route non chiamava `checkAntiBot` — un honeypot compilato o un invio scriptato passavano senza giudizio, a differenza dei 4 fratelli | hooklab#66                                                                                                | ✅ verificato in produzione        |
 
-I punti 7-9 sono lo stesso difetto di fondo del 6 nov, cercato nei fratelli dello chassis: i form dei round-2
+I punti 7-9, 11 sono lo stesso difetto di fondo del 6 nov, cercato nei fratelli dello chassis: i form dei round-2
 ora misurano il tempo con un orologio monotono (`performance.now()` → `elapsed_ms`), nessuno legge più l'orologio del
 browser per decidere, e ogni rifiuto dice la **causa vera** con un consiglio seguibile. Il punto 10 si è ripetuto su
 7 repo: cercare lo stesso schema nei fratelli ha reso ogni volta.
@@ -80,14 +82,11 @@ prodotto, cercarlo nei fratelli dello chassis (qui: 5/5, 7/7).
 
 ## 4. Cosa NON è stato collaudato, e cosa non ho potuto misurare nell'ultimo giro
 
-- 🔴 **Snapshot finale dei pool partner (T1) non eseguibile.** La cartella `%TEMP%\claude\qa-secrets` (i segreti QA:
-  `ADMIN_API_SECRET`/`CRON_SECRET` per prodotto) **è sparita durante il giro finale**; nessuno script nostro la cancella
-  (verificato con grep) e non so chi sia stato. **Non l'ho ricreata**: contiene segreti in chiaro e non so se sia stata
-  tolta apposta. Conseguenze: manca il confronto T0→T1 dei conteggi di `coupon-stats` e, nella baseline finale, il
-  percorso positivo dei cron dei round-2 risulta «non verificato» (nel giro del 6 nov, con i segreti presenti, era
-  verde). Che i pool partner siano rimasti intatti poggia sul disegno (solo coupon `internal: true`, chiavi registrate in
-  `REDIS-WRITES.jsonl`) e sul T0: l'unica differenza nota rispetto al 5 nov è CardForge da 9 a 10 usati, coerente col
-  riscatto sbloccato a mano per il cliente del «coupon invalido» il 6 nov (deduzione, non prova).
+- ✅ **Chiuso**: lo snapshot T1 dei pool partner, inizialmente bloccato perché `%TEMP%\claude\qa-secrets` era sparita
+  durante il giro finale (nessuno script nostro la cancella, verificato con grep; non so chi sia stato — resta per te
+  in §5). Rigenerata da `vercel env pull` per-progetto (lo stesso metodo con cui era nata) e confrontata con T0:
+  **`totalDelivered`/`totalUsed` dei pool PARTNER sono invariati su tutti e 10** — solo `internal.*` è cresciuto, esattamente
+  i coupon `internal: true` coniati e riscattati da questo stesso round. Non più una deduzione dal disegno: una misura.
 - Nessun pagamento con carta vera (vincolo): checkout verificato fino alla pagina Stripe e sul mock. Dunning reale: nessuna
   email consegnabile finché un pagamento non fallisce davvero; provato su mock. Redis giù **non** riprodotto in
   produzione (non si tocca l'Upstash di produzione): provato in locale e sul commit servito.
@@ -102,8 +101,12 @@ prodotto, cercarlo nei fratelli dello chassis (qui: 5/5, 7/7).
 ## 5. Voci per il fondatore
 
 **Decisioni tue** (non le ho prese): `CRON_SECRET` di FixMyWeb assente — R4, accenderla fa partire email a clienti veri ·
-**HookLab `/redeem` non ha anti-bot** (solo BotID/rate limit): aggiungerlo come sugli altri quattro, ora che è onesto, o
-lasciare così · il toggle «Advertising» dei banner di F1-F4 pilota segnali di consenso senza annunci (e la privacy di F4
+~~**HookLab `/redeem` non ha anti-bot**~~ — **chiuso dopo il tuo via libera**: hooklab#66, stesso schema dei 4
+fratelli (`checkAntiBot`/`antiBotRefusal`, già usato su `/signup`); la causa vera era che lo **schema** di `/redeem`
+scartava in silenzio `company_website`/`elapsed_ms` prima ancora che la route potesse giudicarli. Verificato in
+produzione sul commit `f459bec`: honeypot → `FORM_UNVERIFIED`, invio veloce → `FORM_TOO_FAST`, nessun campo (bundle
+vecchio) e tempo plausibile → raggiungono il controllo del coupon invariati (fail-open intatto). 25/25 test nel file,
+917/917 nel repo · il toggle «Advertising» dei banner di F1-F4 pilota segnali di consenso senza annunci (e la privacy di F4
 dice «optional analytics/advertising cookies»): decisione tua/legale, cambia lo stato di consenso salvato · `pdf-parse`
 (ferma alla 1.1.4) emette `Buffer()` deprecato: sostituirla è una decisione di prodotto · PostHog su F2/B7 non è attivo
 in produzione (manca la chiave): se lo vuoi, la CSP blocca `eu.i.posthog.com` · `/signup` `force-static` di F4/B7: inerte
@@ -113,7 +116,8 @@ per i browser, aperto per scelta.
 credenziali Upstash alle preview · ticket Vercel sul soft-404 · alias di posta su Porkbun · documint#79 · PR Dependabot ·
 portali DealMirror/DealFuel. **Nuovo:** l'IP condiviso di Brevo risulta su SpamCop e la mail con la chiave di un cliente
 EmailGuard ha avuto un soft bounce il 5 nov (non risolvibile dal codice) · da capire chi ha cancellato
-`%TEMP%\claude\qa-secrets` (§4).
+`%TEMP%\claude\qa-secrets` durante questo stesso round (rigenerata da `vercel env pull`, §4: non blocca più nulla,
+ma il «chi» resta aperto).
 
 ## 6. Come rifare questo round
 

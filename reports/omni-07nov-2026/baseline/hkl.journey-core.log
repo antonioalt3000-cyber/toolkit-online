@@ -13,6 +13,7 @@ PASS  verify-signature dichiara non valida una firma sbagliata  — HTTP 200 {"p
 PASS  un corpo alterato di un byte invalida la firma  — HTTP 200 {"provider":"github","source":"literal","valid":false,"reason":"SIGNATURE_MISMATCH","details":{}}
 PASS  verify-signature verifica anche la richiesta memorizzata  — HTTP 200 {"provider":"github","source":"captured","valid":true,"reason":"OK","details":{}}
 PASS  l endpoint di collaudo viene rimosso  — HTTP 200
-NON VERIF.  i 2 cron di questo prodotto  — CRON_SECRET esiste ma e' marcata Sensitive: vercel env pull la restituisce vuota, quindi il percorso positivo non e' stato esercitato
+PASS  i 2 cron dichiarati accettano il proprio segreto  — digest=200 portfolio-watch=200
+PASS  i cron rifiutano un segreto sbagliato  — 401/403 su tutti
 
---- hkl: 12/12 PASS · 1 NON VERIFICATI (i 2 cron di questo prodotto)
+--- hkl: 14/14 PASS

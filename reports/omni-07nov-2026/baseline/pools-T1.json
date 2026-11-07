@@ -1,36 +1,121 @@
 {
   "label": "T1",
-  "at": "2026-11-07T07:17:01.390Z",
+  "at": "2026-11-07T18:05:34.321Z",
   "products": {
     "f1": {
-      "error": "ADMIN_API_SECRET assente"
+      "status": 200,
+      "dealMirrorPrice": 49,
+      "totalDelivered": 976,
+      "totalUsed": 58,
+      "remaining": 918,
+      "usagePercent": 6,
+      "internal.delivered": 50,
+      "internal.used": 35,
+      "internal.remaining": 15
     },
     "f2": {
-      "error": "ADMIN_API_SECRET assente"
+      "status": 200,
+      "dealMirrorPrice": 25,
+      "totalDelivered": 977,
+      "totalUsed": 76,
+      "remaining": 901,
+      "usagePercent": 8,
+      "internal.delivered": 50,
+      "internal.used": 31,
+      "internal.remaining": 19
     },
     "f3": {
-      "error": "ADMIN_API_SECRET assente"
+      "status": 200,
+      "dealMirrorPrice": 49,
+      "totalDelivered": 469,
+      "totalUsed": 44,
+      "remaining": 425,
+      "usagePercent": 9,
+      "internal.delivered": 48,
+      "internal.used": 30,
+      "internal.remaining": 18
     },
     "f4": {
-      "error": "ADMIN_API_SECRET assente"
+      "status": 200,
+      "dealMirrorPrice": 25,
+      "totalDelivered": 966,
+      "totalUsed": 62,
+      "remaining": 904,
+      "usagePercent": 6,
+      "internal.delivered": 62,
+      "internal.used": 40,
+      "internal.remaining": 22
     },
     "b7": {
-      "error": "ADMIN_API_SECRET assente"
+      "status": 200,
+      "dealMirrorPrice": 25,
+      "totalDelivered": 962,
+      "totalUsed": 58,
+      "remaining": 904,
+      "usagePercent": 6,
+      "internal.delivered": 66,
+      "internal.used": 43,
+      "internal.remaining": 23
     },
     "cfg": {
-      "error": "ADMIN_API_SECRET assente"
+      "status": 200,
+      "dealMirrorPrice": 39,
+      "totalDelivered": 214,
+      "totalUsed": 10,
+      "remaining": 204,
+      "usagePercent": 5,
+      "internal.delivered": 86,
+      "internal.used": 57,
+      "internal.remaining": 29,
+      "redemptionsTruncated": false
     },
     "eg": {
-      "error": "ADMIN_API_SECRET assente"
+      "status": 200,
+      "dealMirrorPrice": 39,
+      "totalDelivered": 214,
+      "totalUsed": 12,
+      "remaining": 202,
+      "usagePercent": 6,
+      "internal.delivered": 65,
+      "internal.used": 46,
+      "internal.remaining": 19,
+      "redemptionsTruncated": false
     },
     "hsh": {
-      "error": "ADMIN_API_SECRET assente"
+      "status": 200,
+      "dealMirrorPrice": 39,
+      "totalDelivered": 214,
+      "totalUsed": 9,
+      "remaining": 205,
+      "usagePercent": 4,
+      "internal.delivered": 73,
+      "internal.used": 51,
+      "internal.remaining": 22,
+      "redemptionsTruncated": false
     },
     "hkl": {
-      "error": "ADMIN_API_SECRET assente"
+      "status": 200,
+      "dealMirrorPrice": 39,
+      "totalDelivered": 214,
+      "totalUsed": 11,
+      "remaining": 203,
+      "usagePercent": 5,
+      "internal.delivered": 1076,
+      "internal.used": 48,
+      "internal.remaining": 1028,
+      "redemptionsTruncated": false
     },
     "seo": {
-      "error": "ADMIN_API_SECRET assente"
+      "status": 200,
+      "dealMirrorPrice": 59,
+      "totalDelivered": 214,
+      "totalUsed": 10,
+      "remaining": 204,
+      "usagePercent": 5,
+      "internal.delivered": 85,
+      "internal.used": 58,
+      "internal.remaining": 27,
+      "redemptionsTruncated": false
     }
   }
 }

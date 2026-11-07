@@ -1,7 +1,7 @@
 {
   "slug": "hkl",
   "domain": "gethooklab.dev",
-  "at": "2026-11-07T07:14:13.704Z",
+  "at": "2026-11-07T18:15:56.833Z",
   "results": [
     {
       "what": "creazione endpoint 2xx",
@@ -64,9 +64,14 @@
       "detail": "HTTP 200"
     },
     {
-      "what": "i 2 cron di questo prodotto",
-      "pass": null,
-      "detail": "CRON_SECRET esiste ma e' marcata Sensitive: vercel env pull la restituisce vuota, quindi il percorso positivo non e' stato esercitato"
+      "what": "i 2 cron dichiarati accettano il proprio segreto",
+      "pass": true,
+      "detail": "digest=200 portfolio-watch=200"
+    },
+    {
+      "what": "i cron rifiutano un segreto sbagliato",
+      "pass": true,
+      "detail": "401/403 su tutti"
     }
   ]
 }
