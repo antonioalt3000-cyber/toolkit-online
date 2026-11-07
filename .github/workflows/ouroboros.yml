@@ -61,7 +61,8 @@ jobs:
           cp -f "$RUNNER_TEMP/network_health.json" logs/network_health.json
           cp -f "$RUNNER_TEMP/network_health.html" logs/network_health.html
           git add -f logs/network_health.json logs/network_health.html
-          git commit -m "ouroboros scan $(date -u +%FT%TZ)" || echo "no change"
+          # [skip ci]: same as sentinel.yml — no failed Vercel preview per scan.
+          git commit -m "ouroboros scan $(date -u +%FT%TZ) [skip ci]" || echo "no change"
           git push -f origin ouroboros-heartbeat
       - name: Fail job if regression
         if: steps.run.outcome == 'failure'
