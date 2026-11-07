@@ -94,8 +94,11 @@ prodotto, cercarlo nei fratelli dello chassis (qui: 5/5, 7/7).
   codice (`renderer.ts` rivalida ogni salto) e coperto da test unitari.
 - `noindex` e più `<h1>` su SEOScope in produzione (nessuna pagina reale li aveva); UA Safari/Firefox con BotID e
   cookie di terze parti disattivati in produzione; matrice «cliente fedele» completa su EG/HSH/HKL/SEO (eseguito un
-  sottoinsieme) e subset sulle F-series (letto nel codice: non hanno il gate con orologio, non provato nel browser);
-  `/api/checkout/complete` dei round-2 per lo stesso schema del 500.
+  sottoinsieme) e subset sulle F-series (letto nel codice: non hanno il gate con orologio, non provato nel browser).
+- ✅ **Verificato, non un gap**: `/api/checkout/complete` esiste su 7 prodotti su 10 (F1, B7, i 5 round-2; F2/F3/F4
+  non ce l'hanno) ed era già protetto contro lo stesso schema del reperto 10 (`isRedisUnavailable` → 503, mai 500) da
+  un round precedente (3 ott), con un test di regressione dedicato su tutti e 7. Rilanciato su ognuno: **14/14 verdi**.
+  Non era una lacuna di questo round, solo non ri-controllata.
 - Il percorso positivo dei cron di F4 non è esercitabile: `CRON_SECRET` è Sensitive e `vercel env pull` la dà vuota.
 
 ## 5. Voci per il fondatore
@@ -116,8 +119,12 @@ per i browser, aperto per scelta.
 credenziali Upstash alle preview · ticket Vercel sul soft-404 · alias di posta su Porkbun · documint#79 · PR Dependabot ·
 portali DealMirror/DealFuel. **Nuovo:** l'IP condiviso di Brevo risulta su SpamCop e la mail con la chiave di un cliente
 EmailGuard ha avuto un soft bounce il 5 nov (non risolvibile dal codice) · da capire chi ha cancellato
-`%TEMP%\claude\qa-secrets` durante questo stesso round (rigenerata da `vercel env pull`, §4: non blocca più nulla,
-ma il «chi» resta aperto).
+`%TEMP%\claude\qa-secrets` durante questo stesso round (rigenerata da `vercel env pull`, §4: non blocca più nulla).
+Indagato: nessun nostro script la tocca, nessun task pianificato dedicato trovato; la cartella padre `claude` in
+`%TEMP%` esiste da marzo (non ricreata, solo la sottocartella è sparita), compatibile con la manutenzione automatica
+periodica di Windows su `%TEMP%` (`SilentCleanup`, attiva su questa macchina) — **ipotesi plausibile, non una prova**.
+Per evitare la ripetizione: i prossimi segreti QA andrebbero scritti fuori da `%TEMP%` (la cartella scratchpad della
+sessione non viene ripulita allo stesso modo).
 
 ## 6. Come rifare questo round
 
