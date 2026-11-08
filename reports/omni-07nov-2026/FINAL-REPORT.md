@@ -107,7 +107,7 @@ prodotto, cercarlo nei fratelli dello chassis (qui: 5/5, 7/7).
 ~~**HookLab `/redeem` non ha anti-bot**~~ — **chiuso dopo il tuo via libera**: hooklab#66, stesso schema dei 4
 fratelli (`checkAntiBot`/`antiBotRefusal`, già usato su `/signup`); la causa vera era che lo **schema** di `/redeem`
 scartava in silenzio `company_website`/`elapsed_ms` prima ancora che la route potesse giudicarli. Verificato in
-produzione sul commit `f459bec`: honeypot → `FORM_UNVERIFIED`, invio veloce → `FORM_TOO_FAST`, nessun campo (bundle
+produzione sul commit `f459bec` (oggi `f4921e3`, stesso albero: §5-bis punto 3): honeypot → `FORM_UNVERIFIED`, invio veloce → `FORM_TOO_FAST`, nessun campo (bundle
 vecchio) e tempo plausibile → raggiungono il controllo del coupon invariati (fail-open intatto). 25/25 test nel file,
 917/917 nel repo · il toggle «Advertising» dei banner di F1-F4 pilota segnali di consenso senza annunci (e la privacy di F4
 dice «optional analytics/advertising cookies»): decisione tua/legale, cambia lo stato di consenso salvato · `pdf-parse`
@@ -136,7 +136,7 @@ Rifatto senza fidarmi dei report, compresi i miei.
    EmailGuard ha ricevuto 3 «weekly usage summary»**: uno dalla mia baseline, due dai rilanci del flusso B con lo
    stesso harness. SEOScope e CaptureAPI hanno mandato 3-4 riepiloghi agli stessi indirizzi (solo account nostri).
    Misurato su Brevo senza filtro per destinatario, indirizzi mai stampati. **Due cause, due correzioni:**
-   - **harness** (`a284f7e`): i cron ora si provano solo a porta chiusa (nessun segreto / segreto sbagliato → 401/403);
+   - **harness** (`c082a37`, ex `a284f7e`): i cron ora si provano solo a porta chiusa (nessun segreto / segreto sbagliato → 401/403);
      il percorso positivo è dichiarato «non esercitato per scelta». Provato dal vivo su EmailGuard: 3/3 respinti.
    - **prodotto**: i tre cron settimanali avevano solo un lock contro le esecuzioni **sovrapposte**; nulla segnava
      «già inviato questa settimana», quindi anche un retry di Vercel (consegna at-least-once) rimandava tutto.
@@ -152,12 +152,21 @@ Rifatto senza fidarmi dei report, compresi i miei.
 2. 🔴 **toolkitonline.vip non deployava dal 5 nov 19:30.** 11 commit di fila con build Vercel fallito (3 erano miei,
    e non l'avevo controllato): `next build` faceva il type-check di un frammento in `scratchpad/` entrato con i report
    del 31 ott. Il `tsconfig` includeva ogni `.ts` del repo; ora esclude `scratchpad/` e `reports/` (`tsc` 2 → 0).
-   Deploy `a284f7e` **READY**, sito 200 su home, pagine localizzate, tool e sitemap. Nei commit rimasti fermi non c'era
+   Deploy `a284f7e` (oggi `c082a37`, stesso albero) **READY**, sito 200 su home, pagine localizzate, tool e sitemap. Nei commit rimasti fermi non c'era
    codice dell'app, solo config e script di monitoraggio.
 3. 🔴 **Regola violata da me: 3 commit con `Co-Authored-By`** (toolkit-online `8abe996`, `6429e74`; hooklab `f459bec`,
    lo squash di #66), vietato dal tuo `CLAUDE.md`. La descrizione di hooklab#66 aveva anche «Generated with»: corretta.
-   I 22 commit dei flussi e quelli di questo ricontrollo sono puliti. Togliere la riga dai 3 commit richiede di
-   riscrivere `master` con un force-push: **decisione tua**, non l'ho fatto.
+   I 22 commit dei flussi e quelli di questo ricontrollo sono puliti.
+   **Riscritti l'8 nov col tuo via libera.** Tolta solo la riga di attribuzione: alberi identici commit per commit,
+   autori, committer e date invariati, force-push con lease sul vecchio SHA. Nuovi SHA — toolkit-online: `8abe996`→
+   `5645bd4`, `6429e74`→`e31816a`, `a284f7e`→`c082a37`, `5235c5c`→`cd48ffd` (gli ultimi due cambiano solo perché
+   stanno sopra); hooklab: `f459bec`→`f4921e3`. **Cosa resta e non si può togliere da qui:** il commit della PR
+   hooklab#66 (`7508596`, sotto `refs/pull/66`, in sola lettura su GitHub) e i vecchi SHA, raggiungibili per SHA
+   diretto finché GitHub non li ripulisce; lo squash di #66 ha perso la firma «Verified» di GitHub. Le evidenze in
+   `baseline/hkl.json` restano su `f459bec` perché registrano ciò che la produzione serviva in quel momento. Backup:
+   `refs/backup/pre-rewrite-08nov` nei due checkout e un bundle per repo nello scratchpad della sessione.
+   **Fuori perimetro, non toccati:** attribuzioni più vecchie di questo round, scritte da altre sessioni — 59 in
+   `toolkit-online`, 3 in hooklab, 1 in cardforge (`95ad34d`, #56 del round precedente).
 4. 🔴 **Il `journey-deep.cjs` che avevo messo alla radice e documentato in §6 non funzionava**: copia di uno script che
    calcola i percorsi dalla cartella `A/`. Al primo uso vero si è fermato a metà dopo aver coniato un coupon interno
    (`QAOCT-B25C-…`, non riscattato, registrato in `REDIS-WRITES.jsonl`, inerte: solo l'email del fondatore lo può
