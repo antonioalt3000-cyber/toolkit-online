@@ -896,36 +896,35 @@ async function crons() {
         false,
         'assente in OGNI ambiente: i 4 job schedulati in vercel.json (1 cron + 3 admin) falliscono chiusi a ogni invocazione — reperto R4'
       );
-    } else {
-      unverified(
-        `i ${names.length} cron di questo prodotto`,
-        "CRON_SECRET esiste ma e' marcata Sensitive: vercel env pull la restituisce vuota, quindi il percorso positivo non e' stato esercitato"
-      );
     }
-    return;
+    // Niente `return`: la porta chiusa si prova lo stesso, il segreto vero non serve.
   }
-  const good = [];
+  // 8 nov 2026: la chiamata col segreto VERO e' stata TOLTA dal collaudo. Invocava ogni cron
+  // a ogni giro, senza leggere la coda che consuma: il 6-7 nov ha fatto partire tre
+  // «weekly summary» di EmailGuard verso un cliente reale, di sabato, piu' duplicati su
+  // SEOScope e CaptureAPI. Un cron che puo' inviare NON si invoca dal collaudo: qui si prova
+  // solo la porta chiusa (nessun segreto, segreto sbagliato -> 401/403). La porta aperta e'
+  // coperta dai test unitari di ogni prodotto e dalla schedulazione di Vercel.
+  void cron; // letto sopra solo per distinguere R4 (assente) da Sensitive
   const bad = [];
   for (const name of names) {
-    const ok = await fetch(`https://${DOMAIN}/api/cron/${name}`, {
-      headers: { authorization: `Bearer ${cron}` },
+    const none = await fetch(`https://${DOMAIN}/api/cron/${name}`);
+    const wrong = await fetch(`https://${DOMAIN}/api/cron/${name}`, {
+      headers: { authorization: 'Bearer sbagliato-08nov' },
     });
-    const no = await fetch(`https://${DOMAIN}/api/cron/${name}`, {
-      headers: { authorization: 'Bearer sbagliato-04nov' },
-    });
-    (ok.status === 200 ? good : bad).push(`${name}=${ok.status}`);
-    if (![401, 403].includes(no.status))
-      bad.push(`${name}: segreto sbagliato accettato con ${no.status}`);
+    if (![401, 403, 503].includes(none.status))
+      bad.push(`${name}: senza segreto -> ${none.status}`);
+    if (![401, 403].includes(wrong.status))
+      bad.push(`${name}: segreto sbagliato -> ${wrong.status}`);
   }
   check(
-    `i ${names.length} cron dichiarati accettano il proprio segreto`,
+    `i ${names.length} cron rifiutano chi non ha il segreto (nessuno o sbagliato)`,
     bad.length === 0,
-    bad.length ? bad.join(' | ') : good.join(' ')
+    bad.length ? bad.join(' | ') : '401/403 su tutti'
   );
-  check(
-    'i cron rifiutano un segreto sbagliato',
-    !bad.some((b) => b.includes('accettato')),
-    bad.filter((b) => b.includes('accettato')).join(' | ') || '401/403 su tutti'
+  unverified(
+    'percorso positivo dei cron (200 col segreto vero)',
+    'non invocato per scelta: un cron che invia email o webhook non si chiama dal collaudo (incidente 6-7 nov)'
   );
 }
 
