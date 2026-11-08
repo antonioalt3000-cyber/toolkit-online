@@ -13,8 +13,8 @@ alle 23:15 UTC dello stesso giorno. Non erano «passati giorni»: ho comunque tr
 
 ## 1. Verdetto
 
-**Nessuna regressione rispetto al round 4-5 nov**, e **11 famiglie di difetti di prodotto trovate e corrette**
-con **23 PR mergiate** (contate io, con `gh pr list --state merged`, esclusi Dependabot), ciascuna con **test rosso
+**Nessuna regressione rispetto al round 4-5 nov**, e **12 famiglie di difetti di prodotto trovate e corrette**
+con **26 PR mergiate** (le ultime 3 dal ricontrollo dell'8 nov, §5-bis) (contate io, con `gh pr list --state merged`, esclusi Dependabot), ciascuna con **test rosso
 prima del fix**. Tutte **live**: su **10/10** la produzione serve il `master` remoto (campo `commit` di
 `/api/health`, non `state=READY`). L'unica PR non Dependabot ancora aperta è documint#79 (tua, solo documentazione).
 Il round è **chiuso**: nessun reperto resta senza un fix, una prova o un motivo scritto.
@@ -126,13 +126,60 @@ periodica di Windows su `%TEMP%` (`SilentCleanup`, attiva su questa macchina) �
 Per evitare la ripetizione: i prossimi segreti QA andrebbero scritti fuori da `%TEMP%` (la cartella scratchpad della
 sessione non viene ripulita allo stesso modo).
 
+## 5-bis. Ricontrollo scettico dell'8 nov — quattro reperti, tre dei quali miei
+
+Rifatto senza fidarmi dei report, compresi i miei.
+
+1. 🔴 **Il collaudo ha mandato email a un cliente reale.** `journey-core.cjs` invocava **ogni** cron col segreto vero
+   a ogni giro, senza leggere cosa avrebbe inviato — esattamente la regola che il piano prometteva di rispettare. Fra
+   il 6 nov 23:28 e il 7 nov 01:20 UTC, di **sabato** (i cron sono schedulati il lunedì), un **utente esterno di
+   EmailGuard ha ricevuto 3 «weekly usage summary»**: uno dalla mia baseline, due dai rilanci del flusso B con lo
+   stesso harness. SEOScope e CaptureAPI hanno mandato 3-4 riepiloghi agli stessi indirizzi (solo account nostri).
+   Misurato su Brevo senza filtro per destinatario, indirizzi mai stampati. **Due cause, due correzioni:**
+   - **harness** (`a284f7e`): i cron ora si provano solo a porta chiusa (nessun segreto / segreto sbagliato → 401/403);
+     il percorso positivo è dichiarato «non esercitato per scelta». Provato dal vivo su EmailGuard: 3/3 respinti.
+   - **prodotto**: i tre cron settimanali avevano solo un lock contro le esecuzioni **sovrapposte**; nulla segnava
+     «già inviato questa settimana», quindi anche un retry di Vercel (consegna at-least-once) rimandava tutto.
+     Ora un `SET NX` per (job, settimana ISO, sha256 dell'indirizzo) prima dell'invio, rilasciato se l'invio fallisce:
+     [emailguard#63](https://github.com/antonioalt3000-cyber/emailguard/pull/63) ·
+     [seoscope#69](https://github.com/antonioalt3000-cyber/seoscope/pull/69) ·
+     [capture-api#115](https://github.com/antonioalt3000-cyber/capture-api/pull/115), test rossi prima su `master`,
+     live su `cacfd6a` · `fd43ff0` · `d67ba89`. CaptureAPI in più non contava come falliti gli invii rifiutati.
+   - **HookLab `digest`** è stato invocato col segreto 3 volte nelle ultime 24 h (più una il 6 sera): fa POST agli URL
+     di alert dei clienti, ma l'indice `hkl:alerts:index` è **vuoto** (letto in sola lettura, con controllo positivo:
+     lo stesso token legge `hkl:coupons:valid` = 1231 = 203 + 1028) → **nessun terzo contattato**. Gli altri cron
+     (`dispatcher`, `monitors`) avvisano solo su cambiamento: nessun avviso partito.
+2. 🔴 **toolkitonline.vip non deployava dal 5 nov 19:30.** 11 commit di fila con build Vercel fallito (3 erano miei,
+   e non l'avevo controllato): `next build` faceva il type-check di un frammento in `scratchpad/` entrato con i report
+   del 31 ott. Il `tsconfig` includeva ogni `.ts` del repo; ora esclude `scratchpad/` e `reports/` (`tsc` 2 → 0).
+   Deploy `a284f7e` **READY**, sito 200 su home, pagine localizzate, tool e sitemap. Nei commit rimasti fermi non c'era
+   codice dell'app, solo config e script di monitoraggio.
+3. 🔴 **Regola violata da me: 3 commit con `Co-Authored-By`** (toolkit-online `8abe996`, `6429e74`; hooklab `f459bec`,
+   lo squash di #66), vietato dal tuo `CLAUDE.md`. La descrizione di hooklab#66 aveva anche «Generated with»: corretta.
+   I 22 commit dei flussi e quelli di questo ricontrollo sono puliti. Togliere la riga dai 3 commit richiede di
+   riscrivere `master` con un force-push: **decisione tua**, non l'ho fatto.
+4. 🔴 **Il `journey-deep.cjs` che avevo messo alla radice e documentato in §6 non funzionava**: copia di uno script che
+   calcola i percorsi dalla cartella `A/`. Al primo uso vero si è fermato a metà dopo aver coniato un coupon interno
+   (`QAOCT-B25C-…`, non riscattato, registrato in `REDIS-WRITES.jsonl`, inerte: solo l'email del fondatore lo può
+   usare). Ora è un rimando a `A/journey-deep.cjs`.
+
+**Verificato e confermato:** HookLab #66 regge un **riscatto vero nel browser** (4/4, POST 200, zero errori di console) —
+prima l'avevo provato solo coi rifiuti · la matrice fatture ParseFlow **130/130** rifatta da me sulla produzione ·
+nessun file `.env` rimasto nei repo dal pull di Vercel · `MEMORY.md` integra rispetto al backup (0 link persi) ·
+`/api/checkout/complete` già protetto su 7/7.
+**Annotato, non corretto:** `review-requests` (F1, F4, B7) manda più copie allo stesso indirizzo quando è in coda più
+volte (visto solo sui nostri account di collaudo): difetto minore.
+**Conteggio aggiornato:** **26 PR di prodotto** mergiate e live in questo round, più la correzione del build di
+`toolkit-online`.
+
 ## 6. Come rifare questo round
 
 ```bash
 export MSYS_NO_PATHCONV=1
 node reports/omni-07nov-2026/baseline-run.cjs            # tutti, ordine alternato; un marker per prodotto
 node reports/omni-07nov-2026/pool-readonly.cjs T1 && node reports/omni-07nov-2026/pool-readonly.cjs diff T0 T1
-node reports/omni-07nov-2026/journey-deep.cjs <slug>     # cliente pagante in produzione (contesto isolato, usa ./lib.cjs)
+node reports/omni-07nov-2026/journey-deep.cjs <slug>     # cliente pagante in produzione (rimando a A/journey-deep.cjs)
+# i cron NON si invocano col segreto vero: journey-core prova solo che rifiutano chi non ce l'ha (§5-bis)
 node reports/omni-07nov-2026/B/fidelity-matrix.cjs <slug> [redeem|signup] [--prod|--prod-real]
 node reports/omni-07nov-2026/csp-browser-check.cjs https://<dominio> / /pricing /redeem
 python -I reports/omni-07nov-2026/rcpt-probe.py

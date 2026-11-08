@@ -10,6 +10,7 @@ PASS  un indirizzo di ruolo e segnalato come tale  — role_address,free_provide
 PASS  una sintassi rotta viene rifiutata o segnata non valida  — HTTP 400 valid=undefined
 PASS  un dominio senza MX: il verdetto segue il DNS  — prodotto mx=true, DNS 2 record
 PASS  un lotto oltre il limite di 100 viene rifiutato  — HTTP 400
-NON VERIF.  i 3 cron di questo prodotto  — CRON_SECRET esiste ma e' marcata Sensitive: vercel env pull la restituisce vuota, quindi il percorso positivo non e' stato esercitato
+PASS  i 3 cron rifiutano chi non ha il segreto (nessuno o sbagliato)  — 401/403 su tutti
+NON VERIF.  percorso positivo dei cron (200 col segreto vero)  — non invocato per scelta: un cron che invia email o webhook non si chiama dal collaudo (incidente 6-7 nov)
 
---- eg: 9/9 PASS · 1 NON VERIFICATI (i 3 cron di questo prodotto)
+--- eg: 10/10 PASS · 1 NON VERIFICATI (percorso positivo dei cron (200 col segreto vero))

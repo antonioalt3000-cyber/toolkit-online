@@ -48,3 +48,5 @@
 {"ts":"2026-11-07T01:45:16.691Z","repo":"seo","key":"seo:coupons:used → QAOCT-2D0A-FF16-A81D-8E44","nota":"B fidelity-matrix --prod-real: redeemed in a scenario"}
 {"ts":"2026-11-07T01:45:16.763Z","repo":"seo","key":"seo:coupons:used → QAOCT-FE03-2E78-E3B4-7924","nota":"B fidelity-matrix --prod-real: redeemed in a scenario"}
 {"ts":"2026-11-07T01:45:16.832Z","repo":"seo","key":"seo:coupons:used → QAOCT-17DC-358A-D89E-BE3F","nota":"B fidelity-matrix --prod-real: redeemed in a scenario"}
+{"ts":"2026-11-08T00:33:32.368Z","repo":"hkl","key":"hkl:coupons:valid -> QAOCT-B25C-43FE-DC81-533B (internal)","nota":"coordinatore 8 nov: coniato e NON riscattato - harness interrotto da un percorso relativo rotto; resta nel pool interno, inerte (solo email del fondatore)"}
+{"ts":"2026-11-08T00:33:41.526Z","repo":"hkl","key":"coupons:used -> QAOCT-181E-1160-1195-2667","nota":"coniato e riscattato, flusso A 7 nov"}

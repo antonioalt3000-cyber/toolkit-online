@@ -1,15 +1,15 @@
 {
   "slug": "b7",
   "domain": "captureapi.dev",
-  "startedAt": "2026-11-07T07:14:25.237Z",
-  "finishedAt": "2026-11-07T07:15:50.456Z",
+  "startedAt": "2026-11-08T00:36:50.814Z",
+  "finishedAt": "2026-11-08T00:38:14.485Z",
   "healthBefore": {
     "status": 200,
-    "commit": "1945ec8"
+    "commit": "d67ba89"
   },
   "healthAfter": {
     "status": 200,
-    "commit": "1945ec8"
+    "commit": "d67ba89"
   },
   "allGreen": true,
   "steps": [
@@ -17,7 +17,7 @@
       "step": "sweep-public",
       "exit": 0,
       "signal": null,
-      "ms": 4020,
+      "ms": 4383,
       "summary": "b7   captureapi.dev     pagine= 39 non-200=0 senza-og:image=0 meta-ereditati=0 h1-multipli=0 backslash-500=0/39",
       "ok": true
     },
@@ -25,7 +25,7 @@
       "step": "journey-public",
       "exit": 0,
       "signal": null,
-      "ms": 52801,
+      "ms": 53222,
       "summary": "--- CaptureAPI: 6/6 PASS",
       "nonVerified": false,
       "fails": [],
@@ -35,9 +35,9 @@
       "step": "journey-core",
       "exit": 0,
       "signal": null,
-      "ms": 18864,
-      "summary": "--- b7: 11/11 PASS",
-      "nonVerified": false,
+      "ms": 16166,
+      "summary": "--- b7: 10/10 PASS · 1 NON VERIFICATI (percorso positivo dei cron (200 col segreto vero))",
+      "nonVerified": true,
       "fails": [],
       "ok": true
     }

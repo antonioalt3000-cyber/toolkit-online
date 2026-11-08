@@ -1,7 +1,7 @@
 {
   "slug": "eg",
   "domain": "emailguard.dev",
-  "at": "2026-11-07T07:09:29.865Z",
+  "at": "2026-11-08T00:35:33.145Z",
   "results": [
     {
       "what": "verify risponde 200",
@@ -49,9 +49,14 @@
       "detail": "HTTP 400"
     },
     {
-      "what": "i 3 cron di questo prodotto",
+      "what": "i 3 cron rifiutano chi non ha il segreto (nessuno o sbagliato)",
+      "pass": true,
+      "detail": "401/403 su tutti"
+    },
+    {
+      "what": "percorso positivo dei cron (200 col segreto vero)",
       "pass": null,
-      "detail": "CRON_SECRET esiste ma e' marcata Sensitive: vercel env pull la restituisce vuota, quindi il percorso positivo non e' stato esercitato"
+      "detail": "non invocato per scelta: un cron che invia email o webhook non si chiama dal collaudo (incidente 6-7 nov)"
     }
   ]
 }

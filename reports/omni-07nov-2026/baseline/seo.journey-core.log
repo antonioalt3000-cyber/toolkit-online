@@ -9,6 +9,7 @@ PASS  il titolo letto e quello della pagina  — prodotto "ToolKit Online — Fr
 PASS  la description letta e quella della pagina  — prodotto 83 car, reale 83 car
 PASS  il conteggio immagini coincide col parser indipendente  — prodotto 0, parser 0
 PASS  fail_under non soddisfatto da 422  — HTTP 422 (score 84 < 99)
-NON VERIF.  i 2 cron di questo prodotto  — CRON_SECRET esiste ma e' marcata Sensitive: vercel env pull la restituisce vuota, quindi il percorso positivo non e' stato esercitato
+PASS  i 2 cron rifiutano chi non ha il segreto (nessuno o sbagliato)  — 401/403 su tutti
+NON VERIF.  percorso positivo dei cron (200 col segreto vero)  — non invocato per scelta: un cron che invia email o webhook non si chiama dal collaudo (incidente 6-7 nov)
 
---- seo: 8/8 PASS · 1 NON VERIFICATI (i 2 cron di questo prodotto)
+--- seo: 9/9 PASS · 1 NON VERIFICATI (percorso positivo dei cron (200 col segreto vero))

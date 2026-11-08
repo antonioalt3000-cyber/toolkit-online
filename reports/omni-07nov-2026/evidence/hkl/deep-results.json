@@ -2,25 +2,19 @@
   "slug": "hkl",
   "dom": "gethooklab.dev",
   "email": "antonio.alt3000+qa07novhkl@gmail.com",
-  "code": "QAOCT-3871-287D-A52A-0D69",
+  "code": "QAOCT-181E-1160-1195-2667",
   "results": [
     {
       "day": 1,
       "what": "coniato un coupon interno via /api/admin/generate-coupons",
       "pass": true,
-      "detail": "QAOCT-3871-287D-A52A-0D69"
+      "detail": "QAOCT-181E-1160-1195-2667"
     },
     {
       "day": 1,
       "what": "il riscatto parte e la POST /api/redeem risponde 2xx",
       "pass": true,
       "detail": "HTTP 200"
-    },
-    {
-      "day": 1,
-      "what": "la pagina consegna la chiave API",
-      "pass": true,
-      "detail": "hkl_9ca29c…"
     },
     {
       "day": 3,

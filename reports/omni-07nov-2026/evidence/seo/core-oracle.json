@@ -1,7 +1,7 @@
 {
   "slug": "seo",
   "domain": "seoscope.dev",
-  "at": "2026-11-07T07:16:49.863Z",
+  "at": "2026-11-08T00:36:39.484Z",
   "results": [
     {
       "what": "audit risponde 200",
@@ -44,9 +44,14 @@
       "detail": "HTTP 422 (score 84 < 99)"
     },
     {
-      "what": "i 2 cron di questo prodotto",
+      "what": "i 2 cron rifiutano chi non ha il segreto (nessuno o sbagliato)",
+      "pass": true,
+      "detail": "401/403 su tutti"
+    },
+    {
+      "what": "percorso positivo dei cron (200 col segreto vero)",
       "pass": null,
-      "detail": "CRON_SECRET esiste ma e' marcata Sensitive: vercel env pull la restituisce vuota, quindi il percorso positivo non e' stato esercitato"
+      "detail": "non invocato per scelta: un cron che invia email o webhook non si chiama dal collaudo (incidente 6-7 nov)"
     }
   ]
 }

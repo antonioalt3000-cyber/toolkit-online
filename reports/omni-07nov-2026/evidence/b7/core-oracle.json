@@ -1,7 +1,7 @@
 {
   "slug": "b7",
   "domain": "captureapi.dev",
-  "at": "2026-11-07T07:15:47.273Z",
+  "at": "2026-11-08T00:38:11.309Z",
   "results": [
     {
       "what": "screenshot (GET) risponde 200",
@@ -16,7 +16,7 @@
     {
       "what": "le dimensioni consegnate sono esattamente 800x600",
       "pass": true,
-      "detail": "800x600, 208168 byte"
+      "detail": "800x600, 208315 byte"
     },
     {
       "what": "screenshot (POST) risponde 200 con involucro JSON",
@@ -31,7 +31,7 @@
     {
       "what": "size_bytes dichiarato coincide con i byte veri",
       "pass": true,
-      "detail": "dichiarato 208241, reale 208241"
+      "detail": "dichiarato 208148, reale 208148"
     },
     {
       "what": "pdf risponde 200",
@@ -49,14 +49,14 @@
       "detail": "595.91998x841.91998 (A4)"
     },
     {
-      "what": "i 3 cron dichiarati accettano il proprio segreto",
-      "pass": true,
-      "detail": "ttl-audit=200 weekly-usage=200 review-requests=200"
-    },
-    {
-      "what": "i cron rifiutano un segreto sbagliato",
+      "what": "i 3 cron rifiutano chi non ha il segreto (nessuno o sbagliato)",
       "pass": true,
       "detail": "401/403 su tutti"
+    },
+    {
+      "what": "percorso positivo dei cron (200 col segreto vero)",
+      "pass": null,
+      "detail": "non invocato per scelta: un cron che invia email o webhook non si chiama dal collaudo (incidente 6-7 nov)"
     }
   ]
 }
