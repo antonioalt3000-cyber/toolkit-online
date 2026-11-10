@@ -8,39 +8,60 @@
 // Required env vars:  BREVO_API_KEY
 // Status files are passed via environment variables set by GitHub Actions.
 
-const https  = require('https');
-const fs     = require('fs');
-const path   = require('path');
+const https = require('https');
+const fs = require('fs');
+const path = require('path');
 const { SITES, OWNER } = require('./config');
-const { sendAndLog }   = require('./brevo');
+const { sendAndLog } = require('./brevo');
+const { collectBounceFindings, buildBounceSectionHtml } = require('./bounce-watch');
 
 // ── Site health check (run inline for the report) ────────────────────────────
 function checkSite(site) {
   return new Promise((resolve) => {
     const startMs = Date.now();
-    const parsed  = new URL(site.url);
+    const parsed = new URL(site.url);
 
     const req = https.get(
       {
         hostname: parsed.hostname,
-        path:     parsed.pathname || '/',
-        port:     443,
-        headers:  { 'User-Agent': 'DevToolsmith-DailyReport/1.0' },
+        path: parsed.pathname || '/',
+        port: 443,
+        headers: { 'User-Agent': 'DevToolsmith-DailyReport/1.0' },
       },
       (res) => {
         const ms = Date.now() - startMs;
         res.resume();
-        resolve({ name: site.name, url: site.url, status: res.statusCode, ms, ok: res.statusCode < 400 });
+        resolve({
+          name: site.name,
+          url: site.url,
+          status: res.statusCode,
+          ms,
+          ok: res.statusCode < 400,
+        });
       }
     );
 
     req.on('error', (err) => {
-      resolve({ name: site.name, url: site.url, status: 0, ms: Date.now() - startMs, ok: false, error: err.message });
+      resolve({
+        name: site.name,
+        url: site.url,
+        status: 0,
+        ms: Date.now() - startMs,
+        ok: false,
+        error: err.message,
+      });
     });
 
     req.setTimeout(10000, () => {
       req.destroy();
-      resolve({ name: site.name, url: site.url, status: 0, ms: 10000, ok: false, error: 'Timeout' });
+      resolve({
+        name: site.name,
+        url: site.url,
+        status: 0,
+        ms: 10000,
+        ok: false,
+        error: 'Timeout',
+      });
     });
   });
 }
@@ -50,46 +71,66 @@ function getProspectStats() {
   try {
     const prospectsPath = path.join(__dirname, 'prospects.json');
     const data = JSON.parse(fs.readFileSync(prospectsPath, 'utf8'));
-    const total     = data.prospects.length;
-    const contacted = data.prospects.filter(p => p.contacted).length;
-    const todayStr  = new Date().toISOString().split('T')[0];
-    const sentToday = data.prospects.filter(p => p.contacted_date === todayStr).length;
+    const total = data.prospects.length;
+    const contacted = data.prospects.filter((p) => p.contacted).length;
+    const todayStr = new Date().toISOString().split('T')[0];
+    const sentToday = data.prospects.filter((p) => p.contacted_date === todayStr).length;
     return { total, contacted, remaining: total - contacted, sentToday };
   } catch {
     return { total: 0, contacted: 0, remaining: 0, sentToday: 0 };
   }
 }
 
+// ── Subject line ──────────────────────────────────────────────────────────────
+// Both failures have to be legible without opening the mail: a site that is
+// down, and a transactional email that never reached a customer. The second one
+// used to be invisible anywhere — that is how the 5 Nov EmailGuard key bounce
+// went unnoticed for five days.
+function buildReportSubject({ downNames = [], highBounceCount = 0, dateStr }) {
+  const parts = [];
+  if (downNames.length) parts.push(`🔴 ${downNames.join(', ')} DOWN`);
+  if (highBounceCount > 0) {
+    parts.push(
+      `🚨 ${highBounceCount} undelivered customer email${highBounceCount === 1 ? '' : 's'}`
+    );
+  }
+  const prefix = parts.length ? `${parts.join(' · ')} —` : '✅';
+  return `${prefix} DevToolsmith Daily Report · ${dateStr}`;
+}
+
 // ── Build report HTML ─────────────────────────────────────────────────────────
-function buildReportHtml({ date, siteResults, prospectStats, workflowRunUrl }) {
-  const allUp     = siteResults.every(r => r.ok);
-  const downSites = siteResults.filter(r => !r.ok);
-  const upSites   = siteResults.filter(r => r.ok);
+function buildReportHtml({ date, siteResults, prospectStats, workflowRunUrl, bounce }) {
+  const allUp = siteResults.every((r) => r.ok);
+  const downSites = siteResults.filter((r) => !r.ok);
+  const upSites = siteResults.filter((r) => r.ok);
 
   const statusBadge = allUp
     ? `<span style="background:#dcfce7;color:#15803d;padding:4px 10px;border-radius:99px;font-size:13px;font-weight:600">✅ All Systems Operational</span>`
     : `<span style="background:#fee2e2;color:#dc2626;padding:4px 10px;border-radius:99px;font-size:13px;font-weight:600">🔴 ${downSites.length} Site(s) Down</span>`;
 
-  const siteRows = siteResults.map(r => {
-    const icon  = r.ok ? '✅' : '🔴';
-    const color = r.ok ? '#15803d' : '#dc2626';
-    return `
+  const siteRows = siteResults
+    .map((r) => {
+      const icon = r.ok ? '✅' : '🔴';
+      const color = r.ok ? '#15803d' : '#dc2626';
+      return `
       <tr style="border-bottom:1px solid #f3f4f6">
         <td style="padding:10px 14px;font-weight:600;color:${color}">${icon} ${r.name}</td>
         <td style="padding:10px 14px"><a href="${r.url}" style="color:#6b7280;font-size:13px">${r.url}</a></td>
         <td style="padding:10px 14px;font-family:monospace;font-size:13px">${r.status || 'ERR'}</td>
         <td style="padding:10px 14px;font-family:monospace;font-size:13px;color:${r.ms < 800 ? '#15803d' : r.ms < 2000 ? '#d97706' : '#dc2626'}">${r.ms}ms</td>
       </tr>`;
-  }).join('');
+    })
+    .join('');
 
   // Read env vars set by workflow steps
-  const devtoStatus    = process.env.DEVTO_STATUS    || 'unknown';
-  const hashnodeStatus = process.env.HASHNODE_STATUS  || 'unknown';
-  const blueskyStatus  = process.env.BLUESKY_STATUS   || 'unknown';
-  const outreachStatus = process.env.OUTREACH_STATUS  || 'unknown';
-  const outreachTarget = process.env.OUTREACH_TARGET  || '—';
+  const devtoStatus = process.env.DEVTO_STATUS || 'unknown';
+  const hashnodeStatus = process.env.HASHNODE_STATUS || 'unknown';
+  const blueskyStatus = process.env.BLUESKY_STATUS || 'unknown';
+  const outreachStatus = process.env.OUTREACH_STATUS || 'unknown';
+  const outreachTarget = process.env.OUTREACH_TARGET || '—';
 
-  const statusIcon = (s) => s === 'success' ? '✅' : s === 'skipped' ? '⏭️' : s === 'failed' ? '❌' : '❓';
+  const statusIcon = (s) =>
+    s === 'success' ? '✅' : s === 'skipped' ? '⏭️' : s === 'failed' ? '❌' : '❓';
 
   return `
   <div style="font-family:system-ui,sans-serif;max-width:680px;margin:0 auto;color:#1f2937">
@@ -125,6 +166,9 @@ function buildReportHtml({ date, siteResults, prospectStats, workflowRunUrl }) {
         <tbody>${siteRows}</tbody>
       </table>
 
+      <!-- Email Delivery (Brevo bounce feed) -->
+      ${bounce ? buildBounceSectionHtml(bounce) : ''}
+
       <!-- Automation Activity -->
       <h2 style="font-size:15px;color:#374151;margin:0 0 12px;text-transform:uppercase;letter-spacing:.05em">
         🤖 Automation Activity
@@ -155,22 +199,26 @@ function buildReportHtml({ date, siteResults, prospectStats, workflowRunUrl }) {
       </h2>
       <div style="display:flex;gap:16px;margin-bottom:24px">
         ${[
-          { label: 'Contacted',  value: prospectStats.contacted, color: '#15803d' },
-          { label: 'Remaining',  value: prospectStats.remaining,  color: '#d97706' },
-          { label: 'Total',      value: prospectStats.total,       color: '#6b7280' },
-          { label: 'Sent Today', value: prospectStats.sentToday,   color: '#3b82f6' },
-        ].map(({ label, value, color }) => `
+          { label: 'Contacted', value: prospectStats.contacted, color: '#15803d' },
+          { label: 'Remaining', value: prospectStats.remaining, color: '#d97706' },
+          { label: 'Total', value: prospectStats.total, color: '#6b7280' },
+          { label: 'Sent Today', value: prospectStats.sentToday, color: '#3b82f6' },
+        ]
+          .map(
+            ({ label, value, color }) => `
           <div style="flex:1;background:#f9fafb;border:1px solid #e5e7eb;border-radius:8px;padding:14px;text-align:center">
             <div style="font-size:24px;font-weight:700;color:${color}">${value}</div>
             <div style="font-size:12px;color:#6b7280;margin-top:4px">${label}</div>
-          </div>`).join('')}
+          </div>`
+          )
+          .join('')}
       </div>
 
       <!-- Quick Links -->
       <div style="background:#f0f9ff;border:1px solid #bae6fd;border-radius:8px;padding:16px;margin-bottom:24px">
         <p style="margin:0 0 10px;font-weight:600;font-size:14px;color:#0369a1">🔗 Quick Links</p>
         <div style="display:flex;flex-wrap:wrap;gap:8px">
-          ${SITES.map(s => `<a href="${s.url}" style="color:#0369a1;font-size:13px;text-decoration:none;background:#fff;border:1px solid #bae6fd;padding:4px 10px;border-radius:99px">${s.name}</a>`).join('')}
+          ${SITES.map((s) => `<a href="${s.url}" style="color:#0369a1;font-size:13px;text-decoration:none;background:#fff;border:1px solid #bae6fd;padding:4px 10px;border-radius:99px">${s.name}</a>`).join('')}
           ${workflowRunUrl ? `<a href="${workflowRunUrl}" style="color:#6b7280;font-size:13px;text-decoration:none;background:#fff;border:1px solid #e5e7eb;padding:4px 10px;border-radius:99px">View Workflow Logs</a>` : ''}
         </div>
       </div>
@@ -185,35 +233,61 @@ function buildReportHtml({ date, siteResults, prospectStats, workflowRunUrl }) {
 
 // ── Main ──────────────────────────────────────────────────────────────────────
 async function main() {
-  const date           = new Date().toLocaleDateString('en-GB', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' });
-  const workflowRunUrl = process.env.GITHUB_SERVER_URL && process.env.GITHUB_REPOSITORY && process.env.GITHUB_RUN_ID
-    ? `${process.env.GITHUB_SERVER_URL}/${process.env.GITHUB_REPOSITORY}/actions/runs/${process.env.GITHUB_RUN_ID}`
-    : null;
+  const date = new Date().toLocaleDateString('en-GB', {
+    weekday: 'long',
+    day: 'numeric',
+    month: 'long',
+    year: 'numeric',
+  });
+  const workflowRunUrl =
+    process.env.GITHUB_SERVER_URL && process.env.GITHUB_REPOSITORY && process.env.GITHUB_RUN_ID
+      ? `${process.env.GITHUB_SERVER_URL}/${process.env.GITHUB_REPOSITORY}/actions/runs/${process.env.GITHUB_RUN_ID}`
+      : null;
 
   console.log('\n[Daily Report]');
   console.log('─'.repeat(60));
   console.log(`  Date: ${date}`);
   console.log('\n  Checking all site statuses...');
 
-  const siteResults  = await Promise.all(SITES.map(checkSite));
+  const siteResults = await Promise.all(SITES.map(checkSite));
   const prospectStats = getProspectStats();
-  const allUp        = siteResults.every(r => r.ok);
 
-  siteResults.forEach(r => {
+  siteResults.forEach((r) => {
     console.log(`  ${r.ok ? '✅' : '🔴'} ${r.name.padEnd(14)} ${r.status} · ${r.ms}ms`);
   });
 
-  console.log(`\n  Prospects: ${prospectStats.contacted}/${prospectStats.total} contacted, ${prospectStats.remaining} remaining`);
+  console.log(
+    `\n  Prospects: ${prospectStats.contacted}/${prospectStats.total} contacted, ${prospectStats.remaining} remaining`
+  );
 
-  const subjectPrefix = allUp ? '✅' : `🔴 ${siteResults.filter(r => !r.ok).map(r => r.name).join(', ')} DOWN —`;
-  const subject = `${subjectPrefix} DevToolsmith Daily Report · ${new Date().toLocaleDateString('en-GB')}`;
+  // Brevo's 201 proves we handed the message over, not that it arrived. The
+  // event feed is the only place a delivery failure exists, so read it here —
+  // this report is the one thing that is looked at every day. collectBounceFindings
+  // never throws: a failure of the check is rendered as "unknown", never as clean.
+  console.log('\n  Reading the Brevo bounce feed...');
+  const bounce = await collectBounceFindings({ days: process.env.BOUNCE_WINDOW_DAYS });
+  console.log(
+    `  Window ${bounce.window.startDate} → ${bounce.window.endDate}: ${bounce.scanned} event(s), ${bounce.excluded} ours, ${bounce.findings.length} finding(s), ${bounce.highCount} high`
+  );
+  if (!bounce.ok) console.log(`  ⚠️  bounce check degraded: ${bounce.errors.join('; ')}`);
+  for (const f of bounce.findings) {
+    console.log(
+      `  ${f.priority === 'high' ? '🚨' : '⚠️ '} ${f.email} — "${f.subject}" (${f.event}) · ${f.reason.slice(0, 90)}`
+    );
+  }
 
-  const html = buildReportHtml({ date, siteResults, prospectStats, workflowRunUrl });
+  const subject = buildReportSubject({
+    downNames: siteResults.filter((r) => !r.ok).map((r) => r.name),
+    highBounceCount: bounce.highCount,
+    dateStr: new Date().toLocaleDateString('en-GB'),
+  });
+
+  const html = buildReportHtml({ date, siteResults, prospectStats, workflowRunUrl, bounce });
 
   console.log(`\n  Sending daily report to ${OWNER.email}...`);
 
   await sendAndLog({
-    to:          [{ email: OWNER.email, name: OWNER.name }],
+    to: [{ email: OWNER.email, name: OWNER.name }],
     subject,
     htmlContent: html,
   });
@@ -222,7 +296,12 @@ async function main() {
   process.exit(0);
 }
 
-main().catch(err => {
-  console.error('\n💥 Fatal error:', err.message);
-  process.exit(2);
-});
+// Export pure logic for unit tests; only run main() when invoked as a script.
+module.exports = { buildReportSubject, buildReportHtml };
+
+if (require.main === module) {
+  main().catch((err) => {
+    console.error('\n💥 Fatal error:', err.message);
+    process.exit(2);
+  });
+}
