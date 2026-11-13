@@ -58,7 +58,10 @@ jobs:
           mkdir -p logs
           cp -f "$RUNNER_TEMP/daily_sentinel_heartbeat.json" logs/daily_sentinel_heartbeat.json
           git add -f logs/daily_sentinel_heartbeat.json
-          git commit -m "sentinel heartbeat $(date -u +%FT%TZ)" || echo "no change"
+          # [skip ci]: Vercel builds a preview of every pushed branch, and this
+          # orphan branch holds no app — every heartbeat was a failed deployment
+          # plus a "Preview deployment failed" email (38 of the last 40).
+          git commit -m "sentinel heartbeat $(date -u +%FT%TZ) [skip ci]" || echo "no change"
           git push -f origin sentinel-heartbeat
       - name: Fail job if degraded after self-heal
         if: steps.run.outcome == 'failure'
